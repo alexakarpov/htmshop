@@ -1,0 +1,147 @@
+---
+- name: installations
+  hosts: htmstore_dev
+  become: true
+
+  tasks:
+    - name: updatem, if last run was more than 1000 hours ago
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600000
+
+    - name: and a few packages
+      apt:
+        name:
+          [
+            tree,
+            git,
+            curl,
+            python3-dev,
+            python3-pip,
+            libpq-dev,
+            python3-virtualenv,
+            python-is-python3,
+            emacs-nox,
+            nginx
+          ]
+        state: latest
+
+    - name: me with sudo
+      user:
+        name: akarpov
+        groups: sudo, docker
+        shell: /bin/bash
+        password: $1$SomeSalt$fG/7WJxdGZynylTBJbXPc1
+
+    - name: Placing public keys
+      authorized_key:
+        user: akarpov
+        key: '{{ item }}'
+      with_file:
+        - ../public_keys/akamac.pub
+        - ../public_keys/akarpov.pub
+
+    #### secrets/dotenv business
+    - name: dotenv file
+      copy:
+        src: ../.env
+        dest: /home/ubuntu/htmshop_django_depl/.env
+
+    #### virtualenv stuff
+    - name: create the virtualenv
+      command:
+        cmd: virtualenv /home/ubuntu/htmshop_django_depl/venv -p python3.8
+        creates: '/home/ubuntu/htmshop_django_depl/venv'
+
+    - name: install dependencies
+      pip:
+        virtualenv: /home/ubuntu/htmshop_django_depl/venv
+        requirements: /home/ubuntu/htmshop_django_depl/requirements.txt
+
+    #### GUNICORN BUINESS
+
+    - name: Create log directory
+      file:
+        path: /var/log/htmshop
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: 0775
+
+    - name: Gunicorn socket file
+      copy:
+        src: ../gunicorn/gunicorn.socket
+        dest: /etc/systemd/system/gunicorn.socket
+
+    - name: Gunicorn service file
+      copy:
+        src: ../gunicorn/gunicorn.service
+        dest: /etc/systemd/system/gunicorn.service
+
+    - name: Gunicron systemd socket start
+      systemd:
+        name: gunicorn.socket
+        state: started
+
+    - name: Gunicorn systemd service start
+      systemd:
+        name: gunicorn.service
+        enabled: yes
+        daemon_reload: yes
+        state: started
+
+    ### nginx stuff
+    - name: Copy nginx configuration
+      copy:
+        src: ../nginx/nginx.conf
+        dest: /etc/nginx/sites-available/transylvania.bostonmonks.com
+
+    - name: Create symlink for nginx config
+      file:
+        src: /etc/nginx/sites-available/transylvania.bostonmonks.com
+        dest: /etc/nginx/sites-enabled/transylvania.bostonmonks.com
+        state: link
+
+    - name: Remove default site
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
+    - name: Enable service nginx
+      service:
+        name: nginx
+        enabled: yes
+
+    - name: Create static_root directory
+      file:
+        path: /var/static_root
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: 0775
+
+    - name: Create media_root directory
+      file:
+        path: /var/media_root
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: 0775
+
+    # - name: Create db directory
+    #   file:
+    #     path: /var/data
+    #     state: directory
+    #     owner: ubuntu
+    #     group: ubuntu
+    #     mode: 0775
+
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+
+    - name: restart gunicorn
+      service:
+        name: gunicorn
+        state: restarted

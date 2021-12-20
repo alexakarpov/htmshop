@@ -1,0 +1,37 @@
+---
+- name: python environment and gunicorn start
+  hosts: htmstore_dev
+  become: true
+  user: ubuntu
+
+  tasks:
+
+    # - name: run migrations
+    #   community.general.django_manage:
+    #     virtualenv: /home/ubuntu/htmshop_django_depl/venv
+    #     project_path: /home/ubuntu/htmshop_django_depl/
+    #     command: migrate
+    #   environment:
+    #     DJANGO_SETTINGS_MODULE: core.settings.staging
+
+    - name: create letsencrypt directory
+      file:
+        path: /var/www/letsencrypt
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: 0775
+
+    # - name: static files
+    #   community.general.django_manage:
+    #     virtualenv: /home/ubuntu/htmshop_django_depl/venv
+    #     project_path: /home/ubuntu/htmshop_django_depl/
+    #     command: collectstatic
+    #   environment:
+    #     DJANGO_SETTINGS_MODULE: settings.staging
+
+    # - name: gunicorn service restart
+    #   systemd:
+    #     name: gunicorn.service
+    #     state: restarted
+    #     daemon_reload: yes
