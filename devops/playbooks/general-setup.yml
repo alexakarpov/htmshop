@@ -44,8 +44,13 @@
     #### secrets/dotenv business
     - name: dotenv file
       copy:
-        src: ../.env
+        src: ../secrets/.env
         dest: /home/ubuntu/htmshop_django_depl/.env
+
+    - name: db init.sql file
+      copy:
+        src: ../secrets/init.sql
+        dest: /home/ubuntu/htmshop_django_depl/init.sql
 
     #### virtualenv stuff
     - name: create the virtualenv

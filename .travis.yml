@@ -21,7 +21,7 @@ deploy:
   local_dir: dpl_cd_upload
   skip_cleanup: true
   on: &repov
-    repo: alexakarpov/htmshop_django
+    repo: alexakarpov/htmshop
     branch: main
   bucket: htmshop
   region: us-east-1
