@@ -66,11 +66,11 @@ var postCode = document.getElementById("postCode").value;
         }
       }).then(function(result) {
         if (result.error) {
-          console.log('payment error')
+          console.log('payment error');
           console.log(result.error.message);
         } else {
           if (result.paymentIntent.status === 'succeeded') {
-            console.log('payment processed')
+            console.log('payment processed');
             // There's a risk of the customer closing the window before callback
             // execution. Set up a webhook or plugin to listen for the
             // payment_intent.succeeded event that handles any business critical
@@ -80,6 +80,11 @@ var postCode = document.getElementById("postCode").value;
         }
       });
     },
-    error: function (xhr, errmsg, err) {},
+    error: function (xhr, errmsg, err) {
+      console.log("Something bad happened.");
+      console.error(errmsg);
+      console.log("### ^ errmsg, \ err ####");
+      console.error(err);
+    },
   });
 });
