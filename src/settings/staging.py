@@ -4,10 +4,14 @@ from dotenv import dotenv_values
 from settings.common import *
 
 ENV = 'staging'
-config = dotenv_values()  # loads .env from BASE_DIR by default
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 print(f"BASE_DIR set to {BASE_DIR}")
+
+config = dotenv_values()  # loads .env from BASE_DIR by default
+print(".env local keys:")
+for k in config:
+    print(f"{k}")
 
 SECRET_KEY = config['SECRET_KEY']
 
@@ -67,3 +71,6 @@ LOGGING = {
         },
     },
 }
+
+STRIPE_PUBLISHABLE_KEY = 'pk_live_51K6PnSCFIch5ayqkdmgTnL8Ahszdb6lvZX3VbCrEuCPocFFGjtjRfA8hQUfyMo1BbCBuECjBMIMFt31C37ynBa0j00zZ1YUG5v'
+STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]

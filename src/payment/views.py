@@ -30,7 +30,7 @@ def BasketView(request):
     total_cents = int(total*100)
     print(total_cents)
 
-    stripe.api_key = settings.CUSTOM_CONFIG.get('STRIPE_SECRET_KEY')
+    stripe.api_key = settings.STRIPE_SECRET_KEY
     intent = stripe.PaymentIntent.create(
         amount=total_cents,
         currency='usd',
@@ -38,4 +38,5 @@ def BasketView(request):
     )
     logger.debug(f"==========intent============\n{intent}")
 
-    return render(request, 'payment/home.html', {'client_secret': intent.client_secret})
+    return render(request, 'payment/payment_form.html', {'client_secret': intent.client_secret,
+                                                         'STRIPE_PUB_KEY': settings.STRIPE_PUBLISHABLE_KEY})

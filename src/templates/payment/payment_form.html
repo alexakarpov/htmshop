@@ -73,10 +73,10 @@
 </form>
 
 <script>
-  var STRIPE_PUBLISHABLE_KEY = '{{STRIPE_PUBLISHABLE_KEY}}'
+  var STRIPE_PUBLISHABLE_KEY = '{{STRIPE_PUB_KEY}}'
   var CSRF_TOKEN = '{{ csrf_token }}';
 </script>
-<script src="https://js.stripe.com/v3/"></script>
+
 <script src="{% static 'payment/index.js' %}" data-rel-js></script>
 
 {% endblock %}

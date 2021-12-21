@@ -3,9 +3,9 @@ from pathlib import Path
 from dotenv import dotenv_values
 import os
 
-CUSTOM_CONFIG = dotenv_values()
+config = dotenv_values()
 print(".env local keys:")
-for k in CUSTOM_CONFIG:
+for k in config:
     print(f"{k}")
 
 ENV = 'development'
@@ -13,7 +13,7 @@ ENV = 'development'
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 print(f"BASE_DIR: {BASE_DIR}")
 
-SECRET_KEY = CUSTOM_CONFIG["SECRET_KEY"]
+SECRET_KEY = config["SECRET_KEY"]
 DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -58,6 +58,10 @@ LOGGING = {
         },
     }
 }
+
+STRIPE_PUBLISHABLE_KEY = "pk_test_51K6PnSCFIch5ayqknnamJA9P1lEBHAft8RXXVPKYIEtciJKZbBRoS7Rt1mfbtFof1VCHdEd0Ax5OovOZDxRnz0QA00YsK7ehAb"
+STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
+
 
 if DEBUG:
     # make all loggers use the console.
