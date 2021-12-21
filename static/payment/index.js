@@ -1,7 +1,7 @@
 //'use strict';
 
-
-var stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+//console.log("STRIPE public key:", STRIPE_PUBLISHABLE_KEY);
+var stripe = Stripe(STRIPE_PUBLISHABLE_KEY); // see payment_form.html
 
 var elem = document.getElementById('submit');
 clientsecret = elem.getAttribute('data-secret');
@@ -79,11 +79,7 @@ var postCode = document.getElementById("postCode").value;
           }
         }
       });
-
     },
     error: function (xhr, errmsg, err) {},
   });
-
-
-
 });
