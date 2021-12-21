@@ -55,12 +55,12 @@
     #### virtualenv stuff
     - name: create the virtualenv
       command:
-        cmd: virtualenv /home/ubuntu/htmshop_django_depl/venv -p python3.8
+        cmd: virtualenv /home/ubuntu/htmshop_depl/venv -p python3.8
         creates: '/home/ubuntu/htmshop_depl/venv'
 
     - name: install dependencies
       pip:
-        virtualenv: /home/ubuntu/htmshop_django_depl/venv
+        virtualenv: /home/ubuntu/htmshop_depl/venv
         requirements: /home/ubuntu/htmshop_depl/requirements.txt
 
     #### GUNICORN BUINESS
