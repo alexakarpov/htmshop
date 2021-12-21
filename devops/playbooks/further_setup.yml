@@ -8,8 +8,8 @@
 
     # - name: run migrations
     #   community.general.django_manage:
-    #     virtualenv: /home/ubuntu/htmshop_django_depl/venv
-    #     project_path: /home/ubuntu/htmshop_django_depl/
+    #     virtualenv: /home/ubuntu/htmshop_depl/venv
+    #     project_path: /home/ubuntu/htmshop_depl/
     #     command: migrate
     #   environment:
     #     DJANGO_SETTINGS_MODULE: core.settings.staging
@@ -24,8 +24,8 @@
 
     # - name: static files
     #   community.general.django_manage:
-    #     virtualenv: /home/ubuntu/htmshop_django_depl/venv
-    #     project_path: /home/ubuntu/htmshop_django_depl/
+    #     virtualenv: /home/ubuntu/htmshop_depl/venv
+    #     project_path: /home/ubuntu/htmshop_depl/
     #     command: collectstatic
     #   environment:
     #     DJANGO_SETTINGS_MODULE: settings.staging

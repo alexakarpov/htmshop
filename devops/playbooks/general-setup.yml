@@ -45,23 +45,23 @@
     - name: dotenv file
       copy:
         src: ../secrets/.env
-        dest: /home/ubuntu/htmshop_django_depl/.env
+        dest: /home/ubuntu/htmshop_depl/.env
 
     - name: db init.sql file
       copy:
         src: ../secrets/init.sql
-        dest: /home/ubuntu/htmshop_django_depl/init.sql
+        dest: /home/ubuntu/htmshop_depl/init.sql
 
     #### virtualenv stuff
     - name: create the virtualenv
       command:
         cmd: virtualenv /home/ubuntu/htmshop_django_depl/venv -p python3.8
-        creates: '/home/ubuntu/htmshop_django_depl/venv'
+        creates: '/home/ubuntu/htmshop_depl/venv'
 
     - name: install dependencies
       pip:
         virtualenv: /home/ubuntu/htmshop_django_depl/venv
-        requirements: /home/ubuntu/htmshop_django_depl/requirements.txt
+        requirements: /home/ubuntu/htmshop_depl/requirements.txt
 
     #### GUNICORN BUINESS
 
