@@ -9,9 +9,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 print(f"BASE_DIR set to {BASE_DIR}")
 
 config = dotenv_values()  # loads .env from BASE_DIR by default
-print(".env local keys:")
-for k in config:
-    print(f"{k}")
 
 SECRET_KEY = config['SECRET_KEY']
 

@@ -4,9 +4,6 @@ from dotenv import dotenv_values
 import os
 
 config = dotenv_values()
-print(".env local keys:")
-for k in config:
-    print(f"{k}")
 
 ENV = 'development'
 
