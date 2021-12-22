@@ -1,0 +1,18 @@
+[
+{
+    "model": "catalogue.category",
+    "pk": 1,
+    "fields": {
+        "name": "Icons",
+        "slug": "icons"
+    }
+},
+{
+    "model": "catalogue.category",
+    "pk": 2,
+    "fields": {
+        "name": "Books",
+        "slug": "books"
+    }
+}
+]

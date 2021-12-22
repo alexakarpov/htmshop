@@ -1,0 +1,26 @@
+[
+  {
+    "model": "catalogue.product",
+      "fields": {
+          "created_by": 1,
+          "title": "Test Icon",
+          "category": 1,
+          "description": "qwe qwe",
+          "price": 11,
+          "slug": "am11",
+          "created": "2021-08-30"
+    }
+  },
+  {
+    "model": "catalogue.product",
+    "fields": {
+      "created_by": 1,
+      "title": "Test Book",
+      "category": 2,
+      "description": "asd asd",
+      "price": 22,
+      "slug": "b22",
+      "created": "2021-08-30"
+    }
+  }
+]
