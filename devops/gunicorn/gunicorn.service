@@ -10,10 +10,10 @@ WorkingDirectory=/home/ubuntu/htmshop_depl
 ExecStart=/home/ubuntu/htmshop_depl/venv/bin/gunicorn \
           --workers 3 \
           --bind unix:/run/gunicorn.sock \
-          --env DJANGO_SETTINGS_MODULE=ecommerce.settings.staging \
+          --env DJANGO_SETTINGS_MODULE=settings.staging \
           --access-logfile /var/log/htmshop/access.log \
           --error-logfile /var/log/htmshop/error.log \
-          ecommerce.wsgi:application
+          wsgi:application
 
 [Install]
 WantedBy=multi-user.target
