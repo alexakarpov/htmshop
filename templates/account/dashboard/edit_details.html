@@ -2,6 +2,7 @@
 {% block title %}Edit Profile{% endblock %}
 {% block sub_content %}
 
+<div class="col-6 mx-auto">
 <form class="account-form" method="post" enctype="multipart/form-data">
     {% if user_form.is_valid and profile_form.is_valid  %}
     <div class="alert alert-primary" role="alert">
@@ -34,5 +35,6 @@
     <p>Are you sure you want to delete your account?</p>
     <button type="submit" role="button" class="btn btn-danger btn-block py-2 mb-4 mt-5 fw-bold w-100">Delete</button>
 </form>
+</div>
 
 {% endblock %}

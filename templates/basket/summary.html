@@ -1,21 +1,21 @@
 {% extends "../base.html" %}
 {% load static %}
-{% block title %}Cart Summary{%endblock %}
+{% block title %}Basket Summary{%endblock %}
 {% block content %}
 
 <div class="container">
   <div class="col-12">
-    <h1 class="h2">Your Cart</h1>
+    <h1 class="h2">Your Basket</h1>
   </div>
   <div class="col-12">
-    <p>Manage <b>items</b> in your cart</p>
+    <p>Manage your <b>items</b> in your basket</p>
   </div>
   <hr />
 </div>
 <div class="container">
   <div class="row g-3">
     {% if basket|length == 0 %}
-    <div class="col-12">Your cart is empty <a href="{% url 'catalogue:store_home' %}">Shop</a></div>
+    <div class="col-12">Your basket is empty <a href="{% url 'catalogue:store_home' %}">Shop</a></div>
     {% else %}
     <div class="col-12 bg-light p-3 d-flex justify-content-between">
       <div class="d-flex d-flex-inline">
@@ -47,7 +47,7 @@
     </div>
     <div class="col-md-5 col-lg-4 order-md-last p-0 order-3">
       <div class="d-grid gap-2 ">
-        <a role="button" href="{% url "payment:basket" %}" class="btn btn-success fw-bold" type="button">Checkout</a>
+        <a role="button" href="{% url 'checkout:deliverychoices' %}" class="btn btn-success fw-bold" type="button">Checkout Securely</a>
         <button class="btn btn-light" type="button">Save for later</button>
       </div>
     </div>
@@ -57,7 +57,11 @@
       <div class="card mb-3 border-0 product-item" data-index="{{product.id}}">
         <div class="row g-0">
           <div class="col-md-2 d-none d-md-block">
-            <img class="img-fluid mx-auto d-block" alt="Responsive image" src="{{ product.image.url }}" />
+            {% for image in product.product_image.all %}
+            {% if image.is_feature%}
+            <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
+            {% endif %}
+            {% endfor %}
           </div>
           <div class="col-md-10 ps-md-3">
             <div class="card-body p-1">
