@@ -1,8 +1,0 @@
-# sqlite sequence hack
-setting the sequence on a table in sqlite:
-
-UPDATE `sqlite_sequence` SET `seq` = 40000 WHERE `name` = 'orders_order';
-
-# coverage test - excluding pyenv's virtualenv (
-coverage run --omit='/Users/akarpov/.pyenv/versions/3.8.10/*' manage.py test
-coverage html
