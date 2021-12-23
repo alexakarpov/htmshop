@@ -38,10 +38,6 @@ deploy:
 script:
   - find . -type d -name '__pycache__' -delete
   #- cd ecommerce/
-  - zip -r latest.zip *
-  # - zip -u latest.zip ../appspec.yml
-  # - zip -u latest.zip ../requirements.txt
-  # - zip -u latest.zip ../manage.py
-  # - zip -ur latest.zip ../static
+  - zip -r latest.zip ecommerce appspec.yml requirements.txt manage.py static templates
   - mkdir -p dpl_cd_upload
   - mv latest.zip dpl_cd_upload/latest.zip
