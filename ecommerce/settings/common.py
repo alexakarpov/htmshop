@@ -8,8 +8,9 @@ INSTALLED_APPS = [
     'ecommerce.apps.catalogue',
     'ecommerce.apps.basket',
     'ecommerce.apps.account',
-    'ecommerce.apps.payment',
+    # 'ecommerce.apps.payment',
     'ecommerce.apps.orders',
+    'ecommerce.apps.checkout',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,7 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'account.UserBase'
+AUTH_USER_MODEL = 'account.Customer'
 
 LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login/'
