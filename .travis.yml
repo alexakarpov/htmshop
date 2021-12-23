@@ -37,7 +37,7 @@ deploy:
   on: *repov
 script:
   - find . -type d -name '__pycache__' -delete
-  - cd ecommerce/
+  #- cd ecommerce/
   - zip -r latest.zip *
   - zip -u latest.zip ../appspec.yml
   - zip -u latest.zip ../requirements.txt
