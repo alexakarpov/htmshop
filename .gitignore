@@ -14,7 +14,8 @@ pip-selfcheck.json
 # src/<yourproject>/settings/local.py
 # static-cdn/  # any collected static files
 
-
+# secrets
+**/secrets/*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
