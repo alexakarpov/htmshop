@@ -1,9 +1,7 @@
 -r requirements.txt
-pytest>=4,<5
-black>=20,<21
-coverage>=5,<6
-factoryboy>=3,<4
-Faker>=8,<9
-pytest-factoryboy>=3,<4
-pytest-django>=4,<5
-isort>=5,<6
+black>=20
+coverage==6.2
+Faker==10.0.0
+pytest-factoryboy==2.1.0
+pytest-django>=4.4.0
+isort==5.7.0
