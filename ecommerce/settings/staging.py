@@ -2,8 +2,7 @@ import os
 from pathlib import Path
 
 from dotenv import dotenv_values
-
-from settings.common import *
+from ecommerce.settings.common import *
 
 ENV = "staging"
 
@@ -18,7 +17,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "34.207.88.228", "transylvania.bostonmonks.com"]
 
-WSGI_APPLICATION = "core.wsgi.application"
+WSGI_APPLICATION = "ecommerce.wsgi.application"
 
 DATABASES = {
     "default": {
