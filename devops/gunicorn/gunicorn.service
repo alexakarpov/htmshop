@@ -4,10 +4,10 @@ Requires=gunicorn.socket
 After=network.target
 
 [Service]
-User=ubuntu
-Group=adm
-WorkingDirectory=/home/ubuntu/htmshop_depl
-ExecStart=/home/ubuntu/htmshop_depl/venv/bin/gunicorn \
+User=storeadmin
+Group=htm
+WorkingDirectory=/home/storeadmin/htmshop
+ExecStart=/home/storeadmin/htmshop/venv/bin/gunicorn \
           --workers 3 \
           --bind unix:/run/gunicorn.sock \
           --env DJANGO_SETTINGS_MODULE=ecommerce.settings.staging \

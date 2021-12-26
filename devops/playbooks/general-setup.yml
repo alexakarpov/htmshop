@@ -26,14 +26,27 @@
           ]
         state: latest
 
+
+    - name: create the group for the store admin
+      group:
+        name: htm
+        state: present
+
     - name: me with sudo
       user:
         name: akarpov
-        groups: sudo, docker
+        groups: sudo, docker, htm
         shell: /bin/bash
         password: $1$SomeSalt$fG/7WJxdGZynylTBJbXPc1
 
-    - name: Placing public keys
+    - name: admin user without sudo
+      user:
+        name: storeadmin
+        groups: docker, htm
+        shell: /bin/bash
+        password: $6$foobarsalt$quoyGsj/DPOV943ZXZjF9UALAjRwwiyP6a02Jqu0B5upUO/OU9UD2TB.Icte/Ch5luhbcx3S9RQmsbcxQRNzu.
+
+    - name: Placing my public keys
       authorized_key:
         user: akarpov
         key: '{{ item }}'
@@ -41,37 +54,52 @@
         - ../public_keys/akamac.pub
         - ../public_keys/akarpov.pub
 
-    #### secrets/dotenv business
-    - name: dotenv file
-      copy:
-        src: ../secrets/.env
-        dest: /home/ubuntu/htmshop_depl/.env
-
-    - name: db init.sql file
-      copy:
-        src: ../secrets/init.sql
-        dest: /home/ubuntu/htmshop_depl/init.sql
-
-    #### virtualenv stuff
-    - name: create the virtualenv
-      command:
-        cmd: virtualenv /home/ubuntu/htmshop_depl/venv -p python3.8
-        creates: '/home/ubuntu/htmshop_depl/venv'
-
-    - name: install dependencies
-      pip:
-        virtualenv: /home/ubuntu/htmshop_depl/venv
-        requirements: /home/ubuntu/htmshop_depl/requirements.txt
-
-    #### GUNICORN BUINESS
+    - name: Placing admin public key
+      authorized_key:
+        user: storeadmin
+        key: '{{ item }}'
+      with_file:
+        - ../public_keys/storeadmin.pub
 
     - name: Create log directory
       file:
         path: /var/log/htmshop
         state: directory
-        owner: ubuntu
-        group: ubuntu
+        owner: storeadmin
+        group: htm
         mode: 0775
+
+    - name: Create deployment directory
+      file:
+        path: /home/storeadmin/htmshop
+        state: directory
+        owner: storeadmin
+        group: htm
+        mode: 0775
+
+    #### secrets/dotenv business
+    - name: dotenv file
+      copy:
+        src: ../secrets/.env
+        dest: /home/storeadmin/htmshop/.env
+
+    - name: db init.sql file
+      copy:
+        src: ../secrets/init.sql
+        dest: /home/storeadmin/htmshop/init.sql
+
+    #### virtualenv stuff
+    - name: create the virtualenv
+      command:
+        cmd: virtualenv /home/storeadmin/htmshop/venv -p python3.8
+        creates: '/home/storeadmin/htmshop/venv'
+
+    - name: install dependencies
+      pip:
+        virtualenv: /home/storeadmin/htmshop/venv
+        requirements: /home/storeadmin/htmshop/requirements.txt
+
+    #### GUNICORN BUINESS
 
     - name: Gunicorn socket file
       copy:
@@ -121,16 +149,16 @@
       file:
         path: /var/static_root
         state: directory
-        owner: ubuntu
-        group: ubuntu
+        owner: storeadmin
+        group: htm
         mode: 0775
 
     - name: Create media_root directory
       file:
         path: /var/media_root
         state: directory
-        owner: ubuntu
-        group: ubuntu
+        owner: storeadmin
+        group: htm
         mode: 0775
 
     # - name: Create db directory
