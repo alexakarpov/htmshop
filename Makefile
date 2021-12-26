@@ -1,8 +1,8 @@
 deploy : build
-	scp htmshop.zip transylvania.bostonmonks.com:/home/storeadmin/deployment
+	scp htmshop.zip transylvania.bostonmonks.com:/home/storeadmin/htmshop
 
 build : clean
-	zip -qr htmshop.zip ecommerce appspec.yml requirements.txt manage.py static templates
+	zip -qr htmshop.zip ecommerce requirements.txt manage.py static templates
 
 clean :
 	find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
