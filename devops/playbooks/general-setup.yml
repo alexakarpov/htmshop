@@ -26,7 +26,6 @@
           ]
         state: latest
 
-
     - name: create the group for the store admin
       group:
         name: htm
@@ -77,30 +76,56 @@
         group: htm
         mode: 0775
 
-    #### secrets/dotenv business
+    - name: Create static_root directory
+      file:
+        path: /var/static_root
+        state: directory
+        owner: storeadmin
+        group: htm
+        mode: 0775
+
+    - name: Create media_root directory
+      file:
+        path: /var/media_root
+        state: directory
+        owner: storeadmin
+        group: htm
+        mode: 0775
+
+    #### secrets
     - name: dotenv file
       copy:
         src: ../secrets/.env
         dest: /home/storeadmin/htmshop/.env
+        owner: storeadmin
+        group: htm
 
     - name: db init.sql file
       copy:
         src: ../secrets/init.sql
         dest: /home/storeadmin/htmshop/init.sql
+        owner: storeadmin
+        group: htm
 
-    #### virtualenv stuff
+    #### virtualenv
     - name: create the virtualenv
       command:
         cmd: virtualenv /home/storeadmin/htmshop/venv -p python3.8
         creates: '/home/storeadmin/htmshop/venv'
+
+    - name: requirements
+      copy:
+        src: ../requirements.txt
+        dest: /home/storeadmin/htmshop/requirements.txt
+        owner: storeadmin
+        group: htm
 
     - name: install dependencies
       pip:
         virtualenv: /home/storeadmin/htmshop/venv
         requirements: /home/storeadmin/htmshop/requirements.txt
 
-    #### GUNICORN BUINESS
-
+    #### GUNICORN
     - name: Gunicorn socket file
       copy:
         src: ../gunicorn/gunicorn.socket
@@ -144,22 +169,6 @@
       service:
         name: nginx
         enabled: yes
-
-    - name: Create static_root directory
-      file:
-        path: /var/static_root
-        state: directory
-        owner: storeadmin
-        group: htm
-        mode: 0775
-
-    - name: Create media_root directory
-      file:
-        path: /var/media_root
-        state: directory
-        owner: storeadmin
-        group: htm
-        mode: 0775
 
     # - name: Create db directory
     #   file:
