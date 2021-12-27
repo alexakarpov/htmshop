@@ -1,5 +1,5 @@
 deploy : build
-	scp htmshop.zip transylvania.bostonmonks.com:/home/storeadmin/htmshop
+	scp htmshop.zip transylvania.bostonmonks.com:~
 
 build : clean
 	zip -qr htmshop.zip ecommerce requirements.txt manage.py static templates
