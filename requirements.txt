@@ -22,6 +22,7 @@ paypal-checkout-serversdk==1.0.1
 paypalhttp==1.0.0
 Pillow==8.1.0
 pluggy==0.13.1
+psycopg2==2.9.2
 py==1.10.0
 pycparser==2.20
 pyOpenSSL==20.0.1
