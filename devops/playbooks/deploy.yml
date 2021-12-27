@@ -1,0 +1,21 @@
+---
+- name: post-deploy steps
+  hosts: htmstore_dev
+  become: true
+  user: ubuntu
+
+  tasks:
+
+    # - name: run migrations
+    #   community.general.django_manage:
+    #     virtualenv: /home/ubuntu/htmshop_depl/venv
+    #     project_path: /home/ubuntu/htmshop_depl/
+    #     command: migrate
+    #   environment:
+    #     DJANGO_SETTINGS_MODULE: core.settings.staging
+
+    - name: Extract htmshop.zip to deployment location
+      ansible.builtin.unarchive:
+        src: /home/akarpov/htmshop.zip
+        dest: /home/storeadmin/htmshop
+        remote_src: true
