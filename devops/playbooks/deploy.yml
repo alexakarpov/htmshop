@@ -5,17 +5,22 @@
   user: ubuntu
 
   tasks:
-
-    # - name: run migrations
-    #   community.general.django_manage:
-    #     virtualenv: /home/ubuntu/htmshop_depl/venv
-    #     project_path: /home/ubuntu/htmshop_depl/
-    #     command: migrate
-    #   environment:
-    #     DJANGO_SETTINGS_MODULE: core.settings.staging
-
     - name: Extract htmshop.zip to deployment location
       ansible.builtin.unarchive:
         src: /home/akarpov/htmshop.zip
         dest: /home/storeadmin/htmshop
         remote_src: true
+
+    - name: run migrations
+      community.general.django_manage:
+        virtualenv: /home/storeadmin/htmshop/venv
+        project_path: /home/storeadmin/htmshop
+        command: migrate
+      environment:
+        DJANGO_SETTINGS_MODULE: ecommerce.settings.staging
+
+    - name: gunicorn service restart
+      systemd:
+        name: gunicorn.service
+        state: restarted
+        daemon_reload: yes
