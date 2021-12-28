@@ -1,1 +1,44 @@
-[{"model": "catalogue.category", "pk": 1, "fields": {"name": "Icons", "slug": "icons", "parent": null, "is_active": true, "lft": 1, "rght": 6, "tree_id": 2, "level": 0}}, {"model": "catalogue.category", "pk": 2, "fields": {"name": "Mounted Icons", "slug": "mounted-icons", "parent": 1, "is_active": true, "lft": 2, "rght": 3, "tree_id": 2, "level": 1}}, {"model": "catalogue.category", "pk": 3, "fields": {"name": "Wallet-sized Icons", "slug": "wallet-sized-icons", "parent": 1, "is_active": true, "lft": 4, "rght": 5, "tree_id": 2, "level": 1}}, {"model": "catalogue.category", "pk": 4, "fields": {"name": "Books", "slug": "books", "parent": null, "is_active": true, "lft": 1, "rght": 2, "tree_id": 1, "level": 0}}]
+[
+  {
+    "model": "catalogue.category",
+    "pk": 1,
+    "fields": {
+      "name": "Books",
+      "slug": "books",
+      "parent": null,
+      "is_active": true,
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 1,
+      "level": 0
+    }
+  },
+  {
+    "model": "catalogue.category",
+    "pk": 2,
+    "fields": {
+      "name": "Icons",
+      "slug": "icons",
+      "parent": null,
+      "is_active": true,
+      "lft": 1,
+      "rght": 4,
+      "tree_id": 2,
+      "level": 0
+    }
+  },
+  {
+    "model": "catalogue.category",
+    "pk": 3,
+    "fields": {
+      "name": "Mounted Icons",
+      "slug": "mounted-icons",
+      "parent": 2,
+      "is_active": true,
+      "lft": 2,
+      "rght": 3,
+      "tree_id": 2,
+      "level": 1
+    }
+  }
+]
