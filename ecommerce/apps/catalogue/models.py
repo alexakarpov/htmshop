@@ -83,7 +83,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name=_("description"), help_text=_("Not Required"), blank=True)
     slug = models.SlugField(max_length=255)
     price = models.DecimalField(
-        verbose_name=_("Regular price"),
+        verbose_name=_("Price"),
         help_text=_("Maximum 999.99"),
         error_messages={
             "name": {
