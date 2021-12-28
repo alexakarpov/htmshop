@@ -7,18 +7,18 @@
 {% block content %}
 
 <div class="container">
-{% if messages %}
-<div class="alert alert-warning" alert-{{ message.tags }}" role="alert">
-{% for message in messages  %}
-  {{message|safe}} - <a href="{% url "account:wishlist" %}" class="alert-link">Your Wishlist</a>.
-{% endfor %}
-</div>
-{% endif %}
+  {% if messages %}
+  <div class="alert alert-warning" alert-{{ message.tags }}" role="alert">
+    {% for message in messages  %}
+    {{message|safe}} - <a href="{% url "account:wishlist" %}" class="alert-link">Your Wishlist</a>.
+    {% endfor %}
+  </div>
+  {% endif %}
   <div class="row g-3">
     <div class="col-md-5 ps-3 col-lg-5 order-md-last p-0 order-1">
       <div class="d-grid gap-2">
         <div class="d-flex d-flex-inline justify-content-between">
-          <div><span class="h3">£{{ product.regular_price }}</span>
+          <div><span class="h3">£{{ product.price }}</span>
             <p class="text-muted">includes tax</p>
           </div>
           <div>
@@ -34,7 +34,8 @@
         <hr>
         <button type="button" id="add-button" value="{{product.id}}" class="btn btn-success fw500">Add to
           basket</button>
-        <a href="{% url "account:user_wishlist" product.id  %}" class="btn btn-light fw500" role="button" aria-disabled="true">Add to Wish List</a>
+        <a href="{% url "account:user_wishlist" product.id  %}" class="btn btn-light fw500" role="button"
+          aria-disabled="true">Add to Wish List</a>
       </div>
     </div>
     <div class="col-md-7 col-lg-7 p-0">

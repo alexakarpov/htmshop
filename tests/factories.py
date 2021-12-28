@@ -49,8 +49,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
     title = "product_title"
     description = fake.text()
     slug = "product_slug"
-    regular_price = "9.99"
-    discount_price = "4.99"
+    price = "9.99"
 
 
 class ProductSpecificationValueFactory(factory.django.DjangoModelFactory):
