@@ -40,6 +40,24 @@ def test_customer_create_address(client, customer):
     assert response.status_code == 302
 
 
+def test_customer_create_address2(client, customer):
+    user = customer
+    client.force_login(user)
+    response = client.post(
+        "/account/add_address/",
+        data={
+            "full_name": "qwe",
+            "phone": "1231231234",
+            "address_line": "1 qwe st",
+            "address_line2": "",
+            "town_city": "qwe",
+            "postcode": "12123",
+        },
+    )
+
+    assert response.status_code == 302
+
+
 @pytest.mark.parametrize(
     "user_name, email, password, password2, validity",
     [
