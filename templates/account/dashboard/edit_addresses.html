@@ -25,19 +25,20 @@
     {{ form.town_city }}
     <label class="small fw-bold">{{ form.postcode.label}}</label>
     {{ form.postcode }}
-    <button class="btn btn-primary btn-block py-2 mb-4 mt-4 fw-bold w-100" type="button" value="Submit" onclick="submitForm()">
-    Add Address
+    <button class="btn btn-primary btn-block py-2 mb-4 mt-4 fw-bold w-100" type="button" value="Submit"
+      onclick="submitForm()">
+      Save changes
     </button>
   </form>
 
 </div>
 
-<script> 
-function submitForm() {
-   var form = document.getElementsByName('address_form')[0];
-   form.submit(); // Submit the form
-   form.reset();  // Reset all form data
-   return false; // Prevent page refresh
-}
+<script>
+  function submitForm() {
+    var form = document.getElementsByName('address_form')[0];
+    form.submit(); // Submit the form
+    form.reset(); // Reset all form data
+    return false; // Prevent page refresh
+  }
 </script>
 {% endblock %}
