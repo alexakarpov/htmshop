@@ -26,19 +26,5 @@
       "tree_id": 2,
       "level": 0
     }
-  },
-  {
-    "model": "catalogue.category",
-    "pk": 3,
-    "fields": {
-      "name": "Mounted Icons",
-      "slug": "mounted-icons",
-      "parent": 2,
-      "is_active": true,
-      "lft": 2,
-      "rght": 3,
-      "tree_id": 2,
-      "level": 1
-    }
   }
 ]
