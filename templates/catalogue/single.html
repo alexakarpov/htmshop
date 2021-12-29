@@ -1,6 +1,4 @@
 {% extends "../base.html" %}
-{% load static %}
-{% block stylesheet %}{% static 'store/css/store.css' %}{% endblock %}
 {% block title %}
 {% if product %}{{ product.title }}{% else %}Product{% endif %}
 {% endblock %}

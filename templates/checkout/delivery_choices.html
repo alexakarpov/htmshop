@@ -15,16 +15,16 @@
 
 
 <div class="container">
-{% if messages %}
-<div class="alert alert-warning" alert-{{ message.tags }}" role="alert">
-  {% for message in messages  %}
+  {% if messages %}
+  <div class="alert alert-warning" alert-{{ message.tags }}" role="alert">
+    {% for message in messages  %}
     {{message|safe}}
-  {% endfor %}
-</div>
-{% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
   <div class="row g-3">
     {% if deliveryoptions|length == 0 %}
-    <div class="col-12">There are no delivery options <a href="{% url 'store:store_home' %}">Shop</a></div>
+    <div class="col-12">There are no delivery options <a href="{% url 'catalogue:store_home' %}">Shop</a></div>
     {% else %}
     <div class="col-md-4 col-lg-4 order-md-last p-0 order-3">
       <div class="d-flex bd-highlight ms-0">
@@ -75,7 +75,7 @@
 </div>
 
 <script>
-  $('input[type=radio][name=deliveryOption]').on('change', function(e) {
+  $('input[type=radio][name=deliveryOption]').on('change', function (e) {
     e.preventDefault();
     $.ajax({
       type: "POST",
@@ -91,7 +91,7 @@
       },
       error: function (xhr, errmsg, err) {},
     });
-    
+
   });
 </script>
 
