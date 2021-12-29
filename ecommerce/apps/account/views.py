@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
@@ -15,6 +17,8 @@ from ecommerce.apps.orders.views import user_orders
 from .forms import RegistrationForm, UserAddressForm, UserEditForm
 from .models import Address, Customer
 from .tokens import account_activation_token
+
+logger = logging.getLogger("django")
 
 
 @login_required
@@ -122,14 +126,18 @@ def view_address(request):
 
 @login_required
 def add_address(request):
+    logger.debug("creating a new address")
+
     if request.method == "POST":
         address_form = UserAddressForm(data=request.POST)
         if address_form.is_valid():
+            logger.debug("address is valid")
             address_form = address_form.save(commit=False)
             address_form.customer = request.user
             address_form.save()
             return HttpResponseRedirect(reverse("account:addresses"))
         else:
+            logger.debug("invalid address")
             return HttpResponse("Error handler content", status=400)
     else:
         address_form = UserAddressForm()
