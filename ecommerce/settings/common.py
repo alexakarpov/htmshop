@@ -6,7 +6,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "ecommerce.apps.catalogue",
-    "ecommerce.apps.basket",
     "ecommerce.apps.account",
     "ecommerce.apps.orders",
     "ecommerce.apps.checkout",
