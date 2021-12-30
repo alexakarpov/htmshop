@@ -7,12 +7,6 @@ class DeliveryOptions(models.Model):
     The Delivery methods table contining all delivery
     """
 
-    DELIVERY_CHOICES = [
-        ("IS", "In Store"),
-        ("HD", "Home Delivery"),
-        ("DD", "Digital Delivery"),
-    ]
-
     delivery_name = models.CharField(
         verbose_name=_("delivery_name"),
         help_text=_("Required"),
@@ -30,7 +24,6 @@ class DeliveryOptions(models.Model):
         decimal_places=2,
     )
     delivery_method = models.CharField(
-        choices=DELIVERY_CHOICES,
         verbose_name=_("delivery_method"),
         help_text=_("Required"),
         max_length=255,
