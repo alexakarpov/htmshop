@@ -81,7 +81,7 @@ class Customer(AbstractBaseUser, PermissionsMixin):
         )
 
     def __str__(self):
-        return self.name
+        return self.email
 
 
 class Address(models.Model):
