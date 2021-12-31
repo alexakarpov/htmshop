@@ -6,7 +6,7 @@ def test_customer_str(customer):
 
 
 def test_customer_str(adminuser):
-    assert adminuser.__str__() == "admin_user"
+    assert adminuser.__str__() == "a@a.com"
 
 
 def test_customer_email_no_input(customer_factory):
