@@ -3,7 +3,7 @@ deploy : build setup
 	ansible-playbook -i devops/inventory.ini devops/playbooks/deploy.yml
 
 build : clean
-	zip -qr htmshop.zip ecommerce requirements.txt manage.py static templates
+	zip -qr htmshop.zip ecommerce requirements.txt requirements_dev.txt manage.py static templates
 
 setup :
 	ansible-playbook -i devops/inventory.ini devops/playbooks/general-setup.yml
