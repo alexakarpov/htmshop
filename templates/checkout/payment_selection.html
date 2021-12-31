@@ -5,7 +5,7 @@
 
 <div class="container">
   <div class="col-12">
-     <h1 class="h2">Payment Selection</h1>
+    <h1 class="h2">Payment Selection</h1>
   </div>
   <div class="col-12">
     <p>Please select your payment option</p>
@@ -38,10 +38,10 @@
   </div>
 </div>
 <script
-  src="https://www.paypal.com/sdk/js?client-id=AZQiAqo_G8vygoAIT9tAL-Z6MQd49xERaY6a3N0ijCRXkubEyMnylsk1qjxNIFM2iAFomcSTfq4yW47O&currency=GBP"
+  src="https://www.paypal.com/sdk/js?client-id=AeIQTllyb61D0xyG6SLmCDTEMfzhxABJqgyyRVMB9cli01NSM_-I7HCG-oAM2BiPTvdMEqhK-CRSAu1S&currency=USD"
   data-sdk-integration-source="button-factory">
 </script>
-    <script>
+<script>
   function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -58,8 +58,6 @@
   }
   var csrftoken = getCookie('csrftoken');
 
-
-
   function initPayPalButton() {
     paypal.Buttons({
       style: {
@@ -69,7 +67,7 @@
         label: 'paypal',
 
       },
-    createOrder: function (data, actions) {
+      createOrder: function (data, actions) {
         return actions.order.create({
           purchase_units: [{
             "amount": {
@@ -79,7 +77,7 @@
           }]
         });
       },
-    onApprove: function (data) {
+      onApprove: function (data) {
         var url = "{% url 'checkout:payment_complete' %}"
         return fetch(url, {
           method: 'POST',
@@ -91,13 +89,13 @@
             orderID: data.orderID
           })
         }).then(function () {
-          location.href = '{% url 'checkout:payment_successful' %}';
+          location.href = '{% url '
+          checkout: payment_successful ' %}';
         })
       },
     }).render('#paypal-button-container');
   }
   initPayPalButton();
-
-    </script>
+</script>
 
 {% endblock %}

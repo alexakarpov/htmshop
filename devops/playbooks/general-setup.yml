@@ -113,12 +113,13 @@
         cmd: virtualenv /home/storeadmin/htmshop/venv -p python3.8
         creates: '/home/storeadmin/htmshop/venv'
 
-    # - name: requirements
-    #   copy:
-    #     src: ../requirements.txt
-    #     dest: /home/storeadmin/htmshop/requirements.txt
-    #     owner: storeadmin
-    #     group: htm
+    - name: owner of venv to storeadmin
+      file:
+        path: /home/storeadmin/htmshop/venv
+        state: directory
+        recurse: yes
+        owner: storeadmin
+        group: htm
 
     - name: install dependencies
       pip:
