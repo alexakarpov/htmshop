@@ -81,6 +81,7 @@
       type: "POST",
       url: '{% url "checkout:basket_update_delivery" %}',
       data: {
+        // this refers to the jQuery-selected element
         deliveryoption: $(this).val(),
         csrfmiddlewaretoken: "{{csrf_token}}",
         action: "post",
