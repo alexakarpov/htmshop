@@ -1,4 +1,5 @@
 .DS_STORE
+ignore/
 
 .env
 notes/email-activation.py
