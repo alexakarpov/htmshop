@@ -95,7 +95,7 @@
     #### secrets
     - name: dotenv file
       copy:
-        src: ../secrets/.env
+        src: ../secrets/staging.env
         dest: /home/storeadmin/htmshop/.env
         owner: storeadmin
         group: htm

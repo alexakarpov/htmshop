@@ -19,6 +19,14 @@
       environment:
         DJANGO_SETTINGS_MODULE: ecommerce.settings.staging
 
+    - name: static files
+      community.general.django_manage:
+        virtualenv: /home/storeadmin/htmshop/venv
+        project_path: /home/storeadmin/htmshop
+        command: collectstatic
+      environment:
+        DJANGO_SETTINGS_MODULE: ecommerce.settings.staging
+
     - name: gunicorn service restart
       systemd:
         name: gunicorn.service
