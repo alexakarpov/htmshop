@@ -126,8 +126,6 @@ def view_address(request):
 
 @login_required
 def add_address(request):
-    logger.debug("creating a new address")
-
     if request.method == "POST":
         address_form = UserAddressForm(data=request.POST)
         if address_form.is_valid():
