@@ -10,3 +10,12 @@ docker exec -it pg psql -U postgres
 # or better yet, setup using a file
 
  sudo cat init.sql | docker exec -i pg psql -U postgres -d postgres
+
+
+# other db notes
+
+## sequence last value example
+select last_value from orders_order_id_seq;
+
+## setting sequence value
+SELECT setval('orders_order_id_seq', 50042);
