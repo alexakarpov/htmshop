@@ -64,7 +64,8 @@ AUTH_USER_MODEL = "account.Customer"
 
 LOGIN_REDIRECT_URL = "/account/dashboard"
 LOGIN_URL = "/account/login/"
+BASKET_SESSION_ID = "basket"
 
 # Email setting
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-BASKET_SESSION_ID = "basket"
+EMAIL_FROM = "info@thehtm.org"
