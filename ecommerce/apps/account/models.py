@@ -1,3 +1,4 @@
+import logging
 import uuid
 
 from django.conf import settings
@@ -11,6 +12,8 @@ from django.core.mail import send_mail
 from django.core.validators import validate_email
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+logger = logging.getLogger("django")
 
 
 class CustomAccountManager(BaseUserManager):
@@ -73,6 +76,8 @@ class Customer(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = "Accounts"
 
     def email_user(self, subject, message):
+
+        logger.debug(f"emailing '{subject}' from {settings.EMAIL_FROM} to {self.email}")
         send_mail(
             subject,
             message,
