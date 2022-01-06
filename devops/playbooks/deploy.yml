@@ -10,6 +10,13 @@
         src: /home/akarpov/htmshop.zip
         dest: /home/storeadmin/htmshop
         remote_src: true
+# secrets
+    - name: dotenv file
+      copy:
+        src: ../secrets/staging.env
+        dest: /home/storeadmin/htmshop/.env
+        owner: storeadmin
+        group: htm
 
     - name: run migrations
       community.general.django_manage:
