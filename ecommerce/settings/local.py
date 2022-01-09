@@ -5,12 +5,11 @@ from dotenv import dotenv_values
 
 from .common import *
 
-
 ENV = "development"
 
 print("workdir: ", os.getcwd())
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-print(f"BASE_DIR: {BASE_DIR}")
+print(f"BASE_DIR: {BASE_DIR}, ENV: {ENV}")
 
 config = dotenv_values("devops/secrets/development.env")
 SECRET_KEY = config["SECRET_KEY"]
@@ -62,12 +61,12 @@ LOGGING = {
         "simple": {"format": "%(levelname)s %(message)s"},
     },
     "handlers": {
-        "console": {"level": "INFO", "class": "logging.StreamHandler", "formatter": "simple"},
+        "console": {"level": "DEBUG", "class": "logging.StreamHandler", "formatter": "simple"},
     },
     "loggers": {
         "django": {
-            "handlers": ["file"],
-            "level": "INFO",
+            "handlers": ["console"],
+            "level": "DEBUG",
             "propagate": True,
         },
     },
@@ -81,8 +80,8 @@ STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
 
 if DEBUG:
     # make all loggers use the console.
-    for logger in LOGGING["loggers"]:
-        LOGGING["loggers"][logger]["handlers"] = ["console"]
+    # for logger in LOGGING["loggers"]:
+    #     LOGGING["loggers"][logger]["handlers"] = ["console"]
 
     # django-debug-toolbar
 
