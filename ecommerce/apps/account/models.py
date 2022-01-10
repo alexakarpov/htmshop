@@ -77,14 +77,17 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message):
 
-        logger.debug(f"emailing '{subject}' from {settings.EMAIL_FROM} to {self.email}")
+        logger.debug(f"emailing '{subject}' to {self.email}")
         send_mail(
             subject,
             message,
-            settings.EMAIL_FROM,
+            # settings.EMAIL_FROM,
             [self.email],
             fail_silently=False,
         )
+
+    def get_short_name(self):
+        return self.name
 
     def __str__(self):
         return self.email
