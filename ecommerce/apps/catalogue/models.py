@@ -153,6 +153,7 @@ class ProductImage(models.Model):
         max_length=255,
         null=True,
         blank=True,
+        default="some image alt text",
     )
     is_feature = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
