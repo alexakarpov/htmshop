@@ -40,14 +40,16 @@
                       d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                   </svg></i>
               </a>
+
               <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="{% url "catalogue:store_home" %}">All</a></li>
                 {% for c in categories %}
-                <li {% if category.slug == c.slug %}class="selected" {% endif %}>
+                <li>
                   <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
                 </li>
                 {% endfor %}
               </ul>
+
             </li>
           </ul>
           <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -123,7 +125,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
               <li><a class="dropdown-item" href="{% url "catalogue:store_home" %}">All</a></li>
               {% for c in categories %}
-              <li {% if category.slug == c.slug %}class="selected" {% endif %}>
+              <li>
                 <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
               </li>
               {% endfor %}
