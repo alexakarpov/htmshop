@@ -8,14 +8,14 @@
   <p class="mb-4">It's free and only takes a minute.</p>
 
   {% if form.errors %}
-  <p>Please correct the following errors:</p>
-  {% for field in form %}
-  {% if field.errors %}
-  <div class="alert alert-primary" role="alert">
-    {{ field.label }}: {{ field.errors|striptags }}
-  </div>
-  {% endif %}
-  {% endfor %}
+    <p>Please correct the following errors:</p>
+    {% for field in form %}
+      {% if field.errors %}
+        <div class="alert alert-primary" role="alert">
+          {{ field.label }}: {{ field.errors|striptags }}
+        </div>
+      {% endif %}
+    {% endfor %}
   {% endif %}
 
   <label>{{ form.user_name.label }}<span class="text-muted small">
