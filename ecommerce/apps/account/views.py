@@ -68,13 +68,17 @@ def delete_user(request):
 
 
 def account_register(request):
-
+    logger.debug("in account_register")
     if request.user.is_authenticated:
         return redirect("account:dashboard")
 
     if request.method == "POST":
+        logger.debug("yes a POST")
+
         registerForm = RegistrationForm(request.POST)
         if registerForm.is_valid():
+            logger.debug("yes a valid form")
+
             user = registerForm.save(commit=False)
             user.email = registerForm.cleaned_data["email"]
             user.set_password(registerForm.cleaned_data["password"])
@@ -95,7 +99,8 @@ def account_register(request):
             logger.debug(f"Registration email sent to {user.email}")
             return render(request, "account/registration/register_email_confirm.html", {"form": registerForm})
         else:
-            return HttpResponse("Error handler content", status=400)
+            logger.debug("INVALID FORM")
+            return render(request, "account/registration/register.html", {"form": registerForm})
     else:
         registerForm = RegistrationForm()
     return render(request, "account/registration/register.html", {"form": registerForm})
