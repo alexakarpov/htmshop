@@ -85,8 +85,8 @@ def test_create_account(user_name, email, password, password2, validity):
     "user_name, email, password, password2, validity",
     [
         ("user1", "a@a.com", "12345a", "12345a", 200),
-        ("user1", "a@a.com", "12345a", "12345", 400),
-        ("user1", "", "12345a", "12345", 400),
+        ("user1", "a@a.com", "12345a", "12345", 200),
+        ("user1", "", "12345a", "12345", 200),
     ],
 )
 @pytest.mark.django_db
