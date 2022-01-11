@@ -68,5 +68,4 @@ BASKET_SESSION_ID = "basket"
 
 # Email setting
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_FROM = "info@thehtm.org"
-DEFAULT_FROM_EMAIL = EMAIL_FROM
+DEFAULT_FROM_EMAIL = "info@thehtm.org"
