@@ -81,7 +81,7 @@ class Customer(AbstractBaseUser, PermissionsMixin):
         send_mail(
             subject,
             message,
-            # settings.EMAIL_FROM,
+            settings.DEFAULT_FROM_EMAIL,
             [self.email],
             fail_silently=False,
         )
