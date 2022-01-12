@@ -5,6 +5,10 @@ description = ""
 authors = ["Alexandre Karpov <alexakarpov@gmail.com>"]
 license = "MIT"
 
+packages = [
+    { include = "ecommerce" }
+]
+
 [tool.poetry.dependencies]
 python = "^3.8"
 gunicorn = "^20"
@@ -14,7 +18,7 @@ django-mptt = "^0.13"
 paypalrestsdk = "^1.13"
 paypal-checkout-serversdk = "^1"
 Pillow = "^9"
-black = "^21.12b0"
+psycopg2 = "^2.9.3"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^3"
