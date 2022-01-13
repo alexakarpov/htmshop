@@ -12,13 +12,12 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.8"
 gunicorn = "^20"
-dj-stripe = "^2.5"
 python-dotenv = "^0.19"
 django-mptt = "^0.13"
-paypalrestsdk = "^1.13"
 paypal-checkout-serversdk = "^1"
 Pillow = "^9"
 psycopg2 = "^2.9.3"
+dj-paypal = "^0.15.3"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^3"
