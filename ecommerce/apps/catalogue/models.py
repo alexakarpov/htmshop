@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-class Category(MPTTModel):
+class Category(models.Model):
     """
     Category Table implimented with MPTT.
     """
@@ -17,21 +17,32 @@ class Category(MPTTModel):
         unique=True,
     )
     slug = models.SlugField(verbose_name=_("Category safe URL"), max_length=255, unique=True)
-    parent = TreeForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="children")
+    parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="children")
     is_active = models.BooleanField(default=True)
 
-    class MPTTMeta:
-        order_insertion_by = ["name"]
-
     class Meta:
-        verbose_name = _("Category")
-        verbose_name_plural = _("Categories")
+        # enforcing that there can not be two categories under a parent with same slug
+
+        # __str__ method elaborated later in post.  use __unicode__ in place of
+
+        # __str__ if you are using python 2
+
+        unique_together = (
+            "slug",
+            "parent",
+        )
+        verbose_name_plural = "categories"
+
+    def __str__(self):
+        full_path = [self.name]
+        k = self.parent
+        while k is not None:
+            full_path.append(k.name)
+            k = k.parent
+        return " -> ".join(full_path[::-1])
 
     def get_absolute_url(self):
         return reverse("catalogue:category_list", args=[self.slug])
-
-    def __str__(self):
-        return self.name
 
 
 class ProductType(models.Model):
@@ -74,7 +85,7 @@ class Product(models.Model):
     """
 
     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
-    category = models.ForeignKey(Category, on_delete=models.RESTRICT)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.RESTRICT)
     title = models.CharField(
         verbose_name=_("title"),
         help_text=_("Required"),
@@ -105,6 +116,17 @@ class Product(models.Model):
         ordering = ("-created_at",)
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
+
+    def get_cat_list(self):
+        k = self.category  # for now ignore this instance method
+
+        breadcrumb = ["dummy"]
+        while k is not None:
+            breadcrumb.append(k.slug)
+            k = k.parent
+        for i in range(len(breadcrumb) - 1):
+            breadcrumb[i] = "/".join(breadcrumb[-1 : i - 1 : -1])
+        return breadcrumb[-1:0:-1]
 
     def get_absolute_url(self):
         return reverse("catalogue:product_detail", args=[self.slug])
