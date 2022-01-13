@@ -6,11 +6,7 @@
       "name": "Books",
       "slug": "books",
       "parent": null,
-      "is_active": true,
-      "lft": 1,
-      "rght": 2,
-      "tree_id": 1,
-      "level": 0
+      "is_active": true
     }
   },
   {
@@ -20,11 +16,7 @@
       "name": "Icons",
       "slug": "icons",
       "parent": null,
-      "is_active": true,
-      "lft": 1,
-      "rght": 4,
-      "tree_id": 2,
-      "level": 0
+      "is_active": true
     }
   }
 ]
