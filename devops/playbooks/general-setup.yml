@@ -94,7 +94,7 @@
 
     - name: requirement file
       copy:
-        src: ../../requirements.txt
+        src: ../requirements.txt
         dest: /home/storeadmin/htmshop/requirements.txt
         owner: storeadmin
         group: htm
