@@ -7,8 +7,8 @@
   tasks:
     - name: Extract archive to deployment location
       ansible.builtin.unarchive:
-        src: /home/akarpov/htmshop-0.1.0.tar.gz
-        dest: /home/storeadmin/htmshop
+        src: /home/akarpov/htmshop.zip
+        dest: /home/storeadmin/htmshop/
         remote_src: true
 # secrets
     - name: dotenv file

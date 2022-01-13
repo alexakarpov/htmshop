@@ -68,14 +68,6 @@
         group: htm
         mode: 0775
 
-    - name: Create deployment directory
-      file:
-        path: /home/storeadmin/htmshop
-        state: directory
-        owner: storeadmin
-        group: htm
-        mode: 0775
-
     - name: Create static_root directory
       file:
         path: /var/static_root
@@ -91,6 +83,22 @@
         owner: storeadmin
         group: htm
         mode: 0775
+
+    - name: Create deployment directory
+      file:
+        path: /home/storeadmin/htmshop
+        state: directory
+        owner: storeadmin
+        group: htm
+        mode: 0775
+
+    - name: requirement file
+      copy:
+        src: ../../requirements.txt
+        dest: /home/storeadmin/htmshop/requirements.txt
+        owner: storeadmin
+        group: htm
+        mode: 644
 
     #### secrets
     - name: db init.sql file
