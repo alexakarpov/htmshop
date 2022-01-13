@@ -49,9 +49,8 @@
                     <img class="img-fluid d-block-inline pt-3" width="100px" alt="Responsive image"
                       src="{{ pi.image.url }}" alt="{{ pi.alt_text }}">
                   {% endif %}
-                  <p>{{ product.description|slice:":355" }}...</p>
                 {% endfor %}
-
+                <p class="card-text">{{ product.description|slice:":355" }}...</p>
               </div>
             </div>
           </div>
