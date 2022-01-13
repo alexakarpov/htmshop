@@ -16,9 +16,6 @@
     <div class="col-md-5 ps-3 col-lg-5 order-md-last p-0 order-1">
       <div class="d-grid gap-2">
         <div class="d-flex d-flex-inline justify-content-between">
-          <div><span class="h3">${{ product.price }}</span>
-            <p class="text-muted">includes tax</p>
-          </div>
           <div>
             <label for="select">Qty</label>
             <select id="select" class="h6 store-select-dropdown">
@@ -31,7 +28,7 @@
         </div>
         <hr>
         <button type="button" id="add-button" value="{{product.id}}" class="btn btn-success fw500">Add to
-          basket</button>
+          cart</button>
         <a href="{% url "account:user_wishlist" product.id  %}" class="btn btn-light fw500" role="button"
           aria-disabled="true">Add to Wish List</a>
       </div>
@@ -52,6 +49,7 @@
                     <img class="img-fluid d-block-inline pt-3" width="100px" alt="Responsive image"
                       src="{{ pi.image.url }}" alt="{{ pi.alt_text }}">
                   {% endif %}
+                  <p>{{ product.description|slice:":355" }}...</p>
                 {% endfor %}
 
               </div>
