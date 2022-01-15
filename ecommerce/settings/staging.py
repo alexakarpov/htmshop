@@ -6,17 +6,25 @@ from ecommerce.settings.common import *
 
 ENV = "staging"
 
+print("workdir: ", os.getcwd())
 BASE_DIR = Path(__file__).resolve().parent.parent
 print(f"BASE_DIR set to {BASE_DIR}")
 
+########### .env-based keys #################
 config = dotenv_values()
 SECRET_KEY = config["SECRET_KEY"]
 STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
 POSTGRES_PASSWORD = config["POSTGRES_PASSWORD"]
 POSTGRES_USER = config["POSTGRES_USER"]
 POSTGRES_DB = config["POSTGRES_DB"]
+PAYPAL_CLIENT_ID = config["PAYPAL_CLIENT_ID"]
+PAYPAL_SECRET = config["PAYPAL_SECRET"]
+PAYPAL_BUSINESS_EMAIL = config["PAYPAL_BUSINESS_EMAIL"]
+PAYPAL_BUSINESS_PASSWORD = config["PAYPAL_BUSINESS_PASSWORD"]
+PAYPAL_PERSONAL_EMAIL = config["PAYPAL_PERSONAL_EMAIL"]
+PAYPAL_PERSONAL_PASSWORD = config["PAYPAL_PERSONAL_PASSWORD"]
 
-SECRET_KEY = config["SECRET_KEY"]
+###########  general configuration ##########
 
 DEBUG = True
 
@@ -35,23 +43,23 @@ DATABASES = {
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    # },
 ]
 
 STATIC_ROOT = "/var/static_root"
 STATICFILES_DIRS = [
-    BASE_DIR / "../static",
+    BASE_DIR / "static",
 ]
 
 MEDIA_ROOT = "/var/media_root"
@@ -81,12 +89,6 @@ STRIPE_PUBLISHABLE_KEY = (
 )
 STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
 STRIPE_LIVE_MODE = False  # Change to True in production
-
-DJSTRIPE_WEBHOOK_SECRET = (
-    "whsec_xxx"  # Get it from the section in the Stripe dashboard where you added the webhook endpoint
-)
-DJSTRIPE_USE_NATIVE_JSONFIELD = True  # We recommend setting to True for new installations
-DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 
 # Paypal
 PAYPAL_CLIENT_ID = config["PAYPAL_CLIENT_ID"]

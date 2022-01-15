@@ -2,14 +2,15 @@ import os
 from pathlib import Path
 
 from dotenv import dotenv_values
-
-from .common import *
+from ecommerce.settings.common import *
 
 ENV = "development"
 
 print("workdir: ", os.getcwd())
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-print(f"BASE_DIR: {BASE_DIR}, ENV: {ENV}")
+print(f"BASE_DIR: {BASE_DIR}")
+
+########### .env-based keys #################
 
 config = dotenv_values("devops/secrets/development.env")
 SECRET_KEY = config["SECRET_KEY"]
@@ -24,9 +25,13 @@ PAYPAL_BUSINESS_PASSWORD = config["PAYPAL_BUSINESS_PASSWORD"]
 PAYPAL_PERSONAL_EMAIL = config["PAYPAL_PERSONAL_EMAIL"]
 PAYPAL_PERSONAL_PASSWORD = config["PAYPAL_PERSONAL_PASSWORD"]
 
-############
+###########  general configuration ##########
+
 DEBUG = True
+
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+WSGI_APPLICATION = "ecommerce.wsgi.application"
 
 # DATABASES = {
 #     "default": {
@@ -76,7 +81,9 @@ STRIPE_PUBLISHABLE_KEY = (
     "pk_test_51K6PnSCFIch5ayqknnamJA9P1lEBHAft8RXXVPKYIEtciJKZbBRoS7Rt1mfbtFof1VCHdEd0Ax5OovOZDxRnz0QA00YsK7ehAb"
 )
 STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
+STRIPE_LIVE_MODE = False  # Change to True in production
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 if DEBUG:
     # make all loggers use the console.
