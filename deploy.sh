@@ -6,7 +6,7 @@ echo you are on $BRANCH
 if [ $BRANCH == 'main' ]; then
   find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
   rm -f htmshop.zip
-  zip -qr htmshop.zip ecommerce requirements.txt requirements_dev.txt manage.py static templates
+  zip -qr htmshop.zip ecommerce requirements.txt manage.py static templates
   scp htmshop.zip transylvania.bostonmonks.com:~
   ansible-playbook -i devops/inventory.ini devops/playbooks/deploy.yml
 else
