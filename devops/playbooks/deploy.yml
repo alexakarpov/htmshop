@@ -10,6 +10,12 @@
         src: /home/akarpov/htmshop.zip
         dest: /home/storeadmin/htmshop/
         remote_src: true
+
+    - name: install dependencies
+      pip:
+        virtualenv: /home/storeadmin/htmshop/venv
+        requirements: /home/storeadmin/htmshop/requirements.txt
+
 # secrets
     - name: dotenv file
       copy:
