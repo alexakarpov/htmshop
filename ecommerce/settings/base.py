@@ -8,7 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 print(f"in {os.path.basename(__file__)}. BASE_DIR set to: {BASE_DIR}")
 
 ########### .env-based keys #################
-config = dotenv_values()
+config = dotenv_values(BASE_DIR / ".env")
+
+WSGI_APPLICATION = "ecommerce.wsgi.application"
 
 INSTALLED_APPS = [
     "django.contrib.admin",

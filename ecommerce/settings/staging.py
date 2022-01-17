@@ -5,12 +5,6 @@ from ecommerce.settings.base import *
 
 ENV = "staging"
 
-print("workdir: ", os.getcwd())
-BASE_DIR = Path(__file__).resolve().parent.parent
-print(f"BASE_DIR set to: {BASE_DIR}")
-
-########### .env-based keys #################
-config = dotenv_values()
 SECRET_KEY = config["SECRET_KEY"]
 
 STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
@@ -31,8 +25,6 @@ PAYPAL_PERSONAL_PASSWORD = config["PAYPAL_PERSONAL_PASSWORD"]
 DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "34.207.88.228", "transylvania.bostonmonks.com"]
-
-WSGI_APPLICATION = "ecommerce.wsgi.application"
 
 DATABASES = {
     "default": {

@@ -4,7 +4,6 @@ ENV = "development"
 
 ########### .env-based keys #################
 
-config = dotenv_values("devops/secrets/development.env")
 SECRET_KEY = config["SECRET_KEY"]
 STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
 POSTGRES_PASSWORD = config["POSTGRES_PASSWORD"]
@@ -22,8 +21,6 @@ PAYPAL_PERSONAL_PASSWORD = config["PAYPAL_PERSONAL_PASSWORD"]
 DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-
-WSGI_APPLICATION = "ecommerce.wsgi.application"
 
 # DATABASES = {
 #     "default": {
