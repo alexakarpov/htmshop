@@ -6,13 +6,13 @@ After=network.target
 [Service]
 User=storeadmin
 Group=htm
-WorkingDirectory=/home/storeadmin/htmshop
-ExecStart=/home/storeadmin/htmshop/venv/bin/gunicorn \
+WorkingDirectory=/var/htmshop
+ExecStart=/var/htmshop/venv/bin/gunicorn \
           --workers 3 \
           --bind unix:/run/gunicorn.sock \
           --env DJANGO_SETTINGS_MODULE=ecommerce.settings.staging \
-          --access-logfile /var/log/htmshop/access.log \
-          --error-logfile /var/log/htmshop/error.log \
+          --access-logfile /var/htmshop/log/access.log \
+          --error-logfile /var/htmshop/log/error.log \
           ecommerce.wsgi:application
 
 [Install]

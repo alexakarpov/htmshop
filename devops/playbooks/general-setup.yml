@@ -45,7 +45,7 @@
         shell: /bin/bash
         password: $6$foobarsalt$quoyGsj/DPOV943ZXZjF9UALAjRwwiyP6a02Jqu0B5upUO/OU9UD2TB.Icte/Ch5luhbcx3S9RQmsbcxQRNzu.
 
-    - name: Placing my public keys
+    - name: Place my public keys
       authorized_key:
         user: akarpov
         key: '{{ item }}'
@@ -53,24 +53,24 @@
         - ../public_keys/akamac.pub
         - ../public_keys/akarpov.pub
 
-    - name: Placing admin public key
+    - name: Place admin public key
       authorized_key:
         user: storeadmin
         key: '{{ item }}'
       with_file:
         - ../public_keys/storeadmin.pub
 
-    - name: Create log directory
+    - name: Create app directory
       file:
-        path: /var/log/htmshop
+        path: /var/htmshop
         state: directory
         owner: storeadmin
         group: htm
         mode: 0775
 
-    - name: Create static_root directory
+    - name: Create static_root subdirectory
       file:
-        path: /var/static_root
+        path: /var/htmshop/static_root
         state: directory
         owner: storeadmin
         group: htm
@@ -78,15 +78,15 @@
 
     - name: Create media_root directory
       file:
-        path: /var/media_root
+        path: /var/htmshop/media_root
         state: directory
         owner: storeadmin
         group: htm
         mode: 0775
 
-    - name: Create deployment directory
+    - name: Create log subdirectory
       file:
-        path: /home/storeadmin/htmshop
+        path: /var/htmshop/log
         state: directory
         owner: storeadmin
         group: htm
@@ -95,7 +95,7 @@
     - name: requirement file
       copy:
         src: ../requirements.txt
-        dest: /home/storeadmin/htmshop/requirements.txt
+        dest: /var/htmshop/requirements.txt
         owner: storeadmin
         group: htm
         mode: 644
@@ -104,19 +104,19 @@
     - name: db init.sql file
       copy:
         src: ../secrets/init.sql
-        dest: /home/storeadmin/htmshop/init.sql
+        dest: /var/htmshop/init.sql
         owner: storeadmin
         group: htm
 
     #### virtualenv
     - name: create the virtualenv
       command:
-        cmd: virtualenv /home/storeadmin/htmshop/venv -p python3.8
-        creates: '/home/storeadmin/htmshop/venv'
+        cmd: virtualenv /var/htmshop/venv -p python3.8
+        creates: '/home/htmshop/venv'
 
     - name: owner of venv to storeadmin
       file:
-        path: /home/storeadmin/htmshop/venv
+        path: /var/htmshop/venv
         state: directory
         recurse: yes
         owner: storeadmin
@@ -167,14 +167,6 @@
       service:
         name: nginx
         enabled: yes
-
-    # - name: Create db directory
-    #   file:
-    #     path: /var/data
-    #     state: directory
-    #     owner: ubuntu
-    #     group: ubuntu
-    #     mode: 0775
 
     - name: restart nginx
       service:

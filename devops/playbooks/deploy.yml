@@ -8,34 +8,34 @@
     - name: Extract archive to deployment location
       ansible.builtin.unarchive:
         src: /home/akarpov/htmshop.zip
-        dest: /home/storeadmin/htmshop/
+        dest: /var/htmshop/
         remote_src: true
 
     - name: install dependencies
       pip:
-        virtualenv: /home/storeadmin/htmshop/venv
-        requirements: /home/storeadmin/htmshop/requirements.txt
+        virtualenv: /var/htmshop/venv
+        requirements: /var/htmshop/requirements.txt
 
 # secrets
     - name: dotenv file
       copy:
         src: ../secrets/staging.env
-        dest: /home/storeadmin/htmshop/.env
+        dest: /var/htmshop/.env
         owner: storeadmin
         group: htm
 
     - name: run migrations
       community.general.django_manage:
-        virtualenv: /home/storeadmin/htmshop/venv
-        project_path: /home/storeadmin/htmshop
+        virtualenv: /var/htmshop/venv
+        project_path: /var/htmshop
         command: migrate
       environment:
         DJANGO_SETTINGS_MODULE: ecommerce.settings.staging
 
     - name: static files
       community.general.django_manage:
-        virtualenv: /home/storeadmin/htmshop/venv
-        project_path: /home/storeadmin/htmshop
+        virtualenv: /var/htmshop/venv
+        project_path: /var/htmshop
         command: collectstatic
       environment:
         DJANGO_SETTINGS_MODULE: ecommerce.settings.staging
