@@ -114,13 +114,6 @@
         cmd: virtualenv /var/htmshop/venv -p python3.8
         creates: '/home/htmshop/venv'
 
-    - name: owner of venv to storeadmin
-      file:
-        path: /var/htmshop/venv
-        state: directory
-        recurse: yes
-        owner: storeadmin
-        group: htm
 # installation of dependencies moved to deploy book
 
     #### GUNICORN

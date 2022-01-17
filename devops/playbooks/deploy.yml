@@ -23,7 +23,7 @@
         dest: /var/htmshop/.env
         owner: storeadmin
         group: htm
-
+# environment
     - name: run migrations
       community.general.django_manage:
         virtualenv: /var/htmshop/venv
@@ -39,6 +39,14 @@
         command: collectstatic
       environment:
         DJANGO_SETTINGS_MODULE: ecommerce.settings.staging
+
+    - name: owner of app dir to storeadmin
+      file:
+        path: /var/htmshop
+        state: directory
+        recurse: yes
+        owner: storeadmin
+        group: htm
 
     - name: gunicorn service restart
       systemd:
