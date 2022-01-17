@@ -1,22 +1,24 @@
 import os
-from pathlib import Path
 
 from dotenv import dotenv_values
-from ecommerce.settings.common import *
+from ecommerce.settings.base import *
 
 ENV = "staging"
 
 print("workdir: ", os.getcwd())
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(f"BASE_DIR set to {BASE_DIR}")
+print(f"BASE_DIR set to: {BASE_DIR}")
 
 ########### .env-based keys #################
 config = dotenv_values()
 SECRET_KEY = config["SECRET_KEY"]
+
 STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
+
 POSTGRES_PASSWORD = config["POSTGRES_PASSWORD"]
 POSTGRES_USER = config["POSTGRES_USER"]
 POSTGRES_DB = config["POSTGRES_DB"]
+
 PAYPAL_CLIENT_ID = config["PAYPAL_CLIENT_ID"]
 PAYPAL_SECRET = config["PAYPAL_SECRET"]
 PAYPAL_BUSINESS_EMAIL = config["PAYPAL_BUSINESS_EMAIL"]
@@ -57,12 +59,12 @@ AUTH_PASSWORD_VALIDATORS = [
     # },
 ]
 
-STATIC_ROOT = "/var/static_root"
+STATIC_ROOT = "/var/htmshop/static_root"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-MEDIA_ROOT = "/var/media_root"
+MEDIA_ROOT = "/var/htmshop/media_root"
 
 LOGGING = {
     "version": 1,
@@ -71,7 +73,7 @@ LOGGING = {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": "/var/log/htmshop/django.log",
+            "filename": "/var/htmshop/log/django.log",
         },
     },
     "loggers": {

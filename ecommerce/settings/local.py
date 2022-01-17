@@ -1,14 +1,6 @@
-import os
-from pathlib import Path
-
-from dotenv import dotenv_values
-from ecommerce.settings.common import *
+from ecommerce.settings.base import *
 
 ENV = "development"
-
-print("workdir: ", os.getcwd())
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-print(f"BASE_DIR: {BASE_DIR}")
 
 ########### .env-based keys #################
 
@@ -71,7 +63,7 @@ LOGGING = {
     "loggers": {
         "django": {
             "handlers": ["console"],
-            "level": "DEBUG",
+            "level": "INFO",
             "propagate": True,
         },
     },
