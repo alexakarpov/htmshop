@@ -21,9 +21,15 @@ register(AddressFactory)
 
 
 @pytest.fixture
-def product_category(db, category_factory):
+def product_category(db, category_factory):  # here db is the Database fixture
     category = category_factory.create()
     return category
+
+
+@pytest.fixture
+def dummy_fix():
+    print("print inside a fixture (function defined in conftest and marked with @pytest.fixture)")
+    return "dumbledore"
 
 
 @pytest.fixture
@@ -66,4 +72,3 @@ def adminuser(db, customer_factory):
 def address(db, address_factory):
     new_address = address_factory.create()
     return new_address
-
