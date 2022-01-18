@@ -51,6 +51,8 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError(_("Customer Account: You must provide an email address"))
 
         email = self.normalize_email(email)
+        if not name:
+            name = email.split("@")[0]
         user = self.model(email=email, name=name, **other_fields)
         user.set_password(password)
         user.save()
@@ -59,7 +61,7 @@ class CustomAccountManager(BaseUserManager):
 
 class Customer(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email address"), unique=True)
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=20)
     mobile = models.CharField(max_length=20, blank=True)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
