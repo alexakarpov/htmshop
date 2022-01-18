@@ -86,8 +86,11 @@ class Customer(AbstractBaseUser, PermissionsMixin):
             fail_silently=False,
         )
 
-    def get_short_name(self):
-        return self.name
+    # def get_short_name(self):
+    #     if self.name:
+    #         return self.name
+    #     else:
+    #         return self.email.split("@")[0]
 
     def __str__(self):
         return self.email
