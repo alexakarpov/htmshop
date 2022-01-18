@@ -28,6 +28,7 @@ pytest-factoryboy = "^2.1"
 pytest-faker = "^2.0.0"
 coverage = "^6.2"
 black = "^21.12b0"
+bpython = "^0.22.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
