@@ -1,5 +1,5 @@
 import factory
-from ecommerce.apps.account.models import Account, Address
+from ecommerce.apps.accounts.models import Account, Address
 from ecommerce.apps.catalogue.models import (
     Category,
     Product,
