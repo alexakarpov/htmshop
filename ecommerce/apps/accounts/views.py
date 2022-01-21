@@ -15,7 +15,7 @@ from ecommerce.apps.orders.models import Order
 from ecommerce.apps.orders.views import user_orders
 
 from .forms import RegistrationForm, UserAddressForm, UserEditForm
-from .models import Address, Customer
+from .models import Account, Address
 from .tokens import account_activation_token
 
 logger = logging.getLogger("django")
@@ -60,7 +60,7 @@ def edit_details(request):
 
 @login_required
 def delete_user(request):
-    user = Customer.objects.get(user_name=request.user)
+    user = Account.objects.get(email=request.user)
     user.is_active = False
     user.save()
     logout(request)
@@ -107,8 +107,8 @@ def account_register(request):
 def account_activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
-        user = Customer.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, Customer.DoesNotExist):
+        user = Account.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, Account.DoesNotExist):
         user = None
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
@@ -135,7 +135,7 @@ def add_address(request):
         if address_form.is_valid():
             logger.debug("address is valid")
             address_form = address_form.save(commit=False)
-            address_form.customer = request.user
+            address_form.user = request.user
             address_form.save()
             return HttpResponseRedirect(reverse("account:addresses"))
         else:

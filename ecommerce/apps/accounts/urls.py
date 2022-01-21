@@ -8,7 +8,7 @@ from .forms import PwdResetConfirmForm, PwdResetForm, UserLoginForm
 # https://docs.djangoproject.com/en/3.1/topics/auth/default/
 # https://ccbv.co.uk/projects/Django/3.0/django.contrib.auth.views/PasswordResetConfirmView/
 
-app_name = "account"
+app_name = "accounts"
 
 urlpatterns = [
     path(
