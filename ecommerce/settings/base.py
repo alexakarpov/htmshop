@@ -20,9 +20,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "ecommerce.apps.catalogue",
-    "ecommerce.apps.account",
+    "ecommerce.apps.accounts",
     "ecommerce.apps.orders",
     "ecommerce.apps.checkout",
+    # "ecommerce.apps.users",
     # "djpaypal",
 ]
 
@@ -74,7 +75,7 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "account.Customer"
+AUTH_USER_MODEL = "accounts.Account"
 
 LOGIN_REDIRECT_URL = "/account/dashboard"
 LOGIN_URL = "/account/login/"
