@@ -6,9 +6,10 @@ from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("accounts/", include("django.contrib.auth.urls")),
     path("checkout/", include("ecommerce.apps.checkout.urls", namespace="checkout")),
     path("basket/", include("ecommerce.apps.basket.urls", namespace="basket")),
-    path("account/", include("ecommerce.apps.account.urls", namespace="account")),
+    path("account/", include("ecommerce.apps.accounts.urls", namespace="account")),
     path("orders/", include("ecommerce.apps.orders.urls", namespace="orders")),
     path("", include("ecommerce.apps.catalogue.urls", namespace="catalogue")),
     path("__debug__/", include(debug_toolbar.urls)),
