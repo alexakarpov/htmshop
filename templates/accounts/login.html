@@ -1,8 +1,8 @@
-{% extends "./sub_base.html" %}
+{% extends "../base.html" %}
 {% block title %}Log-in{% endblock %}
 {% block sub_content %}
 
-<form class="account-form" action="{% url 'login' %}" method="post">
+<form class="account-form" action="{% url 'accounts:login' %}" method="post">
   {% csrf_token %}
   <h3 class="mb-4">Sign In</h3>
 
@@ -27,8 +27,8 @@
     </button>
   </div>
   <div class="flex-column justify-content-center mx-auto pb-3">
-    <div class="text-center"><a href="{% url "account:register" %}">Create an account</a></div>
-    <div class="text-center"><a href="{% url "account:pwdreset" %}">Forgotten Password?</a></div>
+    <div class="text-center"><a href="{% url "accounts:register" %}">Create an account</a></div>
+    <div class="text-center"><a href="{% url "accounts:pwdreset" %}">Forgotten Password?</a></div>
   </div>
 </form>
 

@@ -2,4 +2,4 @@ Hi {{ user }},
 
 Your account has successfully created. Please click below link to activate your account
 
-http://{{ domain }}{% url 'account:activate' uidb64=uid token=token %}
+http://{{ domain }}{% url 'accounts:activate' uidb64=uid token=token %}
