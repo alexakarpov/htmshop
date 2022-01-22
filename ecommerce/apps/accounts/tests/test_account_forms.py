@@ -1,5 +1,5 @@
 import pytest
-from ecommerce.apps.account.forms import RegistrationForm, UserAddressForm
+from ecommerce.apps.accounts.forms import RegistrationForm, UserAddressForm
 
 
 @pytest.mark.parametrize(
