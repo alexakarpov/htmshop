@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     "ecommerce.apps.accounts",
     "ecommerce.apps.orders",
     "ecommerce.apps.checkout",
-    # "ecommerce.apps.users",
     # "djpaypal",
 ]
 
@@ -42,7 +41,7 @@ ROOT_URLCONF = "ecommerce.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["templates"],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
