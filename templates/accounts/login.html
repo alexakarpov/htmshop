@@ -1,4 +1,4 @@
-{% extends "../base.html" %}
+{% extends "./sub_base.html" %}
 {% block title %}Log-in{% endblock %}
 {% block sub_content %}
 
@@ -16,7 +16,6 @@
       {% endif %}
     {% endfor %}
   {% endif %}
-
   <label class="form-label">{{ form.email.label}}</label>
   {{ form.email}}
   <label class="form-label">{{ form.password.label}}</label>
@@ -30,6 +29,7 @@
     <div class="text-center"><a href="{% url "accounts:register" %}">Create an account</a></div>
     <div class="text-center"><a href="{% url "accounts:pwdreset" %}">Forgotten Password?</a></div>
   </div>
+
 </form>
 
 {% endblock %}
