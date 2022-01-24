@@ -9,7 +9,7 @@
         Details successfully updated!
     </div>
     <p class="small text-center pt-0">
-        <a href="{% url "account:dashboard" %}">Back to Dashboard</a>
+        <a href="{% url "accounts:dashboard" %}">Back to Dashboard</a>
     </p>
     {%else%}
     <h3>Change your details</h3>
@@ -29,7 +29,7 @@
         Changes</button>
     <hr class="mb-3">
 </form>
-<form class="account-form" action="{% url "account:delete_user" %}" method="post">
+<form class="account-form" action="{% url "accounts:delete_user" %}" method="post">
     {% csrf_token %}
     <p class=" h3 pt-4 font-weight-bold">Delete Account</p>
     <p>Are you sure you want to delete your account?</p>

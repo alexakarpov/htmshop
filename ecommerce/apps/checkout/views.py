@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from ecommerce.apps.account.models import Address
+from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order, OrderItem
 

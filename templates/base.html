@@ -82,15 +82,15 @@
                         <h6 class="card-title">My Account</h6>
                         <ul class="list-group list-group-flush dropdown-account-link">
                           {% if user.is_authenticated %}
-                          <a href="{% url "account:dashboard" %}"
+                          <a href="{% url "accounts:dashboard" %}"
                             class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Your
                             Account</a>
                           <a href="#"
                             class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Orders</a>
-                          <a href="{% url "account:logout" %}"
+                          <a href="{% url "accounts:logout" %}"
                             class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Logout</a>
                           {% else %}
-                          <a href="{% url "account:login" %}"
+                          <a href="{% url "accounts:login" %}"
                             class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Login</a>
                           {% endif %}
                         </ul>
@@ -135,11 +135,11 @@
             <h6 class="card-title">My Account</h6>
             <ul class="list-group list-group-flush dropdown-account-link">
               {% if user.is_authenticated %}
-              <a href="{% url "account:dashboard" %}" class="dropdown-item">Your Account</a>
+              <a href="{% url "accounts:dashboard" %}" class="dropdown-item">Your Account</a>
               <a href="#" class="dropdown-item">Orders</a>
-              <a href="{% url "account:logout" %}" class="dropdown-item">Logout</a>
+              <a href="{% url "accounts:logout" %}" class="dropdown-item">Logout</a>
               {% else %}
-              <a href="{% url "account:login" %}" class="dropdown-item">Login</a>
+              <a href="{% url "accounts:login" %}" class="dropdown-item">Login</a>
               {% endif %}
             </ul>
           </div>

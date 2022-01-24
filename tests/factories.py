@@ -1,5 +1,5 @@
 import factory
-from ecommerce.apps.account.models import Address, Customer
+from ecommerce.apps.accounts.models import Account, Address
 from ecommerce.apps.catalogue.models import (
     Category,
     Product,
@@ -66,13 +66,12 @@ class ProductSpecificationValueFactory(factory.django.DjangoModelFactory):
 ####
 
 
-class CustomerFactory(factory.django.DjangoModelFactory):
+class AccountFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = Customer
+        model = Account
 
     email = "a@a.com"
-    name = "user1"
-    mobile = "07525251252"
+    phone = "07525251252"
     password = "tester"
     is_active = True
     is_staff = False
@@ -90,7 +89,7 @@ class AddressFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Address
 
-    customer = factory.SubFactory(CustomerFactory)
+    customer = factory.SubFactory(AccountFactory)
     full_name = fake.name()
     phone = fake.phone_number()
     postcode = fake.postcode()

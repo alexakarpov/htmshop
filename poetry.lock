@@ -277,6 +277,17 @@ Django = ">=2.2"
 sqlparse = ">=0.2.0"
 
 [[package]]
+name = "django-extensions"
+version = "3.1.5"
+description = "Extensions for Django"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+Django = ">=2.2"
+
+[[package]]
 name = "django-ses"
 version = "2.3.1"
 description = "A Django email backend for Amazon's Simple Email Service"
@@ -757,7 +768,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "702b383465c75c280fee09f34b000d11ede2791658bbbf28e9476c584530c719"
+content-hash = "ba50041e88f151ad371bff6cce5f6891af8bde1f195f65aaa25d3f20092f5f7a"
 
 [metadata.files]
 asgiref = [
@@ -995,6 +1006,10 @@ django = [
 django-debug-toolbar = [
     {file = "django-debug-toolbar-3.2.4.tar.gz", hash = "sha256:644bbd5c428d3283aa9115722471769cac1bec189edf3a0c855fd8ff870375a9"},
     {file = "django_debug_toolbar-3.2.4-py3-none-any.whl", hash = "sha256:6b633b6cfee24f232d73569870f19aa86c819d750e7f3e833f2344a9eb4b4409"},
+]
+django-extensions = [
+    {file = "django-extensions-3.1.5.tar.gz", hash = "sha256:28e1e1bf49f0e00307ba574d645b0af3564c981a6dfc87209d48cb98f77d0b1a"},
+    {file = "django_extensions-3.1.5-py3-none-any.whl", hash = "sha256:9238b9e016bb0009d621e05cf56ea8ce5cce9b32e91ad2026996a7377ca28069"},
 ]
 django-ses = [
     {file = "django-ses-2.3.1.tar.gz", hash = "sha256:ececf3b4284001d776e8021e9090184690495c652c0b45f4cfb984688819895b"},

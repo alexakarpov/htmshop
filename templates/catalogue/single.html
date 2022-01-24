@@ -8,7 +8,7 @@
   {% if messages %}
   <div class="alert alert-warning" alert-{{ message.tags }}" role="alert">
     {% for message in messages  %}
-    {{message|safe}} - <a href="{% url "account:wishlist" %}" class="alert-link">Your Wishlist</a>.
+    {{message|safe}} - <a href="{% url "accounts:wishlist" %}" class="alert-link">Your Wishlist</a>.
     {% endfor %}
   </div>
   {% endif %}
@@ -29,7 +29,7 @@
         <hr>
         <button type="button" id="add-button" value="{{product.id}}" class="btn btn-success fw500">Add to
           cart</button>
-        <a href="{% url "account:user_wishlist" product.id  %}" class="btn btn-light fw500" role="button"
+        <a href="{% url "accounts:user_wishlist" product.id  %}" class="btn btn-light fw500" role="button"
           aria-disabled="true">Add to Wish List</a>
       </div>
     </div>

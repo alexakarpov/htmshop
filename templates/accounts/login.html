@@ -1,0 +1,35 @@
+{% extends "./sub_base.html" %}
+{% block title %}Log-in{% endblock %}
+{% block sub_content %}
+
+<form class="account-form" action="{% url 'accounts:login' %}" method="post">
+  {% csrf_token %}
+  <h3 class="mb-4">Sign In</h3>
+
+  {% if form.errors %}
+    <p>Please correct the following errors:</p>
+    {% for field in form %}
+      {% if field.errors %}
+        <div class="alert alert-primary" role="alert">
+          {{ field.label }}: {{ field.errors|striptags }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  <label class="form-label">{{ form.email.label}}</label>
+  {{ form.email}}
+  <label class="form-label">{{ form.password.label}}</label>
+  {{ form.password}}
+  <div class="d-grid gap-2">
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Sign in
+    </button>
+  </div>
+  <div class="flex-column justify-content-center mx-auto pb-3">
+    <div class="text-center"><a href="{% url "accounts:register" %}">Create an account</a></div>
+    <div class="text-center"><a href="{% url "accounts:pwdreset" %}">Forgotten Password?</a></div>
+  </div>
+
+</form>
+
+{% endblock %}

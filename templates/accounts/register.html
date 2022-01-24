@@ -1,4 +1,4 @@
-{% extends "../sub_base.html" %}
+{% extends "./sub_base.html" %}
 {% block title %}Register Account{% endblock %}
 {% block sub_content %}
 
@@ -18,24 +18,20 @@
     {% endfor %}
   {% endif %}
 
-  <label>{{ form.user_name.label }}<span class="text-muted small">
-      (Required)</span></label>
-  {{ form.user_name }}
-  <label>{{ form.email.label}}<span class="text-muted small">
-      (Required)</span></label>
+  <label>{{ form.email.label}}<span class="text-muted small">(Required)</span></label>
   {{ form.email }}
-  <label>{{ form.password.label}}<span class="text-muted mb-4">
-    </span></label>
-  <small class="form-text text-muted mb-4 small">
-    At least 8 characters and 1 digit
-  </small>
+  <label>{{ form.name.label}}<span class="text-muted small">(Optional)</span></label>
+  {{ form.name }}
+  <label>{{ form.password.label}}</label>
+
+  <small class="form-text text-muted mb-4 small">At least 8 characters and 1 digit</small>
   {{ form.password }}
   <label>{{ form.password2.label}}<span class="text-muted small">
       (Required)</span></label>
   {{ form.password2 }}
   <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw500 w-100" type="submit">Register</button>
   <p class="text-center">
-    <a href="{% url "account:login" %}">Already have an account?</a>
+    <a href="{% url "accounts:login" %}">Already have an account?</a>
   </p>
 </form>
 

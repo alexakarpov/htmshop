@@ -55,7 +55,7 @@ LOGGING = {
         "simple": {"format": "%(levelname)s %(message)s"},
     },
     "handlers": {
-        "console": {"level": "DEBUG", "class": "logging.StreamHandler", "formatter": "simple"},
+        "console": {"level": "INFO", "class": "logging.StreamHandler", "formatter": "simple"},
     },
     "loggers": {
         "django": {
@@ -80,7 +80,7 @@ if DEBUG:
     #     LOGGING["loggers"][logger]["handlers"] = ["console"]
 
     # django-debug-toolbar
-
+    INSTALLED_APPS.append("django_extensions")
     INTERNAL_IPS = ("127.0.0.1",)
     MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
 
