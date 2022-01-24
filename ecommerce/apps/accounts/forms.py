@@ -37,7 +37,6 @@ class UserAddressForm(forms.ModelForm):
 
 
 class UserLoginForm(AuthenticationForm):
-
     email = forms.EmailField(
         widget=forms.TextInput(attrs={"class": "form-control mb-3", "placeholder": "Email", "id": "login-email"})
     )
