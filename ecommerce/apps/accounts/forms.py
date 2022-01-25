@@ -5,6 +5,7 @@ from django.contrib.auth.forms import (
     PasswordResetForm,
     SetPasswordForm,
 )
+from django.utils.translation import gettext_lazy as _
 
 from .models import Account, Address
 
@@ -17,20 +18,20 @@ class UserAddressForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["full_name"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+            {"class": "form-control mb-2 account-form", "placeholder": _("Full Name")}
         )
         self.fields["phone"].widget.attrs.update({"class": "form-control mb-2 account-form", "placeholder": "Phone"})
         self.fields["address_line"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+            {"class": "form-control mb-2 account-form", "placeholder": _("Address Line 1")}
         )
         self.fields["address_line2"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+            {"class": "form-control mb-2 account-form", "placeholder": _("Address Line 2")}
         )
         self.fields["town_city"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+            {"class": "form-control mb-2 account-form", "placeholder": _("Town/City")}
         )
         self.fields["postcode"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+            {"class": "form-control mb-2 account-form", "placeholder": _("Postal code")}
         )
 
         self.fields["address_line2"].required = False
