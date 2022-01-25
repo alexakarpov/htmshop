@@ -67,7 +67,10 @@ coverage.xml
 # Translations
 *.mo
 *.pot
+
+# Lock files
 Pipfile.lock
+poetry.lock
 
 # Django stuff:
 *.log
