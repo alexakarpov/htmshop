@@ -4,6 +4,8 @@ from django.contrib.auth.forms import (
     AuthenticationForm,
     PasswordResetForm,
     SetPasswordForm,
+    UserChangeForm,
+    UserCreationForm,
 )
 from django.utils.translation import gettext_lazy as _
 
@@ -38,6 +40,10 @@ class UserAddressForm(forms.ModelForm):
 
 
 class UserLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(UserLoginForm, self).__init__(*args, **kwargs)
+        self.fields["username"].required = False
+
     email = forms.EmailField(
         widget=forms.TextInput(attrs={"class": "form-control mb-3", "placeholder": "Email", "id": "login-email"})
     )
@@ -51,6 +57,24 @@ class UserLoginForm(AuthenticationForm):
             }
         )
     )
+
+    def is_valid(self) -> bool:
+        print("validating form submission")
+        if self.fields["email"] is not None and self.field.password is not None:
+            return True
+        return False
+
+
+class AccountCreationForm(UserCreationForm):
+    class Meta:
+        model = Account
+        fields = ("password", "email")
+
+
+class AccountChangeForm(UserChangeForm):
+    class Meta:
+        model = Account
+        fields = ("email", "password")
 
 
 class RegistrationForm(forms.ModelForm):

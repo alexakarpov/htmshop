@@ -4,6 +4,7 @@ import uuid
 from django.conf import settings
 from django.contrib.auth.models import (
     AbstractBaseUser,
+    AbstractUser,
     BaseUserManager,
     PermissionsMixin,
 )
@@ -16,7 +17,7 @@ from django.utils.translation import gettext_lazy as _
 logger = logging.getLogger("django")
 
 
-class UserAccountManager(BaseUserManager):
+class CustomAccountManager(BaseUserManager):
     def validateEmail(self, email):
         try:
             validate_email(email)
@@ -48,7 +49,7 @@ class UserAccountManager(BaseUserManager):
             email = self.normalize_email(email)
             self.validateEmail(email)
         else:
-            raise ValueError(_("User Account: You must provide an email address"))
+            raise ValueError(_("Customer Account: You must provide an email address"))
 
         email = self.normalize_email(email)
         user = self.model(email=email, **other_fields)
@@ -59,16 +60,20 @@ class UserAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email address"), unique=True)
-    name = models.CharField(max_length=20)
+    name = models.CharField(_("short name"), max_length=20, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    objects = UserAccountManager()
+    objects = CustomAccountManager()
+    # ordering = [
+    #     "email",
+    # ]
 
     USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
 
     class Meta:
         verbose_name = "Account"
@@ -85,11 +90,11 @@ class Account(AbstractBaseUser, PermissionsMixin):
             fail_silently=False,
         )
 
-    # def get_short_name(self):
-    #     if self.name:
-    #         return self.name
-    #     else:
-    #         return self.email.split("@")[0]
+    def get_short_name(self):
+        if self.name:
+            return self.name
+        else:
+            return self.email.split("@")[0]
 
     def __str__(self):
         return self.email
