@@ -1,7 +1,7 @@
 import logging
 
 from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse, HttpResponseRedirect
@@ -15,10 +15,12 @@ from ecommerce.apps.orders.models import Order
 from ecommerce.apps.orders.views import user_orders
 
 from .forms import RegistrationForm, UserAddressForm, UserEditForm
-from .models import Account, Address
+from .models import Address
 from .tokens import account_activation_token
 
 logger = logging.getLogger("django")
+
+UserModel = get_user_model()
 
 
 @login_required
@@ -60,7 +62,7 @@ def edit_details(request):
 
 @login_required
 def delete_user(request):
-    user = Account.objects.get(email=request.user)
+    user = UserModel.objects.get(email=request.user)
     user.is_active = False
     user.save()
     logout(request)
@@ -106,8 +108,8 @@ def register_account(request):
 def account_activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
-        user = Account.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, Account.DoesNotExist):
+        user = UserModel.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
         user = None
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
