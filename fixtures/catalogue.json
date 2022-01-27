@@ -1,5 +1,41 @@
 [
   {
+    "model": "catalogue.category",
+    "pk": 1,
+    "fields": {
+      "name": "Books",
+      "slug": "books",
+      "parent": null,
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalogue.category",
+    "pk": 2,
+    "fields": {
+      "name": "Icons",
+      "slug": "icons",
+      "parent": null,
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalogue.producttype",
+    "pk": 1,
+    "fields": {
+      "name": "mounted icons",
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalogue.producttype",
+    "pk": 2,
+    "fields": {
+      "name": "liturgical books",
+      "is_active": true
+    }
+  },
+  {
     "model": "catalogue.product",
     "pk": 1,
     "fields": {
