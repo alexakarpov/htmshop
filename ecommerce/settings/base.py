@@ -56,7 +56,10 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = ["ecommerce.apps.accounts.auth_backend.EmailAuthBackend"]
+AUTHENTICATION_BACKENDS = [
+    "ecommerce.apps.accounts.auth_backend.EmailAuthBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
 
 WSGI_APPLICATION = "ecommerce.wsgi.application"
 
