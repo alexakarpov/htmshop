@@ -1,5 +1,8 @@
+import logging
+
 from attr import attrs
 from django import forms
+from django.contrib.auth import authenticate, get_user_model, password_validation
 from django.contrib.auth.forms import (
     AuthenticationForm,
     PasswordResetForm,
@@ -9,7 +12,11 @@ from django.contrib.auth.forms import (
 )
 from django.utils.translation import gettext_lazy as _
 
-from .models import Account, Address
+from .models import Address
+
+UserModel = get_user_model()
+
+logger = logging.getLogger("django")
 
 
 class UserAddressForm(forms.ModelForm):
@@ -39,41 +46,110 @@ class UserAddressForm(forms.ModelForm):
         self.fields["address_line2"].required = False
 
 
-class UserLoginForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super(UserLoginForm, self).__init__(*args, **kwargs)
-        self.fields["username"].required = False
+class EmailAuthenticationForm(forms.Form):
+    """
+    Base class for authenticating users. Extend this to get a form that accepts
+    username/password logins.
+    """
 
     email = forms.EmailField(
         widget=forms.TextInput(attrs={"class": "form-control mb-3", "placeholder": "Email", "id": "login-email"})
     )
-
     password = forms.CharField(
-        widget=forms.PasswordInput(
-            attrs={
-                "class": "form-control",
-                "placeholder": "Password",
-                "id": "login-pwd",
-            }
-        )
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "current-password"}),
     )
 
-    def is_valid(self) -> bool:
-        print("validating form submission")
-        if self.fields["email"] is not None and self.field.password is not None:
-            return True
-        return False
+    error_messages = {
+        "invalid_login": _(f"Please enter a correct email and password."),
+        "inactive": _("This account is inactive."),
+    }
+
+    def __init__(self, request=None, *args, **kwargs):
+        """
+        The 'request' parameter is set for custom auth use by subclasses.
+        The form data comes in via the standard 'data' kwarg.
+        """
+        self.request = request
+        self.user_cache = None
+        super().__init__(*args, **kwargs)
+
+        self.email_field = UserModel._meta.get_field(UserModel.USERNAME_FIELD)
+
+    def clean(self):
+        email = self.cleaned_data.get("email")
+        password = self.cleaned_data.get("password")
+        if email is not None and password:
+            self.user_cache = authenticate(self.request, email=email, password=password)
+            if self.user_cache is None:
+                raise self.get_invalid_login_error()
+            else:
+                self.confirm_login_allowed(self.user_cache)
+
+        return self.cleaned_data
+
+    def confirm_login_allowed(self, user):
+        """
+        Controls whether the given User may log in. This is a policy setting,
+        independent of end-user authentication. This default behavior is to
+        allow login by active users, and reject login by inactive users.
+
+        If the given user cannot log in, this method should raise a
+        ``ValidationError``.
+
+        If the given user may log in, this method should return None.
+        """
+        if not user.is_active:
+            raise forms.ValidationError(
+                self.error_messages["inactive"],
+                code="inactive",
+            )
+
+    def get_user(self):
+        return self.user_cache
+
+    def get_invalid_login_error(self):
+        return forms.ValidationError(
+            self.error_messages["invalid_login"],
+            code="invalid_login",
+            params={"email": self.email_field.verbose_name},
+        )
 
 
 class AccountCreationForm(UserCreationForm):
+    """Require email address when a user signs up"""
+
+    email = forms.EmailField(label="Email address", max_length=75)
+
     class Meta:
-        model = Account
-        fields = ("password", "email")
+        model = UserModel
+        fields = (
+            # "username",
+            "email",
+        )
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        try:
+            user = UserModel.objects.get(email=email)
+            raise forms.ValidationError("This email address already exists. Did you forget your password?")
+        except UserModel.DoesNotExist:
+            return email
+
+    def save(self, commit=True):
+        user = super(UserCreationForm, self).save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
+        user.email = self.cleaned_data["email"]
+        user.is_active = True  # change to false if using email activation
+        if commit:
+            user.save()
+            return user
 
 
 class AccountChangeForm(UserChangeForm):
     class Meta:
-        model = Account
+        model = UserModel
         fields = ("email", "password")
 
 
@@ -90,7 +166,7 @@ class RegistrationForm(forms.ModelForm):
     name = forms.CharField(label="Short name", required=False, widget=forms.TextInput())
 
     class Meta:
-        model = Account
+        model = UserModel
         fields = ("email",)
 
     def clean_password2(self):
@@ -101,7 +177,7 @@ class RegistrationForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data["email"]
-        if Account.objects.filter(email=email).exists():
+        if UserModel.objects.filter(email=email).exists():
             raise forms.ValidationError("Please use another Email, that is already taken")
         return email
 
@@ -126,7 +202,7 @@ class PwdResetForm(PasswordResetForm):
 
     def clean_email(self):
         email = self.cleaned_data["email"]
-        u = Account.objects.filter(email=email)
+        u = UserModel.objects.filter(email=email)
         if not u:
             raise forms.ValidationError("Unfortunatley we can not find that email address")
         return email
@@ -158,7 +234,7 @@ class UserEditForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Account
+        model = UserModel
         fields = ("email",)
 
     def __init__(self, *args, **kwargs):
