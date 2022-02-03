@@ -73,7 +73,7 @@ def test_create_account(email, password, password2, validity):
 @pytest.mark.django_db
 def test_create_account_view(client, email, password, password2, validity):
     response = client.post(
-        "/account/register/",
+        "/accounts/register/",
         data={
             "email": email,
             "password": password,
@@ -86,11 +86,11 @@ def test_create_account_view(client, email, password, password2, validity):
 def test_account_register_redirect(client, customer):
     user = customer
     client.force_login(user)
-    response = client.get("/account/register/")
+    response = client.get("/accounts/register/")
     assert response.status_code == 302
 
 
 @pytest.mark.django_db
 def test_account_register_render(client):
-    response = client.get("/account/register/")
+    response = client.get("/accounts/register/")
     assert response.status_code == 200
