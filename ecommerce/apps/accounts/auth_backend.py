@@ -1,8 +1,12 @@
+import logging
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
 
 UserModel = get_user_model()
+
+logger = logging.getLogger("django")
 
 
 class EmailAuthBackend(object):
@@ -20,7 +24,8 @@ class EmailAuthBackend(object):
             if user.check_password(password):
                 return user
             else:
-                print("password mismatch")
+                logger.error(f"password mismatch for {email}")
+                return None
         except UserModel.DoesNotExist:
             return None
 

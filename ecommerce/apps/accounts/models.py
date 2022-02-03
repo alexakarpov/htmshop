@@ -4,7 +4,6 @@ import uuid
 from django.conf import settings
 from django.contrib.auth.models import (
     AbstractBaseUser,
-    AbstractUser,
     BaseUserManager,
     PermissionsMixin,
 )
@@ -68,9 +67,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
     updated = models.DateTimeField(auto_now=True)
 
     objects = CustomAccountManager()
-    # ordering = [
-    #     "email",
-    # ]
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
