@@ -137,7 +137,7 @@ def add_address(request):
         if address_form.is_valid():
             logger.debug("address is valid")
             address_form = address_form.save(commit=False)
-            address_form.user = request.user
+            address_form.customer = request.user
             address_form.save()
             return HttpResponseRedirect(reverse("accounts:addresses"))
         else:
