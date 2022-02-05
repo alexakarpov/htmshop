@@ -12,6 +12,7 @@ from django.core.mail import send_mail
 from django.core.validators import validate_email
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from pytz import country_names
 
 logger = logging.getLogger("django")
 
@@ -102,13 +103,17 @@ class Address(models.Model):
     """
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    customer = models.ForeignKey(Account, verbose_name=_("User"), on_delete=models.CASCADE)
+    customer = models.ForeignKey(Account, verbose_name=_("Account"), on_delete=models.CASCADE)
     full_name = models.CharField(_("Full Name"), max_length=150)
-    phone = models.CharField(_("Phone Number"), max_length=50)
-    postcode = models.CharField(_("Postcode"), max_length=50)
-    address_line = models.CharField(_("Address Line 1"), max_length=255)
-    address_line2 = models.CharField(_("Address Line 2"), max_length=255)
-    town_city = models.CharField(_("Town/City/State"), max_length=150)
+    phone = models.CharField(_("Phone Number"), max_length=25)
+    postcode = models.CharField(_("Postal Code"), max_length=10)
+    address_line = models.CharField(_("Address Line 1"), max_length=100)
+    address_line2 = models.CharField(_("Address Line 2"), max_length=100)
+    town_city = models.CharField(_("Town/City"), max_length=50)
+    country = models.CharField(_("Country"), max_length=2, default="US", choices=country_names.items())
+
+    #     choices=sorted(country_names.items(), key=lambda c: c[1]),
+
     delivery_instructions = models.CharField(_("Delivery Instructions"), max_length=255)
     created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated at"), auto_now=True)
