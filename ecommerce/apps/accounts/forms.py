@@ -14,6 +14,9 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import Address
 
+# from django_countries.fields import CountryField
+
+
 UserModel = get_user_model()
 
 logger = logging.getLogger("django")
@@ -22,7 +25,7 @@ logger = logging.getLogger("django")
 class UserAddressForm(forms.ModelForm):
     class Meta:
         model = Address
-        fields = ["full_name", "phone", "address_line", "address_line2", "town_city", "postcode"]
+        fields = ["full_name", "phone", "address_line", "address_line2", "town_city", "postcode", "country"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -42,6 +45,7 @@ class UserAddressForm(forms.ModelForm):
         self.fields["postcode"].widget.attrs.update(
             {"class": "form-control mb-2 account-form", "placeholder": _("Postal code")}
         )
+        self.fields["country"].widget.attrs.update({"class": "form-control mb-2 account-form"})
 
         self.fields["address_line2"].required = False
 
