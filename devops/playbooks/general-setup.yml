@@ -112,7 +112,7 @@
     - name: create the virtualenv
       command:
         cmd: virtualenv /var/htmshop/venv -p python3.8
-        creates: '/home/htmshop/venv'
+        creates: '/var/htmshop/venv'
 
 # installation of dependencies moved to deploy book
 
