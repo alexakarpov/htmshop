@@ -2,7 +2,7 @@
 docker volume create pgdata
 
 # launch a container
-docker run -d --name=pgdb -p 5432:5432 -v pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=$PGPASS postgres
+docker run -d --name=pgdb -p 5432:5432 -v pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD postgres
 
 # drop into postgres console
 docker exec -it pgdb psql -U postgres
