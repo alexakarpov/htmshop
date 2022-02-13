@@ -1,0 +1,1623 @@
+{
+  "carriers": [
+    {
+      "carrier_id": "se-660215",
+      "carrier_code": "stamps_com",
+      "account_number": "test_account_660215",
+      "requires_funded_amount": true,
+      "balance": 8918.5,
+      "nickname": "ShipEngine Test Account - Stamps.com",
+      "friendly_name": "Stamps.com",
+      "primary": false,
+      "has_multi_package_supporting_services": false,
+      "supports_label_messages": true,
+      "services": [
+        {
+          "carrier_id": "se-660215",
+          "carrier_code": "stamps_com",
+          "service_code": "usps_first_class_mail",
+          "name": "USPS First Class Mail",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": false
+        },
+        {
+          "carrier_id": "se-660215",
+          "carrier_code": "stamps_com",
+          "service_code": "usps_media_mail",
+          "name": "USPS Media Mail",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": false
+        },
+        {
+          "carrier_id": "se-660215",
+          "carrier_code": "stamps_com",
+          "service_code": "usps_parcel_select",
+          "name": "USPS Parcel Select Ground",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": false
+        },
+        {
+          "carrier_id": "se-660215",
+          "carrier_code": "stamps_com",
+          "service_code": "usps_priority_mail",
+          "name": "USPS Priority Mail",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": false
+        },
+        {
+          "carrier_id": "se-660215",
+          "carrier_code": "stamps_com",
+          "service_code": "usps_priority_mail_express",
+          "name": "USPS Priority Mail Express",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": false
+        },
+        {
+          "carrier_id": "se-660215",
+          "carrier_code": "stamps_com",
+          "service_code": "usps_first_class_mail_international",
+          "name": "USPS First Class Mail Intl",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": false
+        },
+        {
+          "carrier_id": "se-660215",
+          "carrier_code": "stamps_com",
+          "service_code": "usps_priority_mail_international",
+          "name": "USPS Priority Mail Intl",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": false
+        },
+        {
+          "carrier_id": "se-660215",
+          "carrier_code": "stamps_com",
+          "service_code": "usps_priority_mail_express_international",
+          "name": "USPS Priority Mail Express Intl",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": false
+        }
+      ],
+      "packages": [
+        {
+          "package_id": null,
+          "package_code": "cubic",
+          "name": "Cubic",
+          "description": "Cubic"
+        },
+        {
+          "package_id": null,
+          "package_code": "flat_rate_envelope",
+          "name": "Flat Rate Envelope",
+          "description": "USPS flat rate envelope. A special cardboard envelope provided by the USPS that clearly indicates \"Flat Rate\"."
+        },
+        {
+          "package_id": null,
+          "package_code": "flat_rate_legal_envelope",
+          "name": "Flat Rate Legal Envelope",
+          "description": "Flat Rate Legal Envelope"
+        },
+        {
+          "package_id": null,
+          "package_code": "flat_rate_padded_envelope",
+          "name": "Flat Rate Padded Envelope",
+          "description": "Flat Rate Padded Envelope"
+        },
+        {
+          "package_id": null,
+          "package_code": "large_envelope_or_flat",
+          "name": "Large Envelope or Flat",
+          "description": "Large envelope or flat. Has one dimension that is between 11 1/2\" and 15\" long, 6 1/18\" and 12\" high, or 1/4\" and 3/4\" thick."
+        },
+        {
+          "package_id": null,
+          "package_code": "large_flat_rate_box",
+          "name": "Large Flat Rate Box",
+          "description": "Large Flat Rate Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "large_package",
+          "name": "Large Package (any side > 12\")",
+          "description": "Large package. Longest side plus the distance around the thickest part is over 84\" and less than or equal to 108\"."
+        },
+        {
+          "package_id": null,
+          "package_code": "letter",
+          "name": "Letter",
+          "description": "Letter"
+        },
+        {
+          "package_id": null,
+          "package_code": "medium_flat_rate_box",
+          "name": "Medium Flat Rate Box",
+          "description": "USPS flat rate box. A special 11\" x 8 1/2\" x 5 1/2\" or 14\" x 3.5\" x 12\" USPS box that clearly indicates \"Flat Rate Box\""
+        },
+        {
+          "package_id": null,
+          "package_code": "non_rectangular",
+          "name": "Non Rectangular Package",
+          "description": "Non-Rectangular package type that is cylindrical in shape."
+        },
+        {
+          "package_id": null,
+          "package_code": "package",
+          "name": "Package",
+          "description": "Package. Longest side plus the distance around the thickest part is less than or equal to 84\""
+        },
+        {
+          "package_id": null,
+          "package_code": "regional_rate_box_a",
+          "name": "Regional Rate Box A",
+          "description": "Regional Rate Box A"
+        },
+        {
+          "package_id": null,
+          "package_code": "regional_rate_box_b",
+          "name": "Regional Rate Box B",
+          "description": "Regional Rate Box B"
+        },
+        {
+          "package_id": null,
+          "package_code": "small_flat_rate_box",
+          "name": "Small Flat Rate Box",
+          "description": "Small Flat Rate Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "thick_envelope",
+          "name": "Thick Envelope",
+          "description": "Thick envelope. Envelopes or flats greater than 3/4\" at the thickest point."
+        }
+      ],
+      "options": [
+        {
+          "name": "non_machinable",
+          "default_value": "false",
+          "description": ""
+        },
+        {
+          "name": "bill_to_account",
+          "default_value": null,
+          "description": "Bill To Account"
+        },
+        {
+          "name": "bill_to_party",
+          "default_value": null,
+          "description": "Bill To Party"
+        },
+        {
+          "name": "bill_to_postal_code",
+          "default_value": null,
+          "description": "Bill To Postal Code"
+        },
+        {
+          "name": "bill_to_country_code",
+          "default_value": null,
+          "description": "Bill To Country Code"
+        }
+      ]
+    },
+    {
+      "carrier_id": "se-660216",
+      "carrier_code": "ups",
+      "account_number": "test_account_660216",
+      "requires_funded_amount": false,
+      "balance": 0.0,
+      "nickname": "ShipEngine Test Account - UPS",
+      "friendly_name": "UPS",
+      "primary": false,
+      "has_multi_package_supporting_services": true,
+      "supports_label_messages": true,
+      "services": [
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_standard_international",
+          "name": "UPS Standard\u00ae",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_next_day_air_early_am",
+          "name": "UPS Next Day Air\u00ae Early",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_worldwide_express",
+          "name": "UPS Worldwide Express\u00ae",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_next_day_air",
+          "name": "UPS Next Day Air\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_ground_international",
+          "name": "UPS Ground\u00ae (International)",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_worldwide_express_plus",
+          "name": "UPS Worldwide Express Plus\u00ae",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_next_day_air_saver",
+          "name": "UPS Next Day Air Saver\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_worldwide_expedited",
+          "name": "UPS Worldwide Expedited\u00ae",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_2nd_day_air_am",
+          "name": "UPS 2nd Day Air AM\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_2nd_day_air",
+          "name": "UPS 2nd Day Air\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_worldwide_saver",
+          "name": "UPS Worldwide Saver\u00ae",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_2nd_day_air_international",
+          "name": "UPS 2nd Day Air\u00ae (International)",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_3_day_select",
+          "name": "UPS 3 Day Select\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_ground",
+          "name": "UPS\u00ae Ground",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660216",
+          "carrier_code": "ups",
+          "service_code": "ups_next_day_air_international",
+          "name": "UPS Next Day Air\u00ae (International)",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        }
+      ],
+      "packages": [
+        {
+          "package_id": null,
+          "package_code": "package",
+          "name": "Package",
+          "description": "Package. Longest side plus the distance around the thickest part is less than or equal to 84\""
+        },
+        {
+          "package_id": null,
+          "package_code": "ups__express_box_large",
+          "name": "UPS  Express\u00ae Box - Large",
+          "description": "Express Box - Large"
+        },
+        {
+          "package_id": null,
+          "package_code": "ups_10_kg_box",
+          "name": "UPS 10 KG Box\u00ae",
+          "description": "10 KG Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "ups_25_kg_box",
+          "name": "UPS 25 KG Box\u00ae",
+          "description": "25 KG Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "ups_express_box",
+          "name": "UPS Express\u00ae Box",
+          "description": "Express Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "ups_express_box_medium",
+          "name": "UPS Express\u00ae Box - Medium",
+          "description": "Express Box - Medium"
+        },
+        {
+          "package_id": null,
+          "package_code": "ups_express_box_small",
+          "name": "UPS Express\u00ae Box - Small",
+          "description": "Express Box - Small"
+        },
+        {
+          "package_id": null,
+          "package_code": "ups_express_pak",
+          "name": "UPS Express\u00ae Pak",
+          "description": "Pak"
+        },
+        {
+          "package_id": null,
+          "package_code": "ups_letter",
+          "name": "UPS Letter",
+          "description": "Letter"
+        },
+        {
+          "package_id": null,
+          "package_code": "ups_tube",
+          "name": "UPS Tube",
+          "description": "Tube"
+        }
+      ],
+      "options": [
+        {
+          "name": "bill_to_account",
+          "default_value": "",
+          "description": ""
+        },
+        {
+          "name": "bill_to_country_code",
+          "default_value": "",
+          "description": ""
+        },
+        {
+          "name": "bill_to_party",
+          "default_value": "",
+          "description": ""
+        },
+        {
+          "name": "bill_to_postal_code",
+          "default_value": "",
+          "description": ""
+        },
+        {
+          "name": "collect_on_delivery",
+          "default_value": "",
+          "description": ""
+        },
+        {
+          "name": "contains_alcohol",
+          "default_value": "false",
+          "description": ""
+        },
+        {
+          "name": "delivered_duty_paid",
+          "default_value": "false",
+          "description": ""
+        },
+        {
+          "name": "dry_ice",
+          "default_value": "false",
+          "description": ""
+        },
+        {
+          "name": "dry_ice_weight",
+          "default_value": "0",
+          "description": ""
+        },
+        {
+          "name": "freight_class",
+          "default_value": "",
+          "description": ""
+        },
+        {
+          "name": "non_machinable",
+          "default_value": "false",
+          "description": ""
+        },
+        {
+          "name": "saturday_delivery",
+          "default_value": "false",
+          "description": ""
+        },
+        {
+          "name": "shipper_release",
+          "default_value": "false",
+          "description": "Driver may release package without signature"
+        }
+      ]
+    },
+    {
+      "carrier_id": "se-660217",
+      "carrier_code": "fedex",
+      "account_number": "test_account_660217",
+      "requires_funded_amount": false,
+      "balance": 0.0,
+      "nickname": "ShipEngine Test Account - FedEx",
+      "friendly_name": "FedEx",
+      "primary": false,
+      "has_multi_package_supporting_services": true,
+      "supports_label_messages": true,
+      "services": [
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_international_priority_express",
+          "name": "FedEx International Priority Express\u00ae",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_ground",
+          "name": "FedEx Ground\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_home_delivery",
+          "name": "FedEx Home Delivery\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_2day",
+          "name": "FedEx 2Day\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_2day_am",
+          "name": "FedEx 2Day\u00ae A.M.",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_express_saver",
+          "name": "FedEx Express Saver\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_standard_overnight",
+          "name": "FedEx Standard Overnight\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_priority_overnight",
+          "name": "FedEx Priority Overnight\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_first_overnight",
+          "name": "FedEx First Overnight\u00ae",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_1_day_freight",
+          "name": "FedEx 1Day\u00ae Freight",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_2_day_freight",
+          "name": "FedEx 2Day\u00ae Freight",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_3_day_freight",
+          "name": "FedEx 3Day\u00ae Freight",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_first_overnight_freight",
+          "name": "FedEx First Overnight\u00ae Freight",
+          "domestic": true,
+          "international": false,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_ground_international",
+          "name": "FedEx International Ground\u00ae",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_international_economy",
+          "name": "FedEx International Economy\u00ae",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_international_priority",
+          "name": "FedEx International Priority\u00ae",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_international_first",
+          "name": "FedEx International First\u00ae",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_international_economy_freight",
+          "name": "FedEx International Economy\u00ae Freight",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_international_priority_freight",
+          "name": "FedEx International Priority\u00ae Freight",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": true
+        },
+        {
+          "carrier_id": "se-660217",
+          "carrier_code": "fedex",
+          "service_code": "fedex_international_connect_plus",
+          "name": "FedEx International Connect Plus\u00ae",
+          "domestic": false,
+          "international": true,
+          "is_multi_package_supported": false
+        }
+      ],
+      "packages": [
+        {
+          "package_id": null,
+          "package_code": "fedex_envelope_onerate",
+          "name": "FedEx One Rate\u00ae Envelope",
+          "description": "FedEx\u00ae Envelope"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_extra_large_box_onerate",
+          "name": "FedEx One Rate\u00ae Extra Large Box",
+          "description": "FedEx\u00ae Extra Large Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_large_box_onerate",
+          "name": "FedEx One Rate\u00ae Large Box",
+          "description": "FedEx\u00ae Large Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_medium_box_onerate",
+          "name": "FedEx One Rate\u00ae Medium Box",
+          "description": "FedEx\u00ae Medium Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_pak_onerate",
+          "name": "FedEx One Rate\u00ae Pak",
+          "description": "FedEx\u00ae Pak"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_small_box_onerate",
+          "name": "FedEx One Rate\u00ae Small Box",
+          "description": "FedEx\u00ae Small Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_tube_onerate",
+          "name": "FedEx One Rate\u00ae Tube",
+          "description": "FedEx\u00ae Tube"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_10kg_box",
+          "name": "FedEx\u00ae 10kg Box",
+          "description": "FedEx\u00ae 10kg Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_25kg_box",
+          "name": "FedEx\u00ae 25kg Box",
+          "description": "FedEx\u00ae 25kg Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_box",
+          "name": "FedEx\u00ae Box",
+          "description": "FedEx\u00ae Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_envelope",
+          "name": "FedEx\u00ae Envelope",
+          "description": "FedEx\u00ae Envelope"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_extra_large_box",
+          "name": "FedEx\u00ae Extra Large Box",
+          "description": "FedEx\u00ae Extra Large Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_large_box",
+          "name": "FedEx\u00ae Large Box",
+          "description": "FedEx\u00ae Large Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_medium_box",
+          "name": "FedEx\u00ae Medium Box",
+          "description": "FedEx\u00ae Medium Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_pak",
+          "name": "FedEx\u00ae Pak",
+          "description": "FedEx\u00ae Pak"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_small_box",
+          "name": "FedEx\u00ae Small Box",
+          "description": "FedEx\u00ae Small Box"
+        },
+        {
+          "package_id": null,
+          "package_code": "fedex_tube",
+          "name": "FedEx\u00ae Tube",
+          "description": "FedEx\u00ae Tube"
+        },
+        {
+          "package_id": null,
+          "package_code": "package",
+          "name": "Package",
+          "description": "Package. Longest side plus the distance around the thickest part is less than or equal to 84\""
+        }
+      ],
+      "options": [
+        {
+          "name": "bill_to_account",
+          "default_value": "",
+          "description": ""
+        },
+        {
+          "name": "bill_to_country_code",
+          "default_value": "",
+          "description": ""
+        },
+        {
+          "name": "bill_to_party",
+          "default_value": "",
+          "description": ""
+        },
+        {
+          "name": "bill_to_postal_code",
+          "default_value": "",
+          "description": ""
+        },
+        {
+          "name": "collect_on_delivery",
+          "default_value": "",
+          "description": ""
+        },
+        {
+          "name": "contains_alcohol",
+          "default_value": "false",
+          "description": ""
+        },
+        {
+          "name": "delivered_duty_paid",
+          "default_value": "false",
+          "description": ""
+        },
+        {
+          "name": "dry_ice",
+          "default_value": "false",
+          "description": ""
+        },
+        {
+          "name": "dry_ice_weight",
+          "default_value": "0",
+          "description": ""
+        },
+        {
+          "name": "non_machinable",
+          "default_value": "false",
+          "description": ""
+        },
+        {
+          "name": "saturday_delivery",
+          "default_value": "false",
+          "description": ""
+        },
+        {
+          "name": "third-party-consignee",
+          "default_value": "false",
+          "description": "Third Party Consignee"
+        }
+      ]
+    }
+  ],
+  "request_id": "85c51d57-a2a1-43bc-814f-c03ac18740b9",
+  "errors": []
+}{
+  "rate_response": {
+    "rates": [
+      {
+        "rate_id": "se-1264328640",
+        "rate_type": "shipment",
+        "carrier_id": "se-660215",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 12.66
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 2,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2022-02-12T00:00:00Z",
+        "carrier_delivery_days": "2",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "USPS Priority Mail",
+        "service_code": "usps_priority_mail",
+        "trackable": true,
+        "carrier_code": "stamps_com",
+        "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+        "carrier_friendly_name": "Stamps.com",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328641",
+        "rate_type": "shipment",
+        "carrier_id": "se-660215",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 48.35
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 2,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2022-02-12T00:00:00Z",
+        "carrier_delivery_days": "1-2",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "USPS Priority Mail Express",
+        "service_code": "usps_priority_mail_express",
+        "trackable": true,
+        "carrier_code": "stamps_com",
+        "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+        "carrier_friendly_name": "Stamps.com",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328642",
+        "rate_type": "shipment",
+        "carrier_id": "se-660215",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 3.82
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 7,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2022-02-18T00:00:00Z",
+        "carrier_delivery_days": "7",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "USPS Media Mail",
+        "service_code": "usps_media_mail",
+        "trackable": true,
+        "carrier_code": "stamps_com",
+        "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+        "carrier_friendly_name": "Stamps.com",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328643",
+        "rate_type": "shipment",
+        "carrier_id": "se-660215",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 10.85
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 7,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2022-02-18T00:00:00Z",
+        "carrier_delivery_days": "7",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "USPS Parcel Select Ground",
+        "service_code": "usps_parcel_select",
+        "trackable": true,
+        "carrier_code": "stamps_com",
+        "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+        "carrier_friendly_name": "Stamps.com",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328644",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 45.91
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 3,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2022-02-15T23:00:00Z",
+        "carrier_delivery_days": "Tuesday 2/15 by 11:00 PM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS 3 Day Select\u00ae",
+        "service_code": "ups_3_day_select",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328645",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 156.6
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2022-02-11T08:00:00Z",
+        "carrier_delivery_days": "Tomorrow by 08:00 AM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS Next Day Air\u00ae Early",
+        "service_code": "ups_next_day_air_early_am",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328646",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 20.83
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 4,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2022-02-16T23:00:00Z",
+        "carrier_delivery_days": "Wednesday 2/16 by 11:00 PM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS\u00ae Ground",
+        "service_code": "ups_ground",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328647",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 112.11
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2022-02-11T23:00:00Z",
+        "carrier_delivery_days": "Tomorrow by 11:00 PM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS Next Day Air Saver\u00ae",
+        "service_code": "ups_next_day_air_saver",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328648",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 122.48
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2022-02-11T12:00:00Z",
+        "carrier_delivery_days": "Tomorrow by 12:00 PM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS Next Day Air\u00ae",
+        "service_code": "ups_next_day_air",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328649",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 54.56
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 2,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2022-02-12T23:00:00Z",
+        "carrier_delivery_days": "Saturday 2/12 by 11:00 PM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS 2nd Day Air\u00ae",
+        "service_code": "ups_2nd_day_air",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328650",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 13.71
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 6.92
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 5,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2022-02-17T23:59:00Z",
+        "carrier_delivery_days": "5",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx Home Delivery\u00ae",
+        "service_code": "fedex_home_delivery",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328651",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 101.28
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 17.56
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2022-02-11T12:00:00Z",
+        "carrier_delivery_days": "Tomorrow by 12:00 PM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx Priority Overnight\u00ae",
+        "service_code": "fedex_priority_overnight",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328652",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 35.68
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 10.01
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 5,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2022-02-15T20:00:00Z",
+        "carrier_delivery_days": "Tuesday 2/15 by 08:00 PM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx Express Saver\u00ae",
+        "service_code": "fedex_express_saver",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328653",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 50.02
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 11.66
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 4,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2022-02-14T12:00:00Z",
+        "carrier_delivery_days": "Monday 2/14 by 12:00 PM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx 2Day\u00ae A.M.",
+        "service_code": "fedex_2day_am",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328654",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 132.28
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 21.12
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2022-02-11T08:00:00Z",
+        "carrier_delivery_days": "Tomorrow by 08:00 AM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx First Overnight\u00ae",
+        "service_code": "fedex_first_overnight",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328655",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 92.27
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 16.52
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2022-02-11T20:00:00Z",
+        "carrier_delivery_days": "Tomorrow by 08:00 PM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx Standard Overnight\u00ae",
+        "service_code": "fedex_standard_overnight",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      },
+      {
+        "rate_id": "se-1264328656",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+          "currency": "usd",
+          "amount": 42.31
+        },
+        "insurance_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "confirmation_amount": {
+          "currency": "usd",
+          "amount": 0.0
+        },
+        "other_amount": {
+          "currency": "usd",
+          "amount": 10.78
+        },
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 4,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2022-02-14T20:00:00Z",
+        "carrier_delivery_days": "Monday 2/14 by 08:00 PM",
+        "ship_date": "2022-02-10T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx 2Day\u00ae",
+        "service_code": "fedex_2day",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+      }
+    ],
+    "invalid_rates": [],
+    "rate_request_id": "se-166529268",
+    "shipment_id": "se-262164407",
+    "created_at": "2022-02-11T01:45:41.2288822Z",
+    "status": "completed",
+    "errors": []
+  },
+  "shipment_id": "se-262164407",
+  "carrier_id": null,
+  "service_code": null,
+  "external_shipment_id": null,
+  "ship_date": "2022-02-10T00:00:00Z",
+  "created_at": "2022-02-11T01:45:39.743Z",
+  "modified_at": "2022-02-11T01:45:39.697Z",
+  "shipment_status": "pending",
+  "ship_to": {
+    "name": "Amanda Miller",
+    "phone": "555-555-5555",
+    "company_name": null,
+    "address_line1": "525 S Winchester Blvd",
+    "address_line2": null,
+    "address_line3": null,
+    "city_locality": "San Jose",
+    "state_province": "CA",
+    "postal_code": "95128",
+    "country_code": "US",
+    "address_residential_indicator": "yes"
+  },
+  "ship_from": {
+    "name": "Shipping department",
+    "phone": "123-123-1234",
+    "company_name": "Holy Transfiguration Monastery",
+    "address_line1": "278 Warren St",
+    "address_line2": null,
+    "address_line3": null,
+    "city_locality": "Brookline",
+    "state_province": "MA",
+    "postal_code": "02445",
+    "country_code": "US",
+    "address_residential_indicator": "unknown"
+  },
+  "warehouse_id": null,
+  "return_to": {
+    "name": "Shipping department",
+    "phone": "123-123-1234",
+    "company_name": "Holy Transfiguration Monastery",
+    "address_line1": "278 Warren St",
+    "address_line2": null,
+    "address_line3": null,
+    "city_locality": "Brookline",
+    "state_province": "MA",
+    "postal_code": "02445",
+    "country_code": "US",
+    "address_residential_indicator": "unknown"
+  },
+  "confirmation": "none",
+  "customs": {
+    "contents": "merchandise",
+    "customs_items": [],
+    "non_delivery": "return_to_sender",
+    "buyer_shipping_amount_paid": null,
+    "duties_paid": null
+  },
+  "external_order_id": null,
+  "order_source_code": null,
+  "advanced_options": {
+    "bill_to_account": null,
+    "bill_to_country_code": null,
+    "bill_to_party": null,
+    "bill_to_postal_code": null,
+    "contains_alcohol": false,
+    "delivered_duty_paid": false,
+    "non_machinable": false,
+    "saturday_delivery": false,
+    "dry_ice": false,
+    "dry_ice_weight": null,
+    "fedex_freight": null,
+    "third_party_consignee": false,
+    "ancillary_endorsements_option": null,
+    "freight_class": null,
+    "custom_field1": null,
+    "custom_field2": null,
+    "custom_field3": null,
+    "collect_on_delivery": null,
+    "return_pickup_attempts": null
+  },
+  "insurance_provider": "none",
+  "tags": [],
+  "packages": [
+    {
+      "package_code": "package",
+      "weight": {
+        "value": 2.0,
+        "unit": "pound"
+      },
+      "dimensions": {
+        "unit": "inch",
+        "length": 0.0,
+        "width": 0.0,
+        "height": 0.0
+      },
+      "insured_value": {
+        "currency": "usd",
+        "amount": 0.0
+      },
+      "label_messages": {
+        "reference1": null,
+        "reference2": null,
+        "reference3": null
+      },
+      "external_package_id": null
+    }
+  ],
+  "total_weight": {
+    "value": 2.0,
+    "unit": "pound"
+  },
+  "items": []
+}
