@@ -3,6 +3,7 @@
 {% if product %}{{ product.title }}{% else %}Product{% endif %}
 {% endblock %}
 {% block content %}
+
 <div class="container">
   {% if messages %}
   <div class="alert alert-warning" alert-{{ message.tags }}" role="alert">

@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from ecommerce.apps.catalogue.models import Product
@@ -18,7 +17,7 @@ def basket_add(request):
         product_qty = int(request.POST.get("productqty"))
         product = get_object_or_404(Product, id=product_id)
         basket.add(product=product, qty=product_qty)
-        messages.add_message(request, messages.INFO, f"{product.title} added to the cart")
+
         basketqty = basket.__len__()
         response = JsonResponse({"qty": basketqty})
         return response
