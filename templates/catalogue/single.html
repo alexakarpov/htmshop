@@ -1,17 +1,13 @@
 {% extends "../base.html" %}
 {% block title %}
-{% if product %}{{ product.title }}{% else %}Product{% endif %}
+{% if product %}{{ product.title }}
+{% else %}Product
+{% endif %}
 {% endblock %}
 {% block content %}
-
 <div class="container">
-  {% if messages %}
-  <div class="alert alert-warning" alert-{{ message.tags }}" role="alert">
-    {% for message in messages  %}
-    {{message|safe}} - <a href="{% url "accounts:wishlist" %}" class="alert-link">Your Wishlist</a>.
-    {% endfor %}
-  </div>
-  {% endif %}
+  <div class="row g-3" id="message-box"/>
+
   <div class="row g-3">
     <div class="col-md-5 ps-3 col-lg-5 order-md-last p-0 order-1">
       <div class="d-grid gap-2">
@@ -76,6 +72,10 @@
         },
         error: function (xhr, errmsg, err) {}
       });
+      document.getElementById("message-box").innerHTML = '<div class="alert alert-success" role="alert">{{product.title}} added to the cart</div>'
+      setTimeout(function() {
+        $('#message-box').html('');
+      }, 2000); // ok at least something worked
     })
   </script>
 
