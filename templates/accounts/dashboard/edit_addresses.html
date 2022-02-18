@@ -40,13 +40,28 @@
 </div>
 
 <script>
-  $(document).ready(function(){
+  $(document).ready(function() {
     $('select#id_country').change(function () {
       country_code = $(this).val()
-      if (country_code != 'US') {
-        const editbox = '<input type="text" name="state_province" maxlength="50" class="form-control mb-2 account-form" placeholder="State/Province" required="" id="id_state_province"></input>'
-        $('select#id_state_province').replaceWith(editbox)
-      } else {
+      if (country_code == 'CA') {
+        const ca_province_select = `<select name="state_province" class="form-control mb-2 account-form" placeholder="State/Province" required="" id="id_state_province">
+          <option value="" selected="">---------</option>
+          <option value="NL">Newfoundland and Labrador</option>
+          <option value="PE">Prince Edward Island</option>
+          <option value="NS">Nova Scotia</option>
+          <option value="NB">New Brunswick	</option>
+          <option value="QC">Quebec</option>
+          <option value="ON">Ontario</option>
+          <option value="MB">Manitoba</option>
+          <option value="SK">Saskatchewan</option>
+          <option value="AB">Alberta</option>
+          <option value="BC">British Columbia</option>
+          <option value="YT">Yukon</option>
+          <option value="NT">Northwest Territories</option>
+          <option value="NU">Nunavut</option>
+          </select>`
+        $('#id_state_province').replaceWith(ca_province_select)
+      } else if (country_code == 'US') {
         const us_state_select = `<select name="state_province" class="form-control mb-2 account-form" placeholder="State/Province" required="" id="id_state_province">
           <option value="" selected="">---------</option>
           <option value="AL">Alabama</option>
@@ -101,10 +116,14 @@
           <option value="AK">Alaska</option>
           <option value="HI">Hawaii</option>
         </select>`
-        $('input#id_state_province').replaceWith(us_state_select)
-      }
+        $('#id_state_province').replaceWith(us_state_select)
+        } else {
+          const editbox = '<input type="text" name="state_province" maxlength="50" class="form-control mb-2 account-form" placeholder="State/Province" required="" id="id_state_province"></input>'
+          $('#id_state_province').replaceWith(editbox)
+        }
+      })
     })
-  })
+
 
   function submitForm() {
     var form = document.getElementsByName('address_form')[0];
