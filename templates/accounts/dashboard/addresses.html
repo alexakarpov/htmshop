@@ -1,8 +1,6 @@
 {% extends "../sub_base.html" %}
 {% block title %}Edit Addresses{% endblock %}
 
-
-
 {% block sub_content %}
 <h1 class="h2">Your Addresses</h1>
 <div>Manage your <b>addresses</b> and delivery preferences</div>
@@ -42,6 +40,7 @@
           <p class="card-text m-0">{{address.address_line}}</p>
           <p class="card-text m-0">{{address.address_line2}}</p>
           <p class="card-text m-0">{{address.town_city}}</p>
+          <p class="card-text m-0">{{address.state_province}}</p>
           <p class="card-text m-0">{{address.postcode}}</p>
           <p class="card-text m-0">{{address.country}}</p>
           <p class="card-text m-0">Phone number: {{address.phone}}</p>
