@@ -110,10 +110,8 @@ class Address(models.Model):
     address_line = models.CharField(_("Address Line 1"), max_length=100)
     address_line2 = models.CharField(_("Address Line 2"), max_length=100)
     town_city = models.CharField(_("Town/City"), max_length=50)
+    state_province = models.CharField(_("State/Province"), max_length=100)
     country = models.CharField(_("Country"), max_length=2, default="US", choices=country_names.items())
-
-    #     choices=sorted(country_names.items(), key=lambda c: c[1]),
-
     delivery_instructions = models.CharField(_("Delivery Instructions"), max_length=255)
     created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated at"), auto_now=True)
