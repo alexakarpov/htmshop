@@ -141,7 +141,9 @@ def add_address(request):
             address_form.save()
             return HttpResponseRedirect(reverse("accounts:addresses"))
         else:
-            logger.debug("invalid address")
+            logger.error("invalid address")
+            for error in address_form.errors:
+                logger.error(error)
             return HttpResponse("Error handler content", status=400)
     else:
         address_form = UserAddressForm()
