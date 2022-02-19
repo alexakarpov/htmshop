@@ -104,7 +104,7 @@ class Address(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Account, verbose_name=_("Account"), on_delete=models.CASCADE)
-    full_name = models.CharField(_("Full Name"), max_length=75)
+    full_name = models.CharField(_("Full Name"), max_length=25)
     phone = models.CharField(_("Phone Number"), max_length=20)
     postcode = models.CharField(_("Postal Code"), max_length=10)
     address_line = models.CharField(_("Address Line 1"), max_length=50)
