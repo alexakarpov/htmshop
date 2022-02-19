@@ -25,7 +25,16 @@ logger = logging.getLogger("django")
 class UserAddressForm(forms.ModelForm):
     class Meta:
         model = Address
-        fields = ["full_name", "phone", "address_line", "address_line2", "town_city", "postcode", "country"]
+        fields = [
+            "full_name",
+            "phone",
+            "address_line",
+            "address_line2",
+            "town_city",
+            "state_province",
+            "postcode",
+            "country",
+        ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -41,6 +50,9 @@ class UserAddressForm(forms.ModelForm):
         )
         self.fields["town_city"].widget.attrs.update(
             {"class": "form-control mb-2 account-form", "placeholder": _("Town/City")}
+        )
+        self.fields["state_province"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": _("State/Province")}
         )
         self.fields["postcode"].widget.attrs.update(
             {"class": "form-control mb-2 account-form", "placeholder": _("Postal code")}
