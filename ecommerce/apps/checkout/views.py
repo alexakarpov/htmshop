@@ -54,8 +54,6 @@ def delivery_address(request):
     if addresses.count() == 0:
         logger.warning(f"No addresses found for {request.user}")
         return HttpResponseRedirect(reverse("account:addresses"))
-
-        # return redirect("account:addresses")
     if "address" not in request.session:
         session["address"] = {"address_id": str(addresses[0].id)}
     else:
@@ -77,7 +75,7 @@ def payment_selection(request):
 
 
 ####
-# PayPay
+# PayPal
 ####
 from paypalcheckoutsdk.orders import OrdersGetRequest
 
