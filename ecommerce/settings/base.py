@@ -84,7 +84,7 @@ AUTH_USER_MODEL = "accounts.Account"
 LOGIN_REDIRECT_URL = "/accounts/dashboard"
 LOGIN_URL = "/account/login/"
 LOGOUT_REDIRECT_URL = LOGIN_URL
-BASKET_SESSION_ID = "basket"
+BASKET_SESSION_KEY = "basket"
 
 # Email setting
 DEFAULT_FROM_EMAIL = "info@thehtm.org"
