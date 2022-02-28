@@ -13,9 +13,9 @@ class Basket:
 
     def __init__(self, request):
         self.session = request.session
-        basket = self.session.get(settings.BASKET_SESSION_ID)
-        if settings.BASKET_SESSION_ID not in request.session:
-            basket = self.session[settings.BASKET_SESSION_ID] = {}
+        basket = self.session.get(settings.BASKET_SESSION_KEY)
+        if settings.BASKET_SESSION_KEY not in request.session:
+            basket = self.session[settings.BASKET_SESSION_KEY] = {}
         self.basket = basket
 
     def add(self, product, qty):
@@ -101,7 +101,7 @@ class Basket:
 
     def clear(self):
         # Remove basket from session
-        del self.session[settings.BASKET_SESSION_ID]
+        del self.session[settings.BASKET_SESSION_KEY]
         del self.session["address"]
         del self.session["purchase"]
         self.save()
