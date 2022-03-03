@@ -3,8 +3,8 @@ from ecommerce.apps.accounts.models import Account, Address
 from ecommerce.apps.catalogue.models import (
     Category,
     Product,
-    ProductSpecification,
-    ProductSpecificationValue,
+    ProductAttribute,
+    ProductAttributeValue,
     ProductType,
 )
 from faker import Faker
@@ -32,9 +32,9 @@ class ProductTypeFactory(factory.django.DjangoModelFactory):
     name = "book"
 
 
-class ProductSpecificationFactory(factory.django.DjangoModelFactory):
+class ProductAttributeFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = ProductSpecification
+        model = ProductAttribute
 
     product_type = factory.SubFactory(ProductTypeFactory)
     name = "pages"
@@ -52,12 +52,12 @@ class ProductFactory(factory.django.DjangoModelFactory):
     price = "9.99"
 
 
-class ProductSpecificationValueFactory(factory.django.DjangoModelFactory):
+class ProductAttributeValueFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = ProductSpecificationValue
+        model = ProductAttributeValue
 
     product = factory.SubFactory(ProductFactory)
-    specification = factory.SubFactory(ProductSpecificationFactory)
+    attribute = factory.SubFactory(ProductAttributeFactory)
     value = "100"
 
 

@@ -8,17 +8,17 @@ from tests.factories import (
     AccountFactory,
     AddressFactory,
     CategoryFactory,
+    ProductAttributeFactory,
+    ProductAttributeValueFactory,
     ProductFactory,
-    ProductSpecificationFactory,
-    ProductSpecificationValueFactory,
     ProductTypeFactory,
 )
 
 register(CategoryFactory)
 register(ProductTypeFactory)
-register(ProductSpecificationFactory)
+register(ProductAttributeFactory)
 register(ProductFactory)
-register(ProductSpecificationValueFactory)
+register(ProductAttributeValueFactory)
 register(AccountFactory)
 register(AddressFactory)
 
