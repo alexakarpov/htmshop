@@ -50,7 +50,7 @@ class ProductType(models.Model):
     of products that are for sale.
     """
 
-    name = models.CharField(verbose_name=_("Product Name"), help_text=_("Required"), max_length=255, unique=True)
+    name = models.CharField(verbose_name=_("Product Type name"), help_text=_("Required"), max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
 
     class Meta:
@@ -146,55 +146,55 @@ class ProductImage(models.Model):
         verbose_name_plural = _("Product Images")
 
 
-class ProductAttribute(models.Model):
-    """
-    Product attribute table
-    """
+# class ProductAttribute(models.Model):
+#     """
+#     Product attribute table
+#     """
 
-    product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
-    name = models.CharField(
-        max_length=25,
-        unique=True,
-        null=False,
-        blank=False,
-        verbose_name=_("product attribute name"),
-        help_text=_("format: required, unique, max-25"),
-    )
-    description = models.TextField(
-        unique=False,
-        null=False,
-        blank=False,
-        verbose_name=_("product attribute description"),
-        help_text=_("format: required"),
-    )
+#     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
+#     name = models.CharField(
+#         max_length=25,
+#         unique=True,
+#         null=False,
+#         blank=False,
+#         verbose_name=_("product attribute name"),
+#         help_text=_("format: required, unique, max-25"),
+#     )
+#     description = models.TextField(
+#         unique=False,
+#         null=False,
+#         blank=False,
+#         verbose_name=_("product attribute description"),
+#         help_text=_("format: required"),
+#     )
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
-class ProductAttributeValue(models.Model):
-    """
-    Product attribute value table
-    """
+# class ProductAttributeValue(models.Model):
+#     """
+#     Product attribute value table
+#     """
 
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE,
-        related_name="attributes",
-    )
-    product_attribute = models.ForeignKey(
-        ProductAttribute,
-        related_name="product_attribute",
-        on_delete=models.PROTECT,
-    )
-    attribute_value = models.CharField(
-        max_length=25,
-        unique=False,
-        null=False,
-        blank=False,
-        verbose_name=_("attribute value"),
-        help_text=_("format: required, max-25"),
-    )
+#     product = models.ForeignKey(
+#         Product,
+#         on_delete=models.CASCADE,
+#         related_name="attributes",
+#     )
+#     product_attribute = models.ForeignKey(
+#         ProductAttribute,
+#         related_name="product_attribute",
+#         on_delete=models.PROTECT,
+#     )
+#     attribute_value = models.CharField(
+#         max_length=25,
+#         unique=False,
+#         null=False,
+#         blank=False,
+#         verbose_name=_("attribute value"),
+#         help_text=_("format: required, max-25"),
+#     )
 
-    def __str__(self):
-        return f"{self.product_attribute.name} : {self.attribute_value}"
+#     def __str__(self):
+#         return f"{self.product_attribute.name} : {self.attribute_value}"
