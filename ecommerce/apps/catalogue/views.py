@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render
+from ecommerce.apps.shipping.utils import variants
 
 from .models import Category, Product
 
@@ -16,4 +17,5 @@ def category_list(request, category_slug=None):
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, is_active=True)
-    return render(request, "catalogue/single.html", {"product": product})
+    vvariants = variants(product_type=product.product_type)
+    return render(request, "catalogue/single.html", {"product": product, "variants": vvariants})
