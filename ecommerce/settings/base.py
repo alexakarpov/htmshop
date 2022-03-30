@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "ecommerce.apps.accounts",
     "ecommerce.apps.orders",
     "ecommerce.apps.checkout",
+    "ecommerce.apps.shipping",
     # "djpaypal",
 ]
 
