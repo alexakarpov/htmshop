@@ -4,21 +4,19 @@ from pytest_factoryboy import register
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from tests.factories import (
+from tests.factories import (  # ProductAttributeFactory,; ProductAttributeValueFactory,
     AccountFactory,
     AddressFactory,
     CategoryFactory,
-    ProductAttributeFactory,
-    ProductAttributeValueFactory,
     ProductFactory,
     ProductTypeFactory,
 )
 
 register(CategoryFactory)
 register(ProductTypeFactory)
-register(ProductAttributeFactory)
+# register(ProductAttributeFactory)
 register(ProductFactory)
-register(ProductAttributeValueFactory)
+# register(ProductAttributeValueFactory)
 register(AccountFactory)
 register(AddressFactory)
 
