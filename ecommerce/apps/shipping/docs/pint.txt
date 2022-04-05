@@ -1,0 +1,13 @@
+https://pint.readthedocs.io/en/stable/tutorial.html
+
+>>> from pint import UnitRegistry
+>>> ureg = UnitRegistry()
+
+>>> weight = 1*ureg.pound
+>>> weight += 13*ureg.ounce
+>>> weight
+<Quantity(1.8125, 'pound')>
+>>> weight.to('kilogram')
+<Quantity(0.822136171, 'kilogram')>
+>>> weight.to('gram')
+<Quantity(822.136171, 'gram')>
