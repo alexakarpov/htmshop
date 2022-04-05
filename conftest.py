@@ -1,23 +1,56 @@
 import pytest
+from django.core.management import call_command
 from pytest_factoryboy import register
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
-from tests.factories import (
+from tests.factories import (  # ProductAttributeFactory,; ProductAttributeValueFactory,
     AccountFactory,
     AddressFactory,
     CategoryFactory,
     ProductFactory,
-    ProductSpecificationFactory,
-    ProductSpecificationValueFactory,
     ProductTypeFactory,
 )
 
 register(CategoryFactory)
 register(ProductTypeFactory)
-register(ProductSpecificationFactory)
+# register(ProductAttributeFactory)
 register(ProductFactory)
-register(ProductSpecificationValueFactory)
+# register(ProductAttributeValueFactory)
 register(AccountFactory)
 register(AddressFactory)
+
+
+@pytest.fixture
+def create_admin_user(django_user_model):
+    """
+    Return admin user
+    """
+    return django_user_model.objects.create_superuser("admin@example.com", "password")
+
+
+@pytest.fixture(scope="session")
+def db_fixture_setup(django_db_setup, django_db_blocker):
+    """
+    Load DB data fixtures
+    """
+    with django_db_blocker.unblock():
+        call_command("migrate")
+        call_command("loaddata", "ecommerce/data_fixtures/accounts.json")
+        call_command("loaddata", "ecommerce/data_fixtures/catalogue.json")
+        call_command("loaddata", "ecommerce/data_fixtures/db_admin_fixture.json")
+
+
+@pytest.fixture(scope="module")
+def chrome_browser_instance(request):
+    """
+    Provide a selenium webdriver instance
+    """
+    options = Options()
+    options.headless = False
+    browser = webdriver.Chrome(options=options)
+    yield browser
+    browser.close()
 
 
 @pytest.fixture

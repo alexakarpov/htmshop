@@ -1,0 +1,52 @@
+useful repo: ShipEngine python SDK
+
+https://github.com/ShipEngine/shipengine-python
+
+list_carriers gets an object, which has "carriers" inside:
+
+>>> se = ShipEngine({"api_key": "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw", "page_size": 75, "retries": 3, "timeout": 10})
+>>> carriers=se.list_carriers()
+>>> ccarriers=carriers.get("carriers")
+
+that would contain what we want:
+
+>>> for c in ccarriers:
+...     print(c.get("carrier_code"))
+...
+...
+stamps_com
+ups
+fedex
+
+----------------------------------------
+
+But we don't need to give customers the carrier choice.
+
+If we fix service_code, e.g.
+service_codes": ["usps_media_mail"],
+
+but select multiple carriers, then usps part will only include media, rest will list all
+
+##### Weight ######
+
+p.attributes.filter(product_attribute__name="weight").first().
+attribute_value
+
+==============================
+
+task re variants
+
+for each product in the catalog, depending on type, provide choices
+
+icon:
+>  mounted icons:
+>>  choise of sizes
+>  prints:
+>>  choise of sizes
+
+incense:
+> choice of weight (1lb, 1/2 lb, 1oz)
+
+8x10 weight is 1 pound 13 oz (with bubble-wrap and envelope)
+
+ok

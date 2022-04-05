@@ -1,0 +1,20 @@
+first, import:
+
+>>> from django.contrib.sessions.models import Session
+
+then load:
+
+>>> s2=Session.objects.get(pk='mdm43w7bqyrqmgv3ce96qrshs48zwoop')
+>>> s2d=s2.get_decoded()
+>>> s2d
+{'basket': {'1': {'price': '20.00', 'qty': 3}, '2': {'price': '30.00',
+'qty': 2}}, '_auth_user_id': '3', '_auth_user_backend': 'ecommerce.apps
+.accounts.auth_backend.EmailAuthBackend', '_auth_user_hash': 'ab547b765
+25f12d2ec2dba412b148141dbfb6f622508368fac785aeff4f42f07'}
+
+or just the basket:
+
+>>> s2d["basket"]
+{'1': {'price': '20.00', 'qty': 3}, '2': {'price': '30.00', 'qty': 2}}
+
+(here the first key seems to be Product's id)

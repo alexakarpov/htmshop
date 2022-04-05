@@ -1,8 +1,11 @@
+import logging
 from decimal import Decimal
 
 from django.conf import settings
 from ecommerce.apps.catalogue.models import Product
 from ecommerce.apps.checkout.models import DeliveryOptions
+
+logger = logging.getLogger("django")
 
 
 class Basket:
@@ -13,21 +16,32 @@ class Basket:
 
     def __init__(self, request):
         self.session = request.session
-        basket = self.session.get(settings.BASKET_SESSION_ID)
-        if settings.BASKET_SESSION_ID not in request.session:
-            basket = self.session[settings.BASKET_SESSION_ID] = {}
+        basket = self.session.get(settings.BASKET_SESSION_KEY)
+        if settings.BASKET_SESSION_KEY not in request.session:
+            basket = self.session[settings.BASKET_SESSION_KEY] = {}
         self.basket = basket
 
-    def add(self, product, qty):
+    def add(self, product, qty, variant=None):
         """
         Adding and updating the users basket session data
         """
+        print(f"adding {product.id}({product.title}) to cart")
         product_id = str(product.id)
-
         if product_id in self.basket:
             self.basket[product_id]["qty"] = qty
+            self.basket[product_id]["title"] = product.title
+            if variant:
+                self.basket[product_id]["variant"] = variant
         else:
-            self.basket[product_id] = {"price": str(product.price), "qty": qty}
+            self.basket[product_id] = {
+                "price": str(product.price),
+                "qty": qty,
+                "variant": variant,
+                "title": product.title,
+            }
+
+        for i in self.basket:
+            print(i)
 
         self.save()
 
@@ -35,6 +49,8 @@ class Basket:
         """
         Collect the product_id in the session data to query the database
         and return products
+        Need to rewrite this, so that the template has access to the variants,
+        which are not DB-based, but only live in the session.
         """
         product_ids = self.basket.keys()
         products = Product.objects.filter(id__in=product_ids)
@@ -101,10 +117,13 @@ class Basket:
 
     def clear(self):
         # Remove basket from session
-        del self.session[settings.BASKET_SESSION_ID]
+        del self.session[settings.BASKET_SESSION_KEY]
         del self.session["address"]
         del self.session["purchase"]
         self.save()
 
     def save(self):
         self.session.modified = True
+
+    def __str__(self):
+        return self.basket.__str__()
