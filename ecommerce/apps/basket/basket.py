@@ -25,13 +25,23 @@ class Basket:
         """
         Adding and updating the users basket session data
         """
+        print(f"adding {product.id}({product.title}) to cart")
         product_id = str(product.id)
         if product_id in self.basket:
             self.basket[product_id]["qty"] = qty
+            self.basket[product_id]["title"] = product.title
             if variant:
                 self.basket[product_id]["variant"] = variant
         else:
-            self.basket[product_id] = {"price": str(product.price), "qty": qty, "variant": variant}
+            self.basket[product_id] = {
+                "price": str(product.price),
+                "qty": qty,
+                "variant": variant,
+                "title": product.title,
+            }
+
+        for i in self.basket:
+            print(i)
 
         self.save()
 

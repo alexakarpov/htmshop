@@ -13,6 +13,7 @@ def basket_summary(request):
 
 def basket_add(request):
     basket = Basket(request)
+    print(request)
     if request.POST.get("action") == "post":
         product_id = int(request.POST.get("productid"))
         product_qty = int(request.POST.get("productqty"))
