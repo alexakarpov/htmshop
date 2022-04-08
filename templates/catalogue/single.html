@@ -84,7 +84,7 @@
         },
         error: function (xhr, errmsg, err) {}
       });
-      document.getElementById("message-box").innerHTML = '<div class="alert alert-success" role="alert">{{product.title}} added to the cart</div>'
+      $('#message-box').html('<div class="alert alert-success" role="alert">{{product.title}} added to the cart</div>')
       setTimeout(function() {
         $('#message-box').html('');
       }, 2000); // ok at least something worked
