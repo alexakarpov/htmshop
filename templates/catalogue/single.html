@@ -5,9 +5,6 @@
 {% endif %}
 {% endblock %}
 {% block content %}
-<div class="container">
-  <div class="row g-3" id="message-box"/>
-
   <div class="row g-3">
     <div class="col-md-5 ps-3 col-lg-5 order-md-last p-0 order-1">
       <div class="d-grid gap-2">
@@ -65,8 +62,9 @@
       </div>
     </div>
   </div>
+</div>
 
-  <script>
+<script>
     $(document).on('click', '#add-button', function (e) {
       e.preventDefault();
       $.ajax({
@@ -84,10 +82,11 @@
         },
         error: function (xhr, errmsg, err) {}
       });
-      $('#message-box').html('<div class="alert alert-success" role="alert">{{product.title}} added to the cart</div>')
+      $('#alertbox').show()
+      $('#alertbox').text('{{product.title}} added to the cart')
       setTimeout(function() {
-        $('#message-box').html('');
+        $('#alertbox').hide()
       }, 2000); // ok at least something worked
     })
-  </script>
+</script>
 {% endblock %}

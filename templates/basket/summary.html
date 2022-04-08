@@ -148,9 +148,10 @@
         console.warn("there was an error");
       },
     });
-    $("#message-box").html('<div class="alert alert-success" role="alert">cart updated</div>')
-      setTimeout(function() {
-        $('#message-box').html('');
+    $("#alertbox").show();
+    $("#alertbox").text("cart updated");
+    setTimeout(function() {
+        $('#alertbox').hide();
       }, 2000);
   });
 </script>
