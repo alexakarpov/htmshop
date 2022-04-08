@@ -80,7 +80,7 @@
           action: 'post'
         },
         success: function (json) {
-          document.getElementById("basket-qty").innerHTML = json.qty
+          $('#basket-qty').html(json.qty)
         },
         error: function (xhr, errmsg, err) {}
       });
@@ -90,5 +90,4 @@
       }, 2000); // ok at least something worked
     })
   </script>
-
-  {% endblock %}
+{% endblock %}
