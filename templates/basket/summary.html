@@ -116,9 +116,9 @@
           subtotal = json.subtotal
         }
 
-        document.getElementById("subtotal").innerHTML = subtotal;
-        document.getElementById("basket-qty").innerHTML = json.qty;
-        document.getElementById("total").innerHTML = total;
+        $("#subtotal").html(subtotal);
+        $("#basket-qty").html(json.qty);
+        $("#total").html(total);
       },
       error: function (xhr, errmsg, err) {},
     });
