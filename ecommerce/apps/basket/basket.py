@@ -3,7 +3,6 @@ from decimal import Decimal
 
 from django.conf import settings
 from ecommerce.apps.catalogue.models import Product
-from ecommerce.apps.checkout.models import DeliveryOptions
 
 logger = logging.getLogger("django")
 
@@ -39,9 +38,6 @@ class Basket:
                 "variant": variant,
                 "title": product.title,
             }
-
-        for i in self.basket:
-            print(i)
 
         self.save()
 
@@ -83,10 +79,7 @@ class Basket:
         return sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
 
     def get_delivery_price(self):
-        newprice = 0.00
-
-        if "purchase" in self.session:
-            newprice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
+        newprice = 42.00
 
         return newprice
 
@@ -95,7 +88,7 @@ class Basket:
         subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
 
         if "purchase" in self.session:
-            newprice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
+            newprice = 100
 
         total = subtotal + Decimal(newprice)
         return total
