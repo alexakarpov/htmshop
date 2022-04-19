@@ -24,7 +24,7 @@ class Basket:
         """
         Adding and updating the users basket session data
         """
-        print(f"adding {product.id}({product.title}) to cart")
+        print(f"adding {product.id}({product.title}) to cart in {self.session.session_key}")
         product_id = str(product.id)
         if product_id in self.basket:
             self.basket[product_id]["qty"] = qty
@@ -66,11 +66,13 @@ class Basket:
         """
         return sum(item["qty"] for item in self.basket.values())
 
-    def update(self, product, qty):
+    def update(self, product_id, qty):
         """
         Update values in session data
         """
-        product_id = str(product)
+        print(f"updating {product_id} in cart {self.session.session_key}")
+
+        product_id = str(product_id)
         if product_id in self.basket:
             self.basket[product_id]["qty"] = qty
         self.save()
@@ -98,11 +100,13 @@ class Basket:
         total = subtotal + Decimal(deliveryprice)
         return total
 
-    def delete(self, product):
+    def delete(self, product_id):
         """
         Delete item from session data
         """
-        product_id = str(product)
+        print(f"deleting {product_id} from cart in {self.session.session_key}")
+
+        product_id = str(product_id)
 
         if product_id in self.basket:
             del self.basket[product_id]

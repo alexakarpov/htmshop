@@ -61,11 +61,11 @@
           <div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent2">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li>
-                  <a class="navbar-brand d-flex-inline" href="cart">
+                {% comment %} <li>
+                  <a class="navbar-brand d-flex-inline" href="{% url 'basket:basket_summary' %}">
                     <i class="fa-solid fa-cart-shopping"></i>
                   </a>
-                </li>
+                </li> {% endcomment %}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-reset" href="#" id="navbarDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -98,9 +98,9 @@
               </ul>
             </div>
           </div>
-          {% comment %} <a type="button" role="button" href="{% url 'carts:cart_home' %}"
+          <a type="button" role="button" href="{% url 'basket:basket_summary' %}"
             class="btn btn-outline-secondary border-0 basket-btn">
-            {% with total_qty=cart|length %}
+            {% with total_qty=basket|length %}
             <div id="basket-qty" class="basket-qty">
               {% if total_qty > 0 %}
               {{ total_qty }}
@@ -117,7 +117,7 @@
               </svg>
             </div>
             <span class="fs15 fw500">Basket</span>
-          </a> {% endcomment %}
+          </a>
         </div>
         <div class="d-md-none d-lg-none d-xl-none">
           <div class="collapse navbar-collapse" id="navbarCollapse">
