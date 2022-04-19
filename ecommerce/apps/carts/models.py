@@ -44,6 +44,13 @@ class Cart(models.Model):
         return str(self.id)
 
 
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, null=False, blank=False, on_delete=models.deletion.CASCADE)
+    product = models.ForeignKey(Product, null=False, blank=False, on_delete=models.deletion.CASCADE)
+    quantity = models.SmallIntegerField(null=False, blank=False, default=1)
+    variant = models.CharField(null=True, blank=True, max_length=20)
+
+
 # def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
 #     if action == "post_add" or action == "post_remove" or action == "post_clear":
 #         products = instance.products.all()
