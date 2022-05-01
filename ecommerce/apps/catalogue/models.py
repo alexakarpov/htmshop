@@ -63,7 +63,7 @@ class ProductType(models.Model):
 
 class Product(models.Model):
     """
-    The Product table contining all product items.
+    The Product table.
     """
 
     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
@@ -93,22 +93,13 @@ class Product(models.Model):
     created_at = models.DateTimeField(_("Created at"), auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(_("Updated at"), auto_now=True)
     users_wishlist = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="user_wishlist", blank=True)
+    # weight in ounces
+    weight = models.IntegerField(null=False, blank=False, default=0, help_text="Weight in ounces")
 
     class Meta:
         ordering = ("-created_at",)
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
-
-    # def get_cat_list(self):
-    #     k = self.category  # for now ignore this instance method
-
-    #     breadcrumb = ["dummy"]
-    #     while k is not None:
-    #         breadcrumb.append(k.slug)
-    #         k = k.parent
-    #     for i in range(len(breadcrumb) - 1):
-    #         breadcrumb[i] = "/".join(breadcrumb[-1 : i - 1 : -1])
-    #     return breadcrumb[-1:0:-1]
 
     def get_absolute_url(self):
         return reverse("catalogue:product_detail", args=[self.slug])
