@@ -1,3 +1,4 @@
+import json
 import logging
 from decimal import Decimal
 
@@ -64,6 +65,7 @@ class Basket:
         """
         Get the basket data and count the qty of items
         """
+        print("in Basket's len")
         return sum(item["qty"] for item in self.basket.values())
 
     def update(self, product_id, qty):
@@ -121,6 +123,9 @@ class Basket:
 
     def save(self):
         self.session.modified = True
+
+    def toJSON(self):
+        return json.dumps(self.basket, indent=2)
 
     def __str__(self):
         return self.basket.__str__()
