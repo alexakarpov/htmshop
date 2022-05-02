@@ -1,0 +1,13 @@
+Basket.toJSON:
+
+  [{"price": "20.00",
+        "qty": 2,
+        "variant": "",
+        "title": "Prayer Book"},
+       {"price": "30.00",
+        "qty": 1,
+        "variant": "8x10",
+        "title": "Holy Napkin"},
+  ]
+
+variant + type should be enough for weight calculation(?)
