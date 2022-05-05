@@ -9,7 +9,6 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("ecommerce.apps.accounts.urls", namespace="accounts")),
-    path("cart/", include("ecommerce.apps.carts.urls", namespace="carts")),
     path("checkout/", include("ecommerce.apps.checkout.urls", namespace="checkout")),
     path("basket/", include("ecommerce.apps.basket.urls", namespace="basket")),
     path("orders/", include("ecommerce.apps.orders.urls", namespace="orders")),
