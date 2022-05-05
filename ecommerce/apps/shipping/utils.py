@@ -7,21 +7,22 @@ def variants(product_type):
     if product_type.name == "icons":
         return ["8x10", "wallet-size"]
     elif product_type.name == "incense":
-        return ["1lb", "1/2 lb", "1 oz"]
+        return ["1 lb", "1/2 lb", "1 oz"]
     else:
         return []
 
 
 def get_weight(basket):
+    print(f">>> {basket}")
     total = 0
-    for it in basket:
-        p = it["product"]
-        q = it["qty"]
-        total += p.weight * q
+    for (k, v) in basket.items():
+        print(f"k is: {k}({type(k)})")
+        print(f"v is: {v}({type(v)})")
 
-    ounces = ureg.ounce * total
+        w = v["weight"]
+        q = v["qty"]
+        total += w * q
 
-    print(f"{ounces.to('pounds')}")
     # {'price': Decimal('30.00'),
     #  'qty': 2,
     #  'variant': '8x10',

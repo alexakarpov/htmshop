@@ -10,4 +10,12 @@ Basket.toJSON:
         "title": "Holy Napkin"},
   ]
 
-variant + type should be enough for weight calculation(?)
+book (no variants) weight is know from product/catalog
+
+for the rest, variant + type is enougho for weight calculation,
+but requires type to get to the cart (alternatively, type can be
+inferred from the variant value)
+
+the other approach is to have SKU table with weight/size/other metadata,
+and cart to contain just the sku's key (this requires add-to-cart, done
+based on the catalogue, to translate the choice to the SKU)
