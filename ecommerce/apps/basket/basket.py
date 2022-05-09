@@ -30,6 +30,7 @@ class Basket:
         if product_id in self.basket:
             self.basket[product_id]["qty"] = qty
             self.basket[product_id]["title"] = product.title
+            self.basket[product_id]["weight"] = product.weight
             if variant:
                 self.basket[product_id]["variant"] = variant
         else:
@@ -38,6 +39,7 @@ class Basket:
                 "qty": qty,
                 "variant": variant,
                 "title": product.title,
+                "weight": product.weight,
             }
 
         self.save()
