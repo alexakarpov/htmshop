@@ -9,16 +9,12 @@ shipengine = ShipEngine({"api_key": SE_SANDBOX_KEY, "page_size": 75, "retries": 
 from shipengine.errors import ShipEngineError
 
 # sandbox ids
-UPS_ID = "se-660216"
 USPS_ID = "se-660215"
-FEDEX_ID = "se-660217"
 
 test_shipment = {
     "rate_options": {
         "carrier_ids": [
             USPS_ID,
-            # FEDEX_ID,
-            # UPS_ID
         ],
         # without service_codes, all will be in the response:
         # "usps_priority_mail",
@@ -26,8 +22,12 @@ test_shipment = {
         # "usps_media_mail",
         # "usps_parcel_select",
         #####################################################
-        # "service_codes": ["usps_media_mail"],
-        # "package_types": ["package"],
+        "service_codes": [
+            "usps_priority_mail_express",
+            "usps_parcel_select",
+            # "usps_media_mail"
+        ],
+        "package_types": ["package"],
     },
     "shipment": {
         "validate_address": "no_validation",
@@ -44,7 +44,7 @@ test_shipment = {
         "ship_from": {
             "name": "Shipping department",
             "company_name": "Holy Transfiguration Monastery",
-            "phone": "123-123-1234",
+            "phone": "617-734-0608",
             "address_line1": "278 Warren St",
             "city_locality": "Brookline",
             "state_province": "MA",
@@ -58,20 +58,18 @@ test_shipment = {
 
 
 def list_carriers(engine=shipengine):
-    result = engine.list_carriers()
-    return result
+    return engine.list_carriers()
 
 
 def dumpit(json_data, fname):
     with open(fname, "w") as json_file:
         json_file.truncate(0)
         json.dump(json_data, json_file, indent=4)
-        json_file.write("\n")  # Add newline cause Py JSON does not
+        json_file.write("\n")  # Add newline 'cause Py JSON does not
 
 
 def get_rates(engine=shipengine, shipment=test_shipment):
-    result = engine.get_rates_from_shipment(shipment=test_shipment)
-    return result
+    return engine.get_rates_from_shipment(shipment=test_shipment)
 
 
 if __name__ == "__main__":
