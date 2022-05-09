@@ -31,8 +31,11 @@
               </svg>
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownLink">
-              <li class="item small">Next day delivery</li>
-              <li class="item small">Premimum delivery</li>
+              {% for o in shipping_choices %}
+
+              <li class="item small">{{o.name}} -- {{o.price}}</li>
+
+              {% endfor %}
             </ul>
           </div>
         </div>
