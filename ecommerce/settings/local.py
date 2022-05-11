@@ -104,3 +104,7 @@ if DEBUG:
     DEBUG_TOOLBAR_CONFIG = {
         "INTERCEPT_REDIRECTS": False,
     }
+
+# Shipping related
+USPS_ID = "se-660215"
+SE_API_KEY = "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw"

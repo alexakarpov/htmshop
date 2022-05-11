@@ -98,3 +98,7 @@ AWS_ACCESS_KEY_ID = config["AWS_ACCESS_KEY_ID"]
 AWS_SECRET_ACCESS_KEY = config["AWS_SECRET_ACCESS_KEY"]
 AWS_SES_REGION_NAME = "us-east-1"
 AWS_SES_REGION_ENDPOINT = "email.us-east-1.amazonaws.com"
+
+# Shipping related
+USPS_ID = "se-660215"
+SE_API_KEY = "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw"
