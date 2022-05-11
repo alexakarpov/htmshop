@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from ecommerce.apps.catalogue.models import Product
+from ecommerce.apps.shipping.choice import ShippingChoice
 from ecommerce.apps.shipping.utils import get_weight, variants
 
 from .basket import Basket
@@ -8,9 +9,9 @@ from .basket import Basket
 
 def basket_summary(request):
     basket = Basket(request)
-    print(basket.toJSON())
-    print(get_weight(basket))
-    return render(request, "basket/summary.html", {"basket": basket})
+    w = get_weight(basket.basket.values())
+    shipping_choices = [ShippingChoice("FOO", 11), ShippingChoice("BAR", 22), ShippingChoice("BAR", 33)]
+    return render(request, "basket/summary.html", {"basket": basket, "shipping_choices": shipping_choices})
 
 
 def basket_add(request):
@@ -28,6 +29,7 @@ def basket_add(request):
 
 def basket_delete(request):
     basket = Basket(request)
+
     if request.POST.get("action") == "post":
         product_id = int(request.POST.get("productid"))
         basket.delete(product_id=product_id)
@@ -39,6 +41,7 @@ def basket_delete(request):
 
 def basket_update(request):
     basket = Basket(request)
+
     if request.POST.get("action") == "post":
         product_id = int(request.POST.get("productid"))
         product_qty = int(request.POST.get("productqty"))

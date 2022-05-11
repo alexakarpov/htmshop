@@ -18,7 +18,10 @@ from .utils import get_weight
 
 
 def test_make_shipment():
-    b = {}
+    b = [
+        {"price": "30.00", "qty": 1, "variant": "8x10", "title": "Holy Napkin", "weight": 16},
+        {"price": "20.00", "qty": 1, "variant": "", "title": "Prayer Book", "weight": 8},
+    ]
     a = Address()
     a.full_name = "John Doe"
     a.address_line = "1 Main St"
@@ -30,4 +33,4 @@ def test_make_shipment():
     assert sd["ship_from"]["company_name"] == "Holy Transfiguration Monastery"
     assert sd["ship_to"]["postal_code"] == a.postcode
     assert sd["ship_to"]["country_code"] == a.country == "US"
-    assert sd.get("packages") == []
+    assert sd.get("packages") == [{"weight": {"value": 24, "unit": "ounce"}}]
