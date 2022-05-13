@@ -17,4 +17,4 @@ or just the basket:
 >>> s2d["basket"]
 {'1': {'price': '20.00', 'qty': 3}, '2': {'price': '30.00', 'qty': 2}}
 
-(here the first key seems to be Product's id)
+(here the first key is Product's id)
