@@ -3,12 +3,10 @@ import json
 from shipengine import ShipEngine
 
 SE_SANDBOX_KEY = "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw"
-SE_PRODUCTION_KEY = ""
 shipengine = ShipEngine({"api_key": SE_SANDBOX_KEY, "page_size": 75, "retries": 3, "timeout": 10})
 
 from shipengine.errors import ShipEngineError
 
-# sandbox ids
 USPS_ID = "se-660215"
 
 test_shipment = {
