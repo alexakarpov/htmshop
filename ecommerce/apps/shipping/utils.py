@@ -12,15 +12,10 @@ def variants(product_type):
         return []
 
 
-def get_weight(basket):
-    print(basket)
+def get_weight(basket_ds):
+    print(f"basket_ds: {basket_ds}")
     total = 0
-    for it in basket:
-        ## key is the product id, v is the 'basket item' dict
-        # with all the metadata
-        # print(f"k is: {k}({type(k)})")
-        # print(f"v is: {v}({type(v)})")
-
+    for it in basket_ds:
         w = it["weight"]
         q = it["qty"]
         total += w * q
