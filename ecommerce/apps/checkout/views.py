@@ -25,11 +25,11 @@ def payment_selection(request):
 
 
 def basket_update_delivery(request):
-    pass
+    print("in basket_update_delivery")
 
 
 def delivery_address(request):
-    pass
+    print("in delivery_address")
 
 
 ####

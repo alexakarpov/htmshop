@@ -3,9 +3,13 @@ import json
 from django.conf import settings
 from shipengine import ShipEngine
 
+from .utils import get_weight
+
 shipengine = ShipEngine({"api_key": settings.SE_API_KEY, "page_size": 75, "retries": 3, "timeout": 10})
 
 from shipengine.errors import ShipEngineError
+
+from .choice import ShippingChoice
 
 
 def init_shipment_dict():
@@ -18,7 +22,7 @@ def init_shipment_dict():
                 "usps_priority_mail_express",
                 "usps_parcel_select",
                 "usps_first_class_mail",
-                "usps_media_mail",
+                # "usps_media_mail", # add for books-only basket
             ],
             "package_types": ["package"],
         },
@@ -40,7 +44,11 @@ def init_shipment_dict():
     }
 
 
-def make_shipment(basket, address):
+def make_package(basketd):
+    return {"weight": {"value": get_weight(basketd), "unit": "ounce"}}
+
+
+def make_shipment(basketd, address):
     sd = init_shipment_dict()
     sd["shipment"]["ship_to"]["name"] = address.full_name
     sd["shipment"]["ship_to"]["phone"] = address.phone
@@ -50,5 +58,11 @@ def make_shipment(basket, address):
     sd["shipment"]["ship_to"]["state_province"] = address.state_province
     sd["shipment"]["ship_to"]["postal_code"] = address.postcode
     sd["shipment"]["ship_to"]["country_code"] = address.country
-
+    sd["shipment"]["packages"].append(make_package(basketd))
     return sd
+
+
+def get_choices(basketd):
+    weight = get_weight(basketd)
+
+    return [ShippingChoice("FOO", 11), ShippingChoice("BAR", 22), ShippingChoice("BAR", 33)]
