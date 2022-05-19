@@ -63,7 +63,7 @@
           </div>
           <div class="col-md-1 ps-md-1">
             <input class="align-middle h-100" type="radio" name="deliveryOption" id="{{option.id}}"
-              value="{{option.id}}">
+              value="{{ option }}">
           </div>
         </div>
       </div>
@@ -74,13 +74,12 @@
 </div>
 
 <script>
-  $('input[type=radio][name=deliveryOption]').on('change', function (e) {
+  $('input[type=radio][name=deliveryOption]').on('change', function(e) {
     e.preventDefault();
     $.ajax({
       type: "POST",
       url: '{% url "checkout:basket_update_delivery" %}',
       data: {
-        // this refers to the jQuery-selected element
         deliveryoption: $(this).val(),
         csrfmiddlewaretoken: "{{csrf_token}}",
         action: "post",
