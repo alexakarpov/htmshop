@@ -1,3 +1,4 @@
+import ast
 import json
 import logging
 
@@ -14,8 +15,16 @@ logger = logging.getLogger("django")
 
 
 @login_required
-def payment_selection(request):
+def deliverychoices(request):
+    deliveryoptions = [
+        {"delivery_name": "aaa", "delivery_timeframe": "2 days", "delivery_price": 31},
+        {"delivery_name": "bbb", "delivery_timeframe": "5 days", "delivery_price": 11},
+    ]
+    return render(request, "checkout/delivery_choices.html", {"deliveryoptions": deliveryoptions})
 
+
+@login_required
+def payment_selection(request):
     session = request.session
     if "address" not in request.session:
         messages.success(request, "Please select address option")
@@ -25,7 +34,23 @@ def payment_selection(request):
 
 
 def basket_update_delivery(request):
-    print("in basket_update_delivery")
+    print("==== in basket_update_delivery =====")
+    basket = Basket(request)
+    if request.POST.get("action") == "post":
+        # convert string repr of a dict to dict
+        od = ast.literal_eval(request.POST.get("deliveryoption"))
+        updated_total_price = basket.basket_update_delivery(od.get("delivery_price"))
+        session = request.session
+        if "purchase" not in request.session:
+            session["purchase"] = {
+                "delivery_choice": od,
+            }
+        else:
+            session["purchase"]["delivery_choice"] = od
+            session.modified = True
+
+        response = JsonResponse({"total": updated_total_price, "delivery_price": od.get("delivery_price")})
+        return response
 
 
 def delivery_address(request):
