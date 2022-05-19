@@ -17,8 +17,8 @@ logger = logging.getLogger("django")
 @login_required
 def deliverychoices(request):
     deliveryoptions = [
-        {"delivery_name": "aaa", "delivery_timeframe": "2 days", "delivery_price": 31},
-        {"delivery_name": "bbb", "delivery_timeframe": "5 days", "delivery_price": 11},
+        {"delivery_name": "aaa", "delivery_timeframe": "2 days", "delivery_price": "31.00"},
+        {"delivery_name": "bbb", "delivery_timeframe": "5 days", "delivery_price": "11.00"},
     ]
     return render(request, "checkout/delivery_choices.html", {"deliveryoptions": deliveryoptions})
 
