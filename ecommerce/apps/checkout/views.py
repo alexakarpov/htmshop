@@ -1,6 +1,7 @@
 import ast
 import json
 import logging
+from decimal import Decimal
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -34,7 +35,7 @@ def payment_selection(request):
 
 
 def basket_update_delivery(request):
-    print("==== in basket_update_delivery =====")
+    # print("==== in basket_update_delivery =====")
     basket = Basket(request)
     if request.POST.get("action") == "post":
         # convert string repr of a dict to dict
@@ -53,8 +54,33 @@ def basket_update_delivery(request):
         return response
 
 
+@login_required
 def delivery_address(request):
     print("in delivery_address")
+    basket = Basket(request)
+
+    session = request.session
+    delivery_choice = session["purchase"]["delivery_choice"]
+    print(f"DELCHOICE:>>{delivery_choice}")
+    if "purchase" not in request.session:
+        messages.success(request, "Please select delivery option")
+        return HttpResponseRedirect(request.META["HTTP_REFERER"])
+
+    addresses = Address.objects.filter(customer=request.user).order_by("-default")
+
+    if "address" not in request.session:
+        session["address"] = {"address_id": str(addresses[0].id)}
+    else:
+        session["address"]["address_id"] = str(addresses[0].id)
+        session.modified = True
+    subtotal = Decimal(basket.get_subtotal_price())
+    delivery_price = Decimal(delivery_choice.get("delivery_price"))
+    total = delivery_price + subtotal
+    return render(
+        request,
+        "checkout/delivery_address.html",
+        {"addresses": addresses, "delivery_price": delivery_price, "total_price": total},
+    )
 
 
 ####
