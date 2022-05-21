@@ -36,14 +36,14 @@ def payment_selection(request):
 
 
 def basket_update_delivery(request):
-    print("==== in basket_update_delivery =====")
+    # print("==== in basket_update_delivery =====")
     basket = Basket(request)
     if request.POST.get("action") == "post":
         # convert string repr of a dict to dict
         od = ast.literal_eval(request.POST.get("deliveryoption"))
         total = basket.basket_get_total(od.get("delivery_price"))
         total = str(total)
-        print(f"##### TOTAL ({type(total)}): {total}")
+        # print(f"##### TOTAL ({type(total)}): {total}")
         session = request.session
         if "purchase" not in request.session:
             session["purchase"] = {"delivery_choice": od, "total": total}
