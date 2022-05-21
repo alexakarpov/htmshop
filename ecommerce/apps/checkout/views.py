@@ -27,30 +27,32 @@ def deliverychoices(request):
 @login_required
 def payment_selection(request):
     session = request.session
+    total = session["purchase"]["total"]
     if "address" not in request.session:
         messages.success(request, "Please select address option")
         return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
-    return render(request, "checkout/payment_selection.html", {})
+    return render(request, "checkout/payment_selection.html", {"total": total})
 
 
 def basket_update_delivery(request):
-    # print("==== in basket_update_delivery =====")
+    print("==== in basket_update_delivery =====")
     basket = Basket(request)
     if request.POST.get("action") == "post":
         # convert string repr of a dict to dict
         od = ast.literal_eval(request.POST.get("deliveryoption"))
-        updated_total_price = basket.basket_update_delivery(od.get("delivery_price"))
+        total = basket.basket_get_total(od.get("delivery_price"))
+        total = str(total)
+        print(f"##### TOTAL ({type(total)}): {total}")
         session = request.session
         if "purchase" not in request.session:
-            session["purchase"] = {
-                "delivery_choice": od,
-            }
+            session["purchase"] = {"delivery_choice": od, "total": total}
         else:
             session["purchase"]["delivery_choice"] = od
+            session["purchase"]["total"] = total
             session.modified = True
 
-        response = JsonResponse({"total": updated_total_price, "delivery_price": od.get("delivery_price")})
+        response = JsonResponse({"total": total, "delivery_price": od.get("delivery_price")})
         return response
 
 
