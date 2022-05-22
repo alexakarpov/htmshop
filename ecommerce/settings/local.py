@@ -108,3 +108,5 @@ if DEBUG:
 # Shipping related
 USPS_ID = "se-660215"
 SE_API_KEY = "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw"
+FEDEX_ID = "se-660217"
+UPS_ID = "se-660216"
