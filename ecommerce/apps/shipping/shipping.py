@@ -8,12 +8,12 @@ shipengine = ShipEngine({"api_key": SE_SANDBOX_KEY, "page_size": 75, "retries": 
 from shipengine.errors import ShipEngineError
 
 USPS_ID = "se-660215"
+FEDEX_ID = "se-660217"
+UPS_ID = "se-660216"
 
 test_shipment = {
     "rate_options": {
-        "carrier_ids": [
-            USPS_ID,
-        ],
+        "carrier_ids": [USPS_ID, UPS_ID, FEDEX_ID],
         # without service_codes, all will be in the response:
         # "usps_priority_mail",
         # "usps_priority_mail_express",
@@ -21,8 +21,8 @@ test_shipment = {
         # "usps_parcel_select",
         #####################################################
         "service_codes": [
-            "usps_priority_mail_express",
-            "usps_parcel_select",
+            # "usps_priority_mail_express",
+            # "usps_parcel_select",
             # "usps_media_mail"
         ],
         "package_types": ["package"],
