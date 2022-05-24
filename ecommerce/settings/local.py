@@ -105,8 +105,10 @@ if DEBUG:
         "INTERCEPT_REDIRECTS": False,
     }
 
-# Shipping related
-USPS_ID = "se-660215"
+# Shipping
 SE_API_KEY = "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw"
+
+## carriers
+USPS_ID = "se-660215"
 FEDEX_ID = "se-660217"
 UPS_ID = "se-660216"
