@@ -2,7 +2,7 @@
     "rate_response": {
         "rates": [
             {
-                "rate_id": "se-1265696917",
+                "rate_id": "se-1543639148",
                 "rate_type": "shipment",
                 "carrier_id": "se-660215",
                 "shipping_amount": {
@@ -25,9 +25,9 @@
                 "package_type": "package",
                 "delivery_days": 3,
                 "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-15T00:00:00Z",
+                "estimated_delivery_date": "2022-05-26T00:00:00Z",
                 "carrier_delivery_days": "3",
-                "ship_date": "2022-02-11T00:00:00Z",
+                "ship_date": "2022-05-23T00:00:00Z",
                 "negotiated_rate": false,
                 "service_type": "USPS First Class Mail",
                 "service_code": "usps_first_class_mail",
@@ -40,7 +40,7 @@
                 "error_messages": []
             },
             {
-                "rate_id": "se-1265696918",
+                "rate_id": "se-1543639149",
                 "rate_type": "shipment",
                 "carrier_id": "se-660215",
                 "shipping_amount": {
@@ -63,9 +63,9 @@
                 "package_type": "package",
                 "delivery_days": 2,
                 "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
+                "estimated_delivery_date": "2022-05-25T00:00:00Z",
                 "carrier_delivery_days": "2",
-                "ship_date": "2022-02-11T00:00:00Z",
+                "ship_date": "2022-05-23T00:00:00Z",
                 "negotiated_rate": false,
                 "service_type": "USPS Priority Mail",
                 "service_code": "usps_priority_mail",
@@ -78,311 +78,7 @@
                 "error_messages": []
             },
             {
-                "rate_id": "se-1265696919",
-                "rate_type": "shipment",
-                "carrier_id": "se-660215",
-                "shipping_amount": {
-                    "currency": "usd",
-                    "amount": 14.25
-                },
-                "insurance_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "confirmation_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "other_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "zone": 8,
-                "package_type": "medium_flat_rate_box",
-                "delivery_days": 2,
-                "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
-                "carrier_delivery_days": "2",
-                "ship_date": "2022-02-11T00:00:00Z",
-                "negotiated_rate": false,
-                "service_type": "USPS Priority Mail",
-                "service_code": "usps_priority_mail",
-                "trackable": true,
-                "carrier_code": "stamps_com",
-                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
-                "carrier_friendly_name": "Stamps.com",
-                "validation_status": "valid",
-                "warning_messages": [],
-                "error_messages": []
-            },
-            {
-                "rate_id": "se-1265696920",
-                "rate_type": "shipment",
-                "carrier_id": "se-660215",
-                "shipping_amount": {
-                    "currency": "usd",
-                    "amount": 8.25
-                },
-                "insurance_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "confirmation_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "other_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "zone": 8,
-                "package_type": "small_flat_rate_box",
-                "delivery_days": 2,
-                "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
-                "carrier_delivery_days": "2",
-                "ship_date": "2022-02-11T00:00:00Z",
-                "negotiated_rate": false,
-                "service_type": "USPS Priority Mail",
-                "service_code": "usps_priority_mail",
-                "trackable": true,
-                "carrier_code": "stamps_com",
-                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
-                "carrier_friendly_name": "Stamps.com",
-                "validation_status": "valid",
-                "warning_messages": [],
-                "error_messages": []
-            },
-            {
-                "rate_id": "se-1265696922",
-                "rate_type": "shipment",
-                "carrier_id": "se-660215",
-                "shipping_amount": {
-                    "currency": "usd",
-                    "amount": 19.2
-                },
-                "insurance_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "confirmation_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "other_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "zone": 8,
-                "package_type": "large_flat_rate_box",
-                "delivery_days": 2,
-                "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
-                "carrier_delivery_days": "2",
-                "ship_date": "2022-02-11T00:00:00Z",
-                "negotiated_rate": false,
-                "service_type": "USPS Priority Mail",
-                "service_code": "usps_priority_mail",
-                "trackable": true,
-                "carrier_code": "stamps_com",
-                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
-                "carrier_friendly_name": "Stamps.com",
-                "validation_status": "valid",
-                "warning_messages": [],
-                "error_messages": []
-            },
-            {
-                "rate_id": "se-1265696924",
-                "rate_type": "shipment",
-                "carrier_id": "se-660215",
-                "shipping_amount": {
-                    "currency": "usd",
-                    "amount": 7.75
-                },
-                "insurance_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "confirmation_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "other_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "zone": 8,
-                "package_type": "flat_rate_envelope",
-                "delivery_days": 2,
-                "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
-                "carrier_delivery_days": "2",
-                "ship_date": "2022-02-11T00:00:00Z",
-                "negotiated_rate": false,
-                "service_type": "USPS Priority Mail",
-                "service_code": "usps_priority_mail",
-                "trackable": true,
-                "carrier_code": "stamps_com",
-                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
-                "carrier_friendly_name": "Stamps.com",
-                "validation_status": "valid",
-                "warning_messages": [],
-                "error_messages": []
-            },
-            {
-                "rate_id": "se-1265696926",
-                "rate_type": "shipment",
-                "carrier_id": "se-660215",
-                "shipping_amount": {
-                    "currency": "usd",
-                    "amount": 8.45
-                },
-                "insurance_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "confirmation_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "other_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "zone": 8,
-                "package_type": "flat_rate_padded_envelope",
-                "delivery_days": 2,
-                "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
-                "carrier_delivery_days": "2",
-                "ship_date": "2022-02-11T00:00:00Z",
-                "negotiated_rate": false,
-                "service_type": "USPS Priority Mail",
-                "service_code": "usps_priority_mail",
-                "trackable": true,
-                "carrier_code": "stamps_com",
-                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
-                "carrier_friendly_name": "Stamps.com",
-                "validation_status": "valid",
-                "warning_messages": [],
-                "error_messages": []
-            },
-            {
-                "rate_id": "se-1265696928",
-                "rate_type": "shipment",
-                "carrier_id": "se-660215",
-                "shipping_amount": {
-                    "currency": "usd",
-                    "amount": 13.54
-                },
-                "insurance_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "confirmation_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "other_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "zone": 8,
-                "package_type": "regional_rate_box_a",
-                "delivery_days": 2,
-                "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
-                "carrier_delivery_days": "2",
-                "ship_date": "2022-02-11T00:00:00Z",
-                "negotiated_rate": false,
-                "service_type": "USPS Priority Mail",
-                "service_code": "usps_priority_mail",
-                "trackable": true,
-                "carrier_code": "stamps_com",
-                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
-                "carrier_friendly_name": "Stamps.com",
-                "validation_status": "valid",
-                "warning_messages": [],
-                "error_messages": []
-            },
-            {
-                "rate_id": "se-1265696930",
-                "rate_type": "shipment",
-                "carrier_id": "se-660215",
-                "shipping_amount": {
-                    "currency": "usd",
-                    "amount": 22.51
-                },
-                "insurance_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "confirmation_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "other_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "zone": 8,
-                "package_type": "regional_rate_box_b",
-                "delivery_days": 2,
-                "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
-                "carrier_delivery_days": "2",
-                "ship_date": "2022-02-11T00:00:00Z",
-                "negotiated_rate": false,
-                "service_type": "USPS Priority Mail",
-                "service_code": "usps_priority_mail",
-                "trackable": true,
-                "carrier_code": "stamps_com",
-                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
-                "carrier_friendly_name": "Stamps.com",
-                "validation_status": "valid",
-                "warning_messages": [],
-                "error_messages": []
-            },
-            {
-                "rate_id": "se-1265696931",
-                "rate_type": "shipment",
-                "carrier_id": "se-660215",
-                "shipping_amount": {
-                    "currency": "usd",
-                    "amount": 8.05
-                },
-                "insurance_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "confirmation_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "other_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "zone": 8,
-                "package_type": "flat_rate_legal_envelope",
-                "delivery_days": 2,
-                "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
-                "carrier_delivery_days": "2",
-                "ship_date": "2022-02-11T00:00:00Z",
-                "negotiated_rate": false,
-                "service_type": "USPS Priority Mail",
-                "service_code": "usps_priority_mail",
-                "trackable": true,
-                "carrier_code": "stamps_com",
-                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
-                "carrier_friendly_name": "Stamps.com",
-                "validation_status": "valid",
-                "warning_messages": [],
-                "error_messages": []
-            },
-            {
-                "rate_id": "se-1265696932",
+                "rate_id": "se-1543639150",
                 "rate_type": "shipment",
                 "carrier_id": "se-660215",
                 "shipping_amount": {
@@ -405,9 +101,9 @@
                 "package_type": "package",
                 "delivery_days": 2,
                 "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
+                "estimated_delivery_date": "2022-05-25T00:00:00Z",
                 "carrier_delivery_days": "1-2",
-                "ship_date": "2022-02-11T00:00:00Z",
+                "ship_date": "2022-05-23T00:00:00Z",
                 "negotiated_rate": false,
                 "service_type": "USPS Priority Mail Express",
                 "service_code": "usps_priority_mail_express",
@@ -420,121 +116,7 @@
                 "error_messages": []
             },
             {
-                "rate_id": "se-1265696933",
-                "rate_type": "shipment",
-                "carrier_id": "se-660215",
-                "shipping_amount": {
-                    "currency": "usd",
-                    "amount": 23.5
-                },
-                "insurance_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "confirmation_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "other_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "zone": 8,
-                "package_type": "flat_rate_envelope",
-                "delivery_days": 2,
-                "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
-                "carrier_delivery_days": "1-2",
-                "ship_date": "2022-02-11T00:00:00Z",
-                "negotiated_rate": false,
-                "service_type": "USPS Priority Mail Express",
-                "service_code": "usps_priority_mail_express",
-                "trackable": true,
-                "carrier_code": "stamps_com",
-                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
-                "carrier_friendly_name": "Stamps.com",
-                "validation_status": "valid",
-                "warning_messages": [],
-                "error_messages": []
-            },
-            {
-                "rate_id": "se-1265696934",
-                "rate_type": "shipment",
-                "carrier_id": "se-660215",
-                "shipping_amount": {
-                    "currency": "usd",
-                    "amount": 23.95
-                },
-                "insurance_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "confirmation_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "other_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "zone": 8,
-                "package_type": "flat_rate_padded_envelope",
-                "delivery_days": 2,
-                "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
-                "carrier_delivery_days": "1-2",
-                "ship_date": "2022-02-11T00:00:00Z",
-                "negotiated_rate": false,
-                "service_type": "USPS Priority Mail Express",
-                "service_code": "usps_priority_mail_express",
-                "trackable": true,
-                "carrier_code": "stamps_com",
-                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
-                "carrier_friendly_name": "Stamps.com",
-                "validation_status": "valid",
-                "warning_messages": [],
-                "error_messages": []
-            },
-            {
-                "rate_id": "se-1265696935",
-                "rate_type": "shipment",
-                "carrier_id": "se-660215",
-                "shipping_amount": {
-                    "currency": "usd",
-                    "amount": 23.75
-                },
-                "insurance_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "confirmation_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "other_amount": {
-                    "currency": "usd",
-                    "amount": 0.0
-                },
-                "zone": 8,
-                "package_type": "flat_rate_legal_envelope",
-                "delivery_days": 2,
-                "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-14T00:00:00Z",
-                "carrier_delivery_days": "1-2",
-                "ship_date": "2022-02-11T00:00:00Z",
-                "negotiated_rate": false,
-                "service_type": "USPS Priority Mail Express",
-                "service_code": "usps_priority_mail_express",
-                "trackable": true,
-                "carrier_code": "stamps_com",
-                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
-                "carrier_friendly_name": "Stamps.com",
-                "validation_status": "valid",
-                "warning_messages": [],
-                "error_messages": []
-            },
-            {
-                "rate_id": "se-1265696936",
+                "rate_id": "se-1543639151",
                 "rate_type": "shipment",
                 "carrier_id": "se-660215",
                 "shipping_amount": {
@@ -557,9 +139,9 @@
                 "package_type": "package",
                 "delivery_days": 7,
                 "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-19T00:00:00Z",
+                "estimated_delivery_date": "2022-06-01T00:00:00Z",
                 "carrier_delivery_days": "7",
-                "ship_date": "2022-02-11T00:00:00Z",
+                "ship_date": "2022-05-23T00:00:00Z",
                 "negotiated_rate": false,
                 "service_type": "USPS Media Mail",
                 "service_code": "usps_media_mail",
@@ -572,7 +154,7 @@
                 "error_messages": []
             },
             {
-                "rate_id": "se-1265696937",
+                "rate_id": "se-1543639152",
                 "rate_type": "shipment",
                 "carrier_id": "se-660215",
                 "shipping_amount": {
@@ -595,9 +177,9 @@
                 "package_type": "package",
                 "delivery_days": 7,
                 "guaranteed_service": false,
-                "estimated_delivery_date": "2022-02-19T00:00:00Z",
+                "estimated_delivery_date": "2022-06-01T00:00:00Z",
                 "carrier_delivery_days": "7",
-                "ship_date": "2022-02-11T00:00:00Z",
+                "ship_date": "2022-05-23T00:00:00Z",
                 "negotiated_rate": false,
                 "service_type": "USPS Parcel Select Ground",
                 "service_code": "usps_parcel_select",
@@ -608,22 +190,516 @@
                 "validation_status": "valid",
                 "warning_messages": [],
                 "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639153",
+                "rate_type": "shipment",
+                "carrier_id": "se-660216",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 43.22
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "zone": null,
+                "package_type": "package",
+                "delivery_days": 3,
+                "guaranteed_service": true,
+                "estimated_delivery_date": "2022-05-26T23:00:00Z",
+                "carrier_delivery_days": "Thursday 5/26 by 11:00 PM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "UPS 3 Day Select\u00ae",
+                "service_code": "ups_3_day_select",
+                "trackable": true,
+                "carrier_code": "ups",
+                "carrier_nickname": "ShipEngine Test Account - UPS",
+                "carrier_friendly_name": "UPS",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639154",
+                "rate_type": "shipment",
+                "carrier_id": "se-660216",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 156.11
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "zone": null,
+                "package_type": "package",
+                "delivery_days": 1,
+                "guaranteed_service": true,
+                "estimated_delivery_date": "2022-05-24T08:00:00Z",
+                "carrier_delivery_days": "Tomorrow by 08:00 AM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "UPS Next Day Air\u00ae Early",
+                "service_code": "ups_next_day_air_early_am",
+                "trackable": true,
+                "carrier_code": "ups",
+                "carrier_nickname": "ShipEngine Test Account - UPS",
+                "carrier_friendly_name": "UPS",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639155",
+                "rate_type": "shipment",
+                "carrier_id": "se-660216",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 19.65
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "zone": null,
+                "package_type": "package",
+                "delivery_days": 4,
+                "guaranteed_service": true,
+                "estimated_delivery_date": "2022-05-27T23:00:00Z",
+                "carrier_delivery_days": "Friday 5/27 by 11:00 PM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "UPS\u00ae Ground",
+                "service_code": "ups_ground",
+                "trackable": true,
+                "carrier_code": "ups",
+                "carrier_nickname": "ShipEngine Test Account - UPS",
+                "carrier_friendly_name": "UPS",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639156",
+                "rate_type": "shipment",
+                "carrier_id": "se-660216",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 105.46
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "zone": null,
+                "package_type": "package",
+                "delivery_days": 1,
+                "guaranteed_service": true,
+                "estimated_delivery_date": "2022-05-24T23:00:00Z",
+                "carrier_delivery_days": "Tomorrow by 11:00 PM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "UPS Next Day Air Saver\u00ae",
+                "service_code": "ups_next_day_air_saver",
+                "trackable": true,
+                "carrier_code": "ups",
+                "carrier_nickname": "ShipEngine Test Account - UPS",
+                "carrier_friendly_name": "UPS",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639157",
+                "rate_type": "shipment",
+                "carrier_id": "se-660216",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 119.21
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "zone": null,
+                "package_type": "package",
+                "delivery_days": 1,
+                "guaranteed_service": true,
+                "estimated_delivery_date": "2022-05-24T12:00:00Z",
+                "carrier_delivery_days": "Tomorrow by 12:00 PM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "UPS Next Day Air\u00ae",
+                "service_code": "ups_next_day_air",
+                "trackable": true,
+                "carrier_code": "ups",
+                "carrier_nickname": "ShipEngine Test Account - UPS",
+                "carrier_friendly_name": "UPS",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639158",
+                "rate_type": "shipment",
+                "carrier_id": "se-660216",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 50.02
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "zone": null,
+                "package_type": "package",
+                "delivery_days": 2,
+                "guaranteed_service": true,
+                "estimated_delivery_date": "2022-05-25T23:00:00Z",
+                "carrier_delivery_days": "Wednesday 5/25 by 11:00 PM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "UPS 2nd Day Air\u00ae",
+                "service_code": "ups_2nd_day_air",
+                "trackable": true,
+                "carrier_code": "ups",
+                "carrier_nickname": "ShipEngine Test Account - UPS",
+                "carrier_friendly_name": "UPS",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639159",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 121.67
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 19.9
+                },
+                "zone": 8,
+                "package_type": "package",
+                "delivery_days": 1,
+                "guaranteed_service": false,
+                "estimated_delivery_date": "2022-05-24T08:00:00Z",
+                "carrier_delivery_days": "Tomorrow by 08:00 AM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "FedEx First Overnight\u00ae",
+                "service_code": "fedex_first_overnight",
+                "trackable": true,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639160",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 90.67
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 16.34
+                },
+                "zone": 8,
+                "package_type": "package",
+                "delivery_days": 1,
+                "guaranteed_service": false,
+                "estimated_delivery_date": "2022-05-24T12:00:00Z",
+                "carrier_delivery_days": "Tomorrow by 12:00 PM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "FedEx Priority Overnight\u00ae",
+                "service_code": "fedex_priority_overnight",
+                "trackable": true,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639161",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 79.59
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 15.06
+                },
+                "zone": 8,
+                "package_type": "package",
+                "delivery_days": 1,
+                "guaranteed_service": false,
+                "estimated_delivery_date": "2022-05-24T20:00:00Z",
+                "carrier_delivery_days": "Tomorrow by 08:00 PM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "FedEx Standard Overnight\u00ae",
+                "service_code": "fedex_standard_overnight",
+                "trackable": true,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639162",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 42.11
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 10.75
+                },
+                "zone": 8,
+                "package_type": "package",
+                "delivery_days": 2,
+                "guaranteed_service": false,
+                "estimated_delivery_date": "2022-05-25T12:00:00Z",
+                "carrier_delivery_days": "Wednesday 5/25 by 12:00 PM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "FedEx 2Day\u00ae A.M.",
+                "service_code": "fedex_2day_am",
+                "trackable": true,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639163",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 34.97
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 9.93
+                },
+                "zone": 8,
+                "package_type": "package",
+                "delivery_days": 2,
+                "guaranteed_service": false,
+                "estimated_delivery_date": "2022-05-25T20:00:00Z",
+                "carrier_delivery_days": "Wednesday 5/25 by 08:00 PM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "FedEx 2Day\u00ae",
+                "service_code": "fedex_2day",
+                "trackable": true,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639164",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 30.72
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 9.44
+                },
+                "zone": 8,
+                "package_type": "package",
+                "delivery_days": 3,
+                "guaranteed_service": false,
+                "estimated_delivery_date": "2022-05-26T20:00:00Z",
+                "carrier_delivery_days": "Thursday 5/26 by 08:00 PM",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "FedEx Express Saver\u00ae",
+                "service_code": "fedex_express_saver",
+                "trackable": true,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
+            },
+            {
+                "rate_id": "se-1543639165",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {
+                    "currency": "usd",
+                    "amount": 11.84
+                },
+                "insurance_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "confirmation_amount": {
+                    "currency": "usd",
+                    "amount": 0.0
+                },
+                "other_amount": {
+                    "currency": "usd",
+                    "amount": 7.94
+                },
+                "zone": 8,
+                "package_type": "package",
+                "delivery_days": 5,
+                "guaranteed_service": false,
+                "estimated_delivery_date": "2022-05-30T23:59:00Z",
+                "carrier_delivery_days": "5",
+                "ship_date": "2022-05-23T00:00:00Z",
+                "negotiated_rate": false,
+                "service_type": "FedEx Home Delivery\u00ae",
+                "service_code": "fedex_home_delivery",
+                "trackable": true,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "valid",
+                "warning_messages": [],
+                "error_messages": []
             }
         ],
         "invalid_rates": [],
-        "rate_request_id": "se-166770141",
-        "shipment_id": "se-262534158",
-        "created_at": "2022-02-11T17:31:17.6858425Z",
+        "rate_request_id": "se-216421174",
+        "shipment_id": "se-334055402",
+        "created_at": "2022-05-24T02:38:19.795431Z",
         "status": "completed",
         "errors": []
     },
-    "shipment_id": "se-262534158",
-    "carrier_id": "se-660215",
+    "shipment_id": "se-334055402",
+    "carrier_id": null,
     "service_code": null,
     "external_shipment_id": null,
-    "ship_date": "2022-02-11T00:00:00Z",
-    "created_at": "2022-02-11T17:31:16.867Z",
-    "modified_at": "2022-02-11T17:31:16.85Z",
+    "ship_date": "2022-05-23T00:00:00Z",
+    "created_at": "2022-05-24T02:38:18.227Z",
+    "modified_at": "2022-05-24T02:38:18.227Z",
     "shipment_status": "pending",
     "ship_to": {
         "name": "Amanda Miller",
@@ -640,7 +716,7 @@
     },
     "ship_from": {
         "name": "Shipping department",
-        "phone": "123-123-1234",
+        "phone": "617-734-0608",
         "company_name": "Holy Transfiguration Monastery",
         "address_line1": "278 Warren St",
         "address_line2": null,
@@ -654,7 +730,7 @@
     "warehouse_id": null,
     "return_to": {
         "name": "Shipping department",
-        "phone": "123-123-1234",
+        "phone": "617-734-0608",
         "company_name": "Holy Transfiguration Monastery",
         "address_line1": "278 Warren St",
         "address_line2": null,
