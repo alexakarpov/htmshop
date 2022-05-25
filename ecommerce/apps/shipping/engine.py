@@ -9,19 +9,18 @@ shipengine = ShipEngine({"api_key": settings.SE_API_KEY, "page_size": 75, "retri
 
 from shipengine.errors import ShipEngineError
 
-from .choice import ShippingChoice
+from .choice import ShippingChoice, rate_to_choice
 
 
 def init_shipment_dict():
     return {
         "rate_options": {
-            "carrier_ids": [
-                settings.USPS_ID,
-            ],
+            "carrier_ids": [settings.USPS_ID, settings.FEDEX_ID, settings.UPS_ID],
             "service_codes": [
-                "usps_priority_mail_express",
-                "usps_parcel_select",
-                "usps_first_class_mail",
+                # USPS
+                # "usps_priority_mail_express",
+                # "usps_parcel_select",
+                # "usps_first_class_mail",
                 # "usps_media_mail", # add for books-only basket
             ],
             "package_types": ["package"],
@@ -62,7 +61,19 @@ def make_shipment(basketd, address):
     return sd
 
 
-def get_choices(basketd):
-    weight = get_weight(basketd)
+def get_rates(engine, shipment):
+    return engine.get_rates_from_shipment(shipment)
 
-    return [ShippingChoice("FOO", 11), ShippingChoice("BAR", 22), ShippingChoice("BAR", 33)]
+
+def shipping_choices(basketd, address):
+    # se_response = get_rates(shipengine, make_shipment(basketd, address))
+    # rate_response = se_response.get("rate_response")
+    # rates = rate_response.get("rates")
+
+    rates = choices = None
+
+    with open("shipping_jsons/get_rates_response.json", "r") as f:
+        rates = json.load(f).get("rate_response").get("rates")
+        choices = list(map(lambda r: rate_to_choice(r), rates))
+
+    return choices

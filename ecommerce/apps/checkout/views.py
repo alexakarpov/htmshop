@@ -11,17 +11,25 @@ from django.urls import reverse
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order, OrderItem
+from ecommerce.apps.shipping.engine import shipping_choices
 
 logger = logging.getLogger("django")
 
 
 @login_required
 def deliverychoices(request):
-    deliveryoptions = [
-        {"delivery_name": "aaa", "delivery_timeframe": "2 days", "delivery_price": "31.00"},
-        {"delivery_name": "bbb", "delivery_timeframe": "5 days", "delivery_price": "11.00"},
-    ]
-    return render(request, "checkout/delivery_choices.html", {"deliveryoptions": deliveryoptions})
+    basket = Basket(request)
+    session = request.session
+    address_id = session["address"]["address_id"]
+    address = Address.objects.get(id=address_id)
+    print("===BASKET===\n", basket, "\n==========")
+    choices = shipping_choices(basket, address)
+    print("===CHOICES===\n", choices, "\n==========")
+    # deliveryoptions = [
+    #     {"delivery_name": "aaa", "delivery_timeframe": "2 days", "delivery_price": "31.00"},
+    #     {"delivery_name": "bbb", "delivery_timeframe": "5 days", "delivery_price": "11.00"},
+    # ]
+    return render(request, "checkout/delivery_choices.html", {"deliveryoptions": choices})
 
 
 @login_required
@@ -36,34 +44,32 @@ def payment_selection(request):
 
 
 def basket_update_delivery(request):
-    # print("==== in basket_update_delivery =====")
     basket = Basket(request)
     if request.POST.get("action") == "post":
         # convert string repr of a dict to dict
-        od = ast.literal_eval(request.POST.get("deliveryoption"))
-        total = basket.basket_get_total(od.get("delivery_price"))
+        shipping_dict = ast.literal_eval(request.POST.get("deliveryoption"))
+        total = basket.basket_get_total(shipping_dict.get("price"))
         total = str(total)
-        # print(f"##### TOTAL ({type(total)}): {total}")
         session = request.session
         if "purchase" not in request.session:
-            session["purchase"] = {"delivery_choice": od, "total": total}
+            session["purchase"] = {"delivery_choice": shipping_dict, "total": total}
         else:
-            session["purchase"]["delivery_choice"] = od
+            session["purchase"]["delivery_choice"] = shipping_dict
             session["purchase"]["total"] = total
             session.modified = True
 
-        response = JsonResponse({"total": total, "delivery_price": od.get("delivery_price")})
+        response = JsonResponse({"total": total, "delivery_price": shipping_dict.get("price")})
         return response
 
 
 @login_required
 def delivery_address(request):
-    print("in delivery_address")
+    # print("in delivery_address")
     basket = Basket(request)
 
     session = request.session
     delivery_choice = session["purchase"]["delivery_choice"]
-    print(f"DELCHOICE:>>{delivery_choice}")
+    # print(f"DELCHOICE:>>{delivery_choice}")
     if "purchase" not in request.session:
         messages.success(request, "Please select delivery option")
         return HttpResponseRedirect(request.META["HTTP_REFERER"])
@@ -75,13 +81,12 @@ def delivery_address(request):
     else:
         session["address"]["address_id"] = str(addresses[0].id)
         session.modified = True
-    subtotal = Decimal(basket.get_subtotal_price())
-    delivery_price = Decimal(delivery_choice.get("delivery_price"))
-    total = delivery_price + subtotal
     return render(
         request,
         "checkout/delivery_address.html",
-        {"addresses": addresses, "delivery_price": delivery_price, "total_price": total},
+        {
+            "addresses": addresses,
+        },
     )
 
 
