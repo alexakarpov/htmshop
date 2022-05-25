@@ -54,8 +54,8 @@
           </div>
           <div class="col-md-9 ps-md-1">
             <div class="card-body p-1">
-              <p class="card-text ps-2 mb-1 pt-1 fw-bold">{{option.delivery_name}}</p>
-              <p class="card-text ps-2 pb-3">Your order should be delivered within {{option.delivery_timeframe}}</p>
+              <p class="card-text ps-2 mb-1 pt-1 fw-bold">{{option.name}}</p>
+              <p class="card-text ps-2 pb-3">Your order should be delivered within {{option.days}} day{{option.days|pluralize}}</p>
             </div>
           </div>
           <div class="col-md-1 ps-md-1">
@@ -72,6 +72,7 @@
 <script>
   $('input[type=radio][name=deliveryOption]').on('change', function(e) {
     e.preventDefault();
+    console.log($(this).val());
     $.ajax({
       type: "POST",
       url: '{% url "checkout:basket_update_delivery" %}',
