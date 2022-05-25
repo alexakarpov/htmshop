@@ -1,0 +1,41 @@
+{
+	"rate_id": "se-1543749056",
+	"rate_type": "shipment",
+	"carrier_id": "se-660215",
+	"shipping_amount": {
+		"currency": "usd",
+		"amount": 17.74
+	},
+
+	"insurance_amount": {
+		"currency": "usd",
+		"amount": 0.0
+	},
+	"confirmation_amount": {
+		"currency": "usd",
+		"amount": 0.0
+	},
+	"other_amount": {
+		"currency": "usd",
+		"amount": 0.0
+	},
+	"zone": 8,
+	"package_type": "package",
+	"delivery_days": 2,
+	"guaranteed_service": "False",
+	"estimated_delivery_date": "2022-05-25T00:00:00Z",
+
+	"carrier_delivery_days": "2",
+
+	"ship_date": "2022-05-23T00:00:00Z",
+	"negotiated_rate": "False",
+	"service_type": "USPS Priority Mail",
+	"service_code": "usps_priority_mail",
+	"trackable": "True",
+	"carrier_code": "stamps_com",
+	"carrier_nickname": "ShipEngine Test Account - Stamps.com",
+	"carrier_friendly_name": "Stamps.com",
+	"validation_status": "valid",
+	"warning_messages": [],
+	"error_messages": []
+}
