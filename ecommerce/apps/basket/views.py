@@ -11,10 +11,7 @@ def basket_summary(request):
     user = request.user
     basket = Basket(request)
     w = get_weight(basket.basket.values())
-    shipping_choices = [ShippingChoice("FOO", 11), ShippingChoice("BAR", 22), ShippingChoice("BAR", 33)]
-    return render(
-        request, "basket/summary.html", {"basket": basket, "user": user, "shipping_choices": shipping_choices}
-    )
+    return render(request, "basket/summary.html", {"basket": basket, "user": user})
 
 
 def basket_add(request):
