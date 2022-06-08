@@ -116,3 +116,14 @@ class Basket:
 
     def __str__(self):
         return self.basket.__str__()
+
+
+def get_weight(basket_ds):
+    print(f"basket_ds: {basket_ds}")
+    total = 0
+    for it in basket_ds:
+        w = it["weight"]
+        q = it["qty"]
+        total += w * q
+
+    return total
