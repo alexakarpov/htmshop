@@ -2,9 +2,9 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from ecommerce.apps.catalogue.models import Product
 from ecommerce.apps.shipping.choice import ShippingChoice
-from ecommerce.apps.shipping.utils import get_weight, variants
+from ecommerce.utils import variants
 
-from .basket import Basket
+from .basket import Basket, get_weight
 
 
 def basket_summary(request):
@@ -49,5 +49,4 @@ def basket_update(request):
 
         basketqty = basket.__len__()
         basketsubtotal = basket.get_subtotal_price()
-        response = JsonResponse({"qty": basketqty, "subtotal": basketsubtotal})
-        return response
+        return JsonResponse({"qty": basketqty, "subtotal": basketsubtotal})
