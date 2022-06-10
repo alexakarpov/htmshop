@@ -1,15 +1,15 @@
 import json
+import time
 
 from django.conf import settings
+from ecommerce.apps.basket.basket import get_weight
 from shipengine import ShipEngine
-
-from .utils import get_weight
 
 shipengine = ShipEngine({"api_key": settings.SE_API_KEY, "page_size": 75, "retries": 3, "timeout": 10})
 
 from shipengine.errors import ShipEngineError
 
-from .choice import ShippingChoice, rate_to_choice
+from .choice import ShippingChoice, rate_to_choice, split_tiers
 
 
 def init_shipment_dict():
@@ -67,13 +67,12 @@ def get_rates(engine, shipment):
 
 def shipping_choices(basketd, address):
     # se_response = get_rates(shipengine, make_shipment(basketd, address))
-    # rate_response = se_response.get("rate_response")
-    # rates = rate_response.get("rates")
-
-    rates = choices = None
+    # rates = se_response.get("rate_response").get("rates")
+    rates = None
 
     with open("shipping_jsons/get_rates_response.json", "r") as f:
         rates = json.load(f).get("rate_response").get("rates")
-        choices = list(map(lambda r: rate_to_choice(r), rates))
 
+    choices = list(map(lambda r: rate_to_choice(r), rates))
+    time.sleep(1)
     return choices
