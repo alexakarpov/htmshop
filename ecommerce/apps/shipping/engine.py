@@ -1,27 +1,26 @@
 import json
+import time
 
 from django.conf import settings
+from ecommerce.apps.basket.basket import get_weight
 from shipengine import ShipEngine
-
-from .utils import get_weight
 
 shipengine = ShipEngine({"api_key": settings.SE_API_KEY, "page_size": 75, "retries": 3, "timeout": 10})
 
 from shipengine.errors import ShipEngineError
 
-from .choice import ShippingChoice
+from .choice import ShippingChoice, rate_to_choice, split_tiers
 
 
 def init_shipment_dict():
     return {
         "rate_options": {
-            "carrier_ids": [
-                settings.USPS_ID,
-            ],
+            "carrier_ids": [settings.USPS_ID, settings.FEDEX_ID, settings.UPS_ID],
             "service_codes": [
-                "usps_priority_mail_express",
-                "usps_parcel_select",
-                "usps_first_class_mail",
+                # USPS
+                # "usps_priority_mail_express",
+                # "usps_parcel_select",
+                # "usps_first_class_mail",
                 # "usps_media_mail", # add for books-only basket
             ],
             "package_types": ["package"],
@@ -62,7 +61,18 @@ def make_shipment(basketd, address):
     return sd
 
 
-def get_choices(basketd):
-    weight = get_weight(basketd)
+def get_rates(engine, shipment):
+    return engine.get_rates_from_shipment(shipment)
 
-    return [ShippingChoice("FOO", 11), ShippingChoice("BAR", 22), ShippingChoice("BAR", 33)]
+
+def shipping_choices(basketd, address):
+    # se_response = get_rates(shipengine, make_shipment(basketd, address))
+    # rates = se_response.get("rate_response").get("rates")
+    rates = None
+
+    with open("shipping_jsons/get_rates_response.json", "r") as f:
+        rates = json.load(f).get("rate_response").get("rates")
+
+    choices = list(map(lambda r: rate_to_choice(r), rates))
+    time.sleep(1)
+    return choices

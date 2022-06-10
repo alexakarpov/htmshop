@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from ecommerce.apps.shipping.utils import variants
+from ecommerce.utils import variants
 
 from .models import Category, Product
 

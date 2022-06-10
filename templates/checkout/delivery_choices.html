@@ -7,7 +7,12 @@
   <div class="col-12">
     <h1 class="h2">Delivery Options</h1>
   </div>
-  <div class="col-12">
+
+  <div class="text-center mt-3">
+    <div class="spinner-border" role="status">
+    </div>
+  </div>
+<div class="col-12">
     <p>Select your delivery options</p>
   </div>
   <hr />
@@ -41,7 +46,7 @@
       <a role="button" href="{% url "checkout:payment_selection" %}" class="btn btn-success fw-bold w-100"
         type="button">Payment</a>
     </div>
-    <div class="col-md-7 col-lg-8">
+    <div id="shippingoptions" class="col-md-7 col-lg-8">
       {% for option in deliveryoptions %}
       <div class="card mb-3 border-1 rounded-0 product-item me-md-4" data-index="{{option.id}}">
         <div class="row g-0">
@@ -54,8 +59,8 @@
           </div>
           <div class="col-md-9 ps-md-1">
             <div class="card-body p-1">
-              <p class="card-text ps-2 mb-1 pt-1 fw-bold">{{option.delivery_name}}</p>
-              <p class="card-text ps-2 pb-3">Your order should be delivered within {{option.delivery_timeframe}}</p>
+              <p class="card-text ps-2 mb-1 pt-1 fw-bold">{{option.name}}</p>
+              <p class="card-text ps-2 pb-3">Your order should be delivered within {{option.days}} day{{option.days|pluralize}} once shipped</p>
             </div>
           </div>
           <div class="col-md-1 ps-md-1">
@@ -70,8 +75,13 @@
 </div>
 
 <script>
+  $(document).ready(function() {
+    console.log("document ready")
+  })
+
   $('input[type=radio][name=deliveryOption]').on('change', function(e) {
     e.preventDefault();
+    console.log($(this).val());
     $.ajax({
       type: "POST",
       url: '{% url "checkout:basket_update_delivery" %}',

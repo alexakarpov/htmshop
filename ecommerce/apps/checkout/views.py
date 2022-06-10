@@ -11,17 +11,29 @@ from django.urls import reverse
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order, OrderItem
+from ecommerce.apps.shipping.choice import split_tiers
+from ecommerce.apps.shipping.engine import shipping_choices
+from ecommerce.utils import debug_print
 
 logger = logging.getLogger("django")
 
 
 @login_required
 def deliverychoices(request):
-    deliveryoptions = [
-        {"delivery_name": "aaa", "delivery_timeframe": "2 days", "delivery_price": "31.00"},
-        {"delivery_name": "bbb", "delivery_timeframe": "5 days", "delivery_price": "11.00"},
-    ]
-    return render(request, "checkout/delivery_choices.html", {"deliveryoptions": deliveryoptions})
+    basket = Basket(request)
+    session = request.session
+    address_id = session["address"]["address_id"]
+    address = Address.objects.get(id=address_id)
+    choices = shipping_choices(basket, address)
+    tiers = split_tiers(choices)
+    e = sorted(tiers["express"])[0]
+    r = sorted(tiers["regular"])[0]
+    f = sorted(tiers["fast"])[0]
+    # print("===CHOICES===\n", [r,f,e], "\n==========")
+    e.name = "Expedited"
+    f.name = "Fast"
+    r.name = "Economy"
+    return render(request, "checkout/delivery_choices.html", {"deliveryoptions": [r,f,e]})
 
 
 @login_required
@@ -29,59 +41,52 @@ def payment_selection(request):
     session = request.session
     total = session["purchase"]["total"]
     if "address" not in request.session:
-        messages.success(request, "Please select address option")
+        messages.success(request, "Please select an address")
         return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
     return render(request, "checkout/payment_selection.html", {"total": total})
 
 
 def basket_update_delivery(request):
-    # print("==== in basket_update_delivery =====")
     basket = Basket(request)
     if request.POST.get("action") == "post":
-        # convert string repr of a dict to dict
-        od = ast.literal_eval(request.POST.get("deliveryoption"))
-        total = basket.basket_get_total(od.get("delivery_price"))
+        opts = request.POST.get("deliveryoption")
+        [sid, sprice, sname, sdays] = opts.split("/")
+        total = basket.basket_get_total(sprice)
         total = str(total)
-        # print(f"##### TOTAL ({type(total)}): {total}")
         session = request.session
         if "purchase" not in request.session:
-            session["purchase"] = {"delivery_choice": od, "total": total}
+            session["purchase"] = {"delivery_choice": opts, "total": total}
         else:
-            session["purchase"]["delivery_choice"] = od
+            session["purchase"]["delivery_choice"] = opts
             session["purchase"]["total"] = total
             session.modified = True
 
-        response = JsonResponse({"total": total, "delivery_price": od.get("delivery_price")})
+        response = JsonResponse({"total": total, "delivery_price": sprice})
         return response
 
 
 @login_required
 def delivery_address(request):
-    print("in delivery_address")
     basket = Basket(request)
 
     session = request.session
-    delivery_choice = session["purchase"]["delivery_choice"]
-    print(f"DELCHOICE:>>{delivery_choice}")
-    if "purchase" not in request.session:
-        messages.success(request, "Please select delivery option")
-        return HttpResponseRedirect(request.META["HTTP_REFERER"])
+    session["purchase"] = {}
 
     addresses = Address.objects.filter(customer=request.user).order_by("-default")
 
     if "address" not in request.session:
         session["address"] = {"address_id": str(addresses[0].id)}
+        session.modified = True
     else:
         session["address"]["address_id"] = str(addresses[0].id)
         session.modified = True
-    subtotal = Decimal(basket.get_subtotal_price())
-    delivery_price = Decimal(delivery_choice.get("delivery_price"))
-    total = delivery_price + subtotal
     return render(
         request,
         "checkout/delivery_address.html",
-        {"addresses": addresses, "delivery_price": delivery_price, "total_price": total},
+        {
+            "addresses": addresses,
+        },
     )
 
 

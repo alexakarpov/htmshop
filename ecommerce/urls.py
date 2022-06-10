@@ -13,6 +13,7 @@ urlpatterns = [
     path("basket/", include("ecommerce.apps.basket.urls", namespace="basket")),
     path("orders/", include("ecommerce.apps.orders.urls", namespace="orders")),
     path("", include("ecommerce.apps.catalogue.urls", namespace="catalogue")),
+    path("shipping/", include("ecommerce.apps.shipping.urls", namespace="shipping")),
     path("__debug__/", include(debug_toolbar.urls)),
 ]
 

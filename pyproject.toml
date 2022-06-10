@@ -21,6 +21,9 @@ django-ses = "^2.3.1"
 Django = "^4.0.1"
 shipengine = "^1.0.0"
 Pint = "^0.18"
+squareup = "^19.0.0"
+djangorestframework = "^3.13.1"
+django-extensions = "^3.1.5"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^3"

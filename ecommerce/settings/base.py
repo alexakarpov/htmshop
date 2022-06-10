@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "ecommerce.apps.orders",
     "ecommerce.apps.checkout",
     "ecommerce.apps.shipping",
+    "rest_framework",
     # "djpaypal",
 ]
 
@@ -89,3 +90,25 @@ BASKET_SESSION_KEY = "basket"
 
 # Email setting
 DEFAULT_FROM_EMAIL = "info@thehtm.org"
+
+# shipping tiers
+MEDIA_MAIL = "usps_media_mail"
+EXPEDITED = [
+    "ups_next_day_air_saver",
+    "fedex_standard_overnight",
+]
+FAST = [
+    "ups_2nd_day_air",
+    "fedex_2day_am",
+    "fedex_2day",
+]
+REGULAR = [
+    "usps_priority_mail",
+    "usps_first_class_mail",
+    "fedex_express_saver",
+    "ups_3_day_select",
+    "usps_parcel_select",
+    "ups_ground",
+    "fedex_home_delivery",
+    "usps_first_class_mail"
+]
