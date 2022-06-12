@@ -1,50 +1,26 @@
-useful repo: ShipEngine python SDK
+when we render the url:
 
-https://github.com/ShipEngine/shipengine-python
+checkout/deliverychoices
 
-list_carriers gets an object, which has "carriers" inside:
+, we don't have the choices yet,
+because we get them from our own "api" endpoint,
+at shipping/get-routes, AFTER we load the page, because we need
+to spin a "loading" circle until ShipEngine gets the data
 
->>> se = ShipEngine({"api_key": "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw", "page_size": 75, "retries": 3, "timeout": 10})
->>> carriers=se.list_carriers()
->>> ccarriers=carriers.get("carriers")
+Therefore, the data from SE can be processed in get-rates,
+(called by AJAX from checkout/deliverychoices on load),
+but that won't be present in Django context, so template renderer
+can't "build" the page.
 
-that would contain what we want:
+we know we will have 3 tiers, Regular, Fast and Expedited,
+but not price or days
+thus we can load three incomplete divs in Django,
+and later populate them with data from JS:
 
->>> for c in ccarriers:
-...     print(c.get("carrier_code"))
-...
-...
-stamps_com
-ups
-fedex
+{name: 'Economy', days: 7, id: 'se-1573559620', price: 13.17}
+{name: 'Fast', days: 4, id: 'se-1573559631', price: 55.25}
+{name: 'Expedited', days: 3, id: 'se-1573559630', price: 110.43}
 
-----------------------------------------
-
-But we don't need to give customers the carrier choice.
-
-If we fix service_code, e.g.
-service_codes": ["usps_media_mail"],
-
-but select multiple carriers, then usps part will only include media, rest will list all
-
-##### Weight ######
-
-p.attributes.filter(product_attribute__name="weight").first().
-attribute_value
-
-==============================
-
-task re variants
-
-for each product in the catalog, depending on type, provide choices
-
-icon:
->  mounted icons:
->>  choise of sizes
->  prints:
->>  choise of sizes
-
-incense:
-> choice of weight (1lb, 1/2 lb, 1oz)
-
-8x10 weight is 1 pound 13 oz (with bubble-wrap and envelope)
+instead of looping through "deliveryoptions",
+coming from the views.py, we can hard-code 3 divs in the template,
+with just the name, and populate days and price from JS

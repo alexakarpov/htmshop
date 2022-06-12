@@ -9,8 +9,7 @@
   </div>
 
   <div class="text-center mt-3">
-    <div class="spinner-border" role="status">
-    </div>
+    <div id="spinner" class="spinner-border" role="status"/>
   </div>
 <div class="col-12">
     <p>Select your delivery options</p>
@@ -47,36 +46,91 @@
         type="button">Payment</a>
     </div>
     <div id="shippingoptions" class="col-md-7 col-lg-8">
-      {% for option in deliveryoptions %}
-      <div class="card mb-3 border-1 rounded-0 product-item me-md-4" data-index="{{option.id}}">
+
+      <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
+        <div class="col-md-2 ps-3 ps-md-4">
+          <i class="fa-solid fa-truck"></i>
+        </div>
         <div class="row g-0">
-          <div class="col-md-2 ps-3 ps-md-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-truck mt-2"
-              viewBox="0 0 16 16">
-              <path
-                d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-            </svg>
-          </div>
           <div class="col-md-9 ps-md-1">
             <div class="card-body p-1">
-              <p class="card-text ps-2 mb-1 pt-1 fw-bold">{{option.name}}</p>
-              <p class="card-text ps-2 pb-3">Your order should be delivered within {{option.days}} day{{option.days|pluralize}} once shipped</p>
+              <p class="card-text ps-2 mb-1 pt-1 fw-bold">Regular</p>
+              <p id="regular-days" class="card-text ps-2 pb-3">...</p>
             </div>
           </div>
-          <div class="col-md-1 ps-md-1">
+          <div id="regular" class="col-md-1 ps-md-1">
             <input class="align-middle h-100" type="radio" name="deliveryOption" id="{{option.id}}"
               value="{{ option }}">
           </div>
         </div>
       </div>
-      {% endfor %}
+
+      <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
+        <div class="col-md-2 ps-3 ps-md-4">
+          <i class="fa-solid fa-truck-fast"></i>
+        </div>
+        <div class="row g-0">
+          <div class="col-md-9 ps-md-1">
+            <div class="card-body p-1">
+              <p class="card-text ps-2 mb-1 pt-1 fw-bold">Fast</p>
+              <p id="fast-days" class="card-text ps-2 pb-3">...</p>
+            </div>
+          </div>
+          <div id="fast" class="col-md-1 ps-md-1">
+            <input class="align-middle h-100" type="radio" name="deliveryOption" id="{{option.id}}"
+              value="">
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
+        <div class="col-md-2 ps-3 ps-md-4">
+          <i class="fa-solid fa-rocket"></i>
+        </div>
+        <div class="row g-0">
+          <div class="col-md-9 ps-md-1">
+            <div class="card-body p-1">
+              <p class="card-text ps-2 mb-1 pt-1 fw-bold">Express</p>
+              <p id="express-days" class="card-text ps-2 pb-3">...</p>
+            </div>
+          </div>
+          <div id="express" class="col-md-1 ps-md-1">
+            <input class="align-middle h-100" type="radio" name="deliveryOption" id="{{option.id}}"
+              value="{{ option }}">
+          </div>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </div>
 
 <script>
+  const maybePluralize = (count, noun, suffix = 's') =>
+  `${count} ${noun}${count !== 1 ? suffix : ''}`;
+
   $(document).ready(function() {
-    console.log("document ready")
+    $.ajax({
+      type: 'GET',
+      url: '/shipping/get-rates',
+      success: function(response) {
+        $('#spinner').hide()
+        rc = response.choices[0]
+        fc = response.choices[1]
+        ec = response.choices[2]
+        console.log(rc,fc,ec)
+        $("#regular > input").val(`${rc.id}/${rc.price}/${rc.name}/${rc.days}`)
+        $("#fast > input").val(`${fc.id}/${fc.price}/${fc.name}/${fc.days}`)
+        $("#express > input").val(`${ec.id}/${ec.price}/${ec.name}/${ec.days}`)
+        $("#regular-days").text(`Your order should arrive within ${maybePluralize(rc.days,'day')} once shipped`)
+        $("#fast-days").text(`Your order should arrive within ${maybePluralize(fc.days,'day')} once shipped`)
+        $("#express-days").text(`Your order should arrive within ${maybePluralize(ec.days,'day')} once shipped`)
+      },
+      error: function(error) {
+        console.log(error)
+      }
+    })
   })
 
   $('input[type=radio][name=deliveryOption]').on('change', function(e) {

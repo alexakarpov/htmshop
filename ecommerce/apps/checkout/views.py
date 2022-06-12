@@ -11,7 +11,7 @@ from django.urls import reverse
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order, OrderItem
-from ecommerce.apps.shipping.choice import split_tiers
+from ecommerce.apps.shipping.choice import ShippingChoice, split_tiers
 from ecommerce.apps.shipping.engine import shipping_choices
 from ecommerce.utils import debug_print
 
@@ -20,20 +20,7 @@ logger = logging.getLogger("django")
 
 @login_required
 def deliverychoices(request):
-    basket = Basket(request)
-    session = request.session
-    address_id = session["address"]["address_id"]
-    address = Address.objects.get(id=address_id)
-    choices = shipping_choices(basket, address)
-    tiers = split_tiers(choices)
-    e = sorted(tiers["express"])[0]
-    r = sorted(tiers["regular"])[0]
-    f = sorted(tiers["fast"])[0]
-    # print("===CHOICES===\n", [r,f,e], "\n==========")
-    e.name = "Expedited"
-    f.name = "Fast"
-    r.name = "Economy"
-    return render(request, "checkout/delivery_choices.html", {"deliveryoptions": [r,f,e]})
+    return render(request, "checkout/delivery_choices.html", {})
 
 
 @login_required
@@ -51,7 +38,8 @@ def basket_update_delivery(request):
     basket = Basket(request)
     if request.POST.get("action") == "post":
         opts = request.POST.get("deliveryoption")
-        [sid, sprice, sname, sdays] = opts.split("/")
+        debug_print(opts)
+        [_, sprice, _, _] = opts.split("/")
         total = basket.basket_get_total(sprice)
         total = str(total)
         session = request.session
