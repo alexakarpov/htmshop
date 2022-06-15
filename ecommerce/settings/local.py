@@ -5,7 +5,6 @@ ENV = "development"
 ########### .env-based keys #################
 
 SECRET_KEY = config["SECRET_KEY"]
-STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
 POSTGRES_PASSWORD = config["POSTGRES_PASSWORD"]
 POSTGRES_USER = config["POSTGRES_USER"]
 POSTGRES_DB = config["POSTGRES_DB"]
@@ -67,12 +66,6 @@ LOGGING = {
 }
 SQUARE_APP_ID = "sandbox-sq0idb-T9rhevjnp8aNdXPPNf-qKg"
 
-STRIPE_PUBLISHABLE_KEY = (
-    "pk_test_51K6PnSCFIch5ayqknnamJA9P1lEBHAft8RXXVPKYIEtciJKZbBRoS7Rt1mfbtFof1VCHdEd0Ax5OovOZDxRnz0QA00YsK7ehAb"
-)
-STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
-STRIPE_LIVE_MODE = False  # Change to True in production
-
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 if DEBUG:
@@ -105,11 +98,3 @@ if DEBUG:
     DEBUG_TOOLBAR_CONFIG = {
         "INTERCEPT_REDIRECTS": False,
     }
-
-# Shipping
-SE_API_KEY = "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw"
-
-## carriers
-USPS_ID = "se-660215"
-FEDEX_ID = "se-660217"
-UPS_ID = "se-660216"

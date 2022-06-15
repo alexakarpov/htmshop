@@ -7,7 +7,6 @@ ENV = "staging"
 
 SECRET_KEY = config["SECRET_KEY"]
 
-STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
 SQUARE_ACCESS_TOKEN=config["SQUARE_ACCESS_TOKEN"]
 
 POSTGRES_PASSWORD = config["POSTGRES_PASSWORD"]
@@ -25,7 +24,7 @@ PAYPAL_PERSONAL_PASSWORD = config["PAYPAL_PERSONAL_PASSWORD"]
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "34.207.88.228", "transylvania.bostonmonks.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "174.129.148.196", "transylvania.bostonmonks.com"]
 
 DATABASES = {
     "default": {
@@ -77,13 +76,6 @@ LOGGING = {
         },
     },
 }
-
-# Stripe
-STRIPE_PUBLISHABLE_KEY = (
-    "pk_live_51K6PnSCFIch5ayqkdmgTnL8Ahszdb6lvZX3VbCrEuCPocFFGjtjRfA8hQUfyMo1BbCBuECjBMIMFt31C37ynBa0j00zZ1YUG5v"
-)
-STRIPE_SECRET_KEY = config["STRIPE_SECRET_KEY"]
-STRIPE_LIVE_MODE = False  # Change to True in production
 
 # Paypal
 PAYPAL_CLIENT_ID = config["PAYPAL_CLIENT_ID"]

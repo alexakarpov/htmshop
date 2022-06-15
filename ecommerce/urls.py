@@ -14,9 +14,9 @@ urlpatterns = [
     path("orders/", include("ecommerce.apps.orders.urls", namespace="orders")),
     path("", include("ecommerce.apps.catalogue.urls", namespace="catalogue")),
     path("shipping/", include("ecommerce.apps.shipping.urls", namespace="shipping")),
-    path("__debug__/", include(debug_toolbar.urls)),
 ]
 
 if settings.DEBUG:
+    urlpatterns += path("__debug__/", include(debug_toolbar.urls)),
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

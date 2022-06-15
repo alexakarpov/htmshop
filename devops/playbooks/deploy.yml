@@ -7,7 +7,7 @@
   tasks:
     - name: Extract archive to deployment location
       ansible.builtin.unarchive:
-        src: /home/akarpov/htmshop.zip
+        src: /tmp/htmshop.zip
         dest: /var/htmshop/
         remote_src: true
 
@@ -16,14 +16,14 @@
         virtualenv: /var/htmshop/venv
         requirements: /var/htmshop/requirements.txt
 
-# secrets
+    # secrets
     - name: dotenv file
       copy:
         src: ../secrets/staging.env
         dest: /var/htmshop/.env
         owner: storeadmin
         group: htm
-# environment
+    # environment
     - name: run migrations
       community.general.django_manage:
         virtualenv: /var/htmshop/venv

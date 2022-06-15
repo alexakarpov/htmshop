@@ -112,3 +112,10 @@ REGULAR = [
     "fedex_home_delivery",
     "usps_first_class_mail"
 ]
+
+# Shipping
+SE_API_KEY = "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw"
+
+USPS_ID = "se-660215"
+FEDEX_ID = "se-660217"
+UPS_ID = "se-660216"
