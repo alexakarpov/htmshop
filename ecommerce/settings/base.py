@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 print(f"in {os.path.basename(__file__)}. BASE_DIR set to: {BASE_DIR}")
 
 ########### .env-based keys #################
-config = dotenv_values(BASE_DIR / "devops/secrets/.env")
+config = dotenv_values()
 
 WSGI_APPLICATION = "ecommerce.wsgi.application"
 
