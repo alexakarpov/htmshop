@@ -22,7 +22,7 @@
             python3-virtualenv,
             python-is-python3,
             emacs-nox,
-            nginx
+            nginx,
           ]
         state: latest
 
@@ -52,6 +52,7 @@
       with_file:
         - ../public_keys/akamac.pub
         - ../public_keys/akarpov.pub
+        - ../public_keys/ak_guest.pub
 
     - name: Place admin public key
       authorized_key:
@@ -92,13 +93,13 @@
         group: htm
         mode: 0775
 
-    - name: requirement file
-      copy:
-        src: ../requirements.txt
-        dest: /var/htmshop/requirements.txt
-        owner: storeadmin
-        group: htm
-        mode: 644
+    # - name: requirement file
+    #   copy:
+    #     src: ../requirements.txt
+    #     dest: /var/htmshop/requirements.txt
+    #     owner: storeadmin
+    #     group: htm
+    #     mode: 644
 
     #### secrets
     - name: db init.sql file
@@ -114,7 +115,15 @@
         cmd: virtualenv /var/htmshop/venv -p python3.8
         creates: '/var/htmshop/venv'
 
-# installation of dependencies moved to deploy book
+    - name: venv ownership
+      file:
+        path: /var/htmshop/venv
+        state: directory
+        owner: storeadmin
+        group: htm
+        mode: 0775
+
+    # installation of dependencies moved to deploy book
 
     #### GUNICORN
     - name: Gunicorn socket file
