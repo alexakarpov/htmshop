@@ -1,5 +1,5 @@
-#! /usr/local/bin/bash
-#set -x
+#!/usr/bin/env bash
+
 BRANCH=`git branch | sed -n -e 's/^\* \(.*\)/\1/p'`
 echo you are on $BRANCH
 
