@@ -249,6 +249,14 @@ class UserEditForm(forms.ModelForm):
         ),
     )
 
+    name = forms.CharField(
+        label="Your name or nickname",
+        max_length=30,
+        widget=forms.TextInput(
+            attrs={"class": "form-control mb-3", "placeholder": "short name", "id": "form-short-name"}
+        ),
+    )
+
     class Meta:
         model = UserModel
         fields = ("email",)
