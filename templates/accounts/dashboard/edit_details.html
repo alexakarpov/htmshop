@@ -3,7 +3,7 @@
 {% block sub_content %}
 
 <div class="col-6 mx-auto">
-<form class="account-form" method="post" enctype="multipart/form-data">
+<form class="account-form" method="post" action="{% url 'accounts:edit_details'%}">
     {% if user_form.is_valid  %}
     <div class="alert alert-primary" role="alert">
         Details successfully updated!
@@ -11,13 +11,13 @@
     <p class="small text-center pt-0">
         <a href="{% url "accounts:dashboard" %}">Back to Dashboard</a>
     </p>
-    {%else%}
+    {% else %}
     <h3>Change your details</h3>
     <p>You can edit your account using the following form:</p>
     {% endif %}
     {% if user_form.errors %}
     <div class="alert alert-primary" role="alert">
-        Error: Please try again!
+        Error: FIXME
     </div>
     {% endif %}
     {% csrf_token %}
@@ -25,8 +25,9 @@
     {{ user_form.email }}
     <label class="small font-weight-bold">{{ user_form.name.label}}</label>
     {{ user_form.name }}
-    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw-bold w-100" type="submit" value="Save changes">Save
-        Changes</button>
+    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw-bold w-100"
+            type="submit"
+            value="Save changes">Save Changes</button>
     <hr class="mb-3">
 </form>
 <form class="account-form" action="{% url "accounts:delete_user" %}" method="post">
