@@ -27,66 +27,7 @@
     </div>
   </div>
 </div>
-<script
-  src="https://www.paypal.com/sdk/js?client-id=AeIQTllyb61D0xyG6SLmCDTEMfzhxABJqgyyRVMB9cli01NSM_-I7HCG-oAM2BiPTvdMEqhK-CRSAu1S&currency=USD"
-  data-sdk-integration-source="button-factory">
-</script>
-<script>
-  function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      var cookies = document.cookie.split(';');
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
-  var csrftoken = getCookie('csrftoken');
 
-  function initPayPalButton() {
-    paypal.Buttons({
-      style: {
-        shape: 'rect',
-        color: 'gold',
-        layout: 'vertical',
-        label: 'paypal',
-
-      },
-      createOrder: function (data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            "amount": {
-              "currency_code": "USD",
-              "value": '{{basket.basket_get_total}}'
-            }
-          }]
-        });
-      },
-      onApprove: function (data) {
-        var url = "{% url 'checkout:payment_complete' %}"
-        return fetch(url, {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json',
-            'X-CSRFToken': csrftoken,
-          },
-          body: JSON.stringify({
-            orderID: data.orderID
-          })
-        }).then(function () {
-          location.href = '{% url "checkout:payment_successful" %}';
-        })
-      },
-    }).render('#paypal-button-container');
-  }
-
-  initPayPalButton();
-</script>
-
+ 
 
 {% endblock %}
