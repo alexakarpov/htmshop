@@ -59,7 +59,7 @@
             </div>
           </div>
           <div id="regular" class="col-md-1 ps-md-1">
-            <input class="align-middle h-100" type="radio" name="deliveryOption">
+            <input class="align-middle h-100" type="radio">
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div id="fast" class="col-md-1 ps-md-1">
-            <input class="align-middle h-100" type="radio" name="deliveryOption">
+            <input class="align-middle h-100" type="radio">
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@
             </div>
           </div>
           <div id="express" class="col-md-1 ps-md-1">
-            <input class="align-middle h-100" type="radio" name="deliveryOption">
+            <input class="align-middle h-100" type="radio">
           </div>
         </div>
       </div>
@@ -130,7 +130,7 @@
     })
   })
 
-  $('input[type=radio][name=deliveryOption]').on('change', function(e) {
+  $('input[type=radio]').on('change', function(e) {
     e.preventDefault();
     console.log($(this).val());
     $.ajax({
