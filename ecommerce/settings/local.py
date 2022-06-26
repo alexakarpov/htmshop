@@ -65,7 +65,7 @@ LOGGING = {
     },
 }
 
-SQUARE_APP_ID = "sandbox-sq0idb-T9rhevjnp8aNdXPPNf-qKg"
+SQUARE_APP_ID = "sandbox-sq0idb-tm1Xf8oX6Jshm4UElKDG6A"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
