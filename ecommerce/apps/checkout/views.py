@@ -1,11 +1,9 @@
-import ast
+from .paypal import PayPalClient
+from paypalcheckoutsdk.orders import OrdersGetRequest
 import json
 import logging
-from decimal import Decimal
-
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from ecommerce.apps.accounts.models import Address
@@ -52,12 +50,11 @@ def basket_update_delivery(request):
 
 @login_required
 def delivery_address(request):
-    basket = Basket(request)
-
     session = request.session
     session["purchase"] = {}
 
-    addresses = Address.objects.filter(customer=request.user).order_by("-default")
+    addresses = Address.objects.filter(
+        customer=request.user).order_by("-default")
 
     if "address" not in request.session:
         session["address"] = {"address_id": str(addresses[0].id)}
@@ -73,16 +70,20 @@ def delivery_address(request):
         },
     )
 
+# Square
+
+
+def payment_with_token(request):
+    print(request)
+    return(JsonResponse({"message": "ok"}))
+
 
 ####
 # PayPal
 ####
-from paypalcheckoutsdk.orders import OrdersGetRequest
-
-from .paypal import PayPalClient
 
 
-@login_required
+@ login_required
 def payment_complete(request):
     PPClient = PayPalClient()
     logger.info("in payment_complete")
@@ -114,14 +115,15 @@ def payment_complete(request):
     order_id = order.pk
 
     for item in basket:
-        OrderItem.objects.create(order_id=order_id, product=item["product"], price=item["price"], quantity=item["qty"])
+        OrderItem.objects.create(
+            order_id=order_id, product=item["product"], price=item["price"], quantity=item["qty"])
 
     print("Order created?!")
 
     return JsonResponse("Payment completed!", safe=False)
 
 
-@login_required
+@ login_required
 def payment_successful(request):
     basket = Basket(request)
     basket.clear()  # address is missing from the session?!
