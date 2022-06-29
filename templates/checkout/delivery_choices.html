@@ -116,7 +116,6 @@
         rc = response.choices[0]
         fc = response.choices[1]
         ec = response.choices[2]
-        console.log(rc,fc,ec)
         $("#regular > input").val(`${rc.id}/${rc.price}/${rc.name}/${rc.days}`)
         $("#fast > input").val(`${fc.id}/${fc.price}/${fc.name}/${fc.days}`)
         $("#express > input").val(`${ec.id}/${ec.price}/${ec.name}/${ec.days}`)
