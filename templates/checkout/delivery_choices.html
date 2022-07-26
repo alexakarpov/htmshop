@@ -131,7 +131,6 @@
 
   $('input[type=radio][name=deliveryOption]').on('change', function(e) {
     e.preventDefault();
-    console.log($(this).val());
     $.ajax({
       type: "POST",
       url: '{% url "checkout:basket_update_delivery" %}',
