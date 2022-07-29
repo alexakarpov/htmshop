@@ -65,7 +65,8 @@ LOGGING = {
     },
 }
 
-SQUARE_APP_ID = "sandbox-sq0idb-T9rhevjnp8aNdXPPNf-qKg"
+# SQUARE_APP_ID = "sandbox-sq0idb-T9rhevjnp8aNdXPPNf-qKg"
+STAX_WEB_PAYMENT_TOKEN = "Holy-Transfiguration-Monastery-d37081f45f59"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
