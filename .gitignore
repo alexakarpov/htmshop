@@ -1,6 +1,7 @@
 .DS_STORE
 ignore/
-
+*~
+wip_notes/
 .env
 notes/email-activation.py
 src/ecommerce/aws/ignore2.py

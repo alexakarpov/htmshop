@@ -1,19 +1,21 @@
-import ast
+import hashlib
 import json
 import logging
-from decimal import Decimal
 
-from django.contrib import messages
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, JsonResponse
-from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.http import JsonResponse
+from django.shortcuts import render
+from dotenv import dotenv_values
+from paypalcheckoutsdk.orders import OrdersGetRequest
+from square.client import Client
+
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order, OrderItem
-from ecommerce.apps.shipping.choice import ShippingChoice, split_tiers
-from ecommerce.apps.shipping.engine import shipping_choices
 from ecommerce.utils import debug_print
+
+from .paypal import PayPalClient
 
 logger = logging.getLogger("django")
 
@@ -27,7 +29,9 @@ def deliverychoices(request):
 def payment_selection(request):
     session = request.session
     total = session["purchase"]["total"]
-    return render(request, "checkout/payment_selection.html", {"total": total})
+    token = session["purchase"]["token"]
+    return render(request, "checkout/payment_selection.html", {"total": total,
+                                                               "idempotency_token": token})
 
 
 def basket_update_delivery(request):
@@ -38,26 +42,28 @@ def basket_update_delivery(request):
         [_, sprice, _, _] = opts.split("/")
         total = basket.basket_get_total(sprice)
         total = str(total)
+        token = hashlib.md5(str(basket).encode())
+        debug_print(token)
         session = request.session
         if "purchase" not in request.session:
             session["purchase"] = {"delivery_choice": opts, "total": total}
         else:
             session["purchase"]["delivery_choice"] = opts
             session["purchase"]["total"] = total
-            session.modified = True
 
+        session["purchase"]["token"] = token.hexdigest()
+        session.modified = True
         response = JsonResponse({"total": total, "delivery_price": sprice})
         return response
 
 
 @login_required
 def delivery_address(request):
-    basket = Basket(request)
-
     session = request.session
     session["purchase"] = {}
 
-    addresses = Address.objects.filter(customer=request.user).order_by("-default")
+    addresses = Address.objects.filter(
+        customer=request.user).order_by("-default")
 
     if "address" not in request.session:
         session["address"] = {"address_id": str(addresses[0].id)}
@@ -73,16 +79,42 @@ def delivery_address(request):
         },
     )
 
+# Square
+
+
+def payment_with_token(request):
+    debug_print(request.POST)
+    source_id = request.POST.get('source')
+    config = dotenv_values()
+    sq_access_token = config["SQUARE_ACCESS_TOKEN"]
+    sq_env = settings.SQUARE_ENVIRONMENT
+    client = Client(access_token=sq_access_token, environment=sq_env)
+
+    body = {}
+    body['source_id'] = source_id
+    body['idempotency_key'] = '7b0f3ec5-086a-4871-8f13-3c81b3875218'
+    body['amount_money'] = {}
+    body['amount_money']['amount'] = 888
+    body['amount_money']['currency'] = 'USD'
+
+    result = client.payments.create_payment(body)
+
+    debug_print(result)
+
+    if result.is_success():
+        debug_print("SUCCESS")
+        return(JsonResponse({"message": "ok"}))
+    elif result.is_error():
+        debug_print("ERROR")
+        return(JsonResponse({"message": "notok"}))
+
 
 ####
 # PayPal
 ####
-from paypalcheckoutsdk.orders import OrdersGetRequest
-
-from .paypal import PayPalClient
 
 
-@login_required
+@ login_required
 def payment_complete(request):
     PPClient = PayPalClient()
     logger.info("in payment_complete")
@@ -114,14 +146,15 @@ def payment_complete(request):
     order_id = order.pk
 
     for item in basket:
-        OrderItem.objects.create(order_id=order_id, product=item["product"], price=item["price"], quantity=item["qty"])
+        OrderItem.objects.create(
+            order_id=order_id, product=item["product"], price=item["price"], quantity=item["qty"])
 
     print("Order created?!")
 
     return JsonResponse("Payment completed!", safe=False)
 
 
-@login_required
+@ login_required
 def payment_successful(request):
     basket = Basket(request)
     basket.clear()  # address is missing from the session?!
