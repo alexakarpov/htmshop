@@ -21,9 +21,7 @@
     <div class="col-6">
       <p>Pay with a credit card</p>
       <h3>CollectJS Payment Form</h3>
-        <form action="{% url 'checkout:token_payment' %}" method="post">
-          <button id="payButton" type="button">Pay</button>
-        </form>
+      <a id="payButton" role="button" href="{% url 'checkout:token_payment' %}" class="btn btn-success fw-bold" type="button">Pay</a>
     </div>
   </div>
 
