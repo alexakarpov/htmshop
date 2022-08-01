@@ -14,4 +14,5 @@ urlpatterns = [
     path("payment_successful/", views.payment_successful,
          name="payment_successful"),
     path('payment/', views.payment_with_token, name="token_payment"),
+    path('name/', views.get_name, name='name'),
 ]
