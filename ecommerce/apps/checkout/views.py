@@ -84,29 +84,29 @@ def delivery_address(request):
 
 def payment_with_token(request):
     debug_print(request.POST)
-    source_id = request.POST.get('source')
-    config = dotenv_values()
-    sq_access_token = config["SQUARE_ACCESS_TOKEN"]
-    sq_env = settings.SQUARE_ENVIRONMENT
-    client = Client(access_token=sq_access_token, environment=sq_env)
+    # source_id = request.POST.get('source')
+    # config = dotenv_values()
+    # sq_access_token = config["SQUARE_ACCESS_TOKEN"]
+    # sq_env = settings.SQUARE_ENVIRONMENT
+    # client = Client(access_token=sq_access_token, environment=sq_env)
 
-    body = {}
-    body['source_id'] = source_id
-    body['idempotency_key'] = '7b0f3ec5-086a-4871-8f13-3c81b3875218'
-    body['amount_money'] = {}
-    body['amount_money']['amount'] = 888
-    body['amount_money']['currency'] = 'USD'
+    # body = {}
+    # body['source_id'] = source_id
+    # body['idempotency_key'] = '7b0f3ec5-086a-4871-8f13-3c81b3875218'
+    # body['amount_money'] = {}
+    # body['amount_money']['amount'] = 888
+    # body['amount_money']['currency'] = 'USD'
 
-    result = client.payments.create_payment(body)
+    # result = client.payments.create_payment(body)
 
-    debug_print(result)
+    return(JsonResponse({"message": "ok"}))
 
-    if result.is_success():
-        debug_print("SUCCESS")
-        return(JsonResponse({"message": "ok"}))
-    elif result.is_error():
-        debug_print("ERROR")
-        return(JsonResponse({"message": "notok"}))
+    # if result.is_success():
+    #     debug_print("SUCCESS")
+    #     return(JsonResponse({"message": "ok"}))
+    # elif result.is_error():
+    #     debug_print("ERROR")
+    #     return(JsonResponse({"message": "notok"}))
 
 
 ####
