@@ -1,10 +1,11 @@
+from .forms import EmptyForm
 import hashlib
 import json
 import logging
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from dotenv import dotenv_values
 from paypalcheckoutsdk.orders import OrdersGetRequest
@@ -79,7 +80,27 @@ def delivery_address(request):
         },
     )
 
-# Square
+
+def get_name(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        debug_print(request.POST)
+
+        # create a form instance and populate it with data from the request:
+        form = EmptyForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            print("done processing, redirecting to '/'")
+            return HttpResponseRedirect('/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = EmptyForm()
+
+    return render(request, 'checkout/name.html', {'form': form})
 
 
 def payment_with_token(request):

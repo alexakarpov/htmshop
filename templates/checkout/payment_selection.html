@@ -21,7 +21,13 @@
     <div class="col-6">
       <p>Pay with a credit card</p>
       <h3>CollectJS Payment Form</h3>
-      <a id="payButton" role="button" href="{% url 'checkout:token_payment' %}" class="btn btn-success fw-bold" type="button">Pay</a>
+      
+      <form action="{% url 'checkout:token_payment' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input id="payButton" role="button" type="submit" class="btn btn-success fw-bold" value="Pay">
+      </form>
+
     </div>
   </div>
 
