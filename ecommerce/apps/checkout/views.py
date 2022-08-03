@@ -31,8 +31,10 @@ def payment_selection(request):
     session = request.session
     total = session["purchase"]["total"]
     token = session["purchase"]["token"]
+    form = EmptyForm()
     return render(request, "checkout/payment_selection.html", {"total": total,
-                                                               "idempotency_token": token})
+                                                               "idempotency_token": token,
+                                                               "form": form})
 
 
 def basket_update_delivery(request):
@@ -81,30 +83,10 @@ def delivery_address(request):
     )
 
 
-def get_name(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        debug_print(request.POST)
-
-        # create a form instance and populate it with data from the request:
-        form = EmptyForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            print("done processing, redirecting to '/'")
-            return HttpResponseRedirect('/')
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = EmptyForm()
-
-    return render(request, 'checkout/name.html', {'form': form})
-
-
 def payment_with_token(request):
     debug_print(request.POST)
+
+    return HttpResponseRedirect('/checkout/payment_successful/')
     # source_id = request.POST.get('source')
     # config = dotenv_values()
     # sq_access_token = config["SQUARE_ACCESS_TOKEN"]
@@ -119,8 +101,6 @@ def payment_with_token(request):
     # body['amount_money']['currency'] = 'USD'
 
     # result = client.payments.create_payment(body)
-
-    return(JsonResponse({"message": "ok"}))
 
     # if result.is_success():
     #     debug_print("SUCCESS")
