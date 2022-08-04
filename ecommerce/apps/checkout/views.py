@@ -159,4 +159,5 @@ def payment_complete(request):
 def payment_successful(request):
     basket = Basket(request)
     basket.clear()  # address is missing from the session?!
+    print("BASKET CLEARED")
     return render(request, "checkout/payment_successful.html", {})
