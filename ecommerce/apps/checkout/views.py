@@ -84,7 +84,8 @@ def delivery_address(request):
 
 
 def payment_with_token(request):
-    debug_print(request.POST)
+    print("pay_with_token")
+    payment_token = request.POST['payment_token']
 
     return HttpResponseRedirect('/checkout/payment_successful/')
     # source_id = request.POST.get('source')
