@@ -11,3 +11,8 @@ coverage html
 # encrypting passwords:
 >>> import crypt
 >>> print(crypt.crypt("This is my Password", "$1$SomeSalt$"))
+
+
+##### renewing cert #####
+
+sudo certbot certonly --nginx -d transylvania.bostonmonks.com
