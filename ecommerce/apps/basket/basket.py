@@ -25,7 +25,6 @@ class Basket:
         """
         Adding and updating the users basket session data
         """
-        print(f"adding {product.id}({product.title}) to cart in {self.session.session_key}")
         product_id = str(product.id)
         if product_id in self.basket:
             self.basket[product_id]["qty"] = qty
@@ -67,15 +66,13 @@ class Basket:
         """
         Get the basket data and count the qty of items
         """
-        print("in Basket's len")
+        print("in Basket's len")  # TODO remove when done
         return sum(item["qty"] for item in self.basket.values())
 
     def update(self, product_id, qty):
         """
         Update values in session data
         """
-        print(f"updating {product_id} in cart {self.session.session_key}")
-
         product_id = str(product_id)
         if product_id in self.basket:
             self.basket[product_id]["qty"] = qty
@@ -84,8 +81,9 @@ class Basket:
     def get_subtotal_price(self):
         return sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
 
-    def basket_get_total(self, deliveryprice=0):
-        subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+    def get_total(self, deliveryprice=0):
+        subtotal = sum(Decimal(item["price"]) * item["qty"]
+                       for item in self.basket.values())
         total = subtotal + Decimal(deliveryprice)
         return total
 
@@ -119,7 +117,6 @@ class Basket:
 
 
 def get_weight(basket_ds):
-    print(f"basket_ds: {basket_ds}")
     total = 0
     for it in basket_ds:
         w = it["weight"]

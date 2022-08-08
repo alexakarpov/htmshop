@@ -43,7 +43,7 @@ def basket_update_delivery(request):
         opts = request.POST.get("deliveryoption")
         debug_print(opts)
         [_, sprice, _, _] = opts.split("/")
-        total = basket.basket_get_total(sprice)
+        total = basket.get_total(sprice)
         total = str(total)
         token = hashlib.md5(str(basket).encode())
         debug_print(token)

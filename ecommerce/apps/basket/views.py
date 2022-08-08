@@ -34,7 +34,7 @@ def basket_delete(request):
         product_id = int(request.POST.get("productid"))
         basket.delete(product_id=product_id)
         basketqty = basket.__len__()
-        baskettotal = basket.get_total_price()
+        baskettotal = basket.get_total()
         response = JsonResponse({"qty": basketqty, "subtotal": baskettotal})
         return response
 
