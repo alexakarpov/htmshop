@@ -38,6 +38,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+CSRF_TRUSTED_ORIGINS = ["https://transylvania.bostonmonks.com"]
+
 ROOT_URLCONF = "ecommerce.urls"
 
 TEMPLATES = [
