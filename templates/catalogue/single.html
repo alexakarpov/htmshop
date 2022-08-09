@@ -79,7 +79,9 @@
         success: function (json) {
           $('#basket-qty').html(json.qty)
         },
-        error: function (xhr, errmsg, err) {}
+        error: function (xhr, errmsg, err) {
+          console.error("add POST failed with {{csrf_token}}")
+        }
       });
       $('#alertbox').show()
       $('#alertbox').text('{{product.title}} added to the cart')
