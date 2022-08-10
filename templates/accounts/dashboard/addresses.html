@@ -3,6 +3,17 @@
 
 {% block sub_content %}
 <h1 class="h2">Your Addresses</h1>
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <div class="alert alert-warning" role="alert">
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  </div>
+  {% endfor %}
+</ul>
+{% endif %}
+
 <div>Manage your <b>addresses</b> and delivery preferences</div>
 <hr />
 <div class="container px-0">

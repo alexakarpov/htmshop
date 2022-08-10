@@ -10,8 +10,8 @@ from django.shortcuts import render
 from django.urls import reverse
 # from dotenv import dotenv_values
 from paypalcheckoutsdk.orders import OrdersGetRequest
-from square.client import Client
-
+# from square.client import Client
+from django.contrib import messages
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order, OrderItem
@@ -70,6 +70,9 @@ def delivery_address(request):
         customer=request.user).order_by("-default")
 
     if len(addresses) == 0:
+        messages.warning(
+            request, "Enter an address for the checkout")
+
         return HttpResponseRedirect(reverse("accounts:addresses"))
 
     if "address" not in request.session:
@@ -160,9 +163,8 @@ def payment_complete(request):
     return JsonResponse("Payment completed!", safe=False)
 
 
-@ login_required
+@login_required
 def payment_successful(request):
     basket = Basket(request)
     basket.clear()  # address is missing from the session?!
-    print("BASKET CLEARED")
     return render(request, "checkout/payment_successful.html", {})
