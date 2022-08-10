@@ -7,7 +7,8 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-from dotenv import dotenv_values
+from django.urls import reverse
+# from dotenv import dotenv_values
 from paypalcheckoutsdk.orders import OrdersGetRequest
 from square.client import Client
 
@@ -68,6 +69,9 @@ def delivery_address(request):
     addresses = Address.objects.filter(
         customer=request.user).order_by("-default")
 
+    if len(addresses) == 0:
+        return HttpResponseRedirect(reverse("accounts:addresses"))
+
     if "address" not in request.session:
         session["address"] = {"address_id": str(addresses[0].id)}
         session.modified = True
@@ -87,7 +91,7 @@ def payment_with_token(request):
     print("pay_with_token")
     payment_token = request.POST['payment_token']
 
-    return HttpResponseRedirect('/checkout/payment_successful/')
+    return HttpResponseRedirect(reverse('checkout:payment_successful'))
     # source_id = request.POST.get('source')
     # config = dotenv_values()
     # sq_access_token = config["SQUARE_ACCESS_TOKEN"]
