@@ -119,3 +119,4 @@ init.sql
 # mypy
 .mypy_cache/
 htmshop.zip
+node_modules/
