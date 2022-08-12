@@ -14,7 +14,6 @@
   <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://secure.networkmerchants.com/token/Collect.js" data-tokenization-key="uXRD2W-32WSUp-36EU4c-mbVZ3m"></script>
 
 </head>
 
@@ -65,7 +64,6 @@
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="fs15 fw500">Account &amp; Lists
                     </span>
-                    </span>
                   </a>
                   <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
                     <div class="card border-0">
@@ -92,7 +90,7 @@
               </ul>
             </div>
           </div>
-          <a type="button" role="button" href="{% url 'basket:basket_summary' %}"
+          <a id="cart" type="button" role="button" href="{% url 'basket:basket_summary' %}"
             class="btn btn-outline-secondary border-0 basket-btn">
             {% with total_qty=basket|length %}
             <div id="basket-qty" class="basket-qty">
