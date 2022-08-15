@@ -1,23 +1,28 @@
+from distutils.log import debug
+from .paypal import PayPalClient
+from ecommerce.utils import debug_print
+from ecommerce.apps.orders.models import Order, OrderItem
+from ecommerce.apps.basket.basket import Basket
+from ecommerce.apps.accounts.models import Address
+from django.contrib import messages
+from paypalcheckoutsdk.orders import OrdersGetRequest
+from dotenv import dotenv_values
+from django.urls import reverse
+from django.shortcuts import render
+from django.http import HttpResponseRedirect, JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from .forms import EmptyForm
+# from square.client import Client
 import hashlib
 import json
 import logging
+import requests
 
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
-from django.urls import reverse
-# from dotenv import dotenv_values
-from paypalcheckoutsdk.orders import OrdersGetRequest
-# from square.client import Client
-from django.contrib import messages
-from ecommerce.apps.accounts.models import Address
-from ecommerce.apps.basket.basket import Basket
-from ecommerce.apps.orders.models import Order, OrderItem
-from ecommerce.utils import debug_print
+config = dotenv_values()
 
-from .paypal import PayPalClient
+POST_URL = 'https://secure.networkmerchants.com/api/transact.php'
+SALE = 'sale'
 
 logger = logging.getLogger("django")
 
@@ -91,10 +96,22 @@ def delivery_address(request):
 
 
 def payment_with_token(request):
-    print("pay_with_token")
     payment_token = request.POST['payment_token']
+    session = request.session
+    total = session["purchase"]["total"]
 
-    return HttpResponseRedirect(reverse('checkout:payment_successful'))
+    # debug_print(request.POST)
+    response = requests.post(
+        POST_URL,
+        params={'security_key': config["STAX_SECURITY_KEY"],
+                'amount': total,
+                'type': SALE,
+                'payment_token': payment_token
+                },
+        headers={},
+    )
+    return HttpResponseRedirect(reverse('catalogue:store_home'))
+    # return HttpResponseRedirect(reverse('checkout:payment_successful'))
     # source_id = request.POST.get('source')
     # config = dotenv_values()
     # sq_access_token = config["SQUARE_ACCESS_TOKEN"]
