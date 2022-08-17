@@ -39,33 +39,33 @@ class UserAddressForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["full_name"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form",
+            {"class": "form-control mb-2",
                 "placeholder": _("Full Name")}
         )
         self.fields["phone"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Phone"})
+            {"class": "form-control mb-2", "placeholder": "Phone"})
         self.fields["address_line"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form",
+            {"class": "form-control mb-2",
                 "placeholder": _("Address Line 1")}
         )
         self.fields["address_line2"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form",
+            {"class": "form-control mb-2",
                 "placeholder": _("Address Line 2")}
         )
         self.fields["town_city"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form",
+            {"class": "form-control mb-2",
                 "placeholder": _("Town/City")}
         )
         self.fields["state_province"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form",
+            {"class": "form-control mb-2",
                 "placeholder": _("State/Province")}
         )
         self.fields["postcode"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form",
+            {"class": "form-control mb-2",
                 "placeholder": _("Postal code")}
         )
         self.fields["country"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form"})
+            {"class": "form-control mb-2"})
 
         self.fields["address_line2"].required = False
 
@@ -151,7 +151,8 @@ class AccountCreationForm(UserCreationForm):
     class Meta:
         model = UserModel
         fields = (
-            # "username",
+            "first_name",
+            "last_name",
             "email",
         )
 
@@ -168,6 +169,8 @@ class AccountCreationForm(UserCreationForm):
         user = super(UserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         user.email = self.cleaned_data["email"]
+        user.first_name = self.cleaned_data["first_name"]
+        user.last_name = self.cleaned_data["last_name"]
         user.is_active = True  # change to false if using email activation
         if commit:
             user.save()
@@ -188,15 +191,31 @@ class RegistrationForm(forms.ModelForm):
         help_text="Required",
         error_messages={"required": "Sorry, you will need an email"},
     )
+
+    first_name = forms.CharField(
+        label="First name",
+        required=True,
+        max_length=20,
+        help_text="Required",
+        error_messages={"required": "Sorry, you will need a first name"},
+    )
+
+    last_name = forms.CharField(
+        label="Last name",
+        required=True,
+        max_length=20,
+        help_text="Required",
+        error_messages={"required": "Sorry, you will need a last name"},
+    )
+
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
+
     password2 = forms.CharField(
         label="Repeat password", widget=forms.PasswordInput)
-    name = forms.CharField(
-        label="Short name", required=False, widget=forms.TextInput())
 
     class Meta:
         model = UserModel
-        fields = ("email",)
+        fields = ("email", "first_name", "last_name")
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -221,9 +240,13 @@ class RegistrationForm(forms.ModelForm):
             {"class": "form-control mb-3", "placeholder": "Password"})
         self.fields["password2"].widget.attrs.update(
             {"class": "form-control mb-3", "placeholder": "Repeat Password"})
-        self.fields["name"].widget.attrs.update(
+        self.fields["first_name"].widget.attrs.update(
             {"class": "form-control",
-                "placeholder": "opional short name on account", "id": "short-name"}
+                "placeholder": "first name on account", "id": "first-name"}
+        )
+        self.fields["last_name"].widget.attrs.update(
+            {"class": "form-control",
+                "placeholder": "last name on account", "id": "last-name"}
         )
 
 
