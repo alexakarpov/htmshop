@@ -95,6 +95,13 @@ def delivery_address(request):
     )
 
 
+def report(res_text):
+
+    for i in res_text.split('&'):
+        (k, v) = i.split('=')
+        print(f"{k} => {v}")
+
+
 def payment_with_token(request):
     payment_token = request.POST['payment_token']
     session = request.session
@@ -110,6 +117,14 @@ def payment_with_token(request):
                 },
         headers={},
     )
+
+    if response:
+        print("RESPONSE OK")
+    else:
+        print("RESPONSE ERROR")
+
+    report(response.text)
+
     return HttpResponseRedirect(reverse('catalogue:store_home'))
     # return HttpResponseRedirect(reverse('checkout:payment_successful'))
     # source_id = request.POST.get('source')
