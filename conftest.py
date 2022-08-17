@@ -1,8 +1,6 @@
 import pytest
 from django.core.management import call_command
 from pytest_factoryboy import register
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
 from tests.factories import (  # ProductAttributeFactory,; ProductAttributeValueFactory,
     AccountFactory,
@@ -38,19 +36,8 @@ def db_fixture_setup(django_db_setup, django_db_blocker):
         call_command("migrate")
         call_command("loaddata", "ecommerce/data_fixtures/accounts.json")
         call_command("loaddata", "ecommerce/data_fixtures/catalogue.json")
-        call_command("loaddata", "ecommerce/data_fixtures/db_admin_fixture.json")
-
-
-@pytest.fixture(scope="module")
-def chrome_browser_instance(request):
-    """
-    Provide a selenium webdriver instance
-    """
-    options = Options()
-    options.headless = False
-    browser = webdriver.Chrome(options=options)
-    yield browser
-    browser.close()
+        call_command(
+            "loaddata", "ecommerce/data_fixtures/db_admin_fixture.json")
 
 
 @pytest.fixture
@@ -97,7 +84,10 @@ def customer(db, account_factory):
 
 @pytest.fixture
 def adminuser(db, account_factory):
-    new_account = account_factory.create(name="admin_user", is_staff=True, is_superuser=True)
+    new_account = account_factory.create(
+        first_name="Admin",
+        last_name="Admino",
+        is_staff=True, is_superuser=True)
     return new_account
 
 
