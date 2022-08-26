@@ -10,7 +10,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "3.8.10"
 gunicorn = "^20"
 python-dotenv = "^0.15"
 paypal-checkout-serversdk = "^1"
