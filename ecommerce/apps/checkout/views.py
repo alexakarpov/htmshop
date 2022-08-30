@@ -12,7 +12,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from .forms import EmptyForm
+from .forms import StaxPaymentForm
 # from square.client import Client
 import hashlib
 import json
@@ -34,10 +34,13 @@ def deliverychoices(request):
 
 @login_required
 def payment_selection(request):
+    user = request.user
+    debug_print(user)
     session = request.session
     total = session["purchase"]["total"]
     token = session["purchase"]["token"]
-    form = EmptyForm()
+    form = StaxPaymentForm(
+        initial={'cc_firstname': user.get_first_name(), 'cc_lastname': user.get_last_name()})
     return render(request, "checkout/payment_selection.html", {"total": total,
                                                                "idempotency_token": token,
                                                                "form": form})
@@ -96,10 +99,12 @@ def delivery_address(request):
 
 
 def report(res_text):
+    print("REPORTING")
 
     for i in res_text.split('&'):
         (k, v) = i.split('=')
         print(f"{k} => {v}")
+    print("EOREPORTING")
 
 
 def payment_with_token(request):
@@ -119,36 +124,13 @@ def payment_with_token(request):
     )
 
     if response:
-        print("RESPONSE OK")
+        print("RESPONSE *OK*")
     else:
-        print("RESPONSE ERROR")
+        print("RESPONSE *ERROR*")
 
     report(response.text)
 
     return HttpResponseRedirect(reverse('catalogue:store_home'))
-    # return HttpResponseRedirect(reverse('checkout:payment_successful'))
-    # source_id = request.POST.get('source')
-    # config = dotenv_values()
-    # sq_access_token = config["SQUARE_ACCESS_TOKEN"]
-    # sq_env = settings.SQUARE_ENVIRONMENT
-    # client = Client(access_token=sq_access_token, environment=sq_env)
-
-    # body = {}
-    # body['source_id'] = source_id
-    # body['idempotency_key'] = '7b0f3ec5-086a-4871-8f13-3c81b3875218'
-    # body['amount_money'] = {}
-    # body['amount_money']['amount'] = 888
-    # body['amount_money']['currency'] = 'USD'
-
-    # result = client.payments.create_payment(body)
-
-    # if result.is_success():
-    #     debug_print("SUCCESS")
-    #     return(JsonResponse({"message": "ok"}))
-    # elif result.is_error():
-    #     debug_print("ERROR")
-    #     return(JsonResponse({"message": "notok"}))
-
 
 ####
 # PayPal
@@ -198,5 +180,5 @@ def payment_complete(request):
 @login_required
 def payment_successful(request):
     basket = Basket(request)
-    basket.clear()  # address is missing from the session?!
+    basket.clear()
     return render(request, "checkout/payment_successful.html", {})
