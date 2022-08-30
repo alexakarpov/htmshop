@@ -4,9 +4,6 @@ ENV = "development"
 ########### .env-based keys #################
 
 SECRET_KEY = config["SECRET_KEY"]
-POSTGRES_PASSWORD = config["POSTGRES_PASSWORD"]
-POSTGRES_USER = config["POSTGRES_USER"]
-POSTGRES_DB = config["POSTGRES_DB"]
 PAYPAL_CLIENT_ID = config["PAYPAL_CLIENT_ID"]
 PAYPAL_SECRET = config["PAYPAL_SECRET"]
 PAYPAL_BUSINESS_EMAIL = config["PAYPAL_BUSINESS_EMAIL"]
@@ -19,16 +16,6 @@ PAYPAL_PERSONAL_PASSWORD = config["PAYPAL_PERSONAL_PASSWORD"]
 DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver"]
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": config["POSTGRES_DB"],
-#         "USER": config["POSTGRES_USER"],
-#         "PASSWORD": config["POSTGRES_PASSWORD"],
-#         "HOST": "localhost",
-#     }
-# }
 
 DATABASES = {
     "default": {
