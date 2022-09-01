@@ -12,7 +12,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from .forms import StaxPaymentForm
+# from .forms import StaxPaymentForm
 # from square.client import Client
 import hashlib
 import json
@@ -39,11 +39,12 @@ def payment_selection(request):
     session = request.session
     total = session["purchase"]["total"]
     token = session["purchase"]["token"]
-    form = StaxPaymentForm(
-        initial={'cc_firstname': user.get_first_name(), 'cc_lastname': user.get_last_name()})
+    # form = StaxPaymentForm(
+    # initial = {'cc_firstname': user.get_first_name(), 'cc_lastname': user.get_last_name()})
     return render(request, "checkout/payment_selection.html", {"total": total,
-                                                               "idempotency_token": token,
-                                                               "form": form})
+                                                               #    "idempotency_token": token,
+                                                               #    "form": form
+                                                               })
 
 
 def basket_update_delivery(request):
@@ -69,7 +70,7 @@ def basket_update_delivery(request):
         return response
 
 
-@login_required
+@ login_required
 def delivery_address(request):
     session = request.session
     session["purchase"] = {}
@@ -108,6 +109,7 @@ def report(res_text):
 
 
 def payment_with_token(request):
+    debug_print("processing payment with token")
     payment_token = request.POST['payment_token']
     session = request.session
     total = session["purchase"]["total"]
@@ -177,7 +179,7 @@ def payment_complete(request):
     return JsonResponse("Payment completed!", safe=False)
 
 
-@login_required
+@ login_required
 def payment_successful(request):
     basket = Basket(request)
     basket.clear()
