@@ -1,6 +1,8 @@
 {% extends "../base.html" %}
 {% load static %}
-{% block title %}Payment Selection{%endblock %}
+{% block title %}
+Payment Selection
+{% endblock %}
 {% block content %}
 
 <div class="container">
@@ -18,29 +20,63 @@
     <div class="col-6">
       <p>Pay with Paypal</p>
     </div>
+
     <div class="col-6">
       <p>Pay with a credit card</p>
-      <h3>CollectJS Payment Form</h3>
-      
-      <form action="{% url 'checkout:token_payment' %}" method="post">
+
+      <form
+        action="{% url 'checkout:token_payment' %}"
+        id="cardPayForm"
+        method="post">
         {% csrf_token %}
-        {{ form }}
-        <input id="payButton" role="button" type="submit" class="btn btn-success fw-bold" value="Pay">
+        <div class="row m-1" id="ccnumber"></div>
+        <div class="row m-1" id="ccexp"></div>
+        <div class="row m-1" id="cvv"></div>
+        <input
+          id="payButton"
+          role="button"
+          type="submit"
+          class="btn btn-success fw-bold"
+          value="Pay ${{total}}"/>
       </form>
-
     </div>
   </div>
 
-  <div class="row g-3">
-    <div class="col-md-4 col-lg-4 order-md-last p-0 order-3">
-      <div class="d-flex bd-highlight">
-    </div>
-    <div class="col-md-7 col-lg-8 pe-0 pe-md-5">
-      <div id="paypal-button-container"></div>
-    </div>
-  </div>
+  <script
+      src="https://secure.nmi.com/token/Collect.js"
+      data-tokenization-key="uXRD2W-32WSUp-36EU4c-mbVZ3m"
+      data-variant="inline"
+      data-style-sniffer="true"
+      data-google-font="Montserrat:400"
+      data-validation-callback = "(function (field, valid, message) {console.log(field + ': ' + valid + ' -- ' + message)})"
+
+      data-invalid-css='{
+          "background-color":"red",
+          "color":"white"
+          }'
+      data-valid-css='{
+          "background-color":"#d0ffd0",
+          "color":"black"
+          }'
+
+      data-focus-css='{
+          "background-color":"#202020",
+          "color":"yellow"
+      }'
+      data-timeout-duration = "10000"
+      data-timeout-callback = "(function() {console.log('Timeout reached')})"
+      data-fields-available-callback = "(function() {console.log('Collect.js has added fields to the form')})"
+      data-field-cvv-display = 'required'
+      data-field-ccnumber-title = 'Card Number'
+      data-field-ccnumber-placeholder = '0000 0000 0000 0000'
+      data-field-ccnumber-enable-card-brand-previews= 'true'
+      data-field-ccexp-title = 'Expiration Date'
+      data-field-ccexp-placeholder = '00 / 00'
+      data-field-cvv-display = 'required'
+      data-field-cvv-title = 'CVV Code'
+      data-field-cvv-placeholder = '***'
+      data-currency="USD"
+      data-country="US">
+    </script>
+  {% endblock %}
 </div>
-
-<script src="https://secure.networkmerchants.com/token/Collect.js" data-tokenization-key="uXRD2W-32WSUp-36EU4c-mbVZ3m"></script>
-
-{% endblock %}
