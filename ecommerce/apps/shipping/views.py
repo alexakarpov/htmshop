@@ -5,6 +5,8 @@ from ecommerce.apps.shipping.choice import split_tiers
 from ecommerce.apps.shipping.engine import shipping_choices
 from rest_framework.decorators import api_view
 
+from ecommerce.utils import debug_print
+
 from .serializers import ShippingChoiceSerializer
 
 
@@ -14,7 +16,10 @@ def get_rates(request):
     session = request.session
     address_id = session["address"]["address_id"]
     address = Address.objects.get(id=address_id)
-    tiers = split_tiers(shipping_choices(basket, address))
+    choices = shipping_choices(basket, address)
+    debug_print(f"choices:\n{choices}")
+    tiers = split_tiers(choices)
+    debug_print(f"tiers: \n{tiers}")
 
     e = sorted(tiers["express"])[0]
     r = sorted(tiers["regular"])[0]
