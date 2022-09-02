@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 # from .forms import StaxPaymentForm
 # from square.client import Client
-import hashlib
+# import hashlib
 import json
 import logging
 import requests
@@ -35,10 +35,10 @@ def deliverychoices(request):
 @login_required
 def payment_selection(request):
     user = request.user
-    debug_print(user)
+    debug_print(f"user:\n{user}")
+
     session = request.session
     total = session["purchase"]["total"]
-    token = session["purchase"]["token"]
     # form = StaxPaymentForm(
     # initial = {'cc_firstname': user.get_first_name(), 'cc_lastname': user.get_last_name()})
     return render(request, "checkout/payment_selection.html", {"total": total,
@@ -51,20 +51,19 @@ def basket_update_delivery(request):
     basket = Basket(request)
     if request.POST.get("action") == "post":
         opts = request.POST.get("deliveryoption")
-        debug_print(opts)
+        debug_print(f"delivery option selected: {opts}")
         [_, sprice, _, _] = opts.split("/")
         total = basket.get_total(sprice)
         total = str(total)
-        token = hashlib.md5(str(basket).encode())
-        debug_print(token)
+        # token = hashlib.md5(str(basket).encode())
         session = request.session
         if "purchase" not in request.session:
             session["purchase"] = {"delivery_choice": opts, "total": total}
         else:
             session["purchase"]["delivery_choice"] = opts
             session["purchase"]["total"] = total
+        # debug_print(f"hashed token's hexdigest: {token.hexdigest()}")
 
-        session["purchase"]["token"] = token.hexdigest()
         session.modified = True
         response = JsonResponse({"total": total, "delivery_price": sprice})
         return response
@@ -109,9 +108,22 @@ def report(res_text):
 
 
 def payment_with_token(request):
-    debug_print("processing payment with token")
     payment_token = request.POST['payment_token']
+    debug_print(
+        f"processing payment with token: {payment_token}")
     session = request.session
+
+    d = {}
+
+    for k in session.keys():
+        d[k] = session.get(k)
+
+    debug_print(f"session keys:\n {d}")
+
+    user = request.user
+    fname = user.get_first_name()
+    lname = user.get_last_name()
+
     total = session["purchase"]["total"]
 
     # debug_print(request.POST)
@@ -120,7 +132,9 @@ def payment_with_token(request):
         params={'security_key': config["STAX_SECURITY_KEY"],
                 'amount': total,
                 'type': SALE,
-                'payment_token': payment_token
+                'payment_token': payment_token,
+                'first_name': fname,
+                'last_name': lname
                 },
         headers={},
     )
