@@ -3,7 +3,7 @@ from datetime import datetime
 from json import JSONEncoder
 
 from django.conf import settings
-from rest_framework import serializers
+# from rest_framework import serializers
 
 
 class ShippingChoice():
@@ -19,6 +19,7 @@ class ShippingChoice():
     # basket_update_delivery relies on this format!
     def __repr__(self):
         return f"{self.id}/{self.price}/{self.name}/{self.days}"
+
 
 def rate_to_choice(rate_d):
     return ShippingChoice(
