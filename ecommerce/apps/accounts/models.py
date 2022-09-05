@@ -1,5 +1,6 @@
 import logging
 import uuid
+import json
 
 from django.conf import settings
 from django.contrib.auth.models import (
@@ -132,4 +133,20 @@ class Address(models.Model):
         verbose_name_plural = "Addresses"
 
     def __str__(self):
-        return "{} Address".format(self.full_name)
+        return f"{self.full_name} address ({self.id})"
+
+    def toDict(self):
+        return {
+            "name": self.full_name,
+            "address_line1": self.address_line,
+            "address_line2": self.address_line2,
+            "phone": self.phone,
+            "city_locality": self.town_city,
+            "state_province": self.state_province,
+            "postal_code": self.postcode,
+            "country_code": self.country,
+            # "address_residential_indicator": "yes",
+        }
+
+    def toJSON(self):
+        return json.dumps(self.toDict(), indent=2)
