@@ -11,7 +11,8 @@ def variants(product_type):
     else:
         return []
 
-def debug_print(it):
-    print("========")
+
+def debug_print(it, header="========", footer="^^^^^^^^"):
+    print(f"==={header}===")
     print(it)
-    print("^^^^^^^^")
+    print(f"^^^{footer}^^^")
