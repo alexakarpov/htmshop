@@ -62,7 +62,8 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = [
     "ecommerce.apps.accounts.auth_backend.EmailAuthBackend",
-    "django.contrib.auth.backends.ModelBackend",  # seems to be required for Django admin interface
+    # seems to be required for Django admin interface
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 WSGI_APPLICATION = "ecommerce.wsgi.application"

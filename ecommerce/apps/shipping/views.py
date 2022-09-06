@@ -1,13 +1,17 @@
+import logging
+
 from django.http import JsonResponse
+from rest_framework.decorators import api_view
+
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.shipping.choice import split_tiers
 from ecommerce.apps.shipping.engine import shipping_choices
-from rest_framework.decorators import api_view
-
 from ecommerce.utils import debug_print
 
 from .serializers import ShippingChoiceSerializer
+
+logger = logging.getLogger("django")
 
 
 @api_view(http_method_names=["GET"])
@@ -17,9 +21,14 @@ def get_rates(request):
     address_id = session["address"]["address_id"]
     address = Address.objects.get(id=address_id)
     choices = shipping_choices(basket, address)
-    debug_print(f"choices:\n{choices}")
+
+    if len(choices) == 0:
+        logger.warn("no rates in SE response?")
+        return JsonResponse({"choices": []})
+
+    logger.debug("CHOICES", choices)
     tiers = split_tiers(choices)
-    debug_print(f"tiers: \n{tiers}")
+    logger.debug("TIERS", tiers)
 
     e = sorted(tiers["express"])[0]
     r = sorted(tiers["regular"])[0]

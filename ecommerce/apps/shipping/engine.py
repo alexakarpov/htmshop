@@ -1,14 +1,15 @@
-from .choice import ShippingChoice, rate_to_choice
-from shipengine.errors import ShipEngineError
-from ecommerce.utils import debug_print
-
 import json
-import time
 import logging
+import time
 
 from django.conf import settings
-from ecommerce.apps.basket.basket import get_weight
 from shipengine import ShipEngine
+from shipengine.errors import ShipEngineError
+
+from ecommerce.apps.basket.basket import get_weight
+from ecommerce.utils import debug_print
+
+from .choice import ShippingChoice, rate_to_choice
 
 logger = logging.getLogger("django")
 
