@@ -1,16 +1,16 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from ecommerce.apps.catalogue.models import Product
-from ecommerce.apps.shipping.choice import ShippingChoice
-from ecommerce.utils import variants
+from ecommerce.utils import debug_print
 
-from .basket import Basket, get_weight
+from .basket import Basket
 
 
 def basket_summary(request):
     user = request.user
     basket = Basket(request)
-    w = get_weight(basket.basket.values())
+    debug_print(basket, header="BASKET")
+
     return render(request, "basket/summary.html", {"basket": basket, "user": user})
 
 
