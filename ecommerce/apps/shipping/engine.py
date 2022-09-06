@@ -1,21 +1,35 @@
+from .choice import ShippingChoice, rate_to_choice
+from shipengine.errors import ShipEngineError
+from ecommerce.utils import debug_print
+
 import json
 import time
+import logging
 
 from django.conf import settings
 from ecommerce.apps.basket.basket import get_weight
 from shipengine import ShipEngine
 
-shipengine = ShipEngine({"api_key": settings.SE_API_KEY, "page_size": 75, "retries": 3, "timeout": 10})
+logger = logging.getLogger("django")
 
-from shipengine.errors import ShipEngineError
-
-from .choice import ShippingChoice, rate_to_choice, split_tiers
+shipengine = ShipEngine(
+    {
+        "api_key": settings.SE_API_KEY,
+        "page_size": 75,
+        "retries": 3,
+        "timeout": 10,
+    }
+)
 
 
 def init_shipment_dict():
     return {
         "rate_options": {
-            "carrier_ids": [settings.USPS_ID, settings.FEDEX_ID, settings.UPS_ID],
+            "carrier_ids": [
+                settings.USPS_ID,
+                settings.FEDEX_ID,
+                settings.UPS_ID,
+            ],
             "service_codes": [
                 # USPS
                 # "usps_priority_mail_express",
@@ -65,14 +79,17 @@ def get_rates(engine, shipment):
     return engine.get_rates_from_shipment(shipment)
 
 
-def shipping_choices(basketd, address):
-    # se_response = get_rates(shipengine, make_shipment(basketd, address))
-    # rates = se_response.get("rate_response").get("rates")
-    rates = None
-
-    with open("shipping_jsons/get_rates_response.json", "r") as f:
-        rates = json.load(f).get("rate_response").get("rates")
-
+def shipping_choices(basket, address):
+    logger.debug(basket)
+    logger.debug(address.toJSON())
+    shipment = make_shipment(basket, address)
+    logger.debug(shipment)
+    se_response = get_rates(shipengine, shipment)
+    rates = se_response.get("rate_response").get("rates")
+    # rates = None
+    # with open("shipping_jsons/get_rates_response.json", "r") as f:
+    #     rates = json.load(f).get("rate_response").get("rates")
+    # time.sleep(1)
     choices = list(map(lambda r: rate_to_choice(r), rates))
-    time.sleep(1)
+
     return choices
