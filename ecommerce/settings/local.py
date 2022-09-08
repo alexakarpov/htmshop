@@ -40,12 +40,21 @@ LOGGING = {
         "simple": {"format": "%(levelname)s %(message)s"},
     },
     "handlers": {
-        "console": {"level": "INFO", "class": "logging.StreamHandler", "formatter": "simple"},
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "simple"
+        },
     },
     "loggers": {
         "django": {
             "handlers": ["console"],
             "level": "INFO",
+            "propagate": True,
+        },
+        "console": {
+            "handlers": ["console"],
+            "level": "DEBUG",
             "propagate": True,
         },
     },
