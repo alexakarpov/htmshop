@@ -1,23 +1,25 @@
-from distutils.log import debug
-from .paypal import PayPalClient
-from ecommerce.utils import debug_print
-from ecommerce.apps.orders.models import Order, OrderItem
-from ecommerce.apps.basket.basket import Basket
-from ecommerce.apps.accounts.models import Address
-from django.contrib import messages
-from paypalcheckoutsdk.orders import OrdersGetRequest
-from dotenv import dotenv_values
-from django.urls import reverse
-from django.shortcuts import render
-from django.http import HttpResponseRedirect, JsonResponse
-from django.contrib.auth.decorators import login_required
-from django.conf import settings
 # from .forms import StaxPaymentForm
 # from square.client import Client
 # import hashlib
 import json
 import logging
+
 import requests
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import render
+from django.urls import reverse
+from dotenv import dotenv_values
+from paypalcheckoutsdk.orders import OrdersGetRequest
+
+from ecommerce.apps.accounts.models import Address
+from ecommerce.apps.basket.basket import Basket
+from ecommerce.apps.orders.models import Order, OrderItem
+from ecommerce.utils import debug_print
+
+from .paypal import PayPalClient
 
 config = dotenv_values()
 
@@ -27,12 +29,12 @@ SALE = 'sale'
 logger = logging.getLogger("django")
 
 
-@login_required
+# @login_required
 def deliverychoices(request):
     return render(request, "checkout/delivery_choices.html", {})
 
 
-@login_required
+# @login_required
 def payment_selection(request):
     user = request.user
     debug_print(f"user:\n{user}")
@@ -69,7 +71,7 @@ def basket_update_delivery(request):
         return response
 
 
-@ login_required
+# @ login_required
 def delivery_address(request):
     session = request.session
     session["purchase"] = {}
@@ -153,7 +155,7 @@ def payment_with_token(request):
 ####
 
 
-@ login_required
+# @ login_required
 def payment_complete(request):
     PPClient = PayPalClient()
     logger.info("in payment_complete")
@@ -193,7 +195,7 @@ def payment_complete(request):
     return JsonResponse("Payment completed!", safe=False)
 
 
-@ login_required
+# @ login_required
 def payment_successful(request):
     basket = Basket(request)
     basket.clear()
