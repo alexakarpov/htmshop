@@ -33,9 +33,9 @@ def get_rates(request):
         logger.warn("no rates in SE response?")
         return JsonResponse({"choices": []})
 
-    logger.debug("CHOICES", choices)
+    logger.debug(f"CHOICES: {choices}")
     tiers = split_tiers(choices)
-    logger.debug("TIERS", tiers)
+    logger.debug(f"TIERS: {tiers}")
 
     e = sorted(tiers["express"])[0]
     r = sorted(tiers["regular"])[0]
