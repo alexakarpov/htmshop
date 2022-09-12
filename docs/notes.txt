@@ -16,3 +16,8 @@ coverage html
 ##### renewing cert #####
 
 sudo certbot certonly --nginx -d transylvania.bostonmonks.com
+
+
+#### using find
+
+> find . -name tests.py
