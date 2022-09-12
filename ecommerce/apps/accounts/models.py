@@ -1,13 +1,10 @@
+import json
 import logging
 import uuid
-import json
 
 from django.conf import settings
-from django.contrib.auth.models import (
-    AbstractBaseUser,
-    BaseUserManager,
-    PermissionsMixin,
-)
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import validate_email
@@ -15,7 +12,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from pytz import country_names
 
-logger = logging.getLogger("django")
+logger = logging.getLogger("console")
 
 
 class CustomAccountManager(BaseUserManager):
@@ -79,6 +76,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     class Meta:
+        # app_label = "accounts"
         verbose_name = "Account"
         verbose_name_plural = "Accounts"
 
@@ -133,7 +131,7 @@ class Address(models.Model):
         verbose_name_plural = "Addresses"
 
     def __str__(self):
-        return f"{self.full_name} address ({self.id})"
+        return f"{self.full_name} address ({self.id}):\n{self.toJSON()}\n >>>>>>>>>"
 
     def toDict(self):
         return {
@@ -150,3 +148,16 @@ class Address(models.Model):
 
     def toJSON(self):
         return json.dumps(self.toDict(), indent=2)
+
+    def fromJSONDict(d):
+        logger.debug(f"convertin dict to Address...")
+        x = Address()
+        x.full_name = d["name"]
+        x.address_line = d["address_line1"],
+        x.address_line2 = d["address_line2"],
+        x.phone = d["phone"],
+        x.town_city = d["city_locality"],
+        x.state_province = d["state_province"],
+        x.postcode = d["postal_code"],
+        x.country = d["country_code"]
+        return x
