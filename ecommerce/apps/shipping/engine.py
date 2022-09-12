@@ -85,12 +85,12 @@ def shipping_choices(basket, address):
     logger.debug(address.toJSON())
     shipment = make_shipment(basket, address)
     logger.debug(shipment)
-    se_response = get_rates(shipengine, shipment)
-    rates = se_response.get("rate_response").get("rates")
-    # rates = None
-    # with open("shipping_jsons/get_rates_response.json", "r") as f:
-    #     rates = json.load(f).get("rate_response").get("rates")
-    # time.sleep(1)
+    # se_response = get_rates(shipengine, shipment)
+    # rates = se_response.get("rate_response").get("rates")
+    rates = None
+    with open("shipping_jsons/get_rates_response.json", "r") as f:
+        rates = json.load(f).get("rate_response").get("rates")
+    time.sleep(1)
     choices = list(map(lambda r: rate_to_choice(r), rates))
 
     return choices
