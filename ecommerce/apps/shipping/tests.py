@@ -1,5 +1,4 @@
 import json
-from random import choices
 
 from django.conf import settings
 from rest_framework.test import APIRequestFactory, APITestCase
@@ -13,6 +12,8 @@ from ecommerce.utils import debug_print
 from .choice import ShippingChoice, rate_to_choice, split_tiers
 from .engine import make_shipment
 from .serializers import ShippingChoiceSerializer
+
+# import unittest
 
 
 class SimpleTest(APITestCase):

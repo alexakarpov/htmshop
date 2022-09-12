@@ -1,3 +1,4 @@
+import json
 import logging
 
 from django.http import JsonResponse
@@ -11,15 +12,21 @@ from ecommerce.utils import debug_print
 
 from .serializers import ShippingChoiceSerializer
 
-logger = logging.getLogger("django")
+logger = logging.getLogger("console")
 
 
 @api_view(http_method_names=["GET"])
 def get_rates(request):
     basket = Basket(request)
     session = request.session
-    address_id = session["address"]["address_id"]
-    address = Address.objects.get(id=address_id)
+    logger.debug(" in shipping.views/get_rates")
+
+    address_json = session["address"]
+    logger.debug(f"JSON from the session:\n{address_json}")
+    d = json.loads(address_json)
+    logger.debug(f"JSON dict loaded:\n{d}")
+    address = Address.fromJSONDict(d)
+    logger.debug(f"JSON dict loaded:\n{address}")
     choices = shipping_choices(basket, address)
 
     if len(choices) == 0:

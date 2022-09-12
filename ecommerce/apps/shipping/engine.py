@@ -1,10 +1,10 @@
 import json
 import logging
-import time
 
 from django.conf import settings
 from shipengine import ShipEngine
 from shipengine.errors import ShipEngineError
+from ecommerce.apps.accounts.models import Address
 
 from ecommerce.apps.basket.basket import get_weight
 from ecommerce.utils import debug_print
@@ -64,7 +64,7 @@ def make_package(basketd):
 
 def make_shipment(basketd, address):
     sd = init_shipment_dict()
-    sd["shipment"]["ship_to"]["name"] = address.full_name
+    sd["shipment"]["ship_to"]["full_name"] = address.full_name
     sd["shipment"]["ship_to"]["phone"] = address.phone
     sd["shipment"]["ship_to"]["address_line1"] = address.address_line
     sd["shipment"]["ship_to"]["address_line2"] = address.address_line2
@@ -81,16 +81,14 @@ def get_rates(engine, shipment):
 
 
 def shipping_choices(basket, address):
-    logger.debug(basket)
-    logger.debug(address.toJSON())
+    logger.debug(f"getting shipping choices for basket:\n{basket}")
     shipment = make_shipment(basket, address)
-    logger.debug(shipment)
+    logger.debug(f"built shipment:\n{shipment}")
     # se_response = get_rates(shipengine, shipment)
     # rates = se_response.get("rate_response").get("rates")
     rates = None
     with open("shipping_jsons/get_rates_response.json", "r") as f:
         rates = json.load(f).get("rate_response").get("rates")
-    time.sleep(1)
-    choices = list(map(lambda r: rate_to_choice(r), rates))
 
+    choices = list(map(lambda r: rate_to_choice(r), rates))
     return choices
