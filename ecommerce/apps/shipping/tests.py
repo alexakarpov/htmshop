@@ -23,9 +23,11 @@ class SimpleTest(APITestCase):
         factory = APIRequestFactory()
         request = factory.get('/shipping/get-rates/')
         request.session = {}
-        request.session["address"] = {
-            "address_id": "802596f0-1d01-4770-9a1c-bc453bcd6668"}
 
+        address = Address.objects.first()
+        aj = address.toJSON()
+
+        request.session["address"] = aj
         view = get_rates
         assert Address.objects.count() == 1
         response = view(request)
