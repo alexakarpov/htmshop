@@ -1,16 +1,14 @@
-import imp
 import json
-import unittest
 from random import choices
 
 from django.conf import settings
+from rest_framework.test import APIRequestFactory, APITestCase
 
 # import requests
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import get_weight
 from ecommerce.apps.shipping.views import get_rates
 from ecommerce.utils import debug_print
-from rest_framework.test import APIRequestFactory, APITestCase
 
 from .choice import ShippingChoice, rate_to_choice, split_tiers
 from .engine import make_shipment
