@@ -1,17 +1,18 @@
 import json
 import logging
 
+import requests
 from django.conf import settings
 from shipengine import ShipEngine
 from shipengine.errors import ShipEngineError
-from ecommerce.apps.accounts.models import Address
 
+from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import get_weight
 from ecommerce.utils import debug_print
 
 from .choice import ShippingChoice, rate_to_choice
 
-logger = logging.getLogger("django")
+logger = logging.getLogger("console")
 
 shipengine = ShipEngine(
     {
@@ -62,16 +63,10 @@ def make_package(basketd):
     return {"weight": {"value": get_weight(basketd), "unit": "ounce"}}
 
 
-def make_shipment(basketd, address):
+def make_shipment(basketd, address_d):
     sd = init_shipment_dict()
-    sd["shipment"]["ship_to"]["full_name"] = address.full_name
-    sd["shipment"]["ship_to"]["phone"] = address.phone
-    sd["shipment"]["ship_to"]["address_line1"] = address.address_line
-    sd["shipment"]["ship_to"]["address_line2"] = address.address_line2
-    sd["shipment"]["ship_to"]["city_locality"] = address.town_city
-    sd["shipment"]["ship_to"]["state_province"] = address.state_province
-    sd["shipment"]["ship_to"]["postal_code"] = address.postcode
-    sd["shipment"]["ship_to"]["country_code"] = address.country
+    # sd["shipment"]["ship_to"]["country_code"] = address.country
+    sd["shipment"]["ship_to"] = address_d
     sd["shipment"]["packages"].append(make_package(basketd))
     return sd
 
@@ -80,15 +75,31 @@ def get_rates(engine, shipment):
     return engine.get_rates_from_shipment(shipment)
 
 
-def shipping_choices(basket, address):
+def shipping_choices(basket, address_d):
     logger.debug(f"getting shipping choices for basket:\n{basket}")
-    shipment = make_shipment(basket, address)
+    shipment = make_shipment(basket, address_d)
     logger.debug(f"built shipment:\n{shipment}")
-    # se_response = get_rates(shipengine, shipment)
-    # rates = se_response.get("rate_response").get("rates")
+    rates = []
+    # try:
+    #     se_response = get_rates(shipengine, shipment)
+    #     rates = se_response.get("rate_response").get("rates")
+    # except ShipEngineError as err:
+    #     logger.error(err.to_json())
+
     rates = None
     with open("shipping_jsons/get_rates_response.json", "r") as f:
         rates = json.load(f).get("rate_response").get("rates")
 
     choices = list(map(lambda r: rate_to_choice(r), rates))
     return choices
+
+
+def get_todos():
+    TODOS_URL = 'http://jsonplaceholder.typicode.com/todos'
+
+    print("REAL GET_TODOS EXECUTING!!!")
+    response = requests.get(TODOS_URL)
+    if response.ok:
+        return response
+    else:
+        return None
