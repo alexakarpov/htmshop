@@ -64,7 +64,6 @@ def basket_update_delivery(request):
         else:
             session["purchase"]["delivery_choice"] = opts
             session["purchase"]["total"] = total
-        # debug_print(f"hashed token's hexdigest: {token.hexdigest()}")
 
         session.modified = True
         response = JsonResponse({"total": total, "delivery_price": sprice})
@@ -86,11 +85,13 @@ def delivery_address(request):
         return HttpResponseRedirect(reverse("accounts:addresses"))
 
     if "address" not in request.session:
-        session["address"] = {"address_id": str(addresses[0].id)}
+        # {"address_id": str(addresses[0].id)}
+        session["address"] = addresses[0].toJSON()
         session.modified = True
     else:
-        session["address"]["address_id"] = str(addresses[0].id)
-        session.modified = True
+        a = session["address"]
+        logger.debug(f"Address in session:\n {a}")
+
     return render(
         request,
         "checkout/delivery_address.html",
