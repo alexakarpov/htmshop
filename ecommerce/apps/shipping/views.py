@@ -18,16 +18,13 @@ logger = logging.getLogger("console")
 @api_view(http_method_names=["GET"])
 def get_rates(request):
     basket = Basket(request)
-    session = request.session
-    logger.debug(" in shipping.views/get_rates")
-
-    address_json = session["address"]
-    logger.debug(f"JSON from the session:\n{address_json}")
-    d = json.loads(address_json)
-    logger.debug(f"JSON dict loaded:\n{d}")
-    address = Address.fromJSONDict(d)
-    logger.debug(f"JSON dict loaded:\n{address}")
-    choices = shipping_choices(basket, address)
+    logger.debug(f"get_rates: Basket>\n{basket}")
+    address_json = request.session["address"]
+    logger.debug(f"get_rates: Address JSON from session >\n{address_json}")
+    address_d = json.loads(address_json)
+    logger.debug(f"as a dict:\n{address_d}")
+    # address = Address.fromDict(d) # this generates an ID, which we don't need here
+    choices = shipping_choices(basket, address_d)
 
     if len(choices) == 0:
         logger.warn("no rates in SE response?")
