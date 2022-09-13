@@ -12,14 +12,17 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from dotenv import dotenv_values
-from paypalcheckoutsdk.orders import OrdersGetRequest
 
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order, OrderItem
 from ecommerce.utils import debug_print
 
-from .paypal import PayPalClient
+# from .paypal import PayPalClient
+
+# from paypalcheckoutsdk.orders import OrdersGetRequest
+
+
 
 config = dotenv_values()
 
@@ -75,6 +78,8 @@ def delivery_address(request):
     session = request.session
     session["purchase"] = {}
 
+    # CRASHES if a user is not logged in (upon Checkout click)
+    # should we fetch the address from the session?
     addresses = Address.objects.filter(
         customer=request.user).order_by("-default")
 
@@ -157,43 +162,43 @@ def payment_with_token(request):
 
 
 # @ login_required
-def payment_complete(request):
-    PPClient = PayPalClient()
-    logger.info("in payment_complete")
-    body = json.loads(request.body)
-    logger.info(f"{body}")  # there's just an orderId for now?
-    data = body["orderID"]
-    user_id = request.user.id
+# def payment_complete(request):
+#     PPClient = PayPalClient()
+#     logger.info("in payment_complete")
+#     body = json.loads(request.body)
+#     logger.info(f"{body}")  # there's just an orderId for now?
+#     data = body["orderID"]
+#     user_id = request.user.id
 
-    requestorder = OrdersGetRequest(data)
-    logger.info(f">>>>>>>>> {requestorder} <<<<<<<<")
-    response = PPClient.client.execute(requestorder)
+#     requestorder = OrdersGetRequest(data)
+#     logger.info(f">>>>>>>>> {requestorder} <<<<<<<<")
+#     response = PPClient.client.execute(requestorder)
 
-    total_paid = response.result.purchase_units[0].amount.value
+#     total_paid = response.result.purchase_units[0].amount.value
 
-    basket = Basket(request)
-    order = Order.objects.create(
-        user_id=user_id,
-        full_name=response.result.purchase_units[0].shipping.name.full_name,
-        email=response.result.payer.email_address,
-        address1=response.result.purchase_units[0].shipping.address.address_line_1,
-        address2=response.result.purchase_units[0].shipping.address.admin_area_2,
-        postal_code=response.result.purchase_units[0].shipping.address.postal_code,
-        country_code=response.result.purchase_units[0].shipping.address.country_code,
-        total_paid=response.result.purchase_units[0].amount.value,
-        order_key=response.result.id,
-        payment_option="paypal",
-        billing_status=True,
-    )
-    order_id = order.pk
+#     basket = Basket(request)
+#     order = Order.objects.create(
+#         user_id=user_id,
+#         full_name=response.result.purchase_units[0].shipping.name.full_name,
+#         email=response.result.payer.email_address,
+#         address1=response.result.purchase_units[0].shipping.address.address_line_1,
+#         address2=response.result.purchase_units[0].shipping.address.admin_area_2,
+#         postal_code=response.result.purchase_units[0].shipping.address.postal_code,
+#         country_code=response.result.purchase_units[0].shipping.address.country_code,
+#         total_paid=response.result.purchase_units[0].amount.value,
+#         order_key=response.result.id,
+#         payment_option="paypal",
+#         billing_status=True,
+#     )
+#     order_id = order.pk
 
-    for item in basket:
-        OrderItem.objects.create(
-            order_id=order_id, product=item["product"], price=item["price"], quantity=item["qty"])
+#     for item in basket:
+#         OrderItem.objects.create(
+#             order_id=order_id, product=item["product"], price=item["price"], quantity=item["qty"])
 
-    print("Order created?!")
+#     print("Order created?!")
 
-    return JsonResponse("Payment completed!", safe=False)
+#     return JsonResponse("Payment completed!", safe=False)
 
 
 # @ login_required
