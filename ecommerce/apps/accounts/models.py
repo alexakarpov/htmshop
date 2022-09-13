@@ -135,7 +135,7 @@ class Address(models.Model):
 
     def toDict(self):
         return {
-            "name": self.full_name,
+            "full_name": self.full_name,
             "address_line1": self.address_line,
             "address_line2": self.address_line2,
             "phone": self.phone,
@@ -143,21 +143,8 @@ class Address(models.Model):
             "state_province": self.state_province,
             "postal_code": self.postcode,
             "country_code": self.country,
-            # "address_residential_indicator": "yes",
+            # "address_residential_indicator": "yes", # used by SE
         }
 
     def toJSON(self):
         return json.dumps(self.toDict(), indent=2)
-
-    def fromJSONDict(d):
-        logger.debug(f"convertin dict to Address...")
-        x = Address()
-        x.full_name = d["name"]
-        x.address_line = d["address_line1"],
-        x.address_line2 = d["address_line2"],
-        x.phone = d["phone"],
-        x.town_city = d["city_locality"],
-        x.state_province = d["state_province"],
-        x.postcode = d["postal_code"],
-        x.country = d["country_code"]
-        return x
