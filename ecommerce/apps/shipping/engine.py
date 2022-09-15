@@ -92,14 +92,3 @@ def shipping_choices(basket, address_d):
 
     choices = list(map(lambda r: rate_to_choice(r), rates))
     return choices
-
-
-def get_todos():
-    TODOS_URL = 'http://jsonplaceholder.typicode.com/todos'
-
-    print("REAL GET_TODOS EXECUTING!!!")
-    response = requests.get(TODOS_URL)
-    if response.ok:
-        return response
-    else:
-        return None
