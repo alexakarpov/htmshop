@@ -1,13 +1,17 @@
 import json
+from unittest.mock import Mock, MagicMock, patch
 
+import requests
 from django.conf import settings
+# Third-party imports...
+# from nose.tools import assert_is_not_none, assert_true
 from rest_framework.test import APIRequestFactory, APITestCase
 
+import ecommerce
 # import requests
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import get_weight
 from ecommerce.apps.shipping.views import get_rates
-from ecommerce.utils import debug_print
 
 from .choice import ShippingChoice, rate_to_choice, split_tiers
 from .engine import make_shipment
@@ -48,10 +52,11 @@ class SimpleTest(APITestCase):
         a.address_line = "1 Main St"
         a.postcode = "98765"
 
-        s = make_shipment(b, a)
+        s = make_shipment(b, a.toDict())
         sd = s["shipment"]
         assert sd["ship_from"]["company_name"] == "Holy Transfiguration Monastery"
         assert sd["ship_to"]["postal_code"] == a.postcode
+        assert sd["ship_to"]["full_name"] == a.full_name
         assert sd["ship_to"]["country_code"] == a.country == "US"
         assert sd.get("packages") == [
             {"weight": {"value": 24, "unit": "ounce"}}]
@@ -98,3 +103,20 @@ class SimpleTest(APITestCase):
         assert ser.data.get("price") == 21.99
         assert ser.data.get("id") == "qwe123"
         assert ser.data.get("days") == 9
+
+    @ patch('ecommerce.apps.shipping.engine.shipengine.get_rates_from_shipment')
+    def test_rates_response(self, mock_get_rates_from_shipment):
+        cart = MagicMock()
+        address = MagicMock()
+
+        shipment = make_shipment(cart, address)
+
+        with open("shipping_jsons/get_rates_response.json", "r") as f:
+            rresponse = json.load(f)
+
+        mock_get_rates_from_shipment.return_value = rresponse
+        response = ecommerce.apps.shipping.engine.get_rates(
+            ecommerce.apps.shipping.engine.shipengine, shipment)
+        print("RESPONSE:", response)
+
+        self.assertEquals(response, rresponse)
