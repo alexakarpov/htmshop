@@ -1,7 +1,7 @@
-from shipengine.errors import ShipEngineError
 import json
 
 from shipengine import ShipEngine
+from shipengine.errors import ShipEngineError
 
 SE_SANDBOX_KEY = "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw"
 shipengine = ShipEngine(
