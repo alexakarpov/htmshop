@@ -1,11 +1,10 @@
 import unittest
-from unittest.mock import MagicMock, Mock, patch
+from unittest.mock import patch
 
-from .playground import do_something
+from .base import work
 
 
 class TestPlayground(unittest.TestCase):
-    @patch('ecommerce.apps.playground.foo.foo')
-    def test_foobar(self, mock_foo):
-        mock_foo.return_value = 24
-        self.assertEquals(do_something(), 24)
+    @patch('ecommerce.apps.playground.service.bar', return_value=24)
+    def test_work(self, mock_bar):
+        self.assertEquals(work(), 24)
