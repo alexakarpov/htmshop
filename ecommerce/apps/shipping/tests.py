@@ -1,5 +1,5 @@
 import json
-from unittest.mock import Mock, MagicMock, patch
+from unittest.mock import MagicMock, Mock, patch
 
 import requests
 from django.conf import settings
@@ -117,6 +117,5 @@ class SimpleTest(APITestCase):
         mock_get_rates_from_shipment.return_value = rresponse
         response = ecommerce.apps.shipping.engine.get_rates(
             ecommerce.apps.shipping.engine.shipengine, shipment)
-        print("RESPONSE:", response)
 
         self.assertEquals(response, rresponse)
