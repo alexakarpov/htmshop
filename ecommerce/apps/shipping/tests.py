@@ -105,17 +105,18 @@ class SimpleTest(APITestCase):
         assert ser.data.get("days") == 9
 
     @ patch('ecommerce.apps.shipping.engine.shipengine.get_rates_from_shipment')
-    def test_rates_response(self, mock_get_rates_from_shipment):
+    def test_shipping_choices(self, mock_get_rates_from_shipment):
         cart = MagicMock()
         address = MagicMock()
-
-        shipment = make_shipment(cart, address)
 
         with open("shipping_jsons/get_rates_response.json", "r") as f:
             rresponse = json.load(f)
 
         mock_get_rates_from_shipment.return_value = rresponse
-        response = ecommerce.apps.shipping.engine.get_rates(
-            ecommerce.apps.shipping.engine.shipengine, shipment)
+        response = ecommerce.apps.shipping.engine.shipping_choices(
+            cart, address)
+        print("===\n", response)
+        print("^^^\n", rresponse)
 
-        self.assertEquals(response, rresponse)
+        # TODO: work out a proper assertion
+        self.assertEquals(len(response), 18)
