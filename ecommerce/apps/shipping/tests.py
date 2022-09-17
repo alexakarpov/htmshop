@@ -19,6 +19,19 @@ from .serializers import ShippingChoiceSerializer
 
 # import unittest
 
+test_cart = [
+    {"price": "30.00", "qty": 1, "variant": "8x10",
+     "title": "Holy Napkin", "weight": 16},
+    {"price": "20.00", "qty": 1, "variant": "",
+     "title": "Prayer Book", "weight": 8},
+]
+
+test_address = Address()
+test_address.full_name = "John Doe"
+test_address.address_line = "1 Main St"
+test_address.postcode = "98765"
+test_address.town_city = "Boston"
+
 
 class SimpleTest(APITestCase):
     fixtures = ['accounts.json']
@@ -41,23 +54,13 @@ class SimpleTest(APITestCase):
         self.assertEquals(choices_j[0].get("id"), "se-1573559620")
 
     def test_make_shipment(self):
-        b = [
-            {"price": "30.00", "qty": 1, "variant": "8x10",
-                "title": "Holy Napkin", "weight": 16},
-            {"price": "20.00", "qty": 1, "variant": "",
-                "title": "Prayer Book", "weight": 8},
-        ]
-        a = Address()
-        a.full_name = "John Doe"
-        a.address_line = "1 Main St"
-        a.postcode = "98765"
-
-        s = make_shipment(b, a.toDict())
+        s = make_shipment(test_cart, test_address.toDict())
         sd = s["shipment"]
         assert sd["ship_from"]["company_name"] == "Holy Transfiguration Monastery"
-        assert sd["ship_to"]["postal_code"] == a.postcode
-        assert sd["ship_to"]["full_name"] == a.full_name
-        assert sd["ship_to"]["country_code"] == a.country == "US"
+        assert sd["ship_to"]["postal_code"] == test_address.postcode
+        assert sd["ship_to"]["full_name"] == test_address.full_name
+        assert sd["ship_to"]["country_code"] == test_address.country == "US"
+        assert sd["ship_to"]["city_locality"] == test_address.town_city
         assert sd.get("packages") == [
             {"weight": {"value": 24, "unit": "ounce"}}]
 
@@ -106,17 +109,15 @@ class SimpleTest(APITestCase):
 
     @ patch('ecommerce.apps.shipping.engine.shipengine.get_rates_from_shipment')
     def test_shipping_choices(self, mock_get_rates_from_shipment):
-        cart = MagicMock()
-        address = MagicMock()
-
         with open("shipping_jsons/get_rates_response.json", "r") as f:
             rresponse = json.load(f)
 
         mock_get_rates_from_shipment.return_value = rresponse
-        response = ecommerce.apps.shipping.engine.shipping_choices(
-            cart, address)
-        print("===\n", response)
-        print("^^^\n", rresponse)
+        choices = ecommerce.apps.shipping.engine.shipping_choices(
+            test_cart, test_address)
 
         # TODO: work out a proper assertion
-        self.assertEquals(len(response), 18)
+        c1 = ShippingChoice.from_repr(
+            "usps_priority_mail/20.77/se-1573559617/2")
+        self.assertEquals(len(choices), 18)
+        self.assertIn(c1, choices)
