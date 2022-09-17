@@ -10,7 +10,7 @@ from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import get_weight
 from ecommerce.utils import debug_print
 
-from .choice import ShippingChoice, rate_to_choice
+from .choice import rate_to_choice
 
 logger = logging.getLogger("console")
 
