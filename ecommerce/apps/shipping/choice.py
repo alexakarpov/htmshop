@@ -17,9 +17,19 @@ class ShippingChoice():
         self.id = id
         self.days = days
 
+    def __eq__(self, other):
+        if isinstance(other, ShippingChoice):
+            return self.name == other.name and self.id == other.id and self.price == other.price and self.days == other.days
+        return False
+
+    def from_repr(it):
+        [name, price, id, days] = it.split('/')
+        return ShippingChoice(name, float(price), id, int(days))
+
     # basket_update_delivery relies on this format!
+
     def __repr__(self):
-        return f"{self.id}/{self.price}/{self.name}/{self.days}"
+        return f"{self.name}/{self.price}/{self.id}/{self.days}"
 
 
 def rate_to_choice(rate_d):
