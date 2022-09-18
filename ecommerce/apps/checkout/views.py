@@ -23,7 +23,6 @@ from ecommerce.utils import debug_print
 # from paypalcheckoutsdk.orders import OrdersGetRequest
 
 
-
 config = dotenv_values()
 
 POST_URL = 'https://secure.networkmerchants.com/api/transact.php'
@@ -80,30 +79,34 @@ def delivery_address(request):
 
     # CRASHES if a user is not logged in (upon Checkout click)
     # should we fetch the address from the session?
-    addresses = Address.objects.filter(
-        customer=request.user).order_by("-default")
+    if request.user.is_authenticated:
+        addresses = Address.objects.filter(
+            customer=request.user).order_by("-default")
 
-    if len(addresses) == 0:
-        messages.warning(
-            request, "Enter an address for the checkout")
+        if len(addresses) == 0:
+            messages.warning(
+                request, "Enter an address for the checkout")
 
-        return HttpResponseRedirect(reverse("accounts:addresses"))
+            return HttpResponseRedirect(reverse("accounts:addresses"))
 
-    if "address" not in request.session:
-        # {"address_id": str(addresses[0].id)}
-        session["address"] = addresses[0].toJSON()
-        session.modified = True
+        if "address" not in request.session:
+            # {"address_id": str(addresses[0].id)}
+            session["address"] = addresses[0].toJSON()
+            session.modified = True
+        else:
+            a = session["address"]
+            logger.debug(f"Address in session:\n {a}")
+
+        return render(
+            request,
+            "checkout/delivery_address.html",
+            {
+                "addresses": addresses,
+            },
+        )
     else:
-        a = session["address"]
-        logger.debug(f"Address in session:\n {a}")
-
-    return render(
-        request,
-        "checkout/delivery_address.html",
-        {
-            "addresses": addresses,
-        },
-    )
+        messages.warning(request, "Guest user checkout still work in progress")
+        return HttpResponseRedirect(reverse("catalogue:store_home"))
 
 
 def report(res_text):
