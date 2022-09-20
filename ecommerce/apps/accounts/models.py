@@ -133,7 +133,19 @@ class Address(models.Model):
     def __str__(self):
         return f"{self.full_name} address ({self.id}):\n{self.toJSON()}\n >>>>>>>>>"
 
-    def toDict(self):
+    def from_dict(a_dict):
+        a = Address()
+        a.full_name = a_dict.get("full_name"),
+        a.address_line = a_dict.get("address_line1")
+        a.address_line2 = a_dict.get("address_line2")
+        a.phone = a_dict.get("phone")
+        a.town_city = a_dict.get("city_locality")
+        a.state_province = a_dict.get("state_province")
+        a.postcode = a_dict.get("postal_code")
+        a.country = a_dict.get("country_code")
+        return a
+
+    def to_dict(self):
         return {
             "full_name": self.full_name,
             "address_line1": self.address_line,
@@ -147,4 +159,4 @@ class Address(models.Model):
         }
 
     def toJSON(self):
-        return json.dumps(self.toDict(), indent=2)
+        return json.dumps(self.to_dict(), indent=2)
