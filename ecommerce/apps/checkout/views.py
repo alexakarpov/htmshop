@@ -8,11 +8,12 @@ import requests
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from dotenv import dotenv_values
 
+from ecommerce.apps.accounts.forms import UserAddressForm
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order, OrderItem
@@ -28,11 +29,12 @@ config = dotenv_values()
 POST_URL = 'https://secure.networkmerchants.com/api/transact.php'
 SALE = 'sale'
 
-logger = logging.getLogger("django")
+logger = logging.getLogger("console")
 
 
 # @login_required
 def deliverychoices(request):
+    logger.debug(">> checkout deliverychoices")
     return render(request, "checkout/delivery_choices.html", {})
 
 
@@ -74,6 +76,7 @@ def basket_update_delivery(request):
 
 # @ login_required
 def delivery_address(request):
+    logger.debug(">> checkput delivery_address")
     session = request.session
     session["purchase"] = {}
 
@@ -96,6 +99,8 @@ def delivery_address(request):
         else:
             a = session["address"]
             logger.debug(f"Address in session:\n {a}")
+            adict = json.loads(a)
+            addresses = [Address(adict)]
 
         return render(
             request,
@@ -105,8 +110,34 @@ def delivery_address(request):
             },
         )
     else:
-        messages.warning(request, "Guest user checkout still work in progress")
-        return HttpResponseRedirect(reverse("catalogue:store_home"))
+        messages.warning(request, "Guest user address is now in the session")
+        a = session["address"]
+        logger.debug(f"Address in session:\n {a}")
+        address = json.loads
+        return HttpResponseRedirect(reverse("checkout:guest_address"))
+
+
+def guest_address(request):
+    logger.debug(">> checkput guest_address")
+
+    if request.method == "POST":
+        session = request.session
+        address_form = UserAddressForm(data=request.POST)
+        if address_form.is_valid():
+            address = address_form.save(commit=False)
+            logger.debug(type(address))
+
+            session["address"] = address.toJSON()
+            logger.debug(">> REDIRECTING")
+            return HttpResponseRedirect(reverse("checkout:delivery_address"))
+        else:
+            logger.error("invalid address")
+            for error in address_form.errors:
+                logger.error(error)
+            return HttpResponse("Error handler content", status=400)
+    else:
+        address_form = UserAddressForm()
+    return render(request, "checkout/guest_address.html", {"form": address_form})
 
 
 def report(res_text):
