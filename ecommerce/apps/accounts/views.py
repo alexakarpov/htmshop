@@ -125,9 +125,12 @@ def account_activate(request, uidb64, token):
         return render(request, "accounts/activation_invalid.html")
 
 
-# Addresses
+######### Addresses ###########
+
+#### Guest User ####
 
 
+#### Authenticated User ###########
 @login_required
 def view_address(request):
     addresses = Address.objects.filter(customer=request.user)
