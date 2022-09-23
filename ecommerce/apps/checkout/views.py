@@ -76,31 +76,30 @@ def basket_update_delivery(request):
 
 # @ login_required
 def delivery_address(request):
-    logger.debug(">> checkput delivery_address")
+    logger.debug(">> checkout delivery_address")
     session = request.session
     session["purchase"] = {}
 
-    # CRASHES if a user is not logged in (upon Checkout click)
-    # should we fetch the address from the session?
+    # everetgyng is simple if they are logged in:
     if request.user.is_authenticated:
         addresses = Address.objects.filter(
             customer=request.user).order_by("-default")
 
         if len(addresses) == 0:
-            messages.warning(
-                request, "Enter an address for the checkout")
+            # messages.warning(
+            #     request, "Enter an address for the checkout")
 
             return HttpResponseRedirect(reverse("accounts:addresses"))
 
         if "address" not in request.session:
-            # {"address_id": str(addresses[0].id)}
+            logger.debug("no address in session for authenticated user")
             session["address"] = addresses[0].toJSON()
             session.modified = True
         else:
-            a = session["address"]
-            logger.debug(f"Address in session:\n {a}")
-            adict = json.loads(a)
-            addresses = [Address(adict)]
+            address_json = session["address"]
+            logger.debug(f"Address in session:\n {address_json}")
+            address_dict = json.loads(address_json)
+            addresses = [Address(address_dict)]
 
         return render(
             request,
@@ -109,13 +108,26 @@ def delivery_address(request):
                 "addresses": addresses,
             },
         )
+    #guest user
     else:
-        messages.warning(request, "Guest user address is now in the session")
-        a = session["address"]
-        logger.debug(f"Address in session:\n {a}")
-        address = json.loads
-        return HttpResponseRedirect(reverse("checkout:guest_address"))
+        if "address" not in request.session:
+            logger.debug("no address in session for guest user")
+            messages.warning(
+                request, "Enter an address for the checkout")
 
+            return HttpResponseRedirect(reverse("checkout:guest_address"))
+
+        else:
+            a = session.get("address")
+            logger.debug(f"Address in session:\n {a}")
+            address = json.loads(a)
+            return render(
+                request,
+                "checkout/delivery_choices.html",
+                {
+                    "addresse   s": [address],
+                },
+            )
 
 def guest_address(request):
     logger.debug(">> checkput guest_address")
