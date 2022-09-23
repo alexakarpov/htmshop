@@ -54,7 +54,7 @@ class SimpleTest(APITestCase):
         self.assertEquals(choices_j[0].get("id"), "se-1573559620")
 
     def test_make_shipment(self):
-        s = make_shipment(test_cart, test_address.toDict())
+        s = make_shipment(test_cart, test_address.to_dict())
         sd = s["shipment"]
         assert sd["ship_from"]["company_name"] == "Holy Transfiguration Monastery"
         assert sd["ship_to"]["postal_code"] == test_address.postcode
