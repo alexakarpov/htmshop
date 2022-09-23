@@ -152,13 +152,12 @@ def guest_address(request):
     return render(request, "checkout/guest_address.html", {"form": address_form})
 
 
-def report(res_text):
-    print("REPORTING")
+def report(logger, res_text):
+    logger.debug("REPORTING")
 
     for i in res_text.split('&'):
         (k, v) = i.split('=')
-        print(f"{k} => {v}")
-    print("EOREPORTING")
+        logger.debug(f"{k} => {v}")
 
 
 def payment_with_token(request):
