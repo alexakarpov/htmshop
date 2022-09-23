@@ -86,8 +86,10 @@
       $('#alertbox').show()
       $('#alertbox').text('{{product.title}} added to the cart')
       setTimeout(function() {
-        $('#alertbox').hide()
+        $('#alertbox').hide();
+        window.location.replace('{% url "basket:basket_summary" %}');
       }, 2000); // ok at least something worked
     })
+
 </script>
 {% endblock %}
