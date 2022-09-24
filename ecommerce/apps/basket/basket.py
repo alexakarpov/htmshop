@@ -66,7 +66,7 @@ class Basket:
         """
         Get the basket data and count the qty of items
         """
-        print("in Basket's len")  # TODO remove when done
+        logger.debug("basket __len__ - why?")
         return sum(item["qty"] for item in self.basket.values())
 
     def update(self, product_id, qty):
