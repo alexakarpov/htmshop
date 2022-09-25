@@ -2,7 +2,6 @@ from pint import UnitRegistry
 
 ureg = UnitRegistry()
 
-
 def variants(product_type):
     if product_type.name == "icons":
         return ["8x10", "wallet-size"]
@@ -10,9 +9,3 @@ def variants(product_type):
         return ["1 lb", "1/2 lb", "1 oz"]
     else:
         return []
-
-
-def debug_print(it, header="========", footer="^^^^^^^^"):
-    print(f"==={header}===")
-    print(it)
-    print(f"^^^{footer}^^^")

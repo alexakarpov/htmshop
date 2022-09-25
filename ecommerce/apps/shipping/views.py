@@ -8,7 +8,6 @@ from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.shipping.choice import split_tiers
 from ecommerce.apps.shipping.engine import shipping_choices
-from ecommerce.utils import debug_print
 
 from .serializers import ShippingChoiceSerializer
 

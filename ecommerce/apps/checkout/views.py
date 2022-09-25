@@ -17,7 +17,6 @@ from ecommerce.apps.accounts.forms import UserAddressForm
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order, OrderItem
-from ecommerce.utils import debug_print
 
 # from .paypal import PayPalClient
 
@@ -41,7 +40,7 @@ def deliverychoices(request):
 # @login_required
 def payment_selection(request):
     user = request.user
-    debug_print(f"user:\n{user}")
+    logger.debug(f"payment_selection, user:\n{user}")
 
     session = request.session
     total = session["purchase"]["total"]
@@ -57,7 +56,7 @@ def basket_update_delivery(request):
     basket = Basket(request)
     if request.POST.get("action") == "post":
         opts = request.POST.get("deliveryoption")
-        debug_print(f"delivery option selected: {opts}")
+        logger.debug(f"delivery option selected: {opts}")
         [_, sprice, _, _] = opts.split("/")
         total = basket.get_total(sprice)
         total = str(total)
@@ -76,7 +75,7 @@ def basket_update_delivery(request):
 
 # @ login_required
 def delivery_address(request):
-    logger.debug(">> checkout delivery_address")
+    logger.debug(f">> checkout delivery_address with {request.method}")
     session = request.session
     session["purchase"] = {}
 
@@ -130,17 +129,18 @@ def delivery_address(request):
             )
 
 def guest_address(request):
-    logger.debug(">> checkput guest_address")
+    logger.debug(f"| checkout guest_address with {request.method}")
 
     if request.method == "POST":
         session = request.session
         address_form = UserAddressForm(data=request.POST)
         if address_form.is_valid():
             address = address_form.save(commit=False)
+            #^ is <class 'ecommerce.apps.accounts.models.Address>
             logger.debug(type(address))
 
             session["address"] = address.toJSON()
-            logger.debug(">> REDIRECTING")
+            logger.debug("| form processed, address saved in the session, redirectong to delivery_address")
             return HttpResponseRedirect(reverse("checkout:delivery_address"))
         else:
             logger.error("invalid address")
@@ -162,16 +162,13 @@ def report(logger, res_text):
 
 def payment_with_token(request):
     payment_token = request.POST['payment_token']
-    debug_print(
-        f"processing payment with token: {payment_token}")
+    logger.debug(f"processing payment with token: {payment_token}")
     session = request.session
 
     d = {}
 
     for k in session.keys():
         d[k] = session.get(k)
-
-    debug_print(f"session keys:\n {d}")
 
     user = request.user
     fname = user.get_first_name()

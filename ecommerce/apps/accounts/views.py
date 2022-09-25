@@ -13,7 +13,6 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from ecommerce.apps.catalogue.models import Product
 from ecommerce.apps.orders.models import Order
 from ecommerce.apps.orders.views import user_orders
-from ecommerce.utils import debug_print
 
 from .forms import RegistrationForm, UserAddressForm, UserEditForm
 from .models import Address

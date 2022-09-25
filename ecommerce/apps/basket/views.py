@@ -3,7 +3,6 @@ import logging
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from ecommerce.apps.catalogue.models import Product
-from ecommerce.utils import debug_print
 
 from .basket import Basket
 
