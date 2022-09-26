@@ -44,7 +44,8 @@
                 <div class="p-2 bd-highlight"><span class="fw-bold h5"></span><span id="total"
                                                                                     class="fw-bold h5">-</span></div>
             </div>
-            <form action="{% url 'checkout:' %}" method="post" >
+            <form action="{% url 'checkout:payment_selection' %}" method="post" >
+                {% csrf_token %}
                 <button type="submit" id="to-payment" class="btn btn-success" disabled>To payment</button>
             </form>
 
