@@ -79,8 +79,7 @@
 </div>
 
 <script>
-  const maybePluralize = (count, noun, suffix = 's') =>
-  `${count} ${noun}${count !== 1 ? suffix : ''}`;
+ const maybePluralize = (count, noun, suffix = 's') => `${count} ${noun}${count !== 1 ? suffix : ''}`;
 
   $(document).ready(function() {
     $.ajax({
