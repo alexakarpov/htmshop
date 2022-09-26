@@ -4,134 +4,135 @@
 {% block content %}
 
 <div class="container">
-  <div class="col-12">
-    <h1 class="h2">Your Cart, {{user}}</h1>
-  </div>
-  <div class="col-12">
-    <p>Manage <b>items</b> in your cart</p>
-  </div>
-  <hr />
+    <div class="col-12">
+        <h1 class="h2">Your Cart, {{user}}</h1>
+    </div>
+    <div class="col-12">
+        <p>Manage <b>items</b> in your cart</p>
+    </div>
+    <hr />
 </div>
 <div class="container">
-  <div class="row g-3">
-    {% if basket|length == 0 %}
-      <div class="col-12">Your cart is empty <a href="{% url 'catalogue:store_home' %}">Shop</a></div>
-    {% else %}
-      <div class="col-12 bg-light p-3 d-flex justify-content-between">
-        <div class="text-end">
-          <div class="">Sub Total: <span class="fw-bold">$</span>
-            <div id="subtotal" class="d-inline-flex fw-bold">{{basket.get_subtotal_price}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-5 col-lg-4 order-md-last p-0 order-3">
-        <div class="d-grid gap-2 ">
-          <a role="button" href="{% url 'checkout:delivery_address' %}" class="btn btn-success fw-bold"
-            type="button">Checkout</a>
-          <button class="btn btn-light" type="button">Save for later</button>
-        </div>
-      </div>
-      <div class="col-md-7 col-lg-8 p-0">
-        {% for item in basket %}
-          {% with product=item.product %}
-            <div class="card mb-3 border-0 product-item" data-index="{{product.id}}">
-              <div class="row g-0">
-                <div class="col-md-2 d-none d-md-block">
-                  {% for image in product.product_image.all %}
-                  {% if image.is_feature%}
-                  <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
-                  {% endif %}
-                  {% endfor %}
+    <div class="row g-3">
+        {% if basket|length == 0 %}
+        <div class="col-12">Your cart is empty <a href="{% url 'catalogue:store_home' %}">Shop</a></div>
+        {% else %}
+        <div class="col-12 bg-light p-3 d-flex justify-content-between">
+            <div class="text-end">
+                <div class="">Sub Total: <span class="fw-bold">$</span>
+                    <div id="subtotal" class="d-inline-flex fw-bold">{{basket.get_subtotal_price}}</div>
                 </div>
-                <div class="col-md-10 ps-md-3">
-                  <div class="card-body p-1">
-                    <a class="text-decoration-none text-reset" href="{{item.product.get_absolute_url}}">
-                      <p class="card-text pb-3">{{product.title}} ({{item.variant}})</p>
-                    </a>
-                    <label for="select">Qty</label>
-                    <select id="select{{product.id}}" style="width:50px;height:31px;">
-                      <option value="" selected disabled hidden>{{item.qty}}</option>
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4</option>
-                    </select>
-                    <a type="button" id="update-button" data-index="{{product.id}}"
-                      class="text-decoration-none small ps-3">Update</a>
-                    <a type="button" id="delete-button" data-index="{{product.id}}"
-                      class="delete-button text-decoration-none small">Delete</a>
-                  </div>
-                </div>
-              </div>
             </div>
-          {% endwith %}
-        {% endfor %}
-      </div>
-    {% endif %}
-  </div>
+        </div>
+        <div class="col-md-5 col-lg-4 order-md-last p-0 order-3">
+            <div class="d-grid gap-2 ">
+                <a role="button" href="{% url 'checkout:delivery_address' %}" class="btn btn-success fw-bold"
+                   type="button">Checkout</a>
+                <button class="btn btn-light" type="button">Save for later</button>
+            </div>
+        </div>
+        <div class="col-md-7 col-lg-8 p-0">
+            {% for item in basket %}
+            {% with product=item.product %}
+            <div class="card mb-3 border-0 product-item" data-index="{{product.id}}">
+                <div class="row g-0">
+                    <div class="col-md-2 d-none d-md-block">
+                        {% for image in product.product_image.all %}
+                        {% if image.is_feature%}
+                        <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-10 ps-md-3">
+                        <div class="card-body p-1">
+                            <a class="text-decoration-none text-reset" href="{{item.product.get_absolute_url}}">
+                                <p class="card-text pb-3">{{product.title}} ({{item.variant}})</p>
+                            </a>
+                            <label for="select">Qty</label>
+                            <select id="select{{product.id}}" style="width:50px;height:31px;">
+                                <option value="" selected disabled hidden>{{item.qty}}</option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                                <option value="">4</option>
+                            </select>
+                            <a type="button" id="update-button" data-index="{{product.id}}"
+                               class="text-decoration-none small ps-3">Update</a>
+                            <a type="button" id="delete-button" data-index="{{product.id}}"
+                               class="delete-button text-decoration-none small">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
 </div>
 
 <script>
-  // Delete Item
-  $(document).on("click", "#delete-button", function (e) {
-    e.preventDefault();
-    var prodid = $(this).data("index");
-    $.ajax({
-      type: "POST",
-      url: '{% url "basket:basket_delete" %}',
-      data: {
-        productid: $(this).data("index"),
-        csrfmiddlewaretoken: "{{csrf_token}}",
-        action: "post",
-      },
-      success: function (json) {
-        $('.product-item[data-index="' + prodid + '"]').remove();
+ // Delete Item
+ $(document).on("click", "#delete-button", function (e) {
+     e.preventDefault();
+     var prodid = $(this).data("index");
+     $.ajax({
+         type: "POST",
+         url: '{% url "basket:basket_delete" %}',
+         data: {
+             productid: $(this).data("index"),
+             csrfmiddlewaretoken: "{{csrf_token}}",
+             action: "post",
+         },
+         success: function (json) {
+             $('.product-item[data-index="' + prodid + '"]').remove();
 
-        if (json.qty == 0) {
-          total = 0
-          subtotal = 0
-        } else {
-          total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
-          subtotal = json.subtotal
-        }
+             if (json.qty == 0) {
+                 total = 0
+                 subtotal = 0
+             } else {
+                 total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
+                 subtotal = json.subtotal
+             }
 
-        $("#subtotal").html(subtotal);
-        $("#basket-qty").html(json.qty);
-        $("#total").html(total);
-      },
-      error: function (xhr, errmsg, err) {},
-    });
-  });
+             $("#subtotal").html(subtotal);
+             $("#basket-qty").html(json.qty);
+             $("#total").html(total);
+         },
+         error: function (xhr, errmsg, err) {},
+     });
+ });
 
-  // Update Item
-  $(document).on("click", "#update-button", function (e) {
-    e.preventDefault();
-    var prodid = $(this).data("index");
-    $.ajax({
-      type: "POST",
-      url: '{% url "basket:basket_update" %}',
-      data: {
-        productid: $(this).data("index"),
-        productqty: $("#select" + prodid + " option:selected").text(),
-        csrfmiddlewaretoken: "{{csrf_token}}",
-        action: "post",
-      },
-      success: function (json) {
-        total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
-        $("#basket-qty").html(json.qty);
-        $("#subtotal").html(json.subtotal);
-        $("#total").html(total);
-      },
-      error: function (xhr, errmsg, err) {
-        console.warn("there was an error");
-      },
-    });
-    $("#alertbox").show();
-    $("#alertbox").text("cart updated");
-    setTimeout(function() {
-        $('#alertbox').hide();
-      }, 2000);
-  });
+ // Update Item
+ $(document).on("click", "#update-button", function (e) {
+     e.preventDefault();
+     var prodid = $(this).data("index");
+     $.ajax({
+         type: "POST",
+         url: '{% url "basket:basket_update" %}',
+         data: {
+             productid: $(this).data("index"),
+             productqty: $("#select" + prodid + " option:selected").text(),
+             csrfmiddlewaretoken: "{{csrf_token}}",
+             action: "post",
+         },
+         success: function (json) {
+             total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
+
+             $("#basket-qty").html(json.qty);
+             $("#subtotal").html(json.subtotal);
+             $("#total").html(total);
+         },
+         error: function (xhr, errmsg, err) {
+             console.error(errmsg);
+         },
+     });
+     $("#alertbox").show();
+     $("#alertbox").text("cart updated");
+     setTimeout(function() {
+         $('#alertbox').hide();
+     }, 2000);
+ });
 </script>
 
 {% endblock %}
