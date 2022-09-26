@@ -44,7 +44,9 @@
                 <div class="p-2 bd-highlight"><span class="fw-bold h5"></span><span id="total"
                                                                                     class="fw-bold h5">-</span></div>
             </div>
-            <button type="submit" id="to-payment" class="btn btn-success" disabled>To payment</button>
+            <form action="{% url 'checkout:' %}" method="post" >
+                <button type="submit" id="to-payment" class="btn btn-success" disabled>To payment</button>
+            </form>
 
         </div>
         <div id="shippingoptions" class="col-md-7 col-lg-8">
