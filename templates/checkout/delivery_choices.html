@@ -81,47 +81,45 @@
 <script>
  const maybePluralize = (count, noun, suffix = 's') => `${count} ${noun}${count !== 1 ? suffix : ''}`;
 
-  $(document).ready(function() {
-    $.ajax({
-      type: 'GET',
-      url: '/shipping/get-rates',
-      success: function(response) {
-        $('#spinner').hide()
-        rc = response.choices[0]
-        fc = response.choices[1]
-        ec = response.choices[2]
-        $("#regular > input").val(`${rc.id}/${rc.price}/${rc.name}/${rc.days}`)
-        $("#fast > input").val(`${fc.id}/${fc.price}/${fc.name}/${fc.days}`)
-        $("#express > input").val(`${ec.id}/${ec.price}/${ec.name}/${ec.days}`)
-        $("#regular-days").text(`Your order should arrive within ${maybePluralize(rc.days,'day')} once shipped`)
-        $("#fast-days").text(`Your order should arrive within ${maybePluralize(fc.days,'day')} once shipped`)
-        $("#express-days").text(`Your order should arrive within ${maybePluralize(ec.days,'day')} once shipped`)
-      },
-      error: function(error) {
-        console.log(error)
-      }
-    })
-  })
+ $(document).ready(function() {
+     $.ajax({
+         type: 'GET',
+         url: '/shipping/get-rates',
+         success: function(response) {
+             $('#spinner').hide()
+             rc = response.choices[0]
+             fc = response.choices[1]
+             ec = response.choices[2]
+             $("#regular > input").val(`${rc.id}/${rc.price}/${rc.name}/${rc.days}`)
+             $("#fast > input").val(`${fc.id}/${fc.price}/${fc.name}/${fc.days}`)
+             $("#express > input").val(`${ec.id}/${ec.price}/${ec.name}/${ec.days}`)
+             $("#regular-days").text(`Your order should arrive within ${maybePluralize(rc.days,'day')} once shipped`)
+             $("#fast-days").text(`Your order should arrive within ${maybePluralize(fc.days,'day')} once shipped`)
+             $("#express-days").text(`Your order should arrive within ${maybePluralize(ec.days,'day')} once shipped`)
+         },
+         error: function(error) {
+             console.log(error)
+         }
+     })
+ })
 
-  $('input[type=radio][name=deliveryOption]').on('change', function(e) {
-    e.preventDefault();
-    $.ajax({
-      type: "POST",
-      url: '{% url "checkout:basket_update_delivery" %}',
-      data: {
-        deliveryoption: $(this).val(),
-        csrfmiddlewaretoken: "{{csrf_token}}",
-        action: "post",
-      },
-      success: function (json) {
-        document.getElementById("total").innerHTML = '$' + json.total;
-        document.getElementById("delivery_price").innerHTML = '$' + json.delivery_price;
-      },
-      error: function (xhr, errmsg, err) {},
-    });
-
-  });
+ $('input[type=radio][name=deliveryOption]').on('change', function(e) {
+     e.preventDefault();
+     $.ajax({
+         type: "POST",
+         url: '{% url "checkout:basket_update_delivery" %}',
+         data: {
+             deliveryoption: $(this).val(),
+             csrfmiddlewaretoken: "{{csrf_token}}",
+             action: "post",
+         },
+         success: function (json) {
+             $('#to-payment').prop('disabled', false)
+             document.getElementById("total").innerHTML = '$' + json.total;
+             document.getElementById("delivery_price").innerHTML = '$' + json.delivery_price;
+         },
+         error: function (xhr, errmsg, err) {},
+     });
+ });
 </script>
-
-
 {% endblock %}
