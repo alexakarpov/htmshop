@@ -2,14 +2,11 @@ import logging
 
 from attr import attrs
 from django import forms
-from django.contrib.auth import authenticate, get_user_model, password_validation
-from django.contrib.auth.forms import (
-    AuthenticationForm,
-    PasswordResetForm,
-    SetPasswordForm,
-    UserChangeForm,
-    UserCreationForm,
-)
+from django.contrib.auth import (authenticate, get_user_model,
+                                 password_validation)
+from django.contrib.auth.forms import (AuthenticationForm, PasswordResetForm,
+                                       SetPasswordForm, UserChangeForm,
+                                       UserCreationForm)
 from django.utils.translation import gettext_lazy as _
 
 from .models import Address
@@ -295,18 +292,27 @@ class UserEditForm(forms.ModelForm):
         ),
     )
 
-    name = forms.CharField(
-        label="Your name or nickname",
-        max_length=30,
+    first_name = forms.CharField(
+        label=_("First name"),
+        max_length=20,
         widget=forms.TextInput(
             attrs={"class": "form-control mb-3",
-                   "placeholder": "short name", "id": "form-short-name"}
+                   "placeholder": "first name", "id": "form-first-name"}
+        ),
+    )
+
+    last_name = forms.CharField(
+        label=_("Last name"),
+        max_length=20,
+        widget=forms.TextInput(
+            attrs={"class": "form-control mb-3",
+                   "placeholder": "last name", "id": "form-last-name"}
         ),
     )
 
     class Meta:
         model = UserModel
-        fields = ("email", "name")
+        fields = ("email", "first_name", "last_name")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
