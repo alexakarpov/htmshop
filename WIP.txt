@@ -1,4 +1,1 @@
-ok so guest use presses checkout
-
-that takes him to checlout/views delivery_address, which redirects to guest_address
- there on filling out and submitting the form, we have the address in the session and are 
+building inventory
