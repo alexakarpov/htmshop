@@ -22,3 +22,18 @@ describe('wheee, a second spec', () => {
       cy.title().should('eq', 'HTM Store')
   })
 })
+
+describe("Login", () => {
+  before(() => {
+    cy.fixture("accounts.json").as("mockedUsers");
+  });
+
+  it("Can login through the UI", function () {
+    cy.visit("localhost:8000/accounts/login/");
+    cy.get("input[name='email']").type(this.mockedUsers[1].fields.email);
+    cy.get("input[name='password']").type("pass");
+    cy.get(".account-form").submit();
+    cy.getCookie("sessionid").should("exist");
+    cy.get("#dashboard_title").should('have.text', 'Your Account (alexandre.karpov@protonmail.com)');
+  });
+});
