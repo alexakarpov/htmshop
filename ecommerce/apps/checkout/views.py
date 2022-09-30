@@ -40,7 +40,7 @@ def deliverychoices(request):
 # @login_required
 def payment_selection(request):
     user = request.user
-    logger.debug(f"payment_selection, user:\n{user}")
+    logger.debug(f"user:\n{user}")
 
     session = request.session
     total = session["purchase"]["total"]
@@ -162,7 +162,8 @@ def report(logger, res_text):
 
 def payment_with_token(request):
     payment_token = request.POST['payment_token']
-    logger.debug(f"processing payment with token: {payment_token}")
+    logger.debug(
+        f"processing payment with token: {payment_token}")
     session = request.session
 
     d = {}
@@ -170,9 +171,21 @@ def payment_with_token(request):
     for k in session.keys():
         d[k] = session.get(k)
 
-    user = request.user
-    fname = user.get_first_name()
-    lname = user.get_last_name()
+    logger.debug(f"session keys:\n {d}")
+
+    # AnonymousUser doesn't have these
+
+    if request.user.is_authenticated:
+        user = request.user
+        fname = user.get_first_name()
+        lname = user.get_last_name()
+    else:
+        session = request.session
+        address_json = session["address"]
+        try:
+            fname, lname = json.loads(address_json).get("full_name").split(' ')
+        except ValueError:
+            fname = lname = ""
 
     total = session["purchase"]["total"]
 
@@ -189,12 +202,10 @@ def payment_with_token(request):
         headers={},
     )
 
-    if response:
-        print("RESPONSE *OK*")
-    else:
-        print("RESPONSE *ERROR*")
+    if not response:
+        logger.error("RESPONSE ERROR")
 
-    report(response.text)
+    report(logger, response.text)
 
     return HttpResponseRedirect(reverse('catalogue:store_home'))
 
