@@ -3,7 +3,7 @@
 SESSIONNAME="devservers"
 tmux has-session -t $SESSIONNAME &> /dev/null
 
-if [ $? != 0 ] 
+if [ $? != 0 ]
  then
     tmux new -s $SESSIONNAME -d
     tmux split-window -h -t $SESSIONNAME
