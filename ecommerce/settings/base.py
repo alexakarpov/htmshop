@@ -25,7 +25,6 @@ INSTALLED_APPS = [
     "ecommerce.apps.checkout",
     "ecommerce.apps.shipping",
     "ecommerce.apps.playground",
-    "ecommerce.apps.inventory",
     "rest_framework",
     # "djpaypal",
 ]
