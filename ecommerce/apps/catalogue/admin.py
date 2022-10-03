@@ -1,37 +1,34 @@
 from django import forms
 from django.contrib import admin
 
-from .models import (  # ProductAttribute,; ProductAttributeValue,
-    Category,
-    Product,
-    ProductImage,
-    ProductType,
-)
+from .models import (Category, Product, ProductImage, ProductSpecification,
+                     ProductSpecificationValue, ProductType)
 
 admin.site.register(Category)
 
 
-# class ProductAttributeInline(admin.TabularInline):
-#     model = ProductAttribute
+class ProductSpecificationInline(admin.TabularInline):
+    model = ProductSpecification
 
 
-@admin.register(ProductType)
+@ admin.register(ProductType)
 class ProductTypeAdmin(admin.ModelAdmin):
     inlines = [
-        # ProductAttributeInline,
+        ProductSpecificationInline,
     ]
+
+
+class ProductSpecificationValueInline(admin.TabularInline):
+    model = ProductSpecificationValue
 
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
 
 
-# class ProductAttributeValueInline(admin.TabularInline):
-#     model = ProductAttributeValue
-
-
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     inlines = [
         ProductImageInline,
+        ProductSpecificationValueInline,
     ]
