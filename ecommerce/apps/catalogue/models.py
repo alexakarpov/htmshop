@@ -144,11 +144,6 @@ class ProductImage(models.Model):
 
 
 class ProductSpecification(models.Model):
-    """
-    The Product Specification Table contains product
-    specifiction or features for the product types.
-    """
-
     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
     name = models.CharField(verbose_name=_(
         "Name"), help_text=_("Required"), max_length=255)
@@ -162,11 +157,6 @@ class ProductSpecification(models.Model):
 
 
 class ProductSpecificationValue(models.Model):
-    """
-    The Product Specification Value table holds each of the
-    products individual specification or bespoke features.
-    """
-
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     specification = models.ForeignKey(
         ProductSpecification, on_delete=models.RESTRICT)
