@@ -1,14 +1,15 @@
 from django import forms
 from django.contrib import admin
 
-from .models import (Category, Product, ProductImage, ProductSpecification,
-                     ProductSpecificationValue, ProductType)
+from .models import (Category, Product, ProductAttribute,
+                     ProductAttributeValue, ProductImage, ProductType,
+                     ProductTypeAttribute)
 
 admin.site.register(Category)
 
 
 class ProductSpecificationInline(admin.TabularInline):
-    model = ProductSpecification
+    model = ProductTypeAttribute
 
 
 @ admin.register(ProductType)
@@ -18,8 +19,8 @@ class ProductTypeAdmin(admin.ModelAdmin):
     ]
 
 
-class ProductSpecificationValueInline(admin.TabularInline):
-    model = ProductSpecificationValue
+# class ProductSpecificationValueInline(admin.TabularInline):
+#     model = ProductSpecificationValue
 
 
 class ProductImageInline(admin.TabularInline):
@@ -30,5 +31,5 @@ class ProductImageInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [
         ProductImageInline,
-        ProductSpecificationValueInline,
+        # ProductSpecificationValueInline,
     ]

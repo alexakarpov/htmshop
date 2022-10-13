@@ -1,1 +1,2 @@
-building inventory
+we need m2m between types and specs/attributes
+

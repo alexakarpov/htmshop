@@ -22,12 +22,7 @@ class Category(models.Model):
     is_active = models.BooleanField(default=True)
 
     class Meta:
-        # enforcing that there can not be two categories under a parent with same slug
-
-        # __str__ method elaborated later in post.  use __unicode__ in place of
-
-        # __str__ if you are using python 2
-
+        # enforcing that there can only be one category under a parent with same slug
         unique_together = (
             "slug",
             "parent",
@@ -48,16 +43,15 @@ class Category(models.Model):
 
 class ProductType(models.Model):
     """
-    ProductType Table will provide a list of the different types
-    of products that are for sale.
+      product_type table - books, mounted icons, incense - each type will have related specifications (Attributes).
     """
-
-    name = models.CharField(verbose_name=_("Product Type name"), help_text=_(
-        "Required"), max_length=255, unique=True)
-    is_active = models.BooleanField(default=True)
+    name = models.CharField(
+        verbose_name=_("Product Type name"),
+        help_text=_("Required"),
+        max_length=55,
+        unique=True)
 
     class Meta:
-        verbose_name = _("Product Type")
         verbose_name_plural = _("Product Types")
 
     def __str__(self):
@@ -66,12 +60,17 @@ class ProductType(models.Model):
 
 class Product(models.Model):
     """
-    The Product table.
+      The product table. This class is meant to be "abstract" in a sense that items added to a shopping cart
+      will be a Product+Product Attributes which are required by it's ProductType 
     """
 
     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
     category = models.ForeignKey(
-        Category, null=True, blank=True, on_delete=models.RESTRICT)
+        Category,
+        null=True,
+        blank=True,
+        on_delete=models.RESTRICT
+    )
     title = models.CharField(
         verbose_name=_("title"),
         help_text=_("Required"),
@@ -97,7 +96,7 @@ class Product(models.Model):
     )
     created_at = models.DateTimeField(
         _("Created at"), auto_now_add=True, editable=False)
-    updated_at = models.DateTimeField(_("Updated at"), auto_now=True)
+
     users_wishlist = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="user_wishlist", blank=True)
 
@@ -113,65 +112,62 @@ class Product(models.Model):
         return self.title
 
 
-class ProductImage(models.Model):
+class ProductAttribute(models.Model):
     """
-    The Product Image table.
+    product_attribute table
     """
 
-    product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="product_image")
-    image = models.ImageField(
-        verbose_name=_("image"),
-        help_text=_("Upload a product image"),
-        upload_to="images/",
-        default="images/default.png",
+    name = models.CharField(
+        max_length=55,
+        unique=True,
+        null=False,
+        blank=False,
+        verbose_name=_("product attribute name"),
+        help_text=_("format: required, unique, max-55"),
     )
-    alt_text = models.CharField(
-        verbose_name=_("Alturnative text"),
-        help_text=_("Please add alturnative text"),
-        max_length=255,
-        null=True,
-        blank=True,
-        default="some image alt text",
+    description = models.TextField(
+        unique=False,
+        null=False,
+        blank=False,
+        verbose_name=_("product attribute description"),
+        help_text=_("format: required"),
     )
-    is_feature = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = _("Product Image")
-        verbose_name_plural = _("Product Images")
-
-
-class ProductSpecification(models.Model):
-    product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
-    name = models.CharField(verbose_name=_(
-        "Name"), help_text=_("Required"), max_length=255)
-
-    class Meta:
-        verbose_name = _("Product Specification")
-        verbose_name_plural = _("Product Specifications")
 
     def __str__(self):
         return self.name
 
 
-class ProductSpecificationValue(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    specification = models.ForeignKey(
-        ProductSpecification, on_delete=models.RESTRICT)
-    value = models.CharField(
-        verbose_name=_("value"),
-        help_text=_("Product specification value (maximum of 255 words"),
-        max_length=255,
+class ProductTypeAttribute(models.Model):
+    """
+    Product type attributes link table
+    """
+
+    product_attribute = models.ForeignKey(
+        ProductAttribute,
+        related_name="product_attribute",
+        on_delete=models.PROTECT,
+    )
+    product_type = models.ForeignKey(
+        ProductType,
+        related_name="product_type",
+        on_delete=models.PROTECT,
     )
 
     class Meta:
-        verbose_name = _("Product Specification Value")
-        verbose_name_plural = _("Product Specification Values")
+        unique_together = (("product_attribute", "product_type"),)
 
-    def __str__(self):
-        return self.value
+
+class ProductAttributeValue(models.Model):
+    value = models.CharField(
+        verbose_name=_("Specification Value"),
+        max_length=20
+    )
+    spec = models.ForeignKey(ProductTypeAttribute,
+                             on_delete=models.CASCADE)
+    type = models.ForeignKey('ProductInventory', on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.spec.name} -> {self.value}"
 
 
 class ProductImage(models.Model):
@@ -201,3 +197,16 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = _("Product Image")
         verbose_name_plural = _("Product Images")
+
+
+class ProductInventory(models.Model):
+    sku = models.CharField(unique=True,
+                           max_length=20,
+                           blank=False,
+                           null=False)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
+    attributes = models.ManyToManyField(
+        ProductTypeAttribute,
+        through=ProductAttributeValue
+    )
