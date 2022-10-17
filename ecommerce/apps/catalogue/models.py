@@ -134,7 +134,7 @@ class ProductAttribute(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return f"{self.product_type.name} > {self.name}"
 
 
 class ProductTypeAttribute(models.Model):
