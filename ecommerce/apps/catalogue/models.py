@@ -43,7 +43,7 @@ class Category(models.Model):
 
 class ProductType(models.Model):
     """
-      product_type table - books, mounted icons, incense - each type will have related specifications (Attributes).
+      product_type table - books, mounted icons, incense - each type will have related specifications.
     """
     name = models.CharField(
         verbose_name=_("Product Type name"),
@@ -79,16 +79,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name=_(
         "description"), help_text=_("Not Required"), blank=True)
     slug = models.SlugField(max_length=255)
-    # price = models.DecimalField(
-    #     verbose_name=_("Price"),
-    #     error_messages={
-    #         "name": {
-    #             "max_length": _("The price must be between 0 and 9999.99."),
-    #         },
-    #     },
-    #     max_digits=6,
-    #     decimal_places=2,
-    # )
+
     is_active = models.BooleanField(
         verbose_name=_("Product visibility"),
         help_text=_("Change product visibility"),
@@ -110,64 +101,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class ProductAttribute(models.Model):
-    """
-    product_attribute table
-    """
-
-    name = models.CharField(
-        max_length=55,
-        unique=True,
-        null=False,
-        blank=False,
-        verbose_name=_("product attribute name"),
-        help_text=_("format: required, unique, max-55"),
-    )
-    description = models.TextField(
-        unique=False,
-        null=False,
-        blank=False,
-        verbose_name=_("product attribute description"),
-        help_text=_("format: required"),
-    )
-
-    def __str__(self):
-        return f"{self.product_type.name} > {self.name}"
-
-
-class ProductTypeAttribute(models.Model):
-    """
-    Product type attributes link table
-    """
-
-    product_attribute = models.ForeignKey(
-        ProductAttribute,
-        related_name="product_attribute",
-        on_delete=models.PROTECT,
-    )
-    product_type = models.ForeignKey(
-        ProductType,
-        related_name="product_type",
-        on_delete=models.PROTECT,
-    )
-
-    class Meta:
-        unique_together = (("product_attribute", "product_type"),)
-
-
-class ProductAttributeValue(models.Model):
-    value = models.CharField(
-        verbose_name=_("Specification Value"),
-        max_length=20
-    )
-    spec = models.ForeignKey(ProductTypeAttribute,
-                             on_delete=models.CASCADE)
-    type = models.ForeignKey('ProductInventory', on_delete=models.CASCADE)
-
-    def __str__(self) -> str:
-        return f"{self.spec.name} -> {self.value}"
 
 
 class ProductImage(models.Model):
@@ -199,14 +132,65 @@ class ProductImage(models.Model):
         verbose_name_plural = _("Product Images")
 
 
-class ProductInventory(models.Model):
-    sku = models.CharField(unique=True,
-                           max_length=20,
-                           blank=False,
-                           null=False)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
-    attributes = models.ManyToManyField(
-        ProductTypeAttribute,
-        through=ProductAttributeValue
+class ProductSpecification(models.Model):
+    """
+    The Product Specification Table contains product
+    specifiction or features for the product types.
+    One Product can come in many variants/specification
+    """
+
+    product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
+    name = models.CharField(
+        verbose_name=_("Name"),
+        help_text=_("Required"),
+        max_length=55
     )
+
+    class Meta:
+        verbose_name = _("specification")
+        verbose_name_plural = _("Associated Specifications")
+
+    def __str__(self):
+        return f"{self.product_type}.{self.name}"
+
+
+class ProductInventory(models.Model):
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    specifications = models.ManyToManyField(ProductSpecification,
+                                            through='ProductSpecificationValue')
+    sku = models.CharField(
+        verbose_name=_("Product SKU"),
+        help_text=_("Required"),
+        max_length=10,
+        unique=True
+    )
+
+    quantity = models.IntegerField()
+
+    class Meta:
+        verbose_name = _("Product Inventory Record")
+        verbose_name_plural = _("Inventory Records")
+
+    def __str__(self):
+        return self.sku
+
+
+class ProductSpecificationValue(models.Model):
+    specification = models.ForeignKey(
+        ProductSpecification,
+        on_delete=models.CASCADE)
+
+    value = models.CharField(
+        max_length=20,
+        blank=False
+    )
+
+    sku = models.ForeignKey(ProductInventory, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.sku.product.title} -> {self.specification.name} spec ({self.value})"
+
+    class Meta:
+        verbose_name = _("Product spec")
+        verbose_name_plural = _("Product specs")
