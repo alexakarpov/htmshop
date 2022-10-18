@@ -23,30 +23,27 @@
     "model": "catalogue.producttype",
     "pk": 1,
     "fields": {
-      "name": "icons",
-      "is_active": true
+      "name": "book"
     }
   },
   {
     "model": "catalogue.producttype",
     "pk": 2,
     "fields": {
-      "name": "books",
-      "is_active": true
+      "name": "mounted_icon"
     }
   },
   {
     "model": "catalogue.product",
     "pk": 1,
     "fields": {
-      "product_type": 2,
+      "product_type": 1,
       "category": 1,
-      "title": "Prayer Book",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "slug": "prayer-book",
+      "title": "Prayer book",
+      "description": "qwe asd zxc",
+      "slug": "pb",
       "is_active": true,
-      "created_at": "2022-01-13T04:46:03.769Z",
-      "updated_at": "2022-01-13T04:46:03.769Z",
+      "created_at": "2022-10-18T00:58:33.232Z",
       "users_wishlist": []
     }
   },
@@ -54,15 +51,117 @@
     "model": "catalogue.product",
     "pk": 2,
     "fields": {
-      "product_type": 1,
+      "product_type": 2,
       "category": 2,
       "title": "Holy Napkin",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "slug": "holy-napkin",
+      "description": "rewrew dsadsa cxzcxz",
+      "slug": "hn",
       "is_active": true,
-      "created_at": "2022-01-13T04:47:21.163Z",
-      "updated_at": "2022-01-13T04:48:21.606Z",
+      "created_at": "2022-10-18T00:59:19.303Z",
       "users_wishlist": []
+    }
+  },
+  {
+    "model": "catalogue.productspecification",
+    "pk": 1,
+    "fields": {
+      "product_type": 1,
+      "name": "weight"
+    }
+  },
+  {
+    "model": "catalogue.productspecification",
+    "pk": 2,
+    "fields": {
+      "product_type": 1,
+      "name": "price"
+    }
+  },
+  {
+    "model": "catalogue.productspecification",
+    "pk": 3,
+    "fields": {
+      "product_type": 2,
+      "name": "weight"
+    }
+  },
+  {
+    "model": "catalogue.productspecification",
+    "pk": 4,
+    "fields": {
+      "product_type": 2,
+      "name": "price"
+    }
+  },
+  {
+    "model": "catalogue.productspecification",
+    "pk": 5,
+    "fields": {
+      "product_type": 2,
+      "name": "size"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 1,
+    "fields": {
+      "product": 2,
+      "sku": "hn810m",
+      "quantity": 45
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "sku": "pb123",
+      "quantity": 45
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 1,
+    "fields": {
+      "specification": 1,
+      "value": "15",
+      "sku": 2
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 2,
+    "fields": {
+      "specification": 2,
+      "value": "9.99",
+      "sku": 2
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 3,
+    "fields": {
+      "specification": 3,
+      "value": "18",
+      "sku": 1
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 4,
+    "fields": {
+      "specification": 4,
+      "value": "30",
+      "sku": 1
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 5,
+    "fields": {
+      "specification": 5,
+      "value": "8x10",
+      "sku": 1
     }
   }
 ]
