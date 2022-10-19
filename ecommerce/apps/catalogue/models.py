@@ -173,7 +173,7 @@ class ProductInventory(models.Model):
         verbose_name_plural = _("Inventory Records")
 
     def __str__(self):
-        return self.sku
+        return f"{self.sku} ({self.product})"
 
 
 class ProductSpecificationValue(models.Model):
