@@ -1,4 +1,3 @@
-import email
 import json
 
 from django.test import TestCase
@@ -11,7 +10,8 @@ class AccountTest(TestCase):
 
     def test_fixture_worked(self):
         self.assertEquals(Account.objects.all().count(),
-                          2, "fixture has 2 accounts")
+                          2,
+                          "fixture has 2 accounts")
 
     def test_address_from_json(self):
         address = Address.objects.get(
