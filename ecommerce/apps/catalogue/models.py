@@ -181,12 +181,12 @@ class ProductSpecificationValue(models.Model):
         ProductSpecification,
         on_delete=models.CASCADE)
 
+    sku = models.ForeignKey(ProductInventory, on_delete=models.CASCADE)
+
     value = models.CharField(
-        max_length=20,
+        max_length=30,
         blank=False
     )
-
-    sku = models.ForeignKey(ProductInventory, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f"{self.sku.product.title} -> {self.specification.name} spec ({self.value})"
