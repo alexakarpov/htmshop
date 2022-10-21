@@ -108,35 +108,6 @@ class Product(models.Model):
         return self.title
 
 
-class ProductImage(models.Model):
-    """
-    The Product Image table.
-    """
-
-    product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="product_image")
-    image = models.ImageField(
-        verbose_name=_("image"),
-        help_text=_("Upload a product image"),
-        upload_to="images/",
-        default="images/default.png",
-    )
-    alt_text = models.CharField(
-        verbose_name=_("Alturnative text"),
-        help_text=_("Please add alturnative text"),
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-    is_feature = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = _("Product Image")
-        verbose_name_plural = _("Product Images")
-
-
 class ProductSpecification(models.Model):
     """
     The Product Specification Table contains product
@@ -199,3 +170,32 @@ class ProductSpecificationValue(models.Model):
     class Meta:
         verbose_name = _("Product spec")
         verbose_name_plural = _("Product specs")
+
+
+class ProductImage(models.Model):
+    """
+    The Product Image table.
+    """
+
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="product_image")
+    image = models.ImageField(
+        verbose_name=_("image"),
+        help_text=_("Upload a product image"),
+        upload_to="images/",
+        default="images/default.png",
+    )
+    alt_text = models.CharField(
+        verbose_name=_("Alturnative text"),
+        help_text=_("Please add alturnative text"),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    is_feature = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = _("Product Image")
+        verbose_name_plural = _("Product Images")
