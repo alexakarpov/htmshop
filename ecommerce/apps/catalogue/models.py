@@ -60,8 +60,10 @@ class ProductType(models.Model):
 
 class Product(models.Model):
     """
-      The product table. This class is meant to be "abstract" in a sense that items added to a shopping cart
-      will be a Product+Product Attributes which are required by it's ProductType 
+      The product table. This class is meant to be "abstract",
+      in a sense that items added to a shopping cart
+      will be a Product with Product Specification which are
+      required by it's Product Type
     """
 
     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
@@ -98,6 +100,9 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("catalogue:product_detail", args=[self.slug])
+
+    def get_variants(self):
+        return self.productinventory_set.all()
 
     def __str__(self):
         return self.title
