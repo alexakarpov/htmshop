@@ -22,11 +22,13 @@ def category_list(request, category_slug=None):
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, is_active=True)
     # FIXME: this is now DB-driven
-    # given a Product, get  all its ProductInventory items
-    # ................ list all type's specs
 
     inventory = product.productinventory_set.all()
-    variants = product.product_type.productspecification_set.all()
+
+    variants = product.get_variants()
+    # if it's a single variant, template won't even show the drop-down
+    if len(variants) == 1:
+        variants = []
 
     logger.debug(
         f"product: {product}, type: {product.product_type}, variants: {inventory},")
