@@ -24,9 +24,8 @@ Table product_specification_value {
 
 Table product_inventory {
   product int [ref: > product.id]
-//  specifications int [ref: <> product_specification.id]
-
-  specifications int [ref: <> product_specification_value.id]
+  //specifications int [ref: <> product_specification_value.id]
+  specs int [ref: > product_specification.id]
   sku varchar [pk]
   
 }

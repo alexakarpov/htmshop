@@ -33,10 +33,9 @@ class ProductTest(TestCase):
 
     def test_product_get_variants(self):
         """
-        a variant is really a specification of a product
-        as of now, each ProductInventory item has two specs,
-        'weight' and 'price'. They should probably be moved
-        to PI class as fields
+        a 'variant' is really a specific SKU for a product
+        e,g, for a book there's a single SKU/variant,
+        but mounted icons can have many
         """
         book_p = Product.objects.get(slug="pb")
         icon_p = Product.objects.get(slug="hn")
