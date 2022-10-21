@@ -102,6 +102,9 @@ class Product(models.Model):
         return reverse("catalogue:product_detail", args=[self.slug])
 
     def get_variants(self):
+        """
+        These are actually ProductInventory items related to this Product
+        """
         return self.productinventory_set.all()
 
     def __str__(self):
@@ -143,6 +146,9 @@ class ProductInventory(models.Model):
     )
 
     quantity = models.IntegerField()
+    weight = models.IntegerField() # in ounces
+    price = models.DecimalField(max_digits=10,
+                                decimal_places=2)
 
     class Meta:
         verbose_name = _("Product Inventory Record")

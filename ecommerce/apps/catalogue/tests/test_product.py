@@ -13,7 +13,7 @@ class ProductTest(TestCase):
     def test_product_types_and_specs(self):
         p1 = Product.objects.get(slug="pb")
         p2 = Product.objects.get(slug="hn")
-        self.assertEqual(p1.title, "Prayer book", "fixture works, expected product loaded")
+        self.assertEqual(p1.title, "Prayer Book", "fixture works, expected product loaded")
 
         book = p1.product_type
         icon = p2.product_type
@@ -22,16 +22,22 @@ class ProductTest(TestCase):
         all_specs = ProductSpecification.objects.all()
         book_specs = all_specs.filter(product_type=book)
         icon_specs = all_specs.filter(product_type=icon)
-        self.assertEquals(book_specs.count(), 2, "there should be two specs for books")
-        self.assertEquals(icon_specs.count(), 3, "there should be three specs for icons")
-        spec = book_specs.first() # cmon, this isn't testing
-        self.assertIn(spec, p1_specs, "Book's spec is in books specs")
+        self.assertEquals(book_specs.count(), 0, "there should be no specs for books")
+        self.assertEquals(icon_specs.count(), 1, "there should be 1 spec for icons")
+        spec = icon_specs.first() # cmon, this isn't testing
+        self.assertIn(spec, p2_specs, "Book's spec is in books specs")
 
     def test_type_name(self):
-        book = ProductType.objects.get(pk=1)
-        self.assertEquals(book.name, "book")
+        books = ProductType.objects.get(name='books')
+        self.assertEquals(books.name, "books")
 
     def test_product_get_variants(self):
+        """
+        a variant is really a specification of a product
+        as of now, each ProductInventory item has two specs,
+        'weight' and 'price'. They should probably be moved
+        to PI class as fields
+        """
         book_p = Product.objects.get(slug="pb")
         icon_p = Product.objects.get(slug="hn")
         b_variants = book_p.get_variants()

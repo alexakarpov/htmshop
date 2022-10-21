@@ -23,14 +23,14 @@
     "model": "catalogue.producttype",
     "pk": 1,
     "fields": {
-      "name": "book"
+      "name": "mounted_icons"
     }
   },
   {
     "model": "catalogue.producttype",
     "pk": 2,
     "fields": {
-      "name": "mounted_icon"
+      "name": "books"
     }
   },
   {
@@ -38,26 +38,26 @@
     "pk": 1,
     "fields": {
       "product_type": 1,
-      "category": 1,
-      "title": "Prayer book",
-      "description": "qwe asd zxc",
-      "slug": "pb",
-      "is_active": true,
-      "created_at": "2022-10-18T00:58:33.232Z",
-      "users_wishlist": []
-    }
-  },
-  {
-    "model": "catalogue.product",
-    "pk": 2,
-    "fields": {
-      "product_type": 2,
       "category": 2,
       "title": "Holy Napkin",
-      "description": "rewrew dsadsa cxzcxz",
+      "description": "qwe qwe",
       "slug": "hn",
       "is_active": true,
-      "created_at": "2022-10-18T00:59:19.303Z",
+      "created_at": "2022-10-21T05:27:42.562Z",
+      "users_wishlist": []
+    }
+  },
+  {
+    "model": "catalogue.product",
+    "pk": 2,
+    "fields": {
+      "product_type": 2,
+      "category": 1,
+      "title": "Prayer Book",
+      "description": "asd asd",
+      "slug": "pb",
+      "is_active": true,
+      "created_at": "2022-10-21T05:28:13.887Z",
       "users_wishlist": []
     }
   },
@@ -66,38 +66,6 @@
     "pk": 1,
     "fields": {
       "product_type": 1,
-      "name": "weight"
-    }
-  },
-  {
-    "model": "catalogue.productspecification",
-    "pk": 2,
-    "fields": {
-      "product_type": 1,
-      "name": "price"
-    }
-  },
-  {
-    "model": "catalogue.productspecification",
-    "pk": 3,
-    "fields": {
-      "product_type": 2,
-      "name": "weight"
-    }
-  },
-  {
-    "model": "catalogue.productspecification",
-    "pk": 4,
-    "fields": {
-      "product_type": 2,
-      "name": "price"
-    }
-  },
-  {
-    "model": "catalogue.productspecification",
-    "pk": 5,
-    "fields": {
-      "product_type": 2,
       "name": "size"
     }
   },
@@ -106,8 +74,10 @@
     "pk": 1,
     "fields": {
       "product": 2,
-      "sku": "hn810m",
-      "quantity": 45
+      "sku": "pb111",
+      "quantity": 12,
+      "weight": 20,
+      "price": "9.99"
     }
   },
   {
@@ -115,89 +85,21 @@
     "pk": 2,
     "fields": {
       "product": 1,
-      "sku": "pb123",
-      "quantity": 99
+      "sku": "hn222",
+      "quantity": 19,
+      "weight": 33,
+      "price": "30.00"
     }
   },
   {
     "model": "catalogue.productinventory",
     "pk": 3,
     "fields": {
-      "product": 2,
-      "sku": "hn321",
-      "quantity": 8
-    }
-  },
-  {
-    "model": "catalogue.productspecificationvalue",
-    "pk": 1,
-    "fields": {
-      "specification": 1,
-      "sku": 2,
-      "value": "15"
-    }
-  },
-  {
-    "model": "catalogue.productspecificationvalue",
-    "pk": 2,
-    "fields": {
-      "specification": 2,
-      "sku": 2,
-      "value": "9.99"
-    }
-  },
-  {
-    "model": "catalogue.productspecificationvalue",
-    "pk": 3,
-    "fields": {
-      "specification": 3,
-      "sku": 1,
-      "value": "40"
-    }
-  },
-  {
-    "model": "catalogue.productspecificationvalue",
-    "pk": 4,
-    "fields": {
-      "specification": 4,
-      "sku": 1,
-      "value": "60"
-    }
-  },
-  {
-    "model": "catalogue.productspecificationvalue",
-    "pk": 5,
-    "fields": {
-      "specification": 5,
-      "sku": 1,
-      "value": "16x20"
-    }
-  },
-  {
-    "model": "catalogue.productspecificationvalue",
-    "pk": 6,
-    "fields": {
-      "specification": 3,
-      "sku": 3,
-      "value": "20"
-    }
-  },
-  {
-    "model": "catalogue.productspecificationvalue",
-    "pk": 7,
-    "fields": {
-      "specification": 2,
-      "sku": 3,
-      "value": "30"
-    }
-  },
-  {
-    "model": "catalogue.productspecificationvalue",
-    "pk": 8,
-    "fields": {
-      "specification": 5,
-      "sku": 3,
-      "value": "8x10"
+      "product": 1,
+      "sku": "hn111",
+      "quantity": 22,
+      "weight": 39,
+      "price": "59.99"
     }
   }
 ]
