@@ -116,7 +116,16 @@
     "fields": {
       "product": 1,
       "sku": "pb123",
-      "quantity": 45
+      "quantity": 99
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 3,
+    "fields": {
+      "product": 2,
+      "sku": "hn321",
+      "quantity": 8
     }
   },
   {
@@ -124,8 +133,8 @@
     "pk": 1,
     "fields": {
       "specification": 1,
-      "value": "15",
-      "sku": 2
+      "sku": 2,
+      "value": "15"
     }
   },
   {
@@ -133,8 +142,8 @@
     "pk": 2,
     "fields": {
       "specification": 2,
-      "value": "9.99",
-      "sku": 2
+      "sku": 2,
+      "value": "9.99"
     }
   },
   {
@@ -142,8 +151,8 @@
     "pk": 3,
     "fields": {
       "specification": 3,
-      "value": "18",
-      "sku": 1
+      "sku": 1,
+      "value": "40"
     }
   },
   {
@@ -151,8 +160,8 @@
     "pk": 4,
     "fields": {
       "specification": 4,
-      "value": "30",
-      "sku": 1
+      "sku": 1,
+      "value": "60"
     }
   },
   {
@@ -160,8 +169,35 @@
     "pk": 5,
     "fields": {
       "specification": 5,
-      "value": "8x10",
-      "sku": 1
+      "sku": 1,
+      "value": "16x20"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 6,
+    "fields": {
+      "specification": 3,
+      "sku": 3,
+      "value": "20"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 7,
+    "fields": {
+      "specification": 2,
+      "sku": 3,
+      "value": "30"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 8,
+    "fields": {
+      "specification": 5,
+      "sku": 3,
+      "value": "8x10"
     }
   }
 ]
