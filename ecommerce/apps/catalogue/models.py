@@ -1,3 +1,5 @@
+import traceback
+
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -105,7 +107,23 @@ class Product(models.Model):
         """
         These are actually ProductInventory items related to this Product
         """
-        return self.productinventory_set.all()
+
+        items =  self.productinventory_set.all()
+        print(f"{len(items)} SKUs found")
+        # print(">>>>>>>>>>>>>>>>")
+        # for line in traceback.format_stack():
+        #     print(line.strip())
+        values = []
+
+        for it in items:
+            values.append(it.productspecificationvalue_set.all())
+
+        if values:
+            print(f"vals: {values}")
+        else:
+            print("no vals")
+
+        return values
 
     def __str__(self):
         return self.title
