@@ -29,5 +29,5 @@ def product_detail(request, slug):
         variants = []
 
     logger.debug(
-        f"product: {product}, type: {product.product_type}, variants: {inventory},")
+        f"product: {product}, type: {product.product_type}, variants: {variants},")
     return render(request, "catalogue/single.html", {"product": product, "variants": variants})
