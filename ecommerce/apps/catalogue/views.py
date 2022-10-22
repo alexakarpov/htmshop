@@ -23,8 +23,6 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, is_active=True)
     # FIXME: this is now DB-driven
 
-    inventory = product.productinventory_set.all()
-
     variants = product.get_variants()
     # if it's a single variant, template won't even show the drop-down
     if len(variants) == 1:
