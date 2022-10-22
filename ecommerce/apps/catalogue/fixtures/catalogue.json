@@ -101,5 +101,14 @@
       "weight": 39,
       "price": "59.99"
     }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 1,
+    "fields": {
+      "specification": 1,
+      "sku": 2,
+      "value": "8x10"
+    }
   }
 ]
