@@ -1,10 +1,12 @@
 import traceback
+import logging
 
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+logger = logging.getLogger("console")
 
 class Category(models.Model):
     """
@@ -109,7 +111,7 @@ class Product(models.Model):
         """
 
         items =  self.productinventory_set.all()
-        print(f"{len(items)} SKUs found")
+        logger.debug(f"{len(items)} SKUs found")
         # print(">>>>>>>>>>>>>>>>")
         # for line in traceback.format_stack():
         #     print(line.strip())
@@ -119,9 +121,9 @@ class Product(models.Model):
             values.append(it.productspecificationvalue_set.all())
 
         if values:
-            print(f"vals: {values}")
+            logger.debug(f"vals: {values}")
         else:
-            print("no vals")
+            logger.debug("no vals")
 
         return values
 
