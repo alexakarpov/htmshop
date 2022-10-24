@@ -1,4 +1,3 @@
-import traceback
 import logging
 
 from django.conf import settings
@@ -6,7 +5,11 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+# import traceback
+
+
 logger = logging.getLogger("console")
+
 
 class Category(models.Model):
     """
@@ -110,15 +113,23 @@ class Product(models.Model):
         These are actually ProductInventory items related to this Product
         """
 
-        items =  self.productinventory_set.all()
+        items = self.productinventory_set.all()
         logger.debug(f"{len(items)} SKUs found")
         # print(">>>>>>>>>>>>>>>>")
         # for line in traceback.format_stack():
         #     print(line.strip())
         values = []
 
-        for it in items:
-            values.append(it.productspecificationvalue_set.all())
+        logger.debug(f"ITEMS:{items}")  # a QS of PIV objects
+        if items:
+            for it in list(items):
+                specs = it.productspecificationvalue_set.all()
+                if specs:
+                    q_to_l = list(it.productspecificationvalue_set.all())
+                    logger.debug(f"singleton list: {q_to_l}")
+                    values.extend(q_to_l)
+                else:  # a Prduct without specs (already a single value)
+                    values = [it]
 
         if values:
             logger.debug(f"vals: {values}")
@@ -166,7 +177,7 @@ class ProductInventory(models.Model):
     )
 
     quantity = models.IntegerField()
-    weight = models.IntegerField() # in ounces
+    weight = models.IntegerField()  # in ounces
     price = models.DecimalField(max_digits=10,
                                 decimal_places=2)
 
@@ -191,7 +202,8 @@ class ProductSpecificationValue(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.sku.product.title} -> {self.specification.name} spec ({self.value})"
+        # return f"{self.sku.product.title} -> {self.specification.name} spec ({self.value})"
+        return f"{self.value}"
 
     class Meta:
         verbose_name = _("Product spec")
