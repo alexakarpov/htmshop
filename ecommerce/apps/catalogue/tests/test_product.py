@@ -8,7 +8,7 @@ class ProductTest(TestCase):
 
     def test_fixture_worked(self):
         self.assertEquals(Product.objects.all().count(),
-                          2, "fixture has 2 Productss")
+                          3, "fixture has 3 Productss")
 
     def test_product_types_and_specs(self):
         p1 = Product.objects.get(slug="pb")
