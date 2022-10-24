@@ -209,5 +209,14 @@
       "sku": 5,
       "value": "half a pound"
     }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 5,
+    "fields": {
+      "specification": 2,
+      "sku": 6,
+      "value": "ounce"
+    }
   }
 ]
