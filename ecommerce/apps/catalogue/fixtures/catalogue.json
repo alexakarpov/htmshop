@@ -20,6 +20,16 @@
     }
   },
   {
+    "model": "catalogue.category",
+    "pk": 3,
+    "fields": {
+      "name": "Incense",
+      "slug": "incense",
+      "parent": null,
+      "is_active": true
+    }
+  },
+  {
     "model": "catalogue.producttype",
     "pk": 1,
     "fields": {
@@ -31,6 +41,13 @@
     "pk": 2,
     "fields": {
       "name": "books"
+    }
+  },
+  {
+    "model": "catalogue.producttype",
+    "pk": 3,
+    "fields": {
+      "name": "incense"
     }
   },
   {
@@ -62,10 +79,32 @@
     }
   },
   {
+    "model": "catalogue.product",
+    "pk": 3,
+    "fields": {
+      "product_type": 3,
+      "category": 3,
+      "title": "Bethlehem",
+      "description": "zxc zxc zxc vbn",
+      "slug": "beth",
+      "is_active": true,
+      "created_at": "2022-10-23T06:01:43.542Z",
+      "users_wishlist": []
+    }
+  },
+  {
     "model": "catalogue.productspecification",
     "pk": 1,
     "fields": {
       "product_type": 1,
+      "name": "size"
+    }
+  },
+  {
+    "model": "catalogue.productspecification",
+    "pk": 2,
+    "fields": {
+      "product_type": 3,
       "name": "size"
     }
   },
@@ -85,7 +124,7 @@
     "pk": 2,
     "fields": {
       "product": 1,
-      "sku": "hn222",
+      "sku": "hn111",
       "quantity": 19,
       "weight": 33,
       "price": "30.00"
@@ -96,10 +135,43 @@
     "pk": 3,
     "fields": {
       "product": 1,
-      "sku": "hn111",
+      "sku": "hn221",
       "quantity": 22,
       "weight": 39,
       "price": "59.99"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 4,
+    "fields": {
+      "product": 3,
+      "sku": "in441",
+      "quantity": 28,
+      "weight": 18,
+      "price": "15.99"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 5,
+    "fields": {
+      "product": 3,
+      "sku": "in442",
+      "quantity": 19,
+      "weight": 10,
+      "price": "9.99"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 6,
+    "fields": {
+      "product": 3,
+      "sku": "in443",
+      "quantity": 7,
+      "weight": 1,
+      "price": "5.99"
     }
   },
   {
@@ -109,6 +181,33 @@
       "specification": 1,
       "sku": 2,
       "value": "8x10"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 2,
+    "fields": {
+      "specification": 1,
+      "sku": 3,
+      "value": "16x222"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 3,
+    "fields": {
+      "specification": 2,
+      "sku": 4,
+      "value": "pound"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 4,
+    "fields": {
+      "specification": 2,
+      "sku": 5,
+      "value": "half a pound"
     }
   }
 ]
