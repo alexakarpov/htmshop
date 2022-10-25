@@ -2,6 +2,7 @@ import logging
 
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
+
 from ecommerce.apps.catalogue.models import Product
 
 from .basket import Basket
@@ -18,6 +19,7 @@ def basket_summary(request):
 
 def basket_add(request):
     basket = Basket(request)
+    logger.debug(f"POST: {request.POST}")
     if request.POST.get("action") == "post":
         product_id = int(request.POST.get("productid"))
         product_qty = int(request.POST.get("productqty"))
@@ -42,6 +44,8 @@ def basket_delete(request):
 
 
 def basket_update(request):
+    logger.debug(f"POST: {request.POST}")
+
     basket = Basket(request)
 
     if request.POST.get("action") == "post":

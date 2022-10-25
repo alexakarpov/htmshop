@@ -25,6 +25,10 @@ class Basket:
         """
         Adding and updating the users basket session data
         """
+
+        logger.debug(f"""product:{product}
+                         qty:{qty}
+                         variant:{variant}""")
         product_id = str(product.id)
         if product_id in self.basket:
             self.basket[product_id]["qty"] = qty
