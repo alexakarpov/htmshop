@@ -1,9 +1,9 @@
 import logging
 
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_list_or_404, render
 
-from ecommerce.apps.catalogue.models import Product
+from ecommerce.apps.catalogue.models import Product, ProductInventory
 
 from .basket import Basket
 
@@ -24,8 +24,15 @@ def basket_add(request):
         product_id = int(request.POST.get("productid"))
         product_qty = int(request.POST.get("productqty"))
         variant = str(request.POST.get("variant"))
-        product = get_object_or_404(Product, id=product_id)
-        basket.add(product=product, qty=product_qty, variant=variant)
+        # need to add PI, which has a price, not P
+        product_items = get_list_or_404(ProductInventory, product=product_id)
+        logger.debug(f"pid {product_id}, pqty: {product_qty}, variant: {variant}")
+
+        for p in product_items:
+            if p.productspecificationvalue_set.reverse().first().value == variant:
+                pri = p
+
+        basket.add(product=pri, qty=product_qty, variant=variant)
         basketqty = basket.__len__()
         response = JsonResponse({"qty": basketqty})
         return response
@@ -33,8 +40,9 @@ def basket_add(request):
 
 def basket_delete(request):
     basket = Basket(request)
-
+    logger.debug(f"basket_delete POST: {request.POST}")
     if request.POST.get("action") == "post":
+        # well yeah: basket_delete POST: <QueryDict: {'productid': ['']
         product_id = int(request.POST.get("productid"))
         basket.delete(product_id=product_id)
         basketqty = basket.__len__()
