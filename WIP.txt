@@ -1,0 +1,21 @@
+delete on item in the basket:
+
+DEBUG basket_delete POST: <QueryDict: {'productid': [''], 'csrfmiddlewaretoken': ['W66VSFVlTKw1UJOLklxzapQG2Q5JpuCogwljj7WRZm8QivcUDxviWNsQmPfU1hMw'], 'action': ['post']}>
+ERROR Internal Server Error: /basket/delete/
+Traceback (most recent call last):
+  File "/home/akarpov/.cache/pypoetry/virtualenvs/htmshop-zZ7tekWr-py3.8/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/akarpov/.cache/pypoetry/virtualenvs/htmshop-zZ7tekWr-py3.8/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/akarpov/repos/htmshop/ecommerce/apps/basket/views.py", line 45, in basket_delete
+    product_id = int(request.POST.get("productid"))
+ValueError: invalid literal for int() with base 10: ''
+Internal Server Error: /basket/delete/
+Traceback (most recent call last):
+  File "/home/akarpov/.cache/pypoetry/virtualenvs/htmshop-zZ7tekWr-py3.8/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/akarpov/.cache/pypoetry/virtualenvs/htmshop-zZ7tekWr-py3.8/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/akarpov/repos/htmshop/ecommerce/apps/basket/views.py", line 45, in basket_delete
+    product_id = int(request.POST.get("productid"))
+ValueError: invalid literal for int() with base 10: ''
