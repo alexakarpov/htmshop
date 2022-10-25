@@ -13,7 +13,7 @@
             <label for="select">Qty</label>
 
             <div class="input-group input-group-sm mb-3 col-xs-2">
-              <input type="number" name="quantity" value="1"/>
+              <input type="number" id="quantity" value="1"/>
             </div>
           </div>
 
@@ -69,24 +69,25 @@
         url: '{% url "basket:basket_add" %}',
         data: {
           productid: $('#add-button').val(),
-          productqty: $('#select-qty option:selected').text(),
+          productqty: $('#quantity').val(),
           variant: $('#select-variant').val(),
           csrfmiddlewaretoken: "{{csrf_token}}",
           action: 'post'
         },
         success: function (json) {
           $('#basket-qty').html(json.qty)
+          $('#alertbox').show()
+          $('#alertbox').text('{{product.title}} added to the cart')
+          setTimeout(function() {
+            $('#alertbox').hide();
+            window.location.replace('{% url "basket:basket_summary" %}');
+          }, 2000); // ok at least something worked
         },
         error: function (xhr, errmsg, err) {
-          console.error("add POST failed with {{csrf_token}}")
+          console.error("add POST failed")
+          console.error(errmsg)
         }
       });
-      $('#alertbox').show()
-      $('#alertbox').text('{{product.title}} added to the cart')
-      setTimeout(function() {
-        $('#alertbox').hide();
-        window.location.replace('{% url "basket:basket_summary" %}');
-      }, 2000); // ok at least something worked
     })
 
 </script>

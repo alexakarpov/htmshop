@@ -5,9 +5,6 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-# import traceback
-
-
 logger = logging.getLogger("console")
 
 
@@ -112,12 +109,8 @@ class Product(models.Model):
         """
         These are actually ProductInventory items related to this Product
         """
-
-        items = self.productinventory_set.all()
+        items = self.productinventory_set.filter(product_id=self.id)
         logger.debug(f"{len(items)} SKUs found")
-        # print(">>>>>>>>>>>>>>>>")
-        # for line in traceback.format_stack():
-        #     print(line.strip())
         values = []
 
         logger.debug(f"ITEMS:{items}")  # a QS of PIV objects
