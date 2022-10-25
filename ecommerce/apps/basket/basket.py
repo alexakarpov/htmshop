@@ -32,7 +32,7 @@ class Basket:
         product_id = str(product.id)
         if product_id in self.basket:
             self.basket[product_id]["qty"] = qty
-            self.basket[product_id]["title"] = product.title
+            self.basket[product_id]["title"] = product.sku
             self.basket[product_id]["weight"] = product.weight
             if variant:
                 self.basket[product_id]["variant"] = variant
@@ -41,7 +41,7 @@ class Basket:
                 "price": str(product.price),
                 "qty": qty,
                 "variant": variant,
-                "title": product.title,
+                "title": product.sku,
                 "weight": product.weight,
             }
 
