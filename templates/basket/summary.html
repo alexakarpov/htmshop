@@ -48,14 +48,6 @@
                             <a class="text-decoration-none text-reset" href="{{item.product.get_absolute_url}}">
                                 <p class="card-text pb-3">{{product.title}} ({{item.variant}})</p>
                             </a>
-                            <label for="select">Qty</label>
-                            <select id="select{{product.id}}" style="width:50px;height:31px;">
-                                <option value="" selected disabled hidden>{{item.qty}}</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
-                            </select>
                             <a type="button" id="update-button" data-index="{{product.id}}"
                                class="text-decoration-none small ps-3">Update</a>
                             <a type="button" id="delete-button" data-index="{{product.id}}"
@@ -75,7 +67,10 @@
  // Delete Item
  $(document).on("click", "#delete-button", function (e) {
      e.preventDefault();
+     var data = $(this)
+     console.log(data);
      var prodid = $(this).data("index");
+     console.log("prodid:", prodid)
      $.ajax({
          type: "POST",
          url: '{% url "basket:basket_delete" %}',
