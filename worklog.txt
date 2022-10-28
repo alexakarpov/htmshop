@@ -1,0 +1,22 @@
+
+### 10.28
+
+delete on item in the basket:
+
+ok, so keys in the basket are not Product ids
+they are ProductInventory ids
+
+some products are crashing on delete from cart
+
+both incense and book can be added to the cart, but only book can be deleted:
+DEBUG basket_delete POST: <QueryDict: {'productid': ['2'], 'csrfmiddlewaretoken': ['zfc7wGCMU5XOUO4YBpRC4LniakXOQDWhm4xE0z5jnPlAGadfuMc14IOXw60IDXnn'], 'action': ['post']}>
+
+^ it has this productid, while incense does not:
+DEBUG basket_delete POST: <QueryDict: {'productid': [''], 'csrfmiddlewaretoken': ['rGq4eYAUvSWD2iOyrUr9cFSN0vz5XZDBevLBIR3rYCkpOEXPkhMycCjsmhCZKj4H'], 'action': ['post']}>
+
+delete-button there is missing value for data-index!
+there's a single #cartitems div with two 'card' children divs, one has data-index, the other does not
+both have:
+ data-index="{{product.id}}
+ so looks like on of the products is missing the id
+ 
