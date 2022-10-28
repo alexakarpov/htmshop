@@ -31,7 +31,7 @@
                 <button class="btn btn-light" type="button">Save for later</button>
             </div>
         </div>
-        <div class="col-md-7 col-lg-8 p-0">
+        <div class="col-md-7 col-lg-8 p-0" id="cartitems">
             {% for item in basket %}
             {% with product=item.product %}
             <div class="card mb-3 border-0 product-item" data-index="{{product.id}}">
@@ -43,7 +43,7 @@
                         {% endif %}
                         {% endfor %}
                     </div>
-                    <div class="col-md-10 ps-md-3">
+                    <div class="col-md-10 ps-md-3 productbuttons">
                         <div class="card-body p-1">
                             <a class="text-decoration-none text-reset" href="{{item.product.get_absolute_url}}">
                                 <p class="card-text pb-3">{{product.title}} ({{item.variant}})</p>

@@ -12,7 +12,7 @@ logger = logging.getLogger("console")
 def basket_summary(request):
     user = request.user
     basket = Basket(request)
-    logger.debug("in basket/views/basket_summary")
+    logger.debug(f"in basket_summary for {basket}")
 
     return render(request, "basket/summary.html", {"basket": basket, "user": user})
 
@@ -22,17 +22,27 @@ def basket_add(request):
     logger.debug(f"POST: {request.POST}")
     if request.POST.get("action") == "post":
         product_id = int(request.POST.get("productid"))
+        logger.debug(f"POST had the key productid, with value of {product_id}")
         product_qty = int(request.POST.get("productqty"))
-        variant = str(request.POST.get("variant"))
-        # need to add PI, which has a price, not P
+        logger.debug(f"POST keys: {request.POST.keys()}")
+        variant = request.POST.get("variant")
+        
+        # need to add ProductInventory item, which has a price, not Product entity, which doesn't
+        
         product_items = get_list_or_404(ProductInventory, product=product_id)
-        logger.debug(f"pid {product_id}, pqty: {product_qty}, variant: {variant}")
-
+        logger.debug(f"got {len(product_items)} of SKUs/Inventory Items for Product# {product_id}")
+        
+        # What if the Product had no variant? pri needs to have price, sku and weight
         for p in product_items:
-            if p.productspecificationvalue_set.reverse().first().value == variant:
+            if variant and p.productspecificationvalue_set.reverse().first().value == variant:
                 pri = p
+            else:
+                pri = product_items[0] # if there's no variant in the request, then the item is unique for this Product
 
-        basket.add(product=pri, qty=product_qty, variant=variant)
+        basket.add(product=pri,
+                   qty=product_qty,
+                   pid=product_id,
+                   variant=variant)
         basketqty = basket.__len__()
         response = JsonResponse({"qty": basketqty})
         return response

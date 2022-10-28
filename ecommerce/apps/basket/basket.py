@@ -3,6 +3,7 @@ import logging
 from decimal import Decimal
 
 from django.conf import settings
+
 from ecommerce.apps.catalogue.models import Product
 
 logger = logging.getLogger("django")
@@ -21,23 +22,25 @@ class Basket:
             basket = self.session[settings.BASKET_SESSION_KEY] = {}
         self.basket = basket
 
-    def add(self, product, qty, variant=None):
+    def add(self, product, qty, pid, variant=None):
         """
         Adding and updating the users basket session data
+        product: actually a ProductInventoryItem
+        qty: quantity of the item added
+        pid: Product.id, which acts as key in Basket's dict
         """
 
         logger.debug(f"""product:{product}
                          qty:{qty}
                          variant:{variant}""")
-        product_id = str(product.id)
-        if product_id in self.basket:
-            self.basket[product_id]["qty"] = qty
-            self.basket[product_id]["title"] = product.sku
-            self.basket[product_id]["weight"] = product.weight
+        if pid in self.basket:
+            self.basket[pid]["qty"] = qty
+            self.basket[pid]["title"] = product.sku
+            self.basket[pid]["weight"] = product.weight
             if variant:
-                self.basket[product_id]["variant"] = variant
+                self.basket[pid]["variant"] = variant
         else:
-            self.basket[product_id] = {
+            self.basket[pid] = {
                 "price": str(product.price),
                 "qty": qty,
                 "variant": variant,
