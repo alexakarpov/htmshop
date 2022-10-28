@@ -98,7 +98,7 @@ class Basket:
         """
         Delete item from session data
         """
-        print(f"deleting {product_id} from cart in {self.session.session_key}")
+        logger.debug(f"deleting {product_id} from cart in {self.session.session_key}")
 
         product_id = str(product_id)
 
