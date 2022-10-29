@@ -1,5 +1,5 @@
 
-### 10.28
+### 10/28
 
 delete on item in the basket:
 
@@ -19,4 +19,7 @@ there's a single #cartitems div with two 'card' children divs, one has data-inde
 both have:
  data-index="{{product.id}}
  so looks like on of the products is missing the id
- 
+
+### 10/29
+
+need to remove $ from product category list and individual product details - or rather replace with a list of prices
