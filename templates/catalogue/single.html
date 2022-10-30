@@ -1,8 +1,10 @@
-{% extends "../base.html" %}
+{% extends '../base.html' %}
 {% block title %}
-{% if product %}{{ product.title }}
-{% else %}Product
-{% endif %}
+  {% if product %}
+    {{ product.title }}
+  {% else %}
+    Product
+  {% endif %}
 {% endblock %}
 {% block content %}
   <div class="px-4 row g-3">
@@ -68,24 +70,23 @@
           productid: $('#add-button').val(),
           productqty: $('#quantity').val(),
           variant: $('#select-variant').val(),
-          csrfmiddlewaretoken: "{{csrf_token}}",
+          csrfmiddlewaretoken: '{{csrf_token}}',
           action: 'post'
         },
         success: function (json) {
           $('#basket-qty').html(json.qty)
           $('#alertbox').show()
           $('#alertbox').text('{{product.title}} added to the cart')
-          setTimeout(function() {
-            $('#alertbox').hide();
-            window.location.replace('{% url "basket:basket_summary" %}');
-          }, 2000); // ok at least something worked
+          setTimeout(function () {
+            $('#alertbox').hide()
+            window.location.replace('{% url "basket:basket_summary" %}')
+          }, 2000) // ok at least something worked
         },
         error: function (xhr, errmsg, err) {
-          console.error("add POST failed")
+          console.error('add POST failed')
           console.error(errmsg)
         }
-      });
+      })
     })
-
-</script>
+  </script>
 {% endblock %}
