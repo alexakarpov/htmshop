@@ -12,9 +12,6 @@ class ProductSpecificationInline(admin.TabularInline):
     model = ProductSpecification
 
 
-admin.site.register(Product)
-
-
 @ admin.register(ProductType)
 class ProductTypeAdmin(admin.ModelAdmin):
     inlines = [
@@ -83,3 +80,12 @@ class ProductInventoryAdmin(admin.ModelAdmin):
         if not obj or not obj.id or not obj.product.product_type:
             return []  # ... then don't show any inlines
         return self.inlines
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    inlines = [
+        ProductImageInline,
+    ]
