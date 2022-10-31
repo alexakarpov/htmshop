@@ -13,7 +13,6 @@
         <div class="col-md-12">
           <div class="card-body p-1 bg-info">
             <h1 class="mb-0 h2 pe-4 pb-4">{{ product.title }}</h1>
-
             {% for pi in product.product_image.all %}
               {% if pi.is_feature %}
                 <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ pi.image.url }}" alt="{{ pi.alt_text }}" />
@@ -28,7 +27,7 @@
     </div>
 
     <div class="row row-cols-2">
-      <div class="col-md-2">
+      <div class="col-sm-2">
         {% if variants %}
           <label for="select-variant">Variant</label>
           <select id="select-variant" class="form-control form-control-sm">
@@ -40,7 +39,7 @@
       </div>
       <div class="col-sm-1">
         <label for="quantity">Quantity</label>
-        <input class="form-control form-control-sm" type="number" id="quantityty" value="1" />
+        <input class="form-control form-control-sm" type="number" id="quantityty" value="1" style="width: 5em" />
       </div>
     </div>
     <div class="row row-cols-2">
