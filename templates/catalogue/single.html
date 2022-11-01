@@ -11,7 +11,7 @@
     <div class="card mb-3 border-0">
       <div class="row g-0">
         <div class="col-md-12">
-          <div class="card-body p-1 bg-info">
+          <div class="card-body p-1">
             <h1 class="mb-0 h2 pe-4 pb-4">{{ product.title }}</h1>
             {% for pi in product.product_image.all %}
               {% if pi.is_feature %}
@@ -27,20 +27,20 @@
     </div>
 
     <div class="row row-cols-2">
+      <div class="col-sm-1">
+        <label for="quantity">Quantity</label>
+        <input class="form-control form-control-sm" type="number" id="quantityty" value="1" style="width: 5em" />
+      </div>
+      {% if variants %}
       <div class="col-sm-2">
-        {% if variants %}
           <label for="select-variant">Variant</label>
           <select id="select-variant" class="form-control form-control-sm">
             {% for v in variants %}
               <option value="{{ v }}">{{ v }}</option>
             {% endfor %}
           </select>
-        {% endif %}
       </div>
-      <div class="col-sm-1">
-        <label for="quantity">Quantity</label>
-        <input class="form-control form-control-sm" type="number" id="quantityty" value="1" style="width: 5em" />
-      </div>
+      {% endif %}
     </div>
     <div class="row row-cols-2">
       <div class="col-md">
