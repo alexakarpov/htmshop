@@ -16,9 +16,9 @@
             {% for product in products %}
               <div class="col">
                 <div class="card border-0">
-                  {% for pi in product.product_image.all %}
-                    {% if pi.is_feature %}
-                      <img class="img-fluid" alt="some alt" src="{{ pi.image.url }}" alt="{{ pi.alt_text }}" />
+                  {% for p_image in product.product_image.all %}
+                    {% if p_image.is_feature %}
+                      <img class="img-fluid" alt="some alt" src="{{ p_image.image.url }}" alt="{{ p_image.alt_text }}" />
                     {% endif %}
                   {% endfor %}
                   <div class="card-body px-0">
