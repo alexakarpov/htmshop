@@ -1,4 +1,5 @@
 import logging
+from distutils.log import debug
 
 from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, render
@@ -12,6 +13,10 @@ logger = logging.getLogger("console")
 def basket_summary(request):
     user = request.user
     basket = Basket(request)
+    
+    for it in basket:
+        logger.debug(f"item: {it}")
+
     logger.debug(f"in basket_summary for {basket}")
 
     return render(request, "basket/summary.html", {"basket": basket, "user": user})
@@ -19,30 +24,17 @@ def basket_summary(request):
 
 def basket_add(request):
     basket = Basket(request)
-    logger.debug(f"POST: {request.POST}")
+    logger.debug(f"basket_add POST: {request.POST}")
     if request.POST.get("action") == "post":
-        product_id = int(request.POST.get("productid"))
-        logger.debug(f"POST had the key productid, with value of {product_id}")
         product_qty = int(request.POST.get("productqty"))
-        logger.debug(f"POST keys: {request.POST.keys()}")
-        variant = request.POST.get("variant")
-        
-        # need to add ProductInventory item, which has a price, not Product entity, which doesn't
-        
-        product_items = get_list_or_404(ProductInventory, product=product_id)
-        logger.debug(f"got {len(product_items)} of SKUs/Inventory Items for Product# {product_id}")
-        
-        # What if the Product had no variant? pri needs to have price, sku and weight
-        for p in product_items:
-            if variant and p.productspecificationvalue_set.reverse().first().value == variant:
-                pri = p
-            else:
-                pri = product_items[0] # if there's no variant in the request, then the item is unique for this Product
+        variant = request.POST.get("variant") # may be None
+        logger.debug(f"to add variant/sku: {variant}")
 
-        basket.add(product=pri,
+        pri = ProductInventory.objects.get(sku=variant)
+        logger.debug(f"item: {pri}")
+        basket.add(product=pri, 
                    qty=product_qty,
-                   pid=product_id,
-                   variant=variant)
+                   sku=variant)
         basketqty = basket.__len__()
         response = JsonResponse({"qty": basketqty})
         return response
@@ -53,8 +45,11 @@ def basket_delete(request):
     logger.debug(f"basket_delete POST: {request.POST}")
     if request.POST.get("action") == "post":
         # well yeah: basket_delete POST: <QueryDict: {'productid': ['']
-        product_id = int(request.POST.get("productid"))
-        basket.delete(product_id=product_id)
+        sku_in = request.POST.get("sku")
+        logger.debug(f"requested to remove {sku_in} from the cart in {basket} ({type(basket)}")
+        logger.debug(f"basket before: {basket}")
+        basket.delete(sku=sku_in)
+        logger.debug(f"basket after: {basket}")
         basketqty = basket.__len__()
         baskettotal = basket.get_total()
         response = JsonResponse({"qty": basketqty, "subtotal": baskettotal})
@@ -67,9 +62,11 @@ def basket_update(request):
     basket = Basket(request)
 
     if request.POST.get("action") == "post":
-        product_id = int(request.POST.get("productid"))
-        product_qty = int(request.POST.get("productqty"))
-        basket.update(product_id=product_id, qty=product_qty)
+        sku = request.POST.get("sku")
+        logger.debug(f"Cart Item for update: {sku}")
+        assert sku != ''
+        sku_qty = int(request.POST.get("skuqty"))
+        basket.update(sku=sku, qty=sku_qty)
 
         basketqty = basket.__len__()
         basketsubtotal = basket.get_subtotal_price()

@@ -33,7 +33,7 @@
         <div class="col-md-7 col-lg-8 p-0" id="cartitems">
             {% for item in basket %}
             {% with product=item.product %}
-            <div class="card mb-3 border-0 product-item" data-index="{{product.id}}">
+            <div class="card mb-3 border-0 product-item" data-index="{{item.sku}}">
                 <div class="row g-0">
                     <div class="col-md-2 d-none d-md-block">
                         {% for image in product.product_image.all %}
@@ -44,12 +44,14 @@
                     </div>
                     <div class="col-md-10 ps-md-3 productbuttons">
                         <div class="card-body p-1">
-                            <a class="text-decoration-none text-reset" href="{{item.product.get_absolute_url}}">
-                                <p class="card-text pb-3">{{product.title}} ({{item.variant}})</p>
+                            <input id="itemqty" class="form-control form-control-sm itemqty" type="number" value="{{item.qty}}" style="width: 4em" />
+        
+                            <a class="text-decoration-none text-reset" href="{{product.get_absolute_url}}">
+                                <p class="card-text pb-3">{{product.title}} ({{item.variant}}/{{item.sku}})</p>
                             </a>
-                            <a type="button" id="update-button" data-index="{{product.id}}"
+                            <a type="button" id="update-button" data-index="{{item.sku}}"
                                class="text-decoration-none small ps-3">Update</a>
-                            <a type="button" id="delete-button" data-index="{{product.id}}"
+                            <a type="button" id="delete-button" data-index="{{item.sku}}"
                                class="delete-button text-decoration-none small">Delete</a>
                         </div>
                     </div>
@@ -74,7 +76,7 @@
          type: "POST",
          url: '{% url "basket:basket_delete" %}',
          data: {
-             productid: $(this).data("index"),
+             sku: $(this).data("index"),
              csrfmiddlewaretoken: "{{csrf_token}}",
              action: "post",
          },
@@ -100,18 +102,21 @@
  // Update Item
  $(document).on("click", "#update-button", function (e) {
      e.preventDefault();
-     var prodid = $(this).data("index");
+     let item = $(this);
+     let sku = $(this).data("index");
+     console.log(item);
+     console.log(sku);
      $.ajax({
          type: "POST",
          url: '{% url "basket:basket_update" %}',
          data: {
-             productid: $(this).data("index"),
-             productqty: $("#select" + prodid + " option:selected").text(),
+             sku: $(this).data("index"),
+             skuqty: $("#itemqty").val(),
              csrfmiddlewaretoken: "{{csrf_token}}",
              action: "post",
          },
          success: function (json) {
-             total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
+             total = (parseFloat(json.subtotal)).toFixed(2);
 
              $("#basket-qty").html(json.qty);
              $("#subtotal").html(json.subtotal);

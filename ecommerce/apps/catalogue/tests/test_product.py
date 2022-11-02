@@ -60,4 +60,4 @@ class ProductTest(TestCase):
                           2,
                           "fixture has 2 variants of the Holy Napkin")
         icon_v1 = i_variants[0]
-        self.assertIsInstance(icon_v1, ProductSpecificationValue)
+        self.assertIsInstance(icon_v1, ProductInventory)

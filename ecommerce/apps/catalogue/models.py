@@ -110,29 +110,11 @@ class Product(models.Model):
         These are actually ProductInventory items related to this Product
         """
         items = self.productinventory_set.filter(product_id=self.id)
-        logger.debug(f"{len(items)} SKUs found")
-        values = []
-
-        logger.debug(f"ITEMS:{items}")  # a QS of PIV objects
-        if items:
-            for it in list(items):
-                specs = it.productspecificationvalue_set.all()
-                if specs:
-                    q_to_l = list(it.productspecificationvalue_set.all())
-                    logger.debug(f"singleton list: {q_to_l}")
-                    values.extend(q_to_l)
-                else:  # a Prduct without specs (already a single value)
-                    values = [it]
-
-        if values:
-            logger.debug(f"vals: {values}")
-        else:
-            logger.debug("no vals")
-
-        return values
+        logger.debug(f"get_variants for {self}: {len(items)} SKUs found")
+        return items
 
     def __str__(self):
-        return self.title
+        return f"{self.title} ({self.id})"
 
 
 class ProductSpecification(models.Model):

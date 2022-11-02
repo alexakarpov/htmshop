@@ -4,7 +4,7 @@ from decimal import Decimal
 
 from django.conf import settings
 
-from ecommerce.apps.catalogue.models import Product
+from ecommerce.apps.catalogue.models import ProductInventory
 
 logger = logging.getLogger("django")
 
@@ -22,29 +22,25 @@ class Basket:
             basket = self.session[settings.BASKET_SESSION_KEY] = {}
         self.basket = basket
 
-    def add(self, product, qty, pid, variant=None):
+    def add(self, product, qty, sku):
         """
         Adding and updating the users basket session data
         product: actually a ProductInventoryItem
         qty: quantity of the item added
-        pid: Product.id, which acts as key in Basket's dict
+        pid: ProductInventory item's SKU, which acts as key in Basket's dict
         """
 
         logger.debug(f"""product:{product}
                          qty:{qty}
-                         variant:{variant}""")
-        if pid in self.basket:
-            self.basket[pid]["qty"] = qty
-            self.basket[pid]["title"] = product.sku
-            self.basket[pid]["weight"] = product.weight
-            if variant:
-                self.basket[pid]["variant"] = variant
+                         sku:{sku}""")
+        if sku in self.basket:
+            self.basket[sku]["qty"] = qty
+            self.basket[sku]["weight"] = product.weight
         else:
-            self.basket[pid] = {
+            self.basket[sku] = {
                 "price": str(product.price),
                 "qty": qty,
-                "variant": variant,
-                "title": product.sku,
+                "sku": sku,
                 "weight": product.weight,
             }
 
@@ -57,17 +53,17 @@ class Basket:
         Need to rewrite this, so that the template has access to the variants,
         which are not DB-based, but only live in the session.
         """
-        product_ids = self.basket.keys()
-        products = Product.objects.filter(id__in=product_ids)
+        skus = self.basket.keys()
+        skus = ProductInventory.objects.filter(sku__in=skus)
         basket = self.basket.copy()
 
-        for product in products:
-            basket[str(product.id)]["product"] = product
+        for s in skus:
+            basket[str(s.sku)]["product"] = s
 
         for item in basket.values():
             item["price"] = Decimal(item["price"])
             item["total_price"] = item["price"] * item["qty"]
-            yield item
+            yield   item
 
     def __len__(self):
         """
@@ -76,13 +72,13 @@ class Basket:
         logger.debug("basket __len__ - why?")
         return sum(item["qty"] for item in self.basket.values())
 
-    def update(self, product_id, qty):
+    def update(self, sku, qty):
         """
         Update values in session data
         """
-        product_id = str(product_id)
-        if product_id in self.basket:
-            self.basket[product_id]["qty"] = qty
+        
+        if sku in self.basket:
+            self.basket[sku]["qty"] = qty
         self.save()
 
     def get_subtotal_price(self):
@@ -94,17 +90,18 @@ class Basket:
         total = subtotal + Decimal(deliveryprice)
         return total
 
-    def delete(self, product_id):
+    def delete(self, sku):
         """
         Delete item from session data
         """
-        logger.debug(f"deleting {product_id} from cart in {self.session.session_key}")
+        logger.debug(f"deleting {sku} from cart in {self.session.session_key}")
 
-        product_id = str(product_id)
-
-        if product_id in self.basket:
-            del self.basket[product_id]
+        if sku in self.basket:
+            logger.debug("found")
+            del self.basket[sku]
             self.save()
+        else:
+            logger.debug("not found")
 
     def clear(self):
         # Remove basket from session
