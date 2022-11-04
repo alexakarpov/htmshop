@@ -123,7 +123,11 @@ class ProductSpecification(models.Model):
     """
     The Product Specification Table contains product
     specifiction or features for the product types.
-    One Product can come in many variants/specification
+    One Product can have many variants/specification,
+    but having more than one spec presents a problem
+    in building a web UI with multiple dimensions, so
+    for now a single drop-down for one spec solution
+    is implemented
     """
 
     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
@@ -164,14 +168,20 @@ class ProductInventory(models.Model):
 
     def value_for_select(self):
         """
-        this only works if there's a single spec. Which is likely to be the case, but worth a mention.
+        this only works if there's a single spec. Which is likely to be the case,
+        but worth a mention.
         """
         return f"{self.productspecificationvalue_set.first().value}"
 
     def __str__(self):
         return f"{self.sku} ({self.product})"
 
+
 class ProductSpecificationValue(models.Model):
+    """
+    link table for Many-to-Many relationship between ProductSpecification
+    and ProductInventory entities
+    """
     specification = models.ForeignKey(
         ProductSpecification,
         on_delete=models.CASCADE)
