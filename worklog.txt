@@ -1,4 +1,3 @@
-
 ### 10/28
 
 delete on item in the basket:
@@ -23,3 +22,9 @@ both have:
 ### 10/29
 
 need to remove $ from product category list and individual product details - or rather replace with a list of prices
+
+###
+
+11/1
+
+basket (the dict) is keyed of product id. Should it be keyed of the sku? Currently sku is an internal key

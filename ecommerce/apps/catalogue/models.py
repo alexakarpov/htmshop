@@ -110,7 +110,7 @@ class Product(models.Model):
         These are actually ProductInventory items related to this Product
         """
         items = self.productinventory_set.filter(product_id=self.id)
-        logger.debug(f"get_variants for {self}: {len(items)} SKUs found")
+        
         return items
 
     def __str__(self):
@@ -160,8 +160,14 @@ class ProductInventory(models.Model):
         verbose_name = _("Product Inventory Record")
         verbose_name_plural = _("Inventory Records")
 
+    def as_variant(self):
+        if self.product.product_type.name == "incense":
+            return f"{self."
+
     def __str__(self):
         return f"{self.sku} ({self.product})"
+
+
 
 
 class ProductSpecificationValue(models.Model):
