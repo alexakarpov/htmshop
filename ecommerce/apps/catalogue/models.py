@@ -110,8 +110,10 @@ class Product(models.Model):
         These are actually ProductInventory items related to this Product
         """
         items = self.productinventory_set.filter(product_id=self.id)
-
-        return items
+        if items and items.count() > 1:
+            return items
+        else:
+            return None
 
     def __str__(self):
         return f"{self.title} ({self.id})"
