@@ -22,7 +22,9 @@ def category_list(request, category_slug=None):
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, is_active=True)
     variants = product.get_variants()
+    if variants:
+        label = variants[0].productspecificationvalue_set.first().specification.name
     # @TODO: get the SKU out of Product+Variant, and pass it in place of the Product
 
-    logger.debug(f"product: {product}, type: {product.product_type}, variants: {variants}")
-    return render(request, "catalogue/single.html", {"product": product, "variants": variants})
+    logger.debug(f"product: {product}, type: {product.product_type}, variants: {variants}, label:{label}")
+    return render(request, "catalogue/single.html", {"product": product, "variants": variants, "label":label})

@@ -33,10 +33,10 @@
       </div>
       {% if variants %}
       <div class="col-sm-2">
-          <label for="select-variant">Variant</label>
+          <label for="select-variant">{{label | title}}</label>
           <select id="select-variant" class="form-control form-control-sm">
             {% for v in variants %}
-              <option value="{{ v.sku }}">{{ v }}</option>
+              <option value="{{ v.sku }}">{{ v.value_for_select }}</option>
             {% endfor %}
           </select>
       </div>

@@ -110,7 +110,7 @@ class Product(models.Model):
         These are actually ProductInventory items related to this Product
         """
         items = self.productinventory_set.filter(product_id=self.id)
-        
+
         return items
 
     def __str__(self):
@@ -160,15 +160,14 @@ class ProductInventory(models.Model):
         verbose_name = _("Product Inventory Record")
         verbose_name_plural = _("Inventory Records")
 
-    def as_variant(self):
-        if self.product.product_type.name == "incense":
-            return f"{self."
+    def value_for_select(self):
+        """
+        this only works if there's a single spec. Which is likely to be the case, but worth a mention.
+        """
+        return f"{self.productspecificationvalue_set.first().value}"
 
     def __str__(self):
         return f"{self.sku} ({self.product})"
-
-
-
 
 class ProductSpecificationValue(models.Model):
     specification = models.ForeignKey(
@@ -183,7 +182,6 @@ class ProductSpecificationValue(models.Model):
     )
 
     def __str__(self) -> str:
-        # return f"{self.sku.product.title} -> {self.specification.name} spec ({self.value})"
         return f"{self.value}"
 
     class Meta:
