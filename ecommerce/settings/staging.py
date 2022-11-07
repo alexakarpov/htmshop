@@ -4,8 +4,6 @@ ENV = "staging"
 
 SECRET_KEY = config["SECRET_KEY"]
 
-SQUARE_ACCESS_TOKEN=config["SQUARE_ACCESS_TOKEN"]
-
 POSTGRES_PASSWORD = config["POSTGRES_PASSWORD"]
 POSTGRES_USER = config["POSTGRES_USER"]
 POSTGRES_DB = config["POSTGRES_DB"]
@@ -21,7 +19,7 @@ PAYPAL_PERSONAL_PASSWORD = config["PAYPAL_PERSONAL_PASSWORD"]
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "174.129.148.196", "transylvania.bostonmonks.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "52.201.215.80", "transylvania.bostonmonks.com"]
 
 DATABASES = {
     "default": {
