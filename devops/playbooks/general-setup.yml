@@ -2,7 +2,6 @@
 - name: installations
   hosts: htmstore_dev
   become: true
-
   tasks:
     - name: updatem, if last run was more than 1000 hours ago
       apt:
@@ -112,7 +111,7 @@
     #### virtualenv
     - name: create the virtualenv
       command:
-        cmd: virtualenv /var/htmshop/venv -p python3.8
+        cmd: virtualenv /var/htmshop/venv -p python3
         creates: '/var/htmshop/venv'
 
     - name: venv ownership
@@ -169,13 +168,3 @@
       service:
         name: nginx
         enabled: yes
-
-    - name: restart nginx
-      service:
-        name: nginx
-        state: restarted
-
-    - name: restart gunicorn
-      service:
-        name: gunicorn
-        state: restarted
