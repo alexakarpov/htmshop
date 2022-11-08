@@ -40,7 +40,6 @@ class Basket:
             self.basket[sku] = {
                 "price": str(product.price),
                 "qty": qty,
-                "sku": sku,
                 "weight": product.weight,
             }
 
