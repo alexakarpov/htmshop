@@ -23,7 +23,7 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, is_active=True)
     variants = product.get_variants()
     label = None
-    if variants:
+    if variants.count() > 1:
         label = variants[0].productspecificationvalue_set.first().specification.name
     # @TODO: get the SKU out of Product+Variant, and pass it in place of the Product
 
