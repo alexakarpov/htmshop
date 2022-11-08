@@ -14,10 +14,8 @@ def basket_summary(request):
     user = request.user
     basket = Basket(request)
     
-    for it in basket:
-        logger.debug(f"item: {it}")
-
-    logger.debug(f"in basket_summary for {basket}")
+    for sku, item in basket.basket.items():
+        logger.debug(f"{sku}: {item}")
 
     return render(request, "basket/summary.html", {"basket": basket, "user": user})
 
