@@ -10,14 +10,17 @@ from .basket import Basket
 
 logger = logging.getLogger("console")
 
+
 def basket_summary(request):
     user = request.user
     basket = Basket(request)
-    
+    logger.debug(f"summary of basket {basket}")
     for sku, item in basket.basket.items():
-        logger.debug(f"{sku}: {item}")
+        logger.debug(f"summary > {sku}: {item}")
 
-    return render(request, "basket/summary.html", {"basket": basket, "user": user})
+    return render(
+        request, "basket/summary.html", {"basket": basket, "user": user}
+    )
 
 
 def basket_add(request):
@@ -25,17 +28,23 @@ def basket_add(request):
     logger.debug(f"basket_add POST: {request.POST}")
     if request.POST.get("action") == "post":
         product_qty = int(request.POST.get("productqty"))
-        variant = request.POST.get("variant") # may be None
-        logger.debug(f"to add variant/sku: {variant}")
+        variant = request.POST.get("variant")  # may be None
+        product_id = request.POST.get("productid")
 
-        pri = ProductInventory.objects.get(sku=variant)
-        logger.debug(f"item: {pri}")
-        basket.add(product=pri, 
-                   qty=product_qty,
-                   sku=variant)
+        if variant:
+            # we can fetch PRI by the supplied SKU
+            logger.debug(f"to add variant/sku: {variant}")
+            pri = ProductInventory.objects.get(sku=variant)
+            logger.debug(f"item: {pri}")
+            basket.add(product=pri, qty=product_qty, sku=variant)
+        else:
+            # we can fetch the unique PRI by using the product itself
+            logger.debug(f"adding a product without variants")
+            pri = ProductInventory.objects.get(product=product_id)
+            basket.add(product=pri, qty=product_qty, sku=pri.sku)
+
         basketqty = basket.__len__()
-        response = JsonResponse({"qty": basketqty})
-        return response
+        return JsonResponse({"qty": basketqty})
 
 
 def basket_delete(request):
@@ -44,7 +53,9 @@ def basket_delete(request):
     if request.POST.get("action") == "post":
         # well yeah: basket_delete POST: <QueryDict: {'productid': ['']
         sku_in = request.POST.get("sku")
-        logger.debug(f"requested to remove {sku_in} from the cart in {basket} ({type(basket)}")
+        logger.debug(
+            f"requested to remove {sku_in} from the cart in {basket} ({type(basket)}"
+        )
         logger.debug(f"basket before: {basket}")
         basket.delete(sku=sku_in)
         logger.debug(f"basket after: {basket}")
@@ -62,7 +73,7 @@ def basket_update(request):
     if request.POST.get("action") == "post":
         sku = request.POST.get("sku")
         logger.debug(f"Cart Item for update: {sku}")
-        assert sku != ''
+        assert sku != ""
         sku_qty = int(request.POST.get("skuqty"))
         basket.update(sku=sku, qty=sku_qty)
 

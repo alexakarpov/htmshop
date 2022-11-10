@@ -38,6 +38,7 @@ class Basket:
             self.basket[sku]["weight"] = product.weight
         else:
             self.basket[sku] = {
+                "title": product.product.title,
                 "price": str(product.price),
                 "qty": qty,
                 "weight": product.weight,
