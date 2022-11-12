@@ -1,16 +1,13 @@
+
 [tool.poetry]
 name = "htmshop"
 version = "0.1.0"
-description = ""
+description = "ecommerce project HTM"
 authors = ["Alexandre Karpov <alexakarpov@gmail.com>"]
 license = "MIT"
 
-packages = [
-    { include = "ecommerce" }
-]
-
 [tool.poetry.dependencies]
-python = "3.8.10"
+python = "3.10.4"
 gunicorn = "^20"
 python-dotenv = "^0.15"
 Pillow = "^9"
@@ -21,6 +18,12 @@ shipengine = "^1.0.0"
 Pint = "^0.18"
 # squareup = "^19.0.0"
 djangorestframework = "^3.13.1"
+
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^3"
@@ -35,9 +38,6 @@ pytest-selenium = "^2.0.1"
 autopep8 = "^1.6.0"
 bpython = "^0.23"
 
+
 [tool.black]
 line-length = 79
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
