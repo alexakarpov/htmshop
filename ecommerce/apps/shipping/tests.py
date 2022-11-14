@@ -3,11 +3,13 @@ from unittest.mock import MagicMock, Mock, patch
 
 import requests
 from django.conf import settings
+
 # Third-party imports...
 # from nose.tools import assert_is_not_none, assert_true
 from rest_framework.test import APIRequestFactory, APITestCase
 
 import ecommerce
+
 # import requests
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import get_weight
@@ -20,10 +22,20 @@ from .serializers import ShippingChoiceSerializer
 # import unittest
 
 test_cart = [
-    {"price": "30.00", "qty": 1, "variant": "8x10",
-     "title": "Holy Napkin", "weight": 16},
-    {"price": "20.00", "qty": 1, "variant": "",
-     "title": "Prayer Book", "weight": 8},
+    {
+        "price": "30.00",
+        "qty": 1,
+        "variant": "8x10",
+        "title": "Holy Napkin",
+        "weight": 16,
+    },
+    {
+        "price": "20.00",
+        "qty": 1,
+        "variant": "",
+        "title": "Prayer Book",
+        "weight": 8,
+    },
 ]
 
 test_address = Address()
@@ -34,11 +46,11 @@ test_address.town_city = "Boston"
 
 
 class SimpleTest(APITestCase):
-    fixtures = ['accounts.json']
+    fixtures = ["accounts.json"]
 
     def test_api(self):
         factory = APIRequestFactory()
-        request = factory.get('/shipping/get-rates/')
+        request = factory.get("/shipping/get-rates/")
         request.session = {}
 
         address = Address.objects.first()
@@ -56,13 +68,16 @@ class SimpleTest(APITestCase):
     def test_make_shipment(self):
         s = make_shipment(test_cart, test_address.to_dict())
         sd = s["shipment"]
-        assert sd["ship_from"]["company_name"] == "Holy Transfiguration Monastery"
+        assert (
+            sd["ship_from"]["company_name"] == "Holy Transfiguration Monastery"
+        )
         assert sd["ship_to"]["postal_code"] == test_address.postcode
         assert sd["ship_to"]["full_name"] == test_address.full_name
         assert sd["ship_to"]["country_code"] == test_address.country == "US"
         assert sd["ship_to"]["city_locality"] == test_address.town_city
         assert sd.get("packages") == [
-            {"weight": {"value": 24, "unit": "ounce"}}]
+            {"weight": {"value": 24, "unit": "ounce"}}
+        ]
 
     def test_rate_to_choice(self):
         with open("shipping_jsons/rate.json", "r") as f:
@@ -107,17 +122,19 @@ class SimpleTest(APITestCase):
         assert ser.data.get("id") == "qwe123"
         assert ser.data.get("days") == 9
 
-    @ patch('ecommerce.apps.shipping.engine.shipengine.get_rates_from_shipment')
+    @patch("ecommerce.apps.shipping.engine.shipengine.get_rates_from_shipment")
     def test_shipping_choices(self, mock_get_rates_from_shipment):
         with open("shipping_jsons/get_rates_response.json", "r") as f:
             rresponse = json.load(f)
 
         mock_get_rates_from_shipment.return_value = rresponse
         choices = ecommerce.apps.shipping.engine.shipping_choices(
-            test_cart, test_address)
+            test_cart, test_address
+        )
 
         # TODO: work out a proper assertion
         c1 = ShippingChoice.from_repr(
-            "usps_priority_mail/20.77/se-1573559617/2")
+            "usps_priority_mail/20.77/se-1573559617/2"
+        )
         self.assertEquals(len(choices), 18)
         self.assertIn(c1, choices)

@@ -3,6 +3,7 @@
 # import hashlib
 import json
 import logging
+from uuid import uuid4
 
 import requests
 from django.conf import settings
@@ -16,6 +17,7 @@ from dotenv import dotenv_values
 from ecommerce.apps.accounts.forms import UserAddressForm
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
+from ecommerce.apps.catalogue.models import ProductInventory
 from ecommerce.apps.orders.models import Order, OrderItem
 
 # from .paypal import PayPalClient
@@ -25,8 +27,8 @@ from ecommerce.apps.orders.models import Order, OrderItem
 
 config = dotenv_values()
 
-POST_URL = 'https://secure.networkmerchants.com/api/transact.php'
-SALE = 'sale'
+POST_URL = "https://secure.networkmerchants.com/api/transact.php"
+SALE = "sale"
 
 logger = logging.getLogger("console")
 
@@ -39,17 +41,9 @@ def deliverychoices(request):
 
 # @login_required
 def payment_selection(request):
-    user = request.user
-    logger.debug(f"user:\n{user}")
-
     session = request.session
     total = session["purchase"]["total"]
-    # form = StaxPaymentForm(
-    # initial = {'cc_firstname': user.get_first_name(), 'cc_lastname': user.get_last_name()})
-    return render(request, "checkout/payment_selection.html", {"total": total,
-                                                               #    "idempotency_token": token,
-                                                               #    "form": form
-                                                               })
+    return render(request, "checkout/payment_selection.html", {"total": total})
 
 
 def basket_update_delivery(request):
@@ -81,8 +75,9 @@ def delivery_address(request):
 
     # everetgyng is simple if they are logged in:
     if request.user.is_authenticated:
-        addresses = Address.objects.filter(
-            customer=request.user).order_by("-default")
+        addresses = Address.objects.filter(customer=request.user).order_by(
+            "-default"
+        )
 
         if len(addresses) == 0:
             # messages.warning(
@@ -107,12 +102,11 @@ def delivery_address(request):
                 "addresses": addresses,
             },
         )
-    #guest user
+    # guest user
     else:
         if "address" not in request.session:
             logger.debug("no address in session for guest user")
-            messages.warning(
-                request, "Enter an address for the checkout")
+            messages.warning(request, "Enter an address for the checkout")
 
             return HttpResponseRedirect(reverse("checkout:guest_address"))
 
@@ -128,6 +122,7 @@ def delivery_address(request):
                 },
             )
 
+
 def guest_address(request):
     logger.debug(f"| checkout guest_address with {request.method}")
 
@@ -136,11 +131,13 @@ def guest_address(request):
         address_form = UserAddressForm(data=request.POST)
         if address_form.is_valid():
             address = address_form.save(commit=False)
-            #^ is <class 'ecommerce.apps.accounts.models.Address>
+            # ^ is <class 'ecommerce.apps.accounts.models.Address>
             logger.debug(type(address))
 
             session["address"] = address.toJSON()
-            logger.debug("| form processed, address saved in the session, redirectong to delivery_address")
+            logger.debug(
+                "| form processed, address saved in the session, redirectong to delivery_address"
+            )
             return HttpResponseRedirect(reverse("checkout:delivery_address"))
         else:
             logger.error("invalid address")
@@ -149,65 +146,118 @@ def guest_address(request):
             return HttpResponse("Error handler content", status=400)
     else:
         address_form = UserAddressForm()
-    return render(request, "checkout/guest_address.html", {"form": address_form})
+    return render(
+        request, "checkout/guest_address.html", {"form": address_form}
+    )
 
 
 def report(logger, res_text):
     logger.debug("REPORTING")
 
-    for i in res_text.split('&'):
-        (k, v) = i.split('=')
+    for i in res_text.split("&"):
+        (k, v) = i.split("=")
         logger.debug(f"{k} => {v}")
 
 
 def payment_with_token(request):
-    payment_token = request.POST['payment_token']
-    logger.debug(
-        f"processing payment with token: {payment_token}")
+    payment_token = request.POST["payment_token"]
+    logger.debug(f"processing payment with token: {payment_token}")
     session = request.session
 
     d = {}
 
     for k in session.keys():
-        d[k] = session.get(k)
+        logger.debug(f"session key {k}, value {session.get(k)}")
 
-    logger.debug(f"session keys:\n {d}")
+    for k, v in config.items():
+        logger.debug(f"{k} is {v}")
 
+    address_json = session["address"]
     # AnonymousUser doesn't have these
-
     if request.user.is_authenticated:
         user = request.user
         fname = user.get_first_name()
         lname = user.get_last_name()
     else:
-        session = request.session
-        address_json = session["address"]
+        # can't we do this for a logged in user?
         try:
-            fname, lname = json.loads(address_json).get("full_name").split(' ')
+            fname, lname = json.loads(address_json).get("full_name").split(" ")
         except ValueError:
             fname = lname = ""
 
     total = session["purchase"]["total"]
 
-    # debug_print(request.POST)
-    response = requests.post(
-        POST_URL,
-        params={'security_key': config["STAX_SECURITY_KEY"],
-                'amount': total,
-                'type': SALE,
-                'payment_token': payment_token,
-                'first_name': fname,
-                'last_name': lname
-                },
-        headers={},
+    ############### while working on Orders, skip the payment POST
+
+    # response = requests.post(
+    #     POST_URL,
+    #     params={
+    #         "security_key": config["STAX_SECURITY_KEY"],
+    #         "amount": total,
+    #         "type": SALE,
+    #         "payment_token": payment_token,
+    #         "first_name": fname,
+    #         "last_name": lname,
+    #     },
+    #     headers={},
+    # )
+
+    # if not response:
+    #     logger.error("RESPONSE ERROR")
+
+    ############# end of skip
+
+
+    full_name = f"{fname} {lname}"
+
+    # report(logger, response.text)
+
+    # ok. a successful payment means the order was placed, so need to capture it in a model
+    # order data requires address and cart (already in the session)
+
+    basket = Basket(request)
+    user = request.user
+    address_json = request.session["address"]
+    address_d = json.loads(address_json)
+
+    if user.is_authenticated:
+        logger.debug(f"{user} is authenticated")
+        user=user
+    else:
+        logger.debug(f"{user} is NOT authenticated")
+    
+    logger.debug(f"placing an order for {user} ({type(user)})")
+    order = Order.objects.create(
+        user=user,
+        full_name=full_name,
+        email="qwe@asd@com", #FIXM
+        address1=address_d.get("address_line1"),
+        address2=address_d.get("address_line2"),
+        postal_code=address_d.get("postal_code"),
+        country_code=address_d.get("country_code"),
+        total_paid=total,
+        order_key=str(uuid4()),
+        payment_option="Stax",
+        billing_status=True,
     )
+    order_id = order.pk
 
-    if not response:
-        logger.error("RESPONSE ERROR")
 
-    report(logger, response.text)
+    for sku, item in basket.basket.items():
+        pii = ProductInventory.objects.get(sku=sku)
+        OrderItem.objects.create(
+            order_id=order_id,
+            product=pii,
+            price=item["price"],
+            quantity=item["qty"],
+        )
 
-    return HttpResponseRedirect(reverse('catalogue:store_home'))
+    order.save()
+
+    basket.clear()
+
+    return HttpResponseRedirect(reverse("catalogue:store_home"))
+
 
 ####
 # PayPal
