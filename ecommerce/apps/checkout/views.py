@@ -67,7 +67,6 @@ def basket_update_delivery(request):
         return response
 
 
-# @ login_required
 def delivery_address(request):
     logger.debug(f">> checkout delivery_address with {request.method}")
     session = request.session
@@ -247,7 +246,7 @@ def payment_with_token(request):
         pii = ProductInventory.objects.get(sku=sku)
         OrderItem.objects.create(
             order_id=order_id,
-            product=pii,
+            inventory_item=pii,
             price=item["price"],
             quantity=item["qty"],
         )
