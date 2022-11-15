@@ -18,11 +18,8 @@ logger = logging.getLogger("console")
 def get_rates(request):
     basket = Basket(request)
     logger.debug(f"get_rates: Basket>\n{basket}")
-    address_json = request.session["address"]
-    logger.debug(f"get_rates: Address JSON from session >\n{address_json}")
-    address_d = json.loads(address_json)
+    address_d = json.loads(request.session["address"])
     logger.debug(f"as a dict:\n{address_d}")
-    # address = Address.fromDict(d) # this generates an ID, which we don't need here
     choices = shipping_choices(basket, address_d)
 
     if len(choices) == 0:

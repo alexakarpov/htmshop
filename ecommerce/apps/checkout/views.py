@@ -74,6 +74,7 @@ def delivery_address(request):
 
     # everetgyng is simple if they are logged in:
     if request.user.is_authenticated:
+        logger.debug(f"user is authenticated")
         addresses = Address.objects.filter(customer=request.user).order_by(
             "-default"
         )
@@ -81,6 +82,7 @@ def delivery_address(request):
         if len(addresses) == 0:
             # messages.warning(
             #     request, "Enter an address for the checkout")
+            logger.debug(f"no addresses yet")
 
             return HttpResponseRedirect(reverse("accounts:addresses"))
 
@@ -92,7 +94,9 @@ def delivery_address(request):
             address_json = session["address"]
             logger.debug(f"Address in session:\n {address_json}")
             address_dict = json.loads(address_json)
-            addresses = [Address(address_dict)]
+            address_obj = Address.from_dict(address_dict)
+            logger.debug(f"address object: {address_obj}")
+            addresses = [address_obj]
 
         return render(
             request,
@@ -130,9 +134,6 @@ def guest_address(request):
         address_form = UserAddressForm(data=request.POST)
         if address_form.is_valid():
             address = address_form.save(commit=False)
-            # ^ is <class 'ecommerce.apps.accounts.models.Address>
-            logger.debug(type(address))
-
             session["address"] = address.toJSON()
             logger.debug(
                 "| form processed, address saved in the session, redirectong to delivery_address"
@@ -145,9 +146,9 @@ def guest_address(request):
             return HttpResponse("Error handler content", status=400)
     else:
         address_form = UserAddressForm()
-    return render(
-        request, "checkout/guest_address.html", {"form": address_form}
-    )
+        return render(
+            request, "checkout/guest_address.html", {"form": address_form}
+        )
 
 
 def report(logger, res_text):
@@ -162,16 +163,17 @@ def payment_with_token(request):
     payment_token = request.POST["payment_token"]
     logger.debug(f"processing payment with token: {payment_token}")
     session = request.session
+    basket = Basket(request)
 
-    d = {}
+    # for k in session.keys():
+    #     logger.debug(f"session key {k}, value {session.get(k)}")
 
-    for k in session.keys():
-        logger.debug(f"session key {k}, value {session.get(k)}")
-
-    for k, v in config.items():
-        logger.debug(f"{k} is {v}")
+    # for k, v in config.items():
+    #     logger.debug(f"{k} is {v}")
 
     address_json = session["address"]
+    total = session["purchase"]["total"]
+
     # AnonymousUser doesn't have these
     if request.user.is_authenticated:
         user = request.user
@@ -183,8 +185,6 @@ def payment_with_token(request):
             fname, lname = json.loads(address_json).get("full_name").split(" ")
         except ValueError:
             fname = lname = ""
-
-    total = session["purchase"]["total"]
 
     ############### while working on Orders, skip the payment POST
 
@@ -206,30 +206,30 @@ def payment_with_token(request):
 
     ############# end of skip
 
-
-    full_name = f"{fname} {lname}"
-
     # report(logger, response.text)
 
     # ok. a successful payment means the order was placed, so need to capture it in a model
     # order data requires address and cart (already in the session)
 
-    basket = Basket(request)
     user = request.user
     address_json = request.session["address"]
     address_d = json.loads(address_json)
 
     if user.is_authenticated:
         logger.debug(f"{user} is authenticated")
-        user=user
+        user = user
     else:
         logger.debug(f"{user} is NOT authenticated")
-    
-    logger.debug(f"placing an order for {user} ({type(user)})")
+
+    logger.debug(f"placing an order for {user} ({type(user)})")  # FIXME
+    # fails for an anonyumous user
+
     order = Order.objects.create(
         user=user,
-        full_name=full_name,
-        email="qwe@asd@com", #FIXM
+        full_name=f"{fname} {lname}",
+        email=user.email
+        if user.is_authenticated
+        else "someone@example.com",  # FIXME
         address1=address_d.get("address_line1"),
         address2=address_d.get("address_line2"),
         postal_code=address_d.get("postal_code"),
@@ -240,7 +240,6 @@ def payment_with_token(request):
         billing_status=True,
     )
     order_id = order.pk
-
 
     for sku, item in basket.basket.items():
         pii = ProductInventory.objects.get(sku=sku)
@@ -254,6 +253,11 @@ def payment_with_token(request):
     order.save()
 
     basket.clear()
+
+    messages.info(
+        request,
+        f"Your order has been placed, reference key: {order.order_key}",
+    )
 
     return HttpResponseRedirect(reverse("catalogue:store_home"))
 
