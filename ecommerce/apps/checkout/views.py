@@ -208,28 +208,17 @@ def payment_with_token(request):
 
     # report(logger, response.text)
 
-    # ok. a successful payment means the order was placed, so need to capture it in a model
-    # order data requires address and cart (already in the session)
 
     user = request.user
-    address_json = request.session["address"]
-    address_d = json.loads(address_json)
+    
+    address_d = json.loads(request.session["address"])
 
-    if user.is_authenticated:
-        logger.debug(f"{user} is authenticated")
-        user = user
-    else:
-        logger.debug(f"{user} is NOT authenticated")
-
-    logger.debug(f"placing an order for {user} ({type(user)})")  # FIXME
-    # fails for an anonyumous user
+    logger.debug(f"placing an order for {user}")
 
     order = Order.objects.create(
-        user=user,
+        user=user if user.is_authenticated else None,
         full_name=f"{fname} {lname}",
-        email=user.email
-        if user.is_authenticated
-        else "someone@example.com",  # FIXME
+        email=user.email if user.is_authenticated else "someone@example.com",
         address1=address_d.get("address_line1"),
         address2=address_d.get("address_line2"),
         postal_code=address_d.get("postal_code"),
