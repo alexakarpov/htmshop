@@ -28,3 +28,55 @@ need to remove $ from product category list and individual product details - or 
 11/1
 
 basket (the dict) is keyed of product id. Should it be keyed of the sku? Currently sku is an internal key
+
+###
+
+11/8
+
+OK once again - product with variants getting added, but book (without variants) fails:
+ ProductInventory matching query does not exist
+ at:
+ pri = ProductInventory.objects.get(sku=variant)
+, variant being None
+
+ok now we can add it, but two copies are being added
+
+fixed add/delete, but need to deal with empty cart post-deletion
+
+#### 11/9
+
+41111 (test Visa) returned error code 65
+
+Activity limit exceeded
+The issuing bank is declining the transaction. May be due to a high volume of transactions within a limited time, or possibly exceeding the credit limit.
+
+- so probably it isn't a good idea to test in Production, eh
+
+support number:
+
+Phone: 4079821782
+Email: support@fattmerchant.com
+
+
+
+error in staging:
+
+NoReverseMatch at /checkout/delivery_address/
+Reverse for 'edit_address' with arguments '({'full_name': 'Father Ephraim', 'address_line1': '287 Warren St', 'address_line2': 'Holy Transfiguration Monastery', 'phone': '1231234567', 'city_locality': 'Brookline', 'state_province': 'MA', 'postal_code': '02445', 'country_code': 'US'},)' not found. 1 pattern(s) tried: ['accounts/addresses/edit/(?P<id>[-a-zA-Z0-9_]+)/\\Z']
+
+path present:
+    path("addresses/edit/<slug:id>/", views.edit_address, name="edit_address"),
+
+error is at line 55 of delivery_address.html:
+
+                    <a href="{% url 'accounts:edit_address' address.id %}" class="text-decoration-none">Edit</a>
+
+
+
+new ips today:
+12.190.236.72
+71.232.204.202
+ 
+#### 15/9
+updated owner of store db to our custom user in init.sql file
+cat init.sql | sudo --login --user=postgres psql

@@ -22,6 +22,7 @@
             python-is-python3,
             emacs-nox,
             nginx,
+            # postgresql,
           ]
         state: latest
 
@@ -91,14 +92,6 @@
         owner: storeadmin
         group: htm
         mode: 0775
-
-    # - name: requirement file
-    #   copy:
-    #     src: ../requirements.txt
-    #     dest: /var/htmshop/requirements.txt
-    #     owner: storeadmin
-    #     group: htm
-    #     mode: 644
 
     #### secrets
     - name: db init.sql file
