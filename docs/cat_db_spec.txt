@@ -1,0 +1,31 @@
+Table product {
+  id int [pk]
+  name varchar
+}
+
+Table product_type {
+  id int [pk]
+  name varchar
+}
+
+Table product_specification {
+  id int [pk]
+  type int [ref: > product_type.id]
+  name varchar
+}
+
+Table product_specification_value {
+  id int [pk]
+  spec int [ref: > product_specification.id]
+  product int [ref: > product_inventory.sku]
+  
+  value varchar
+}
+
+Table product_inventory {
+  product int [ref: > product.id]
+  //specifications int [ref: <> product_specification_value.id]
+  specs int [ref: > product_specification.id]
+  sku varchar [pk]
+  
+}
