@@ -137,13 +137,13 @@
         <main class="pt-2">
             <div id="content">
                 {% if messages %}
-                <div class="alert alert-warning alert-{{ message.tags }}" role="alert">
+                <div class="m-4 alert alert-warning alert-{{ message.tags }}" role="alert">
                     {% for message in messages  %}
                     {{message|safe}}
                     {% endfor %}
                 </div>
                 {% endif %}
-                <div class="alert alert-success" role="alert" id="alertbox" style="display:none;">
+                <div class="m-4 alert alert-success" role="alert" id="alertbox" style="display:none;">
                 </div>
                 {% block content %}
                 {% endblock %}
