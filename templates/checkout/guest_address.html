@@ -12,7 +12,7 @@
     <hr />
     <form name="address_form" class="account-form" method="post" enctype="multipart/form-data">
       {% if form.errors %}
-        <div class="alert alert-primary" role="alert">Error: Please try again!</div>
+        <div class="alert alert-primary" role="alert">Some error in the form, fwiw...</div>
       {% endif %}
       {% csrf_token %}
       <label class="small fw-bold">{{ form.full_name.label }}</label>
