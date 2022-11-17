@@ -57,7 +57,7 @@
       "product_type": 1,
       "category": 2,
       "title": "Holy Napkin",
-      "description": "qwe qwe",
+      "description": "When the fame of our Lord Jesus Christ came to Abgar, the ruler of Edessa, who was suffering from leprosy, Abgar sent a messenger named Ananias, through him asking the Saviour to heal him of his disease, while bidding Ananias bring back a depiction of Him. When Ananias came to Jerusalem, and was unable to capture the likeness of our Lord, He, the Knower of hearts, asked for water, and having washed His immaculate and divine face, wiped it dry with a certain cloth, which He gave to Ananias to take to Abgar; the form of the Lord’s face had been wondrously printed upon the cloth. As soon as Abgar received the cloth, which is called the Holy Napkin (Mandylion), he reverenced it with joy, and was healed of his leprosy; only his forehead remained afflicted. After the Lord’s Death, Resurrection, and Ascension, the Apostle Thaddaeus (see Aug. 21) came to Edessa, and when he had baptized Abgar and all his men, Abgar’s remaining leprosy also was healed. Abgar had the holy image of our Saviour fixed to a board and placed at the city gate, commanding that all who entered the city reverence it as they passed through. Abgar’s grandson, however, returned to the worship of the idols, and the Bishop of Edessa learned of his intention to replace the Holy Napkin with an idol. Since the place where it stood above the city gate was a rounded hollow, he set a burning lamp before the Holy Napkin, put a tile facing it, then bricked up the place and smoothed it over, so that the holy icon made without hands was no longer to be seen, and the ungodly ruler gave no further thought to it.\r\n\r\nWith the passage of time, the hidden icon was forgotten, until the year 615, when Chosroës II, King of Persia, was assaulting the cities of Asia, and besieged Edessa. The Bishop of Edessa, Eulabius, instructed by a divine revelation, opened the sealed chamber above the city gate and found the Holy Napkin complete and incorrupt, the lamp burning, and the tile bearing upon itself an identical copy of the image that was on the Holy Napkin. The Persians had built a huge fire outside the city wall; when the Bishop approached with the Holy Napkin, a violent wind fell upon the fire, turning it back upon the Persians, who fled in defeat. The Holy Napkin remained in Edessa, even after the Arabs conquered it, until the year 944, when it was brought with honor and triumph to Constantinople in the reign of Romanus I, when Theophylact was Ecumenical Patriarch. The Holy Napkin was enshrined in the Church of the most holy Theotokos called the Pharos.",
       "slug": "hn",
       "is_active": true,
       "created_at": "2022-10-21T05:27:42.562Z",
@@ -71,7 +71,7 @@
       "product_type": 2,
       "category": 1,
       "title": "Prayer Book",
-      "description": "asd asd",
+      "description": "Translated from the Greek by the Holy Transfiguration Monastery. 2010.\r\nHardcover binding. 384 pages.\r\nFifth Printing.\r\nMorning Prayers and Prayers at Mealtime\r\nComplete services of Small Compline, Vespers, Matins and the Divine Liturgy\r\nPrincipal hymns of the feasts of the year\r\nComplete Service of Pascha\r\nAkathist Hymn to our Sweetest Lord Jesus Christ\r\nThe Akathist Hymn to the Most Holy Theotokos\r\nSupplicatory Canon to our Lord Jesus Christ\r\nBoth the Small and the Great Supplicatory Canons to the Most Holy Theotokos (translated to fit the Greek melodies)\r\nSupplicatory Canon to the Guardian Angel\r\nCommunion Prayers",
       "slug": "pb",
       "is_active": true,
       "created_at": "2022-10-21T05:28:13.887Z",
@@ -85,7 +85,7 @@
       "product_type": 3,
       "category": 3,
       "title": "Bethlehem",
-      "description": "zxc zxc zxc vbn",
+      "description": "The first incense developed by our monastery, and still the favorite. A non-floral combination of mild fragrances with hints of vanilla. Gentle and appealing to most people.",
       "slug": "beth",
       "is_active": true,
       "created_at": "2022-10-23T06:01:43.542Z",
@@ -217,6 +217,39 @@
       "specification": 2,
       "sku": 6,
       "value": "ounce"
+    }
+  },
+  {
+    "model": "catalogue.productimage",
+    "pk": 1,
+    "fields": {
+      "product": 2,
+      "image": "images/b025-Prayer_Book.jpg",
+      "alt_text": null,
+      "created_at": "2022-11-17T02:27:46.643Z",
+      "updated_at": "2022-11-17T02:45:31.992Z"
+    }
+  },
+  {
+    "model": "catalogue.productimage",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "image": "images/A-329-Icon-Holy-Napkin.png",
+      "alt_text": null,
+      "created_at": "2022-11-17T02:29:19.441Z",
+      "updated_at": "2022-11-17T02:44:04.697Z"
+    }
+  },
+  {
+    "model": "catalogue.productimage",
+    "pk": 3,
+    "fields": {
+      "product": 3,
+      "image": "images/L001-Bethlehem.jpg",
+      "alt_text": null,
+      "created_at": "2022-11-17T02:29:38.467Z",
+      "updated_at": "2022-11-17T02:44:53.115Z"
     }
   }
 ]
