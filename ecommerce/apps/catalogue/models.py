@@ -97,6 +97,13 @@ class Product(models.Model):
     users_wishlist = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="user_wishlist", blank=True)
 
+    image = models.ImageField(
+        verbose_name=_("image"),
+        help_text=_("Upload a product image"),
+        upload_to="images/",
+        default="images/default.png",
+    )
+    
     class Meta:
         ordering = ("-created_at",)
         verbose_name = _("Product")
@@ -202,22 +209,14 @@ class ProductImage(models.Model):
     The Product Image table.
     """
 
-    product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="product_image")
-    image = models.ImageField(
-        verbose_name=_("image"),
-        help_text=_("Upload a product image"),
-        upload_to="images/",
-        default="images/default.png",
-    )
+    
     alt_text = models.CharField(
-        verbose_name=_("Alturnative text"),
-        help_text=_("Please add alturnative text"),
+        verbose_name=_("Alternative text"),
+        help_text=_("Please add alternative text"),
         max_length=255,
         null=True,
         blank=True,
     )
-    is_feature = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -13,13 +13,7 @@
         <div class="col-md-12">
           <div class="card-body p-1">
             <h1 class="mb-0 h2 pe-4 pb-4">{{ product.title }}</h1>
-            {% for pi in product.product_image.all %}
-              {% if pi.is_feature %}
-                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ pi.image.url }}" alt="{{ pi.alt_text }}" />
-              {% else %}
-                <img class="img-fluid d-block-inline pt-3" width="100px" alt="Responsive image" src="{{ pi.image.url }}" alt="{{ pi.alt_text }}" />
-              {% endif %}
-            {% endfor %}
+            <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ product.image.url }}" alt="{{ product.title }}" />
             <p class="card-text">{{ product.description }}</p>
           </div>
         </div>
@@ -66,10 +60,10 @@
           $('#basket-qty').html(json.qty)
           $('#alertbox').show()
           $('#alertbox').text('{{product.title}} added to the cart')
-          setTimeout(function () {
-            $('#alertbox').hide()
-            window.location.replace('{% url "basket:basket_summary" %}')
-          }, 2000) // ok at least something worked
+          //setTimeout(function () {
+          //  $('#alertbox').hide()
+          //  window.location.replace('{% url "basket:basket_summary" %}')
+          //}, 2000) // ok at least something worked
         },
         error: function (xhr, errmsg, err) {
           console.error("add POST failed", errmsg)
