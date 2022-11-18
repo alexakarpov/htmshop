@@ -14,6 +14,7 @@ from .models import (
 admin.site.register(Category)
 admin.site.register(Product)
 
+
 class ProductSpecificationInline(admin.TabularInline):
     model = ProductSpecification
 

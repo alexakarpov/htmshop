@@ -9,9 +9,7 @@ logger = logging.getLogger("console")
 
 def catalogue_index(request):
     logger.debug(f"index for {request.user}")
-    products = Product.objects.filter(
-        is_active=True
-    )
+    products = Product.objects.filter(is_active=True)
     return render(request, "catalogue/index.html", {"products": products})
 
 

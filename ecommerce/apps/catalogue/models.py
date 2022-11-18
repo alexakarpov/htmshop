@@ -19,10 +19,16 @@ class Category(models.Model):
         max_length=255,
         unique=True,
     )
-    slug = models.SlugField(verbose_name=_(
-        "Category safe URL"), max_length=255, unique=True)
+    slug = models.SlugField(
+        verbose_name=_("Category safe URL"), max_length=255, unique=True
+    )
     parent = models.ForeignKey(
-        "self", on_delete=models.CASCADE, null=True, blank=True, related_name="children")
+        "self",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="children",
+    )
     is_active = models.BooleanField(default=True)
 
     class Meta:
@@ -47,13 +53,15 @@ class Category(models.Model):
 
 class ProductType(models.Model):
     """
-      product_type table - books, mounted icons, incense - each type will have related specifications.
+    product_type table - books, mounted icons, incense - each type will have related specifications.
     """
+
     name = models.CharField(
         verbose_name=_("Product Type name"),
         help_text=_("Required"),
         max_length=55,
-        unique=True)
+        unique=True,
+    )
 
     class Meta:
         verbose_name_plural = _("Product Types")
@@ -64,26 +72,24 @@ class ProductType(models.Model):
 
 class Product(models.Model):
     """
-      The product table. This class is meant to be "abstract",
-      in a sense that items added to a shopping cart
-      will be a Product with Product Specification which are
-      required by it's Product Type
+    The product table. This class is meant to be "abstract",
+    in a sense that items added to a shopping cart
+    will be a Product with Product Specification which are
+    required by it's Product Type
     """
 
     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
     category = models.ForeignKey(
-        Category,
-        null=True,
-        blank=True,
-        on_delete=models.RESTRICT
+        Category, null=True, blank=True, on_delete=models.RESTRICT
     )
     title = models.CharField(
         verbose_name=_("title"),
         help_text=_("Required"),
         max_length=255,
     )
-    description = models.TextField(verbose_name=_(
-        "description"), help_text=_("Not Required"), blank=True)
+    description = models.TextField(
+        verbose_name=_("description"), help_text=_("Not Required"), blank=True
+    )
     slug = models.SlugField(max_length=255)
 
     is_active = models.BooleanField(
@@ -92,10 +98,12 @@ class Product(models.Model):
         default=True,
     )
     created_at = models.DateTimeField(
-        _("Created at"), auto_now_add=True, editable=False)
+        _("Created at"), auto_now_add=True, editable=False
+    )
 
     users_wishlist = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, related_name="user_wishlist", blank=True)
+        settings.AUTH_USER_MODEL, related_name="user_wishlist", blank=True
+    )
 
     image = models.ImageField(
         verbose_name=_("image"),
@@ -136,9 +144,7 @@ class ProductSpecification(models.Model):
 
     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
     name = models.CharField(
-        verbose_name=_("Name"),
-        help_text=_("Required"),
-        max_length=55
+        verbose_name=_("Name"), help_text=_("Required"), max_length=55
     )
 
     class Meta:
@@ -152,19 +158,19 @@ class ProductSpecification(models.Model):
 class ProductInventory(models.Model):
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    specifications = models.ManyToManyField(ProductSpecification,
-                                            through='ProductSpecificationValue')
+    specifications = models.ManyToManyField(
+        ProductSpecification, through="ProductSpecificationValue"
+    )
     sku = models.CharField(
         verbose_name=_("Product SKU"),
         help_text=_("Required"),
         max_length=10,
-        unique=True
+        unique=True,
     )
 
     quantity = models.IntegerField()
     weight = models.IntegerField()  # in ounces
-    price = models.DecimalField(max_digits=10,
-                                decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
         verbose_name = _("Product Inventory Record")
@@ -186,16 +192,14 @@ class ProductSpecificationValue(models.Model):
     link table for Many-to-Many relationship between ProductSpecification
     and ProductInventory entities
     """
+
     specification = models.ForeignKey(
-        ProductSpecification,
-        on_delete=models.CASCADE)
+        ProductSpecification, on_delete=models.CASCADE
+    )
 
     sku = models.ForeignKey(ProductInventory, on_delete=models.CASCADE)
 
-    value = models.CharField(
-        max_length=30,
-        blank=False
-    )
+    value = models.CharField(max_length=30, blank=False)
 
     def __str__(self) -> str:
         return f"{self.value}"
@@ -210,7 +214,6 @@ class ProductImage(models.Model):
     The Product Image table.
     """
 
-    
     alt_text = models.CharField(
         verbose_name=_("Alternative text"),
         help_text=_("Please add alternative text"),
