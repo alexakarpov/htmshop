@@ -37,6 +37,10 @@ Product
     </div>
     {% endif %}
   </div>
+  <div class="row">
+    <div class="m-4 alert alert-success" role="alert" id="cartalertbox" style="display:none;">
+    </div>
+  </div>
   <div class="row row-cols-2">
     <div class="col-md">
       <button type="button" id="add-button" value="{{ product.id }}" class="btn btn-success m-5 fw500">Add to
@@ -60,10 +64,10 @@ Product
       },
       success: function (json) {
         $('#basket-qty').html(json.qty)
-        $('#alertbox').show()
-        $('#alertbox').text('{{product.title}} added to the cart')
+        $('#cartalertbox').show()
+        $('#cartalertbox').text('{{product.title}} added to the cart')
         setTimeout(function () {
-          $('#alertbox').hide()
+          $('#cartalertbox').hide()
           //  window.location.replace('{% url "basket:basket_summary" %}')
         }, 2000) // ok at least something worked
       },
