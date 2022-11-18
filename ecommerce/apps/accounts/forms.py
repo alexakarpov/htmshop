@@ -195,7 +195,7 @@ class RegistrationForm(forms.ModelForm):
         required=True,
         max_length=100,
         help_text="Required",
-        error_messages={"required": "Sorry, you will need an email"},
+        error_messages={"required": "email is required"},
     )
 
     first_name = forms.CharField(
@@ -203,7 +203,7 @@ class RegistrationForm(forms.ModelForm):
         required=True,
         max_length=20,
         help_text="Required",
-        error_messages={"required": "Sorry, you will need a first name"},
+        error_messages={"required": "first name is required"},
     )
 
     last_name = forms.CharField(
@@ -211,7 +211,7 @@ class RegistrationForm(forms.ModelForm):
         required=True,
         max_length=20,
         help_text="Required",
-        error_messages={"required": "Sorry, you will need a last name"},
+        error_messages={"required": "last name is required"},
     )
 
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
@@ -287,9 +287,7 @@ class PwdResetForm(PasswordResetForm):
         email = self.cleaned_data["email"]
         u = UserModel.objects.filter(email=email)
         if not u:
-            raise forms.ValidationError(
-                "Unfortunatley we can not find that email address"
-            )
+            raise forms.ValidationError("unknown email address")
         return email
 
 
