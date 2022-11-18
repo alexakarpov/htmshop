@@ -11,8 +11,8 @@ class ProductTest(TestCase):
 
     def test_fixture_worked(self):
         self.assertEquals(Product.objects.all().count(),
-                          3,
-                          "fixture has 3 Productss")
+                          4,
+                          "fixture has 4 Productss")
 
     def test_product_types_and_specs(self):
         p1 = Product.objects.get(slug="pb")
@@ -40,8 +40,8 @@ class ProductTest(TestCase):
                       "Book's spec is in books specs")
 
     def test_type_name(self):
-        books = ProductType.objects.get(name='books')
-        self.assertEquals(books.name, "books")
+        books = ProductType.objects.get(name='book')
+        self.assertEquals(books.name, "book")
 
     def test_product_get_variants(self):
         """

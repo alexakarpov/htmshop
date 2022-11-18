@@ -10,8 +10,8 @@ class AccountTest(TestCase):
 
     def test_fixture_worked(self):
         self.assertEquals(Account.objects.all().count(),
-                          2,
-                          "fixture has 2 accounts")
+                          3,
+                          "fixture has 3 accounts")
 
     def test_address_from_json(self):
         address = Address.objects.get(

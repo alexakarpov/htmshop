@@ -121,7 +121,7 @@
     "model": "accounts.address",
     "pk": "802596f0-1d01-4770-9a1c-bc453bcd6668",
     "fields": {
-      "customer": 2,
+      "customer": 3,
       "full_name": "John Doe",
       "phone": "123-456-7890",
       "postcode": "94103",
