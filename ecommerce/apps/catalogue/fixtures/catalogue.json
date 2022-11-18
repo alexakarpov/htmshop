@@ -204,6 +204,17 @@
     }
   },
   {
+    "model": "catalogue.productinventory",
+    "pk": 8,
+    "fields": {
+      "product": 4,
+      "sku": "a021",
+      "quantity": 0,
+      "weight": 39,
+      "price": "60.00"
+    }
+  },
+  {
     "model": "catalogue.productspecificationvalue",
     "pk": 1,
     "fields": {
@@ -254,6 +265,15 @@
     "fields": {
       "specification": 1,
       "sku": 7,
+      "value": "16x20"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 7,
+    "fields": {
+      "specification": 1,
+      "sku": 8,
       "value": "16x20"
     }
   }

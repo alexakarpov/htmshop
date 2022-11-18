@@ -60,10 +60,10 @@
           $('#basket-qty').html(json.qty)
           $('#alertbox').show()
           $('#alertbox').text('{{product.title}} added to the cart')
-          //setTimeout(function () {
-          //  $('#alertbox').hide()
+          setTimeout(function () {
+            $('#alertbox').hide()
           //  window.location.replace('{% url "basket:basket_summary" %}')
-          //}, 2000) // ok at least something worked
+          }, 2000) // ok at least something worked
         },
         error: function (xhr, errmsg, err) {
           console.error("add POST failed", errmsg)

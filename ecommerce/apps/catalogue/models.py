@@ -103,7 +103,7 @@ class Product(models.Model):
         upload_to="images/",
         default="images/default.png",
     )
-    
+
     class Meta:
         ordering = ("-created_at",)
         verbose_name = _("Product")
@@ -116,6 +116,7 @@ class Product(models.Model):
         """
         These are actually ProductInventory items related to this Product
         """
+        logger.debug(f"getting variants for {self}")
         return self.productinventory_set.filter(product_id=self.id)
 
     def __str__(self):

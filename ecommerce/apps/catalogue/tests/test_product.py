@@ -4,6 +4,7 @@ from ecommerce.apps.catalogue.models import (Product, ProductInventory,
                                              ProductSpecification,
                                              ProductSpecificationValue,
                                              ProductType)
+from ecommerce.constants import *
 
 
 class ProductTest(TestCase):
@@ -21,13 +22,13 @@ class ProductTest(TestCase):
                          "Prayer Book",
                          "fixture works, products loaded")
 
-        book = p1.product_type
-        icon = p2.product_type
+        book_type = p1.product_type
+        icon_type = p2.product_type
         p1_specs = p1.product_type.productspecification_set.all()
         p2_specs = p2.product_type.productspecification_set.all()
         all_specs = ProductSpecification.objects.all()
-        book_specs = all_specs.filter(product_type=book)
-        icon_specs = all_specs.filter(product_type=icon)
+        book_specs = all_specs.filter(product_type=book_type)
+        icon_specs = all_specs.filter(product_type=icon_type)
         self.assertEquals(book_specs.count(),
                           0,
                           "there should be no specs for books")
@@ -41,7 +42,7 @@ class ProductTest(TestCase):
 
     def test_type_name(self):
         books = ProductType.objects.get(name='book')
-        self.assertEquals(books.name, "book")
+        self.assertEquals(books.name, PRODUCT_TYPE_BOOK)
 
     def test_product_get_variants(self):
         """
