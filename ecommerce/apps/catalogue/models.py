@@ -5,12 +5,15 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from mptt.models import MPTTModel, TreeForeignKey
+
 logger = logging.getLogger("console")
 
 
-class Category(models.Model):
+class Category(MPTTModel):
+    
     """
-    Category Table implimented barebones
+    Category Table implimented with mptt
     """
 
     name = models.CharField(
@@ -22,15 +25,14 @@ class Category(models.Model):
     slug = models.SlugField(
         verbose_name=_("Category safe URL"), max_length=255, unique=True
     )
-    parent = models.ForeignKey(
-        "self",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        related_name="children",
-    )
+
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+
     is_active = models.BooleanField(default=True)
 
+    class MPTTMeta:
+        order_insertion_by = ['name']
+        
     class Meta:
         # enforcing that there can only be one category under a parent with same slug
         unique_together = (
