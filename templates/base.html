@@ -1,4 +1,5 @@
 {% load static %}
+{% load mptt_tags %}
 <!DOCTYPE html>
 <html>
 
@@ -49,12 +50,16 @@
                             </a>
 
                             <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{% url 'catalogue:store_home' %}">All</a></li>
-                                {% for c in categories %}
-                                <li>
-                                    <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
+                                {% recursetree categories %}
+                                <li class="dropdown-item">
+                                    <a href="{{ node.get_absolute_url }}">{{ node.name }}</a>
+                                    {% if not node.is_leaf_node %}
+                                    <ul class="children">
+                                        {{ children }}
+                                    </ul>
+                                    {% endif %}
                                 </li>
-                                {% endfor %}
+                                {% endrecursetree %}
                             </ul>
                         </li>
                     </ul>

@@ -13,11 +13,15 @@
 .dropdown-toggle::after {
     display: none;
 }
-.dropdown-menu{
+.dropdown-menu {
     top:58px;
     left:0px;
     padding:10px;
 }
+
+
+/* .dropdown-menu li:nth-child(odd) { background: red; }
+.dropdown-menu li:nth-child(even) { background: green; } */
 
 .alert-primary{
     background-color: #E4F1FF;
