@@ -8,14 +8,30 @@ logger = logging.getLogger("console")
 
 
 def catalogue_index(request):
-    logger.debug(f"index for {request.user}")
     products = Product.objects.filter(is_active=True)
     return render(request, "catalogue/index.html", {"products": products})
 
 
+def get_children_products(cat):
+    all_products = Product.objects.all()
+    relevant_products = []
+
+    for p in all_products:
+        if p.category in cat.children.all():
+            relevant_products.append(p)
+
+    return relevant_products
+
+
 def category_list(request, category_slug=None):
+    logger.debug(f"fetching products for category by slug - {category_slug}")
     category = get_object_or_404(Category, slug=category_slug)
-    products = Product.objects.filter(category__slug=category_slug)
+    products = (
+        Product.objects.filter(category__slug=category_slug)
+        if category.children.count() == 0
+        else get_children_products(category)
+    )
+
     return render(
         request,
         "catalogue/category.html",
