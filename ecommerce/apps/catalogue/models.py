@@ -5,12 +5,15 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from mptt.models import MPTTModel, TreeForeignKey
+
 logger = logging.getLogger("console")
 
 
-class Category(models.Model):
+class Category(MPTTModel):
+    
     """
-    Category Table implimented barebones
+    Category Table implimented with mptt
     """
 
     name = models.CharField(
@@ -22,15 +25,14 @@ class Category(models.Model):
     slug = models.SlugField(
         verbose_name=_("Category safe URL"), max_length=255, unique=True
     )
-    parent = models.ForeignKey(
-        "self",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        related_name="children",
-    )
+
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+
     is_active = models.BooleanField(default=True)
 
+    class MPTTMeta:
+        order_insertion_by = ['name']
+        
     class Meta:
         # enforcing that there can only be one category under a parent with same slug
         unique_together = (
@@ -39,13 +41,16 @@ class Category(models.Model):
         )
         verbose_name_plural = "categories"
 
-    def __str__(self):
-        full_path = [self.name]
-        k = self.parent
-        while k is not None:
-            full_path.append(k.name)
-            k = k.parent
-        return " -> ".join(full_path[::-1])
+    # def __str__(self):
+    #     full_path = [self.name]
+    #     k = self.parent
+    #     while k is not None:
+    #         full_path.append(k.name)
+    #         k = k.parent
+    #     return " -> ".join(full_path[::-1])
+
+    def __str__(self) -> str:
+        return self.name
 
     def get_absolute_url(self):
         return reverse("catalogue:category_list", args=[self.slug])

@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "ecommerce.apps.checkout",
     "ecommerce.apps.shipping",
     "rest_framework",
+    "mptt",
     # "djpaypal",
 ]
 

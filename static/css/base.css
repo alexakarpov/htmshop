@@ -1,25 +1,32 @@
 /* Bootstrap Over-ride */
-@media (min-width: 1000px){
-    .container{
+@media (min-width: 1000px) {
+    .container {
         max-width: 1000px;
     }
 }
-@media (max-width: 1200px){
-    .container{
+
+@media (max-width: 1200px) {
+    .container {
         max-width: 100%;
-        padding:0 24px;
+        padding: 0 24px;
     }
 }
+
 .dropdown-toggle::after {
     display: none;
 }
-.dropdown-menu{
-    top:58px;
-    left:0px;
-    padding:10px;
+
+.dropdown-menu {
+    top: 58px;
+    left: 0px;
+    padding: 10px;
 }
 
-.alert-primary{
+.dropdown-menu a {
+    text-decoration: none;
+}
+
+.alert-primary {
     background-color: #E4F1FF;
 }
 
@@ -30,18 +37,21 @@
     width: 49px;
     height: auto;
 }
+
 /* sm */
 @media (min-width: 768px) {
     .logo {
         width: 49px;
     }
 }
+
 /* md */
 @media (min-width: 992px) {
     .logo {
         width: 60px;
     }
 }
+
 /* lg */
 @media (min-width: 1200px) {
     .logo {
@@ -51,7 +61,7 @@
 
 /* Basket Menu */
 
-.basket-qty{
+.basket-qty {
     color: #fff;
     background: #d42114;
     border: 2px solid #fff;
@@ -70,12 +80,14 @@
     right: 10px;
 }
 
-.basket-btn{
+.basket-btn {
     position: relative;
 }
 
-.basket-btn:hover, .basket-btn:focus, .basket-btn:active {
-    color:#d42114;
+.basket-btn:hover,
+.basket-btn:focus,
+.basket-btn:active {
+    color: #d42114;
     transition-duration: 0.4s;
     background-color: #fff;
 }
@@ -83,6 +95,6 @@
 
 /* Footer */
 
-.footer > div > div > ul > li{
-    padding-bottom:8px;
+.footer>div>div>ul>li {
+    padding-bottom: 8px;
 }
