@@ -34,7 +34,7 @@
                         <li>
                             <div>
                                 <a href="{% url 'catalogue:store_home' %}">
-                                    <img src="{% static 'store_logo.png'%}" />
+                                    <img src="{% static 'store_logo.png' %}" />
                                 </a>
                             </div>
                         </li>
@@ -49,7 +49,7 @@
                                     </svg></i>
                             </a>
 
-                            <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu rounded-0 border-0">
                                 {% recursetree categories %}
                                 <li class="dropdown-item">
                                     <a href="{{ node.get_absolute_url }}">{{ node.name }}</a>
@@ -69,14 +69,14 @@
                         <span class="fs15 fw500">Shop</span>
                     </button>
                     <div>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                        <div class="collapse navbar-collapse">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-reset" href="#" id="navbarDropdown"
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span class="fs15 fw500">Account</span>
                                     </a>
-                                    <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+                                    <div class="dropdown-menu rounded-0">
                                         <div class="card border-0">
                                             <div class="card-body">
                                                 <ul class="list-group list-group-flush dropdown-account-link">
@@ -131,7 +131,7 @@
                         <h6 class="card-title">My Account</h6>
                         <ul class="list-group list-group-flush dropdown-account-link">
                             {% if user.is_authenticated %}
-                            <a href="{% url " accounts:dashboard" %}" class="dropdown-item">Your Account</a>
+                            <a href="{% url "accounts:dashboard" %}" class="dropdown-item">Your Account</a>
                             <a href="#" class="dropdown-item">Orders</a>
                             <a href="{% url 'accounts:logout' %}" class="dropdown-item">Logout</a>
                             {% else %}

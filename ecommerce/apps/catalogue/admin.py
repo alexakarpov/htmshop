@@ -10,8 +10,9 @@ from .models import (
     ProductSpecificationValue,
     ProductType,
 )
+from mptt.admin import MPTTModelAdmin
 
-admin.site.register(Category)
+admin.site.register(Category, MPTTModelAdmin)
 admin.site.register(Product)
 
 
