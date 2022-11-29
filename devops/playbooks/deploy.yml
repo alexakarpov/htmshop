@@ -44,7 +44,7 @@
       file:
         path: /var/htmshop
         state: directory
-        recurse: yes
+        recurse: true
         owner: storeadmin
         group: htm
 
