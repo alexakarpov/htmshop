@@ -7,9 +7,6 @@ from .models import Category, Product, ProductInventory
 logger = logging.getLogger("console")
 
 
-def playground(request):
-    return render(request, "catalogue/playground.html")
-
 def catalogue_index(request):
     products = Product.objects.filter(is_active=True)
     return render(request, "catalogue/index.html", {"products": products})
