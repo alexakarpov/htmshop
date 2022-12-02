@@ -17,14 +17,14 @@ class ProductTest(TestCase):
 
     def test_fixture_worked(self):
         self.assertEquals(
-            Product.objects.all().count(), 4, "fixture has 4 Productss"
+            Product.objects.all().count(), 6, "fixture has 6 Productss"
         )
 
     def test_product_types_and_specs(self):
-        p1 = Product.objects.get(slug="pb")
-        p2 = Product.objects.get(slug="hn")
+        p1 = Product.objects.get(slug=BOOK_SLUG)
+        p2 = Product.objects.get(slug=NAPKIN_SLUG)
         self.assertEqual(
-            p1.title, "Prayer Book", "fixture works, products loaded"
+            p1.title, "Psalter", "fixture works, products loaded"
         )
 
         book_type = p1.product_type
@@ -53,14 +53,14 @@ class ProductTest(TestCase):
         e,g, for a book there's a single SKU/variant,
         but mounted icons can have many
         """
-        book_p = Product.objects.get(slug="pb")
-        icon_p = Product.objects.get(slug="hn")
+        book_p = Product.objects.get(slug=BOOK_SLUG)
+        icon_p = Product.objects.get(slug=NAPKIN_SLUG)
         b_variants = book_p.get_variants()
         i_variants = icon_p.get_variants()
         self.assertEquals(
             len(b_variants),
             1,
-            "fixture contains a single variant of this Product",
+            "fixture contains a single variant of Psalter",
         )
         self.assertEquals(
             len(i_variants), 2, "fixture has 2 variants of the Holy Napkin"

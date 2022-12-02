@@ -195,5 +195,56 @@
       "product_type": 3,
       "name": "size"
     }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "sku": "b001",
+      "quantity": 11,
+      "weight": 12,
+      "price": "15.00"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 2,
+    "fields": {
+      "product": 3,
+      "sku": "a0010",
+      "quantity": 3,
+      "weight": 22,
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 3,
+    "fields": {
+      "product": 3,
+      "sku": "a0011",
+      "quantity": 6,
+      "weight": 39,
+      "price": "59.00"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 1,
+    "fields": {
+      "specification": 2,
+      "sku": 3,
+      "value": "16x20"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 2,
+    "fields": {
+      "specification": 2,
+      "sku": 2,
+      "value": "8x10"
+    }
   }
 ]
