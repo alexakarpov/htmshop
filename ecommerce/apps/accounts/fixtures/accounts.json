@@ -3,8 +3,8 @@
     "model": "accounts.account",
     "pk": 1,
     "fields": {
-      "password": "pbkdf2_sha256$320000$VI3uLoXx2ycWFI6dRUWP4x$xWOIbfjEgdgjjnToXIWSrVBuseCN/XtGD0ZCveZdVF0=",
-      "last_login": "2022-01-25T04:51:05.365Z",
+      "password": "pbkdf2_sha256$390000$nAG5g8YSaFOrKCDiYP3nM0$VYu3MblfVAe0n8QJvzqcpWnHtF1gg2ZGgJzFhqyAtUI=",
+      "last_login": "2022-12-02T03:41:08.799Z",
       "is_superuser": true,
       "email": "alexakarpov@gmail.com",
       "first_name": "Alexandre",
@@ -63,10 +63,6 @@
         26,
         27,
         28,
-        45,
-        46,
-        47,
-        48,
         29,
         30,
         31,
@@ -75,14 +71,18 @@
         34,
         35,
         36,
-        41,
-        42,
-        43,
-        44,
         37,
         38,
         39,
         40,
+        45,
+        46,
+        47,
+        48,
+        41,
+        42,
+        43,
+        44,
         13,
         14,
         15,
@@ -96,6 +96,44 @@
         63,
         64
       ]
+    }
+  },
+  {
+    "model": "accounts.account",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$mDuDxxrwAiNANwaiqlIhE0$eXvc1+PJGeE/IX+kOQnE33tqWHUazslxt35OFYwV0Jg=",
+      "last_login": "2022-12-02T03:42:22.090Z",
+      "is_superuser": false,
+      "email": "alexandre.karpov@protonmail.com",
+      "first_name": "Foo",
+      "last_name": "Bar",
+      "phone": "",
+      "is_active": true,
+      "is_staff": false,
+      "created": "2022-12-02T03:30:29.707Z",
+      "updated": "2022-12-02T03:42:12.731Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.address",
+    "pk": "a788a0d2-e54a-4d87-b652-1a0eda98a2a1",
+    "fields": {
+      "customer": 3,
+      "full_name": "Foo Bar",
+      "phone": "6173456543",
+      "postcode": "98133",
+      "address_line": "10300 Ashworth Ave N",
+      "address_line2": "",
+      "town_city": "Seattle",
+      "state_province": "WA",
+      "country": "US",
+      "delivery_instructions": "",
+      "created_at": "2022-12-02T03:46:20.751Z",
+      "updated_at": "2022-12-02T03:46:20.751Z",
+      "default": true
     }
   }
 ]
