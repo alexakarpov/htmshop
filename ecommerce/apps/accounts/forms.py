@@ -66,6 +66,8 @@ class UserAddressForm(forms.ModelForm):
 
 
 class EmailAuthenticationForm(forms.Form):
+    fields = ["email", "password"]
+
     email = forms.EmailField(
         widget=forms.TextInput(
             attrs={
@@ -82,7 +84,7 @@ class EmailAuthenticationForm(forms.Form):
     )
 
     error_messages = {
-        "invalid_login": _(f"Please enter a correct email and password."),
+        "invalid_login": _(f"Incorrect email/password."),
         "inactive": _("This account is inactive."),
     }
 
