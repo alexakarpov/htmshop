@@ -12,14 +12,10 @@
     }
 }
 
-.dropdown-toggle::after {
-    display: none;
-}
-
-.dropdown-menu {
-    top: 58px;
-    left: 0px;
-    padding: 10px;
+/* a hack */
+.navbar-expand-md .navbar-nav .dropdown-menu {
+    /* position: static; */
+    top: 30px !important;
 }
 
 .dropdown-menu a {
@@ -98,3 +94,4 @@
 .footer>div>div>ul>li {
     padding-bottom: 8px;
 }
+
