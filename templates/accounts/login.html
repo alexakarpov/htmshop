@@ -9,13 +9,14 @@
   {% if form.errors %}
     <p>Please correct the following errors:</p>
     {% for field in form %}
-      {% if field.errors %}
-        <div class="alert alert-primary" role="alert">
-          {{ field.label }}: {{ field.errors|striptags }}
-        </div>
-      {% endif %}
+      {% for error in field.errors %} 
+      <div class="alert alert-primary" role="alert">
+        <strong>{{ error|escape }}</strong>
+      </div>
+      {% endfor %}
     {% endfor %}
   {% endif %}
+
   <label class="form-label">{{ form.email.label}}</label>
   {{ form.email}}
   <label class="form-label">{{ form.password.label}}</label>
