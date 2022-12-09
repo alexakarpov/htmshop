@@ -9,8 +9,13 @@ logger = logging.getLogger("console")
 
 def catalogue_index(request):
     products = Product.objects.filter(is_active=True)
+    logger.debug(f"all products - {products.count()} are active")
     return render(request, "catalogue/index.html", {"products": products})
 
+def catalogue_new(request):
+    products = Product.objects.filter(is_active=True)
+    logger.debug("catalogue new")
+    return render(request, "catalogue/wip.html", {"products": products})
 
 def get_children_products(cat):
     all_products = Product.objects.all()

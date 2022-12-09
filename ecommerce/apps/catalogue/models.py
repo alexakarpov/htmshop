@@ -50,7 +50,7 @@ class Category(MPTTModel):
     #     return " -> ".join(full_path[::-1])
 
     def __str__(self) -> str:
-        return f"{self.parent.name} > { self.name }" if self.parent else self.name
+        return f" {self.parent.name} > { self.name }" if self.parent else self.name
 
     def get_absolute_url(self):
         return reverse("catalogue:category_list", args=[self.slug])

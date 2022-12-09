@@ -11,8 +11,9 @@ urlpatterns = [
     path("checkout/", include("ecommerce.apps.checkout.urls", namespace="checkout")),
     path("basket/", include("ecommerce.apps.basket.urls", namespace="basket")),
     path("orders/", include("ecommerce.apps.orders.urls", namespace="orders")),
-    path("", include("ecommerce.apps.catalogue.urls", namespace="catalogue")),
+    path("search/", include("ecommerce.apps.search.urls", namespace="search")),
     path("shipping/", include("ecommerce.apps.shipping.urls", namespace="shipping")),
+    path("", include("ecommerce.apps.catalogue.urls", namespace="catalogue")),
 ]
 
 if settings.DEBUG:
