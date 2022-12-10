@@ -15,7 +15,7 @@ def catalogue_index(request):
 def catalogue_new(request):
     products = Product.objects.filter(is_active=True)
     logger.debug("catalogue new")
-    return render(request, "catalogue/wip.html", {"products": products})
+    return render(request, "catalogue/wip_index.html", {"products": products})
 
 def get_children_products(cat):
     all_products = Product.objects.all()
