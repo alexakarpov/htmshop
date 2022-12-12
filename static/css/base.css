@@ -20,12 +20,12 @@
 
 
 body header {
-    background-color: #B7950B;
+    background-color: #cdbb91;
     /* background-color: lightcyan; */
 }
 
 header div .navbar {
-    background-color: #D4AC0D;
+    background-color: #e7cca1;
     /* background-color: lightpink; */
 }
 
@@ -33,13 +33,23 @@ li {
     background-color: transparent;
 }
 
+hr.divider {
+    margin: 0em;
+    border: 1px solid #6e260a;
+}
+
+.navbar ul a {
+    font-weight: 500;
+    color: #3C1201;
+}
+
+.navbar {
+    border-bottom: 1px solid #773e28;
+}
+
 /* .card {
     background-color: transparent;
 } */
-
-.dropdown-menu a {
-    text-decoration: none;
-}
 
 .alert-primary {
     background-color: #E4F1FF;
@@ -65,7 +75,6 @@ li {
     .logo {
         width: 60px;
     }
-}
 
 /* lg */
 @media (min-width: 1200px) {
