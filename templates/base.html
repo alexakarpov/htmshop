@@ -30,127 +30,54 @@
 </head>
 
 <body>
-    <header class="pb-1">
-        <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
-            <div class="container-fluid px-md-4">
-                <div class="d-flex w-100 navbar-collapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li>
-                            <div>
-                                <a href="{% url 'catalogue:store_home' %}">
-                                    <img src="{% static 'store_logo.png' %}" />
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="fs15 fw500">Shop</span>
-                    </button>
-
-
-                    <div class="collapse navbar-collapse m-2">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center list-group list-group-horizontal">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle d-none d-md-block fw500" href="#" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Product categories
-                                </a>
-
-                                <ul class="dropdown-menu rounded-0 border-0">
-                                    {% recursetree categories %}
-                                    <a href="{{ node.get_absolute_url }}">
-                                        <li>{% if node.level == 1 %}<i class="fas fa-caret-right"></i>{% endif %} {{ node.name }}</li>
-                                        {% if not node.is_leaf_node %}
-                                        {{ children }}
-                                        {% endif %}
-                                    </a>
-                                    {% endrecursetree %}
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <div class="px-2">
-                                    <form class="d-flex w-100" action="{% url 'search:query' %}" method="GET">
-                                        <input class="form-control me-2" type="search" placeholder="Search products"
-                                            aria-label="Search" name="q">
-                                        <button class="btn btn-outline-secondary" type="submit">Search</button>
-                                    </form>
-                                </div>
-
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-reset" href="#" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="fs15 fw500">Account</span>
-                                </a>
-                                <div class="dropdown-menu rounded-0">
-                                    <div class="card border-0">
-                                        <div class="card-body">
-                                            <ul class="list-group list-group-flush dropdown-account-link">
-                                                {% if user.is_authenticated %}
-                                                <a href="{% url 'accounts:dashboard' %}"
-                                                    class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Management</a>
-                                                <a href="{% url 'accounts:logout' %}"
-                                                    class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Logout</a>
-                                                {% else %}
-                                                <a href="{% url 'accounts:login' %}"
-                                                    class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Login</a>
-                                                {% endif %}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                    <a id="cart" type="button" role="button" href="{% url 'basket:basket_summary' %}"
-                        class="btn btn-outline-secondary border-0 basket-btn">
-                        {% with total_qty=basket|length %}
-                        <div id="basket-qty" class="basket-qty">
-                            {% if total_qty > 0 %}
-                            {{ total_qty }}
-                            {% else %}
-                            0
-                            {% endif %}
-                        </div>
-                        {% endwith %}
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                                class="bi bi-cart3" viewBox="0 0 16 16">
-                                <path
-                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                            </svg>
-                        </div>
-                        <span class="fs15 fw500">Cart</span>
+    <header class="pt-2">
+        <div class="page-header">
+            <div class="list-group list-group-horizontal pb-1">
+                <div>
+                    <a href="{% url 'catalogue:store_home' %}">
+                        <img src="{% static 'logo2.png' %}">
                     </a>
                 </div>
-                <div class="d-md-none d-lg-none d-xl-none">
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                            <li><a class="dropdown-item" href="{% url 'catalogue:store_home' %}">All</a></li>
-                            {% for c in categories %}
-                            <li>
-                                <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        <h6 class="card-title">My Account</h6>
-                        <ul class="list-group list-group-flush dropdown-account-link">
-                            {% if user.is_authenticated %}
-                            <a href="{% url 'accounts:dashboard' %}" class="dropdown-item">Your Account</a>
-                            <a href="#" class="dropdown-item">Orders</a>
-                            <a href="{% url 'accounts:logout' %}" class="dropdown-item">Logout</a>
-                            {% else %}
-                            <a href="{% url 'accounts:login' %}" class="dropdown-item">Login</a>
-                            {% endif %}
-                        </ul>
-                    </div>
+                <div class="text-center m-3 ">
+                    <h1>Holy Transfiguration Monastery Store</h1>
                 </div>
             </div>
-        </nav>
+
+            <hr class="divider">
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Books</a>
+                        </li>
+
+                        <div class="dropdown">
+                            <a class="text nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Icons
+                            </a>
+
+                            <ul class="dropdown-menu ">
+                                <li><a class="dropdown-item" href="/savior">Savior</a></li>
+                                <li><a class="dropdown-item" href="/theotokos">Theotokos</a></li>
+                                <li><a class="dropdown-item" href="/saints">Saints</a></li>
+                            </ul>
+                        </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Incense</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search" action="{% url 'search:query' %} ">
+                        <input class="form-control me-2" type="search" placeholder="Search our catalog"
+                            aria-label="Search" name="q">
+                        <button class="btn btn-secondary" type="submit">Search</button>
+                    </form>
+                </div>
+
+            </nav>
     </header>
 
     <main class="pt-2">
@@ -176,7 +103,6 @@
                 <small class="d-block mb-3 text-muted">&copy; 2021-2022</small>
             </div>
             <div class="col-6 col-md fs15">
-                <h5>Features</h5>
                 <ul class="list-unstyled">
                     <li><a class="link-secondary text-decoration-none" href="#">First item</a></li>
                     <li><a class="link-secondary text-decoration-none" href="#">Second feature</a></li>
