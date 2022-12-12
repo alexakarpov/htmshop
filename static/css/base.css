@@ -1,5 +1,5 @@
 /* Bootstrap Over-ride */
-@media (min-width: 1000px) {
+/* @media (min-width: 1000px) {
     .container {
         max-width: 1000px;
     }
@@ -10,13 +10,32 @@
         max-width: 100%;
         padding: 0 24px;
     }
-}
+} */
 
 /* a hack */
-.navbar-expand-md .navbar-nav .dropdown-menu {
-    /* position: static; */
+/* .navbar-expand-md .navbar-nav .dropdown-menu {
+    /* position: static;
     top: 30px !important;
+} */
+
+
+body header {
+    background-color: #B7950B;
+    /* background-color: lightcyan; */
 }
+
+header div .navbar {
+    background-color: #D4AC0D;
+    /* background-color: lightpink; */
+}
+
+li {
+    background-color: transparent;
+}
+
+/* .card {
+    background-color: transparent;
+} */
 
 .dropdown-menu a {
     text-decoration: none;
@@ -94,4 +113,3 @@
 .footer>div>div>ul>li {
     padding-bottom: 8px;
 }
-
