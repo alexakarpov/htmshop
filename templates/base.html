@@ -22,44 +22,44 @@
 </head>
 
 <body>
-    <header class="pt-2">
+    <header class="pt-1 px-1">
         <div class="page-header">
-            <div class="list-group list-group-horizontal pb-1">
+            <div class="list-group list-group-horizontal text-center mb-1">
                 <div>
                     <a href="{% url 'catalogue:store_home' %}">
                         <img src="{% static 'logo2.png' %}">
                     </a>
                 </div>
-                <div class="text-center m-3 ">
-                    <h1>Holy Transfiguration Monastery Store</h1>
+                <div class="m-2">
+                    <p class="bold">Holy Transfiguration Monastery Store</p>
                 </div>
             </div>
 
             <hr class="divider">
 
-            <nav class="navbar navbar-expand-lg">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto">
+            <nav class="navbar navbar-expand">
+                <div class="container-fluid">
+                    <ul class="navbar-nav me-auto list-group list-group-horizontal">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Books</a>
+                            <a class="text nav-link" href="/books">Books</a>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <a class="text nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Icons
+                                </a>
+
+                                <ul class="dropdown-menu ">
+                                    <li><a class="dropdown-item" href="/savior">Savior</a></li>
+                                    <li><a class="dropdown-item" href="/theotokos">Theotokos</a></li>
+                                    <li><a class="dropdown-item" href="/saints">Saints</a></li>
+                                </ul>
+                            </div>
                         </li>
 
-                        <div class="dropdown">
-                            <a class="text nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Icons
-                            </a>
-
-                            <ul class="dropdown-menu ">
-                                <li><a class="dropdown-item" href="/savior">Savior</a></li>
-                                <li><a class="dropdown-item" href="/theotokos">Theotokos</a></li>
-                                <li><a class="dropdown-item" href="/saints">Saints</a></li>
-                            </ul>
-                        </div>
-                        </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Incense</a>
+                            <a class="nav-link" href="/incense">Incense</a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search" action="{% url 'search:query' %} ">
@@ -68,6 +68,7 @@
                         <button class="btn btn-secondary" type="submit">Search</button>
                     </form>
                 </div>
+
 
             </nav>
     </header>
@@ -88,26 +89,21 @@
         </div>
     </main>
 
-    <footer class="container py-5 footer">
-        <hr>
-        <div class="row pt-4">
-            <div class="col-12 col-md">
-                <small class="d-block mb-3 text-muted">&copy; 2021-2022</small>
+    <footer class="pt-1 px-1 footer">
+        <div class="container">
+            <div class="row">
+                <div class="col col-1">
+                    <img src="{% static 'logo-small.png' %}">
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <p class="h5 text-center">Holy Transfiguration Monastery Store</p>
+                    </div>
+                    <div class="row">
+                        <p class="small text-center">© Content copyright 2023 by The Holy Transfiguration Monastery</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-6 col-md fs15">
-                <ul class="list-unstyled">
-                    <li><a class="link-secondary text-decoration-none" href="#">First item</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Second feature</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md fs15">
-                <h5>Resources</h5>
-                <ul class="list-unstyled">
-                    <li><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
-                </ul>
-            </div>
-        </div>
     </footer>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
