@@ -14,13 +14,6 @@ body main p {
     color: #3d2a1a;
     /* color: green; */
 }
-/* nav {
-    padding: .25em;
-}
-
-.navbar {
-    padding: 0;
-} */
 
 body header, footer {
     background-color: #c6b991;
@@ -36,7 +29,7 @@ li {
 }
 
 .album .card {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: Georgia, 'Times New Roman', serif;
 }
 
 hr.divider {
@@ -57,6 +50,9 @@ hr.divider {
     border-bottom: 1px solid #773e28;
 }
 
+.footer {
+    border-top: 1px solid #773e28;
+}
 .card {
     background-color: transparent;
 }
