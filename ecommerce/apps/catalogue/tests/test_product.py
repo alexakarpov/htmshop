@@ -55,15 +55,15 @@ class ProductTest(TestCase):
         """
         book_p = Product.objects.get(slug=BOOK_SLUG)
         icon_p = Product.objects.get(slug=NAPKIN_SLUG)
-        b_variants = book_p.get_variants()
-        i_variants = icon_p.get_variants()
+        i_skus = icon_p.get_skus()
+        b_skus = book_p.get_skus()
         self.assertEquals(
-            len(b_variants),
+            len(b_skus),
             1,
             "fixture contains a single variant of Psalter",
         )
         self.assertEquals(
-            len(i_variants), 2, "fixture has 2 variants of the Holy Napkin"
+            len(i_skus), 2, "fixture has 2 variants of the Holy Napkin"
         )
-        icon_v1 = i_variants[0]
+        icon_v1 = i_skus[0]
         self.assertIsInstance(icon_v1, ProductInventory)

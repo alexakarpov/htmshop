@@ -125,7 +125,7 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("catalogue:product_detail", args=[self.slug])
 
-    def get_variants(self):
+    def get_skus(self):
         """
         These are actually ProductInventory items related to this Product
         """
