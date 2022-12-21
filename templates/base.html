@@ -62,6 +62,14 @@
                             <a class="nav-link" href="/incense">Incense</a>
                         </li>
                     </ul>
+
+                    <span class="nav-item px-5">
+                        <a href="basket">
+                        Cart (<span id="cart-qty">0</span>)
+                        </a>
+                    </span>
+
+
                     <form class="d-flex" role="search" action="{% url 'search:query' %} ">
                         <input class="form-control me-2" type="search" placeholder="Search our catalog"
                             aria-label="Search" name="q">
@@ -98,7 +106,8 @@
                         <p class="h5 text-center">Holy Transfiguration Monastery Store</p>
                     </div>
                     <div class="row">
-                        <p class="small mb-0 text-center">© Content copyright 2023 by The Holy Transfiguration Monastery</p>
+                        <p class="small mb-0 text-center">© Content copyright 2023 by The Holy Transfiguration Monastery
+                        </p>
                     </div>
                 </div>
             </div>
