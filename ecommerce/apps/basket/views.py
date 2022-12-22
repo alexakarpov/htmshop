@@ -28,20 +28,12 @@ def basket_add(request):
     logger.debug(f"basket_add POST: {request.POST}")
     if request.POST.get("action") == "post":
         product_qty = int(request.POST.get("productqty"))
-        variant = request.POST.get("variant")  # may be None
-        product_id = request.POST.get("productid")
 
-        if variant:
-            # we can fetch PRI by the supplied SKU
-            logger.debug(f"to add variant/sku: {variant}")
-            pri = ProductInventory.objects.get(sku=variant)
-            logger.debug(f"item: {pri}")
-            basket.add(product=pri, qty=product_qty, sku=variant)
-        else:
-            # we can fetch the unique PRI by using the product itself
-            logger.debug(f"adding a product without variants")
-            pri = ProductInventory.objects.get(product=product_id)
-            basket.add(product=pri, qty=product_qty, sku=pri.sku)
+        sku = request.POST.get("sku")
+
+        inventoryitem = ProductInventory.objects.get(sku=sku)
+        logger.debug(f"item: {inventoryitem}")
+        basket.add(product=inventoryitem, qty=product_qty, sku=sku)
 
         basketqty = basket.__len__()
         return JsonResponse({"qty": basketqty})

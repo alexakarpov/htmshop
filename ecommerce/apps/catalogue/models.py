@@ -129,7 +129,7 @@ class Product(models.Model):
         These are actually ProductInventory items related to this Product
         """
         logger.debug(f"getting variants for {self}")
-        return list(self.productinventory_set.filter(product_id=self.id))
+        return self.productinventory_set.filter(product_id=self.id)
 
     def __str__(self):
         return f"{self.title}"
@@ -179,13 +179,6 @@ class ProductInventory(models.Model):
     class Meta:
         verbose_name = _("Product Inventory Record")
         verbose_name_plural = _("Inventory Records")
-
-    def value_for_select(self):
-        """
-        this only works if there's a single spec. Which is likely to be the case,
-        but worth a mention.
-        """
-        return f"{self.productspecificationvalue_set.first().value}"
 
     def __str__(self):
         return f"{self.sku} ({self.product} - {self.product_type})"

@@ -13,7 +13,6 @@ urlpatterns = [
     path("orders/", include("ecommerce.apps.orders.urls", namespace="orders")),
     path("search/", include("ecommerce.apps.search.urls", namespace="search")),
     path("shipping/", include("ecommerce.apps.shipping.urls", namespace="shipping")),
-    path("cart/", include("ecommerce.apps.carts.urls", namespace="carts")),
     path("", include("ecommerce.apps.catalogue.urls", namespace="catalogue")),
 ]
 

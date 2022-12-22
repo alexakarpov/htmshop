@@ -21,21 +21,25 @@ Product
     </div>
   </div>
 
-  <div class="row row-cols-2">
+  <div class="row row-cols">
+
+    {% for i in skus %}
+    <div class="row">
+      <div class="col-sm-3">{{i.product_type.name}}
+      {% if i.productspecificationvalue_set.count %}
+        ({{ i.productspecificationvalue_set.first }})
+      {% endif %}
+      </div>
+      <div class="col-sm-1 price">${{i.price}}</div>
+      <div class="col-sm-1"><input class="form-check-input sku-picker" type="radio" name="radiox" value="{{i.sku}}"></div>
+    </div>
+    {% endfor %}
+
     <div class="col-sm-1">
       <label for="quantity">Quantity</label>
       <input class="form-control form-control-sm" type="number" id="quantity" value="1" style="width: 5em" />
     </div>
-    {% if label %}
-    <div class="col-sm-2">
-      <label for="select-variant">{{label | title}}</label>
-      <select id="select-variant" class="form-control form-control-sm">
-        {% for v in variants %}
-        <option value="{{ v.sku }}">{{ v.value_for_select }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    {% endif %}
+
   </div>
   <div class="row">
     <div class="m-4 alert alert-success" role="alert" id="cartalertbox" style="display:none;">
@@ -56,9 +60,8 @@ Product
       type: 'POST',
       url: '{% url "basket:basket_add" %}',
       data: {
-        productid: $('#add-button').val(),
         productqty: $('#quantity').val(),
-        variant: $('#select-variant').val(),
+        sku: $(".sku-picker:checked").val(),
         csrfmiddlewaretoken: '{{csrf_token}}',
         action: 'post'
       },
