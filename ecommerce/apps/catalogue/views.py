@@ -48,9 +48,10 @@ def category_list(request, category_slug=None):
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, is_active=True)
-    
+    skus = product.get_skus()
+    logger.debug(f"fetched {len(skus)} skus")
     return render(
         request,
         "catalogue/single.html",
-        {"product": product, "skus": product.get_skus()},
+        {"product": product, "skus": skus },
     )
