@@ -50,7 +50,7 @@ class Category(MPTTModel):
     #     return " -> ".join(full_path[::-1])
 
     def __str__(self) -> str:
-        return self.name
+        return f"{self.parent.name} > { self.name }" if self.parent else self.name
 
     def get_absolute_url(self):
         return reverse("catalogue:category_list", args=[self.slug])
@@ -83,7 +83,6 @@ class Product(models.Model):
     required by it's Product Type
     """
 
-    product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
     category = models.ForeignKey(
         Category, null=True, blank=True, on_delete=models.RESTRICT
     )
@@ -125,15 +124,15 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("catalogue:product_detail", args=[self.slug])
 
-    def get_variants(self):
+    def get_skus(self):
         """
         These are actually ProductInventory items related to this Product
         """
         logger.debug(f"getting variants for {self}")
-        return self.productinventory_set.filter(product_id=self.id)
+        return list(self.productinventory_set.filter(product_id=self.id))
 
     def __str__(self):
-        return f"{self.title} ({self.id})"
+        return f"{self.title}"
 
 
 class ProductSpecification(models.Model):
@@ -161,8 +160,8 @@ class ProductSpecification(models.Model):
 
 
 class ProductInventory(models.Model):
-
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product_type = models.ForeignKey(ProductType, null=False, blank=False, on_delete=models.RESTRICT)
     specifications = models.ManyToManyField(
         ProductSpecification, through="ProductSpecificationValue"
     )
@@ -189,7 +188,7 @@ class ProductInventory(models.Model):
         return f"{self.productspecificationvalue_set.first().value}"
 
     def __str__(self):
-        return f"{self.sku} ({self.product})"
+        return f"{self.sku} ({self.product} - {self.product_type})"
 
 
 class ProductSpecificationValue(models.Model):

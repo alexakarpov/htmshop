@@ -7,12 +7,16 @@ from .models import Category, Product, ProductInventory
 logger = logging.getLogger("console")
 
 
-def playground(request):
-    return render(request, "catalogue/playground.html")
-
 def catalogue_index(request):
     products = Product.objects.filter(is_active=True)
+    logger.debug(f"all products - {products.count()} are active")
     return render(request, "catalogue/index.html", {"products": products})
+
+
+def catalogue_new(request):
+    products = Product.objects.filter(is_active=True)
+    logger.debug("catalogue new")
+    return render(request, "catalogue/wip_index.html", {"products": products})
 
 
 def get_children_products(cat):
@@ -44,20 +48,9 @@ def category_list(request, category_slug=None):
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, is_active=True)
-    variants = product.get_variants()
-    label = None
-    if variants.count() > 1:
-        label = (
-            variants[0]
-            .productspecificationvalue_set.first()
-            .specification.name
-        )
-
-    logger.debug(
-        f"product: {product}, type: {product.product_type}, variants: {variants}, label:{label}"
-    )
+    
     return render(
         request,
         "catalogue/single.html",
-        {"product": product, "variants": variants, "label": label},
+        {"product": product, "skus": product.get_skus()},
     )

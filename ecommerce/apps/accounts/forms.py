@@ -5,7 +5,6 @@ from django import forms
 from django.contrib.auth import (
     authenticate,
     get_user_model,
-    password_validation,
 )
 from django.contrib.auth.forms import (
     AuthenticationForm,
@@ -18,12 +17,9 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import Address
 
-# from django_countries.fields import CountryField
-
-
 UserModel = get_user_model()
 
-logger = logging.getLogger("django")
+logger = logging.getLogger("console")
 
 
 class UserAddressForm(forms.ModelForm):
@@ -70,10 +66,7 @@ class UserAddressForm(forms.ModelForm):
 
 
 class EmailAuthenticationForm(forms.Form):
-    """
-    Base class for authenticating users. Extend this to get a form that accepts
-    username/password logins.
-    """
+    fields = ["email", "password"]
 
     email = forms.EmailField(
         widget=forms.TextInput(
@@ -91,7 +84,7 @@ class EmailAuthenticationForm(forms.Form):
     )
 
     error_messages = {
-        "invalid_login": _(f"Please enter a correct email and password."),
+        "invalid_login": _(f"Incorrect email/password."),
         "inactive": _("This account is inactive."),
     }
 
@@ -132,6 +125,7 @@ class EmailAuthenticationForm(forms.Form):
         If the given user may log in, this method should return None.
         """
         if not user.is_active:
+            logger.error(f"you're not even active, {user}, buddy")
             raise forms.ValidationError(
                 self.error_messages["inactive"],
                 code="inactive",

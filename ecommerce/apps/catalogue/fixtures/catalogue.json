@@ -91,10 +91,16 @@
     }
   },
   {
+    "model": "catalogue.producttype",
+    "pk": 4,
+    "fields": {
+      "name": "icon print"
+    }
+  },
+  {
     "model": "catalogue.product",
     "pk": 1,
     "fields": {
-      "product_type": 1,
       "category": 2,
       "title": "Psalter",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -109,7 +115,6 @@
     "model": "catalogue.product",
     "pk": 2,
     "fields": {
-      "product_type": 3,
       "category": 4,
       "title": "Mother of God - Burning Bush",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -124,14 +129,13 @@
     "model": "catalogue.product",
     "pk": 3,
     "fields": {
-      "product_type": 3,
       "category": 5,
       "title": "Holy Napkin",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "slug": "holy_napkin",
       "is_active": true,
       "created_at": "2022-11-22T03:05:17.335Z",
-      "image": "images/A-329-Icon-Holy-Napkin_VSAxlHP.png",
+      "image": "images/A-329-Icon-Holy-Napkin_BZITpDb.png",
       "users_wishlist": []
     }
   },
@@ -139,7 +143,6 @@
     "model": "catalogue.product",
     "pk": 4,
     "fields": {
-      "product_type": 3,
       "category": 4,
       "title": "Mother of God - Korsun",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -154,7 +157,6 @@
     "model": "catalogue.product",
     "pk": 5,
     "fields": {
-      "product_type": 3,
       "category": 5,
       "title": "Bridegroom",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -169,14 +171,13 @@
     "model": "catalogue.product",
     "pk": 6,
     "fields": {
-      "product_type": 2,
       "category": 3,
       "title": "Bethlehem",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "slug": "bethlehem",
       "is_active": true,
       "created_at": "2022-11-22T03:11:19.879Z",
-      "image": "images/L001-Bethlehem_JJqeDQk.jpg",
+      "image": "images/L001-Bethlehem_6JUyM95.jpg",
       "users_wishlist": []
     }
   },
@@ -184,7 +185,7 @@
     "model": "catalogue.productspecification",
     "pk": 1,
     "fields": {
-      "product_type": 2,
+      "product_type": 3,
       "name": "size"
     }
   },
@@ -192,8 +193,136 @@
     "model": "catalogue.productspecification",
     "pk": 2,
     "fields": {
-      "product_type": 3,
+      "product_type": 2,
       "name": "size"
+    }
+  },
+  {
+    "model": "catalogue.productspecification",
+    "pk": 3,
+    "fields": {
+      "product_type": 4,
+      "name": "size"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "product_type": 1,
+      "sku": "b001",
+      "quantity": 4,
+      "weight": 16,
+      "price": "16.00"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 2,
+    "fields": {
+      "product": 2,
+      "product_type": 3,
+      "sku": "a00100",
+      "quantity": 4,
+      "weight": 29,
+      "price": "29.00"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 3,
+    "fields": {
+      "product": 2,
+      "product_type": 4,
+      "sku": "a00101",
+      "quantity": 4,
+      "weight": 1,
+      "price": "17.00"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 4,
+    "fields": {
+      "product": 2,
+      "product_type": 3,
+      "sku": "a00110",
+      "quantity": 1,
+      "weight": 39,
+      "price": "59.00"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 5,
+    "fields": {
+      "product": 6,
+      "product_type": 2,
+      "sku": "in010",
+      "quantity": 2,
+      "weight": 17,
+      "price": "29.00"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 6,
+    "fields": {
+      "product": 6,
+      "product_type": 2,
+      "sku": "in011",
+      "quantity": 12,
+      "weight": 9,
+      "price": "19.00"
+    }
+  },
+  {
+    "model": "catalogue.productinventory",
+    "pk": 7,
+    "fields": {
+      "product": 6,
+      "product_type": 2,
+      "sku": "in012",
+      "quantity": 3,
+      "weight": 1,
+      "price": "9.99"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 1,
+    "fields": {
+      "specification": 1,
+      "sku": 2,
+      "value": "8x10"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 2,
+    "fields": {
+      "specification": 2,
+      "sku": 7,
+      "value": "ounce"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 3,
+    "fields": {
+      "specification": 2,
+      "sku": 6,
+      "value": "half a pound"
+    }
+  },
+  {
+    "model": "catalogue.productspecificationvalue",
+    "pk": 4,
+    "fields": {
+      "specification": 2,
+      "sku": 5,
+      "value": "pound"
     }
   }
 ]

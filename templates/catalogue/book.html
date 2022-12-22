@@ -1,0 +1,70 @@
+{% extends '../base.html' %}
+{% block title %}
+{% if product %}
+{{ product.title }}
+{% else %}
+Product
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="card mb-3 border-0">
+    <div class="row g-0">
+      <div class="col-md-12">
+        <div class="card-body p-1">
+          <h1 class="mb-0 h2 pe-4 pb-4">{{ product.title }}</h1>
+          <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ product.image.url }}"
+            alt="{{ product.title }}" />
+          <p class="card-text">{{ product.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-cols-2">
+    <div class="col-sm-1">
+      <label for="quantity">Quantity</label>
+      <input class="form-control form-control-sm" type="number" id="quantity" value="1" style="width: 5em" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="m-4 alert alert-success" role="alert" id="cartalertbox" style="display:none;">
+    </div>
+  </div>
+  <div class="row row-cols-2">
+    <div class="col-md">
+      <button type="button" id="add-button" value="{{ product.id }}" class="btn btn-success m-5 fw500">Add to
+        cart</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).on('click', '#add-button', function (e) {
+    e.preventDefault()
+    $.ajax({
+      type: 'POST',
+      url: '{% url "basket:basket_add" %}',
+      data: {
+        productid: $('#add-button').val(),
+        productqty: $('#quantity').val(),
+        variant: $('#select-variant').val(),
+        csrfmiddlewaretoken: '{{csrf_token}}',
+        action: 'post'
+      },
+      success: function (json) {
+        $('#basket-qty').html(json.qty)
+        $('#cartalertbox').show()
+        $('#cartalertbox').text('{{product.title}} added to the cart')
+        setTimeout(function () {
+          $('#cartalertbox').hide()
+          //  window.location.replace('{% url "basket:basket_summary" %}')
+        }, 2000) // ok at least something worked
+      },
+      error: function (xhr, errmsg, err) {
+        console.error("add POST failed", errmsg)
+      }
+    })
+  })
+</script>
+{% endblock %}

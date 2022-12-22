@@ -15,10 +15,10 @@ class AccountTest(TestCase):
 
     def test_address_from_json(self):
         address = Address.objects.get(
-            pk='802596f0-1d01-4770-9a1c-bc453bcd6668')
+            pk="a788a0d2-e54a-4d87-b652-1a0eda98a2a1")
         j_dict = json.loads(address.toJSON())
         acc = Account.objects.get(email='alexandre.karpov@protonmail.com')
         self.assertEquals(address.customer, acc)
-        self.assertEquals(j_dict["full_name"], "John Doe",
+        self.assertEquals(j_dict["full_name"], "Foo Bar",
                           "wrong name on the address")
-        self.assertEquals(j_dict["city_locality"], "San Francisco")
+        self.assertEquals(j_dict["city_locality"], "Seattle")
