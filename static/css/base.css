@@ -4,18 +4,17 @@
     top: 30px !important;
 } */
 
-body {
+body main #content {
     background-color: #f9f4ed;
     color: #3d2a1a;
-    /* color: green; */
 }
 
 body main p {
     color: #3d2a1a;
-    /* color: green; */
 }
 
-body header, footer {
+body header,
+footer {
     background-color: #c6b991;
 }
 
@@ -53,6 +52,7 @@ hr.divider {
 .footer {
     border-top: 1px solid #773e28;
 }
+
 .card {
     background-color: transparent;
 }
@@ -88,8 +88,9 @@ hr.divider {
     .logo {
         width: 70px;
     }
-} */
+}
 
+*/
 /* Basket Menu */
 
 .basket-qty {
