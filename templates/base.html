@@ -39,14 +39,14 @@
                         <img src="{% static 'logo2.png' %}">
                     </a>
                 </div>
-                <div class="m-2">
-                    <p class="bold">Holy Transfiguration Monastery Store</p>
+                <div>
+                    <p class="bold fs-2 ">Holy Transfiguration Monastery Store</p>
                 </div>
             </div>
 
             <hr class="divider">
 
-            <nav class="navbar navbar-expand">
+            <nav class="navbar navbar-expand p-0">
                 <div class="container-fluid">
                     <ul class="navbar-nav me-auto list-group list-group-horizontal">
                         <li class="nav-item">
@@ -74,7 +74,7 @@
 
                     <span class="nav-item px-5">
                         <a href=" {% url 'basket:basket_summary' %} ">
-                        Cart (<span id="cart-qty">0</span>)
+                            Cart (<span id="cart-qty">0</span>)
                         </a>
                     </span>
 
@@ -88,7 +88,7 @@
             </nav>
     </header>
 
-    <main class="pt-2">
+    <main>
         <div id="content">
             {% if messages %}
             <div class="m-4 alert alert-warning alert-{{ message.tags }}" role="alert">
