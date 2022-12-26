@@ -31,8 +31,9 @@ Product
           {% endif %}
         </td>
         <td><strong>${{i.price}}</strong></td>
-        <td><input class="form-check-input sku-picker" type="radio" name="radiox" value="{{i.sku}}" {% if skus.count==1
-            %} checked {% endif %}></td>
+        <td>
+          <input class="form-check-input sku-picker" type="radio" name="radiox" value="{{i.sku}}" {% if skus.count == 1 %} checked {% endif %}>
+        </td>
       </tr>
       {% endfor %}
     </tbody>
@@ -78,4 +79,3 @@ Product
     })
   </script>
   {% endblock %}
-  
