@@ -13,8 +13,7 @@ body main p {
     color: #3d2a1a;
 }
 
-body header,
-footer {
+body header, footer {
     background-color: #c6b991;
 }
 
@@ -36,10 +35,6 @@ hr.divider {
     border: 1px solid #6e260a;
 }
 
-/* .stylo {
-    font-family: 'Times New Roman', Times, serif;
-} */
-
 .navbar ul a {
     font-weight: 500;
     color: #3C1201;
@@ -51,82 +46,18 @@ hr.divider {
 
 .footer {
     border-top: 1px solid #773e28;
+    height: 65px;
 }
 
 .card {
     background-color: transparent;
 }
 
-.alert-primary {
-    background-color: #E4F1FF;
+html {
+    padding: none;
+    margin: none;
 }
-
-/* Navigation-Main
-
-/* xs */
-.logo {
-    width: 49px;
-    height: auto;
-}
-
-/* sm */
-@media (min-width: 768px) {
-    .logo {
-        width: 49px;
-    }
-}
-
-/* md */
-@media (min-width: 992px) {
-    .logo {
-        width: 60px;
-    }
-}
-
-/* lg */
-@media (min-width: 1200px) {
-    .logo {
-        width: 70px;
-    }
-}
-
-*/
-/* Basket Menu */
-
-.basket-qty {
-    color: rgb(14, 2, 2);
-    /* background: #d31b0e;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 10px;
-    height: 14px;
-    width: 14px;
-    position: absolute;
-    box-sizing: content-box;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 1px;
-    right: 10px; */
-}
-
-.basket-btn {
-    position: relative;
-}
-
-.basket-btn:hover,
-.basket-btn:focus,
-.basket-btn:active {
-    color: #d42114;
-    transition-duration: 0.4s;
-    background-color: #e7cca1;
-}
-
-
-/* Footer */
-
-.footer>div>div>ul>li {
-    padding-bottom: 8px;
+#quantity {
+    max-width: 4em;
+    max-height: 2em;
 }
