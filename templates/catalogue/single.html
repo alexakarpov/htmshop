@@ -31,57 +31,51 @@ Product
           {% endif %}
         </td>
         <td><strong>${{i.price}}</strong></td>
-        <td><input class="form-check-input sku-picker" type="radio" name="radiox" value="{{i.sku}}"></td>
+        <td><input class="form-check-input sku-picker" type="radio" name="radiox" value="{{i.sku}}" {% if skus.count==1
+            %} checked {% endif %}></td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 
+  <div class="input-group">
+    <label for="quantity" class="p-1 fs-6">Quantity:</label>
+    <input class="form-control" type="number" id="quantity" value="1" />
+
+    <button type="button" id="add-button" class="btn btn-md btn-success m-1 ">Add to cart</button>
+  </div>
+
+
   <div class="row">
-    <div class="col-sm-1">
-      <label for="quantity">Quantity</label>
-      <input class="form-control form-control-sm" type="number" id="quantity" value="1" style="width: 5em" />
+    <div class="m-1 alert alert-success" role="alert" id="cartalertbox" style="display:none;">
     </div>
   </div>
 
-</div>
-<div class="row">
-  <div class="m-4 alert alert-success" role="alert" id="cartalertbox" style="display:none;">
-  </div>
-</div>
-<div class="row row-cols-2">
-  <div class="col-md">
-    <button type="button" id="add-button" class="btn btn-success m-5 fw500">Add to
-      cart</button>
-  </div>
-</div>
-</div>
-
-<script>
-  $(document).on('click', '#add-button', function (e) {
-    e.preventDefault()
-    $.ajax({
-      type: 'POST',
-      url: '{% url "basket:basket_add" %}',
-      data: {
-        productqty: $('#quantity').val(),
-        sku: $(".sku-picker:checked").val(),
-        csrfmiddlewaretoken: '{{csrf_token}}',
-        action: 'post'
-      },
-      success: function (json) {
-        $('#basket-qty').html(json.qty)
-        $('#cartalertbox').show()
-        $('#cartalertbox').text('{{product.title}} added to the cart')
-        setTimeout(function () {
-          $('#cartalertbox').hide()
-          //  window.location.replace('{% url "basket:basket_summary" %}')
-        }, 2000) // ok at least something worked
-      },
-      error: function (xhr, errmsg, err) {
-        console.error("add POST failed", errmsg)
-      }
+  <script>
+    $(document).on('click', '#add-button', function (e) {
+      e.preventDefault()
+      $.ajax({
+        type: 'POST',
+        url: '{% url "basket:basket_add" %}',
+        data: {
+          productqty: $('#quantity').val(),
+          sku: $(".sku-picker:checked").val(),
+          csrfmiddlewaretoken: '{{csrf_token}}',
+          action: 'post'
+        },
+        success: function (json) {
+          $('#basket-qty').html(json.qty)
+          $('#cartalertbox').show()
+          $('#cartalertbox').text('{{product.title}} added to the cart')
+          setTimeout(function () {
+            $('#cartalertbox').hide()
+          }, 2000) // ok at least something worked
+        },
+        error: function (xhr, errmsg, err) {
+          console.error("add POST failed", errmsg)
+        }
+      })
     })
-  })
-</script>
-{% endblock %}
+  </script>
+  {% endblock %}
+  
