@@ -69,7 +69,7 @@
 
                     <span class="nav-item px-5">
                         <a href=" {% url 'basket:basket_summary' %} ">
-                            Cart (<span id="cart-qty">0</span>)
+                            Cart (<strong><span id="basket-qty">{{ basket | length }}</span></strong>)
                         </a>
                     </span>
 
@@ -82,7 +82,6 @@
                 </div>
             </nav>
     </header>
-
 
     <div id="content">
         {% if messages %}
