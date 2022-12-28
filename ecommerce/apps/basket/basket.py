@@ -6,7 +6,7 @@ from django.conf import settings
 
 from ecommerce.apps.catalogue.models import ProductInventory
 
-logger = logging.getLogger("django")
+logger = logging.getLogger("console")
 
 
 class Basket:
@@ -30,9 +30,7 @@ class Basket:
         pid: ProductInventory item's SKU, which acts as key in Basket's dict
         """
 
-        logger.debug(f"""product:{product}
-                         qty:{qty}
-                         sku:{sku}""")
+        logger.debug(f"product: {product}, qty:{qty}, sku:{sku}")
         if sku in self.basket:
             self.basket[sku]["qty"] = qty
             self.basket[sku]["weight"] = product.weight
@@ -41,6 +39,8 @@ class Basket:
                 "title": product.product.title,
                 "price": str(product.price),
                 "qty": qty,
+                "spec": product.productspecificationvalue_set.first().value if product.productspecificationvalue_set.first() else '',
+                "type": str(product.product_type),
                 "weight": product.weight,
             }
 

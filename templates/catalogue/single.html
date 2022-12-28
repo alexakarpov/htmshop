@@ -7,50 +7,49 @@ Product
 {% endif %}
 {% endblock %}
 {% block content %}
-<div class="container">
+<div class="container-fluid overflow-auto">
   <div class="card mb-3 border-0">
     <div class="row g-0">
       <div class="col-md-12">
         <div class="card-body p-1">
           <p class="pt-2 text-center fw-bold lead mb-0 h2 pe-4 pb-4">{{ product.title }}</p>
-          <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ product.image.url }}"
+          <img class="img-fluid mx-auto d-block" width="200px" alt={{ product.title }} src="{{ product.image.url }}"
             alt="{{ product.title }}" />
-          <p class="card-text">{{ product.description }}</p>
+          <p class="mt-2 card-text">{{ product.description | truncatewords:40 }}</p>
         </div>
       </div>
     </div>
   </div>
 
-  <table class="table table-striped">
-    <tbody>
-      {% for i in skus %}
-      <tr>
-        <td><strong>{{i.product_type.name}}</strong>
-          {% if i.productspecificationvalue_set.count %}
-          <i>({{ i.productspecificationvalue_set.first }})</i>
-          {% endif %}
-        </td>
-        <td><strong>${{i.price}}</strong></td>
-        <td>
-          <input class="form-check-input sku-picker" type="radio" name="radiox" value="{{i.sku}}" {% if skus.count == 1 %} checked {% endif %}>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-  <div class="input-group">
+  <div class="input-group overflow-auto">
+    <table class="table table-striped">
+      <tbody>
+        {% for i in skus %}
+        <tr>
+          <td><strong>{{i.product_type.name}}</strong>
+            {% if i.productspecificationvalue_set.count %}
+            <i>({{ i.productspecificationvalue_set.first }})</i>
+            {% endif %}
+          </td>
+          <td><strong>${{i.price}}</strong></td>
+          <td>
+            <input class="form-check-input sku-picker" type="radio" name="radiox" value="{{ i.sku }}"
+            {% if skus.count == 1 %}
+            checked
+            {% endif %}>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
     <label for="quantity" class="p-1 fs-6">Quantity:</label>
     <input class="form-control" type="number" id="quantity" value="1" />
-
-    <button type="button" id="add-button" class="btn btn-md btn-success m-1 ">Add to cart</button>
+  
   </div>
-
-
-  <div class="row">
-    <div class="m-1 alert alert-success" role="alert" id="cartalertbox" style="display:none;">
-    </div>
-  </div>
+  
+  <button type="button" id="add-button" class="btn btn-md btn-success mx-1 mt-2 form-control">Add to cart</button>
+  <div class="row m-1 alert alert-success" role="alert" id="cartalertbox" style="display:none;"></div>
 
   <script>
     $(document).on('click', '#add-button', function (e) {
