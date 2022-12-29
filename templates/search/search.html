@@ -1,12 +1,12 @@
-
+{% extends '../base.html' %}
 {% block title %}
-Search
+HTM Store - Search
 {% endblock %}
 {% block content %}
 
 <div class="container" style="max-width: 1000px">
   <div class="col-12">
-    <h1 class="h2">search for {{request.GET.q }} results</h1>
+    <h1 class="h3 p-2">search for '{{request.GET.q }}' results</h1>
   </div>
   <hr />
 </div>

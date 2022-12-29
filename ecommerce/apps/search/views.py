@@ -15,4 +15,4 @@ def search(request):
         lookup = Q(title__icontains=query) | Q(description__icontains=query)
         products=products.filter(lookup).distinct()
     logger.debug(f"{products.count()} products matched the query")
-    return render(request, "search/index.html", {"products": products})
+    return render(request, "search/search.html", {"products": products})
