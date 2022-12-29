@@ -4,12 +4,12 @@
     top: 30px !important;
 } */
 
-body main #content {
+body #content {
     background-color: #f9f4ed;
     color: #3d2a1a;
 }
 
-body main p {
+body #content p {
     color: #3d2a1a;
 }
 
