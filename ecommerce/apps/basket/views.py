@@ -25,7 +25,6 @@ def basket_summary(request):
 
 def basket_add(request):
     basket = Basket(request)
-    # logger.debug(f"basket_add POST: {request.POST}")
     if request.POST.get("action") == "post":
         product_qty = int(request.POST.get("productqty"))
 
@@ -43,7 +42,6 @@ def basket_delete(request):
     basket = Basket(request)
     # logger.debug(f"basket_delete POST: {request.POST}")
     if request.POST.get("action") == "post":
-        # well yeah: basket_delete POST: <QueryDict: {'productid': ['']
         sku_in = request.POST.get("sku")
         logger.debug(
             f"requested to remove {sku_in} from the cart in {basket} ({type(basket)}"

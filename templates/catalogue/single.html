@@ -21,6 +21,8 @@ Product
     </div>
   </div>
 
+  {% if skus %}
+
   <div class="input-group overflow-auto">
     <table class="table table-striped">
       <tbody>
@@ -47,8 +49,17 @@ Product
     <input class="form-control" type="number" id="quantity" value="1" />
   
   </div>
-  
+
   <button type="button" id="add-button" class="btn btn-md btn-success mx-1 mt-2 form-control">Add to cart</button>
+
+  {% else %}
+  <div class="card">
+    <div class="alert alert-warning" role="alert">
+      <span class="warning">Sorry, there's no inventory available for this product</span>
+    </div>
+  </div>
+  {% endif %}
+
   <div class="row m-1 alert alert-success" role="alert" id="cartalertbox" style="display:none;"></div>
 
   <script>
