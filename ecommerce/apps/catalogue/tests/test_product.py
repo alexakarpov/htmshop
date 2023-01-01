@@ -2,11 +2,12 @@ from django.test import TestCase
 
 from ecommerce.apps.catalogue.models import (
     Product,
+)
+from ecommerce.apps.inventory import (
     ProductInventory,
-    ProductSpecification,
-    ProductSpecificationValue,
     ProductType,
 )
+
 from ecommerce.constants import *
 
 

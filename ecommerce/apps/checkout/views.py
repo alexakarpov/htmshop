@@ -17,7 +17,7 @@ from dotenv import dotenv_values
 from ecommerce.apps.accounts.forms import UserAddressForm
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
-from ecommerce.apps.catalogue.models import ProductInventory
+from ecommerce.apps.inventory.models import ProductInventory
 from ecommerce.apps.orders.models import Order, OrderItem
 
 # from .paypal import PayPalClient

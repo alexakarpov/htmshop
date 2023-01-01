@@ -4,7 +4,7 @@ from decimal import Decimal
 
 from django.conf import settings
 
-from ecommerce.apps.catalogue.models import ProductInventory
+from ecommerce.apps.inventory.models import ProductInventory
 
 logger = logging.getLogger("console")
 

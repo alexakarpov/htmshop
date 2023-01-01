@@ -4,7 +4,8 @@ from distutils.log import debug
 from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, render
 
-from ecommerce.apps.catalogue.models import Product, ProductInventory
+from ecommerce.apps.inventory.models import ProductInventory
+
 
 from .basket import Basket
 

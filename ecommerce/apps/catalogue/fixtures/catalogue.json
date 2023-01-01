@@ -70,28 +70,28 @@
     }
   },
   {
-    "model": "catalogue.producttype",
+    "model": "inventory.producttype",
     "pk": 1,
     "fields": {
       "name": "book"
     }
   },
   {
-    "model": "catalogue.producttype",
+    "model": "inventory.producttype",
     "pk": 2,
     "fields": {
       "name": "incense"
     }
   },
   {
-    "model": "catalogue.producttype",
+    "model": "inventory.producttype",
     "pk": 3,
     "fields": {
       "name": "mounted icon"
     }
   },
   {
-    "model": "catalogue.producttype",
+    "model": "inventory.producttype",
     "pk": 4,
     "fields": {
       "name": "icon print"
@@ -182,7 +182,7 @@
     }
   },
   {
-    "model": "catalogue.productspecification",
+    "model": "inventory.productspecification",
     "pk": 1,
     "fields": {
       "product_type": 3,
@@ -190,7 +190,7 @@
     }
   },
   {
-    "model": "catalogue.productspecification",
+    "model": "inventory.productspecification",
     "pk": 2,
     "fields": {
       "product_type": 2,
@@ -198,7 +198,7 @@
     }
   },
   {
-    "model": "catalogue.productspecification",
+    "model": "inventory.productspecification",
     "pk": 3,
     "fields": {
       "product_type": 4,
@@ -206,7 +206,7 @@
     }
   },
   {
-    "model": "catalogue.productinventory",
+    "model": "inventory.productinventory",
     "pk": 1,
     "fields": {
       "product": 1,
@@ -218,7 +218,7 @@
     }
   },
   {
-    "model": "catalogue.productinventory",
+    "model": "inventory.productinventory",
     "pk": 2,
     "fields": {
       "product": 2,
@@ -230,7 +230,7 @@
     }
   },
   {
-    "model": "catalogue.productinventory",
+    "model": "inventory.productinventory",
     "pk": 3,
     "fields": {
       "product": 2,
@@ -242,7 +242,7 @@
     }
   },
   {
-    "model": "catalogue.productinventory",
+    "model": "inventory.productinventory",
     "pk": 4,
     "fields": {
       "product": 2,
@@ -254,7 +254,7 @@
     }
   },
   {
-    "model": "catalogue.productinventory",
+    "model": "inventory.productinventory",
     "pk": 5,
     "fields": {
       "product": 6,
@@ -266,7 +266,7 @@
     }
   },
   {
-    "model": "catalogue.productinventory",
+    "model": "inventory.productinventory",
     "pk": 6,
     "fields": {
       "product": 6,
@@ -278,7 +278,7 @@
     }
   },
   {
-    "model": "catalogue.productinventory",
+    "model": "inventory.productinventory",
     "pk": 7,
     "fields": {
       "product": 6,
@@ -290,7 +290,7 @@
     }
   },
   {
-    "model": "catalogue.productspecificationvalue",
+    "model": "inventory.productspecificationvalue",
     "pk": 1,
     "fields": {
       "specification": 1,
@@ -299,7 +299,7 @@
     }
   },
   {
-    "model": "catalogue.productspecificationvalue",
+    "model": "inventory.productspecificationvalue",
     "pk": 2,
     "fields": {
       "specification": 2,
@@ -308,7 +308,7 @@
     }
   },
   {
-    "model": "catalogue.productspecificationvalue",
+    "model": "inventory.productspecificationvalue",
     "pk": 3,
     "fields": {
       "specification": 2,
@@ -317,7 +317,7 @@
     }
   },
   {
-    "model": "catalogue.productspecificationvalue",
+    "model": "inventory.productspecificationvalue",
     "pk": 4,
     "fields": {
       "specification": 2,
