@@ -53,10 +53,10 @@ hr.divider {
     background-color: transparent;
 }
 
-html {
-    padding: none;
-    margin: none;
-}
+/* html {
+
+} */
+
 #quantity {
     max-width: 4em;
     max-height: 2em;
