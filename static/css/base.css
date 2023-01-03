@@ -17,6 +17,14 @@ body header, footer {
     background-color: #c6b991;
 }
 
+details.description[open] summary::after {
+    content: attr(data-open);
+}
+
+details.description:not([open]) summary::after {
+    content: attr(data-close);
+}
+
 /* menu backgroun */
 header div .navbar {
     background-color: #decaa0;

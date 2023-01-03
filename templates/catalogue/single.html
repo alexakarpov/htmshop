@@ -16,8 +16,8 @@ Product
           <p class="pt-2 text-center fw-bold lead mb-0 h2 pe-4 pb-4">{{ product.title }}</p>
           <img class="img-fluid mx-auto d-block" width="200px" alt={{ product.title }} src="{{ product.image.url }}"
             alt="{{ product.title }}" />
-            <details>
-              <summary class="mt-2"><i>read more...</i></summary>
+            <details class="description">
+              <summary class="mt-2" data-open="hide" data-close="read more"></summary>
               {{ product.description }}
             </details>
         </div>
