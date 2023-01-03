@@ -16,7 +16,10 @@ Product
           <p class="pt-2 text-center fw-bold lead mb-0 h2 pe-4 pb-4">{{ product.title }}</p>
           <img class="img-fluid mx-auto d-block" width="200px" alt={{ product.title }} src="{{ product.image.url }}"
             alt="{{ product.title }}" />
-          <p class="mt-2 card-text">{{ product.description | truncatewords:40 }}</p>
+            <details>
+              <summary class="mt-2"><i>read more...</i></summary>
+              {{ product.description }}
+            </details>
         </div>
       </div>
     </div>
