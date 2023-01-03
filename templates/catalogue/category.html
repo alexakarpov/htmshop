@@ -4,36 +4,32 @@
 {% endblock %}
 {% block content %}
 
-<div class="container" style="max-width: 1000px">
-  <div class="col-12">
-    <h1 class="h2">{{ category|title }}</h1>
-  </div>
-  <hr />
-</div>
+<h2 class="h2 p-3">{{ category|title }}</h2>
+<hr />
 <div class="container">
-  <div class="row">
-    <div class="album">
-      {% if not products %}
-      <div class="col-12">There are currently no products active <a href="{% url 'catalogue:store_home' %}">Home</a>
-      </div>
-      {% else %}
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-        {% for product in products %}
-        <div class="col">
-          <div class="card border-0">
+  <div class="album">
+    {% if not products %}
+    <div class="col-12">There are currently no products active <a href="{% url 'catalogue:store_home' %}">Home</a>
+    </div>
+    {% else %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+      {% for product in products %}
+      <div class="col">
+        <div class="card border-0">
+          <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">
             <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}" alt="{{ product.title }}">
             <div class="card-body px-0">
               <p class="card-text">
-                <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                {{ product.title }}
               </p>
-            </div>
-          </div>
+          </a>
         </div>
-        {% endfor %}
       </div>
-      {% endif %}
     </div>
+    {% endfor %}
   </div>
+  {% endif %}
+</div>
 </div>
 
 {% endblock %}
