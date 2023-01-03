@@ -18,7 +18,9 @@ Product
             alt="{{ product.title }}" />
             <details class="description">
               <summary class="mt-2" data-open="hide" data-close="read more"></summary>
+              {% autoescape off %}
               {{ product.description }}
+              {% endautoescape %}
             </details>
         </div>
       </div>
