@@ -1,4 +1,4 @@
-import json
+import simplejson as json
 import logging
 from decimal import Decimal
 
@@ -30,10 +30,10 @@ class Basket:
         pid: ProductInventory item's SKU, which acts as key in Basket's dict
         """
 
-        logger.debug(f"product: {product}, qty:{qty}, sku:{sku}")
+        logger.debug(f"PRODUCT: {product}, qty:{qty}, sku:{sku}")
         if sku in self.basket:
             self.basket[sku]["qty"] = qty
-            self.basket[sku]["weight"] = product.weight
+            self.basket[sku]["weight"] = json.dumps(product.weight),
         else:
             self.basket[sku] = {
                 "title": product.product.title,
@@ -41,7 +41,7 @@ class Basket:
                 "qty": qty,
                 "spec": product.productspecificationvalue_set.first().value if product.productspecificationvalue_set.first() else '',
                 "type": str(product.product_type),
-                "weight": product.weight,
+                "weight": json.dumps(product.weight)
             }
 
         self.save()

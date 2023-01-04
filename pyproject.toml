@@ -19,6 +19,7 @@ Pint = "^0.18"
 # squareup = "^19.0.0"
 djangorestframework = "^3.13.1"
 django-mptt = "^0.14.0"
+simplejson = "^3.18.1"
 
 
 
