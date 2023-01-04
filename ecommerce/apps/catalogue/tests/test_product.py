@@ -3,7 +3,7 @@ from django.test import TestCase
 from ecommerce.apps.catalogue.models import (
     Product,
 )
-from ecommerce.apps.inventory import (
+from ecommerce.apps.inventory.models import (
     ProductInventory,
     ProductType,
 )
@@ -14,11 +14,12 @@ from ecommerce.constants import *
 class ProductTest(TestCase):
     fixtures = [
         "catalogue.json",
+        "inventory.json",
     ]
 
     def test_fixture_worked(self):
         self.assertEquals(
-            Product.objects.all().count(), 6, "fixture has 6 Productss"
+            Product.objects.all().count(), 7, "fixture has 7 Productss"
         )
 
     # def test_product_types_and_specs(self):
@@ -48,7 +49,7 @@ class ProductTest(TestCase):
         books = ProductType.objects.get(name="book")
         self.assertEquals(books.name, PRODUCT_TYPE_BOOK)
 
-    def test_product_get_variants(self):
+    def test_product_get_skus(self):
         """
         a 'variant' is really a specific SKU for a product
         e,g, for a book there's a single SKU/variant,
@@ -59,7 +60,7 @@ class ProductTest(TestCase):
         i_skus = icon_p.get_skus()
         b_skus = book_p.get_skus()
         self.assertEquals(
-            len(b_skus),
+            b_skus.count(),
             1,
             "fixture contains a single variant of Psalter",
         )
