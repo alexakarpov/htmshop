@@ -64,7 +64,7 @@ class ProductInventory(models.Model):
 
     quantity = models.IntegerField()
     restock_point = models.PositiveIntegerField(blank=True, null=True)
-    weight = models.DecimalField(decimal_places=2, max_digits=6, help_text='ounces')  # in ounces
+    weight = models.DecimalField(decimal_places=2, max_digits=10, help_text='ounces')  # in ounces
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:

@@ -62,7 +62,7 @@ hr.divider {
 
 #content {
     position: relative;
-    min-height: 100vh;
+    min-height: 85vh;
 }
 
 #content-wrap {
