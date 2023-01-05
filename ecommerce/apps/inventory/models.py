@@ -58,7 +58,7 @@ class ProductInventory(models.Model):
     sku = models.CharField(
         verbose_name=_("Product SKU"),
         help_text=_("Required"),
-        max_length=10,
+        max_length=12,
         unique=True,
     )
 
