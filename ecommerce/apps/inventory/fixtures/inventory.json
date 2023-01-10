@@ -60,7 +60,8 @@
       "sku": "b001",
       "quantity": 4,
       "restock_point": null,
-      "weight": 16,
+      "target_amount": 10,
+      "weight": "16.00",
       "price": "16.00"
     }
   },
@@ -73,7 +74,8 @@
       "sku": "a00100",
       "quantity": 4,
       "restock_point": 5,
-      "weight": 29,
+      "target_amount": 10,
+      "weight": "29.00",
       "price": "29.00"
     }
   },
@@ -86,7 +88,8 @@
       "sku": "a00101",
       "quantity": 4,
       "restock_point": 6,
-      "weight": 0.01,
+      "target_amount": 10,
+      "weight": "0.01",
       "price": "17.00"
     }
   },
@@ -97,9 +100,10 @@
       "product": 2,
       "product_type": 3,
       "sku": "a00110",
-      "quantity": 1,
+      "quantity": 5,
       "restock_point": 4,
-      "weight": 39,
+      "target_amount": 10,
+      "weight": "39.00",
       "price": "59.00"
     }
   },
@@ -112,7 +116,8 @@
       "sku": "in010",
       "quantity": 2,
       "restock_point": null,
-      "weight": 17,
+      "target_amount": 10,
+      "weight": "17.00",
       "price": "29.00"
     }
   },
@@ -125,7 +130,8 @@
       "sku": "in011",
       "quantity": 12,
       "restock_point": null,
-      "weight": 9,
+      "target_amount": 10,
+      "weight": "9.00",
       "price": "19.00"
     }
   },
@@ -138,7 +144,8 @@
       "sku": "in012",
       "quantity": 3,
       "restock_point": null,
-      "weight": 1,
+      "target_amount": 10,
+      "weight": "1.00",
       "price": "9.99"
     }
   },

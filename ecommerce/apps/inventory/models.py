@@ -27,11 +27,7 @@ class ProductSpecification(models.Model):
     """
     The Product Specification Table contains product
     specifiction or features for the product types.
-    One Product can have many variants/specification,
-    but having more than one spec presents a problem
-    in building a web UI with multiple dimensions, so
-    for now a single drop-down for one spec solution
-    is implemented
+    A ProductType can have many specification
     """
 
     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
@@ -64,6 +60,8 @@ class ProductInventory(models.Model):
 
     quantity = models.IntegerField()
     restock_point = models.PositiveIntegerField(blank=True, null=True)
+    target_amount = models.PositiveIntegerField(blank=False, null=False)
+
     weight = models.DecimalField(decimal_places=2, max_digits=10, help_text='ounces')  # in ounces
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
