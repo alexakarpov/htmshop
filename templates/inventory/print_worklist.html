@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"
+        integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<html lang="en">
+<div class="container">
+    <table style="width:100%">
+        <th>SKU</th>
+        <th>Title</th>
+        <th>Quantity</th>
+        {% for it in work %}
+        <tr>
+            <td>
+                <span>{{ it.sku }}</span>
+            </td>
+            <td>
+                <span>{{ it.product.title }} / {{ it.product_type.name }}</span>
+            </td>
+            <td>
+                <span>{{ it.quantity }}</span>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    tr:nth-child(even) {
+         background-color: #a1a1a1;
+    }
+
+    table
+    {
+        font-weight: 300;
+        font-size: 30px;
+    }
+</style>
+</html>

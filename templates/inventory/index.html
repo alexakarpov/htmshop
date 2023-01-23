@@ -17,12 +17,12 @@
 
 <h1>Worklists generation:</h1>
 
-<form class="m-1" action="{% url 'inventory:print-worklist' %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-success">Generate Print worklist</button>
+<form class="m-1" action="{% url 'inventory:printworklistpdf' %}" method="get">
+    <button type="submit" class="btn btn-success">Generate Printing worklist</button>
 </form>
-<form class="m-1" action="{% url 'inventory:pdf' %}" method="get">
-    <button type="submit" class="btn btn-success">Generate Mounting worklist</button>
+
+<form class="m-1" action="{% url 'inventory:mountworklistpdf' %}" method="get">
+    <button type="submit" class="btn btn-success">Generate Mount worklist</button>
 </form>
 
 </html>

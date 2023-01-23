@@ -20,6 +20,8 @@ Pint = "^0.18"
 djangorestframework = "^3.13.1"
 django-mptt = "^0.14.0"
 simplejson = "^3.18.1"
+#xhtml2pdf = "^0.2.8"
+django-wkhtmltopdf = "^3.4.0"
 
 
 

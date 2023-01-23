@@ -150,6 +150,34 @@
     }
   },
   {
+    "model": "inventory.productinventory",
+    "pk": 8,
+    "fields": {
+      "product": 4,
+      "product_type": 3,
+      "sku": "a0211",
+      "quantity": 3,
+      "restock_point": 5,
+      "target_amount": 10,
+      "weight": "19.90",
+      "price": "33.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 9,
+    "fields": {
+      "product": 4,
+      "product_type": 4,
+      "sku": "a0222",
+      "quantity": 7,
+      "restock_point": 5,
+      "target_amount": 8,
+      "weight": "0.10",
+      "price": "11.00"
+    }
+  },
+  {
     "model": "inventory.productspecificationvalue",
     "pk": 1,
     "fields": {
@@ -183,6 +211,15 @@
       "specification": 2,
       "sku": 5,
       "value": "pound"
+    }
+  },
+  {
+    "model": "inventory.productspecificationvalue",
+    "pk": 5,
+    "fields": {
+      "specification": 1,
+      "sku": 8,
+      "value": "8x10"
     }
   }
 ]

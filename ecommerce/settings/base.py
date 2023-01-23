@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "ecommerce.apps.inventory",
     "rest_framework",
     "mptt",
+    "wkhtmltopdf",
     # "djpaypal",
 ]
 

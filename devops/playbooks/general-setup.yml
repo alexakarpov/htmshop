@@ -22,6 +22,7 @@
             python-is-python3,
             emacs-nox,
             nginx,
+            wkhtmltopdf,
             # postgresql,
           ]
         state: latest

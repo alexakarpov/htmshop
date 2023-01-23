@@ -4,3 +4,6 @@ PRODUCT_TYPE_INCENSE = "incense"
 NAPKIN_SLUG = "holy_napkin"
 BB_SLUG = "burning_bush"
 BOOK_SLUG = "psalter"
+MOUNTED_ICON_TYPE_NAME = "mounted icon"
+ICON_PRINT_TYPE_NAME = "icon print"
+WS_SEPARATOR = "            " * 2
