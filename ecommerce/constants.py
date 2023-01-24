@@ -7,3 +7,4 @@ BOOK_SLUG = "psalter"
 MOUNTED_ICON_TYPE_NAME = "mounted icon"
 ICON_PRINT_TYPE_NAME = "icon print"
 WS_SEPARATOR = "            " * 2
+PRINT_TYPE_ID = 4
