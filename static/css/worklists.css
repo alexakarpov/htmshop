@@ -1,0 +1,59 @@
+.sku {
+    min-width: 0.7in;
+}
+
+.title {
+    min-width: 1.7in;
+}
+
+.qty {
+    min-width: 0.6in;
+}
+
+h2 {
+    font-size: 12pt;
+}
+
+h3 {
+    font-size: 9pt;
+}
+
+table,
+th,
+td {
+    padding-left: 2mm;
+    padding-right: 2mm;
+    font-size: 8pt;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th {
+    font-size: 9pt;
+}
+
+tr {
+    height: 1em;
+}
+
+tr:nth-child(even) {
+    background-color: #d0d0d0;
+}
+
+table {
+    font-weight: 300;
+    font-size: 30px;
+}
+
+/* #content {
+    display: table;
+}
+
+#pageFooter {
+    display: table-footer-group;
+}
+
+#pageFooter:after {
+    counter-increment: page;
+    content: counter(page);
+} */
