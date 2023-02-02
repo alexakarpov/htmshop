@@ -6,6 +6,7 @@ from ecommerce.apps.catalogue.models import Product
 
 import random, string
 
+
 class ProductType(models.Model):
     """
     product_type table - books, mounted icons, incense - each type will have related specifications.
@@ -64,7 +65,9 @@ class ProductInventory(models.Model):
     restock_point = models.PositiveIntegerField(blank=True, null=True)
     target_amount = models.PositiveIntegerField(blank=False, null=False)
 
-    weight = models.DecimalField(decimal_places=2, max_digits=10, help_text='ounces')  # in ounces
+    weight = models.DecimalField(
+        decimal_places=2, max_digits=10, help_text="ounces"
+    )  # in ounces
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
@@ -96,13 +99,19 @@ class ProductSpecificationValue(models.Model):
         verbose_name = _("Product spec")
         verbose_name_plural = _("Product specs")
 
-def make_fake_pinv():
-    fake_pinv = ProductInventory()
-    fake_pinv.sku = ''.join(random.choices(string.ascii_uppercase, k=9))
-    fake_pinv.quantity = ''.join(random.choices(string.ascii_uppercase, k=2))
-    fake_p = Product()
-    fake_t = ProductType()
-    fake_p.title = ''.join(random.choices(string.ascii_uppercase, k=8))
-    fake_pinv.product = Product()
-    fake_pinv.product_type = fake_t
-    return fake_pinv
+
+class WorkItem:
+    def __init__(
+        self,
+        sku,
+        title,
+        type,
+        qty,
+    ):
+        self.sku = sku
+        self.title = title
+        self.type = type
+        self.qty = qty
+
+    def __str__(self) -> str:
+        return f"{self.sku}|{self.title}|{self.type}|{self.qty}"

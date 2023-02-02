@@ -6,8 +6,8 @@
     {% for it in page %}
     <tr>
         <td><span>{{ it.sku }}</span></td>
-        <td><span>{{ it.product.title }} ({{ it.product_type }})</span></td>
-        <td style="width:1em">{{ it.quantity }}</td>
+        <td><span>{{ it.title }} ({{ it.type }})</span></td>
+        <td style="width:1em">{{ it.qty }}</td>
         <td></td>
     </tr>
     {% endfor %}
