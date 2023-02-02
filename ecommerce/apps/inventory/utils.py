@@ -5,11 +5,8 @@ from ecommerce.constants import MOUNTED_ICON_TYPE_NAME, ICON_PRINT_TYPE_NAME, WS
 
 logger=logging.getLogger("console")
 
-def mounted_icons(inventory):
-    return list(filter(lambda x: x.product_type.name == MOUNTED_ICON_TYPE_NAME, inventory))
-
-def prints(inventory):
-    return list(filter(lambda x: x.product_type.name == ICON_PRINT_TYPE_NAME, inventory))
+def filter_inventory(inventory, kind):
+    return list(filter(lambda x: x.product_type.name == kind, inventory))
 
 def padd(it, l, c=' '):
     if len(it) >= l:
@@ -26,9 +23,11 @@ def header(l):
     logger.debug(f"paddedx= {paddedx}, lth is {lth}")
     return f"SKU" + paddedx + "|QTY|" + "^^^" * 4 + "|PRINTED|^^^"
 
-
 def print_work(inventory):
-    prints_inventory = prints(inventory)
+    return filter_inventory(inventory, ICON_PRINT_TYPE_NAME)
+
+def print_work_x(inventory):
+    prints_inventory = filter_inventory(inventory, ICON_PRINT_TYPE_NAME)
     result = []
     
     longest=0
@@ -50,4 +49,4 @@ def print_work(inventory):
     return result
  
 def mount_work(inventory):
-    return mounted_icons(inventory)
+    return filter_inventory(inventory, MOUNTED_ICON_TYPE_NAME)

@@ -1,16 +1,25 @@
 import logging
-from datetime import datetime
+import io
 
-from wkhtmltopdf.views import PDFTemplateResponse
-from wkhtmltopdf.views import PDFTemplateView
+from datetime import datetime
+from itertools import repeat
+
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+from django.core.paginator import Paginator
+from ecommerce.constants import (
+    MOUNTED_ICON_TYPE_NAME,
+    ICON_PRINT_TYPE_NAME,
+    WS_SEPARATOR,
+)
 
 from ecommerce.constants import PRINT_TYPE_ID
 from django.contrib.admin.views.decorators import staff_member_required
 
-
 from django.shortcuts import render
-from .models import ProductInventory
-from .utils import print_work, mount_work, header
+from .models import ProductInventory, make_fake_pinv
+from .utils import filter_inventory
+from django.views.generic.list import ListView
 
 logger = logging.getLogger("console")
 
@@ -19,42 +28,38 @@ def ts():
     return datetime.now().strftime("%y-%m-%d")
 
 
-class PrintWorkListPDFView(PDFTemplateView):
-    filename = f"list-print-{ts()}.pdf"
-    template_name = "inventory/print_worklist.html"
-    inventory = (
-        ProductInventory.objects.filter(product_type=PRINT_TYPE_ID)
-        .exclude(sku__icontains="x")
-        .exclude(sku__icontains=".")
-    )
+class PrintWorkListHTMLView(ListView):
+    model = ProductInventory
+    paginate_by = 13
 
-    def get(self, request):
+    def get_context_data(self, **kwargs):
+        fakes = []
+        for i in range(1, 100):
+            fakes.append(make_fake_pinv())
 
-        response = PDFTemplateResponse(
-            self.request,
-            self.template_name,
-            filename=self.filename,
-            context={"work": self.inventory},
-            cmd_options={"margin-top": 50},
-        )
-        return response
+        paginator = Paginator(fakes, 27)
+
+        return {"work": paginator}
 
 
-class MountWorkListPDFView(PDFTemplateView):
-    filename = f"lisst-mount-{ts()}.pdf"
-    template_name = "inventory/mount_worklist.html"
-    inventory = ProductInventory.objects.filter(product_type=3)
+def generate_pdf(request):
+    buffer = io.BytesIO()
 
-    def get(self, request):
+    # Create the PDF object, using the buffer as its "file."
+    p = canvas.Canvas(buffer)
 
-        response = PDFTemplateResponse(
-            self.request,
-            self.template_name,
-            filename=self.filename,
-            context={"work": self.inventory},
-            cmd_options={"margin-top": 50},
-        )
-        return response
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(100, 100, "Hello world.")
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+
+    # FileResponse sets the Content-Disposition header so that browsers
+    # present the option to save the file.
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename="hello.pdf")
 
 
 def inventory_index(request):

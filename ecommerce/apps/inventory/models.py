@@ -1,8 +1,10 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from unittest.mock import MagicMock, patch
 
 from ecommerce.apps.catalogue.models import Product
 
+import random, string
 
 class ProductType(models.Model):
     """
@@ -93,3 +95,14 @@ class ProductSpecificationValue(models.Model):
     class Meta:
         verbose_name = _("Product spec")
         verbose_name_plural = _("Product specs")
+
+def make_fake_pinv():
+    fake_pinv = ProductInventory()
+    fake_pinv.sku = ''.join(random.choices(string.ascii_uppercase, k=9))
+    fake_pinv.quantity = ''.join(random.choices(string.ascii_uppercase, k=2))
+    fake_p = Product()
+    fake_t = ProductType()
+    fake_p.title = ''.join(random.choices(string.ascii_uppercase, k=8))
+    fake_pinv.product = Product()
+    fake_pinv.product_type = fake_t
+    return fake_pinv

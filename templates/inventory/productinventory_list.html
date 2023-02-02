@@ -1,0 +1,8 @@
+<body>
+    <h2>Print List</h2>
+    <div id="content">
+        {% for page in work %}
+        {% include 'inventory/page.html' with page=page%}
+        {% endfor %}
+    </div>
+</body>

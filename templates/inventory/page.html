@@ -1,0 +1,65 @@
+<table style="page-break-after: always;">
+    <th>SKU</th>
+    <th>Title</th>
+    <th>Qty</th>
+    <th>Printed</th>
+    {% for it in page %}
+    <tr>
+        <td><span>{{ it.sku }}</span></td>
+        <td><span>{{ it.product.title }} ({{ it.product_type }})</span></td>
+        <td style="width:1em">{{ it.quantity }}</td>
+        <td></td>
+    </tr>
+    {% endfor %}
+    <p>Page {{ page.number }} of {{ page.paginator.num_pages }}</p>
+</table>
+
+<style>
+    h2 {
+        font-size: 12pt;
+    }
+
+    h3 {
+        font-size: 9pt;
+    }
+
+    table,
+    th,
+    td {
+        padding-left: 2mm;
+        padding-right: 2mm;
+        font-size: 8pt;
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th {
+        font-size: 9pt;
+    }
+
+    tr {
+        height: 1em;
+    }
+
+    tr:nth-child(even) {
+        background-color: #d0d0d0;
+    }
+
+    table {
+        font-weight: 300;
+        font-size: 30px;
+    }
+
+    /* #content {
+        display: table;
+    }
+
+    #pageFooter {
+        display: table-footer-group;
+    }
+
+    #pageFooter:after {
+        counter-increment: page;
+        content: counter(page);
+    } */
+</style>
