@@ -1,11 +1,9 @@
 import logging
-import io
 
 from datetime import datetime
-from itertools import repeat
 
-from django.http import FileResponse
-from reportlab.pdfgen import canvas
+# from django.http import FileResponse
+# from reportlab.pdfgen import canvas
 from django.core.paginator import Paginator
 from ecommerce.constants import (
     MOUNTED_ICON_TYPE_NAME,
@@ -34,10 +32,11 @@ class PrintWorkListHTMLView(ListView):
 
     def get_context_data(self, **kwargs):
         work = print_work()
-        work=work*15 #TODO remove
+        work = work * 15  # TODO remove
         paginator = Paginator(work, 27)
 
         return {"work": paginator}
+
 
 def inventory_index(request):
     inventory = ProductInventory.objects.all()
