@@ -100,6 +100,13 @@ class ProductSpecificationValue(models.Model):
         verbose_name_plural = _("Product specs")
 
 
+class Room(models.Model):
+    name = models.CharField(verbose_name="Room name", max_length=20)
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class WorkItem:
     def __init__(
         self,
@@ -115,3 +122,12 @@ class WorkItem:
 
     def __str__(self) -> str:
         return f"{self.sku}|{self.title}|{self.type}|{self.qty}"
+
+
+class Stock(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.RESTRICT)
+    product = models.ForeignKey(ProductInventory, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
+
+    def __str__(self) -> str:
+        return f"{self.product.sku} X {self.quantity} in {self.room}"
