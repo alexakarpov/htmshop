@@ -75,7 +75,7 @@ class ProductInventory(models.Model):
         verbose_name_plural = _("Inventory Records")
 
     def __str__(self):
-        return f"{self.sku} ({self.product} - {self.product_type})"
+        return f"{self.sku} ({self.product})"
 
 
 class ProductSpecificationValue(models.Model):
@@ -88,7 +88,7 @@ class ProductSpecificationValue(models.Model):
         ProductSpecification, on_delete=models.CASCADE
     )
 
-    sku = models.ForeignKey(ProductInventory, on_delete=models.CASCADE)
+    sku = models.ForeignKey(ProductInventory, on_delete=models.RESTRICT)
 
     value = models.CharField(max_length=30, blank=False)
 
