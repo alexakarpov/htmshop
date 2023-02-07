@@ -171,10 +171,52 @@
       "product_type": 4,
       "sku": "a0222",
       "quantity": 7,
-      "restock_point": 5,
-      "target_amount": 8,
+      "restock_point": 8,
+      "target_amount": 11,
       "weight": "0.10",
       "price": "11.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 10,
+    "fields": {
+      "product": 5,
+      "product_type": 4,
+      "sku": "a00333",
+      "quantity": 5,
+      "restock_point": 3,
+      "target_amount": 12,
+      "weight": "20.00",
+      "price": "19.99"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 11,
+    "fields": {
+      "product": 7,
+      "product_type": 4,
+      "sku": "a077",
+      "quantity": 1,
+      "restock_point": 3,
+      "target_amount": 7,
+      "weight": "0.01",
+      "price": "9.89"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 12,
+    "fields": {
+      "product": 3,
+      "product_type": 4,
+      "sku": "a00101.123x4",
+      "quantity": 0,
+      "restock_point": 1,
+      "target_amount": 2,
+      "weight": "0.10",
+      "price": "11.90"
     }
   },
   {
@@ -220,6 +262,54 @@
       "specification": 1,
       "sku": 8,
       "value": "8x10"
+    }
+  },
+  {
+    "model": "inventory.room",
+    "pk": 1,
+    "fields": {
+      "name": "Sanding Room"
+    }
+  },
+  {
+    "model": "inventory.room",
+    "pk": 2,
+    "fields": {
+      "name": "Mounting Room"
+    }
+  },
+  {
+    "model": "inventory.room",
+    "pk": 3,
+    "fields": {
+      "name": "Painting Room"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 1,
+    "fields": {
+      "room": 1,
+      "product": 2,
+      "quantity": 2
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 3,
+    "fields": {
+      "room": 2,
+      "product": 2,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 4,
+    "fields": {
+      "room": 3,
+      "product": 2,
+      "quantity": 1
     }
   }
 ]
