@@ -116,7 +116,7 @@ REGULAR = [
     "usps_parcel_select",
     "ups_ground",
     "fedex_home_delivery",
-    "usps_first_class_mail"
+    "usps_first_class_mail",
 ]
 
 # Shipping

@@ -126,7 +126,11 @@ class WorkItem:
 
 class Stock(models.Model):
     room = models.ForeignKey(Room, on_delete=models.RESTRICT)
-    product = models.ForeignKey(ProductInventory, on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        ProductInventory,
+        on_delete=models.CASCADE,
+        verbose_name="Product Inventory",
+    )
     quantity = models.IntegerField(default=0)
 
     def __str__(self) -> str:

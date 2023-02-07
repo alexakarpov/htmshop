@@ -15,8 +15,9 @@ from ecommerce.constants import PRINT_TYPE_ID
 from django.contrib.admin.views.decorators import staff_member_required
 
 from django.shortcuts import render
-from .models import ProductInventory
+from .models import ProductInventory, Room, Stock
 from .utils import print_work
+from .forms import MoveStockForm
 from django.views.generic.list import ListView
 
 logger = logging.getLogger("console")
@@ -38,13 +39,39 @@ class PrintWorkListHTMLView(ListView):
         return {"work": paginator}
 
 
+def move_stock(request):
+    assert request.method == "POST", "only POST is allowed"
+    logger.debug(request.POST)
+    from_id = request.POST.get("from_room")
+    to_id = request.POST.get("to_room")
+    quantity = request.POST.get("qty")
+    sku = request.POST.get("sku")
+    logger.debug(
+        f"move request, from {from_id} to {to_id}, {quantity} of {sku}"
+    )
+    from_room = Room.objects.get(pk=from_id)
+    to_room = Room.objects.get(pk=to_id)
+    return render(
+        request,
+        "moved.html",
+    )
+
+
 def inventory_index(request):
     inventory = ProductInventory.objects.all()
     logger.debug(f"inventory index with {inventory.count()} productx")
+    form = MoveStockForm()
+    rooms = Room.objects.all()
+    choices = []
+    for r in rooms:
+        c = (r.pk, r.name)
+        choices.append(c)
+    form.choices = choices
     return render(
         request,
-        "inventory/index.html",
+        "index.html",
         {
+            "form": form,
             "inventory": inventory,
         },
     )
