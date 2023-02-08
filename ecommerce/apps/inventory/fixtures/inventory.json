@@ -311,5 +311,14 @@
       "product": 2,
       "quantity": 1
     }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 5,
+    "fields": {
+      "room": 3,
+      "product": 10,
+      "quantity": 2
+    }
   }
 ]

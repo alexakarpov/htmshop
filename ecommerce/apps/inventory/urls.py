@@ -13,5 +13,7 @@ urlpatterns = [
         staff_member_required(views.PrintWorkListHTMLView.as_view()),
         name="printworklisthtml",
     ),
-    path("move", staff_member_required(views.move_stock), name="move_stock"),
+    path(
+        "move", staff_member_required(views.move_stock_view), name="move_stock"
+    ),
 ]

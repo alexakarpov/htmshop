@@ -39,18 +39,37 @@ class PrintWorkListHTMLView(ListView):
         return {"work": paginator}
 
 
-def move_stock(request):
+def move_stock_view(request):
     assert request.method == "POST", "only POST is allowed"
     logger.debug(request.POST)
     from_id = request.POST.get("from_room")
     to_id = request.POST.get("to_room")
-    quantity = request.POST.get("qty")
+    quantity = int(request.POST.get("qty"))
     sku = request.POST.get("sku")
     logger.debug(
         f"move request, from {from_id} to {to_id}, {quantity} of {sku}"
     )
     from_room = Room.objects.get(pk=from_id)
     to_room = Room.objects.get(pk=to_id)
+
+    from_stock = from_room.get_stock_by_sku(sku)
+    assert from_stock
+    fqty = from_stock.quantity
+    if fqty < quantity:
+        logger.warning(f"insufficient quantity of {sku} in {from_room}")
+    else:
+        from_stock.quantity -= quantity
+        to_stock = to_room.get_stock_by_sku(sku)
+        if to_stock:
+            to_stock.quantity += quantity
+        else:
+            to_stock = Stock()
+            to_stock.room = to_room
+            to_stock.quantity = quantity
+            to_stock.product = from_stock.product
+        from_stock.save()
+        to_stock.save()
+
     return render(
         request,
         "moved.html",
