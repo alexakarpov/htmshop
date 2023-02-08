@@ -2,8 +2,12 @@ import logging
 
 from datetime import datetime
 
+from django.contrib import messages
+from django.shortcuts import redirect
+
 # from django.http import FileResponse
 # from reportlab.pdfgen import canvas
+
 from django.core.paginator import Paginator
 from ecommerce.constants import (
     MOUNTED_ICON_TYPE_NAME,
@@ -53,7 +57,12 @@ def move_stock_view(request):
     to_room = Room.objects.get(pk=to_id)
 
     from_stock = from_room.get_stock_by_sku(sku)
-    assert from_stock
+    if not from_stock:
+        messages.warning(
+            request, "the inventory item is missing from the source room"
+        )
+        return redirect("inventory:dashboard")
+
     fqty = from_stock.quantity
     if fqty < quantity:
         logger.warning(f"insufficient quantity of {sku} in {from_room}")
@@ -70,9 +79,14 @@ def move_stock_view(request):
         from_stock.save()
         to_stock.save()
 
+    messages.success(
+        request,
+        f"moved { quantity } of { sku } fom { from_room } to { to_room }",
+    )
+
     return render(
         request,
-        "moved.html",
+        "index.html",
     )
 
 

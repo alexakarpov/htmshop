@@ -6,7 +6,7 @@ from . import views
 app_name = "inventory"
 
 urlpatterns = [
-    path("", views.inventory_index, name="inventory_dash"),
+    path("", views.inventory_index, name="dashboard"),
     #    path("print-worklist", staff_member_required(views.generate_pdf), name='printworklistpdf'),
     path(
         "print-worklist-html",
