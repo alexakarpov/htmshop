@@ -22,6 +22,8 @@
 </head>
 
 <body>
+    {% block header %}
+
     <header class="pt-1">
         <div class="page-header">
             <div class="list-group list-group-horizontal text-center mb-1">
@@ -77,6 +79,7 @@
                 </div>
             </nav>
     </header>
+    {% endblock header %}
 
     <div id="content">
         {% if messages %}
@@ -89,33 +92,37 @@
         <div class="m-4 alert alert-success" role="alert" id="alertbox" style="display:none;">
         </div>
         <div id="content-wrap">
-        {% block content %}
-        {% endblock %}
-        <footer id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="d-flex col col-1">
-                        <img src="{% static 'logo-small.png' %}">
-                    </div>
-                    <div class="col">
-                        <div class="row">
-                            <p class="h5 text-center">Holy Transfiguration Monastery Store</p>
+            {% block content %}
+            {% endblock %}
+            {% block footer %}
+
+
+            <footer id="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="d-flex col col-1">
+                            <img src="{% static 'logo-small.png' %}">
                         </div>
-                        <div class="row">
-                            <p class="small mb-0 text-center">© 2023 by The Holy Transfiguration Monastery
-                            </p>
+                        <div class="col">
+                            <div class="row">
+                                <p class="h5 text-center">Holy Transfiguration Monastery Store</p>
+                            </div>
+                            <div class="row">
+                                <p class="small mb-0 text-center">© 2023 by The Holy Transfiguration Monastery
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </footer>
-    </div>
+            </footer>
+            {% endblock footer %}
+        </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"
-        integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"
+            integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer">
+            </script>
 
 </body>
 
