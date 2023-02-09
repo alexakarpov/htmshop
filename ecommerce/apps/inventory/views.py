@@ -95,11 +95,12 @@ def move_stock_view(request):
 
 
 def inventory_index(request):
-    inventory = ProductInventory.objects.all()
-    logger.debug(f"inventory index with {inventory.count()} productx")
     form = MoveStockForm()
-
     rooms = Room.objects.all()
+    sanding = Room.objects.get(id=1)
+    # printing = Room.objects.get(id=2)
+    mounting = Room.objects.get(id=2)
+    painting = Room.objects.get(id=3)
     choices = []
     for r in rooms:
         c = (r.pk, r.name)
@@ -107,9 +108,12 @@ def inventory_index(request):
     form.choices = choices
     return render(
         request,
-        "index.html",
+        "dashboard.html",
         {
             "form": form,
-            "inventory": inventory,
+
+            "mounting": mounting,
+            "sanding": sanding,
+            "painting": painting
         },
     )
