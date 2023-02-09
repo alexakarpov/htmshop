@@ -94,26 +94,21 @@ def move_stock_view(request):
     )
 
 
-def inventory_index(request):
+def dashboard(request):
     form = MoveStockForm()
-    rooms = Room.objects.all()
     sanding = Room.objects.get(id=1)
-    # printing = Room.objects.get(id=2)
     mounting = Room.objects.get(id=2)
     painting = Room.objects.get(id=3)
+    wrapping = ProductInventory.objects.filter(product_type__name=MOUNTED_ICON_TYPE_NAME)
     choices = []
-    for r in rooms:
-        c = (r.pk, r.name)
-        choices.append(c)
-    form.choices = choices
     return render(
         request,
         "dashboard.html",
         {
+            
             "form": form,
-
+            "wrapping": wrapping,
             "mounting": mounting,
             "sanding": sanding,
-            "painting": painting
         },
     )
