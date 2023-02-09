@@ -9,10 +9,6 @@ from ecommerce.constants import (
 logger = logging.getLogger("console")
 
 
-def filter_inventory(inventory, kind):
-    return list(filter(lambda x: x.product_type.name == kind, inventory))
-
-
 def padd(it, l, c=" "):
     if len(it) >= l:
         logger.debug(f"{it} is >= of {l}, not padding")
@@ -31,7 +27,7 @@ def header(l):
 
 
 def print_work(inventory=ProductInventory.objects.all()):
-    inv = filter_inventory(inventory, ICON_PRINT_TYPE_NAME)
+    inv = inventory.filter(product_type__name=ICON_PRINT_TYPE_NAME)
     result = []
     for it in inv:
         if it.quantity < it.restock_point:
@@ -42,10 +38,6 @@ def print_work(inventory=ProductInventory.objects.all()):
         else:
             continue
     return result
-
-
-def mount_work(inventory):
-    return filter_inventory(inventory, MOUNTED_ICON_TYPE_NAME)
 
 
 def add_stock(to_room: Room, sku: str, qty: int = 0):

@@ -59,13 +59,17 @@ def move_stock_view(request):
     from_stock = from_room.get_stock_by_sku(sku)
     if not from_stock:
         messages.warning(
-            request, "the inventory item is missing from the source room"
+            request, "the inventory for move is missing from the source room"
         )
         return redirect("inventory:dashboard")
 
     fqty = from_stock.quantity
     if fqty < quantity:
-        logger.warning(f"insufficient quantity of {sku} in {from_room}")
+        messages.warning(
+            request, f"insufficient quantity ({fqty}) of {sku} in {from_room}"
+        )
+        return redirect("inventory:dashboard")
+
     else:
         from_stock.quantity -= quantity
         to_stock = to_room.get_stock_by_sku(sku)
@@ -94,6 +98,7 @@ def inventory_index(request):
     inventory = ProductInventory.objects.all()
     logger.debug(f"inventory index with {inventory.count()} productx")
     form = MoveStockForm()
+
     rooms = Room.objects.all()
     choices = []
     for r in rooms:
