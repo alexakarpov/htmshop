@@ -76,7 +76,7 @@ hr.divider {
     background-color: transparent;
 }
 
-#quantity {
+.quantity {
     max-width: 4em;
     max-height: 2em;
 }
