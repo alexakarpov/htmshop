@@ -22,7 +22,9 @@ Inventory
         
         <div class="tab-panels">
             <section id="wrapping" class="tab-panel">
-              <h2>Wrapping room stock</h2>
+              
+              <div class="h3">Wrapping room stock</div>
+              
               <div class="row">
                 <div class="col border">
                     <div class="h4">Title</div>
@@ -33,16 +35,19 @@ Inventory
                 <div class="col border">
                     <div class="h4">Quantity</div>
                 </div>
-            </div>
+              </div>
+              
               {% for item in wrapping %}
               <div class="row">
                 <div class="col border">{{ item.product }}</div>
+                <div class="col border">{{ item.sku }}</div>
                 <div class="col border">{{ item.quantity }}</div>
               </div>                
               {% endfor %}
             </section>
             <section id="sanding" class="tab-panel">
-                <h2>Sanding room stock</h2>
+                <div class="h3">Sanding room stock</div>
+                
                 <div class="row">
                     <div class="col border">
                         <div class="h4">Title</div>
@@ -54,15 +59,19 @@ Inventory
                         <div class="h4">Quantity</div>
                     </div>
                 </div>
+
                 {% for item in sanding.stock_set.all %}
                 <div class="row">
                     <div class="col border">{{ item.product }}</div>
+                    <div class="col border">{{ item.product.sku }}</div>
                     <div class="col border">{{ item.quantity }}</div>
                 </div>
                 {% endfor %}
             </section>
+            
             <section id="mounting" class="tab-panel">
-                <h2>Mounting room stock</h2>
+                <div class="h3">Mounting room stock</div>
+                
                 <div class="row">
                     <div class="col border">
                         <div class="h4">Title</div>
@@ -74,9 +83,11 @@ Inventory
                         <div class="h4">Quantity</div>
                     </div>
                 </div>
+
                 {% for item in mounting.stock_set.all %}
                 <div class="row">
                     <div class="col border">{{ item.product }}</div>
+                    <div class="col border">{{ item.product.sku }}</div>
                     <div class="col border">{{ item.quantity }}</div>
                 </div>
                 {% endfor %}
@@ -84,18 +95,6 @@ Inventory
         </div>
     </div>
     
-    
-    
-    <div class="h3">
-        <span>Sanding</span>    
-    </div>
-    {% for item in sanding.stock_set.all %}
-    <div class="row">
-        <div class="col border">{{ item.product }}</div>
-        <div class="col border">{{ item.quantity }}</div>
-    </div>
-    {% endfor %}
-
     <div class="row">
         <div class="col border">
             <div class="h3 text-center">Worklist generation</div>
@@ -110,10 +109,10 @@ Inventory
             <div class="h3 text-center">
                 Inventory move
             </div>
-            <form class="m-1" action="{% url 'inventory:move_stock' %}" method="post">
+            <form class="m-2" action="{% url 'inventory:move_stock' %}" method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-success">Move stock</button>
+                {{ form }}
+                <button type="submit" class="btn btn-success m-3">Move stock</button>
             </form>
 
         </div>

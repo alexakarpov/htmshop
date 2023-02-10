@@ -20,7 +20,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 from django.shortcuts import render
 from .models import ProductInventory, Room, Stock
-from .utils import print_work
+from .utils import print_work, move_stock
 from .forms import MoveStockForm
 from django.views.generic.list import ListView
 
@@ -45,13 +45,14 @@ class PrintWorkListHTMLView(ListView):
 
 def move_stock_view(request):
     assert request.method == "POST", "only POST is allowed"
-    logger.debug(request.POST)
+    logger.debug(f"got move request, POST: {request.POST}")
     from_id = request.POST.get("from_room")
     to_id = request.POST.get("to_room")
     quantity = int(request.POST.get("qty"))
-    sku = request.POST.get("sku")
+    inv_id = request.POST.get("sku")
+    sku = ProductInventory.objects.get(pk=inv_id).sku
     logger.debug(
-        f"move request, from {from_id} to {to_id}, {quantity} of {sku}"
+        f"move request, from {from_id} to {to_id}, {quantity} x {sku}"
     )
     from_room = Room.objects.get(pk=from_id)
     to_room = Room.objects.get(pk=to_id)
@@ -59,7 +60,7 @@ def move_stock_view(request):
     from_stock = from_room.get_stock_by_sku(sku)
     if not from_stock:
         messages.warning(
-            request, "the inventory for move is missing from the source room"
+            request, f"{sku} is missing from {from_room}"
         )
         return redirect("inventory:dashboard")
 
@@ -70,42 +71,29 @@ def move_stock_view(request):
         )
         return redirect("inventory:dashboard")
 
-    else:
-        from_stock.quantity -= quantity
-        to_stock = to_room.get_stock_by_sku(sku)
-        if to_stock:
-            to_stock.quantity += quantity
-        else:
-            to_stock = Stock()
-            to_stock.room = to_room
-            to_stock.quantity = quantity
-            to_stock.product = from_stock.product
-        from_stock.save()
-        to_stock.save()
+    move_stock(from_stock, to_room, quantity)
 
     messages.success(
         request,
         f"moved { quantity } of { sku } fom { from_room } to { to_room }",
     )
 
-    return render(
-        request,
-        "index.html",
-    )
+    return redirect("inventory:dashboard")
 
 
 def dashboard(request):
     form = MoveStockForm()
-    sanding = Room.objects.get(id=1)
-    mounting = Room.objects.get(id=2)
-    painting = Room.objects.get(id=3)
-    wrapping = ProductInventory.objects.filter(product_type__name=MOUNTED_ICON_TYPE_NAME)
+    sanding = Room.objects.get(name="Sanding Room")
+    mounting = Room.objects.get(name="Mounting Room")
+    painting = Room.objects.get(name="Painting Room")
+    wrapping = ProductInventory.objects.filter(
+        product_type__name=MOUNTED_ICON_TYPE_NAME
+    )
     choices = []
     return render(
         request,
         "dashboard.html",
         {
-            
             "form": form,
             "wrapping": wrapping,
             "mounting": mounting,
