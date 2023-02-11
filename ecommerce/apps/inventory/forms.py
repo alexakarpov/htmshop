@@ -4,7 +4,7 @@ from .models import Stock, ProductInventory
 from ecommerce import constants
 
 
-ROOMS = [(1, "Sanding room"), (2, "Mounting room"), (3, "Printing room")]
+ROOMS = [("sanding", "Sanding room"), ("mounting", "Mounting room"), ("wrapping", "Wrapping room")]
 
 
 class MoveStockForm(forms.Form):
