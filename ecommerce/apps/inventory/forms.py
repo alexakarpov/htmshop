@@ -1,10 +1,7 @@
 from django import forms
 
 from .models import Stock, ProductInventory
-from ecommerce import constants
-
-
-ROOMS = [("sanding", "Sanding room"), ("mounting", "Mounting room"), ("wrapping", "Wrapping room")]
+from ecommerce.constants import ROOMS
 
 
 class MoveStockForm(forms.Form):

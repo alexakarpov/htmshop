@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 from ecommerce.constants import (
     MOUNTED_ICON_TYPE_NAME,
     ICON_PRINT_TYPE_NAME,
-    WS_SEPARATOR,
+    ITEMS_PER_PAGE
 )
 
 from ecommerce.constants import PRINT_TYPE_ID
@@ -37,9 +37,9 @@ class PrintWorkListHTMLView(ListView):
 
     def get_context_data(self, **kwargs):
         work = print_work()
-        work = work * 15  # TODO remove
-        paginator = Paginator(work, 27)
-
+        # work = work * 150  # TODO remove
+        paginator = Paginator(work, ITEMS_PER_PAGE)
+        logger.debug(f"work: {work}")
         return {"work": paginator}
 
 

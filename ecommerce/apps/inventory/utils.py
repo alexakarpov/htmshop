@@ -26,15 +26,26 @@ def header(l):
     return f"SKU" + paddedx + "|QTY|" + "^^^" * 4 + "|PRINTED|^^^"
 
 
-def print_work(inventory=ProductInventory.objects.all()):
-    inv = inventory.filter(product_type__name=ICON_PRINT_TYPE_NAME)
+def print_work():
+    room = Room.objects.get(
+        name__icontains="wrapping"
+    )  # TODO: sorce from Printing?
+
+    inventory = room.get_stock_by_type(ICON_PRINT_TYPE_NAME)
+
     result = []
-    for it in inv:
-        if it.quantity < it.restock_point:
-            w_qty = it.target_amount - it.quantity
-            result.append(
-                WorkItem(it.sku, it.product.title, it.product_type.name, w_qty)
+    for it in inventory:
+        logger.debug(f"item: {it}")
+        if it.quantity < it.product.restock_point:
+            w_qty = it.product.target_amount - it.quantity
+            wit = WorkItem(
+                it.product.sku,
+                it.product.product.title,
+                it.product.product_type.name,
+                w_qty,
             )
+            logger.debug(f"addin {wit} to worklist")
+            result.append(wit)
         else:
             continue
     return result

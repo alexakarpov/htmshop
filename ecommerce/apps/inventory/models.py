@@ -61,7 +61,7 @@ class ProductInventory(models.Model):
         unique=True,
     )
 
-    quantity = models.IntegerField()
+    # quantity = models.IntegerField()
     restock_point = models.PositiveIntegerField(blank=True, null=True)
     target_amount = models.PositiveIntegerField(blank=False, null=False)
 
@@ -121,6 +121,9 @@ class Room(models.Model):
 
     def get_stock_by_sku(self, sku):
         return self.stock_set.filter(product__sku=sku).first()
+    
+    def get_stock_by_type(self, type: str):
+        return self.stock_set.filter(product__product_type__name__icontains=type)
 
 
 class WorkItem:

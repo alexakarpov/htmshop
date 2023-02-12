@@ -36,22 +36,29 @@ class InventoryTest(TestCase):
         )
 
     def test_move_existing_sku(self):
-        from_room = Room.objects.get(pk=3)  # Painting
-        to_room = Room.objects.get(pk=2)  # Mounting
+        from_room = Room.objects.get(name__icontains='painting')
+        to_room = Room.objects.get(name__icontains='Mounting')
         from_stock = from_room.get_stock_by_sku("a00100")
-        move_stock(from_stock, to_room, 1)
-        to_stock = to_room.get_stock_by_sku("a00100")
+        to_stock=to_room.get_stock_by_sku("a00100")
+        self.assertEquals(to_stock.quantity, 1, "Should start at 1 in Mounting")
+        self.assertEquals(
+            from_stock.quantity, 1, "Should start with 1 in Painting"
+        )
+        self.assertEquals(
+            to_stock.quantity, 1, "Should start with 1 in Mounting"
+        )
+        to_stock = move_stock(from_stock, to_room, 1)
+        
         self.assertEquals(
             from_stock.quantity, 0, "Should now be 0 in Painting"
         )
-        self.assertEquals(to_stock.quantity, 1, "Should now be 1 in Mounting")
+        self.assertEquals(to_stock.quantity, 2, "Should now be 2 in Mounting")
 
     def test_move_new_sku(self):
-        from_room = Room.objects.get(pk=3)  # Painting
-        to_room = Room.objects.get(pk=2)  # Mounting
+        from_room = Room.objects.get(name__icontains="Painting")
+        to_room = Room.objects.get(name__icontains="Mounting")
         from_stock = from_room.get_stock_by_sku(self.BRIDEGROOM_SKU)
         to_stock = to_room.get_stock_by_sku(self.BRIDEGROOM_SKU)
-        # self.assertFalse(to_room.stock_set.exists())
         self.assertEquals(
             to_stock, None, "should be None for non-existing stock"
         )
@@ -64,9 +71,8 @@ class InventoryTest(TestCase):
         self.assertEquals(to_stock.quantity, 1, "Should now be 1 in Mounting")
 
     def test_move_to_empty_room(self):
-        from_room = Room.objects.get(pk=3)  # Painting
-        to_room = Room.objects.get(pk=1)  # Sanding
-        # self.assertFalse(to_room.stock_set.exists())
+        from_room = Room.objects.get(name__icontains="Painting")
+        to_room = Room.objects.get(name__icontains="Sanding")
         from_stock = from_room.get_stock_by_sku(self.BRIDEGROOM_SKU)
         to_stock = to_room.get_stock_by_sku(self.BRIDEGROOM_SKU)
 

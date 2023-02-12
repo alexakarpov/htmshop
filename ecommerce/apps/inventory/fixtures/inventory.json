@@ -58,7 +58,6 @@
       "product": 1,
       "product_type": 1,
       "sku": "b001",
-      "quantity": 4,
       "restock_point": null,
       "target_amount": 10,
       "weight": "16.00",
@@ -72,7 +71,6 @@
       "product": 2,
       "product_type": 3,
       "sku": "a00100",
-      "quantity": 4,
       "restock_point": 5,
       "target_amount": 10,
       "weight": "29.00",
@@ -86,7 +84,6 @@
       "product": 2,
       "product_type": 4,
       "sku": "a00101",
-      "quantity": 4,
       "restock_point": 6,
       "target_amount": 10,
       "weight": "0.01",
@@ -100,7 +97,6 @@
       "product": 2,
       "product_type": 3,
       "sku": "a00110",
-      "quantity": 5,
       "restock_point": 4,
       "target_amount": 10,
       "weight": "39.00",
@@ -114,7 +110,6 @@
       "product": 6,
       "product_type": 2,
       "sku": "in010",
-      "quantity": 2,
       "restock_point": null,
       "target_amount": 10,
       "weight": "17.00",
@@ -128,7 +123,6 @@
       "product": 6,
       "product_type": 2,
       "sku": "in011",
-      "quantity": 12,
       "restock_point": null,
       "target_amount": 10,
       "weight": "9.00",
@@ -142,7 +136,6 @@
       "product": 6,
       "product_type": 2,
       "sku": "in012",
-      "quantity": 3,
       "restock_point": null,
       "target_amount": 10,
       "weight": "1.00",
@@ -156,7 +149,6 @@
       "product": 4,
       "product_type": 3,
       "sku": "a0211",
-      "quantity": 3,
       "restock_point": 5,
       "target_amount": 10,
       "weight": "19.90",
@@ -170,7 +162,6 @@
       "product": 4,
       "product_type": 4,
       "sku": "a0222",
-      "quantity": 7,
       "restock_point": 8,
       "target_amount": 11,
       "weight": "0.10",
@@ -182,9 +173,8 @@
     "pk": 10,
     "fields": {
       "product": 5,
-      "product_type": 4,
+      "product_type": 3,
       "sku": "a00333",
-      "quantity": 5,
       "restock_point": 3,
       "target_amount": 12,
       "weight": "20.00",
@@ -198,7 +188,6 @@
       "product": 7,
       "product_type": 4,
       "sku": "a077",
-      "quantity": 1,
       "restock_point": 3,
       "target_amount": 7,
       "weight": "0.01",
@@ -212,7 +201,6 @@
       "product": 3,
       "product_type": 4,
       "sku": "a00101.123x4",
-      "quantity": 0,
       "restock_point": 1,
       "target_amount": 2,
       "weight": "0.10",
@@ -265,6 +253,69 @@
     }
   },
   {
+    "model": "inventory.productspecificationvalue",
+    "pk": 7,
+    "fields": {
+      "specification": 1,
+      "sku": 4,
+      "value": "16x24"
+    }
+  },
+  {
+    "model": "inventory.productspecificationvalue",
+    "pk": 8,
+    "fields": {
+      "specification": 1,
+      "sku": 10,
+      "value": "8x10"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 1,
+    "fields": {
+      "room": 1,
+      "product": 2,
+      "quantity": 1
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 3,
+    "fields": {
+      "room": 2,
+      "product": 2,
+      "quantity": 1
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 4,
+    "fields": {
+      "room": 3,
+      "product": 2,
+      "quantity": 1
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 5,
+    "fields": {
+      "room": 3,
+      "product": 10,
+      "quantity": 2
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 6,
+    "fields": {
+      "room": 4,
+      "product": 2,
+      "quantity": 1
+    }
+  },
+  {
     "model": "inventory.room",
     "pk": 1,
     "fields": {
@@ -286,39 +337,10 @@
     }
   },
   {
-    "model": "inventory.stock",
-    "pk": 1,
-    "fields": {
-      "room": 1,
-      "product": 2,
-      "quantity": 2
-    }
-  },
-  {
-    "model": "inventory.stock",
-    "pk": 3,
-    "fields": {
-      "room": 2,
-      "product": 2,
-      "quantity": 0
-    }
-  },
-  {
-    "model": "inventory.stock",
+    "model": "inventory.room",
     "pk": 4,
     "fields": {
-      "room": 3,
-      "product": 2,
-      "quantity": 1
-    }
-  },
-  {
-    "model": "inventory.stock",
-    "pk": 5,
-    "fields": {
-      "room": 3,
-      "product": 10,
-      "quantity": 2
+      "name": "Wrapping Room"
     }
   }
 ]
