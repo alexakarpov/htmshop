@@ -12,12 +12,11 @@ from django.core.paginator import Paginator
 from ecommerce.constants import (
     MOUNTED_ICON_TYPE_NAME,
     ICON_PRINT_TYPE_NAME,
-    ITEMS_PER_PAGE
+    ITEMS_PER_PAGE,
 )
 
 from ecommerce.constants import PRINT_TYPE_ID
 from django.contrib.admin.views.decorators import staff_member_required
-
 from django.shortcuts import render
 from .models import ProductInventory, Room, Stock
 from .utils import print_work, move_stock
@@ -40,7 +39,8 @@ class PrintWorkListHTMLView(ListView):
         # work = work * 150  # TODO remove
         paginator = Paginator(work, ITEMS_PER_PAGE)
         logger.debug(f"work: {work}")
-        return {"work": paginator}
+        return {"work": paginator,
+                "now": ts()}
 
 
 def move_stock_view(request):
@@ -59,9 +59,7 @@ def move_stock_view(request):
 
     from_stock = from_room.get_stock_by_sku(sku)
     if not from_stock:
-        messages.warning(
-            request, f"{sku} is missing from {from_room}"
-        )
+        messages.warning(request, f"{sku} is missing from {from_room}")
         return redirect("inventory:dashboard")
 
     fqty = from_stock.quantity
