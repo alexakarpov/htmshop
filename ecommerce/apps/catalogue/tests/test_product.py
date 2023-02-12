@@ -55,8 +55,8 @@ class ProductTest(TestCase):
         e,g, for a book there's a single SKU/variant,
         but mounted icons can have many
         """
-        book_p = Product.objects.get(slug=BOOK_SLUG)
-        icon_p = Product.objects.get(slug=BB_SLUG)
+        book_p = Product.objects.get(slug=TEST_BOOK_SLUG)
+        icon_p = Product.objects.get(slug=TEST_ICON2_SLUG)
         i_skus = icon_p.get_skus()
         b_skus = book_p.get_skus()
         self.assertEquals(
