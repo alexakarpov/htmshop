@@ -1,0 +1,14 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/worklists.css' %}" />
+</head>
+
+<body>
+    <h2>Print List {{ now }}</h2>
+    <div id="content">
+        {% for page in work %}
+        {% include 'inventory/page.html' with page=page %}
+        {% endfor %}
+    </div>
+</body>
