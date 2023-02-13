@@ -37,7 +37,7 @@ Inventory
                 </div>
               </div>
               
-              {% for item in wrapping %}
+              {% for item in wrapping.stock_set.all %}
               <div class="row">
                 <div class="col border">{{ item.product }}</div>
                 <div class="col border">{{ item.sku }}</div>

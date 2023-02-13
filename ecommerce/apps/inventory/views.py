@@ -81,19 +81,17 @@ def move_stock_view(request):
 
 def dashboard(request):
     form = MoveStockForm()
-    sanding = Room.objects.get(name="Sanding Room")
-    mounting = Room.objects.get(name="Mounting Room")
-    painting = Room.objects.get(name="Painting Room")
-    wrapping = ProductInventory.objects.filter(
-        product_type__name=MOUNTED_ICON_TYPE_NAME
-    )
-    choices = []
+    sanding = Room.objects.get(name__icontains="Sanding")
+    mounting = Room.objects.get(name__icontains="Mounting")
+    painting = Room.objects.get(name__icontains="Painting")
+    wrapping = Room.objects.get(name__icontains="wrapping")
     return render(
         request,
         "dashboard.html",
         {
             "form": form,
             "wrapping": wrapping,
+            "painting": painting,
             "mounting": mounting,
             "sanding": sanding,
         },

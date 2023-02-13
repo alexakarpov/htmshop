@@ -188,7 +188,7 @@
       "product": 7,
       "product_type": 4,
       "sku": "a077",
-      "restock_point": 3,
+      "restock_point": 2,
       "target_amount": 7,
       "weight": "0.01",
       "price": "9.89"
@@ -312,6 +312,15 @@
     "fields": {
       "room": 4,
       "product": 2,
+      "quantity": 1
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 9,
+    "fields": {
+      "room": 4,
+      "product": 11,
       "quantity": 1
     }
   },
