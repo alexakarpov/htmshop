@@ -276,7 +276,7 @@
     "fields": {
       "room": 1,
       "product": 2,
-      "quantity": 1
+      "quantity": 0
     }
   },
   {
@@ -285,7 +285,7 @@
     "fields": {
       "room": 2,
       "product": 2,
-      "quantity": 1
+      "quantity": 0
     }
   },
   {
@@ -312,7 +312,7 @@
     "fields": {
       "room": 4,
       "product": 2,
-      "quantity": 1
+      "quantity": 3
     }
   },
   {
@@ -328,28 +328,32 @@
     "model": "inventory.room",
     "pk": 1,
     "fields": {
-      "name": "Sanding Room"
+      "name": "Sanding Room",
+      "slug": "sanding"
     }
   },
   {
     "model": "inventory.room",
     "pk": 2,
     "fields": {
-      "name": "Mounting Room"
+      "name": "Mounting Room",
+      "slug": "mounting"
     }
   },
   {
     "model": "inventory.room",
     "pk": 3,
     "fields": {
-      "name": "Painting Room"
+      "name": "Painting Room",
+      "slug": "painting"
     }
   },
   {
     "model": "inventory.room",
     "pk": 4,
     "fields": {
-      "name": "Wrapping Room"
+      "name": "Wrapping Room",
+      "slug": "wrapping"
     }
   }
 ]

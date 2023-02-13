@@ -115,7 +115,7 @@ class Stock(models.Model):
 
 class Room(models.Model):
     name = models.CharField(verbose_name="Room name", max_length=20)
-
+    slug = models.CharField(verbose_name="Room slug", max_length=20)
     def __str__(self) -> str:
         return self.name
 

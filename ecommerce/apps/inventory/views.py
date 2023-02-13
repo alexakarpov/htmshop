@@ -88,14 +88,12 @@ def dashboard(request):
     mounting = Room.objects.get(name__icontains="Mounting")
     painting = Room.objects.get(name__icontains="Painting")
     wrapping = Room.objects.get(name__icontains="wrapping")
+    rooms = [wrapping, painting, sanding, mounting]  # the order of the rooms _must_ be this
     return render(
         request,
         "dashboard.html",
         {
             "form": form,
-            "wrapping": wrapping,
-            "painting": painting,
-            "mounting": mounting,
-            "sanding": sanding,
+            "rooms": rooms
         },
     )
