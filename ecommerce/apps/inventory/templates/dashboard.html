@@ -14,9 +14,12 @@ Inventory
         <input type="radio" name="tabset" id="wrapping" aria-controls="Wrapping" checked>
         <label for="wrapping">Wrapping</label>
         <!-- Tab 2 -->
+        <input type="radio" name="tabset" id="painting" aria-controls="painting">
+        <label for="painting">Painting</label>
+        <!-- Tab 3 -->
         <input type="radio" name="tabset" id="sanding" aria-controls="sanding">
         <label for="sanding">Sanding</label>
-        <!-- Tab 3 -->
+        <!-- Tab 4 -->
         <input type="radio" name="tabset" id="mounting" aria-controls="mounting">
         <label for="mounting">Mounting</label>
         
@@ -45,6 +48,31 @@ Inventory
               </div>                
               {% endfor %}
             </section>
+            
+            <section id="painting" class="tab-panel">
+                <div class="h3">Painting room stock</div>
+                
+                <div class="row">
+                    <div class="col border">
+                        <div class="h4">Title</div>
+                    </div>
+                    <div class="col border">
+                        <div class="h4">SKU</div>
+                    </div>
+                    <div class="col border">
+                        <div class="h4">Quantity</div>
+                    </div>
+                </div>
+
+                {% for item in painting.stock_set.all %}
+                <div class="row">
+                    <div class="col border">{{ item.product }}</div>
+                    <div class="col border">{{ item.product.sku }}</div>
+                    <div class="col border">{{ item.quantity }}</div>
+                </div>
+                {% endfor %}
+            </section>
+            
             <section id="sanding" class="tab-panel">
                 <div class="h3">Sanding room stock</div>
                 

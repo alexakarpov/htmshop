@@ -48,6 +48,9 @@ def move_stock_view(request):
     logger.debug(f"got move request, POST: {request.POST}")
     from_name = request.POST.get("from_room")
     to_name = request.POST.get("to_room")
+    if from_name == to_name:
+        messages.warning(request, f"what are you trying to achieve, moving from a room to itself?")
+        return redirect("inventory:dashboard")
     quantity = int(request.POST.get("qty"))
     inv_id = request.POST.get("sku")
     sku = ProductInventory.objects.get(pk=inv_id).sku

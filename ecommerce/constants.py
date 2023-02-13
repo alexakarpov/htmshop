@@ -9,4 +9,9 @@ ICON_PRINT_TYPE_NAME = "icon print"
 # WS_SEPARATOR = "            " * 2
 PRINT_TYPE_ID = 4
 ITEMS_PER_PAGE = 27
-ROOMS = [("sanding", "Sanding room"), ("mounting", "Mounting room"), ("wrapping", "Wrapping room")]
+ROOMS = [
+    ("sanding", "Sanding room"),
+    ("mounting", "Mounting room"),
+    ("wrapping", "Wrapping room"),
+    ("painting", "Painting room"),
+]
