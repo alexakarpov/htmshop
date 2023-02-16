@@ -5,92 +5,92 @@
 } */
 
 body #content {
-    background-color: #f9f4ed;
-    color: #3d2a1a;
+  background-color: #f9f4ed;
+  color: #3d2a1a;
 }
 
 body #content p {
-    color: #3d2a1a;
+  color: #3d2a1a;
 }
 
 body header,
 #footer {
-    background-color: #c6b991;
+  background-color: #c6b991;
 }
 
 details.description[open] summary::after {
-    content: attr(data-open);
+  content: attr(data-open);
 }
 
 details.description:not([open]) summary::after {
-    content: attr(data-close);
+  content: attr(data-close);
 }
 
 /* menu backgroun */
 header div .navbar {
-    background-color: #decaa0;
+  background-color: #decaa0;
 }
 
 li {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .album .card {
-    font-family: Georgia, 'Times New Roman', serif;
+  font-family: Georgia, 'Times New Roman', serif;
 }
 
 hr.divider {
-    margin: 0em;
-    border: 1px solid #6e260a;
+  margin: 0em;
+  border: 1px solid #6e260a;
 }
 
 .navbar ul a {
-    font-weight: 500;
-    color: #3C1201;
+  font-weight: 500;
+  color: #3C1201;
 }
 
 .navbar {
-    border-bottom: 1px solid #773e28;
+  border-bottom: 1px solid #773e28;
 }
 
 #footer {
-    border-top: 1px solid #773e28;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 3.5rem;
+  border-top: 1px solid #773e28;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3.5rem;
 }
 
 #content {
-    position: relative;
-    min-height: 85vh;
+  position: relative;
+  min-height: 85vh;
 }
 
 #content-wrap {
-    padding-bottom: 3.5rem;
-    /* Footer height */
+  padding-bottom: 3.5rem;
+  /* Footer height */
 }
 
 
 .card {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .quantity {
-    max-width: 4em;
-    max-height: 2em;
+  max-width: 4em;
+  max-height: 2em;
 }
 
 .btn-link {
-    border: none;
-    outline: none;
-    background: none;
-    cursor: pointer;
-    color: #0000EE;
-    padding: 0;
-    text-decoration: underline;
-    font-family: inherit;
-    font-size: inherit;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: #0000EE;
+  padding: 0;
+  text-decoration: underline;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 /*
@@ -100,83 +100,79 @@ Tabs
 /*
  CSS for the main interaction
 */
-.tabset > input[type="radio"] {
-    position: absolute;
-    left: -200vw;
-  }
-  
-  .tabset .tab-panel {
-    display: none;
-  }
-  
-  .tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
-  .tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
-  .tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
-  .tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
-  .tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
-  .tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
-    display: block;
-  }
-  
-  /*
+.tabset>input[type="radio"] {
+  position: absolute;
+  left: -200vw;
+}
+
+.tabset .tab-panel {
+  display: none;
+}
+
+.tabset>input:first-child:checked~.tab-panels>.tab-panel:first-child,
+.tabset>input:nth-child(3):checked~.tab-panels>.tab-panel:nth-child(2),
+.tabset>input:nth-child(5):checked~.tab-panels>.tab-panel:nth-child(3),
+.tabset>input:nth-child(7):checked~.tab-panels>.tab-panel:nth-child(4),
+.tabset>input:nth-child(9):checked~.tab-panels>.tab-panel:nth-child(5),
+.tabset>input:nth-child(11):checked~.tab-panels>.tab-panel:nth-child(6) {
+  display: block;
+}
+
+/*
    Styling
   */
-  
-  .tabset > label {
-    position: relative;
-    display: inline-block;
-    padding: 15px 15px 25px;
-    border: 1px solid transparent;
-    border-bottom: 0;
-    cursor: pointer;
-    font-weight: 600;
-  }
-  
-  .tabset > label::after {
-    content: "";
-    position: absolute;
-    left: 15px;
-    bottom: 10px;
-    width: 22px;
-    height: 4px;
-    background: #8d8d8d;
-  }
-  
-  .tabset > label:hover,
-  .tabset > input:focus + label {
-    color: #06c;
-  }
-  
-  .tabset > label:hover::after,
-  .tabset > input:focus + label::after,
-  .tabset > input:checked + label::after {
-    background: #06c;
-  }
-  
-  .tabset > input:checked + label {
-    border-color: #ccc;
-    border-bottom: 1px solid #fff;
-    margin-bottom: -1px;
-  }
-  
-  .tab-panel {
-    padding: 30px 0;
-    border-top: 1px solid #ccc;
-  }
-  
-  /*
+
+.tabset>label {
+  position: relative;
+  display: inline-block;
+  padding: 15px 15px 25px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tabset>label::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
+  width: 22px;
+  height: 4px;
+  background: #8d8d8d;
+}
+
+.tabset>label:hover,
+.tabset>input:focus+label {
+  color: #06c;
+}
+
+.tabset>label:hover::after,
+.tabset>input:focus+label::after,
+.tabset>input:checked+label::after {
+  background: #06c;
+}
+
+.tabset>input:checked+label {
+  border-color: #ccc;
+  border-bottom: 1px solid #fff;
+  margin-bottom: -1px;
+}
+
+.tab-panel {
+  padding: 30px 0;
+  border-top: 1px solid #ccc;
+}
+
+/*
    Demo purposes only
   */
-  *,
-  *:before,
-  *:after {
-    box-sizing: border-box;
-  }
-  
-  body {
-    padding: 30px;
-  }
-  
-  .tabset {
-    max-width: 65em;
-  }
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.tabset {
+  max-width: 65em;
+}
