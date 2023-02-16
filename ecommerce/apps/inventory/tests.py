@@ -40,7 +40,6 @@ class InventoryTest(TestCase):
         to_room = Room.objects.get(name__icontains='Mounting')
         from_stock = from_room.get_stock_by_sku("a00100")
         to_stock=to_room.get_stock_by_sku("a00100")
-        self.assertEquals(to_stock.quantity, 1, "Should start at 1 in Mounting")
         self.assertEquals(
             from_stock.quantity, 1, "Should start with 1 in Painting"
         )

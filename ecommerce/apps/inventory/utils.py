@@ -20,12 +20,6 @@ def padd(it, l, c=" "):
         return (it + (c * p), p)
 
 
-def header(l):
-    (paddedx, lth) = padd("-", l, c="-")
-    logger.debug(f"paddedx= {paddedx}, lth is {lth}")
-    return f"SKU" + paddedx + "|QTY|" + "^^^" * 4 + "|PRINTED|^^^"
-
-
 def print_work():
     room = Room.objects.get(
         name__icontains="wrapping"

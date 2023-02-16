@@ -68,7 +68,6 @@ hr.divider {
 
 #content-wrap {
   padding-bottom: 3.5rem;
-  /* Footer height */
 }
 
 
@@ -81,6 +80,7 @@ hr.divider {
   max-height: 2em;
 }
 
+/*
 .btn-link {
   border: none;
   outline: none;
@@ -92,6 +92,7 @@ hr.divider {
   font-family: inherit;
   font-size: inherit;
 }
+*/
 
 /*
 Tabs
@@ -162,17 +163,4 @@ Tabs
 .tab-panel {
   padding: 30px 0;
   border-top: 1px solid #ccc;
-}
-
-/*
-   Demo purposes only
-  */
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
-.tabset {
-  max-width: 65em;
 }
