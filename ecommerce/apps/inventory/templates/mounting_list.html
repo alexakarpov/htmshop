@@ -1,0 +1,14 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/worklists.css' %}" />
+</head>
+
+<body>
+    <h2>Mounting Worklist {{ now }}</h2>
+    <div id="content">
+        {% for page in work %}
+        {% include 'page.html' with page=page %}
+        {% endfor %}
+    </div>
+</body>
