@@ -65,6 +65,8 @@
                         </li>
                     </ul>
 
+                    <span class="nav-item px-1">
+                        <a href=" {% url 'accounts:dashboard' %} ">Account</a></span>
                     <span class="nav-item px-5">
                         <a href=" {% url 'basket:basket_summary' %} ">
                             Cart (<strong><span id="basket-qty">{{ basket | length }}</span></strong>)

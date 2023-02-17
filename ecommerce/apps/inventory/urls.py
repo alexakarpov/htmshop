@@ -8,9 +8,19 @@ app_name = "inventory"
 urlpatterns = [
     path("", views.dashboard, name="dashboard"),
     path(
-        "print-worklist-html",
-        staff_member_required(views.PrintWorkListHTMLView.as_view()),
-        name="printworklisthtml",
+        "printing-worklist",
+        staff_member_required(views.PrintingWorkListView.as_view()),
+        name="printing_worklist",
+    ),
+    path(
+        "sanding-worklist",
+        staff_member_required(views.SandingWorkListView.as_view()),
+        name="sanding_worklist",
+    ),
+    path(
+        "mounting-worklist",
+        staff_member_required(views.MountingWorkListView.as_view()),
+        name="mounting_worklist",
     ),
     path(
         "move", staff_member_required(views.move_stock_view), name="move_stock"

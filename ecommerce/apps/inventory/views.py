@@ -30,15 +30,41 @@ def ts():
     return datetime.now().strftime("%y-%m-%d")
 
 
-class PrintWorkListHTMLView(ListView):
+class PrintingWorkListView(ListView):
     model = ProductInventory
-    paginate_by = 13
+    template_name="printing_list.html"
 
     def get_context_data(self, **kwargs):
         work = print_work()
         # work = work * 150  # TODO remove
         paginator = Paginator(work, ITEMS_PER_PAGE)
-        logger.debug(f"work: {work}")
+
+        return {"work": paginator,
+                "now": ts()}
+
+
+class SandingWorkListView(ListView):
+    model = ProductInventory
+    template_name="sanding_list.html"
+
+    def get_context_data(self, **kwargs):
+        work = []
+        # work = work * 150  # TODO remove
+        paginator = Paginator(work, ITEMS_PER_PAGE)
+
+        return {"work": paginator,
+                "now": ts()}
+
+
+class MountingWorkListView(ListView):
+    model = ProductInventory
+    template_name="mounting_list.html"
+
+    def get_context_data(self, **kwargs):
+        work = []
+        # work = work * 150  # TODO remove
+        paginator = Paginator(work, ITEMS_PER_PAGE)
+
         return {"work": paginator,
                 "now": ts()}
 
