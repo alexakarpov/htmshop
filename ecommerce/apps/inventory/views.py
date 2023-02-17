@@ -40,6 +40,7 @@ class PrintingWorkListView(ListView):
         paginator = Paginator(work, ITEMS_PER_PAGE)
 
         return {"work": paginator,
+                "title": "printing",
                 "now": ts()}
 
 
@@ -53,6 +54,7 @@ class SandingWorkListView(ListView):
         paginator = Paginator(work, ITEMS_PER_PAGE)
 
         return {"work": paginator,
+                "title": "sanding",
                 "now": ts()}
 
 
@@ -66,6 +68,7 @@ class MountingWorkListView(ListView):
         paginator = Paginator(work, ITEMS_PER_PAGE)
 
         return {"work": paginator,
+                "title": "mounting",
                 "now": ts()}
 
 
