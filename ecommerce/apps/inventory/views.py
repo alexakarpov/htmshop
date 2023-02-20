@@ -116,7 +116,7 @@ def dashboard(request):
     sanding = Room.objects.get(name__icontains="Sanding")
     painting = Room.objects.get(name__icontains="Painting")
     wrapping = Room.objects.get(name__icontains="wrapping")
-    rooms = [wrapping, painting, sanding, mounting]  # the order of the rooms _must_ be this
+    rooms = [wrapping, painting, sanding]  # the order of the rooms _must_ be this
     return render(
         request,
         "dashboard.html",
