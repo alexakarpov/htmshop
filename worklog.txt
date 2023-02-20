@@ -80,3 +80,19 @@ new ips today:
 #### 15/9
 updated owner of store db to our custom user in init.sql file
 cat init.sql | sudo --login --user=postgres psql
+
+----------------
+given a type,
+t1.productspecification_set.all()
+will fetch all the specs
+
+=================
+
+
+no longer using naive variants
+
+for getting the sku of a selected box: $("#sku-picker:checked").val()
+
+
+footer div should be outside of the "content"
+

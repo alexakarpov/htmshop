@@ -42,12 +42,12 @@
             <nav class="navbar navbar-expand p-0">
                 <div class="container">
                     <ul class="navbar-nav me-auto list-group list-group-horizontal">
-                        <li class="nav-item">
-                            <a class="text nav-link" href="/books">Books</a>
+                        <li class="nav-item px-1">
+                            <a class="text nav-link h5" href="/books">Books</a>
                         </li>
-                        <li>
+                        <li class="nav-item px-1">
                             <div class="dropdown">
-                                <a class="text nav-link dropdown-toggle" href="#" role="button"
+                                <a class="text nav-link dropdown-toggle h5" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Icons
                                 </a>
@@ -61,14 +61,15 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/incense">Incense</a>
+                            <a class="nav-link h5" href="/incense">Incense</a>
                         </li>
                     </ul>
 
                     <span class="nav-item px-1">
-                        <a href=" {% url 'accounts:dashboard' %} ">Account</a></span>
+                        <a class="h5" href=" {% url 'accounts:dashboard' %} ">Account</a>
+                    </span>
                     <span class="nav-item px-5">
-                        <a href=" {% url 'basket:basket_summary' %} ">
+                        <a class="h5" href=" {% url 'basket:basket_summary' %} ">
                             Cart (<strong><span id="basket-qty">{{ basket | length }}</span></strong>)
                         </a>
                     </span>
