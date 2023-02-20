@@ -114,7 +114,6 @@ def move_stock_view(request):
 def dashboard(request):
     form = MoveStockForm()
     sanding = Room.objects.get(name__icontains="Sanding")
-    mounting = Room.objects.get(name__icontains="Mounting")
     painting = Room.objects.get(name__icontains="Painting")
     wrapping = Room.objects.get(name__icontains="wrapping")
     rooms = [wrapping, painting, sanding, mounting]  # the order of the rooms _must_ be this
