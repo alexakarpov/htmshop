@@ -18,7 +18,7 @@ class ProductTest(TestCase):
     ]
 
     def test_fixture_worked(self):
-        self.assertEquals(
+        self.assertEqual(
             Product.objects.all().count(), 7, "fixture has 7 Productss"
         )
 
@@ -36,10 +36,10 @@ class ProductTest(TestCase):
     #     all_specs = ProductSpecification.objects.all()
     #     book_specs = all_specs.filter(product_type=book_type)
     #     icon_specs = all_specs.filter(product_type=icon_type)
-    #     self.assertEquals(
+    #     self.assertEqual(
     #         book_specs.count(), 0, "there should be no specs for books"
     #     )
-    #     self.assertEquals(
+    #     self.assertEqual(
     #         icon_specs.count(), 1, "there should be 1 spec for icons"
     #     )
     #     spec = icon_specs.first()  # cmon, this isn't testing
@@ -47,7 +47,7 @@ class ProductTest(TestCase):
 
     def test_type_name(self):
         books = ProductType.objects.get(name="book")
-        self.assertEquals(books.name, PRODUCT_TYPE_BOOK)
+        self.assertEqual(books.name, PRODUCT_TYPE_BOOK)
 
     def test_product_get_skus(self):
         """
@@ -59,12 +59,12 @@ class ProductTest(TestCase):
         icon_p = Product.objects.get(slug=TEST_ICON2_SLUG)
         i_skus = icon_p.get_skus()
         b_skus = book_p.get_skus()
-        self.assertEquals(
+        self.assertEqual(
             b_skus.count(),
             1,
             "fixture contains a single variant of Psalter",
         )
-        self.assertEquals(
+        self.assertEqual(
             len(i_skus), 3, "fixture has 3 variants of the Holy Napkin"
         )
         icon_v1 = i_skus[0]
