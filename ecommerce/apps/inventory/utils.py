@@ -47,7 +47,7 @@ def sanding_work():
 
     mounted_icons = ProductInventory.objects.filter(
         product_type__name="mounted icon"
-    )
+    ).order_by('sku')
     result = []
     for it in mounted_icons:
         logger.debug("######" * 2)
