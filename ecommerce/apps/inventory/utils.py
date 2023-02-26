@@ -6,7 +6,7 @@ from ecommerce.constants import (
     ICON_PRINT_TYPE_NAME,
 )
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 
 def padd(it, l, c=" "):

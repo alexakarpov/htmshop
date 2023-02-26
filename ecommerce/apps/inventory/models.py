@@ -1,7 +1,6 @@
 from abc import ABC
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from unittest.mock import MagicMock, patch
 
 from ecommerce.apps.catalogue.models import Product
 
@@ -34,7 +33,7 @@ class ProductSpecification(models.Model):
     A ProductType can have many specification
     """
 
-    product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
+    product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
     name = models.CharField(
         verbose_name=_("Name"), help_text=_("Required"), max_length=55
     )
@@ -50,7 +49,7 @@ class ProductSpecification(models.Model):
 class ProductInventory(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     product_type = models.ForeignKey(
-        ProductType, null=False, blank=False, on_delete=models.RESTRICT
+        ProductType, null=False, blank=False, on_delete=models.CASCADE
     )
     specifications = models.ManyToManyField(
         ProductSpecification, through="ProductSpecificationValue"
@@ -89,7 +88,7 @@ class ProductSpecificationValue(models.Model):
         ProductSpecification, on_delete=models.CASCADE
     )
 
-    sku = models.ForeignKey(ProductInventory, on_delete=models.RESTRICT)
+    sku = models.ForeignKey(ProductInventory, on_delete=models.CASCADE)
 
     value = models.CharField(max_length=30, blank=False)
 
@@ -102,7 +101,7 @@ class ProductSpecificationValue(models.Model):
 
 
 class Stock(models.Model):
-    room = models.ForeignKey("Room", on_delete=models.RESTRICT)
+    room = models.ForeignKey("Room", on_delete=models.CASCADE)
     product = models.ForeignKey(
         ProductInventory,
         on_delete=models.CASCADE,
