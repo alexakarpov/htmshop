@@ -1,3 +1,4 @@
+from abc import ABC
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from unittest.mock import MagicMock, patch
@@ -116,28 +117,50 @@ class Stock(models.Model):
 class Room(models.Model):
     name = models.CharField(verbose_name="Room name", max_length=20)
     slug = models.CharField(verbose_name="Room slug", max_length=20)
+
     def __str__(self) -> str:
         return self.name
 
     def get_stock_by_sku(self, sku):
         return self.stock_set.filter(product__sku=sku).first()
-    
+
     def get_stock_by_type(self, type: str):
-        return self.stock_set.filter(product__product_type__name__icontains=type)
+        return self.stock_set.filter(
+            product__product_type__name__icontains=type
+        )
 
 
-class WorkItem:
+class WorkItem(ABC):
+    def __init__(self, sku, title):
+        self.sku = sku
+        self.title = title
+
+
+class PrintingWorkItem(WorkItem):
     def __init__(
         self,
         sku,
         title,
-        type,
+        qty
+    ):
+        # print(f"pwi init with {(sku, title, qty)}")
+        super().__init__(sku, title)
+        self.qty = qty
+
+    def __repr__(self) -> str:
+        return f"PWI {self.sku}|{self.title}|{self.qty}"
+
+
+class SandingWorkItem(WorkItem):
+    def __init__(
+        self,
+        sku,
+        title,
         qty,
     ):
-        self.sku = sku
-        self.title = title
-        self.type = type
+        # print(f"calling WI (super) with {sku} and {title}")
+        super().__init__(sku, title)
         self.qty = qty
 
     def __str__(self) -> str:
-        return f"{self.sku}|{self.title}|{self.type}|{self.qty}"
+        return f"{self.sku}|{self.title}|{self.qty}"

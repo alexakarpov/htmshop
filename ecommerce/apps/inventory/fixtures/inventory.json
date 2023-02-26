@@ -325,6 +325,24 @@
     }
   },
   {
+    "model": "inventory.stock",
+    "pk": 10,
+    "fields": {
+      "room": 4,
+      "product": 10,
+      "quantity": 2
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 11,
+    "fields": {
+      "room": 3,
+      "product": 8,
+      "quantity": 1
+    }
+  },
+  {
     "model": "inventory.room",
     "pk": 1,
     "fields": {

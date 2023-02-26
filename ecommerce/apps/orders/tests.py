@@ -44,6 +44,6 @@ class OrdersTest(TestCase):
 
         order.save()
 
-        self.assertEquals(order.full_name, "Testy Testo")
-        self.assertEquals(order.email, "testytesto@example.com")
-        self.assertEquals(order.total_paid, 2 * 30 + 20)
+        self.assertEqual(order.full_name, "Testy Testo")
+        self.assertEqual(order.email, "testytesto@example.com")
+        self.assertEqual(order.total_paid, 2 * 30 + 20)

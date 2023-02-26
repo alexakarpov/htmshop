@@ -19,9 +19,6 @@ Inventory
         <!-- Tab 3 -->
         <input type="radio" name="tabset" id="sanding" aria-controls="sanding">
         <label for="sanding">Sanding</label>
-        <!-- Tab 4 -->
-        <input type="radio" name="tabset" id="mounting" aria-controls="mounting">
-        <label for="mounting">Mounting</label>
 
         <div class="tab-panels">
 
@@ -44,29 +41,33 @@ Inventory
                 {% for item in room.stock_set.all %}
                 <div class="row">
                     <div class="col border">{{ item.product }}</div>
-                    <div class="col border">{{ item.sku }}</div>
+                    <div class="col border">{{ item.product.sku }}</div>
                     <div class="col border">{{ item.quantity }}</div>
                 </div>
                 {% endfor %}
             </section>
 
             {% endfor %}
-
         </div>
     </div>
 
     <div class="h3 text-center">Worklist generation</div>
-    <div class="row w-50">
+    <div class="row w-25">
         <form class="m-1" action="{% url 'inventory:printing_worklist' %}" method="get">
             <button type="submit" class="btn btn-block btn-success btn-sm w-50">Printing Worklist</button>
         </form>
     </div>
-    <div class="row w-50">
+    <div class="row w-25">
         <form class="m-1" action="{% url 'inventory:sanding_worklist' %}" method="get">
             <button type="submit" class="btn btn-block btn-success btn-sm w-50">Sanding Worklist</button>
         </form>
     </div>
-    <div class="row w-50">
+    <div class="row w-25">
+        <form class="m-1" action="{% url 'inventory:sanding_worklist' %}" method="get">
+            <button type="submit" class="btn btn-block btn-success btn-sm w-50">Sawing Worklist</button>
+        </form>
+    </div>
+    <div class="row w-25">
         <form class="m-1" action="{% url 'inventory:mounting_worklist' %}" method="get">
             <button type="submit" class="btn btn-block btn-success btn-sm w-50">Mounting Worklist</button>
         </form>

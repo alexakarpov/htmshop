@@ -19,7 +19,7 @@ from ecommerce.constants import PRINT_TYPE_ID
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from .models import ProductInventory, Room, Stock
-from .utils import print_work, move_stock
+from .utils import print_work, move_stock, sanding_work
 from .forms import MoveStockForm
 from django.views.generic.list import ListView
 
@@ -49,7 +49,7 @@ class SandingWorkListView(ListView):
     template_name="sanding_list.html"
 
     def get_context_data(self, **kwargs):
-        work = []
+        work = sanding_work()
         # work = work * 150  # TODO remove
         paginator = Paginator(work, ITEMS_PER_PAGE)
 

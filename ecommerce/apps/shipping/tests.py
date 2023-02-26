@@ -62,8 +62,8 @@ class SimpleTest(APITestCase):
         response = view(request)
         choices_j = json.loads(response.content).get("choices")
         self.assertEqual(len(choices_j), 3)
-        self.assertEquals(choices_j[0].get("name"), "Economy")
-        self.assertEquals(choices_j[0].get("id"), "se-1573559620")
+        self.assertEqual(choices_j[0].get("name"), "Economy")
+        self.assertEqual(choices_j[0].get("id"), "se-1573559620")
 
     def test_make_shipment(self):
         s = make_shipment(test_cart, test_address.to_dict())
@@ -108,7 +108,7 @@ class SimpleTest(APITestCase):
 
         choices = list(map(lambda r: rate_to_choice(r), [r1, r2, r3]))
         tiers = split_tiers(choices)
-        self.assertEquals(choices[0].price, 17.74)
+        self.assertEqual(choices[0].price, 17.74)
         assert choices[0].name == "fedex_standard_overnight"
         assert tiers["regular"][0].name == "usps_priority_mail"
         assert tiers["fast"][0].name == "fedex_2day"
@@ -136,5 +136,5 @@ class SimpleTest(APITestCase):
         c1 = ShippingChoice.from_repr(
             "usps_priority_mail/20.77/se-1573559617/2"
         )
-        self.assertEquals(len(choices), 18)
+        self.assertEqual(len(choices), 18)
         self.assertIn(c1, choices)

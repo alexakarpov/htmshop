@@ -1,6 +1,6 @@
 import logging
 
-from .models import ProductInventory, WorkItem, Room, Stock
+from .models import ProductInventory, PrintingWorkItem, SandingWorkItem, Room, Stock
 from ecommerce.constants import (
     MOUNTED_ICON_TYPE_NAME,
     ICON_PRINT_TYPE_NAME,
@@ -20,7 +20,7 @@ def padd(it, l, c=" "):
 
 def print_work():
     room = Room.objects.get(
-        name__icontains="wrapping"
+        name__icontains="wrap"
     )  # TODO: sorce from Printing?
 
     inventory = room.get_stock_by_type(ICON_PRINT_TYPE_NAME)
@@ -29,14 +29,49 @@ def print_work():
     for it in inventory:
         if it.quantity < it.product.restock_point:
             w_qty = it.product.target_amount - it.quantity
-            wit = WorkItem(
+            wit = PrintingWorkItem(
                 it.product.sku,
                 it.product.product.title,
-                it.product.product_type.name,
                 w_qty,
             )
             result.append(wit)
         else:
+            continue
+    return result
+
+
+def sanding_work():
+    wrapping_room = Room.objects.get(name__icontains="wrapping")
+
+    painting_room = Room.objects.get(name__icontains="paint")
+
+    mounted_icons = ProductInventory.objects.filter(
+        product_type__name="mounted icon"
+    )
+    result = []
+    for it in mounted_icons:
+        logger.debug("######" * 2)
+        sku = it.sku
+        logger.debug(f"considering {sku}")
+        w_stock = wrapping_room.get_stock_by_sku(sku)
+        p_stock = painting_room.get_stock_by_sku(sku)
+        w_qty = w_stock.quantity if w_stock else 0
+        logger.debug(f"wrapping room has {w_qty} of {sku}")
+        p_qty = p_stock.quantity if p_stock else 0
+        logger.debug(f"painting room has {p_qty} of {sku}")
+        qty = w_qty + p_qty
+        logger.debug(f"qty for {sku} determined as {qty}")
+        if qty < it.restock_point:
+            logger.debug(f"below the restock point ({it.restock_point}), adding to reach {it.target_amount}")
+            wit = SandingWorkItem(
+                it.sku,
+                it.product.title,
+                it.target_amount - qty,
+            )
+            logger.debug(f"adding {wit} to the list")
+            result.append(wit)
+        else:
+            logger.debug(f"above the restock point ({it.restock_point}), continuing")
             continue
     return result
 

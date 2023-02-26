@@ -5,7 +5,7 @@
 </head>
 
 <body>
-    <h2>{{ title|title }} Worklist of {{ now }}</h2>
+    <h2>{{ title|title }} worklist of {{ now }}</h2>
     <div id="content">
         {% for page in work %}
         {% include 'sanding_page.html' with page=page %}
