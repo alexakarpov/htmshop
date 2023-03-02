@@ -75,7 +75,7 @@ class ProductInventory(models.Model):
         verbose_name_plural = _("Inventory Records")
 
     def __str__(self):
-        return f"{self.sku} ({self.product})"
+        return f"{self.sku} ({self.product} - {self.product_type})"
 
 
 class ProductSpecificationValue(models.Model):
@@ -136,12 +136,7 @@ class WorkItem(ABC):
 
 
 class PrintingWorkItem(WorkItem):
-    def __init__(
-        self,
-        sku,
-        title,
-        qty
-    ):
+    def __init__(self, sku, title, qty):
         # print(f"pwi init with {(sku, title, qty)}")
         super().__init__(sku, title)
         self.qty = qty
@@ -155,11 +150,13 @@ class SandingWorkItem(WorkItem):
         self,
         sku,
         title,
-        qty,
+        s_qty,  # qty in sanding room
+        qty,  # needed
     ):
         # print(f"calling WI (super) with {sku} and {title}")
         super().__init__(sku, title)
         self.qty = qty
+        self.s_qty = s_qty
 
     def __str__(self) -> str:
         return f"{self.sku}|{self.title}|{self.qty}"
