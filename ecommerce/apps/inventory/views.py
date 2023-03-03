@@ -19,7 +19,13 @@ from ecommerce.constants import PRINT_TYPE_ID
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from .models import ProductInventory, Room, Stock
-from .utils import print_work, move_stock, sanding_work, mounting_work
+from .utils import (
+    print_work,
+    move_stock,
+    sanding_work,
+    mounting_work,
+    sawing_work,
+)
 from .forms import MoveStockForm
 from django.views.generic.list import ListView
 
@@ -32,44 +38,49 @@ def ts():
 
 class PrintingWorkListView(ListView):
     model = ProductInventory
-    template_name="printing_list.html"
+    template_name = "printing_list.html"
 
     def get_context_data(self, **kwargs):
         work = print_work()
         # work = work * 150  # TODO remove
         paginator = Paginator(work, ITEMS_PER_PAGE)
 
-        return {"work": paginator,
-                "title": "printing",
-                "now": ts()}
+        return {"work": paginator, "title": "printing", "now": ts()}
 
 
 class SandingWorkListView(ListView):
     model = ProductInventory
-    template_name="sanding_list.html"
+    template_name = "sanding_list.html"
 
     def get_context_data(self, **kwargs):
         work = sanding_work()
         # work = work * 150  # TODO remove
         paginator = Paginator(work, ITEMS_PER_PAGE)
 
-        return {"work": paginator,
-                "title": "sanding",
-                "now": ts()}
+        return {"work": paginator, "title": "sanding", "now": ts()}
 
 
 class MountingWorkListView(ListView):
     model = ProductInventory
-    template_name="mounting_list.html"
+    template_name = "mounting_list.html"
 
     def get_context_data(self, **kwargs):
         work = mounting_work()
         # work = work * 150  # TODO remove
         paginator = Paginator(work, ITEMS_PER_PAGE)
 
-        return {"work": paginator,
-                "title": "mounting",
-                "now": ts()}
+        return {"work": paginator, "title": "mounting", "now": ts()}
+
+
+class SawingWorkListView(ListView):
+    model = ProductInventory
+    template_name = "sawing_list.html"
+
+    def get_context_data(self, **kwargs):
+        work = sawing_work()
+        paginator = Paginator(work, ITEMS_PER_PAGE)
+
+        return {"work": paginator, "title": "sawing", "now": ts()}
 
 
 def move_stock_view(request):
@@ -78,7 +89,10 @@ def move_stock_view(request):
     from_name = request.POST.get("from_room")
     to_name = request.POST.get("to_room")
     if from_name == to_name:
-        messages.warning(request, f"what are you trying to achieve, moving from a room to itself?")
+        messages.warning(
+            request,
+            f"what are you trying to achieve, moving from a room to itself?",
+        )
         return redirect("inventory:dashboard")
     quantity = int(request.POST.get("qty"))
     inv_id = request.POST.get("sku")
@@ -116,12 +130,13 @@ def dashboard(request):
     sanding = Room.objects.get(name__icontains="Sanding")
     painting = Room.objects.get(name__icontains="Painting")
     wrapping = Room.objects.get(name__icontains="wrapping")
-    rooms = [wrapping, painting, sanding]  # the order of the rooms _must_ be this
+    rooms = [
+        wrapping,
+        painting,
+        sanding,
+    ]  # the order of the rooms _must_ be this
     return render(
         request,
         "dashboard.html",
-        {
-            "form": form,
-            "rooms": rooms
-        },
+        {"form": form, "rooms": rooms},
     )

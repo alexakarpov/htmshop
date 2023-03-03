@@ -98,15 +98,40 @@ def mounting_work():
 
     for it in mounted_icons:
         sku = it.sku
-        p_stock = painting_room.get_stock_by_sku(sku)
-        p_qty = p_stock.quantity if p_stock else 0
-        
-        if p_qty < it.restock_point:
+        painting_stock = painting_room.get_stock_by_sku(sku)
+        painting_qty = painting_stock.quantity if painting_stock else 0
+
+        if painting_qty < it.restock_point:
             wit = MountingWorkItem(sku, it.product.title)
             result.append(wit)
-    
+
     return result
 
+
+def sawing_work():
+    sanding_room = Room.objects.get(name__icontains="sand")
+    print_supply = Room.objects.get(name__icontains="print")
+    mounted_icons = ProductInventory.objects.filter(
+        product_type__name="mounted icon"
+    ).order_by("sku")
+    result = []
+
+    for it in mounted_icons:
+        sku = it.sku
+        sanding_stock = sanding_room.get_stock_by_sku(sku)
+        sanding_qty = sanding_stock.quantity if sanding_stock else 0
+        print_stock = print_supply.get_stock_by_sku(sku)
+        print_qty = print_stock.quantity if print_stock else 0
+        if sanding_qty < it.restock_point:
+            wit = SandingWorkItem(
+                sku,
+                it.product.title,
+                print_qty,
+                it.target_amount - sanding_qty,
+            )
+            result.append(wit)
+
+    return result
 
 
 def add_stock(to_room: Room, sku: str, qty: int = 0):

@@ -18,6 +18,11 @@ urlpatterns = [
         name="sanding_worklist",
     ),
     path(
+        "sawing-worklist",
+        staff_member_required(views.SawingWorkListView.as_view()),
+        name="sawing_worklist",
+    ),
+    path(
         "mounting-worklist",
         staff_member_required(views.MountingWorkListView.as_view()),
         name="mounting_worklist",
