@@ -43,6 +43,7 @@ tr:nth-child(even) {
 table {
     font-weight: 300;
     font-size: 30px;
+    width: 100%;
 }
 
 /* #content {

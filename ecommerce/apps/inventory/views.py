@@ -19,7 +19,7 @@ from ecommerce.constants import PRINT_TYPE_ID
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from .models import ProductInventory, Room, Stock
-from .utils import print_work, move_stock, sanding_work
+from .utils import print_work, move_stock, sanding_work, mounting_work
 from .forms import MoveStockForm
 from django.views.generic.list import ListView
 
@@ -63,7 +63,7 @@ class MountingWorkListView(ListView):
     template_name="mounting_list.html"
 
     def get_context_data(self, **kwargs):
-        work = []
+        work = mounting_work()
         # work = work * 150  # TODO remove
         paginator = Paginator(work, ITEMS_PER_PAGE)
 

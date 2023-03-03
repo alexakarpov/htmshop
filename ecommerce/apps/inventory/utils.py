@@ -4,6 +4,7 @@ from .models import (
     ProductInventory,
     PrintingWorkItem,
     SandingWorkItem,
+    MountingWorkItem,
     Room,
     Stock,
 )
@@ -58,11 +59,9 @@ def sanding_work():
     ).order_by("sku")
 
     result = []
-    logger.warning(f"loaded {mounted_icons.count()} icons")
+
     for it in mounted_icons:
-        logger.info("######" * 2)
         sku = it.sku
-        logger.info(f"considering {sku}")
         w_stock = wrapping_room.get_stock_by_sku(sku)
         p_stock = painting_room.get_stock_by_sku(sku)
         s_stock = sanding_room.get_stock_by_sku(sku)
@@ -70,13 +69,9 @@ def sanding_work():
         p_qty = p_stock.quantity if p_stock else 0
         s_qty = s_stock.quantity if s_stock else 0
 
-        logger.info(f"painting room has {p_qty} of {sku}")
-        logger.info(f"wrapping room has {w_qty} of {sku}")
-        logger.info(f"sanding room has {s_qty} of {sku}")
         qty = w_qty + p_qty
-        logger.info(f"qty for {sku} is {qty}")
         if qty < it.restock_point:
-            logger.info(
+            logger.debug(
                 f"below the restock point ({it.restock_point}), adding { it.target_amount - qty } to reach {it.target_amount}"
             )
             wit = SandingWorkItem(
@@ -85,7 +80,6 @@ def sanding_work():
                 s_qty,
                 it.target_amount - qty,
             )
-            logger.info(f"adding {wit} to the list")
             result.append(wit)
         else:
             logger.debug(
@@ -93,6 +87,26 @@ def sanding_work():
             )
             continue
     return result
+
+
+def mounting_work():
+    painting_room = Room.objects.get(name__icontains="paint")
+    mounted_icons = ProductInventory.objects.filter(
+        product_type__name="mounted icon"
+    ).order_by("sku")
+    result = []
+
+    for it in mounted_icons:
+        sku = it.sku
+        p_stock = painting_room.get_stock_by_sku(sku)
+        p_qty = p_stock.quantity if p_stock else 0
+        
+        if p_qty < it.restock_point:
+            wit = MountingWorkItem(sku, it.product.title)
+            result.append(wit)
+    
+    return result
+
 
 
 def add_stock(to_room: Room, sku: str, qty: int = 0):

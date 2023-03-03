@@ -145,6 +145,11 @@ class PrintingWorkItem(WorkItem):
         return f"PWI {self.sku}|{self.title}|{self.qty}"
 
 
+class MountingWorkItem(WorkItem):
+    def __init__(self, sku, title):
+        super().__init__(sku, title)
+
+
 class SandingWorkItem(WorkItem):
     def __init__(
         self,
