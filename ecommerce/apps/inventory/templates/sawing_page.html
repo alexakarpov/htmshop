@@ -1,0 +1,20 @@
+<table style="page-break-after: always;">
+    <th class="sku">SKU</th>
+    <th class="title">Title</th>
+    <th class="qty">Print Supply</th>
+    <th class="qty">Needed</th>
+    <th class="qty">Completed</th>
+    {% for it in page %}
+    <tr>
+        <td><span class="sku">{{ it.sku }}</span></td>
+        <td><span class="title">{{ it.title }}</span></td>
+        <td><span class="qty">{{ it.s_qty }}</span></td>
+        <td><span class="qty">{{ it.qty }}</span></td>
+        <td><span class="qty"></span></td>
+    </tr>
+    {% endfor %}
+    <p>Page {{ page.number }} of {{ page.paginator.num_pages }}</p>
+</table>
+<style>
+    
+</style>

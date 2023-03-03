@@ -1,0 +1,14 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/worklists.css' %}" />
+</head>
+
+<body>
+    <h2>{{ title|title }} worklist of {{ now }}</h2>
+    <div id="content">
+        {% for page in work %}
+        {% include 'sawing_page.html' with page=page %}
+        {% endfor %}
+    </div>
+</body>
