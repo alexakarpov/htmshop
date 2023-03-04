@@ -19,13 +19,14 @@ from ecommerce.constants import PRINT_TYPE_ID
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from .models import ProductInventory, Room, Stock
-from .utils import (
+from .lists import (
     print_work,
-    move_stock,
     sanding_work,
     mounting_work,
     sawing_work,
 )
+from .utils import move_stock
+
 from .forms import MoveStockForm
 from django.views.generic.list import ListView
 

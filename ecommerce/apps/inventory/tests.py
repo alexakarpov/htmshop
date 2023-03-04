@@ -1,16 +1,17 @@
 from django.test import TestCase
 from .models import (
-    ProductInventory,
+    # ProductInventory,
     Room,
-    Stock,
-    PrintingWorkItem,
-    SandingWorkItem,
+    # Stock,
+    # PrintingWorkItem,
+    # SandingWorkItem,
 )
 from ecommerce.apps.inventory.utils import (
     padd,
     move_stock,
-    sanding_work
 )
+
+from .lists import sanding_work
 
 from django.test import TestCase
 
