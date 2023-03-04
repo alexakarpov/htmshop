@@ -24,7 +24,7 @@ class InventoryTest(TestCase):
     ]
 
     UB_SKU = "a00100"
-    BRIDEGROOM_SKU = "a00333"
+    BRIDEGROOM_SKU = "a-03"
 
     
     def test_padding(self):

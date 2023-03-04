@@ -3,6 +3,7 @@ import logging
 from ecommerce.apps.inventory.models import (
     MountingWorkItem,
     PrintingWorkItem,
+    SawingWorkItem,
     ProductInventory,
     Room,
     SandingWorkItem,
@@ -99,14 +100,12 @@ def sawing_work():
     The “Need” column (see the attachment) is calculated by this formula: Need = full amount - sanding room stock.
     This list is sorted by “Need” (descending), and then by SKU (ascending).
     The Print Supply column in just the count of Icon Prints for sku in Wrapping Room
-    problem: we have an icon, say, A-9. Will all prints for that icon will be called A-9P?
     """
     sanding_room = Room.objects.get(name__icontains="sand")
     wrapping_room = Room.objects.get(name__icontains="wrapping")
     mounted_icons = ProductInventory.objects.filter(
         product_type__name="mounted icon"
     ).order_by("sku")
-    
 
     result = []
 
@@ -114,19 +113,13 @@ def sawing_work():
         sanding_stock = sanding_room.get_stock_by_sku(it.sku)
         sanding_qty = sanding_stock.quantity if sanding_stock else 0
         print_supply = wrapping_room.get_print_supply_by_sku(it.sku)
-        # if not print_supply.exists(): # there are no prints at all in the wrapping room
 
-        # try:
-        # print = print_supply.get(product__sku=sku) # what if there's more than 1 entry?
-        # or what if the stock matching the query does not exist? self.model.DoesNotExist
-        # except model.DoesNotExist:
-
-        # print_qty = print.quantity if print else 0
+        ps_qty = print_supply.quantity if print_supply else 0
         if sanding_qty < it.restock_point:
-            wit = SandingWorkItem(
+            wit = SawingWorkItem(
                 it.sku,
                 it.product.title,
-                sanding_qty,
+                ps_qty,
                 it.target_amount - sanding_qty,
             )
             result.append(wit)

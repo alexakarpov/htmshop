@@ -174,7 +174,7 @@
     "fields": {
       "product": 5,
       "product_type": 3,
-      "sku": "a00333",
+      "sku": "a-03",
       "restock_point": 3,
       "target_amount": 12,
       "weight": "20.00",

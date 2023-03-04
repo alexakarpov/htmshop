@@ -178,3 +178,19 @@ class SandingWorkItem(WorkItem):
 
     def __repr__(self) -> str:
         return f"{self.sku}|{self.title}|{self.s_qty}|{self.need}"
+
+class SawingWorkItem(WorkItem):
+    def __init__(
+        self,
+        sku,
+        title,
+        ps,  # print Supply
+        need,
+    ):
+        # print(f"calling WI (super) with {sku} and {title}")
+        super().__init__(sku, title)
+        self.need = need
+        self.ps = ps
+
+    def __repr__(self) -> str:
+        return f"{self.sku}|{self.title}|{self.ps}|{self.need}"
