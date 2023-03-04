@@ -9,6 +9,7 @@ from .models import (
 from ecommerce.apps.inventory.utils import (
     padd,
     move_stock,
+    clean_room
 )
 
 from .lists import sanding_work
@@ -25,6 +26,7 @@ class InventoryTest(TestCase):
     UB_SKU = "a00100"
     BRIDEGROOM_SKU = "a00333"
 
+    
     def test_padding(self):
         px = padd("abc", 5)
         self.assertEqual(px, ("abc  ", 2))
@@ -36,7 +38,7 @@ class InventoryTest(TestCase):
         self.assertEqual(px, ("-" * 10, 9))
 
     def test_get_stock_by_sku(self):
-        r = Room.objects.get(pk=3)  # Painting
+        r = Room.objects.get(name__icontains="Paint")
         s = r.get_stock_by_sku("a00100")
 
         self.assertEqual(
@@ -100,9 +102,13 @@ class InventoryTest(TestCase):
         # painting has 1 of a00100 (BB) and 2 a00333 (Bridegroom) and no records fpr St Ephraim
         # wrapping has 2 of bridegroom, 3 of BB and 1 of St Ephraim
 
-        # 
-
         work = sanding_work()
-        self.assertEqual(len(work), 3)
+        self.assertEqual(len(work), 4)
 
-
+    def test_sanding_work(self):
+        # clean_room('wrap') # empty wrapping room => each icon print needs to be full
+        sand_room=Room.objects.get(name__icontains='sand')
+        # wrap_room=Room.objects.get(name__icontains='wrap')
+        # self.assertEqual(wrap_room.stock_set.count(), 0)
+        work = sanding_work()
+        self.assertEqual(len(work), 4)

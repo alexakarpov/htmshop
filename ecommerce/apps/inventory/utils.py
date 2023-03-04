@@ -36,3 +36,8 @@ def move_stock(stock: Stock, to_room: Room, qty: int) -> Stock:
     stock.save()
     to_stock.save()
     return to_stock
+
+
+def clean_room(name):
+        room=Room.objects.get(name__icontains=name)
+        room.stock_set.all().delete()

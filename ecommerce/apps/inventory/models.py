@@ -1,7 +1,7 @@
 from abc import ABC
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
+from django.core.exceptions import ObjectDoesNotExist
 from ecommerce.apps.catalogue.models import Product
 
 import random, string
@@ -121,9 +121,22 @@ class Room(models.Model):
         return self.name
 
     def get_stock_by_sku(self, sku):
-        return self.stock_set.filter(product__sku=sku).first()
+        """
+        this gets an exact stock by sku
+        """
+        try:
+            return self.stock_set.get(product__sku=sku)
+        except ObjectDoesNotExist:
+            return None
 
-    def get_stock_by_type(self, type: str):
+
+    def get_print_supply_by_sku(self, sku) -> Stock:
+        """
+        this will get the [unique] print stock for this sku (icon)
+        """
+        return self.stock_set.filter(product__sku__icontains=sku+'p').first()
+
+    def get_stock_by_type(self, type: str) -> Stock:
         return self.stock_set.filter(
             product__product_type__name__icontains=type
         )
@@ -156,12 +169,12 @@ class SandingWorkItem(WorkItem):
         sku,
         title,
         s_qty,  # qty in sanding room
-        qty,  # needed
+        need,
     ):
         # print(f"calling WI (super) with {sku} and {title}")
         super().__init__(sku, title)
-        self.qty = qty
+        self.need = need
         self.s_qty = s_qty
 
-    def __str__(self) -> str:
-        return f"{self.sku}|{self.title}|{self.qty}"
+    def __repr__(self) -> str:
+        return f"{self.sku}|{self.title}|{self.s_qty}|{self.need}"

@@ -187,7 +187,7 @@
     "fields": {
       "product": 7,
       "product_type": 4,
-      "sku": "a077",
+      "sku": "a-07p",
       "restock_point": 2,
       "target_amount": 7,
       "weight": "0.01",
@@ -205,6 +205,19 @@
       "target_amount": 2,
       "weight": "0.10",
       "price": "11.90"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 13,
+    "fields": {
+      "product": 7,
+      "product_type": 3,
+      "sku": "a-07",
+      "restock_point": 7,
+      "target_amount": 20,
+      "weight": "16.00",
+      "price": "31.99"
     }
   },
   {
@@ -340,6 +353,24 @@
       "room": 3,
       "product": 8,
       "quantity": 1
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 16,
+    "fields": {
+      "room": 4,
+      "product": 3,
+      "quantity": 1
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 17,
+    "fields": {
+      "room": 4,
+      "product": 13,
+      "quantity": 2
     }
   },
   {
