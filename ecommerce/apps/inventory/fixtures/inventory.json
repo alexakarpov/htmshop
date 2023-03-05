@@ -28,6 +28,13 @@
     }
   },
   {
+    "model": "inventory.producttype",
+    "pk": 5,
+    "fields": {
+      "name": "Metal Item"
+    }
+  },
+  {
     "model": "inventory.productspecification",
     "pk": 1,
     "fields": {
@@ -57,7 +64,7 @@
     "fields": {
       "product": 1,
       "product_type": 1,
-      "sku": "b001",
+      "sku": "B-10",
       "restock_point": null,
       "target_amount": 10,
       "weight": "16.00",
@@ -66,28 +73,15 @@
   },
   {
     "model": "inventory.productinventory",
-    "pk": 2,
-    "fields": {
-      "product": 2,
-      "product_type": 3,
-      "sku": "a00100",
-      "restock_point": 5,
-      "target_amount": 10,
-      "weight": "29.00",
-      "price": "29.00"
-    }
-  },
-  {
-    "model": "inventory.productinventory",
     "pk": 3,
     "fields": {
       "product": 2,
       "product_type": 4,
-      "sku": "a00101",
-      "restock_point": 6,
-      "target_amount": 10,
+      "sku": "A-9P",
+      "restock_point": 5,
+      "target_amount": 25,
       "weight": "0.01",
-      "price": "17.00"
+      "price": "18.00"
     }
   },
   {
@@ -96,11 +90,11 @@
     "fields": {
       "product": 2,
       "product_type": 3,
-      "sku": "a00110",
+      "sku": "A-9",
       "restock_point": 4,
-      "target_amount": 10,
+      "target_amount": 12,
       "weight": "39.00",
-      "price": "59.00"
+      "price": "32.00"
     }
   },
   {
@@ -135,7 +129,7 @@
     "fields": {
       "product": 6,
       "product_type": 2,
-      "sku": "in012",
+      "sku": "L-1C",
       "restock_point": null,
       "target_amount": 10,
       "weight": "1.00",
@@ -144,89 +138,275 @@
   },
   {
     "model": "inventory.productinventory",
-    "pk": 8,
-    "fields": {
-      "product": 4,
-      "product_type": 3,
-      "sku": "a0211",
-      "restock_point": 5,
-      "target_amount": 10,
-      "weight": "19.90",
-      "price": "33.00"
-    }
-  },
-  {
-    "model": "inventory.productinventory",
     "pk": 9,
     "fields": {
-      "product": 4,
+      "product": 5,
       "product_type": 4,
-      "sku": "a0222",
-      "restock_point": 8,
-      "target_amount": 11,
-      "weight": "0.10",
-      "price": "11.00"
+      "sku": "A-399P",
+      "restock_point": 10,
+      "target_amount": 25,
+      "weight": "0.78",
+      "price": "18.00"
     }
   },
   {
     "model": "inventory.productinventory",
     "pk": 10,
     "fields": {
-      "product": 5,
-      "product_type": 3,
-      "sku": "a-03",
-      "restock_point": 3,
-      "target_amount": 12,
-      "weight": "20.00",
-      "price": "19.99"
+      "product": 8,
+      "product_type": 4,
+      "sku": "A-148P",
+      "restock_point": 5,
+      "target_amount": 25,
+      "weight": "1.00",
+      "price": "18.00"
     }
   },
   {
     "model": "inventory.productinventory",
     "pk": 11,
     "fields": {
-      "product": 7,
+      "product": 9,
       "product_type": 4,
-      "sku": "a-07p",
-      "restock_point": 2,
-      "target_amount": 7,
-      "weight": "0.01",
-      "price": "9.89"
+      "sku": "A-176P",
+      "restock_point": 5,
+      "target_amount": 25,
+      "weight": "1.00",
+      "price": "18.00"
     }
   },
   {
     "model": "inventory.productinventory",
     "pk": 12,
     "fields": {
-      "product": 3,
+      "product": 10,
       "product_type": 4,
-      "sku": "a00101.123x4",
-      "restock_point": 1,
-      "target_amount": 2,
-      "weight": "0.10",
-      "price": "11.90"
+      "sku": "A-391P",
+      "restock_point": 4,
+      "target_amount": 25,
+      "weight": "1.00",
+      "price": "18.00"
     }
   },
   {
     "model": "inventory.productinventory",
     "pk": 13,
     "fields": {
-      "product": 7,
-      "product_type": 3,
-      "sku": "a-07",
-      "restock_point": 7,
-      "target_amount": 20,
-      "weight": "16.00",
-      "price": "31.99"
+      "product": 11,
+      "product_type": 4,
+      "sku": "A-122P",
+      "restock_point": 5,
+      "target_amount": 25,
+      "weight": "0.05",
+      "price": "18.00"
     }
   },
   {
-    "model": "inventory.productspecificationvalue",
-    "pk": 1,
+    "model": "inventory.productinventory",
+    "pk": 14,
     "fields": {
-      "specification": 1,
-      "sku": 2,
-      "value": "8x10"
+      "product": 12,
+      "product_type": 4,
+      "sku": "A-298P",
+      "restock_point": 10,
+      "target_amount": 25,
+      "weight": "0.76",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 15,
+    "fields": {
+      "product": 13,
+      "product_type": 4,
+      "sku": "A-129P",
+      "restock_point": 10,
+      "target_amount": 20,
+      "weight": "0.94",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 16,
+    "fields": {
+      "product": 14,
+      "product_type": 4,
+      "sku": "A-5P",
+      "restock_point": 20,
+      "target_amount": 50,
+      "weight": "0.75",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 17,
+    "fields": {
+      "product": 14,
+      "product_type": 3,
+      "sku": "A-5",
+      "restock_point": 15,
+      "target_amount": 30,
+      "weight": "22.21",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 18,
+    "fields": {
+      "product": 13,
+      "product_type": 3,
+      "sku": "A-129",
+      "restock_point": 5,
+      "target_amount": 15,
+      "weight": "28.02",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 19,
+    "fields": {
+      "product": 12,
+      "product_type": 3,
+      "sku": "A-298",
+      "restock_point": 15,
+      "target_amount": 20,
+      "weight": "22.53",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 20,
+    "fields": {
+      "product": 11,
+      "product_type": 3,
+      "sku": "A-122",
+      "restock_point": 15,
+      "target_amount": 30,
+      "weight": "23.51",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 21,
+    "fields": {
+      "product": 10,
+      "product_type": 3,
+      "sku": "A-391",
+      "restock_point": 5,
+      "target_amount": 25,
+      "weight": "22.70",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 22,
+    "fields": {
+      "product": 9,
+      "product_type": 3,
+      "sku": "A-176",
+      "restock_point": 4,
+      "target_amount": 12,
+      "weight": "25.24",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 23,
+    "fields": {
+      "product": 8,
+      "product_type": 3,
+      "sku": "A-148",
+      "restock_point": 15,
+      "target_amount": 30,
+      "weight": "21.67",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 24,
+    "fields": {
+      "product": 4,
+      "product_type": 3,
+      "sku": "A-11",
+      "restock_point": 5,
+      "target_amount": 15,
+      "weight": "27.88",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 25,
+    "fields": {
+      "product": 3,
+      "product_type": 3,
+      "sku": "A-329",
+      "restock_point": 4,
+      "target_amount": 12,
+      "weight": "20.90",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 26,
+    "fields": {
+      "product": 5,
+      "product_type": 3,
+      "sku": "A-399",
+      "restock_point": 5,
+      "target_amount": 15,
+      "weight": "23.07",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 27,
+    "fields": {
+      "product": 4,
+      "product_type": 4,
+      "sku": "A-11P",
+      "restock_point": 5,
+      "target_amount": 25,
+      "weight": "0.94",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 28,
+    "fields": {
+      "product": 15,
+      "product_type": 3,
+      "sku": "A-93",
+      "restock_point": 15,
+      "target_amount": 20,
+      "weight": "19.72",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 29,
+    "fields": {
+      "product": 15,
+      "product_type": 4,
+      "sku": "A-93P",
+      "restock_point": 10,
+      "target_amount": 25,
+      "weight": "0.67",
+      "price": "18.00"
     }
   },
   {
@@ -257,136 +437,353 @@
     }
   },
   {
-    "model": "inventory.productspecificationvalue",
-    "pk": 5,
-    "fields": {
-      "specification": 1,
-      "sku": 8,
-      "value": "8x10"
-    }
-  },
-  {
-    "model": "inventory.productspecificationvalue",
-    "pk": 7,
-    "fields": {
-      "specification": 1,
-      "sku": 4,
-      "value": "16x24"
-    }
-  },
-  {
-    "model": "inventory.productspecificationvalue",
-    "pk": 8,
-    "fields": {
-      "specification": 1,
-      "sku": 10,
-      "value": "8x10"
-    }
-  },
-  {
-    "model": "inventory.stock",
-    "pk": 1,
-    "fields": {
-      "room": 1,
-      "product": 2,
-      "quantity": 0
-    }
-  },
-  {
     "model": "inventory.stock",
     "pk": 3,
     "fields": {
       "room": 2,
-      "product": 2,
-      "quantity": 1
+      "product": 4,
+      "quantity": 5
     }
   },
   {
     "model": "inventory.stock",
     "pk": 4,
     "fields": {
-      "room": 3,
-      "product": 2,
-      "quantity": 1
+      "room": 2,
+      "product": 17,
+      "quantity": 3
     }
   },
   {
     "model": "inventory.stock",
     "pk": 5,
     "fields": {
-      "room": 3,
-      "product": 10,
-      "quantity": 2
+      "room": 2,
+      "product": 21,
+      "quantity": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 6,
     "fields": {
-      "room": 4,
-      "product": 2,
-      "quantity": 3
+      "room": 3,
+      "product": 21,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 7,
+    "fields": {
+      "room": 2,
+      "product": 22,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 8,
+    "fields": {
+      "room": 3,
+      "product": 22,
+      "quantity": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 9,
     "fields": {
-      "room": 4,
-      "product": 11,
-      "quantity": 1
+      "room": 2,
+      "product": 23,
+      "quantity": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 10,
     "fields": {
-      "room": 4,
-      "product": 10,
-      "quantity": 2
+      "room": 3,
+      "product": 23,
+      "quantity": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 11,
     "fields": {
+      "room": 2,
+      "product": 24,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 12,
+    "fields": {
       "room": 3,
-      "product": 8,
-      "quantity": 1
+      "product": 24,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 13,
+    "fields": {
+      "room": 2,
+      "product": 25,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 14,
+    "fields": {
+      "room": 3,
+      "product": 25,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 15,
+    "fields": {
+      "room": 2,
+      "product": 20,
+      "quantity": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 16,
     "fields": {
-      "room": 4,
-      "product": 3,
-      "quantity": 1
+      "room": 3,
+      "product": 20,
+      "quantity": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 17,
     "fields": {
-      "room": 4,
-      "product": 13,
+      "room": 2,
+      "product": 19,
       "quantity": 2
     }
   },
   {
-    "model": "inventory.room",
-    "pk": 1,
+    "model": "inventory.stock",
+    "pk": 18,
     "fields": {
-      "name": "Sanding Room",
-      "slug": "sanding"
+      "room": 3,
+      "product": 19,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 19,
+    "fields": {
+      "room": 3,
+      "product": 18,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 20,
+    "fields": {
+      "room": 2,
+      "product": 18,
+      "quantity": 13
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 21,
+    "fields": {
+      "room": 3,
+      "product": 17,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 22,
+    "fields": {
+      "room": 3,
+      "product": 4,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 23,
+    "fields": {
+      "room": 5,
+      "product": 4,
+      "quantity": 1
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 24,
+    "fields": {
+      "room": 5,
+      "product": 10,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 25,
+    "fields": {
+      "room": 5,
+      "product": 11,
+      "quantity": 4
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 26,
+    "fields": {
+      "room": 5,
+      "product": 12,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 27,
+    "fields": {
+      "room": 5,
+      "product": 13,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 28,
+    "fields": {
+      "room": 5,
+      "product": 14,
+      "quantity": 9
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 29,
+    "fields": {
+      "room": 5,
+      "product": 15,
+      "quantity": 8
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 30,
+    "fields": {
+      "room": 5,
+      "product": 9,
+      "quantity": 18
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 31,
+    "fields": {
+      "room": 5,
+      "product": 16,
+      "quantity": 9
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 32,
+    "fields": {
+      "room": 5,
+      "product": 24,
+      "quantity": 15
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 33,
+    "fields": {
+      "room": 5,
+      "product": 19,
+      "quantity": 10
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 34,
+    "fields": {
+      "room": 5,
+      "product": 17,
+      "quantity": 3
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 35,
+    "fields": {
+      "room": 5,
+      "product": 21,
+      "quantity": 6
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 36,
+    "fields": {
+      "room": 5,
+      "product": 22,
+      "quantity": 7
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 37,
+    "fields": {
+      "room": 5,
+      "product": 23,
+      "quantity": 8
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 38,
+    "fields": {
+      "room": 5,
+      "product": 25,
+      "quantity": 10
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 39,
+    "fields": {
+      "room": 5,
+      "product": 20,
+      "quantity": 15
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 40,
+    "fields": {
+      "room": 5,
+      "product": 18,
+      "quantity": 42
     }
   },
   {
     "model": "inventory.room",
     "pk": 2,
     "fields": {
-      "name": "Mounting Room",
-      "slug": "mounting"
+      "name": "Sanding Room",
+      "slug": "foo"
     }
   },
   {
@@ -394,15 +791,15 @@
     "pk": 3,
     "fields": {
       "name": "Painting Room",
-      "slug": "painting"
+      "slug": "foo"
     }
   },
   {
     "model": "inventory.room",
-    "pk": 4,
+    "pk": 5,
     "fields": {
       "name": "Wrapping Room",
-      "slug": "wrapping"
+      "slug": "foo"
     }
   }
 ]
