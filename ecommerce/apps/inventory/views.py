@@ -110,12 +110,7 @@ def move_stock_view(request):
         return redirect("inventory:dashboard")
 
     fqty = from_stock.quantity
-    if fqty < quantity:
-        messages.warning(
-            request, f"insufficient quantity ({fqty}) of {sku} in {from_room}"
-        )
-        return redirect("inventory:dashboard")
-
+    
     move_stock(from_stock, to_room, quantity)
 
     messages.success(
