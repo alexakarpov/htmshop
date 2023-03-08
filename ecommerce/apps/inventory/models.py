@@ -126,20 +126,30 @@ class Room(models.Model):
         """
         try:
             return self.stock_set.get(product__sku=sku)
-        except ObjectDoesNotExist:
+        except Stock.DoesNotExist:
             return None
-
 
     def get_print_supply_by_sku(self, sku) -> Stock:
         """
         this will get the [unique] print stock for this sku (icon)
         """
-        return self.stock_set.filter(product__sku__icontains=sku+'p').first()
+        return self.stock_set.filter(product__sku__icontains=sku + "p").first()
 
     def get_stock_by_type(self, type: str) -> Stock:
         return self.stock_set.filter(
             product__product_type__name__icontains=type
         )
+
+    def kill_sku(self, sku):
+        try:
+            victim = self.stock_set.get(product__sku=sku)
+        except Stock.DoesNotExist:
+            victim = None
+        if victim:
+            victim.delete()
+            return True
+        else:
+            return False
 
 
 class WorkItem(ABC):
@@ -178,6 +188,7 @@ class SandingWorkItem(WorkItem):
 
     def __repr__(self) -> str:
         return f"{self.sku}|{self.title}|{self.s_qty}|{self.need}"
+
 
 class SawingWorkItem(WorkItem):
     def __init__(

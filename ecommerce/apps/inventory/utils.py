@@ -24,13 +24,17 @@ def add_stock(to_room: Room, sku: str, qty: int = 0):
     new_stock.product = ProductInventory.objects.get(sku=sku)
     new_stock.quantity = qty
     new_stock.room = to_room
+    print(f'added {new_stock}')
     return new_stock
 
 
 def move_stock(stock: Stock, to_room: Room, qty: int) -> Stock:
-    to_stock = to_room.get_stock_by_sku(stock.product.sku)
-    if not to_stock:
+    try:
+        to_stock = to_room.get_stock_by_sku(stock.product.sku)
+    except Stock.DoesNotExist:
         to_stock = add_stock(to_room, stock.product.sku)
+        assert to_stock
+
     to_stock.quantity += qty
     stock.quantity -= qty
     stock.save()

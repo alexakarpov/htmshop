@@ -75,7 +75,7 @@ def sanding_work():
 
 
 def mounting_work():
-    painting_room = Room.objects.get(name__icontains="paint")
+    sanding_room = Room.objects.get(name__icontains="sand")
     mounted_icons = ProductInventory.objects.filter(
         product_type__name="mounted icon"
     ).order_by("sku")
@@ -83,10 +83,10 @@ def mounting_work():
 
     for it in mounted_icons:
         sku = it.sku
-        painting_stock = painting_room.get_stock_by_sku(sku)
-        painting_qty = painting_stock.quantity if painting_stock else 0
+        sanding_stock = sanding_room.get_stock_by_sku(sku)
+        sanding_qty = sanding_stock.quantity if sanding_stock else 0
 
-        if painting_qty < it.restock_point:
+        if sanding_qty < it.restock_point:
             wit = MountingWorkItem(sku, it.product.title)
             result.append(wit)
 
