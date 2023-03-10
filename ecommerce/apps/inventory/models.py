@@ -4,8 +4,6 @@ from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
 from ecommerce.apps.catalogue.models import Product
 
-import random, string
-
 
 class ProductType(models.Model):
     """
