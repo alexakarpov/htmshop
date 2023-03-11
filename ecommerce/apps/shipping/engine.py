@@ -7,7 +7,7 @@ from shipengine import ShipEngine
 from shipengine.errors import ShipEngineError
 
 from ecommerce.apps.accounts.models import Address
-from ecommerce.apps.basket.basket import get_weight
+from ecommerce.apps.basket.basket import Basket, get_weight
 
 from .choice import rate_to_choice
 
@@ -58,7 +58,7 @@ def init_shipment_dict():
     }
 
 
-def make_package(basketd):
+def make_package(basketd: dict):
     return {"weight": {"value": get_weight(basketd), "unit": "ounce"}}
 
 
@@ -74,7 +74,7 @@ def get_rates(engine, shipment):
     return engine.get_rates_from_shipment(shipment)
 
 
-def shipping_choices(basket, address_d):
+def shipping_choices(basket: Basket, address_d: dict):
     logger.debug(f"getting shipping choices for basket:\n{basket}")
     shipment = make_shipment(basket, address_d)
     logger.debug(f"built shipment:\n{shipment}")

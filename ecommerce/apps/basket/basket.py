@@ -123,7 +123,7 @@ class Basket:
 def get_weight(basket_ds):
     total = 0
     for it in basket_ds:
-        w = it["weight"]
+        w = Decimal(it["weight"])
         q = it["qty"]
         total += w * q
 
