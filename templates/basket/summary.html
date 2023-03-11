@@ -63,7 +63,6 @@
  $(document).on("click", ".delete-button", function (e) {
      e.preventDefault();
      let sku = $(this).data("index");
-     console.log("sku:", sku)
      $.ajax({
          type: "POST",
          url: '{% url "basket:basket_delete" %}',
@@ -74,10 +73,9 @@
          },
          success: function (json) {
              $('.product-item[data-index="' + sku + '"]').remove();
-             if (json.qty == 0) {
-                 total = 0
-                 subtotal = 0
-             } else {
+             let total = 0
+             let subtotal = 0
+             if (json.qty != 0) {
                  subtotal = json.subtotal
              }
              $("#subtotal").html(subtotal);
