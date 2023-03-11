@@ -30,10 +30,12 @@ def add_stock(to_room: Room, sku: str, qty: int = 0):
 
 def move_stock(stock: Stock, to_room: Room, qty: int) -> Stock:
     try:
+        print('stock exists')
         to_stock = to_room.get_stock_by_sku(stock.product.sku)
+
     except Stock.DoesNotExist:
+        print('adding new stock')
         to_stock = add_stock(to_room, stock.product.sku)
-        assert to_stock
 
     to_stock.quantity += qty
     stock.quantity -= qty
@@ -45,3 +47,7 @@ def move_stock(stock: Stock, to_room: Room, qty: int) -> Stock:
 def clean_room(name):
         room=Room.objects.get(name__icontains=name)
         room.stock_set.all().delete()
+
+
+def get_or_create_stock_by_sku(room: Room, sku: str):
+     room.stock

@@ -98,19 +98,6 @@ class ProductSpecificationValue(models.Model):
         verbose_name_plural = _("Product specs")
 
 
-class Stock(models.Model):
-    room = models.ForeignKey("Room", on_delete=models.CASCADE)
-    product = models.ForeignKey(
-        ProductInventory,
-        on_delete=models.CASCADE,
-        verbose_name="Product Inventory",
-    )
-    quantity = models.IntegerField(default=0)
-
-    def __str__(self) -> str:
-        return f"{self.product.sku} X {self.quantity} in {self.room}"
-
-
 class Room(models.Model):
     name = models.CharField(verbose_name="Room name", max_length=20)
     slug = models.CharField(verbose_name="Room slug", max_length=20)
@@ -127,13 +114,13 @@ class Room(models.Model):
         except Stock.DoesNotExist:
             return None
 
-    def get_print_supply_by_sku(self, sku) -> Stock:
+    def get_print_supply_by_sku(self, sku):
         """
         this will get the [unique] print stock for this sku (icon)
         """
         return self.stock_set.filter(product__sku__icontains=sku + "p").first()
 
-    def get_stock_by_type(self, type: str) -> Stock:
+    def get_stock_by_type(self, type: str):
         return self.stock_set.filter(
             product__product_type__name__icontains=type
         )
@@ -148,6 +135,37 @@ class Room(models.Model):
             return True
         else:
             return False
+
+
+class Stock(models.Model):
+    room = models.ForeignKey("Room", on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        ProductInventory,
+        on_delete=models.CASCADE,
+        verbose_name="Product Inventory",
+    )
+    quantity = models.IntegerField(default=0)
+
+    def move_to_room(self, to_room: Room, qty: int):
+        
+        to_stock = to_room.get_stock_by_sku(self.product.sku)
+        if not to_stock:
+            to_stock = Stock()
+            to_stock.product = self.product
+            to_stock.room = to_room
+            print(f"new stock createdk: {to_stock}")
+        
+        print("to_stock: " + str(to_stock))
+        to_stock.quantity += qty
+        self.quantity -= qty
+        self.save()
+        to_stock.save()
+        to_stock.save()
+        
+        return to_stock
+
+    def __str__(self) -> str:
+        return f"{self.product.sku} X {self.quantity} in {self.room}"
 
 
 class WorkItem(ABC):

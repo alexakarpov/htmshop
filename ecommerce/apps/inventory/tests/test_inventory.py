@@ -6,11 +6,7 @@ from ecommerce.apps.inventory.models import (
     # PrintingWorkItem,
     # SandingWorkItem,
 )
-from ecommerce.apps.inventory.utils import (
-    padd,
-    move_stock,
-    clean_room
-)
+from ecommerce.apps.inventory.utils import padd, move_stock, clean_room
 
 from ecommerce.apps.inventory.lists import sanding_work
 from .constants import UNBURNING_BUSH_SKU, BRIDEGROOM_SKU
@@ -26,7 +22,6 @@ class InventoryTest(TestCase):
 
     BRIDEGROOM_SKU = "a-03"
 
-    
     def test_padding(self):
         px = padd("abc", 5)
         self.assertEqual(px, ("abc  ", 2))
@@ -37,64 +32,50 @@ class InventoryTest(TestCase):
         px = padd("-", 10, c="-")
         self.assertEqual(px, ("-" * 10, 9))
 
-    def test_get_stock_by_sku(self):
-        r = Room.objects.get(name__icontains="Paint")
-        s = r.get_stock_by_sku(UNBURNING_BUSH_SKU)
+    def test_move_to_existing(self):
+        f_room = Room.objects.get(name__icontains="Paint")
+        t_room = Room.objects.get(name__icontains="wrap")
+        f_stock = f_room.get_stock_by_sku("A-9")
+        t_stock = t_room.get_stock_by_sku("A-9")
 
+        self.assertEqual(f_stock.quantity, 2, "painting starts with 2 of A-9")
+        self.assertEqual(t_stock.quantity, 1, "wrapping starts with 1 of A-9")
+
+        moved_stock = f_stock.move_to_room(t_room, 1)
+
+        self.assertEqual(moved_stock, t_stock, "should be the same stock")
+
+        self.assertEqual(moved_stock.product.sku, f_stock.product.sku)
         self.assertEqual(
-            s.quantity, 1, "Painting room should have 1 of Unburning Bush"
+            f_stock.quantity, 1, "from_stock after move qty decreased by 1"
+        )
+        self.assertEqual(
+            moved_stock.quantity,
+            2,
+            "to_stock (moved stock) qty increased by 1",
         )
 
-    def test_move_existing_sku(self):
-        from_room = Room.objects.get(name__icontains="painting")
-        to_room = Room.objects.get(name__icontains="wrap")
-        from_stock = from_room.get_stock_by_sku(UNBURNING_BUSH_SKU)
-        to_stock = to_room.get_stock_by_sku(UNBURNING_BUSH_SKU)
-        self.assertEqual(
-            from_stock.quantity, 1, "Should start with 1 in Painting"
-        )
-        self.assertEqual(
-            to_stock.quantity, 1, "Should start with 1 in wrapping"
-        )
-        to_stock = move_stock(from_stock, to_room, 1)
+    def test_move_to_new(self):
+        f_room = Room.objects.get(name__icontains="Paint")
+        t_room = Room.objects.get(name__icontains="wrap")
+        f_stock = f_room.get_stock_by_sku("A-329")
+        t_stock = t_room.get_stock_by_sku("A-329")
 
         self.assertEqual(
-            from_stock.quantity, 0, "Should now be 0 in Painting"
+            f_stock.quantity, 1, "painting starts with 1 of A-329"
         )
-        self.assertEqual(to_stock.quantity, 2, "Should now be 2 in wrapping")
+        self.assertEqual(
+            t_stock, None, "A-329 should be missing from the target room"
+        )
 
-    # def test_move_new_sku(self):
-    #     from_room = Room.objects.get(name__icontains="Painting")
-    #     to_room = Room.objects.get(name__icontains="wrap")
-    #     from_stock = from_room.stock_set.first()
-    #     assert from_stock
-    #     k=to_room.kill_sku(from_stock.product.sku)
+        moved_stock = f_stock.move_to_room(t_room, 1)
 
-    #     to_stock = to_room.get_stock_by_sku(BRIDEGROOM_SKU)
-    #     self.assertEqual(
-    #         to_stock, None, "should be None for non-existing stock"
-    #     )
-    #     move_stock(from_stock, to_room, 1)
-    #     to_stock = to_room.get_stock_by_sku(self.BRIDEGROOM_SKU)
-
-    #     self.assertEqual(
-    #         from_stock.quantity, 1, "Should now be 1 in Painting"
-    #     )
-    #     self.assertEqual(to_stock.quantity, 1, "Should now be 1 in wrapping")
-
-    # def test_move_to_empty_room(self):
-    #     from_room = Room.objects.get(name__icontains="Painting")
-    #     to_room = Room.objects.get(name__icontains="Sanding")
-    #     from_stock = from_room.get_stock_by_sku(self.BRIDEGROOM_SKU)
-    #     to_stock = to_room.get_stock_by_sku(self.BRIDEGROOM_SKU)
-
-    #     self.assertEqual(
-    #         to_stock, None, "should be None for non-existing stock"
-    #     )
-    #     move_stock(from_stock, to_room, 1)
-    #     to_stock = to_room.get_stock_by_sku(self.BRIDEGROOM_SKU)
-
-    #     self.assertEqual(
-    #         from_stock.quantity, 1, "Should now be 1 in Painting"
-    #     )
-    #     self.assertEqual(to_stock.quantity, 1, "Should now be 1 in Mounting")
+        self.assertEqual(moved_stock.product.sku, f_stock.product.sku)
+        self.assertEqual(
+            f_stock.quantity, 0, "from_stock after move qty decreased by 1"
+        )
+        self.assertEqual(
+            moved_stock.quantity,
+            1,
+            "new (moved) stock qty is 1",
+        )
