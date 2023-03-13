@@ -40,8 +40,8 @@ Inventory
 
                 {% for item in room.stock_set.all %}
                 <div class="row">
-                    <div class="col border">{{ item.product }}</div>
-                    <div class="col border">{{ item.product.sku }}</div>
+                    <div class="col border">{{ item.productinv }}</div>
+                    <div class="col border">{{ item.productinv.sku }}</div>
                     <div class="col border">{{ item.quantity }}</div>
                 </div>
                 {% endfor %}

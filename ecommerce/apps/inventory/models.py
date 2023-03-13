@@ -110,7 +110,7 @@ class Room(models.Model):
         this gets an exact stock by sku
         """
         try:
-            return self.stock_set.get(product__sku=sku)
+            return self.stock_set.get(productinv__sku=sku)
         except Stock.DoesNotExist:
             return None
 
@@ -118,54 +118,25 @@ class Room(models.Model):
         """
         this will get the [unique] print stock for this sku (icon)
         """
-        return self.stock_set.filter(product__sku__icontains=sku + "p").first()
+        return self.stock_set.filter(productinv__sku__icontains=sku + "p").first()
 
     def get_stock_by_type(self, type: str):
         return self.stock_set.filter(
-            product__product_type__name__icontains=type
+            productinv__product_type__name__icontains=type
         )
-
-    def kill_sku(self, sku):
-        try:
-            victim = self.stock_set.get(product__sku=sku)
-        except Stock.DoesNotExist:
-            victim = None
-        if victim:
-            victim.delete()
-            return True
-        else:
-            return False
 
 
 class Stock(models.Model):
     room = models.ForeignKey("Room", on_delete=models.CASCADE)
-    product = models.ForeignKey(
+    productinv = models.ForeignKey(
         ProductInventory,
         on_delete=models.CASCADE,
         verbose_name="Product Inventory",
     )
     quantity = models.IntegerField(default=0)
 
-    def move_to_room(self, to_room: Room, qty: int):
-
-        to_stock = to_room.get_stock_by_sku(self.product.sku)
-        if not to_stock:
-            to_stock = Stock()
-            to_stock.product = self.product
-            to_stock.room = to_room
-            print(f"new stock createdk: {to_stock}")
-
-        print("to_stock: " + str(to_stock))
-        to_stock.quantity += qty
-        self.quantity -= qty
-        self.save()
-        to_stock.save()
-        to_stock.save()
-
-        return to_stock
-
     def __str__(self) -> str:
-        return f"{self.product.sku} X {self.quantity} in {self.room}"
+        return f"{self.productinv.sku} X {self.quantity} in {self.room}"
 
 
 class WorkItem(ABC):
@@ -214,7 +185,6 @@ class SawingWorkItem(WorkItem):
         ps,  # print Supply
         need,
     ):
-        # print(f"calling WI (super) with {sku} and {title}")
         super().__init__(sku, title)
         self.need = need
         self.ps = ps

@@ -10,6 +10,7 @@ from ecommerce.constants import (
     ICON_PRINT_TYPE_NAME,
 )
 
+
 def padd(it, l, c=" "):
     if len(it) >= l:
         return (it, 0)
@@ -21,33 +22,37 @@ def padd(it, l, c=" "):
 
 def add_stock(to_room: Room, sku: str, qty: int = 0):
     new_stock = Stock()
-    new_stock.product = ProductInventory.objects.get(sku=sku)
+    new_stock.productinv = ProductInventory.objects.get(sku=sku)
     new_stock.quantity = qty
     new_stock.room = to_room
-    print(f'added {new_stock}')
+    print(f"added {new_stock}")
     return new_stock
 
 
-def move_stock(stock: Stock, to_room: Room, qty: int) -> Stock:
-    try:
-        print('stock exists')
-        to_stock = to_room.get_stock_by_sku(stock.product.sku)
-
-    except Stock.DoesNotExist:
-        print('adding new stock')
-        to_stock = add_stock(to_room, stock.product.sku)
-
-    to_stock.quantity += qty
-    stock.quantity -= qty
-    stock.save()
-    to_stock.save()
-    return to_stock
-
-
-def clean_room(name):
-        room=Room.objects.get(name__icontains=name)
-        room.stock_set.all().delete()
-
-
-def get_or_create_stock_by_sku(room: Room, sku: str):
-     room.stock
+def move_stock(from_room: Room, to_room: Room, sku: str, qty: int) -> Stock:
+    assert from_room or to_room
+    if not from_room: # ex nihilo
+        new_stock = add_stock(to_room, sku, qty=qty)
+        new_stock.save()
+        return new_stock
+    elif to_room:  # both from_room and to_room both are given
+        to_stock = to_room.get_stock_by_sku(sku)
+        from_stock = from_room.get_stock_by_sku(sku)
+        to_q_before = to_stock.quantity if to_stock else None
+        f_q_before = from_stock.quantity
+        if not to_stock:
+            new_stock = add_stock(to_room, sku, qty=qty)
+            from_stock.quantity -= qty
+            from_stock.save()
+            new_stock.save()
+            return new_stock
+        to_stock.quantity += qty
+        to_stock.save()
+        from_stock.quantity -= qty
+        from_stock.save()
+        return to_stock
+    else:  # from_room given but not to_room
+        from_stock = from_room.get_stock_by_sku(sku)
+        from_stock.quantity -= qty
+        from_stock.save()
+        return None

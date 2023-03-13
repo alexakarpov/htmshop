@@ -101,17 +101,10 @@ def move_stock_view(request):
     logger.debug(
         f"move request, from {from_name} to {to_name}, {quantity} x {sku}"
     )
-    from_room = Room.objects.get(name__icontains=from_name)
-    to_room = Room.objects.get(name__icontains=to_name)
+    from_room = Room.objects.get(name__icontains=from_name) if from_name != "nihil" else None
+    to_room = Room.objects.get(name__icontains=to_name) if to_name != "nihil" else None
 
-    from_stock = from_room.get_stock_by_sku(sku)
-    if not from_stock:
-        messages.warning(request, f"{sku} is missing from {from_room}")
-        return redirect("inventory:dashboard")
-
-    fqty = from_stock.quantity
-    
-    move_stock(from_stock, to_room, quantity)
+    move_stock(from_room, to_room, sku, qty=quantity)
 
     messages.success(
         request,

@@ -465,7 +465,7 @@
     "pk": 3,
     "fields": {
       "room": 2,
-      "product": 4,
+      "productinv": 4,
       "quantity": 5
     }
   },
@@ -474,7 +474,7 @@
     "pk": 4,
     "fields": {
       "room": 2,
-      "product": 17,
+      "productinv": 17,
       "quantity": 3
     }
   },
@@ -483,7 +483,7 @@
     "pk": 5,
     "fields": {
       "room": 2,
-      "product": 21,
+      "productinv": 21,
       "quantity": 0
     }
   },
@@ -492,7 +492,7 @@
     "pk": 6,
     "fields": {
       "room": 3,
-      "product": 21,
+      "productinv": 21,
       "quantity": 0
     }
   },
@@ -501,7 +501,7 @@
     "pk": 7,
     "fields": {
       "room": 2,
-      "product": 22,
+      "productinv": 22,
       "quantity": 0
     }
   },
@@ -510,7 +510,7 @@
     "pk": 8,
     "fields": {
       "room": 3,
-      "product": 22,
+      "productinv": 22,
       "quantity": 0
     }
   },
@@ -519,7 +519,7 @@
     "pk": 9,
     "fields": {
       "room": 2,
-      "product": 23,
+      "productinv": 23,
       "quantity": 0
     }
   },
@@ -528,7 +528,7 @@
     "pk": 10,
     "fields": {
       "room": 3,
-      "product": 23,
+      "productinv": 23,
       "quantity": 0
     }
   },
@@ -537,7 +537,7 @@
     "pk": 11,
     "fields": {
       "room": 2,
-      "product": 24,
+      "productinv": 24,
       "quantity": 0
     }
   },
@@ -546,7 +546,7 @@
     "pk": 12,
     "fields": {
       "room": 3,
-      "product": 24,
+      "productinv": 24,
       "quantity": 0
     }
   },
@@ -555,7 +555,7 @@
     "pk": 13,
     "fields": {
       "room": 2,
-      "product": 25,
+      "productinv": 25,
       "quantity": 0
     }
   },
@@ -564,7 +564,7 @@
     "pk": 14,
     "fields": {
       "room": 3,
-      "product": 25,
+      "productinv": 25,
       "quantity": 1
     }
   },
@@ -573,7 +573,7 @@
     "pk": 15,
     "fields": {
       "room": 2,
-      "product": 20,
+      "productinv": 20,
       "quantity": 0
     }
   },
@@ -582,7 +582,7 @@
     "pk": 16,
     "fields": {
       "room": 3,
-      "product": 20,
+      "productinv": 20,
       "quantity": 0
     }
   },
@@ -591,7 +591,7 @@
     "pk": 17,
     "fields": {
       "room": 2,
-      "product": 19,
+      "productinv": 19,
       "quantity": 2
     }
   },
@@ -600,7 +600,7 @@
     "pk": 18,
     "fields": {
       "room": 3,
-      "product": 19,
+      "productinv": 19,
       "quantity": 0
     }
   },
@@ -609,7 +609,7 @@
     "pk": 19,
     "fields": {
       "room": 3,
-      "product": 18,
+      "productinv": 18,
       "quantity": 0
     }
   },
@@ -618,7 +618,7 @@
     "pk": 20,
     "fields": {
       "room": 2,
-      "product": 18,
+      "productinv": 18,
       "quantity": 13
     }
   },
@@ -627,7 +627,7 @@
     "pk": 21,
     "fields": {
       "room": 3,
-      "product": 17,
+      "productinv": 17,
       "quantity": 1
     }
   },
@@ -636,7 +636,7 @@
     "pk": 22,
     "fields": {
       "room": 3,
-      "product": 4,
+      "productinv": 4,
       "quantity": 2
     }
   },
@@ -645,7 +645,7 @@
     "pk": 23,
     "fields": {
       "room": 5,
-      "product": 4,
+      "productinv": 4,
       "quantity": 1
     }
   },
@@ -654,7 +654,7 @@
     "pk": 24,
     "fields": {
       "room": 5,
-      "product": 10,
+      "productinv": 10,
       "quantity": 0
     }
   },
@@ -663,7 +663,7 @@
     "pk": 25,
     "fields": {
       "room": 5,
-      "product": 11,
+      "productinv": 11,
       "quantity": 4
     }
   },
@@ -672,7 +672,7 @@
     "pk": 26,
     "fields": {
       "room": 5,
-      "product": 12,
+      "productinv": 12,
       "quantity": 0
     }
   },
@@ -681,7 +681,7 @@
     "pk": 27,
     "fields": {
       "room": 5,
-      "product": 13,
+      "productinv": 13,
       "quantity": 0
     }
   },
@@ -690,7 +690,7 @@
     "pk": 28,
     "fields": {
       "room": 5,
-      "product": 14,
+      "productinv": 14,
       "quantity": 9
     }
   },
@@ -699,7 +699,7 @@
     "pk": 29,
     "fields": {
       "room": 5,
-      "product": 15,
+      "productinv": 15,
       "quantity": 8
     }
   },
@@ -708,7 +708,7 @@
     "pk": 30,
     "fields": {
       "room": 5,
-      "product": 9,
+      "productinv": 9,
       "quantity": 18
     }
   },
@@ -717,7 +717,7 @@
     "pk": 31,
     "fields": {
       "room": 5,
-      "product": 16,
+      "productinv": 16,
       "quantity": 9
     }
   },
@@ -726,7 +726,7 @@
     "pk": 32,
     "fields": {
       "room": 5,
-      "product": 24,
+      "productinv": 24,
       "quantity": 15
     }
   },
@@ -735,7 +735,7 @@
     "pk": 33,
     "fields": {
       "room": 5,
-      "product": 19,
+      "productinv": 19,
       "quantity": 10
     }
   },
@@ -744,7 +744,7 @@
     "pk": 35,
     "fields": {
       "room": 5,
-      "product": 21,
+      "productinv": 21,
       "quantity": 6
     }
   },
@@ -753,7 +753,7 @@
     "pk": 36,
     "fields": {
       "room": 5,
-      "product": 22,
+      "productinv": 22,
       "quantity": 7
     }
   },
@@ -762,7 +762,7 @@
     "pk": 37,
     "fields": {
       "room": 5,
-      "product": 23,
+      "productinv": 23,
       "quantity": 8
     }
   },
@@ -771,7 +771,7 @@
     "pk": 39,
     "fields": {
       "room": 5,
-      "product": 20,
+      "productinv": 20,
       "quantity": 15
     }
   },
@@ -780,7 +780,7 @@
     "pk": 40,
     "fields": {
       "room": 5,
-      "product": 18,
+      "productinv": 18,
       "quantity": 42
     }
   }
