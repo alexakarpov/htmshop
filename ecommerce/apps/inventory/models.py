@@ -147,21 +147,21 @@ class Stock(models.Model):
     quantity = models.IntegerField(default=0)
 
     def move_to_room(self, to_room: Room, qty: int):
-        
+
         to_stock = to_room.get_stock_by_sku(self.product.sku)
         if not to_stock:
             to_stock = Stock()
             to_stock.product = self.product
             to_stock.room = to_room
             print(f"new stock createdk: {to_stock}")
-        
+
         print("to_stock: " + str(to_stock))
         to_stock.quantity += qty
         self.quantity -= qty
         self.save()
         to_stock.save()
         to_stock.save()
-        
+
         return to_stock
 
     def __str__(self) -> str:
