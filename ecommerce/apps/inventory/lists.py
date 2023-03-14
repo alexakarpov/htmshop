@@ -16,17 +16,17 @@ logger = logging.getLogger("django")
 def print_work():
     room = Room.objects.get(
         name__icontains="wrap"
-    )  # TODO: sorce from Printing?
-
+    )
+    # this is the "Print Supply" for all SKUs
     inventory = room.get_stock_by_type(ICON_PRINT_TYPE_NAME)
 
     result = []
     for it in inventory:
-        if it.quantity < it.product.restock_point:
-            w_qty = it.product.target_amount - it.quantity
+        if it.quantity < it.productinv.restock_point:
+            w_qty = it.productinv.target_amount - it.quantity
             wit = PrintingWorkItem(
-                it.product.sku,
-                it.product.product.title,
+                it.productinv.sku,
+                it.productinv.product.title,
                 w_qty,
             )
             result.append(wit)
