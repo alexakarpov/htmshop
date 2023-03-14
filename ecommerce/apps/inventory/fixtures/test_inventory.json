@@ -1,0 +1,138 @@
+[
+  {
+    "model": "inventory.producttype",
+    "pk": 1,
+    "fields": {
+      "name": "book"
+    }
+  },
+  {
+    "model": "inventory.producttype",
+    "pk": 2,
+    "fields": {
+      "name": "incense"
+    }
+  },
+  {
+    "model": "inventory.producttype",
+    "pk": 3,
+    "fields": {
+      "name": "mounted icon"
+    }
+  },
+  {
+    "model": "inventory.producttype",
+    "pk": 4,
+    "fields": {
+      "name": "icon print"
+    }
+  },
+  {
+    "model": "inventory.producttype",
+    "pk": 5,
+    "fields": {
+      "name": "Metal Item"
+    }
+  },
+  {
+    "model": "inventory.productspecification",
+    "pk": 1,
+    "fields": {
+      "product_type": 3,
+      "name": "size"
+    }
+  },
+  {
+    "model": "inventory.productspecification",
+    "pk": 2,
+    "fields": {
+      "product_type": 2,
+      "name": "size"
+    }
+  },
+  {
+    "model": "inventory.productspecification",
+    "pk": 3,
+    "fields": {
+      "product_type": 4,
+      "name": "size"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 4,
+    "fields": {
+      "product": 2,
+      "product_type": 3,
+      "sku": "A-9",
+      "restock_point": 4,
+      "target_amount": 12,
+      "weight": "39.00",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 25,
+    "fields": {
+      "product": 3,
+      "product_type": 3,
+      "sku": "A-329",
+      "restock_point": 4,
+      "target_amount": 12,
+      "weight": "20.90",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.room",
+    "pk": 2,
+    "fields": {
+      "name": "Sanding Room",
+      "slug": "sanding"
+    }
+  },
+  {
+    "model": "inventory.room",
+    "pk": 3,
+    "fields": {
+      "name": "Painting Room",
+      "slug": "painting"
+    }
+  },
+  {
+    "model": "inventory.room",
+    "pk": 5,
+    "fields": {
+      "name": "Wrapping Room",
+      "slug": "wrapping"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 3,
+    "fields": {
+      "room": 2,
+      "productinv": 4,
+      "quantity": 5
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 13,
+    "fields": {
+      "room": 2,
+      "productinv": 25,
+      "quantity": 0
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": 22,
+    "fields": {
+      "room": 3,
+      "productinv": 4,
+      "quantity": 2
+    }
+  }
+]
