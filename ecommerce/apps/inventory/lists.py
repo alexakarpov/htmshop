@@ -71,7 +71,7 @@ def sanding_work():
                 f"above the restock point ({it.restock_point}), continuing"
             )
             continue
-    return result
+    return sorted(result)
 
 
 def mounting_work():
@@ -90,7 +90,7 @@ def mounting_work():
             wit = MountingWorkItem(sku, it.product.title)
             result.append(wit)
 
-    return result
+    return sorted(result)
 
 
 def sawing_work():
@@ -124,4 +124,4 @@ def sawing_work():
             )
             result.append(wit)
 
-    return result
+    return sorted(result)

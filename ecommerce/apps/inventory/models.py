@@ -118,7 +118,9 @@ class Room(models.Model):
         """
         this will get the [unique] print stock for this sku (icon)
         """
-        return self.stock_set.filter(productinv__sku__icontains=sku + "p").first()
+        return self.stock_set.filter(
+            productinv__sku__icontains=sku + "p"
+        ).first()
 
     def get_stock_by_type(self, type: str):
         return self.stock_set.filter(
@@ -159,6 +161,9 @@ class MountingWorkItem(WorkItem):
     def __init__(self, sku, title):
         super().__init__(sku, title)
 
+    def __lt__(self, other):
+        return self.sku < other.sku
+
 
 class SandingWorkItem(WorkItem):
     def __init__(
@@ -168,13 +173,15 @@ class SandingWorkItem(WorkItem):
         s_qty,  # qty in sanding room
         need,
     ):
-        # print(f"calling WI (super) with {sku} and {title}")
         super().__init__(sku, title)
         self.need = need
         self.s_qty = s_qty
 
     def __repr__(self) -> str:
         return f"{self.sku}|{self.title}|{self.s_qty}|{self.need}"
+
+    def __lt__(self, other):
+        return self.need > other.need
 
 
 class SawingWorkItem(WorkItem):
@@ -188,6 +195,9 @@ class SawingWorkItem(WorkItem):
         super().__init__(sku, title)
         self.need = need
         self.ps = ps
+
+    def __lt__(self, other):
+        return self.need > other.need
 
     def __repr__(self) -> str:
         return f"{self.sku}|{self.title}|{self.ps}|{self.need}"
