@@ -12,7 +12,6 @@ ITEMS_PER_PAGE = 27
 ROOMS = [
     ("nihil", "nowhere"),
     ("sanding", "Sanding room"),
-    ("mounting", "Mounting room"),
     ("wrapping", "Wrapping room"),
     ("painting", "Painting room"),
 ]

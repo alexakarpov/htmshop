@@ -21,17 +21,23 @@ def padd(it, l, c=" "):
 
 
 def add_stock(to_room: Room, sku: str, qty: int = 0):
+    stock = to_room.get_stock_by_sku(sku)
+    if stock:
+        stock.quantity += qty
+        stock.save()
+        return stock
+
     new_stock = Stock()
     new_stock.productinv = ProductInventory.objects.get(sku=sku)
     new_stock.quantity = qty
     new_stock.room = to_room
-    print(f"added {new_stock}")
+
     return new_stock
 
 
 def move_stock(from_room: Room, to_room: Room, sku: str, qty: int) -> Stock:
     assert from_room or to_room
-    if not from_room: # ex nihilo
+    if not from_room:  # ex nihilo
         new_stock = add_stock(to_room, sku, qty=qty)
         new_stock.save()
         return new_stock
