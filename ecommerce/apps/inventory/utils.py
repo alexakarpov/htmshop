@@ -21,6 +21,9 @@ def padd(it, l, c=" "):
 
 
 def add_stock(to_room: Room, sku: str, qty: int = 0):
+    """
+    add stock to room, either creating new Stock or increasing quantity of an existing one
+    """
     stock = to_room.get_stock_by_sku(sku)
     if stock:
         stock.quantity += qty
@@ -36,6 +39,9 @@ def add_stock(to_room: Room, sku: str, qty: int = 0):
 
 
 def move_stock(from_room: Room, to_room: Room, sku: str, qty: int) -> Stock:
+    """
+    move stocks between rooms, including to/from nowhere
+    """
     assert from_room or to_room
     if not from_room:  # ex nihilo
         new_stock = add_stock(to_room, sku, qty=qty)
