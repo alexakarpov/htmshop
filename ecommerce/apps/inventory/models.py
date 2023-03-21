@@ -1,9 +1,13 @@
+import re
+import logging
 from abc import ABC
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
 from ecommerce.apps.catalogue.models import Product
 
+sku_reg = re.compile("([A-Z]+)-([0-9]+)")
+logger = logging.getLogger("django")
 
 class ProductType(models.Model):
     """
@@ -162,7 +166,27 @@ class MountingWorkItem(WorkItem):
         super().__init__(sku, title)
 
     def __lt__(self, other):
-        return self.sku < other.sku
+        smatch = sku_reg.match(self.sku)
+        if smatch:
+            self_letter, self_num =smatch.groups()
+        else:
+            logger.error(f"{self.sku} doesn't match the expected SKU pattern")
+            return True
+        omatch = sku_reg.match(other.sku)
+        if omatch:
+            other_letter, other_num = omatch.groups()
+        else:
+            logger.error(f"{other.sku} doesn't match the expected SKU pattern")
+            return True
+        if self_letter > other_letter:
+            return False
+        try:
+            if int(self_num) > int(other_num):
+                return False
+        except ValueError:
+            logger.error(f"either {self_num} or {other_num} are not numeric")
+            return True
+        return True
 
 
 class SandingWorkItem(WorkItem):
