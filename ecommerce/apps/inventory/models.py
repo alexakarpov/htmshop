@@ -166,25 +166,31 @@ class MountingWorkItem(WorkItem):
         super().__init__(sku, title)
 
     def __lt__(self, other):
-        smatch = sku_reg.match(self.sku)
-        if smatch:
-            self_letter, self_num =smatch.groups()
-        else:
-            logger.error(f"{self.sku} doesn't match the expected SKU pattern")
-            return True
-        omatch = sku_reg.match(other.sku)
-        if omatch:
-            other_letter, other_num = omatch.groups()
-        else:
-            logger.error(f"{other.sku} doesn't match the expected SKU pattern")
-            return True
-        if self_letter > other_letter:
-            return False
         try:
+            smatch = sku_reg.match(self.sku)
+            if smatch:
+                self_letter, self_num =smatch.groups()
+            else:
+                logger.error(f"{self.sku} doesn't match the expected SKU pattern")
+                return True
+
+            omatch = sku_reg.match(other.sku)
+            if omatch:
+                other_letter, other_num = omatch.groups()
+            else:
+                logger.error(f"{other.sku} doesn't match the expected SKU pattern")
+                return True
+
+            if self_letter > other_letter:
+                return False
             if int(self_num) > int(other_num):
                 return False
+
         except ValueError:
             logger.error(f"either {self_num} or {other_num} are not numeric")
+            return True
+        except:
+            logger.error(f"something else blew up matching {self_num} or {other_num}")
             return True
         return True
 

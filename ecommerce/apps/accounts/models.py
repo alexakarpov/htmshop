@@ -97,6 +97,10 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def get_last_name(self):
         return self.last_name
 
+    def get_short_name(self):
+        # otherwise there are strange error in the logs
+        return self.get_first_name()
+
     def __str__(self):
         return self.email
 
