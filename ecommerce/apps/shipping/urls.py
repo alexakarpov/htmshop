@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from rest_framework import routers, serializers, viewsets
 
 from . import views
@@ -6,5 +6,6 @@ from . import views
 app_name = "shipping"
 
 urlpatterns = [
-  path("get-rates/", views.get_rates, name="shipping_get_rates"),
+    path("", views.get_orders, name="get_orders"),
+    path("get-rates/", views.get_rates, name="shipping_get_rates"),
 ]

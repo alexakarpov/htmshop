@@ -15,6 +15,16 @@ logger = logging.getLogger("console")
 
 
 @api_view(http_method_names=["GET"])
+def get_orders(request):
+    action = request.GET.get('action', '')
+    start_date = request.GET.get('start_date', '')
+    end_date = request.GET.get('end_date', '')
+
+    logger.debug(f"action: {action}, start_date: {start_date}, end_date: {end_date}")
+    return JsonResponse({"hello": "world"})
+
+
+@api_view(http_method_names=["GET"])
 def get_rates(request):
     basket = Basket(request)
     logger.debug(f"get_rates: Basket>\n{basket}")
