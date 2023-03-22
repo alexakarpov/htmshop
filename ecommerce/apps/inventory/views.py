@@ -10,8 +10,6 @@ from django.shortcuts import redirect
 
 from django.core.paginator import Paginator
 from ecommerce.constants import (
-    MOUNTED_ICON_TYPE_NAME,
-    ICON_PRINT_TYPE_NAME,
     ITEMS_PER_PAGE,
 )
 
@@ -27,7 +25,6 @@ from .lists import (
 )
 from .utils import move_stock
 
-from .forms import MoveStockForm
 from django.views.generic.list import ListView
 
 logger = logging.getLogger("console")
@@ -96,15 +93,17 @@ def move_stock_view(request):
         )
         return redirect("inventory:dashboard")
     quantity = int(request.POST.get("qty"))
-    inv_id = request.POST.get("sku")
-    sku = ProductInventory.objects.get(pk=inv_id).sku
+    inv_sku = request.POST.get("sku")
+    sku = ProductInventory.objects.get(sku=inv_sku)
     logger.debug(
-        f"move request, from {from_name} to {to_name}, {quantity} x {sku}"
+        f"move request, from {from_name} to {to_name}, {quantity} x {inv_sku}"
     )
-    from_room = Room.objects.get(name__icontains=from_name) if from_name != "nihil" else None
-    to_room = Room.objects.get(name__icontains=to_name) if to_name != "nihil" else None
+    from_room = Room.objects.get(
+        name__icontains=from_name) if from_name != "nihil" else None
+    to_room = Room.objects.get(
+        name__icontains=to_name) if to_name != "nihil" else None
 
-    move_stock(from_room, to_room, sku, qty=quantity)
+    move_stock(from_room, to_room, inv_sku, qty=quantity)
 
     messages.success(
         request,
@@ -115,7 +114,6 @@ def move_stock_view(request):
 
 
 def dashboard(request):
-    form = MoveStockForm()
     sanding = Room.objects.get(name__icontains="Sanding")
     painting = Room.objects.get(name__icontains="Painting")
     wrapping = Room.objects.get(name__icontains="wrapping")
@@ -127,5 +125,5 @@ def dashboard(request):
     return render(
         request,
         "dashboard.html",
-        {"form": form, "rooms": rooms},
+        {"rooms": rooms},
     )

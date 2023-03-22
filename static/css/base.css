@@ -80,6 +80,10 @@ hr.divider {
   max-height: 2em;
 }
 
+.sku {
+  max-width: 6em;
+}
+
 /*
 .btn-link {
   border: none;

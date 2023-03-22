@@ -80,7 +80,36 @@ Inventory
         </div>
         <form class="m-2" action="{% url 'inventory:move_stock' %}" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+
+            <p>
+                <label for="id_to_room">To:</label>
+                <select name="to_room" id="id_to_room">
+                    <option value="nihil">nowhere</option>
+                    <option value="sanding">Sanding room</option>
+                    <option value="wrapping">Wrapping room</option>
+                    <option value="painting">Painting room</option>
+                </select>            
+            </p>
+            <p>
+                <label for="id_from_room">From:</label>
+                <select name="from_room" id="id_from_room">
+                    <option value="nihil">nowhere</option>
+                    <option value="sanding">Sanding room</option>
+                    <option value="wrapping">Wrapping room</option>
+                    <option value="painting">Painting room</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="id_qty">Quantity:</label>
+                <input type="number" name="qty" class="quantity" min="0" id="id_qty" required>
+            </p>
+
+            <p>
+                <label for="id_sku">SKU:</label>
+                <input type="text" name="sku" class="sku" maxlength="12" id="id_sku" required>
+            </p>
+
             <button type="submit" class="btn btn-success m-3">Move stock</button>
         </form>
 
