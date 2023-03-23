@@ -10,7 +10,7 @@ Inventory
 {% block content %}
 <div class="container-fluid">
 
-    <div class="tabset p-2">
+    <div class="tabset p-1">
         <!-- Tab 1 -->
         <input type="radio" name="tabset" id="wrapping" aria-controls="wrapping" checked>
         <label for="wrapping">Wrapping</label>
@@ -21,7 +21,7 @@ Inventory
         <input type="radio" name="tabset" id="sanding" aria-controls="sanding">
         <label for="sanding">Sanding</label>
 
-        <div class="tab-panels" style="background-color:rgb(119, 197, 116)">
+        <div class="tab-panels" style="background-color:rgb(149, 216, 146)">
 
             {% for room in rooms %}
             <section id={{ room.slug }} class="tab-panel">
@@ -86,7 +86,7 @@ Inventory
 
                 <p>
                     <label for="id_to_room">To:</label>
-                    <select name="to_room" id="id_to_room">
+                    <select name="to_room" id="id_to_room" class="form-control" style="width: 15%;">
                         <option value="nihil">nowhere</option>
                         <option value="sanding">Sanding room</option>
                         <option value="wrapping">Wrapping room</option>
@@ -95,7 +95,7 @@ Inventory
                 </p>
                 <p>
                     <label for="id_from_room">From:</label>
-                    <select name="from_room" id="id_from_room">
+                    <select name="from_room" class="form-control" id="id_from_room" style="width: 15%;">
                         <option value="nihil">nowhere</option>
                         <option value="sanding">Sanding room</option>
                         <option value="wrapping">Wrapping room</option>
@@ -110,15 +110,14 @@ Inventory
 
                 <div class="autocomplete">
                     <label for="id_sku">SKU:</label>
-                    <input type="text" name="sku" class="sku form-control" maxlength="12" id="move_sku" required>
+                    <input type="text" name="sku" class="sku form-control" maxlength="12" id="move_sku"
+                        style="width: 5rem; text-transform:uppercase" required>
                 </div>
                 <input type="submit" class="btn btn-success m-3" value="Move">
         </div>
         </form>
 
     </div>
-</div>
-
 </div>
 
 <script>
