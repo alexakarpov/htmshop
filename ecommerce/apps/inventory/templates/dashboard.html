@@ -21,7 +21,7 @@ Inventory
         <input type="radio" name="tabset" id="sanding" aria-controls="sanding">
         <label for="sanding">Sanding</label>
 
-        <div class="tab-panels">
+        <div class="tab-panels" style="background-color:rgb(119, 197, 116)">
 
             {% for room in rooms %}
             <section id={{ room.slug }} class="tab-panel">
@@ -52,33 +52,35 @@ Inventory
         </div>
     </div>
 
-    <div class="h3 text-center">Worklist generation</div>
-    <div class="row w-25">
-        <form class="m-1" action="{% url 'inventory:printing_worklist' %}" method="get">
-            <button type="submit" class="btn btn-block btn-success btn-sm w-50">Printing Worklist</button>
-        </form>
-    </div>
-    <div class="row w-25">
-        <form class="m-1" action="{% url 'inventory:sawing_worklist' %}" method="get">
-            <button type="submit" class="btn btn-block btn-success btn-sm w-50">Sawing Worklist</button>
-        </form>
-    </div>
-    <div class="row w-25">
-        <form class="m-1" action="{% url 'inventory:sanding_worklist' %}" method="get">
-            <button type="submit" class="btn btn-block btn-success btn-sm w-50">Sanding Worklist</button>
-        </form>
-    </div>
-    <div class="row w-25">
-        <form class="m-1" action="{% url 'inventory:mounting_worklist' %}" method="get">
-            <button type="submit" class="btn btn-block btn-success btn-sm w-50">Mounting Worklist</button>
-        </form>
+    <div style="background-color:rgb(199, 155, 102)" class="m-3">
+        <div class="h3 text-center">Worklist generation</div>
+        <div class="row w-25">
+            <form class="m-1" action="{% url 'inventory:printing_worklist' %}" method="get">
+                <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Printing Worklist</button>
+            </form>
+        </div>
+        <div class="row w-25">
+            <form class="m-1" action="{% url 'inventory:sawing_worklist' %}" method="get">
+                <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Sawing Worklist</button>
+            </form>
+        </div>
+        <div class="row w-25">
+            <form class="m-1" action="{% url 'inventory:sanding_worklist' %}" method="get">
+                <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Sanding Worklist</button>
+            </form>
+        </div>
+        <div class="row w-25">
+            <form class="m-1" action="{% url 'inventory:mounting_worklist' %}" method="get">
+                <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Mounting Worklist</button>
+            </form>
+        </div>
     </div>
 
-    <div class="row">
-        <div class="h3 text-center">
-            Inventory move
-        </div>
-        <div class="border bg-light">
+    <div style="background-color:rgb(212, 210, 95);" class="m-3">
+        <div class="border">
+            <div class="h3 text-center">
+                Inventory move
+            </div>
             <form class="m-2" autocomplete="off" action="{% url 'inventory:move_stock' %}" method="post">
                 {% csrf_token %}
 
@@ -103,12 +105,12 @@ Inventory
 
                 <p>
                     <label for="id_qty">Quantity:</label>
-                    <input type="number" name="qty" class="quantity" min="0" id="id_qty" required>
+                    <input type="number" name="qty" class="quantity form-control" min="0" id="id_qty" required>
                 </p>
 
                 <div class="autocomplete">
                     <label for="id_sku">SKU:</label>
-                    <input type="text" name="sku" class="sku" maxlength="12" id="move_sku" required>
+                    <input type="text" name="sku" class="sku form-control" maxlength="12" id="move_sku" required>
                 </div>
                 <input type="submit" class="btn btn-success m-3" value="Move">
         </div>
