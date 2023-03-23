@@ -441,7 +441,7 @@
     "pk": 2,
     "fields": {
       "name": "Sanding Room",
-      "slug": "foo"
+      "slug": "sanding"
     }
   },
   {
@@ -449,7 +449,7 @@
     "pk": 3,
     "fields": {
       "name": "Painting Room",
-      "slug": "foo"
+      "slug": "painting"
     }
   },
   {
@@ -457,7 +457,7 @@
     "pk": 5,
     "fields": {
       "name": "Wrapping Room",
-      "slug": "foo"
+      "slug": "wrapping"
     }
   },
   {
