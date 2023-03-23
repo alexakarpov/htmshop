@@ -122,8 +122,20 @@ def dashboard(request):
         painting,
         sanding,
     ]  # the order of the rooms _must_ be this
+    icons = ProductInventory.objects.filter(
+        product_type__name="mounted icon"
+    )
+
+    skus_arr = []
+    for it in icons:
+        skus_arr.append(it.sku)
+    
+    skus = ",".join(skus_arr)
+
+    logger.debug(f"skus: {skus}")
     return render(
         request,
         "dashboard.html",
-        {"rooms": rooms},
+        {"rooms": rooms,
+         "all_skus": skus},
     )
