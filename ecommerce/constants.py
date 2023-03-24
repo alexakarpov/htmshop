@@ -14,4 +14,5 @@ ROOMS = [
     ("sanding", "Sanding room"),
     ("wrapping", "Wrapping room"),
     ("painting", "Painting room"),
+    ("print_supply", "Print Supply")
 ]
