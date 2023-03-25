@@ -114,14 +114,15 @@ def move_stock_view(request):
 
 
 def dashboard(request):
-    sanding = Room.objects.get(name__icontains="Sanding")
-    painting = Room.objects.get(name__icontains="Painting")
-    wrapping = Room.objects.get(name__icontains="wrapping")
-    rooms = [
-        wrapping,
-        painting,
-        sanding,
-    ]  # the order of the rooms _must_ be this
+    logger.debug(f"posted: {request.POST}")
+    # sanding = Room.objects.get(name__icontains="Sanding")
+    # painting = Room.objects.get(name__icontains="Painting")
+    # wrapping = Room.objects.get(name__icontains="wrapping")
+    # rooms = [
+    #     wrapping,
+    #     painting,
+    #     sanding,
+    # ]  # the order of the rooms _must_ be this
     icons = ProductInventory.objects.filter(
         product_type__name="mounted icon"
     )
@@ -129,13 +130,18 @@ def dashboard(request):
     skus_arr = []
     for it in icons:
         skus_arr.append(it.sku)
-    
+
     skus = ",".join(skus_arr)
+
+    the_sku = from_name = request.POST.get("sku")
+    logger.debug(f"inspecting {the_sku}")
 
     logger.debug(f"skus: {skus}")
     return render(
         request,
         "dashboard.html",
-        {"rooms": rooms,
-         "all_skus": skus},
+        {
+            # "rooms": rooms,
+            "all_skus": skus
+        },
     )

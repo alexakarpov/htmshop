@@ -14,11 +14,20 @@ input {
 input[type=text] {
     background-color: #f1f1f1;
     width: 100%;
+    box-sizing: border-box;
+    border: 3px solid black;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
 }
 
 input[type=submit] {
     background-color: DodgerBlue;
     color: #fff;
+}
+
+.form-control {
+    border: 1px solid black;
 }
 
 .autocomplete-items {
