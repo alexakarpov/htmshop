@@ -10,46 +10,16 @@ Inventory
 {% block content %}
 <div class="container-fluid">
 
-    <div class="tabset p-1">
-        <!-- Tab 1 -->
-        <input type="radio" name="tabset" id="wrapping" aria-controls="wrapping" checked>
-        <label for="wrapping">Wrapping</label>
-        <!-- Tab 2 -->
-        <input type="radio" name="tabset" id="painting" aria-controls="painting">
-        <label for="painting">Painting</label>
-        <!-- Tab 3 -->
-        <input type="radio" name="tabset" id="sanding" aria-controls="sanding">
-        <label for="sanding">Sanding</label>
-
-        <div class="tab-panels" style="background-color:rgb(149, 216, 146)">
-
-            {% for room in rooms %}
-            <section id={{ room.slug }} class="tab-panel">
-                <div class="h3">{{ room.name }} stock</div>
-
-                <div class="row">
-                    <div class="col border">
-                        <div class="h4">Title</div>
-                    </div>
-                    <div class="col border">
-                        <div class="h4">SKU</div>
-                    </div>
-                    <div class="col border">
-                        <div class="h4">Quantity</div>
-                    </div>
-                </div>
-
-                {% for item in room.stock_set.all %}
-                <div class="row">
-                    <div class="col border">{{ item.productinv }}</div>
-                    <div class="col border">{{ item.productinv.sku }}</div>
-                    <div class="col border">{{ item.quantity }}</div>
-                </div>
-                {% endfor %}
-            </section>
-
-            {% endfor %}
-        </div>
+    <div style="background-color:rgb(149, 216, 146)">
+        <form class="m-2" autocomplete="off" action="{% url 'inventory:dashboard' %}" method="post">
+            {% csrf_token %}
+            <div class="autocomplete">
+                <label for="view_sku">SKU:</label>
+                <input type="text" name="sku" class="sku form-control" maxlength="12" id="view_sku"
+                    style="width: 5rem; text-transform:uppercase" required>
+            </div>
+            <input type="submit" class="btn btn-success m-3" value="Inspect">
+        </form>
     </div>
 
     <div style="background-color:rgb(199, 155, 102)" class="m-3">
@@ -91,6 +61,7 @@ Inventory
                         <option value="sanding">Sanding room</option>
                         <option value="wrapping">Wrapping room</option>
                         <option value="painting">Painting room</option>
+                        <option value="print_supply">Print supply</option>
                     </select>
                 </p>
                 <p>
@@ -100,6 +71,7 @@ Inventory
                         <option value="sanding">Sanding room</option>
                         <option value="wrapping">Wrapping room</option>
                         <option value="painting">Painting room</option>
+                        <option value="painting">Print supply</option>
                     </select>
                 </p>
 
@@ -114,9 +86,8 @@ Inventory
                         style="width: 5rem; text-transform:uppercase" required>
                 </div>
                 <input type="submit" class="btn btn-success m-3" value="Move">
+            </form>
         </div>
-        </form>
-
     </div>
 </div>
 
@@ -223,6 +194,8 @@ Inventory
     }
 
     autocomplete(document.getElementById("move_sku"), skus_arr);
+    autocomplete(document.getElementById("view_sku"), skus_arr);
+
 </script>
 {% endblock content %}
 
