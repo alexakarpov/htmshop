@@ -5,7 +5,6 @@ pytest_plugins = [
 
 import pytest
 from pytest_factoryboy import register
-from ecommerce.tests.factories import RoomFactory, StockFactory
+from ecommerce.tests.factories import StockFactory
 
-register(RoomFactory)
 register(StockFactory)

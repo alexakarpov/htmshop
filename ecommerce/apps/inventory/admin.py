@@ -5,7 +5,6 @@ from .models import (
     ProductSpecification,
     ProductSpecificationValue,
     ProductType,
-    Room,
     Stock,
 )
 
@@ -39,12 +38,3 @@ class StockInline(admin.TabularInline):
     model = Stock
 
 admin.site.register(Stock)
-
-
-@admin.register(Room)
-class RoomAdmin(admin.ModelAdmin):
-    inlines = [
-        StockInline,
-    ]
-
-

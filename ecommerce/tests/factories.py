@@ -3,16 +3,9 @@ import factory
 from faker import Faker
 from ecommerce.apps.catalogue.models import Product
 
-from ecommerce.apps.inventory.models import ProductInventory, ProductType, Room, Stock
+from ecommerce.apps.inventory.models import ProductInventory, ProductType, Stock
 
 fake = Faker()
-
-
-class RoomFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Room
-
-    name = "Room_from_factory"
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
@@ -45,6 +38,6 @@ class StockFactory(factory.django.DjangoModelFactory):
         model = Stock
 
     productinv = factory.SubFactory(ProductInvFactory)
-    room = factory.SubFactory(RoomFactory)
+    
     quantity = 7
     
