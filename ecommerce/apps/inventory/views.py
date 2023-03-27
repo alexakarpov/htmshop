@@ -13,7 +13,7 @@ from ecommerce.constants import (
 from ecommerce.constants import PRINT_TYPE_ID
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
-from .models import ProductInventory, Stock
+from .models import ProductInventory, Stock, get_stock_by_sku
 from .lists import (
     print_work,
     sanding_work,
@@ -119,13 +119,16 @@ def dashboard(request):
     skus = ",".join(skus_arr)
 
     the_sku = from_name = request.POST.get("sku")
+    item = ProductInventory.objects.get(sku=the_sku)
     logger.debug(f"inspecting {the_sku}")
-
+    stock = get_stock_by_sku(the_sku)
     logger.debug(f"skus: {skus}")
     return render(
         request,
         "dashboard.html",
         {
-            "all_skus": skus
+            "all_skus": skus,
+            "item": stock,
+            "the_sku": the_sku
         },
     )
