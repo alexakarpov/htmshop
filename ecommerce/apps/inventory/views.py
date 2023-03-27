@@ -118,10 +118,11 @@ def dashboard(request):
 
     skus = ",".join(skus_arr)
 
-    the_sku = from_name = request.POST.get("sku")
-    item = ProductInventory.objects.get(sku=the_sku)
+    the_sku = request.POST.get("sku")
+    item = ProductInventory.objects.get(sku=the_sku) if the_sku else None
     logger.debug(f"inspecting {the_sku}")
-    stock = get_stock_by_sku(the_sku)
+    stock = get_stock_by_sku(the_sku) if the_sku else None
+
     logger.debug(f"skus: {skus}")
     return render(
         request,
