@@ -53,28 +53,26 @@ Inventory
             </div>
             <form class="m-2" autocomplete="off" action="{% url 'inventory:move_stock' %}" method="post">
                 {% csrf_token %}
-
                 <p>
-                    <label for="id_to_room">To:</label>
-                    <select name="to_room" id="id_to_room" class="form-control" style="width: 15%;">
-                        <option value="nihil">nowhere</option>
-                        <option value="sanding">Sanding room</option>
-                        <option value="wrapping">Wrapping room</option>
-                        <option value="painting">Painting room</option>
-                        <option value="print_supply">Print supply</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="id_from_room">From:</label>
-                    <select name="from_room" class="form-control" id="id_from_room" style="width: 15%;">
-                        <option value="nihil">nowhere</option>
+                    <label for="from_room">From:</label>
+                    <select name="from_room" class="form-control" id="from_room" style="width: 15%;">
+                        <option value="nowhere">nowhere</option>
                         <option value="sanding">Sanding room</option>
                         <option value="wrapping">Wrapping room</option>
                         <option value="painting">Painting room</option>
                         <option value="painting">Print supply</option>
                     </select>
                 </p>
-
+                <p>
+                    <label for="to_room">To:</label>
+                    <select name="to_room" id="to_room" class="form-control" style="width: 15%;">
+                        <option value="nowhere">nowhere</option>
+                        <option value="sanding">Sanding room</option>
+                        <option value="wrapping">Wrapping room</option>
+                        <option value="painting">Painting room</option>
+                        <option value="print_supply">Print supply</option>
+                    </select>
+                </p>
                 <p>
                     <label for="id_qty">Quantity:</label>
                     <input type="number" name="qty" class="quantity form-control" min="0" id="id_qty" required>

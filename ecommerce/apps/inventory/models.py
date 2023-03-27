@@ -9,6 +9,7 @@ from ecommerce.apps.catalogue.models import Product
 sku_reg = re.compile("([A-Z]+)-([0-9]+)")
 logger = logging.getLogger("django")
 
+
 class ProductType(models.Model):
     """
     product_type table - books, mounted icons, incense - each type will have related specifications.
@@ -102,47 +103,92 @@ class ProductSpecificationValue(models.Model):
         verbose_name_plural = _("Product specs")
 
 
-class Room(models.Model):
-    name = models.CharField(verbose_name="Room name", max_length=20)
-    slug = models.CharField(verbose_name="Room slug", max_length=20)
-
-    def __str__(self) -> str:
-        return self.name
-
-    def get_stock_by_sku(self, sku):
-        """
-        this gets an exact stock by sku
-        """
-        try:
-            return self.stock_set.get(productinv__sku=sku)
-        except Stock.DoesNotExist:
-            return None
-
-    def get_print_supply_by_sku(self, sku):
-        """
-        this will get the [unique] print stock for this sku (icon)
-        """
-        return self.stock_set.filter(
-            productinv__sku__icontains=sku + "p"
-        ).first()
-
-    def get_stock_by_type(self, type: str):
-        return self.stock_set.filter(
-            productinv__product_type__name__icontains=type
-        )
-
-
 class Stock(models.Model):
-    room = models.ForeignKey("Room", on_delete=models.CASCADE)
     productinv = models.ForeignKey(
         ProductInventory,
         on_delete=models.CASCADE,
         verbose_name="Product Inventory",
+        null=True,
+        default=None
     )
-    quantity = models.IntegerField(default=0)
+    wrapping_qty = models.IntegerField(default=0)
+    sanding_qty = models.IntegerField(default=0)
+    painting_qty = models.IntegerField(default=0)
 
     def __str__(self) -> str:
-        return f"{self.productinv.sku} X {self.quantity} in {self.room}"
+        if self.productinv:
+            return f"{self.productinv.sku} X w{self.wrapping_qty}|p{self.painting_qty}|s{self.sanding_qty}"
+        else:
+            return f"stock of nothing"
+
+    def wrapping_add(self, qty: int):
+        self.wrapping_qty += qty
+
+    def painting_add(self, qty: int):
+        self.painting_qty += qty
+
+    def sanding_add(self, qty: int):
+        self.sanding_qty += qty
+
+    def wrapping_remove(self, qty: int):
+        self.wrapping_qty -= qty
+
+    def painting_remove(self, qty: int):
+        self.painting_qty -= qty
+
+    def sanding_remove(self, qty: int):
+        self.sanding_qty -= qty
+
+    def settle_quantities(self, qty: int, from_room: str, to_room: str):
+        print(f"settling move of {self.productinv.sku}x{qty} from {from_room} to {to_room}")
+        from_room = from_room.lower() if from_room else ""
+        to_room = to_room.lower() if to_room else ""
+        # increase destination qty
+        if to_room.find('wrap') > -1:
+            print("to wrapping")
+            self.wrapping_add(qty)
+        elif to_room.find('paint') > -1:
+            print("to painting")
+            self.painting_add(qty)
+        elif to_room.find('sand') > -1:
+            print("to sanding")
+            self.sanding_add(qty)
+        else:
+            print("adding nothing")
+
+        # decrease source qty
+        if from_room.find('wrap') > -1:
+            print("from wrapping")
+            self.wrapping_remove(qty)
+        elif from_room.find('paint') > -1:
+            print("from painting")
+            self.painting_remove(qty)
+        elif from_room.find('sand') > -1:
+            print("from sanding")
+            self.sanding_remove(qty)
+        else:
+            print("removing nothing")
+
+        return True
+
+
+def get_stock_by_sku(sku:str) -> Stock:
+    try:
+        return Stock.objects.get(productinv__sku=sku)
+    except Stock.DoesNotExist:
+        return None
+
+
+def get_print_supply_by_sku(sku:str) -> Stock:
+    return Stock.objects.filter(
+        productinv__sku__icontains=sku + "p"
+    ).first()
+
+
+def get_stock_by_type(type: str) -> Stock:
+    return Stock.objects.filter(
+        productinv__product_type__name__icontains=type
+    )
 
 
 class WorkItem(ABC):
@@ -169,16 +215,18 @@ class MountingWorkItem(WorkItem):
         try:
             smatch = sku_reg.match(self.sku)
             if smatch:
-                self_letter, self_num =smatch.groups()
+                self_letter, self_num = smatch.groups()
             else:
-                logger.error(f"{self.sku} doesn't match the expected SKU pattern")
+                logger.error(
+                    f"{self.sku} doesn't match the expected SKU pattern")
                 return True
 
             omatch = sku_reg.match(other.sku)
             if omatch:
                 other_letter, other_num = omatch.groups()
             else:
-                logger.error(f"{other.sku} doesn't match the expected SKU pattern")
+                logger.error(
+                    f"{other.sku} doesn't match the expected SKU pattern")
                 return True
 
             if self_letter > other_letter:
@@ -190,7 +238,8 @@ class MountingWorkItem(WorkItem):
             logger.error(f"either {self_num} or {other_num} are not numeric")
             return True
         except:
-            logger.error(f"something else blew up matching {self_num} or {other_num}")
+            logger.error(
+                f"something else blew up matching {self_num} or {other_num}")
             return True
         return True
 

@@ -73,6 +73,19 @@
   },
   {
     "model": "inventory.productinventory",
+    "pk": 5,
+    "fields": {
+      "product": 7,
+      "product_type": 3,
+      "sku": "A-99",
+      "restock_point": 4,
+      "target_amount": 12,
+      "weight": "39.00",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
     "pk": 25,
     "fields": {
       "product": 3,
@@ -85,54 +98,21 @@
     }
   },
   {
-    "model": "inventory.room",
-    "pk": 2,
-    "fields": {
-      "name": "Sanding Room",
-      "slug": "sanding"
-    }
-  },
-  {
-    "model": "inventory.room",
-    "pk": 3,
-    "fields": {
-      "name": "Painting Room",
-      "slug": "painting"
-    }
-  },
-  {
-    "model": "inventory.room",
-    "pk": 5,
-    "fields": {
-      "name": "Wrapping Room",
-      "slug": "wrapping"
-    }
-  },
-  {
     "model": "inventory.stock",
     "pk": 3,
     "fields": {
-      "room": 2,
       "productinv": 4,
-      "quantity": 5
+      "wrapping_qty": 5,
+      "painting_qty": 2
     }
   },
   {
     "model": "inventory.stock",
     "pk": 13,
     "fields": {
-      "room": 2,
       "productinv": 25,
-      "quantity": 0
-    }
-  },
-  {
-    "model": "inventory.stock",
-    "pk": 22,
-    "fields": {
-      "room": 3,
-      "productinv": 4,
-      "quantity": 2
+      "wrapping_qty": 0,
+      "painting_qty": 2
     }
   }
 ]

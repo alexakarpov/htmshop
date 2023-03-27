@@ -5,8 +5,10 @@ from ecommerce.apps.inventory.models import (
     PrintingWorkItem,
     SawingWorkItem,
     ProductInventory,
-    Room,
     SandingWorkItem,
+    get_print_supply_by_sku,
+    get_stock_by_sku,
+    get_stock_by_type
 )
 from ecommerce.constants import ICON_PRINT_TYPE_NAME
 
@@ -14,16 +16,13 @@ logger = logging.getLogger("django")
 
 
 def print_work():
-    room = Room.objects.get(
-        name__icontains="wrap"
-    )
     # this is the "Print Supply" for all SKUs
-    inventory = room.get_stock_by_type(ICON_PRINT_TYPE_NAME)
+    inventory = get_stock_by_type(ICON_PRINT_TYPE_NAME)
 
     result = []
     for it in inventory:
-        if it.quantity < it.productinv.restock_point:
-            w_qty = it.productinv.target_amount - it.quantity
+        if it.wrapping_qty < it.productinv.restock_point:
+            w_qty = it.productinv.target_amount - it.wrapping_qty
             wit = PrintingWorkItem(
                 it.productinv.sku,
                 it.productinv.product.title,
@@ -36,9 +35,6 @@ def print_work():
 
 
 def sanding_work():
-    wrapping_room = Room.objects.get(name__icontains="wrapping")
-    painting_room = Room.objects.get(name__icontains="paint")
-    sanding_room = Room.objects.get(name__icontains="sand")
     mounted_icons = ProductInventory.objects.filter(
         product_type__name="mounted icon"
     ).order_by("sku")
@@ -47,12 +43,11 @@ def sanding_work():
 
     for it in mounted_icons:
         sku = it.sku
-        w_stock = wrapping_room.get_stock_by_sku(sku)
-        p_stock = painting_room.get_stock_by_sku(sku)
-        s_stock = sanding_room.get_stock_by_sku(sku)
-        w_qty = w_stock.quantity if w_stock else 0
-        p_qty = p_stock.quantity if p_stock else 0
-        s_qty = s_stock.quantity if s_stock else 0
+        stock = get_stock_by_sku(sku)
+
+        w_qty = stock.wrapping_qty if stock else 0
+        p_qty = stock.painting_qty if stock else 0
+        s_qty = stock.sanding_qty if stock else 0
 
         qty = w_qty + p_qty
         if qty < it.restock_point:
@@ -75,7 +70,6 @@ def sanding_work():
 
 
 def mounting_work():
-    sanding_room = Room.objects.get(name__icontains="sand")
     mounted_icons = ProductInventory.objects.filter(
         product_type__name="mounted icon"
     ).order_by("sku")
@@ -83,8 +77,8 @@ def mounting_work():
 
     for it in mounted_icons:
         sku = it.sku
-        sanding_stock = sanding_room.get_stock_by_sku(sku)
-        sanding_qty = sanding_stock.quantity if sanding_stock else 0
+        stock = get_stock_by_sku(sku)
+        sanding_qty = stock.sanding_qty if stock else 0
 
         if sanding_qty < it.restock_point:
             wit = MountingWorkItem(sku, it.product.title)
@@ -101,20 +95,18 @@ def sawing_work():
     This list is sorted by “Need” (descending), and then by SKU (ascending).
     The Print Supply column in just the count of Icon Prints for sku in Wrapping Room
     """
-    sanding_room = Room.objects.get(name__icontains="sand")
-    wrapping_room = Room.objects.get(name__icontains="wrapping")
     mounted_icons = ProductInventory.objects.filter(
         product_type__name="mounted icon"
-    ).order_by("sku")
+    )
 
     result = []
 
     for it in mounted_icons:
-        sanding_stock = sanding_room.get_stock_by_sku(it.sku)
-        sanding_qty = sanding_stock.quantity if sanding_stock else 0
-        print_supply = wrapping_room.get_print_supply_by_sku(it.sku)
+        stock = get_stock_by_sku(it.sku)
+        sanding_qty = stock.sanding_qty if stock else 0
+        print_supply = get_print_supply_by_sku(it.sku)
 
-        ps_qty = print_supply.quantity if print_supply else 0
+        ps_qty = print_supply.wrapping_qty if print_supply else 0
         if sanding_qty < it.restock_point:
             wit = SawingWorkItem(
                 it.sku,

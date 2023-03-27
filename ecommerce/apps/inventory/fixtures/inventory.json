@@ -99,32 +99,6 @@
   },
   {
     "model": "inventory.productinventory",
-    "pk": 5,
-    "fields": {
-      "product": 6,
-      "product_type": 2,
-      "sku": "in010",
-      "restock_point": null,
-      "target_amount": 10,
-      "weight": "17.00",
-      "price": "29.00"
-    }
-  },
-  {
-    "model": "inventory.productinventory",
-    "pk": 6,
-    "fields": {
-      "product": 6,
-      "product_type": 2,
-      "sku": "in011",
-      "restock_point": null,
-      "target_amount": 10,
-      "weight": "9.00",
-      "price": "19.00"
-    }
-  },
-  {
-    "model": "inventory.productinventory",
     "pk": 7,
     "fields": {
       "product": 6,
@@ -419,369 +393,363 @@
     }
   },
   {
-    "model": "inventory.productspecificationvalue",
-    "pk": 3,
-    "fields": {
-      "specification": 2,
-      "sku": 6,
-      "value": "half a pound"
-    }
-  },
-  {
-    "model": "inventory.productspecificationvalue",
-    "pk": 4,
-    "fields": {
-      "specification": 2,
-      "sku": 5,
-      "value": "pound"
-    }
-  },
-  {
-    "model": "inventory.room",
-    "pk": 2,
-    "fields": {
-      "name": "Sanding Room",
-      "slug": "sanding"
-    }
-  },
-  {
-    "model": "inventory.room",
-    "pk": 3,
-    "fields": {
-      "name": "Painting Room",
-      "slug": "painting"
-    }
-  },
-  {
-    "model": "inventory.room",
-    "pk": 5,
-    "fields": {
-      "name": "Wrapping Room",
-      "slug": "wrapping"
-    }
-  },
-  {
     "model": "inventory.stock",
     "pk": 3,
     "fields": {
-      "room": 2,
       "productinv": 4,
-      "quantity": 5
+      "wrapping_qty": 6,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 4,
     "fields": {
-      "room": 2,
       "productinv": 17,
-      "quantity": 3
+      "wrapping_qty": 3,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 5,
     "fields": {
-      "room": 2,
       "productinv": 21,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 6,
     "fields": {
-      "room": 3,
       "productinv": 21,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 7,
     "fields": {
-      "room": 2,
       "productinv": 22,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 8,
     "fields": {
-      "room": 3,
       "productinv": 22,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 9,
     "fields": {
-      "room": 2,
       "productinv": 23,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 10,
     "fields": {
-      "room": 3,
       "productinv": 23,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 11,
     "fields": {
-      "room": 2,
       "productinv": 24,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 12,
     "fields": {
-      "room": 3,
       "productinv": 24,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 13,
     "fields": {
-      "room": 2,
       "productinv": 25,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 14,
     "fields": {
-      "room": 3,
       "productinv": 25,
-      "quantity": 1
+      "wrapping_qty": 1,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 15,
     "fields": {
-      "room": 2,
       "productinv": 20,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 16,
     "fields": {
-      "room": 3,
       "productinv": 20,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 17,
     "fields": {
-      "room": 2,
       "productinv": 19,
-      "quantity": 2
+      "wrapping_qty": 2,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 18,
     "fields": {
-      "room": 3,
       "productinv": 19,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 19,
     "fields": {
-      "room": 3,
       "productinv": 18,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 20,
     "fields": {
-      "room": 2,
       "productinv": 18,
-      "quantity": 13
+      "wrapping_qty": 13,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 21,
     "fields": {
-      "room": 3,
       "productinv": 17,
-      "quantity": 1
+      "wrapping_qty": 1,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 22,
     "fields": {
-      "room": 3,
       "productinv": 4,
-      "quantity": 2
+      "wrapping_qty": 2,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 23,
     "fields": {
-      "room": 5,
       "productinv": 4,
-      "quantity": 1
+      "wrapping_qty": 1,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 24,
     "fields": {
-      "room": 5,
       "productinv": 10,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 25,
     "fields": {
-      "room": 5,
       "productinv": 11,
-      "quantity": 4
+      "wrapping_qty": 4,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 26,
     "fields": {
-      "room": 5,
       "productinv": 12,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 27,
     "fields": {
-      "room": 5,
       "productinv": 13,
-      "quantity": 0
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 28,
     "fields": {
-      "room": 5,
       "productinv": 14,
-      "quantity": 9
+      "wrapping_qty": 9,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 29,
     "fields": {
-      "room": 5,
       "productinv": 15,
-      "quantity": 8
+      "wrapping_qty": 8,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 30,
     "fields": {
-      "room": 5,
       "productinv": 9,
-      "quantity": 18
+      "wrapping_qty": 18,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 31,
     "fields": {
-      "room": 5,
       "productinv": 16,
-      "quantity": 9
+      "wrapping_qty": 9,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 32,
     "fields": {
-      "room": 5,
       "productinv": 24,
-      "quantity": 15
+      "wrapping_qty": 15,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 33,
     "fields": {
-      "room": 5,
       "productinv": 19,
-      "quantity": 10
+      "wrapping_qty": 10,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 35,
     "fields": {
-      "room": 5,
       "productinv": 21,
-      "quantity": 6
+      "wrapping_qty": 6,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 36,
     "fields": {
-      "room": 5,
       "productinv": 22,
-      "quantity": 7
+      "wrapping_qty": 7,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 37,
     "fields": {
-      "room": 5,
       "productinv": 23,
-      "quantity": 8
+      "wrapping_qty": 8,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 39,
     "fields": {
-      "room": 5,
       "productinv": 20,
-      "quantity": 15
+      "wrapping_qty": 15,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   },
   {
     "model": "inventory.stock",
     "pk": 40,
     "fields": {
-      "room": 5,
       "productinv": 18,
-      "quantity": 42
+      "wrapping_qty": 21,
+      "sanding_qty": 0,
+      "painting_qty": 0
     }
   }
 ]

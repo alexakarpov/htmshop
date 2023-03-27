@@ -10,7 +10,7 @@ ICON_PRINT_TYPE_NAME = "icon print"
 PRINT_TYPE_ID = 4
 ITEMS_PER_PAGE = 27
 ROOMS = [
-    ("nihil", "nowhere"),
+    ("nowhere", "nowhere"),
     ("sanding", "Sanding room"),
     ("wrapping", "Wrapping room"),
     ("painting", "Painting room"),

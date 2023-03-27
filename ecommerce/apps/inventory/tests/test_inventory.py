@@ -1,11 +1,9 @@
 from django.test import TestCase
 
 from ecommerce.apps.inventory.models import (
-    # ProductInventory,
-    Room,
-    # Stock,
-    # PrintingWorkItem,
-    # SandingWorkItem,
+    ProductInventory,
+    Stock,
+    get_stock_by_sku
 )
 from ecommerce.apps.inventory.utils import padd, move_stock
 
@@ -20,7 +18,6 @@ class InventoryTest(TestCase):
         "test_inventory.json",
     ]
 
-
     def test_padding(self):
         px = padd("abc", 5)
         self.assertEqual(px, ("abc  ", 2))
@@ -31,88 +28,85 @@ class InventoryTest(TestCase):
         px = padd("-", 10, c="-")
         self.assertEqual(px, ("-" * 10, 9))
 
-    def test_move_between_existing(self):
+    def test_move_between(self):
         sku = "A-9"
-        f_room = Room.objects.get(name__icontains="Paint")
-        t_room = Room.objects.get(name__icontains="wrap")
-
-        f_stock = f_room.get_stock_by_sku(sku)
-        t_stock = t_room.get_stock_by_sku(sku)
-
-        self.assertEqual(f_stock.quantity, 2, "painting starts with 2 of A-9")
-        self.assertIsNone(t_stock, "wrapping starts with no A-9")
-
-        moved_stock = move_stock(f_room, t_room, sku, qty=1)
-
-        self.assertEqual(moved_stock.productinv.sku, f_stock.productinv.sku)
-        f_stock.refresh_from_db()
+        f_room = "Paint"
+        t_room = "sand"
+        stock = get_stock_by_sku(sku)
+        print(stock)
         self.assertEqual(
-            f_stock.quantity, 1, "from_stock after move qty decreased by 1"
+            stock.painting_qty, 2, "painting starts with 2 of A-9"
         )
         self.assertEqual(
-            moved_stock.quantity,
+            stock.sanding_qty, 0, "A-9 should be missing from the sanding room"
+        )
+        
+        move_stock(f_room, t_room, sku, qty=1)
+
+        stock.refresh_from_db()
+        self.assertEqual(
+            stock.painting_qty, 1, "painting stock after move qty decreased by 1"
+        )
+        self.assertEqual(
+            stock.sanding_qty,
             1,
-            "to_stock (moved stock) qty increased by 1",
-        )
-
-    def test_move_to_new(self):
-        sku = "A-9"
-        f_room = Room.objects.get(name__icontains="Paint")
-        t_room = Room.objects.get(name__icontains="wrap")
-        f_stock = f_room.get_stock_by_sku(sku)
-        t_stock = t_room.get_stock_by_sku(sku)
-
-        self.assertEqual(
-            f_stock.quantity, 2, "painting starts with 2 of A-9"
-        )
-        self.assertEqual(
-            t_stock, None, "A-9 should be missing from the wrapping room"
-        )
-        self.assertIsNone(
-            t_stock, "that SKU should be missing from to_room altogether"
-        )
-        moved_stock = move_stock(f_room, t_room, sku, qty=1)
-
-        self.assertEqual(moved_stock.productinv.sku, f_stock.productinv.sku)
-        f_stock.refresh_from_db()
-        self.assertEqual(
-            f_stock.quantity, 1, "from_stock after move qty decreased by 1"
-        )
-        self.assertEqual(
-            moved_stock.quantity,
-            1,
-            "new (moved) stock qty is 1",
+            "sanding qty is now 1",
         )
 
     def test_move_to_nowhere(self):
         sku = "A-9"
-        f_room = Room.objects.get(name__icontains="paint")
-        f_stock = f_room.get_stock_by_sku(sku)
+        stock = get_stock_by_sku(sku)
 
         self.assertEqual(
-            f_stock.quantity, 2, "painting starts with 2xA-9"
+            stock.painting_qty, 2, "painting starts with 2xA-9"
         )
 
-        moved_stock = move_stock(f_room, None, sku, qty=1)
-        f_stock.refresh_from_db()
+        stock = move_stock("painting", None, sku, 1)
+
+        stock.refresh_from_db()
         self.assertEqual(
-            f_stock.quantity, 1, "from_stock after move qty decreased by 1"
+            stock.painting_qty, 1, " painting stock after move decreased by 1"
         )
-        self.assertIsNone(moved_stock)
 
     def test_move_from_nowhere(self):
         sku = "A-329"
-        t_room = Room.objects.get(name__icontains="paint")
-        self.assertIsNone(t_room.get_stock_by_sku(sku))
 
-        moved_stock = move_stock(None, t_room, sku, qty=2)
+        stock = get_stock_by_sku(sku)
+        self.assertIsNotNone(stock, "stock gotta exist")
+        # prepare
+        stock.painting_qty = 0
+        stock.save()
+        #  confirm
+        self.assertEqual(stock.painting_qty, 0, "starts with 0 in painting")
 
+        stock = move_stock(None, "painting", sku, 2)
+
+        stock.refresh_from_db()
         self.assertEqual(
-            moved_stock.quantity, 2, "new stock created with qty of 3"
+            stock.painting_qty, 2, "stock now has 2 in painting")
+
+        moved_stock = move_stock(None, "painting", sku, 2)
+
+        stock.refresh_from_db()
+        self.assertEqual(
+            stock.painting_qty, 4, "new stock bumped to 4"
         )
 
-        moved_stock = move_stock(None, t_room, sku, qty=2)
+    def test_move_new_from_nowhere(self):
+        sku = "A-99"
 
+        stock = get_stock_by_sku(sku)
+        self.assertIsNone(stock, "stock doesnt exist")
+        
+        stock = move_stock(None, "painting", sku, 2)
+        print(stock)
+
+        stock.refresh_from_db()
         self.assertEqual(
-            moved_stock.quantity, 4, "new stock bumped to 4"
+            stock.painting_qty, 2, "stock now has 2 in painting")
+
+        move_stock(None, "painting", sku, 2)
+        stock.refresh_from_db()
+        self.assertEqual(
+            stock.painting_qty, 4, "new stock bumped to 4"
         )

@@ -5,9 +5,6 @@ from datetime import datetime
 from django.contrib import messages
 from django.shortcuts import redirect
 
-# from django.http import FileResponse
-# from reportlab.pdfgen import canvas
-
 from django.core.paginator import Paginator
 from ecommerce.constants import (
     ITEMS_PER_PAGE,
@@ -16,7 +13,7 @@ from ecommerce.constants import (
 from ecommerce.constants import PRINT_TYPE_ID
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
-from .models import ProductInventory, Room, Stock
+from .models import ProductInventory, Stock
 from .lists import (
     print_work,
     sanding_work,
@@ -98,16 +95,12 @@ def move_stock_view(request):
     logger.debug(
         f"move request, from {from_name} to {to_name}, {quantity} x {inv_sku}"
     )
-    from_room = Room.objects.get(
-        name__icontains=from_name) if from_name != "nihil" else None
-    to_room = Room.objects.get(
-        name__icontains=to_name) if to_name != "nihil" else None
 
-    move_stock(from_room, to_room, inv_sku, qty=quantity)
+    move_stock(from_name, to_name, inv_sku, qty=quantity)
 
     messages.success(
         request,
-        f"moved { quantity } of { sku } fom { from_room } to { to_room }",
+        f"moved { quantity } of { sku } fom { from_name } to { to_name }",
     )
 
     return redirect("inventory:dashboard")
@@ -115,14 +108,6 @@ def move_stock_view(request):
 
 def dashboard(request):
     logger.debug(f"posted: {request.POST}")
-    # sanding = Room.objects.get(name__icontains="Sanding")
-    # painting = Room.objects.get(name__icontains="Painting")
-    # wrapping = Room.objects.get(name__icontains="wrapping")
-    # rooms = [
-    #     wrapping,
-    #     painting,
-    #     sanding,
-    # ]  # the order of the rooms _must_ be this
     icons = ProductInventory.objects.filter(
         product_type__name="mounted icon"
     )
@@ -141,7 +126,6 @@ def dashboard(request):
         request,
         "dashboard.html",
         {
-            # "rooms": rooms,
             "all_skus": skus
         },
     )
