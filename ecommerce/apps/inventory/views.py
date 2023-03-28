@@ -118,18 +118,29 @@ def dashboard(request):
 
     skus = ",".join(skus_arr)
 
-    the_sku = request.GET.get("sku").upper()
-    logger.debug(f"inspecting {the_sku}")
-    item = ProductInventory.objects.get(sku=the_sku) if the_sku else None
-    stock = get_stock_by_sku(the_sku) if the_sku else None
-
-    logger.debug(f"skus: {skus}")
-    return render(
-        request,
-        "dashboard.html",
-        {
-            "all_skus": skus,
-            "item": stock,
-            "the_sku": the_sku
-        },
-    )
+    the_sku = request.GET.get("sku")
+    logger.debug(f"the sku: {the_sku}")
+    if the_sku:
+        the_sku = the_sku.upper()
+        logger.debug(f"inspecting {the_sku}")
+        item = ProductInventory.objects.get(sku=the_sku)
+        stock = get_stock_by_sku(the_sku)
+        the_sku = the_sku.upper()
+        logger.debug(f"skus: {skus}")
+        return render(
+            request,
+            "dashboard.html",
+            {
+                "all_skus": skus,
+                "item": stock,
+                "the_sku": the_sku
+            },
+        )
+    else:
+        return render(
+            request,
+            "dashboard.html",
+            {
+                "all_skus": skus,
+            },
+        )
