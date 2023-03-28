@@ -10,6 +10,7 @@ from ecommerce.constants import (
     ICON_PRINT_TYPE_NAME,
 )
 
+logger = logging.getLogger("django")
 
 def padd(it, l, c=" "):
     if len(it) >= l:
@@ -25,7 +26,7 @@ def move_stock(from_room: str, to_room: str, sku: str, qty: int) -> Stock:
     move stocks between rooms, including to/from nowhere
     """
     assert from_room or to_room, "at least one room must be provided"
-    print(
+    logger.debug(
         f"moving {sku}x{qty} from {from_room or 'nowhere'} to {to_room or 'nowhere'}")
     stock = get_stock_by_sku(sku)
 
@@ -37,5 +38,4 @@ def move_stock(from_room: str, to_room: str, sku: str, qty: int) -> Stock:
     stock.settle_quantities(qty, from_room, to_room)
     stock.save()
     stock.refresh_from_db()
-    print(f"after move: {stock}")
     return stock

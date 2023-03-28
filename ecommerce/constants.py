@@ -1,6 +1,6 @@
 PRODUCT_TYPE_BOOK = "book"
-# PRODUCT_TYPE_MOUNTED_ICON = "mounted_icon"
-# PRODUCT_TYPE_INCENSE = "incense"
+PRODUCT_TYPE_MOUNTED_ICON = "mounted icon"
+PRODUCT_TYPE_INCENSE = "incense"
 TEST_ICON_SLUG = "holy_napkin"
 TEST_ICON2_SLUG = "burning_bush"
 TEST_BOOK_SLUG = "psalter"

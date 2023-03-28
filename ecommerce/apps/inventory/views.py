@@ -107,7 +107,7 @@ def move_stock_view(request):
 
 
 def dashboard(request):
-    logger.debug(f"posted: {request.POST}")
+    logger.debug(f"gettted: {request.GET}")
     icons = ProductInventory.objects.filter(
         product_type__name="mounted icon"
     )
@@ -118,9 +118,9 @@ def dashboard(request):
 
     skus = ",".join(skus_arr)
 
-    the_sku = request.POST.get("sku")
-    item = ProductInventory.objects.get(sku=the_sku) if the_sku else None
+    the_sku = request.GET.get("sku").upper()
     logger.debug(f"inspecting {the_sku}")
+    item = ProductInventory.objects.get(sku=the_sku) if the_sku else None
     stock = get_stock_by_sku(the_sku) if the_sku else None
 
     logger.debug(f"skus: {skus}")

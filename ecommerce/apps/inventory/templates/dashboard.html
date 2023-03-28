@@ -13,16 +13,16 @@ Inventory
         <thead>
             <tr>
                 <th scope=" col">Enter SKU</th>
-                <th scope="col">Wrapping</th>
-                <th scope="col">Sanding</th>
-                <th scope="col">Painting</th>
+                <th scope="col">Print supply</th>
+                <th scope="col">Sanding room</th>
+                <th scope="col">Painting room</th>
+                <th scope="col">Wrapping room</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
-                    <form class="m-2" autocomplete="off" action="{% url 'inventory:dashboard' %}" method="post">
-                        {% csrf_token %}
+                    <form class="m-2" autocomplete="off" action="{% url 'inventory:dashboard' %}" method="get">
                         <div class="autocomplete">
                             <label for="view_sku">SKU:</label>
                             <input type="text" name="sku" class="sku form-control" maxlength="12" id="view_sku"
@@ -31,9 +31,10 @@ Inventory
                         <input type="submit" class="btn btn-success m-3" value="Inspect">
                     </form>
                 </td>
-                <td>{{ item.wrapping_qty }}</td>
+                <td>{{ item.get_print_supply }}</td>
                 <td>{{ item.sanding_qty }}</td>
                 <td>{{ item.painting_qty }}</td>
+                <td>{{ item.wrapping_qty }}</td>
             </tr>
         </tbody>
     </table>
@@ -103,7 +104,7 @@ Inventory
             </form>
         </div>
     </div>
-    <h1><a href="{% url 'catalogue:store_home' %}"">Back</a></h1>
+    <h1><a href="{% url 'catalogue:store_home' %}"">Back to Home</a></h1>
 </div>
 
 <script>

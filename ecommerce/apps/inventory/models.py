@@ -4,7 +4,10 @@ from abc import ABC
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
+
 from ecommerce.apps.catalogue.models import Product
+from ecommerce.constants import PRODUCT_TYPE_MOUNTED_ICON
 
 sku_reg = re.compile("([A-Z]+)-([0-9]+)")
 logger = logging.getLogger("django")
@@ -64,7 +67,6 @@ class ProductInventory(models.Model):
         unique=True,
     )
 
-    # quantity = models.IntegerField()
     restock_point = models.PositiveIntegerField(blank=True, null=True)
     target_amount = models.PositiveIntegerField(blank=False, null=False)
 
@@ -111,15 +113,34 @@ class Stock(models.Model):
         null=True,
         default=None
     )
-    wrapping_qty = models.IntegerField(default=0)
-    sanding_qty = models.IntegerField(default=0)
-    painting_qty = models.IntegerField(default=0)
+    wrapping_qty = models.IntegerField(
+        default=0, verbose_name="Wrapping room stock")
+    sanding_qty = models.IntegerField(
+        default=0, verbose_name="Sanding room stock")
+    painting_qty = models.IntegerField(
+        default=0, verbose_name="Painting room stock")
 
     def __str__(self) -> str:
         if self.productinv:
             return f"{self.productinv.sku} X w{self.wrapping_qty}|p{self.painting_qty}|s{self.sanding_qty}"
         else:
             return f"stock of nothing"
+
+    def get_print_supply(self):
+        """
+        Print supply for a SKU such as A-9 is the number of A-9P units located in wrapping room
+        """
+        if self.productinv.product_type.name != PRODUCT_TYPE_MOUNTED_ICON:
+            assert False, f"should be executed on {PRODUCT_TYPE_MOUNTED_ICON}, not {self.productinv.product_type.name}"
+        product_sku = self.productinv.sku
+        print_sku = product_sku + 'P'
+
+        try:
+            prints = Stock.objects.get(productinv__sku=print_sku)
+            return prints.wrapping_qty
+        except Stock.DoesNotExist:
+            logger.debug(f"prints aren't even in stock for {product_sku}")
+            return 0
 
     def wrapping_add(self, qty: int):
         self.wrapping_qty += qty
@@ -140,46 +161,41 @@ class Stock(models.Model):
         self.sanding_qty -= qty
 
     def settle_quantities(self, qty: int, from_room: str, to_room: str):
-        print(f"settling move of {self.productinv.sku}x{qty} from {from_room} to {to_room}")
+        logger.debug(
+            f"settling move of {self.productinv.sku}x{qty} from {from_room} to {to_room}")
         from_room = from_room.lower() if from_room else ""
         to_room = to_room.lower() if to_room else ""
         # increase destination qty
         if to_room.find('wrap') > -1:
-            print("to wrapping")
             self.wrapping_add(qty)
         elif to_room.find('paint') > -1:
-            print("to painting")
             self.painting_add(qty)
         elif to_room.find('sand') > -1:
-            print("to sanding")
             self.sanding_add(qty)
         else:
-            print("adding nothing")
+            logger.debug("must be move to nowhere, nothing to add")
 
         # decrease source qty
         if from_room.find('wrap') > -1:
-            print("from wrapping")
             self.wrapping_remove(qty)
         elif from_room.find('paint') > -1:
-            print("from painting")
             self.painting_remove(qty)
         elif from_room.find('sand') > -1:
-            print("from sanding")
             self.sanding_remove(qty)
         else:
-            print("removing nothing")
+            logger.debug("fromn nowhere? nothing to remove")
 
         return True
 
 
-def get_stock_by_sku(sku:str) -> Stock:
+def get_stock_by_sku(sku: str) -> Stock:
     try:
         return Stock.objects.get(productinv__sku=sku)
     except Stock.DoesNotExist:
         return None
 
 
-def get_print_supply_by_sku(sku:str) -> Stock:
+def get_print_supply_by_sku(sku: str) -> Stock:
     return Stock.objects.filter(
         productinv__sku__icontains=sku + "p"
     ).first()
