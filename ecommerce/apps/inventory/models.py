@@ -126,7 +126,7 @@ class Stock(models.Model):
         else:
             return f"stock of nothing"
 
-    def get_print_supply(self):
+    def get_print_supply_count(self):
         """
         Print supply for a SKU such as A-9 is the number of A-9P units located in wrapping room
         """
