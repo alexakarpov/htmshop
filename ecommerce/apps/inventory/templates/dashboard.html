@@ -9,10 +9,11 @@ Inventory
 
 {% block content %}
 <div class="container-fluid p-1 m-3">
+
     <table class="table" style="background-color:rgb(149, 216, 146)">
         <thead>
             <tr>
-                <th scope=" col">Enter SKU to inspect</th>
+                <th scope="col">Enter SKU to inspect</th>
                 <th scope="col">Print supply</th>
                 <th scope="col">Sanding room</th>
                 <th scope="col">Painting room</th>
@@ -25,16 +26,22 @@ Inventory
                     <form class="m-2" autocomplete="off" action="{% url 'inventory:dashboard' %}" method="get">
                         <div class="autocomplete">
                             <label for="view_sku">SKU:</label>
-                            <input type="text" name="sku" class="sku form-control" maxlength="12" id="view_sku"
-                                placeholder="{{ the_sku }}" style="width: 5rem; text-transform:uppercase" required>
+                            <input type="text"
+                                name="sku"
+                                class="sku form-control"
+                                maxlength="12"
+                                id="view_sku"
+                                style="width: 5rem; text-transform:uppercase" required>
                         </div>
                         <input type="submit" class="btn btn-success m-3" value="Inspect">
                     </form>
                 </td>
-                <td>{{ item.get_print_supply_count }}</td>
-                <td>{{ item.sanding_qty }}</td>
-                <td>{{ item.painting_qty }}</td>
-                <td>{{ item.wrapping_qty }}</td>
+                {% if stock %}
+                    <td>{{ stock.get_print_supply_count }}</td>
+                    <td>{{ stock.sanding_qty }}</td>
+                    <td>{{ stock.painting_qty }}</td>
+                    <td>{{ stock.wrapping_qty }}</td>
+                {% endif %}
             </tr>
         </tbody>
     </table>
@@ -104,7 +111,7 @@ Inventory
             </form>
         </div>
     </div>
-    <h1><a href="{% url 'catalogue:store_home' %}"">Back to Home</a></h1>
+    <h1><a href="{% url 'catalogue:store_home' %}">Back to Home</a></h1>
 </div>
 
 <script>

@@ -24,7 +24,7 @@ from .utils import move_stock
 
 from django.views.generic.list import ListView
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 
 def ts():
@@ -107,33 +107,26 @@ def move_stock_view(request):
 
 
 def dashboard(request):
-    logger.debug(f"gettted: {request.GET}")
+    logger.debug(f"GET dict: {request.GET}")
     icons = ProductInventory.objects.filter(
         product_type__name="mounted icon"
     )
-
     skus_arr = []
     for it in icons:
         skus_arr.append(it.sku)
-
     skus = ",".join(skus_arr)
+    sku = request.GET.get("sku")
 
-    the_sku = request.GET.get("sku")
-    logger.debug(f"the sku: {the_sku}")
-    if the_sku:
-        the_sku = the_sku.upper()
-        logger.debug(f"inspecting {the_sku}")
-        item = ProductInventory.objects.get(sku=the_sku)
-        stock = get_stock_by_sku(the_sku)
-        the_sku = the_sku.upper()
-        logger.debug(f"skus: {skus}")
+    if sku:
+        sku = sku.upper()
+        logger.debug(f"inspecting {sku}")
+        stock = get_stock_by_sku(sku)
         return render(
             request,
             "dashboard.html",
             {
                 "all_skus": skus,
-                "item": stock,
-                "the_sku": the_sku
+                "stock": stock,
             },
         )
     else:
@@ -141,6 +134,6 @@ def dashboard(request):
             request,
             "dashboard.html",
             {
+                "stock": None,
                 "all_skus": skus,
-            },
-        )
+            })
