@@ -5,6 +5,13 @@
   user: ubuntu
 
   tasks:
+
+    # - name: Git checkout
+    #   ansible.builtin.git:
+    #     repo: 'https://github.com/alexakarpov/htmshop.git'
+    #     dest: /var/htmhop/
+    #     version: release
+
     - name: Extract archive to deployment location
       ansible.builtin.unarchive:
         src: /tmp/htmshop.zip

@@ -3,7 +3,7 @@
 BRANCH=`git branch | sed -n -e 's/^\* \(.*\)/\1/p'`
 echo you are on $BRANCH
 
-if [ $BRANCH == 'main' ]; then
+if [ $BRANCH == 'release' ]; then
   find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
   rm -f htmshop.zip
   poetry export -f requirements.txt --with dev --without-hashes > requirements.txt
