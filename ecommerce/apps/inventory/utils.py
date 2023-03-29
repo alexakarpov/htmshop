@@ -15,7 +15,6 @@ logger = logging.getLogger("django")
 def padd(it, l, c=" "):
     if len(it) >= l:
         return (it, 0)
-
     else:
         p = l - len(it)
         return (it + (c * p), p)
