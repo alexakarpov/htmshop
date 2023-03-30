@@ -88,3 +88,8 @@ input[type="radio"]
 {
   border: 0.1em solid
 }
+
+.category {
+  font-weight: 500;
+  font-size: larger;
+}

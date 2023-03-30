@@ -33,13 +33,13 @@
                     </a>
                 </div>
                 <div>
-                    <p class="bold fs-2 ">Holy Transfiguration Monastery Store</p>
+                    <h1 >Holy Transfiguration Monastery Store</h1>
                 </div>
             </div>
 
             <hr class="divider">
 
-            <nav class="navbar navbar-expand p-0">
+            <nav class="navbar p-0">
                 <div class="container">
 
                     {% if request.user.is_staff %}
@@ -51,13 +51,12 @@
 
                     <ul class="navbar-nav me-auto list-group list-group-horizontal">
                         <li class="nav-item">
-                            <a class="text nav-link h5" href="/books">Books</a>
+                            <a class="text nav-link" href="/books"><span class="category">Books</span></a>
                         </li>
                         <li class="nav-item px-1">
                             <div class="dropdown">
-                                <a class="text nav-link dropdown-toggle h5" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Icons
+                                <a class="text nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false"><span class="category">Icons</span>
                                 </a>
 
                                 <ul class="dropdown-menu ">
@@ -69,7 +68,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link h5" href="/incense">Incense</a>
+                            <a class="nav-link" href="/incense"><span class="category">Incense</span></a>
                         </li>
                     </ul>
 
