@@ -41,8 +41,16 @@
 
             <nav class="navbar navbar-expand p-0">
                 <div class="container">
+
+                    {% if request.user.is_staff %}
+                    <span class="nav-item px-1">
+                        <a class="h4" href="{% url 'inventory:dashboard' %}">INVENTORY ADMIN</a>
+                    </span>
+                    {% else %}
+                    {% endif %}
+
                     <ul class="navbar-nav me-auto list-group list-group-horizontal">
-                        <li class="nav-item px-1">
+                        <li class="nav-item">
                             <a class="text nav-link h5" href="/books">Books</a>
                         </li>
                         <li class="nav-item px-1">
@@ -69,7 +77,7 @@
                         <a class="h5" href=" {% url 'accounts:dashboard' %} ">Account</a>
                     </span>
                     <span class="nav-item px-5">
-                        <a class="h5" href=" {% url 'basket:basket_summary' %} ">
+                        <a class="h5" href="{% url 'basket:basket_summary' %}">
                             Cart (<strong><span id="basket-qty">{{ basket | length }}</span></strong>)
                         </a>
                     </span>
