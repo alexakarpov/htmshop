@@ -41,6 +41,10 @@ Inventory
                     <td>{{ stock.sanding_qty }}</td>
                     <td>{{ stock.painting_qty }}</td>
                     <td>{{ stock.wrapping_qty }}</td>
+                {% else %}
+                <td colspan=4>
+                <h3 class="errormsg">No stock records present for this SKU</h3>
+                </td>
                 {% endif %}
             </tr>
         </tbody>
