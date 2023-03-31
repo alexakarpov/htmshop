@@ -6,17 +6,24 @@
 
   tasks:
 
+    - name: clear the previous deployment
+      file:
+        path: /var/htmshop
+        state: absent
+
     - name: Git checkout
       ansible.builtin.git:
         repo: 'https://github.com/alexakarpov/htmshop.git'
-        dest: /var/htmshopwgit/
-        version: release
-
-    - name: Extract archive to deployment location
-      ansible.builtin.unarchive:
-        src: /tmp/htmshop.zip
         dest: /var/htmshop/
-        remote_src: true
+        version: release
+        depth: 1
+        force: yes
+
+    # - name: Extract archive to deployment location
+    #   ansible.builtin.unarchive:
+    #     src: /tmp/htmshop.zip
+    #     dest: /var/htmshop/
+    #     remote_src: true
 
     - name: install dependencies
       pip:
