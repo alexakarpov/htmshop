@@ -5,6 +5,19 @@
   user: ubuntu
 
   tasks:
+      #### virtualenv
+    - name: create the virtualenv
+      command:
+        cmd: virtualenv /var/venv -p python3
+        creates: '/var/venv'
+
+    - name: venv ownership
+      file:
+        path: /var/venv
+        state: directory
+        owner: storeadmin
+        group: htm
+        mode: 0775
 
     - name: clear the previous deployment
       file:
@@ -19,6 +32,14 @@
         depth: 1
         force: yes
 
+    - name: Create static_root subdirectory
+      file:
+        path: /var/htmshop/static_root
+        state: directory
+        owner: storeadmin
+        group: htm
+        mode: 0775
+
     # - name: Extract archive to deployment location
     #   ansible.builtin.unarchive:
     #     src: /tmp/htmshop.zip
@@ -27,7 +48,7 @@
 
     - name: install dependencies
       pip:
-        virtualenv: /var/htmshop/venv
+        virtualenv: /var/venv
         requirements: /var/htmshop/requirements.txt
 
     ### secrets
@@ -40,7 +61,7 @@
     ### environment
     - name: run migrations
       community.general.django_manage:
-        virtualenv: /var/htmshop/venv
+        virtualenv: /var/venv
         project_path: /var/htmshop
         command: migrate
       environment:
@@ -48,7 +69,7 @@
 
     - name: static files
       community.general.django_manage:
-        virtualenv: /var/htmshop/venv
+        virtualenv: /var/venv
         project_path: /var/htmshop
         command: collectstatic
       environment:
