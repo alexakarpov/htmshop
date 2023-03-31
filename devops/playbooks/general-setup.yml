@@ -62,22 +62,6 @@
       with_file:
         - ../public_keys/storeadmin.pub
 
-    - name: Create app directory
-      file:
-        path: /var/htmshop
-        state: directory
-        owner: storeadmin
-        group: htm
-        mode: 0775
-
-    - name: Create static_root subdirectory
-      file:
-        path: /var/htmshop/static_root
-        state: directory
-        owner: storeadmin
-        group: htm
-        mode: 0775
-
     #### secrets
     - name: db init.sql file
       copy:
@@ -85,22 +69,6 @@
         dest: /var/htmshop/init.sql
         owner: storeadmin
         group: htm
-
-    #### virtualenv
-    - name: create the virtualenv
-      command:
-        cmd: virtualenv /var/htmshop/venv -p python3
-        creates: '/var/htmshop/venv'
-
-    - name: venv ownership
-      file:
-        path: /var/htmshop/venv
-        state: directory
-        owner: storeadmin
-        group: htm
-        mode: 0775
-
-    # installation of dependencies moved to deploy book
 
     #### GUNICORN
     - name: Gunicorn socket file
