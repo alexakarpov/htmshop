@@ -2,26 +2,35 @@ import json
 import logging
 
 from django.http import JsonResponse
-from rest_framework.decorators import api_view
+from django.shortcuts import render
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework_xml.renderers import XMLRenderer
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from ecommerce.apps.accounts.models import Address
+from ecommerce.apps.orders.models import Order
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.shipping.choice import split_tiers
 from ecommerce.apps.shipping.engine import shipping_choices
 
-from .serializers import ShippingChoiceSerializer
+from .serializers import OrderSerializer, ShippingChoiceSerializer
 
 logger = logging.getLogger("console")
 
 
-@api_view(http_method_names=["GET"])
-def get_orders(request):
-    action = request.GET.get('action', '')
-    start_date = request.GET.get('start_date', '')
-    end_date = request.GET.get('end_date', '')
+class OrdersXMLRenderer(XMLRenderer):
+    root_tag_name = 'Orders'
+    item_tag_name = 'Order'
 
-    logger.debug(f"action: {action}, start_date: {start_date}, end_date: {end_date}")
-    return JsonResponse({"hello": "world"})
+
+class OrderExportView(APIView):
+    renderer_classes = [OrdersXMLRenderer]
+
+    def get(self, request):
+        orders = Order.objects.all()
+        orders_serializer = OrderSerializer(orders, many=True)
+        return Response(orders_serializer.data)
 
 
 @api_view(http_method_names=["GET"])
