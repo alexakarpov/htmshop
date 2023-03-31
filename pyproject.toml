@@ -21,6 +21,7 @@ djangorestframework = "^3.13.1"
 django-mptt = "^0.14.0"
 simplejson = "^3.18.1"
 #xhtml2pdf = "^0.2.8"
+djangorestframework-xml = "^2.0.0"
 
 
 
