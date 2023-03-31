@@ -46,7 +46,7 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"order {self.order.id} item"
+        return f"{self.inventory_item} x {self.quantity} of order {self.order.id}"
         
 
 

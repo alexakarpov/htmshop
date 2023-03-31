@@ -186,7 +186,7 @@ def payment_with_token(request):
         except ValueError:
             fname = lname = ""
 
-    ############### while working on Orders, skip the payment POST
+    ############### while working on Orders, skip the payment POST @TODO: remove this
 
     # response = requests.post(
     #     POST_URL,
@@ -214,13 +214,14 @@ def payment_with_token(request):
     address_d = json.loads(request.session["address"])
 
     logger.debug(f"placing an order for {user}")
-
+    logger.debug(f"to {address_d}")
     order = Order.objects.create(
         user=user if user.is_authenticated else None,
         full_name=f"{fname} {lname}",
         email=user.email if user.is_authenticated else "someone@example.com",
         address1=address_d.get("address_line1"),
         address2=address_d.get("address_line2"),
+        city=address_d.get("city_locality"),
         postal_code=address_d.get("postal_code"),
         country_code=address_d.get("country_code"),
         total_paid=total,
