@@ -38,6 +38,23 @@
         owner: storeadmin
         group: htm
     ### environment
+
+    - name: Create media_root directory
+      file:
+        path: /var/htmshop/media_root
+        state: directory
+        owner: storeadmin
+        group: htm
+        mode: 0775
+
+    - name: Create log subdirectory
+      file:
+        path: /var/htmshop/log
+        state: directory
+        owner: storeadmin
+        group: htm
+        mode: 0775
+
     - name: run migrations
       community.general.django_manage:
         virtualenv: /var/htmshop/venv
