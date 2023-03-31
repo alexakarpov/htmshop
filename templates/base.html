@@ -39,17 +39,17 @@
 
             <hr class="divider">
 
-            <nav class="navbar p-0">
+            <nav class="navbar navbar-expand-sm p-0">
                 <div class="container">
 
                     {% if request.user.is_staff %}
-                    <span class="nav-item px-1">
+                    <span class="nav-item ">
                         <a class="h4" href="{% url 'inventory:dashboard' %}">INVENTORY ADMIN</a>
                     </span>
                     {% else %}
                     {% endif %}
 
-                    <ul class="navbar-nav me-auto list-group list-group-horizontal">
+                    <ul class="navbar-nav list-group list-group-horizontal">
                         <li class="nav-item">
                             <a class="text nav-link" href="/books"><span class="category">Books</span></a>
                         </li>
