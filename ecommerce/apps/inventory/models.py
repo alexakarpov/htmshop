@@ -126,12 +126,11 @@ class Stock(models.Model):
         else:
             return f"stock of nothing"
 
-    def get_print_supply_count(self):
+    def get_print_supply_count(self): # called only from inventory dashboard template
         """
         Print supply for a SKU such as A-9 is the number of A-9P units located in wrapping room
         """
-        if self.productinv.product_type.name != PRODUCT_TYPE_MOUNTED_ICON:
-            assert False, f"should be executed on {PRODUCT_TYPE_MOUNTED_ICON}, not {self.productinv.product_type.name}"
+        assert self.productinv.product_type.name == PRODUCT_TYPE_MOUNTED_ICON, f"should be executed on {PRODUCT_TYPE_MOUNTED_ICON}, not {self.productinv.product_type.name}"
         product_sku = self.productinv.sku
         print_sku = product_sku + 'P'
 
@@ -165,6 +164,7 @@ class Stock(models.Model):
             f"settling move of {self.productinv.sku}x{qty} from {from_room} to {to_room}")
         from_room = from_room.lower() if from_room else ""
         to_room = to_room.lower() if to_room else ""
+
         # increase destination qty
         if to_room.find('wrap') > -1:
             self.wrapping_add(qty)
@@ -172,8 +172,10 @@ class Stock(models.Model):
             self.painting_add(qty)
         elif to_room.find('sand') > -1:
             self.sanding_add(qty)
+        elif to_room.find('print') > -1:
+            self.wrapping_add(qty)
         else:
-            logger.debug("must be move to nowhere, nothing to add")
+            logger.debug("to nowhere, nothing to add")
 
         # decrease source qty
         if from_room.find('wrap') > -1:
@@ -183,16 +185,20 @@ class Stock(models.Model):
         elif from_room.find('sand') > -1:
             self.sanding_remove(qty)
         else:
-            logger.debug("fromn nowhere? nothing to remove")
+            logger.debug("fromn nowhere, nothing to remove")
 
         return True
 
 
-def get_stock_by_sku(sku: str) -> Stock:
+def get_or_create_stock_by_sku(sku: str) -> Stock:
     try:
-        return Stock.objects.get(productinv__sku=sku)
+        return Stock.objects.get(productinv__sku=sku.upper())
     except Stock.DoesNotExist:
-        return None
+        stock = Stock()
+        logger.debug(f"making Stock of {sku}")
+        pinv = ProductInventory.objects.get(sku=sku)
+        stock.productinv = pinv
+        return stock
 
 
 def get_print_supply_by_sku(sku: str) -> Stock:
@@ -215,7 +221,6 @@ class WorkItem(ABC):
 
 class PrintingWorkItem(WorkItem):
     def __init__(self, sku, title, qty):
-        # print(f"pwi init with {(sku, title, qty)}")
         super().__init__(sku, title)
         self.qty = qty
 
@@ -249,7 +254,6 @@ class MountingWorkItem(WorkItem):
                 return False
             if int(self_num) > int(other_num):
                 return False
-
         except ValueError:
             logger.error(f"either {self_num} or {other_num} are not numeric")
             return True

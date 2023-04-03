@@ -7,7 +7,7 @@ from ecommerce.apps.inventory.models import (
     ProductInventory,
     SandingWorkItem,
     get_print_supply_by_sku,
-    get_stock_by_sku,
+    get_or_create_stock_by_sku,
     get_stock_by_type
 )
 from ecommerce.constants import ICON_PRINT_TYPE_NAME
@@ -43,7 +43,7 @@ def sanding_work():
 
     for it in mounted_icons:
         sku = it.sku
-        stock = get_stock_by_sku(sku)
+        stock = get_or_create_stock_by_sku(sku)
 
         w_qty = stock.wrapping_qty if stock else 0
         p_qty = stock.painting_qty if stock else 0
@@ -77,7 +77,7 @@ def mounting_work():
 
     for it in mounted_icons:
         sku = it.sku
-        stock = get_stock_by_sku(sku)
+        stock = get_or_create_stock_by_sku(sku)
         sanding_qty = stock.sanding_qty if stock else 0
 
         if sanding_qty < it.restock_point:
@@ -102,7 +102,7 @@ def sawing_work():
     result = []
 
     for it in mounted_icons:
-        stock = get_stock_by_sku(it.sku)
+        stock = get_or_create_stock_by_sku(it.sku)
         sanding_qty = stock.sanding_qty if stock else 0
         print_supply = get_print_supply_by_sku(it.sku)
 

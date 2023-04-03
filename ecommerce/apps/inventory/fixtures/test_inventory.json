@@ -73,6 +73,20 @@
   },
   {
     "model": "inventory.productinventory",
+    "pk": 6,
+    "fields": {
+      "product": 2,
+      "product_type": 4,
+      "sku": "A-9P",
+      "restock_point": 3,
+      "target_amount": 5,
+      "weight": "1.00",
+      "price": "22.00"
+    }
+  },
+  
+  {
+    "model": "inventory.productinventory",
     "pk": 5,
     "fields": {
       "product": 7,
@@ -94,6 +108,19 @@
       "restock_point": 4,
       "target_amount": 12,
       "weight": "20.90",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productinventory",
+    "pk": 20,
+    "fields": {
+      "product": 11,
+      "product_type": 3,
+      "sku": "A-122",
+      "restock_point": 15,
+      "target_amount": 30,
+      "weight": "23.51",
       "price": "32.00"
     }
   },
