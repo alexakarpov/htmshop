@@ -4,7 +4,7 @@ from distutils.log import debug
 from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, render
 
-from ecommerce.apps.inventory.models import ProductInventory
+from ecommerce.apps.inventory.models import ProductStock
 
 
 from .basket import Basket
@@ -31,7 +31,7 @@ def basket_add(request):
 
         sku = request.POST.get("sku")
 
-        inventoryitem = ProductInventory.objects.get(sku=sku)
+        inventoryitem = ProductStock.objects.get(sku=sku)
         logger.debug(f"item: {inventoryitem}")
         basket.add(product=inventoryitem, qty=product_qty, sku=sku)
 

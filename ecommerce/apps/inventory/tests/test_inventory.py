@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from ecommerce.apps.inventory.models import (
-    ProductInventory,
+    ProductStock,
     Stock,
     get_or_create_stock_by_sku
 )

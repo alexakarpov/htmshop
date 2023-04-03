@@ -1,5 +1,5 @@
-from ecommerce.apps.inventory.models import Stock, ProductInventory, get_stock_by_sku
+from ecommerce.apps.inventory.models import Stock, Stock, get_stock_by_sku
 
-for p in ProductInventory.objects.filter(
+for p in Stock.objects.filter(
         product_type__name="mounted icon"):
     print(p)

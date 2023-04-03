@@ -17,7 +17,7 @@ from dotenv import dotenv_values
 from ecommerce.apps.accounts.forms import UserAddressForm
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
-from ecommerce.apps.inventory.models import ProductInventory
+from ecommerce.apps.inventory.models import ProductStock
 from ecommerce.apps.orders.models import Order, OrderItem
 
 # from .paypal import PayPalClient
@@ -232,7 +232,7 @@ def payment_with_token(request):
     order_id = order.pk
 
     for sku, item in basket.basket.items():
-        pii = ProductInventory.objects.get(sku=sku)
+        pii = ProductStock.objects.get(sku=sku)
         OrderItem.objects.create(
             order_id=order_id,
             inventory_item=pii,

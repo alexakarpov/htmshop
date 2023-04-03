@@ -13,7 +13,7 @@ from ecommerce.constants import (
 from ecommerce.constants import PRINT_TYPE_ID
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
-from .models import ProductInventory, get_or_create_stock_by_sku
+from .models import ProductStock, get_or_create_stock_by_sku
 from .lists import (
     print_work,
     sanding_work,
@@ -32,7 +32,7 @@ def ts():
 
 
 class PrintingWorkListView(ListView):
-    model = ProductInventory
+    model = ProductStock
     template_name = "printing_list.html"
 
     def get_context_data(self, **kwargs):
@@ -44,7 +44,7 @@ class PrintingWorkListView(ListView):
 
 
 class SandingWorkListView(ListView):
-    model = ProductInventory
+    model = ProductStock
     template_name = "sanding_list.html"
 
     def get_context_data(self, **kwargs):
@@ -56,7 +56,7 @@ class SandingWorkListView(ListView):
 
 
 class MountingWorkListView(ListView):
-    model = ProductInventory
+    model = ProductStock
     template_name = "mounting_list.html"
 
     def get_context_data(self, **kwargs):
@@ -68,7 +68,7 @@ class MountingWorkListView(ListView):
 
 
 class SawingWorkListView(ListView):
-    model = ProductInventory
+    model = ProductStock
     template_name = "sawing_list.html"
 
     def get_context_data(self, **kwargs):
@@ -112,7 +112,7 @@ def move_stock_view(request):
 
 def dashboard(request):
     logger.debug(f"GET dict: {request.GET}")
-    icons = ProductInventory.objects.filter(
+    icons = ProductStock.objects.filter(
         product_type__name="mounted icon"
     )
     skus_arr = []

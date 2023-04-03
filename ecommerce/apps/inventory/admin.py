@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (
-    ProductInventory,
+    ProductStock,
     ProductSpecification,
     ProductSpecificationValue,
     ProductType,
@@ -23,7 +23,7 @@ class ProductSpecificationValueInline(admin.TabularInline):
     model = ProductSpecificationValue
 
 
-@admin.register(ProductInventory)
+@admin.register(ProductStock)
 class ProductInventoryAdmin(admin.ModelAdmin):
     inlines = [
         ProductSpecificationValueInline,

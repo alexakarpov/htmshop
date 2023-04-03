@@ -52,7 +52,7 @@ class ProductSpecification(models.Model):
         return f"{self.product_type}.{self.name}"
 
 
-class ProductInventory(models.Model):
+class ProductStock(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     product_type = models.ForeignKey(
         ProductType, null=False, blank=False, on_delete=models.CASCADE
@@ -93,7 +93,7 @@ class ProductSpecificationValue(models.Model):
         ProductSpecification, on_delete=models.CASCADE
     )
 
-    sku = models.ForeignKey(ProductInventory, on_delete=models.CASCADE)
+    sku = models.ForeignKey(ProductStock, on_delete=models.CASCADE)
 
     value = models.CharField(max_length=30, blank=False)
 
@@ -107,7 +107,7 @@ class ProductSpecificationValue(models.Model):
 
 class Stock(models.Model):
     productinv = models.ForeignKey(
-        ProductInventory,
+        ProductStock,
         on_delete=models.CASCADE,
         verbose_name="Product Inventory",
         null=True,
@@ -196,7 +196,7 @@ def get_or_create_stock_by_sku(sku: str) -> Stock:
     except Stock.DoesNotExist:
         stock = Stock()
         logger.debug(f"making Stock of {sku}")
-        pinv = ProductInventory.objects.get(sku=sku)
+        pinv = ProductStock.objects.get(sku=sku)
         stock.productinv = pinv
         return stock
 

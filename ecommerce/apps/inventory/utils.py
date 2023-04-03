@@ -1,7 +1,7 @@
 import logging
 
 from .models import (
-    ProductInventory,
+    ProductStock,
     Stock,
     get_or_create_stock_by_sku,
 )

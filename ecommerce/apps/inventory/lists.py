@@ -4,7 +4,7 @@ from ecommerce.apps.inventory.models import (
     MountingWorkItem,
     PrintingWorkItem,
     SawingWorkItem,
-    ProductInventory,
+    ProductStock,
     SandingWorkItem,
     get_print_supply_by_sku,
     get_or_create_stock_by_sku,
@@ -35,7 +35,7 @@ def print_work():
 
 
 def sanding_work():
-    mounted_icons = ProductInventory.objects.filter(
+    mounted_icons = ProductStock.objects.filter(
         product_type__name="mounted icon"
     ).order_by("sku")
 
@@ -70,7 +70,7 @@ def sanding_work():
 
 
 def mounting_work():
-    mounted_icons = ProductInventory.objects.filter(
+    mounted_icons = ProductStock.objects.filter(
         product_type__name="mounted icon"
     ).order_by("sku")
     result = []
@@ -95,7 +95,7 @@ def sawing_work():
     This list is sorted by “Need” (descending), and then by SKU (ascending).
     The Print Supply column in just the count of Icon Prints for sku in Wrapping Room
     """
-    mounted_icons = ProductInventory.objects.filter(
+    mounted_icons = ProductStock.objects.filter(
         product_type__name="mounted icon"
     )
 
