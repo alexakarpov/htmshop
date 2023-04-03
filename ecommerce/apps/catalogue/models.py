@@ -110,7 +110,7 @@ class Product(models.Model):
         These are actually ProductInventory items related to this Product
         """
         logger.debug(f"getting variants for {self}")
-        return self.productinventory_set.filter(product_id=self.id).order_by('price')
+        return self.productstock_set.filter(product_id=self.id).order_by('price')
 
     def __str__(self):
         return f"{self.title}"
