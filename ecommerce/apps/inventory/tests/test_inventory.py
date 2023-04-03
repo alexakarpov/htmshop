@@ -2,7 +2,6 @@ from django.test import TestCase
 
 from ecommerce.apps.inventory.models import (
     ProductStock,
-    Stock,
     get_or_create_stock_by_sku
 )
 from ecommerce.apps.inventory.utils import move_stock
@@ -121,6 +120,6 @@ class InventoryTest(TestCase):
 
         stock.refresh_from_db()
         p_stock.refresh_from_db()
-        self.assertEqual(p_stock.productinv.sku, "A-9P")
+        self.assertEqual(p_stock.sku, "A-9P")
 
         self.assertEqual(p_stock.wrapping_qty, 2, "stock now has 3 in wrapping")

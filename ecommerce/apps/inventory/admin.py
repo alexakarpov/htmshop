@@ -5,7 +5,6 @@ from .models import (
     ProductSpecification,
     ProductSpecificationValue,
     ProductType,
-    Stock,
 )
 
 class ProductSpecificationInline(admin.TabularInline):
@@ -33,8 +32,3 @@ class ProductInventoryAdmin(admin.ModelAdmin):
         if not obj or not obj.id or not obj.product_type:
             return []  # ... then don't show any inlines
         return self.inlines
-
-class StockInline(admin.TabularInline):
-    model = Stock
-
-admin.site.register(Stock)

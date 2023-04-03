@@ -2,7 +2,6 @@ import logging
 
 from .models import (
     ProductStock,
-    Stock,
     get_or_create_stock_by_sku,
 )
 from ecommerce.constants import (
@@ -20,7 +19,7 @@ logger = logging.getLogger("django")
 #         return (it + (c * p), p)
 
 
-def move_stock(sku: str, from_room: str = 'nowhere', to_room: str = 'nowhere',  qty: int = 1) -> Stock:
+def move_stock(sku: str, from_room: str = 'nowhere', to_room: str = 'nowhere',  qty: int = 1) -> ProductStock:
     """
     move stocks between rooms, including to/from nowhere
     """
