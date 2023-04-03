@@ -16,7 +16,7 @@ from ecommerce.apps.shipping.engine import shipping_choices
 
 from .serializers import OrderSerializer, ShippingChoiceSerializer
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 
 class OrdersXMLRenderer(XMLRenderer):

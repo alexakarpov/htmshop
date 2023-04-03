@@ -7,7 +7,7 @@ After=network.target
 User=storeadmin
 Group=htm
 WorkingDirectory=/var/htmshop
-ExecStart=/var/htmshop/venv/bin/gunicorn \
+ExecStart=/var/venv/bin/gunicorn \
           --workers 3 \
           --bind unix:/run/gunicorn.sock \
           --env DJANGO_SETTINGS_MODULE=ecommerce.settings.staging \

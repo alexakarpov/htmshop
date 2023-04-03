@@ -1,11 +1,10 @@
 from django.contrib import admin
 
 from .models import (
-    ProductInventory,
+    ProductStock,
     ProductSpecification,
     ProductSpecificationValue,
     ProductType,
-    Stock,
 )
 
 class ProductSpecificationInline(admin.TabularInline):
@@ -23,7 +22,7 @@ class ProductSpecificationValueInline(admin.TabularInline):
     model = ProductSpecificationValue
 
 
-@admin.register(ProductInventory)
+@admin.register(ProductStock)
 class ProductInventoryAdmin(admin.ModelAdmin):
     inlines = [
         ProductSpecificationValueInline,
@@ -33,8 +32,3 @@ class ProductInventoryAdmin(admin.ModelAdmin):
         if not obj or not obj.id or not obj.product_type:
             return []  # ... then don't show any inlines
         return self.inlines
-
-class StockInline(admin.TabularInline):
-    model = Stock
-
-admin.site.register(Stock)

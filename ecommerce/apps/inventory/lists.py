@@ -4,10 +4,10 @@ from ecommerce.apps.inventory.models import (
     MountingWorkItem,
     PrintingWorkItem,
     SawingWorkItem,
-    ProductInventory,
+    ProductStock,
     SandingWorkItem,
     get_print_supply_by_sku,
-    get_stock_by_sku,
+    get_or_create_stock_by_sku,
     get_stock_by_type
 )
 from ecommerce.constants import ICON_PRINT_TYPE_NAME
@@ -35,7 +35,7 @@ def print_work():
 
 
 def sanding_work():
-    mounted_icons = ProductInventory.objects.filter(
+    mounted_icons = ProductStock.objects.filter(
         product_type__name="mounted icon"
     ).order_by("sku")
 
@@ -43,7 +43,7 @@ def sanding_work():
 
     for it in mounted_icons:
         sku = it.sku
-        stock = get_stock_by_sku(sku)
+        stock = get_or_create_stock_by_sku(sku)
 
         w_qty = stock.wrapping_qty if stock else 0
         p_qty = stock.painting_qty if stock else 0
@@ -70,14 +70,14 @@ def sanding_work():
 
 
 def mounting_work():
-    mounted_icons = ProductInventory.objects.filter(
+    mounted_icons = ProductStock.objects.filter(
         product_type__name="mounted icon"
     ).order_by("sku")
     result = []
 
     for it in mounted_icons:
         sku = it.sku
-        stock = get_stock_by_sku(sku)
+        stock = get_or_create_stock_by_sku(sku)
         sanding_qty = stock.sanding_qty if stock else 0
 
         if sanding_qty < it.restock_point:
@@ -95,14 +95,14 @@ def sawing_work():
     This list is sorted by “Need” (descending), and then by SKU (ascending).
     The Print Supply column in just the count of Icon Prints for sku in Wrapping Room
     """
-    mounted_icons = ProductInventory.objects.filter(
+    mounted_icons = ProductStock.objects.filter(
         product_type__name="mounted icon"
     )
 
     result = []
 
     for it in mounted_icons:
-        stock = get_stock_by_sku(it.sku)
+        stock = get_or_create_stock_by_sku(it.sku)
         sanding_qty = stock.sanding_qty if stock else 0
         print_supply = get_print_supply_by_sku(it.sku)
 

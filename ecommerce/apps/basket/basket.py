@@ -4,7 +4,7 @@ from decimal import Decimal
 
 from django.conf import settings
 
-from ecommerce.apps.inventory.models import ProductInventory
+from ecommerce.apps.inventory.models import ProductStock
 
 logger = logging.getLogger("console")
 
@@ -54,7 +54,7 @@ class Basket:
         which are not DB-based, but only live in the session.
         """
         skus = self.basket.keys()
-        skus = ProductInventory.objects.filter(sku__in=skus)
+        skus = ProductStock.objects.filter(sku__in=skus)
         basket = self.basket.copy()
 
         for s in skus:

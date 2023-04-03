@@ -40,11 +40,12 @@
         group: htm
         mode: 0775
 
-    # - name: Extract archive to deployment location
-    #   ansible.builtin.unarchive:
-    #     src: /tmp/htmshop.zip
-    #     dest: /var/htmshop/
-    #     remote_src: true
+    - name: media files
+      copy:
+        src: ../../media/
+        dest: /var/htmshop/media_root
+        owner: storeadmin
+        group: htm
 
     - name: install dependencies
       pip:
