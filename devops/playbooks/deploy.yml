@@ -1,5 +1,5 @@
 ---
-- name: post-deploy steps
+- name: deployment steps
   hosts: htmstore_dev
   become: true
   user: ubuntu
