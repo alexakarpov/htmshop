@@ -23,7 +23,7 @@ class ProductSpecificationValueInline(admin.TabularInline):
 
 
 @admin.register(ProductStock)
-class ProductInventoryAdmin(admin.ModelAdmin):
+class ProductStockAdmin(admin.ModelAdmin):
     inlines = [
         ProductSpecificationValueInline,
     ]
