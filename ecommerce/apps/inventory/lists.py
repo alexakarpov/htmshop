@@ -21,11 +21,11 @@ def print_work():
 
     result = []
     for it in inventory:
-        if it.wrapping_qty < it.productinv.restock_point:
-            w_qty = it.productinv.target_amount - it.wrapping_qty
+        if it.wrapping_qty < it.restock_point:
+            w_qty = it.target_amount - it.wrapping_qty
             wit = PrintingWorkItem(
-                it.productinv.sku,
-                it.productinv.product.title,
+                it.sku,
+                it.product.title,
                 w_qty,
             )
             result.append(wit)
