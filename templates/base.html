@@ -93,7 +93,7 @@
 
     <div id="content">
         {% if messages %}
-        <div class="m-4 alert alert-warning alert-{{ message.tags }}" role="alert">
+        <div class="m-4 alert alert-warning" role="alert">
             {% for message in messages %}
             {{message|safe}}
             {% endfor %}
