@@ -91,15 +91,14 @@ class ProductStock(models.Model):
         """
         Print supply for a SKU such as A-9 is the number of A-9P units located in wrapping room
         """
-        assert self.product_type.name == PRODUCT_TYPE_MOUNTED_ICON, f"should be executed on {PRODUCT_TYPE_MOUNTED_ICON}, not {self.product_type}"
         product_sku = self.sku
-        print_sku = product_sku + 'P'
-
+        print_sku = product_sku + 'P' if product_sku[-1] != "P" else product_sku
+        logger.debug(f"stock of {product_sku} looking up {print_sku}")
         try:
-            prints = ProductStock.objects.get(sku=print_sku)
-            return prints.wrapping_qty
+            print = ProductStock.objects.get(sku=print_sku)
+            return print.wrapping_qty
         except ProductStock.DoesNotExist:
-            logger.debug(f"prints aren't even in stock for {product_sku}")
+            logger.warning(f"prints aren't even in stock for {product_sku}")
             return 0
 
     def wrapping_add(self, qty: int):
@@ -121,8 +120,12 @@ class ProductStock(models.Model):
         self.sanding_qty -= qty
 
     def settle_quantities(self, qty: int, from_room: str, to_room: str):
+        """
+        adjust this stock object's quantity between wrapping, sanding and painting rooms
+        move to/from printing supply involves a different SKU so will not be handled by this alone
+        """
         logger.debug(
-            f"settling move of {self.sku}x{qty} from {from_room} to {to_room}")
+            f"settling move: {qty} of {self} from {from_room} to {to_room}")
         from_room = from_room.lower() if from_room else ""
         to_room = to_room.lower() if to_room else ""
 
@@ -145,13 +148,14 @@ class ProductStock(models.Model):
             self.painting_remove(qty)
         elif from_room.find('sand') > -1:
             self.sanding_remove(qty)
+        # on a move from printing to wrapping - we decrease Print SKU, and increase the Mounted
         else:
-            logger.debug("fromn nowhere, nothing to remove")
+            logger.debug("from nowhere, nothing to remove")
 
         return True
 
     def __str__(self):
-        return f"{self.sku} ({self.product} - {self.product_type})"
+        return f"{self.sku} ({self.product} - {self.product_type}) X p{self.painting_qty}|s{self.sanding_qty}|w{self.wrapping_qty} + {self.get_print_supply_count()}"
 
 
 class ProductSpecificationValue(models.Model):

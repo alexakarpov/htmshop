@@ -20,7 +20,7 @@ from .lists import (
     mounting_work,
     sawing_work,
 )
-from .utils import move_stock
+from .utils import move_stock_one_sku, move_sku_to_print_supply, move_sku_from_print_supply
 
 from django.views.generic.list import ListView
 
@@ -90,17 +90,21 @@ def move_stock_view(request):
         )
         return redirect("inventory:dashboard")
     quantity = int(request.POST.get("qty"))
-    sku = request.POST.get("sku")
+    sku = request.POST.get("sku").upper()
 
-    # sku = ProductInventory.objects.get(sku=inv_sku)
     logger.debug(
         f"move request, from {from_name} to {to_name}, {quantity} x {sku.upper()}"
     )
 
-    move_stock(sku.upper(),
-               from_room=from_name,
-               to_room=to_name,
-               qty=quantity)
+    if to_name.find("print") >= 0:
+        stock = move_sku_to_print_supply(sku, from_name, qty=quantity)
+    elif from_name.find("print") >= 0:
+        stock = move_sku_from_print_supply(sku, to_name, quantity)
+    else:
+        move_stock_one_sku(sku,
+                           from_room=from_name,
+                           to_room=to_name,
+                           qty=quantity)
 
     messages.success(
         request,
