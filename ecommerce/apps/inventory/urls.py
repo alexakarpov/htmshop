@@ -30,4 +30,8 @@ urlpatterns = [
     path(
         "move", staff_member_required(views.move_stock_view), name="move_stock"
     ),
+    path(
+        "inspect/", views.inspect_sku, name="inspect_sku"
+    ),
 ]
+

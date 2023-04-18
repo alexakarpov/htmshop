@@ -5,6 +5,12 @@ from datetime import datetime
 from django.contrib import messages
 from django.shortcuts import redirect
 
+from django.http import JsonResponse
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from django.core.paginator import Paginator
 from ecommerce.constants import (
     ITEMS_PER_PAGE,
@@ -14,6 +20,7 @@ from ecommerce.constants import PRINT_TYPE_ID
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from .models import ProductStock, get_or_create_stock_by_sku
+from .serializers import ProductStockSerializer
 from .lists import (
     print_work,
     sanding_work,
@@ -77,6 +84,17 @@ class SawingWorkListView(ListView):
 
         return {"work": paginator, "title": "sawing", "now": ts()}
 
+
+@api_view(['POST'])
+def inspect_sku(request):
+    data = request.POST
+    sku=data.get('sku')
+    item = ProductStock.objects.get(sku=sku)
+    psupp = item.get_print_supply_count()
+    serializer = ProductStockSerializer(item, many=False)
+    sdata = serializer.data
+    sdata["psupp"] = psupp
+    return JsonResponse(sdata)
 
 def move_stock_view(request):
     assert request.method == "POST", "only POST is allowed"
