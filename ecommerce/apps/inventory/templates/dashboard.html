@@ -32,17 +32,10 @@ Inventory
                         <input type="submit" class="btn btn-success m-3" id="inspect-btn" value="Inspect">
                     </form>
                 </td>
-                {% if stock %}
-                <td>{{ stock.get_print_supply_count }}</td>
-                <td>{{ stock.sanding_qty }}</td>
-                <td>{{ stock.painting_qty }}</td>
-                <td>{{ stock.wrapping_qty }}</td>
-                {% else %}
-                <td colspan=4>
-                    <h3 class="errormsg">No stock records
-                        present for this SKU</h3>
-                </td>
-                {% endif %}
+                <td id="psupp">-</td>
+                <td id="sandqty">-</td>
+                <td id="paintqty">-</td>
+                <td id="wrapqty">-</td>
             </tr>
         </tbody>
     </table>
@@ -130,14 +123,14 @@ Inventory
             data: d,
             url: '{% url "inventory:inspect_sku" %}',
             success: function (json) {
-                console.log(`in wrapping: ${json.wrapping_qty}`)
-                console.log(`in painting: ${json.painting_qty}`)
-                console.log(`in sanding: ${json.sanding_qty}`)
-                console.log(`in print supply: ${json.psupp}`)
-
+                console.log(json)
+                $("#wrapqty").html(json.wrapping_qty)
+                $("#paintqty").html(json.painting_qty)
+                $("#sandqty").html(json.sanding_qty)
+                $("#psupp").html(json.psupp)
             },
             error: function (xhr, errmsg, err) {
-                console.error("add POST failed", errmsg)
+                console.error("inspect POST failed", errmsg)
             }
         })
     })

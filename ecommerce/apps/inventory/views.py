@@ -88,12 +88,14 @@ class SawingWorkListView(ListView):
 @api_view(['POST'])
 def inspect_sku(request):
     data = request.POST
-    sku=data.get('sku')
+    sku=data.get('sku').upper()
+    logger.debug(f"inspecting {sku}")
     item = ProductStock.objects.get(sku=sku)
     psupp = item.get_print_supply_count()
     serializer = ProductStockSerializer(item, many=False)
     sdata = serializer.data
     sdata["psupp"] = psupp
+    logger.debug(f"API data: {sdata}")
     return JsonResponse(sdata)
 
 def move_stock_view(request):
@@ -134,6 +136,8 @@ def move_stock_view(request):
 
 def dashboard(request):
     logger.debug(f"GET dict: {request.GET}")
+    logger.debug(f"POST dict: {request.POST}")
+
     icons = ProductStock.objects.filter(
         product_type__name="mounted icon"
     )
@@ -144,6 +148,7 @@ def dashboard(request):
     sku = request.GET.get("sku")
 
     if sku:
+        logger.debug(f"a SKU was provided: {sku}")
         sku = sku.upper()
         logger.debug(f"inspecting {sku}")
         stock = get_or_create_stock_by_sku(sku)
@@ -156,6 +161,7 @@ def dashboard(request):
             },
         )
     else:
+        logger.debug(f"a SKU was not provided")
         return render(
             request,
             "dashboard.html",
