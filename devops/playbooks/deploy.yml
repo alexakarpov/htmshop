@@ -34,18 +34,11 @@
 
     - name: Create static_root subdirectory
       file:
-        path: /var/htmshop/static_root
+        path: /var/static_root
         state: directory
         owner: storeadmin
         group: htm
         mode: 0775
-
-    - name: media files
-      copy:
-        src: ../../media/
-        dest: /var/htmshop/media_root
-        owner: storeadmin
-        group: htm
 
     - name: install dependencies
       pip:
@@ -63,11 +56,18 @@
 
     - name: Create media_root directory
       file:
-        path: /var/htmshop/media_root
+        path: /var/media_root
         state: directory
         owner: storeadmin
         group: htm
         mode: 0775
+
+    - name: media files
+      copy:
+        src: ../../media/
+        dest: /var/media_root
+        owner: storeadmin
+        group: htm
 
     - name: Create log subdirectory
       file:
