@@ -28,10 +28,10 @@ urlpatterns = [
         name="mounting_worklist",
     ),
     path(
-        "move", staff_member_required(views.move_stock_view), name="move_stock"
+        "move", staff_member_required(views.move_stock), name="move"
     ),
     path(
-        "inspect/", views.inspect_sku, name="inspect_sku"
+        "inspect/", staff_member_required(views.inspect_sku), name="inspect"
     ),
 ]
 

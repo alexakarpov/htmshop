@@ -23,10 +23,10 @@ Inventory
         <tbody>
             <tr>
                 <td>
-                    <form class="m-2" autocomplete="off" action="{% url 'inventory:dashboard' %}" method="get">
+                    <form class="m-2" autocomplete="off" method="get">
                         <div class="autocomplete">
-                            <label for="view_sku">SKU:</label>
-                            <input type="text" name="sku" class="sku form-control" maxlength="12" id="view_sku"
+                            <label for="sku2view">SKU:</label>
+                            <input type="text" name="sku" class="sku form-control" maxlength="12" id="sku2view"
                                 style="width: 5rem; text-transform:uppercase" required>
                         </div>
                         <input type="submit" class="btn btn-success m-3" id="inspect-btn" value="Inspect">
@@ -69,7 +69,7 @@ Inventory
             <div class="h3 text-center">
                 Inventory move
             </div>
-            <form class="m-2" autocomplete="off" action="{% url 'inventory:move_stock' %}" method="post">
+            <form class="m-2" autocomplete="off" method="post">
                 {% csrf_token %}
                 <p>
                     <label for="from_room">From:</label>
@@ -98,10 +98,10 @@ Inventory
 
                 <div class="autocomplete">
                     <label for="id_sku">SKU:</label>
-                    <input type="text" name="sku" class="sku form-control" maxlength="12" id="move_sku"
+                    <input type="text" name="sku" class="sku form-control" maxlength="12" id="sku2move"
                         style="width: 5rem; text-transform:uppercase" required>
                 </div>
-                <input type="submit" class="btn btn-success m-3" value="Move">
+                <input type="submit" class="btn btn-success m-3" id="move-btn" value="Move">
             </form>
         </div>
     </div>
@@ -109,11 +109,41 @@ Inventory
 </div>
 
 <script>
+    $('#move-btn').on('click', function (e) {
+        e.preventDefault()
+        const sku = $("#sku2move").val()
+        const from_room = $("#from_room").val()
+        const to_room = $("#to_room").val()
+        const qty = $("#id_qty").val()
+        const d = {
+            sku: sku,
+            from_room: from_room,
+            to_room: to_room,
+            qty: qty,
+            csrfmiddlewaretoken: '{{csrf_token}}',
+        }
+        console.log(`POSTing a move request for ${qty}X${sku} from ${from_room} to ${to_room}`)
+        $.ajax({
+            type: 'POST',
+            data: d,
+            url: '{% url "inventory:move" %}',
+            success: function (json) {
+                console.log(json)
+                $("#wrapqty").html(json.wrapping_qty)
+                $("#paintqty").html(json.painting_qty)
+                $("#sandqty").html(json.sanding_qty)
+                $("#psupp").html(json.psupp)
+            },
+            error: function (xhr, errmsg, err) {
+                console.error("move POST failed", errmsg)
+            }
+        })
+    })
 
     $('#inspect-btn').on('click', function (e) {
         e.preventDefault()
-        sku = $("#view_sku").val()
-        d = {
+        const sku = $("#sku2view").val()
+        const d = {
             sku: sku,
             csrfmiddlewaretoken: '{{csrf_token}}',
         }
@@ -121,7 +151,7 @@ Inventory
         $.ajax({
             type: 'POST',
             data: d,
-            url: '{% url "inventory:inspect_sku" %}',
+            url: '{% url "inventory:inspect" %}',
             success: function (json) {
                 console.log(json)
                 $("#wrapqty").html(json.wrapping_qty)
@@ -138,8 +168,6 @@ Inventory
     let skus_str = "{{ all_skus }}";
 
     let skus_arr = skus_str.split(",");
-
-
 
     function autocomplete(inp, arr) {
         /*the autocomplete function takes two arguments,
@@ -238,8 +266,8 @@ Inventory
         });
     }
 
-    autocomplete(document.getElementById("move_sku"), skus_arr);
-    autocomplete(document.getElementById("view_sku"), skus_arr);
+    autocomplete(document.getElementById("sku2move"), skus_arr);
+    autocomplete(document.getElementById("sku2view"), skus_arr);
 
 </script>
 {% endblock content %}

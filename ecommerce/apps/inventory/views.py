@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.utils.html import escape
 
 from django.core.paginator import Paginator
 from ecommerce.constants import (
@@ -88,7 +89,8 @@ class SawingWorkListView(ListView):
 @api_view(['POST'])
 def inspect_sku(request):
     data = request.POST
-    sku=data.get('sku').upper()
+    sku=escape(data.get('sku').upper())
+    logger.error(sku)
     logger.debug(f"inspecting {sku}")
     item = ProductStock.objects.get(sku=sku)
     psupp = item.get_print_supply_count()
@@ -98,8 +100,8 @@ def inspect_sku(request):
     logger.debug(f"API data: {sdata}")
     return JsonResponse(sdata)
 
-def move_stock_view(request):
-    assert request.method == "POST", "only POST is allowed"
+@api_view(['POST'])
+def move_stock(request):
     logger.debug(f"got move request, POST: {request.POST}")
     from_name = request.POST.get("from_room")
     to_name = request.POST.get("to_room")
@@ -131,8 +133,13 @@ def move_stock_view(request):
         f"moved { quantity } of { sku.upper() } from { from_name } to { to_name }",
     )
 
-    return redirect("inventory:dashboard")
-
+    item = ProductStock.objects.get(sku=sku)
+    psupp = item.get_print_supply_count()
+    serializer = ProductStockSerializer(item, many=False)
+    sdata = serializer.data
+    sdata["psupp"] = psupp
+    logger.debug(f"API data: {sdata}")
+    return JsonResponse(sdata)
 
 def dashboard(request):
     logger.debug(f"GET dict: {request.GET}")
