@@ -46,12 +46,12 @@ AUTH_PASSWORD_VALIDATORS = [
     # },
 ]
 
-STATIC_ROOT = "/var/htmshop/static_root"
+STATIC_ROOT = "/var/static_root/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-MEDIA_ROOT = "/var/htmshop/media_root"
+MEDIA_ROOT = "/var/media_root/"
 
 LOGGING = {
     "version": 1,
