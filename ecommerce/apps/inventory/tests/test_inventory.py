@@ -107,7 +107,8 @@ class InventoryTest(TestCase):
         self.assertEqual(stock.wrapping_qty, 7,
                          "should start with 7 prints in wrapping")
         stock = move_sku_to_print_supply(sku, from_room="nowhere", qty=2)
-        self.assertEqual(stock.wrapping_qty, 2+7, "should be 5+2 after move")
+        stock.refresh_from_db()
+        self.assertEqual(stock.wrapping_qty, 2+7, "should be 7+2 after move")
 
         self.assertEqual(stock.sku, "A-9P")
 

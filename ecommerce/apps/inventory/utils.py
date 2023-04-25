@@ -56,7 +56,9 @@ def move_sku_to_print_supply(source_sku: str, from_room: str, qty: int = 1) -> P
     print_sku = source_sku+"P"
 
     stock = get_or_create_stock_by_sku(print_sku)
-    stock.settle_quantities(qty, "nowhere", "print supply")
+    logger.info(f"stock is {stock}")
+    stock.wrapping_qty += qty
+    stock.save()
     return stock
 
 
