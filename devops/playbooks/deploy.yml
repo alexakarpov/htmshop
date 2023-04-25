@@ -101,6 +101,14 @@
         owner: storeadmin
         group: htm
 
+    - name: owner of static root dir to storeadmin
+      file:
+        path: /var/static_root
+        state: directory
+        recurse: true
+        owner: storeadmin
+        group: htm
+
     - name: gunicorn service restart
       systemd:
         name: gunicorn.service
