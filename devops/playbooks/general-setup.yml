@@ -43,6 +43,7 @@
       user:
         name: storeadmin
         groups: docker, htm
+        home: /var/htmshop
         shell: /bin/bash
         password: $6$foobarsalt$quoyGsj/DPOV943ZXZjF9UALAjRwwiyP6a02Jqu0B5upUO/OU9UD2TB.Icte/Ch5luhbcx3S9RQmsbcxQRNzu.
 
