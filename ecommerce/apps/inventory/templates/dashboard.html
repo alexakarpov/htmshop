@@ -13,7 +13,7 @@ Inventory
     <table class="table" style="background-color:rgb(149, 216, 146)">
         <thead>
             <tr>
-                <th scope="col">Enter SKU to inspect</th>
+                <th scope="col">Enter SKU to inspect or move</th>
                 <th scope="col">Print supply</th>
                 <th scope="col">Sanding room</th>
                 <th scope="col">Painting room</th>
@@ -23,14 +23,13 @@ Inventory
         <tbody>
             <tr>
                 <td>
-                    <form class="m-2" autocomplete="off" method="get">
-                        <div class="autocomplete">
-                            <label for="sku2view">SKU:</label>
-                            <input type="text" name="sku" class="sku form-control" maxlength="12" id="sku2view"
-                                style="width: 5rem; text-transform:uppercase" required>
-                        </div>
-                        <input type="submit" class="btn btn-success m-3" id="inspect-btn" value="Inspect">
-                    </form>
+
+                    <div class="autocomplete">
+                        <label for="thesku">SKU:</label>
+                        <input type="text" name="sku" class="sku form-control" maxlength="12" id="thesku"
+                            style="width: 5rem; text-transform:uppercase" required>
+                    </div>
+                    <input type="submit" class="btn btn-success m-3" id="inspect-btn" value="Inspect">
                 </td>
                 <td id="psupp">-</td>
                 <td id="sandqty">-</td>
@@ -69,40 +68,33 @@ Inventory
             <div class="h3 text-center">
                 Inventory move
             </div>
-            <form class="m-2" autocomplete="off" method="post">
-                {% csrf_token %}
-                <p>
-                    <label for="from_room">From:</label>
-                    <select name="from_room" class="form-control" id="from_room" style="width: 15%;">
-                        <option value="nowhere">nowhere</option>
-                        <option value="sanding">Sanding room</option>
-                        <option value="wrapping">Wrapping room</option>
-                        <option value="painting">Painting room</option>
-                        <option value="printing">Print supply</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="to_room">To:</label>
-                    <select name="to_room" id="to_room" class="form-control" style="width: 15%;">
-                        <option value="nowhere">nowhere</option>
-                        <option value="sanding">Sanding room</option>
-                        <option value="wrapping">Wrapping room</option>
-                        <option value="painting">Painting room</option>
-                        <option value="printing">Print supply</option>
-                    </select>
-                </p>
-                <p>
-                    <label for="id_qty">Quantity:</label>
-                    <input type="number" name="qty" class="quantity form-control" min="0" id="id_qty" required>
-                </p>
+            <p>
+                <label for="from_room">From:</label>
+                <select name="from_room" class="form-control" id="from_room" style="width: 15%;">
+                    <option value="nowhere">nowhere</option>
+                    <option value="sanding">Sanding room</option>
+                    <option value="wrapping">Wrapping room</option>
+                    <option value="painting">Painting room</option>
+                    <option value="printing">Print supply</option>
+                </select>
+            </p>
+            <p>
+                <label for="to_room">To:</label>
+                <select name="to_room" id="to_room" class="form-control" style="width: 15%;">
+                    <option value="nowhere">nowhere</option>
+                    <option value="sanding">Sanding room</option>
+                    <option value="wrapping">Wrapping room</option>
+                    <option value="painting">Painting room</option>
+                    <option value="printing">Print supply</option>
+                </select>
+            </p>
+            <p>
+                <label for="id_qty">Quantity:</label>
+                <input type="number" name="qty" class="quantity form-control" min="0" id="id_qty" required>
+            </p>
 
-                <div class="autocomplete">
-                    <label for="id_sku">SKU:</label>
-                    <input type="text" name="sku" class="sku form-control" maxlength="12" id="sku2move"
-                        style="width: 5rem; text-transform:uppercase" required>
-                </div>
-                <input type="submit" class="btn btn-success m-3" id="move-btn" value="Move">
-            </form>
+            <input type="submit" class="btn btn-success m-3" id="move-btn" value="Move">
+
         </div>
     </div>
     <h1><a href="{% url 'catalogue:store_home' %}">Back to Home</a></h1>
@@ -111,7 +103,7 @@ Inventory
 <script>
     $('#move-btn').on('click', function (e) {
         e.preventDefault()
-        const sku = $("#sku2move").val()
+        const sku = $("#thesku").val()
         const from_room = $("#from_room").val()
         const to_room = $("#to_room").val()
         const qty = $("#id_qty").val()
@@ -142,7 +134,7 @@ Inventory
 
     $('#inspect-btn').on('click', function (e) {
         e.preventDefault()
-        const sku = $("#sku2view").val()
+        const sku = $("#thesku").val()
         const d = {
             sku: sku,
             csrfmiddlewaretoken: '{{csrf_token}}',
@@ -266,8 +258,7 @@ Inventory
         });
     }
 
-    autocomplete(document.getElementById("sku2move"), skus_arr);
-    autocomplete(document.getElementById("sku2view"), skus_arr);
+    autocomplete(document.getElementById("thesku"), skus_arr);
 
 </script>
 {% endblock content %}

@@ -11,13 +11,6 @@ from ecommerce.constants import (
 
 logger = logging.getLogger("django")
 
-# def padd(it, l, c=" "):
-#     if len(it) >= l:
-#         return (it, 0)
-#     else:
-#         p = l - len(it)
-#         return (it + (c * p), p)
-
 
 def move_stock_one_sku(sku: str, from_room: str = 'nowhere', to_room: str = 'nowhere',  qty: int = 1) -> ProductStock:
     """
