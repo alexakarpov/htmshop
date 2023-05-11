@@ -5,6 +5,7 @@ from django.db import models
 
 from ecommerce.apps.inventory.models import ProductStock
 
+from faker import Faker
 
 class Order(models.Model):
     user = models.ForeignKey(
@@ -24,7 +25,7 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     total_paid = models.DecimalField(max_digits=5, decimal_places=2)
-    order_key = models.CharField(max_length=200)
+    order_key = models.CharField(max_length=36, null=False, blank=False)
     payment_option = models.CharField(max_length=200, blank=True)
     billing_status = models.BooleanField(default=False)
 
@@ -62,8 +63,41 @@ def make_order(address_d, cart_d, email):
     o.email = email
     return o
 
+
+# def make_fake_order_item(o:Order, persist=True):
+#     fake = Faker()
+#     for it in o.items:
+#         it.order = o
+
+def make_fake_order(persist=False):
+    fake = Faker()
+
+    o = Order()
+    item1 = OrderItem()
+    item2 = OrderItem()
+    item3 = OrderItem()
+    item1.order = o
+    item2.order = o
+    item3.order = o
+    o.full_name = fake.name()
+    o.email = fake.email()
+    o.address1=f"{fake.street_name()} {str(int(fake.numerify()))}"
+    o.address2=f"apt {fake.numerify()}"
+    o.city = fake.city()
+    o.phone = fake.phone_number()
+    o.postal_code = fake.zipcode()
+    o.country_code = fake.country_code()
+    o.id = int(fake.numerify())
+    o.total_paid = fake.pydecimal(left_digits=3, positive=True, right_digits=2)
+    o.billing_status = fake.boolean()
+    o.created = fake.date_between()
+    if persist:
+        o.save()
+    return o
+
     # def get_total(self, deliveryprice=0):
     #     subtotal = sum(Decimal(item["price"]) * item["qty"]
     #                    for item in self.basket.values())
     #     total = subtotal + Decimal(deliveryprice)
     #     return total
+
