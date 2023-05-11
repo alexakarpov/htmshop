@@ -1,5 +1,6 @@
 import json
 import logging
+from datetime import datetime, timedelta, date
 
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -13,6 +14,8 @@ from ecommerce.apps.orders.models import Order
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.shipping.choice import split_tiers
 from ecommerce.apps.shipping.engine import shipping_choices
+
+from ecommerce.constants import SS_DT_FORMAT
 
 from .serializers import OrderSerializer, ShippingChoiceSerializer
 
@@ -28,7 +31,13 @@ class OrderExportView(APIView):
     renderer_classes = [OrdersXMLRenderer]
 
     def get(self, request):
-        orders = Order.objects.all()
+        logger.info(f"SS GET, action={request.GET.get('action')}, page={request.GET.get('page')}")
+        start_date_str = request.GET.get('start_date') or (date.today() - timedelta(days = 1)).strftime(SS_DT_FORMAT)
+        end_date_str = request.GET.get('end_date') or date.today().strftime(SS_DT_FORMAT)
+        start_date = datetime.strptime(start_date_str, SS_DT_FORMAT)
+        end_date = datetime.strptime(end_date_str, SS_DT_FORMAT)
+
+        orders = Order.objects.filter(updated__gte=start_date, updated__lte=end_date)
         orders_serializer = OrderSerializer(orders, many=True)
         return Response(orders_serializer.data)
 
