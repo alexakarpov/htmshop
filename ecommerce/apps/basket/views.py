@@ -1,7 +1,7 @@
 import logging
 from distutils.log import debug
 
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_list_or_404, render
 
 from ecommerce.apps.inventory.models import ProductStock
@@ -38,6 +38,20 @@ def basket_add(request):
         basketqty = basket.__len__()
         return JsonResponse({"qty": basketqty})
 
+def add_to_cart(request):
+    basket = Basket(request)
+    product_qty = int(request.POST.get("productqty"))
+    sku = request.POST.get("sku")
+    next = request.POST.get('next', '/')
+    next2 = request.META.get('HTTP_REFERER')
+    logger.info(f"redirecting to: {next} or {next2}")
+    inventoryitem = ProductStock.objects.get(sku=sku)
+    
+    # need to make sure the cart is updated and redirect is done to the proper url
+    # for now this method/view isn't even invoked
+    basket.add(product=inventoryitem, qty=product_qty, sku=sku)
+    basketqty = basket.__len__()
+    return HttpResponseRedirect(next2)
 
 def basket_delete(request):
     basket = Basket(request)
