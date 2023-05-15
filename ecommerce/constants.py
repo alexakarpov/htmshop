@@ -16,3 +16,5 @@ ROOMS = [
     ("painting", "Painting room"),
     ("print_supply", "Print Supply")
 ]
+
+SS_DT_FORMAT = '%m%d%Y %H:%M'

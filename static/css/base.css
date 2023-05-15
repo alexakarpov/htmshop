@@ -84,8 +84,7 @@ hr.divider {
   max-width: 6em;
 }
 
-input[type="radio"]
-{
+input[type="radio"] {
   border: 0.1em solid
 }
 
@@ -97,4 +96,8 @@ input[type="radio"]
 .errormsg {
   font-style: italic;
   color: darkred;
+}
+
+#cartalertbox {
+  font-weight: bold;
 }

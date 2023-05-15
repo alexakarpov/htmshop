@@ -8,7 +8,6 @@ from .models import Order, OrderItem
 def add(request):
     basket = Basket(request)
     if request.POST.get("action") == "post":
-
         order_key = request.POST.get("order_key")
         user_id = request.user.id
         baskettotal = basket.get_total()
@@ -29,7 +28,10 @@ def add(request):
 
             for item in basket:
                 OrderItem.objects.create(
-                    order_id=order_id, product=item["product"], price=item["price"], quantity=item["qty"]
+                    order_id=order_id,
+                    product=item["product"],
+                    price=item["price"],
+                    quantity=item["qty"],
                 )
 
         response = JsonResponse({"success": "Return something"})

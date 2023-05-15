@@ -11,7 +11,9 @@ class ShippingChoiceSerializer(serializers.Serializer):
 
 
 class OrderSerializer(serializers.Serializer):
-    user = serializers.CharField()
+    OrderID = serializers.IntegerField(source='id')
+    OrderNumber = serializers.CharField(source='order_key')
+    OrderDate = serializers.DateTimeField(source='created')
     full_name = serializers.CharField()
     email = serializers.CharField()
     address1 = serializers.CharField()
