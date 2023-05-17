@@ -73,12 +73,15 @@ Product
 
   $(document).on('click', '#add-button', function (e) {
     e.preventDefault()
+    let next = '{{referred}}'
     const d = {
-        productqty: $('#quantity').val(),
-        sku: $(".sku-picker:checked").val(),
-        csrfmiddlewaretoken: '{{csrf_token}}',
-        action: 'post'
+      productqty: $('#quantity').val(),
+      sku: $(".sku-picker:checked").val(),
+      csrfmiddlewaretoken: '{{csrf_token}}',
+      action: 'post',
+      next
     }
+
     $.ajax({
       type: 'POST',
       url: '{% url "basket:basket_add" %}',
@@ -89,7 +92,8 @@ Product
         $('#cartalertbox').text('{{product.title}} added to the cart')
         setTimeout(function () {
           $('#cartalertbox').hide()
-        }, 3000)
+          window.location.replace(next)
+        }, 2000)
       },
       error: function (xhr, errmsg, err) {
         console.error("add POST failed", errmsg)
