@@ -26,36 +26,24 @@ def basket_summary(request):
 
 def basket_add(request):
     basket = Basket(request)
+    next = request.POST.get('next', '/')
+
     if request.POST.get("action") == "post":
         product_qty = int(request.POST.get("productqty"))
 
         sku = request.POST.get("sku")
 
         inventoryitem = ProductStock.objects.get(sku=sku)
-        logger.debug(f"item: {inventoryitem}")
+
         basket.add(product=inventoryitem, qty=product_qty, sku=sku)
 
         basketqty = basket.__len__()
-        return JsonResponse({"qty": basketqty})
+        return JsonResponse({"qty": basketqty, 'next': next})
 
-def add_to_cart(request):
-    basket = Basket(request)
-    product_qty = int(request.POST.get("productqty"))
-    sku = request.POST.get("sku")
-    next = request.POST.get('next', '/')
-    next2 = request.META.get('HTTP_REFERER')
-    logger.info(f"redirecting to: {next} or {next2}")
-    inventoryitem = ProductStock.objects.get(sku=sku)
-    
-    # need to make sure the cart is updated and redirect is done to the proper url
-    # for now this method/view isn't even invoked
-    basket.add(product=inventoryitem, qty=product_qty, sku=sku)
-    basketqty = basket.__len__()
-    return HttpResponseRedirect(next2)
 
 def basket_delete(request):
     basket = Basket(request)
-    # logger.debug(f"basket_delete POST: {request.POST}")
+
     if request.POST.get("action") == "post":
         sku_in = request.POST.get("sku")
         logger.debug(
@@ -75,7 +63,6 @@ def basket_update(request):
 
     if request.POST.get("action") == "post":
         sku = request.POST.get("sku")
-        logger.debug(f"Cart Item for update: {sku}")
         assert sku != ""
         sku_qty = int(request.POST.get("skuqty"))
         basket.update(sku=sku, qty=sku_qty)
