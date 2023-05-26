@@ -11,8 +11,6 @@ SECRET_KEY = config["SECRET_KEY"]
 # PAYPAL_PERSONAL_EMAIL = config["PAYPAL_PERSONAL_EMAIL"]
 # PAYPAL_PERSONAL_PASSWORD = config["PAYPAL_PERSONAL_PASSWORD"]
 
-###########  general configuration ##########
-
 DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver"]
@@ -61,7 +59,7 @@ LOGGING = {
 }
 
 # SQUARE_APP_ID = "sandbox-sq0idb-T9rhevjnp8aNdXPPNf-qKg"
-STAX_WEB_PAYMENT_TOKEN = "Holy-Transfiguration-Monastery-d37081f45f59"
+
 COLLECTJS_PUBKEY = "uXRD2W-32WSUp-36EU4c-mbVZ3m"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
