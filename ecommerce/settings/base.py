@@ -43,6 +43,8 @@ MIDDLEWARE = [
 
 CSRF_TRUSTED_ORIGINS = ["https://transylvania.bostonmonks.com"]
 
+SQUARE_ACCESS_TOKEN=config["SQUARE_ACCESS_TOKEN"]
+
 ROOT_URLCONF = "ecommerce.urls"
 
 TEMPLATES = [
