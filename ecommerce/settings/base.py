@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "ecommerce.apps.shipping",
     "ecommerce.apps.inventory",
     "rest_framework",
+    "corsheaders",
     "mptt",
     # "wkhtmltopdf",
     # "djpaypal",
@@ -41,9 +42,18 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CSRF_TRUSTED_ORIGINS = ["https://transylvania.bostonmonks.com"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://transylvania.bostonmonks.com",
+    "http://localhost:8000",
+]
 
-SQUARE_ACCESS_TOKEN=config["SQUARE_ACCESS_TOKEN"]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://transylvania.bostonmonks.com",
+]
+
+SQUARE_ACCESS_TOKEN = config["SQUARE_ACCESS_TOKEN"]
 
 ROOT_URLCONF = "ecommerce.urls"
 

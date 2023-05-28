@@ -22,6 +22,7 @@ simplejson = "^3.18.1"
 #xhtml2pdf = "^0.2.8"
 djangorestframework-xml = "^2.0.0"
 squareup = "^27.0.0.20230517"
+django-cors-headers = "^4.0.0"
 
 
 

@@ -58,7 +58,7 @@ LOGGING = {
     },
 }
 
-# SQUARE_APP_ID = "sandbox-sq0idb-T9rhevjnp8aNdXPPNf-qKg"
+SQUARE_APP_ID = "sandbox-sq0idb-T9rhevjnp8aNdXPPNf-qKg"
 
 COLLECTJS_PUBKEY = "uXRD2W-32WSUp-36EU4c-mbVZ3m"
 

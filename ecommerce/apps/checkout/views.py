@@ -5,10 +5,10 @@ import json
 import logging
 from uuid import uuid4
 
-import requests
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -20,9 +20,7 @@ from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.inventory.models import ProductStock
 from ecommerce.apps.orders.models import Order, OrderItem
 
-# from .paypal import PayPalClient
-
-# from paypalcheckoutsdk.orders import OrdersGetRequest
+from square.client import Client
 
 
 config = dotenv_values()
@@ -32,14 +30,15 @@ SALE = "sale"
 
 logger = logging.getLogger("console")
 
+client = Client(
+    access_token=config["SQUARE_ACCESS_TOKEN"], environment="sandbox"
+)
 
-# @login_required
+
 def deliverychoices(request):
-    logger.debug(">> checkout deliverychoices")
     return render(request, "checkout/delivery_choices.html", {})
 
 
-# @login_required
 def payment_selection(request):
     session = request.session
     total = session["purchase"]["total"]
@@ -159,17 +158,16 @@ def report(logger, res_text):
         logger.debug(f"{k} => {v}")
 
 
+# https://developer.squareup.com/forums/t/django-csrf-middleware-token-missing/6959
+@csrf_exempt
 def payment_with_token(request):
-    payment_token = request.POST["payment_token"]
-    logger.debug(f"processing payment with token: {payment_token}")
+    print(f">>>> checkout req.POST: {request.POST}")
+
     session = request.session
     basket = Basket(request)
 
     # for k in session.keys():
-    #     logger.debug(f"session key {k}, value {session.get(k)}")
-
-    # for k, v in config.items():
-    #     logger.debug(f"{k} is {v}")
+    #     logger.info(f"session key {k}, value {session.get(k)}")
 
     address_json = session["address"]
     total = session["purchase"]["total"]
@@ -186,6 +184,34 @@ def payment_with_token(request):
         except ValueError:
             fname = lname = ""
 
+    payment_token = request.POST.get("token")
+
+    result = client.payments.create_payment(
+        body={
+            "source_id":payment_token,
+            "idempotency_key": "7b0f3ec5-086a-4871-8f13-3c81b3875218",
+            "amount_money": {"amount": 100, "currency": "USD"},
+            "app_fee_money": {"amount": 0, "currency": "USD"},
+            "autocomplete": True,
+            "customer_id": "W92WH6P11H4Z77CTET0RNTGFW8",
+            "location_id": settings.SQUARE_LOCATION,
+            "reference_id": "123456",
+            "note": "Foobar",
+        }
+    )
+
+    print(f">> {result} ({type(result)})")
+    
+
+    if result.is_success():
+        print(result.body)
+    elif result.is_error():
+        print(result.errors)
+        return JsonResponse({
+            "status": "Error",
+            "code":result['code'],
+            "message": result["detail"]
+        })
     ############### while working on Orders, skip the payment POST @TODO: remove this
 
     # response = requests.post(
@@ -208,9 +234,8 @@ def payment_with_token(request):
 
     # report(logger, response.text)
 
-
     user = request.user
-    
+
     address_d = json.loads(request.session["address"])
 
     logger.debug(f"placing an order for {user}")
@@ -242,7 +267,7 @@ def payment_with_token(request):
 
     order.save()
 
-    basket.clear()
+    # basket.clear() TODO: uncomment this   
 
     messages.info(
         request,
