@@ -72,6 +72,9 @@ LOGGING = {
     },
 }
 
+SQUARE_LOCATION = "LCDT9FPECTMHA"
+SQUARE_APP_ID = "sandbox-sq0idb-T9rhevjnp8aNdXPPNf-qKg"
+
 # email
 EMAIL_BACKEND = "django_ses.SESBackend"
 AWS_ACCESS_KEY_ID = config["AWS_ACCESS_KEY_ID"]
