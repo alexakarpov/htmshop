@@ -1,7 +1,6 @@
 import json
 import logging
 
-import requests
 from django.conf import settings
 from shipengine import ShipEngine
 from shipengine.errors import ShipEngineError
@@ -21,7 +20,6 @@ shipengine = ShipEngine(
         "timeout": 10,
     }
 )
-
 
 def init_shipment_dict():
     return {

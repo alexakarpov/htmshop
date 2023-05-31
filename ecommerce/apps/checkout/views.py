@@ -3,12 +3,14 @@
 # import hashlib
 import json
 import logging
+import random
+import string
 from uuid import uuid4
 
-import requests
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -20,9 +22,7 @@ from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.inventory.models import ProductStock
 from ecommerce.apps.orders.models import Order, OrderItem
 
-# from .paypal import PayPalClient
-
-# from paypalcheckoutsdk.orders import OrdersGetRequest
+from square.client import Client
 
 
 config = dotenv_values()
@@ -32,14 +32,15 @@ SALE = "sale"
 
 logger = logging.getLogger("console")
 
+client = Client(
+    access_token=config["SQUARE_ACCESS_TOKEN"], environment="sandbox"
+)
 
-# @login_required
+
 def deliverychoices(request):
-    logger.debug(">> checkout deliverychoices")
     return render(request, "checkout/delivery_choices.html", {})
 
 
-# @login_required
 def payment_selection(request):
     session = request.session
     total = session["purchase"]["total"]
@@ -159,20 +160,23 @@ def report(logger, res_text):
         logger.debug(f"{k} => {v}")
 
 
+# https://developer.squareup.com/forums/t/django-csrf-middleware-token-missing/6959
+@csrf_exempt
 def payment_with_token(request):
-    payment_token = request.POST["payment_token"]
-    logger.debug(f"processing payment with token: {payment_token}")
+    post_data = request.POST
+    token = post_data.get("source_id")
+    if not token:
+        logger.error("Missing the token, buddy")
+        res = JsonResponse({'status':'false','message':"Token missing"}, status=400)
+        return res
     session = request.session
     basket = Basket(request)
 
-    # for k in session.keys():
-    #     logger.debug(f"session key {k}, value {session.get(k)}")
-
-    # for k, v in config.items():
-    #     logger.debug(f"{k} is {v}")
-
     address_json = session["address"]
-    total = session["purchase"]["total"]
+    total_s = session["purchase"]["total"]
+    print(f"total_s: {total_s}")
+    total_f = float(total_s)
+    total_i = int(total_f*100)
 
     # AnonymousUser doesn't have these
     if request.user.is_authenticated:
@@ -186,31 +190,35 @@ def payment_with_token(request):
         except ValueError:
             fname = lname = ""
 
-    ############### while working on Orders, skip the payment POST @TODO: remove this
+    payload = {
+            "source_id": token,
+            "idempotency_key": ''.join(random.choices(string.ascii_lowercase,k=18)),
+            "amount_money": {"amount": total_i, "currency": "USD"},
+            "app_fee_money": {"amount": 0, "currency": "USD"},
+            "autocomplete": True,
+            # "customer_id": "W92WH6P11H4Z77CTET0RNTGFW8",
+            "location_id": settings.SQUARE_LOCATION,
+            "reference_id": ''.join(random.choices(string.ascii_lowercase,k=10)),
+            "note": "Foobar",
+        }
+    
+    result = client.payments.create_payment(
+        body=payload
+    )
 
-    # response = requests.post(
-    #     POST_URL,
-    #     params={
-    #         "security_key": config["STAX_SECURITY_KEY"],
-    #         "amount": total,
-    #         "type": SALE,
-    #         "payment_token": payment_token,
-    #         "first_name": fname,
-    #         "last_name": lname,
-    #     },
-    #     headers={},
-    # )
-
-    # if not response:
-    #     logger.error("RESPONSE ERROR")
-
-    ############# end of skip
-
-    # report(logger, response.text)
-
+    if result.is_success():
+        logger.info(result.body)
+    elif result.is_error():
+        logger.error(result.errors)
+        return JsonResponse(
+            {
+                "status": result.status_code,
+                "message": result.text
+            }
+        )
 
     user = request.user
-    
+
     address_d = json.loads(request.session["address"])
 
     logger.debug(f"placing an order for {user}")
@@ -224,7 +232,7 @@ def payment_with_token(request):
         city=address_d.get("city_locality"),
         postal_code=address_d.get("postal_code"),
         country_code=address_d.get("country_code"),
-        total_paid=total,
+        total_paid=total_f,
         order_key=str(uuid4()),
         payment_option="Stax",
         billing_status=True,

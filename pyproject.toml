@@ -7,7 +7,7 @@ authors = ["Alexandre Karpov <alexakarpov@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = ">=3.10.4, <3.11"
+python = ">=3.10.4, <4"
 gunicorn = "^20"
 python-dotenv = "^0.15"
 Pillow = "^9"
@@ -16,14 +16,13 @@ django-ses = "^2.3.1"
 Django = "^4.0.1"
 shipengine = "^1.0.0"
 Pint = "^0.18"
-# squareup = "^19.0.0"
 djangorestframework = "^3.13.1"
 django-mptt = "^0.14.0"
 simplejson = "^3.18.1"
 #xhtml2pdf = "^0.2.8"
 djangorestframework-xml = "^2.0.0"
-
-
+squareup = "^27.0.0.20230517"
+urllib3 = ">=1.25,<1.27"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
