@@ -3,6 +3,8 @@
 # import hashlib
 import json
 import logging
+import random
+import string
 from uuid import uuid4
 
 from django.conf import settings
@@ -161,16 +163,20 @@ def report(logger, res_text):
 # https://developer.squareup.com/forums/t/django-csrf-middleware-token-missing/6959
 @csrf_exempt
 def payment_with_token(request):
-    print(f">>>> checkout req.POST: {request.POST}")
-
+    post_data = request.POST
+    token = post_data.get("source_id")
+    if not token:
+        logger.error("Missing the token, buddy")
+        res = JsonResponse({'status':'false','message':"Token missing"}, status=400)
+        return res
     session = request.session
     basket = Basket(request)
 
-    # for k in session.keys():
-    #     logger.info(f"session key {k}, value {session.get(k)}")
-
     address_json = session["address"]
-    total = session["purchase"]["total"]
+    total_s = session["purchase"]["total"]
+    print(f"total_s: {total_s}")
+    total_f = float(total_s)
+    total_i = int(total_f*100)
 
     # AnonymousUser doesn't have these
     if request.user.is_authenticated:
@@ -184,55 +190,32 @@ def payment_with_token(request):
         except ValueError:
             fname = lname = ""
 
-    payment_token = request.POST.get("token")
-
-    result = client.payments.create_payment(
-        body={
-            "source_id":payment_token,
-            "idempotency_key": "7b0f3ec5-086a-4871-8f13-3c81b3875218",
-            "amount_money": {"amount": 100, "currency": "USD"},
+    payload = {
+            "source_id": token,
+            "idempotency_key": ''.join(random.choices(string.ascii_lowercase,k=18)),
+            "amount_money": {"amount": total_i, "currency": "USD"},
             "app_fee_money": {"amount": 0, "currency": "USD"},
             "autocomplete": True,
-            "customer_id": "W92WH6P11H4Z77CTET0RNTGFW8",
+            # "customer_id": "W92WH6P11H4Z77CTET0RNTGFW8",
             "location_id": settings.SQUARE_LOCATION,
-            "reference_id": "123456",
+            "reference_id": ''.join(random.choices(string.ascii_lowercase,k=10)),
             "note": "Foobar",
         }
+    
+    result = client.payments.create_payment(
+        body=payload
     )
 
-    print(f">> {result} ({type(result)})")
-    
-
     if result.is_success():
-        print(result.body)
+        logger.info(result.body)
     elif result.is_error():
-        print(result.errors)
-        return JsonResponse({
-            "status": "Error",
-            "code":result['code'],
-            "message": result["detail"]
-        })
-    ############### while working on Orders, skip the payment POST @TODO: remove this
-
-    # response = requests.post(
-    #     POST_URL,
-    #     params={
-    #         "security_key": config["STAX_SECURITY_KEY"],
-    #         "amount": total,
-    #         "type": SALE,
-    #         "payment_token": payment_token,
-    #         "first_name": fname,
-    #         "last_name": lname,
-    #     },
-    #     headers={},
-    # )
-
-    # if not response:
-    #     logger.error("RESPONSE ERROR")
-
-    ############# end of skip
-
-    # report(logger, response.text)
+        logger.error(result.errors)
+        return JsonResponse(
+            {
+                "status": result.status_code,
+                "message": result.text
+            }
+        )
 
     user = request.user
 
@@ -249,7 +232,7 @@ def payment_with_token(request):
         city=address_d.get("city_locality"),
         postal_code=address_d.get("postal_code"),
         country_code=address_d.get("country_code"),
-        total_paid=total,
+        total_paid=total_f,
         order_key=str(uuid4()),
         payment_option="Stax",
         billing_status=True,
@@ -267,7 +250,7 @@ def payment_with_token(request):
 
     order.save()
 
-    # basket.clear() TODO: uncomment this   
+    basket.clear()
 
     messages.info(
         request,

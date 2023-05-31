@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     "ecommerce.apps.shipping",
     "ecommerce.apps.inventory",
     "rest_framework",
-    "corsheaders",
     "mptt",
     # "wkhtmltopdf",
     # "djpaypal",
