@@ -1,16 +1,13 @@
 import json
-from unittest.mock import MagicMock, Mock, patch
+from unittest.mock import patch
 
-import requests
 from django.conf import settings
 
 # Third-party imports...
-# from nose.tools import assert_is_not_none, assert_true
 from rest_framework.test import APIRequestFactory, APITestCase
 
 import ecommerce
 
-# import requests
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import get_weight
 from ecommerce.apps.shipping.views import get_rates
