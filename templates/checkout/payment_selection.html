@@ -6,10 +6,7 @@ Payment
 {% block content %}
 
 <head>
-  <script
-    type="text/javascript"
-    src="https://sandbox.web.squarecdn.com/v1/square.js"
-  ></script>
+  <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
   <script>
     const appId = 'sandbox-sq0idb-H9U7rreVn5iRv9za5FSlRg';
     const locationId = 'LCDT9FPECTMHA';
@@ -22,22 +19,22 @@ Payment
     }
 
     async function createPayment(token, verificationToken) {
-      const body = JSON.stringify({
+      const d = {
         locationId,
-        sourceId: token,
+        source_id: token,
         verificationToken,
-        idempotencyKey: window.crypto.randomUUID(),
-      });
-      let csrftoken = "{{ csrf_token }}"
-      console.log("CSRF token: ", csrftoken)
-      const paymentResponse = await fetch('/checkout/payment/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // 'X-CSRF-Token': csrftoken
+      }
+      $.ajax({
+        type: 'POST',
+        url: '{% url "checkout:token_payment" %}',
+        data: d,
+        success: function (json) {
+          console.log(json)
         },
-        body,
-      });
+        error: function (xhr, errmsg, err) {
+          console.error("PAYMENT POST failed", errmsg)
+        }
+      })
     }
 
     async function tokenize(paymentMethod) {
@@ -114,8 +111,6 @@ Payment
         return;
       }
 
-      console.log("payments initialized", payments)
-
       let card;
       try {
         card = await initializeCard(payments);
@@ -123,8 +118,6 @@ Payment
         console.error('Initializing Card failed', e);
         return;
       }
-
-      console.log("card initialized", card)
 
       async function handlePaymentMethodSubmission(event, card) {
         event.preventDefault();
@@ -134,14 +127,11 @@ Payment
           cardButton.disabled = true;
           const token = await tokenize(card);
           const verificationToken = await verifyBuyer(payments, token);
-          console.log("token:", token)
           const paymentResults = await createPayment(
             token,
             verificationToken
           );
           displayPaymentResults('SUCCESS');
-
-          console.debug('Payment Success', paymentResults);
         } catch (e) {
           cardButton.disabled = false;
           displayPaymentResults('FAILURE');
