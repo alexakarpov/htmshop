@@ -8,9 +8,11 @@ Payment
 <head>
   <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
   <script>
+    // TODO: replace with Production valies
     const appId = 'sandbox-sq0idb-H9U7rreVn5iRv9za5FSlRg';
     const locationId = 'LCDT9FPECTMHA';
 
+    // ===== BEGIN OF OUTER LEVEL FUNCTION DECLARATIONS =====
     async function initializeCard(payments) {
       const card = await payments.card();
       await card.attach('#card-container');
@@ -29,7 +31,7 @@ Payment
         url: '{% url "checkout:token_payment" %}',
         data: d,
         success: function (json) {
-          console.log(json)
+          console.log(`success, payment created! - ${json}`)
         },
         error: function (xhr, errmsg, err) {
           console.error("PAYMENT POST failed", errmsg)
@@ -55,6 +57,7 @@ Payment
 
     // Required in SCA Mandated Regions: Learn more at https://developer.squareup.com/docs/sca-overview
     async function verifyBuyer(payments, token) {
+      console.log("verifying buyer")
       const verificationDetails = {
         amount: '1.00',
         billingContact: {
@@ -63,7 +66,8 @@ Payment
           givenName: 'John',
           email: 'jondoe@gmail.com',
           country: 'US',
-          phone: '3214563987',
+          // phone: '3214563987',
+          phone: '1235679767',
           region: 'MA',
           city: 'Boston',
         },
@@ -93,14 +97,19 @@ Payment
 
       statusContainer.style.visibility = 'visible';
     }
+    // ===== END OF OUTER LEVEL FUNCTION DECLARATIONS =====
 
+    // AND GO!
+    // when the DOM is loaded...
     document.addEventListener('DOMContentLoaded', async function () {
+      // first check if Square object is ready
       if (!window.Square) {
         throw new Error('Square.js failed to load properly');
       }
 
       let payments;
       try {
+        // prepare the Payments API
         payments = window.Square.payments(appId, locationId);
       } catch {
         const statusContainer = document.getElementById(
@@ -113,15 +122,16 @@ Payment
 
       let card;
       try {
-        card = await initializeCard(payments);
+        card = await initializeCard(payments); // empty card initialized
       } catch (e) {
         console.error('Initializing Card failed', e);
         return;
       }
 
+      // START of the _INNER_ function (handlePaymentMethodSubmission) declaration
       async function handlePaymentMethodSubmission(event, card) {
         event.preventDefault();
-
+        console.log("the inner handler function execution began")
         try {
           // disable the submit button as we await tokenization and make a payment request.
           cardButton.disabled = true;
@@ -132,14 +142,16 @@ Payment
             verificationToken
           );
           displayPaymentResults('SUCCESS');
+          window.location.replace('{% url "checkout:payment_successful" %}')
         } catch (e) {
           cardButton.disabled = false;
           displayPaymentResults('FAILURE');
           console.error(e.message);
         }
       }
-
+      
       const cardButton = document.getElementById('card-button');
+      // whencard button is clicked, the event, together with the initialized void card, is passed to the inner function
       cardButton.addEventListener('click', async function (event) {
         await handlePaymentMethodSubmission(event, card);
       });

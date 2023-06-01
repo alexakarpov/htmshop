@@ -43,7 +43,8 @@ def deliverychoices(request):
 
 def payment_selection(request):
     session = request.session
-    total = session["purchase"]["total"]
+    purchase = session.get("purchase")
+    total = purchase["total"] if purchase else 0
     return render(request, "checkout/payment_selection.html", {"total": total})
 
 
@@ -167,97 +168,48 @@ def payment_with_token(request):
     token = post_data.get("source_id")
     if not token:
         logger.error("Missing the token, buddy")
-        res = JsonResponse({'status':'false','message':"Token missing"}, status=400)
+        res = JsonResponse(
+            {"status": "false", "message": "Token missing"}, status=400
+        )
         return res
     session = request.session
-    basket = Basket(request)
-
-    address_json = session["address"]
-    total_s = session["purchase"]["total"]
+    total_s = session.get("purchase")["total"]
     print(f"total_s: {total_s}")
     total_f = float(total_s)
-    total_i = int(total_f*100)
-
-    # AnonymousUser doesn't have these
-    if request.user.is_authenticated:
-        user = request.user
-        fname = user.get_first_name()
-        lname = user.get_last_name()
-    else:
-        # can't we do this for a logged in user?
-        try:
-            fname, lname = json.loads(address_json).get("full_name").split(" ")
-        except ValueError:
-            fname = lname = ""
+    total_i = int(total_f * 100)
 
     payload = {
-            "source_id": token,
-            "idempotency_key": ''.join(random.choices(string.ascii_lowercase,k=18)),
-            "amount_money": {"amount": total_i, "currency": "USD"},
-            "app_fee_money": {"amount": 0, "currency": "USD"},
-            "autocomplete": True,
-            # "customer_id": "W92WH6P11H4Z77CTET0RNTGFW8",
-            "location_id": settings.SQUARE_LOCATION,
-            "reference_id": ''.join(random.choices(string.ascii_lowercase,k=10)),
-            "note": "Foobar",
-        }
-    
-    result = client.payments.create_payment(
-        body=payload
-    )
+        "source_id": token,
+        "idempotency_key": "".join(
+            random.choices(string.ascii_lowercase, k=18)
+        ),
+        "amount_money": {"amount": total_i, "currency": "USD"},
+        "app_fee_money": {"amount": 0, "currency": "USD"},
+        "autocomplete": True,
+        # "customer_id": "W92WH6P11H4Z77CTET0RNTGFW8",
+        "location_id": settings.SQUARE_LOCATION,
+        "reference_id": "".join(random.choices(string.ascii_lowercase, k=10)),
+        "note": "Foobar",
+    }
+
+    result = client.payments.create_payment(body=payload)
 
     if result.is_success():
         logger.info(result.body)
+        return JsonResponse({"status": "OK", "message": "payment accepted"})
     elif result.is_error():
         logger.error(result.errors)
         return JsonResponse(
-            {
-                "status": result.status_code,
-                "message": result.text
-            }
+            {"status": result.status_code, "message": result.text}
         )
 
-    user = request.user
+    # OK so is this a JSON API with JsonResponse? But what about:
+    # - creating the Order
+    # - producing a message
+    # - redirect
+    # - clearing the cart
 
-    address_d = json.loads(request.session["address"])
-
-    logger.debug(f"placing an order for {user}")
-    logger.debug(f"to {address_d}")
-    order = Order.objects.create(
-        user=user if user.is_authenticated else None,
-        full_name=f"{fname} {lname}",
-        email=user.email if user.is_authenticated else "someone@example.com",
-        address1=address_d.get("address_line1"),
-        address2=address_d.get("address_line2"),
-        city=address_d.get("city_locality"),
-        postal_code=address_d.get("postal_code"),
-        country_code=address_d.get("country_code"),
-        total_paid=total_f,
-        order_key=str(uuid4()),
-        payment_option="Stax",
-        billing_status=True,
-    )
-    order_id = order.pk
-
-    for sku, item in basket.basket.items():
-        pii = ProductStock.objects.get(sku=sku)
-        OrderItem.objects.create(
-            order_id=order_id,
-            inventory_item=pii,
-            price=item["price"],
-            quantity=item["qty"],
-        )
-
-    order.save()
-
-    basket.clear()
-
-    messages.info(
-        request,
-        f"Your order has been placed, reference key: {order.order_key}",
-    )
-
-    return HttpResponseRedirect(reverse("catalogue:store_home"))
+    # below is the code that used to run in the same ^
 
 
 ####
@@ -307,6 +259,63 @@ def payment_with_token(request):
 
 # @ login_required
 def payment_successful(request):
+    session = request.session
+    total_s = session.get("purchase")["total"]
+    print(f"total_s: {total_s}")
+    total_f = float(total_s)
+
     basket = Basket(request)
+    address_json = session["address"]
+    # AnonymousUser doesn't have these
+    if request.user.is_authenticated:
+        user = request.user
+        fname = user.get_first_name()
+        lname = user.get_last_name()
+    else:
+        # can't we do this for a logged in user?
+        try:
+            fname, lname = json.loads(address_json).get("full_name").split(" ")
+        except ValueError:
+            fname = lname = ""
+
+    user = request.user
+
+    address_d = json.loads(request.session["address"])
+
+    logger.debug(f"placing an order for {user}")
+    logger.debug(f"to {address_d}")
+    order = Order.objects.create(
+        user=user if user.is_authenticated else None,
+        full_name=f"{fname} {lname}",
+        email=user.email if user.is_authenticated else "someone@example.com",
+        address1=address_d.get("address_line1"),
+        address2=address_d.get("address_line2"),
+        city=address_d.get("city_locality"),
+        postal_code=address_d.get("postal_code"),
+        country_code=address_d.get("country_code"),
+        total_paid=total_f,
+        order_key=str(uuid4()),
+        payment_option="Stax",
+        billing_status=True,
+    )
+    order_id = order.pk
+
+    for sku, item in basket.basket.items():
+        pii = ProductStock.objects.get(sku=sku)
+        OrderItem.objects.create(
+            order_id=order_id,
+            inventory_item=pii,
+            price=item["price"],
+            quantity=item["qty"],
+        )
+
+    order.save()
+
     basket.clear()
-    return render(request, "checkout/payment_successful.html", {})
+
+    messages.info(
+        request,
+        f"Your order has been placed, reference key: {order.order_key}",
+    )
+
+    return HttpResponseRedirect(reverse("catalogue:store_home"))
