@@ -28,7 +28,7 @@
       ansible.builtin.git:
         repo: 'https://github.com/alexakarpov/htmshop.git'
         dest: /var/htmshop/
-        version: release
+        version: main
         depth: 1
         force: yes
 
