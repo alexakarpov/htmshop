@@ -7,6 +7,7 @@ from ecommerce.apps.inventory.models import ProductStock
 
 from faker import Faker
 
+
 class Order(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -27,7 +28,7 @@ class Order(models.Model):
     total_paid = models.DecimalField(max_digits=5, decimal_places=2)
     order_key = models.CharField(max_length=36, null=False, blank=False)
     payment_option = models.CharField(max_length=200, blank=True)
-    billing_status = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
 
     class Meta:
         ordering = ("-created",)
@@ -47,14 +48,15 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.inventory_item} x {self.quantity} of order {self.order.id}"
-        
+        return (
+            f"{self.inventory_item} x {self.quantity} of order {self.order.id}"
+        )
 
 
 def make_order(address_d, cart_d, email):
     o = Order()
     o.full_name = address_d["full_name"]
-    
+
     total = 0
     for sku, item in cart_d.items():
         total += float(item.get("price")) * int(item.get("qty"))
@@ -69,6 +71,7 @@ def make_order(address_d, cart_d, email):
 #     for it in o.items:
 #         it.order = o
 
+
 def make_fake_order(persist=False):
     fake = Faker()
 
@@ -81,15 +84,15 @@ def make_fake_order(persist=False):
     item3.order = o
     o.full_name = fake.name()
     o.email = fake.email()
-    o.address1=f"{fake.street_name()} {str(int(fake.numerify()))}"
-    o.address2=f"apt {fake.numerify()}"
+    o.address1 = f"{fake.street_name()} {str(int(fake.numerify()))}"
+    o.address2 = f"apt {fake.numerify()}"
     o.city = fake.city()
     o.phone = fake.phone_number()
     o.postal_code = fake.zipcode()
     o.country_code = fake.country_code()
     o.id = int(fake.numerify())
     o.total_paid = fake.pydecimal(left_digits=3, positive=True, right_digits=2)
-    o.billing_status = fake.boolean()
+    o.paid = fake.boolean()
     o.created = fake.date_between()
     if persist:
         o.save()
@@ -100,4 +103,3 @@ def make_fake_order(persist=False):
     #                    for item in self.basket.values())
     #     total = subtotal + Decimal(deliveryprice)
     #     return total
-
