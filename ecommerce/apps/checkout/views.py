@@ -16,6 +16,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from dotenv import dotenv_values
 
+from ecommerce.constants import ORDER_KEY_LENGTH
 from ecommerce.apps.accounts.forms import UserAddressForm
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
@@ -257,11 +258,9 @@ def payment_with_token(request):
 #     return JsonResponse("Payment completed!", safe=False)
 
 
-# @ login_required
 def payment_successful(request):
     session = request.session
     total_s = session.get("purchase")["total"]
-    print(f"total_s: {total_s}")
     total_f = float(total_s)
 
     basket = Basket(request)
@@ -283,7 +282,6 @@ def payment_successful(request):
     address_d = json.loads(request.session["address"])
 
     logger.debug(f"placing an order for {user}")
-    logger.debug(f"to {address_d}")
     order = Order.objects.create(
         user=user if user.is_authenticated else None,
         full_name=f"{fname} {lname}",
@@ -294,16 +292,19 @@ def payment_successful(request):
         postal_code=address_d.get("postal_code"),
         country_code=address_d.get("country_code"),
         total_paid=total_f,
-        order_key=str(uuid4()),
-        payment_option="Stax",
+        order_key="".join(
+            random.choices(
+                string.ascii_uppercase + string.digits, k=ORDER_KEY_LENGTH
+            )
+        ),
+        payment_option="Square",
         billing_status=True,
     )
-    order_id = order.pk
 
     for sku, item in basket.basket.items():
         pii = ProductStock.objects.get(sku=sku)
         OrderItem.objects.create(
-            order_id=order_id,
+            order_id=order.pk,
             inventory_item=pii,
             price=item["price"],
             quantity=item["qty"],

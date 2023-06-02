@@ -16,5 +16,6 @@ ROOMS = [
     ("painting", "Painting room"),
     ("print_supply", "Print Supply")
 ]
+ORDER_KEY_LENGTH = 8
 
 SS_DT_FORMAT = '%m%d%Y %H:%M'
