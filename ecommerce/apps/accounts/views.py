@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+
 from ecommerce.apps.catalogue.models import Product
 from ecommerce.apps.orders.models import Order
 
@@ -37,14 +38,10 @@ def add_to_wishlist(request, id):
     product = get_object_or_404(Product, id=id)
     if product.users_wishlist.filter(id=request.user.id).exists():
         product.users_wishlist.remove(request.user)
-        messages.success(
-            request, product.title + " has been removed from your WishList"
-        )
+        messages.success(request, product.title + " has been removed from your WishList")
     else:
         product.users_wishlist.add(request.user)
-        messages.success(
-            request, "Added " + product.title + " to your WishList"
-        )
+        messages.success(request, "Added " + product.title + " to your WishList")
     return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
 
@@ -122,9 +119,7 @@ def register_account(request):
             )
         else:
             logger.debug("INVALID FORM")
-            return render(
-                request, "accounts/register.html", {"form": registerForm}
-            )
+            return render(request, "accounts/register.html", {"form": registerForm})
     else:
         registerForm = RegistrationForm()
     return render(request, "accounts/register.html", {"form": registerForm})
@@ -157,9 +152,7 @@ def account_activate(request, uidb64, token):
 @login_required
 def view_address(request):
     addresses = Address.objects.filter(customer=request.user)
-    return render(
-        request, "accounts/dashboard/addresses.html", {"addresses": addresses}
-    )
+    return render(request, "accounts/dashboard/addresses.html", {"addresses": addresses})
 
 
 @login_required
@@ -212,9 +205,7 @@ def delete_address(request, id):
 
 @login_required
 def set_default(request, id):
-    Address.objects.filter(customer=request.user, default=True).update(
-        default=False
-    )
+    Address.objects.filter(customer=request.user, default=True).update(default=False)
     Address.objects.filter(pk=id, customer=request.user).update(default=True)
 
     previous_url = request.META.get("HTTP_REFERER")
@@ -229,7 +220,5 @@ def set_default(request, id):
 def user_orders(request):
     logger.debug(f"listing orders for {request.user}")
     user_id = request.user.id
-    orders = Order.objects.filter(user_id=user_id).filter(billing_status=True)
-    return render(
-        request, "accounts/dashboard/user_orders.html", {"orders": orders}
-    )
+    orders = Order.objects.filter(user_id=user_id)  # .filter(paid=True)
+    return render(request, "accounts/dashboard/user_orders.html", {"orders": orders})
