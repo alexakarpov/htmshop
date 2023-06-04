@@ -1,6 +1,7 @@
 # from .forms import StaxPaymentForm
 # from square.client import Client
 # import hashlib
+
 import json
 import logging
 import random
@@ -10,32 +11,27 @@ from uuid import uuid4
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from dotenv import dotenv_values
+from square.client import Client
 
-from ecommerce.constants import ORDER_KEY_LENGTH
 from ecommerce.apps.accounts.forms import UserAddressForm
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.inventory.models import ProductStock
 from ecommerce.apps.orders.models import Order, OrderItem
+from ecommerce.constants import ORDER_KEY_LENGTH
 
-from square.client import Client
-
+from .forms import BillingAddressForm
 
 config = dotenv_values()
 
-POST_URL = "https://secure.networkmerchants.com/api/transact.php"
-SALE = "sale"
-
 logger = logging.getLogger("console")
 
-client = Client(
-    access_token=config["SQUARE_ACCESS_TOKEN"], environment="sandbox"
-)
+client = Client(access_token=config["SQUARE_ACCESS_TOKEN"], environment="sandbox")
 
 
 def deliverychoices(request):
@@ -44,9 +40,13 @@ def deliverychoices(request):
 
 def payment_selection(request):
     session = request.session
+    logger.info(f"request is {request.method}")
     purchase = session.get("purchase")
+    billing_form = BillingAddressForm()
     total = purchase["total"] if purchase else 0
-    return render(request, "checkout/payment_selection.html", {"total": total})
+    return render(
+        request, "checkout/payment_selection.html", {"total": total, "billing_form": billing_form}
+    )
 
 
 def basket_update_delivery(request):
@@ -78,9 +78,7 @@ def delivery_address(request):
     # everetgyng is simple if they are logged in:
     if request.user.is_authenticated:
         logger.debug(f"user is authenticated")
-        addresses = Address.objects.filter(customer=request.user).order_by(
-            "-default"
-        )
+        addresses = Address.objects.filter(customer=request.user).order_by("-default")
 
         if len(addresses) == 0:
             # messages.warning(
@@ -149,9 +147,7 @@ def guest_address(request):
             return HttpResponse("Error handler content", status=400)
     else:
         address_form = UserAddressForm()
-        return render(
-            request, "checkout/guest_address.html", {"form": address_form}
-        )
+        return render(request, "checkout/guest_address.html", {"form": address_form})
 
 
 def report(logger, res_text):
@@ -169,9 +165,7 @@ def payment_with_token(request):
     token = post_data.get("source_id")
     if not token:
         logger.error("Missing the token, buddy")
-        res = JsonResponse(
-            {"status": "false", "message": "Token missing"}, status=400
-        )
+        res = JsonResponse({"status": "false", "message": "Token missing"}, status=400)
         return res
     session = request.session
     total_s = session.get("purchase")["total"]
@@ -181,9 +175,7 @@ def payment_with_token(request):
 
     payload = {
         "source_id": token,
-        "idempotency_key": "".join(
-            random.choices(string.ascii_lowercase, k=18)
-        ),
+        "idempotency_key": "".join(random.choices(string.ascii_lowercase, k=18)),
         "amount_money": {"amount": total_i, "currency": "USD"},
         "app_fee_money": {"amount": 0, "currency": "USD"},
         "autocomplete": True,
@@ -200,62 +192,7 @@ def payment_with_token(request):
         return JsonResponse({"status": "OK", "message": "payment accepted"})
     elif result.is_error():
         logger.error(result.errors)
-        return JsonResponse(
-            {"status": result.status_code, "message": result.text}
-        )
-
-    # OK so is this a JSON API with JsonResponse? But what about:
-    # - creating the Order
-    # - producing a message
-    # - redirect
-    # - clearing the cart
-
-    # below is the code that used to run in the same ^
-
-
-####
-# PayPal
-####
-
-
-# @ login_required
-# def payment_complete(request):
-#     PPClient = PayPalClient()
-#     logger.info("in payment_complete")
-#     body = json.loads(request.body)
-#     logger.info(f"{body}")  # there's just an orderId for now?
-#     data = body["orderID"]
-#     user_id = request.user.id
-
-#     requestorder = OrdersGetRequest(data)
-#     logger.info(f">>>>>>>>> {requestorder} <<<<<<<<")
-#     response = PPClient.client.execute(requestorder)
-
-#     total_paid = response.result.purchase_units[0].amount.value
-
-#     basket = Basket(request)
-#     order = Order.objects.create(
-#         user_id=user_id,
-#         full_name=response.result.purchase_units[0].shipping.name.full_name,
-#         email=response.result.payer.email_address,
-#         address1=response.result.purchase_units[0].shipping.address.address_line_1,
-#         address2=response.result.purchase_units[0].shipping.address.admin_area_2,
-#         postal_code=response.result.purchase_units[0].shipping.address.postal_code,
-#         country_code=response.result.purchase_units[0].shipping.address.country_code,
-#         total_paid=response.result.purchase_units[0].amount.value,
-#         order_key=response.result.id,
-#         payment_option="paypal",
-#         billing_status=True,
-#     )
-#     order_id = order.pk
-
-#     for item in basket:
-#         OrderItem.objects.create(
-#             order_id=order_id, product=item["product"], price=item["price"], quantity=item["qty"])
-
-#     print("Order created?!")
-
-#     return JsonResponse("Payment completed!", safe=False)
+        return JsonResponse({"status": result.status_code, "message": result.text})
 
 
 def payment_successful(request):
@@ -293,12 +230,10 @@ def payment_successful(request):
         country_code=address_d.get("country_code"),
         total_paid=total_f,
         order_key="".join(
-            random.choices(
-                string.ascii_uppercase + string.digits, k=ORDER_KEY_LENGTH
-            )
+            random.choices(string.ascii_uppercase + string.digits, k=ORDER_KEY_LENGTH)
         ),
         payment_option="Square",
-        billing_status=True,
+        paid=True,
     )
 
     for sku, item in basket.basket.items():
