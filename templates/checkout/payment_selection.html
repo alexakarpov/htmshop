@@ -149,22 +149,29 @@ Payment
           console.error(e.message);
         }
       }
-      
+
       const cardButton = document.getElementById('card-button');
       // whencard button is clicked, the event, together with the initialized void card, is passed to the inner function
       cardButton.addEventListener('click', async function (event) {
         await handlePaymentMethodSubmission(event, card);
       });
+
+      $('#billing-is-shipping_id').on('change', function (e) {
+        // this will contain a reference to the checkbox   
+        if (this.checked) {
+          $("#billingaddress").hide()
+        } else {
+          $("#billingaddress").show()
+        }
+      });
     });
+
   </script>
 </head>
 
 <div class="container">
   <div class="col-12">
     <h1 class="h2">Payment methods</h1>
-  </div>
-  <div class="col-12">
-    <p>Please select your payment option</p>
   </div>
   <hr />
 </div>
@@ -173,6 +180,12 @@ Payment
   <div class="row">
     <div class="col-12">
       <p>Pay with a credit card</p>
+      <p>Please enter the billing address and the name on the card</p>
+      <input type="checkbox" name="billing-is-shipping" id="billing-is-shipping_id" checked>
+      <label for="billing-is-shipping_id">billing address is the same as shipping</label>
+      <div id="billingaddress" style="display:none;">
+        OHAI
+      </div>
       <form id="payment-form">
         <div id="card-container"></div>
         <button id="card-button" type="button">Pay $1.00</button>
