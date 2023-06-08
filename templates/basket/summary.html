@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="col-12">
-        <h1 class="h2">Your Cart, {{user}}</h1>
+        <h1 class="h2 pt-5">Your Cart, {{user}}</h1>
     </div>
     <div class="col-12">
         <p>Manage <b>items</b> in your cart</p>
@@ -14,7 +14,7 @@
 <div class="container">
     <div class="row g-3">
         {% if basket|length == 0 %}
-        <div class="col-12">Your cart is empty <a href="{% url 'catalogue:store_home' %}">Shop</a></div>
+        <div class="col-12">Your cart is empty <a href="{% url 'catalogue:home' %}">Shop</a></div>
         {% else %}
         <div class="col-12 bg-light p-3 d-flex justify-content-between">
             <div class="text-end">
@@ -41,7 +41,7 @@
                                 {% if item.spec %}
                                     {{ item.title}} - {{ item.type }} ({{ item.spec }})
                                 {% else %}
-                                    {{ item.title }} - {{ item.type }} 
+                                    {{ item.title }} - {{ item.type }}
                                 {% endif %}
                             </p>
                         </a>
