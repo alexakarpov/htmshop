@@ -36,7 +36,7 @@ li {
 }
 
 .album .card {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 hr.divider {
@@ -46,7 +46,7 @@ hr.divider {
 
 .navbar ul a {
   font-weight: 500;
-  color: #3C1201;
+  color: #3c1201;
 }
 
 .navbar {
@@ -70,7 +70,6 @@ hr.divider {
   padding-bottom: 3.5rem;
 }
 
-
 .card {
   background-color: transparent;
 }
@@ -85,7 +84,7 @@ hr.divider {
 }
 
 input[type="radio"] {
-  border: 0.1em solid
+  border: 0.1em solid;
 }
 
 .category {

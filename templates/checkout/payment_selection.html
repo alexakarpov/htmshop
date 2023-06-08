@@ -183,16 +183,28 @@ Payment
       <p>Please enter the billing address and the name on the card</p>
       <input type="checkbox" name="billing-is-shipping" id="billing-is-shipping_id" checked>
       <label for="billing-is-shipping_id">billing address is the same as shipping</label>
-      <div id="billingaddress" style="display:none;">
-        OHAI
-      </div>
-      <form id="payment-form">
-        <div id="card-container"></div>
-        <button id="card-button" type="button">Pay $1.00</button>
-      </form>
-      <div id="payment-status-container"></div>
-    </div>
-  </div>
+      <div id="billingaddress" class="container" style="display:none;">
+        <label for="full-name" class="small mt-2">full name</label>
+        <input id="address-line2" class="form-control mb-1" type="text" placeholder="full name">
 
-  {% endblock %}
+        <label for="address-line1" class="small mt-2">billing address line 1</label>
+        <input id="address-line1" class="form-control mb-1" type="text" placeholder="address line 1">
+
+        <label for="address-line2" class="small mt-2">billing address line 2</label>
+        <input id="address-line2" class="form-control mb-1" type="text" placeholder="address line 2">
+
+        <label for="town-city" class="small mt-2">Town/City</label>
+        <input id="town-city" class="form-control mb-1" type="text" placeholder="town/city">
+
+      </div>
+    </div>
+    <form id="payment-form">
+      <div id="card-container"></div>
+      <button id="card-button" type="button">Pay $1.00</button>
+    </form>
+    <div id="payment-status-container"></div>
+  </div>
+</div>
+
+{% endblock %}
 </div>
