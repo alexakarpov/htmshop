@@ -1,13 +1,13 @@
 {% extends "../base.html" %}
 {% load static %}
 {% block title %}
-Payment
-{% endblock %}
+  Payment
+{% endblock title %}
 {% block content %}
-
-<head>
-  <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
-  <script>
+  <head>
+    <script type="text/javascript"
+            src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
+    <script>
     // TODO: replace with Production valies
     const appId = 'sandbox-sq0idb-H9U7rreVn5iRv9za5FSlRg';
     const locationId = 'LCDT9FPECTMHA';
@@ -58,18 +58,22 @@ Payment
     // Required in SCA Mandated Regions: Learn more at https://developer.squareup.com/docs/sca-overview
     async function verifyBuyer(payments, token) {
       console.log("verifying buyer")
+      const fullName = $("#full-name").val()
+      const givenName = fullName.split(' ')[0]
+      const familyName = fullName.split(' ')[1]
+      const ad1 = $("#address-line1").val()
+      const ad2 = $("#address-line2").val()
+      const city = $("#town-city").val()
+      const zip =  $("#postal-code").val()
       const verificationDetails = {
         amount: '1.00',
         billingContact: {
-          addressLines: ['123 Main Street', 'Apartment 1'],
-          familyName: 'Doe',
-          givenName: 'John',
-          email: 'jondoe@gmail.com',
-          country: 'US',
-          // phone: '3214563987',
-          phone: '1235679767',
-          region: 'MA',
-          city: 'Boston',
+          addressLines: [ad1, ad2],
+          familyName,
+          givenName,
+          // phone: '1235679767',
+          // region: 'MA',
+          city
         },
         currencyCode: 'USD',
         intent: 'CHARGE',
@@ -168,45 +172,58 @@ Payment
       });
     });
 
-  </script>
-</head>
-
-<div class="container">
-  <div class="col-12">
-    <h1 class="h2">Payment methods</h1>
-  </div>
-  <hr />
-</div>
-
-<div class="container">
-  <div class="row">
+    </script>
+  </head>
+  <div class="container">
     <div class="col-12">
-      <p>Pay with a credit card</p>
-      <p>Please enter the billing address and the name on the card</p>
-      <input type="checkbox" name="billing-is-shipping" id="billing-is-shipping_id" checked>
-      <label for="billing-is-shipping_id">billing address is the same as shipping</label>
-      <div id="billingaddress" class="container" style="display:none;">
-        <label for="full-name" class="small mt-2">full name</label>
-        <input id="address-line2" class="form-control mb-1" type="text" placeholder="full name">
-
-        <label for="address-line1" class="small mt-2">billing address line 1</label>
-        <input id="address-line1" class="form-control mb-1" type="text" placeholder="address line 1">
-
-        <label for="address-line2" class="small mt-2">billing address line 2</label>
-        <input id="address-line2" class="form-control mb-1" type="text" placeholder="address line 2">
-
-        <label for="town-city" class="small mt-2">Town/City</label>
-        <input id="town-city" class="form-control mb-1" type="text" placeholder="town/city">
-
-      </div>
+      <h1 class="h2">Payment methods</h1>
     </div>
-    <form id="payment-form">
-      <div id="card-container"></div>
-      <button id="card-button" type="button">Pay $1.00</button>
-    </form>
-    <div id="payment-status-container"></div>
+    <hr />
   </div>
-</div>
-
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <p>Pay with a credit card</p>
+        <p>Please enter the billing address and the name on the card</p>
+        <input type="checkbox"
+               name="billing-is-shipping"
+               id="billing-is-shipping_id"
+               checked>
+        <label for="billing-is-shipping_id">billing address is the same as shipping</label>
+        <div id="billingaddress" class="container" style="display:none;">
+          <label for="full-name" class="small mt-2">Full name</label>
+          <input id="full-name"
+                 class="form-control mb-1"
+                 type="text"
+                 placeholder="full name">
+          <label for="address-line1" class="small mt-2">Billing address line 1</label>
+          <input id="address-line1"
+                 class="form-control mb-1"
+                 type="text"
+                 placeholder="address line 1">
+          <label for="address-line2" class="small mt-2">Billing address line 2</label>
+          <input id="address-line2"
+                 class="form-control mb-1"
+                 type="text"
+                 placeholder="address line 2">
+          <label for="town-city" class="small mt-2">Town/City</label>
+          <input id="town-city"
+                 class="form-control mb-1"
+                 type="text"
+                 placeholder="town/city">
+          <label for="postal-code" class="small mt-2">Postal code</label>
+          <input id="postal-code"
+                 class="form-control mb-1"
+                 type="text"
+                 placeholder="postal code">
+        </div>
+      </div>
+      <form id="payment-form">
+        <div id="card-container"></div>
+        <button id="card-button" type="button">Pay ${{ total }}</button>
+      </form>
+      <div id="payment-status-container"></div>
+    </div>
+  </div>
 {% endblock %}
 </div>

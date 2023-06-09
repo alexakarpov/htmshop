@@ -6,7 +6,6 @@ import json
 import logging
 import random
 import string
-from uuid import uuid4
 
 from django.conf import settings
 from django.contrib import messages
@@ -25,7 +24,10 @@ from ecommerce.apps.inventory.models import ProductStock
 from ecommerce.apps.orders.models import Order, OrderItem
 from ecommerce.constants import ORDER_KEY_LENGTH
 
-from .forms import BillingAddressForm
+# from uuid import uuid4
+
+
+# from .forms import BillingAddressForm
 
 config = dotenv_values()
 
@@ -42,11 +44,9 @@ def payment_selection(request):
     session = request.session
     logger.info(f"request is {request.method}")
     purchase = session.get("purchase")
-    billing_form = BillingAddressForm()
+
     total = purchase["total"] if purchase else 0
-    return render(
-        request, "checkout/payment_selection.html", {"total": total, "billing_form": billing_form}
-    )
+    return render(request, "checkout/payment_selection.html", {"total": total})
 
 
 def basket_update_delivery(request):
@@ -164,14 +164,14 @@ def payment_with_token(request):
     post_data = request.POST
     token = post_data.get("source_id")
     if not token:
-        logger.error("Missing the token, buddy")
-        res = JsonResponse({"status": "false", "message": "Token missing"}, status=400)
+        logger.error("payment_with_token must have a token (source_id)")
+        res = JsonResponse({"message": "Token missing"}, status=400)
         return res
     session = request.session
     total_s = session.get("purchase")["total"]
-    print(f"total_s: {total_s}")
-    total_f = float(total_s)
-    total_i = int(total_f * 100)
+    total_i = int(float(total_s) * 100)
+
+    refid = "".join(random.choices(string.ascii_lowercase, k=10))
 
     payload = {
         "source_id": token,
@@ -179,79 +179,54 @@ def payment_with_token(request):
         "amount_money": {"amount": total_i, "currency": "USD"},
         "app_fee_money": {"amount": 0, "currency": "USD"},
         "autocomplete": True,
-        # "customer_id": "W92WH6P11H4Z77CTET0RNTGFW8",
         "location_id": settings.SQUARE_LOCATION,
-        "reference_id": "".join(random.choices(string.ascii_lowercase, k=10)),
-        "note": "Foobar",
+        "reference_id": refid,
     }
 
     result = client.payments.create_payment(body=payload)
 
     if result.is_success():
         logger.info(result.body)
-        return JsonResponse({"status": "OK", "message": "payment accepted"})
-    elif result.is_error():
-        logger.error(result.errors)
-        return JsonResponse({"status": result.status_code, "message": result.text})
+        basket = Basket(request)
+        address_json = session["address"]
+        address_d = json.loads(request.session["address"])
 
-
-def payment_successful(request):
-    session = request.session
-    total_s = session.get("purchase")["total"]
-    total_f = float(total_s)
-
-    basket = Basket(request)
-    address_json = session["address"]
-    # AnonymousUser doesn't have these
-    if request.user.is_authenticated:
-        user = request.user
-        fname = user.get_first_name()
-        lname = user.get_last_name()
-    else:
-        # can't we do this for a logged in user?
         try:
             fname, lname = json.loads(address_json).get("full_name").split(" ")
         except ValueError:
             fname = lname = ""
-
-    user = request.user
-
-    address_d = json.loads(request.session["address"])
-
-    logger.debug(f"placing an order for {user}")
-    order = Order.objects.create(
-        user=user if user.is_authenticated else None,
-        full_name=f"{fname} {lname}",
-        email=user.email if user.is_authenticated else "someone@example.com",
-        address1=address_d.get("address_line1"),
-        address2=address_d.get("address_line2"),
-        city=address_d.get("city_locality"),
-        postal_code=address_d.get("postal_code"),
-        country_code=address_d.get("country_code"),
-        total_paid=total_f,
-        order_key="".join(
-            random.choices(string.ascii_uppercase + string.digits, k=ORDER_KEY_LENGTH)
-        ),
-        payment_option="Square",
-        paid=True,
-    )
-
-    for sku, item in basket.basket.items():
-        pii = ProductStock.objects.get(sku=sku)
-        OrderItem.objects.create(
-            order_id=order.pk,
-            inventory_item=pii,
-            price=item["price"],
-            quantity=item["qty"],
+        user = request.user
+        order = Order.objects.create(
+            user=user if user.is_authenticated else None,
+            full_name=f"{fname} {lname}",
+            email=user.email if user.is_authenticated else "someone@example.com",
+            address1=address_d.get("address_line1"),
+            address2=address_d.get("address_line2"),
+            city=address_d.get("city_locality"),
+            postal_code=address_d.get("postal_code"),
+            country_code=address_d.get("country_code"),
+            total_paid=total_i / 100,
+            order_key=refid,
+            payment_option="Square",
+            paid=True,
         )
 
-    order.save()
+        for sku, item in basket.basket.items():
+            pii = ProductStock.objects.get(sku=sku)
+            OrderItem.objects.create(
+                order_id=order.pk,
+                inventory_item=pii,
+                price=item["price"],
+                quantity=item["qty"],
+            )
 
-    basket.clear()
+        order.save()
+        new_key = order.order_key + "_" + str(order.id)
+        order.order_key = new_key
+        order.save()
+        basket.clear()
 
-    messages.info(
-        request,
-        f"Your order has been placed, reference key: {order.order_key}",
-    )
-
-    return HttpResponseRedirect(reverse("catalogue:store_home"))
+        return JsonResponse({"status": "OK", "message": "payment accepted"})
+    elif result.is_error():
+        logger.error(result.errors)
+        return JsonResponse({"status": result.status_code, "message": result.text})
