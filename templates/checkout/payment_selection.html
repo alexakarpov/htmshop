@@ -142,7 +142,9 @@ Payment
             verificationToken
           );
           displayPaymentResults('SUCCESS');
-          window.location.replace('{% url "checkout:payment_successful" %}')
+          setTimeout(() => {
+            window.location.replace('{% url "catalogue:home" %}')
+            }, 2300);
         } catch (e) {
           cardButton.disabled = false;
           displayPaymentResults('FAILURE');
