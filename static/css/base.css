@@ -101,3 +101,7 @@ input[type="radio"] {
   font-weight: bold;
   font-size: xx-large;
 }
+
+.itemqty {
+  width: 4em;
+}
