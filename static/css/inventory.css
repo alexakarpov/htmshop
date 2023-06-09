@@ -65,3 +65,8 @@ th,
 td {
     border: 1px solid black;
 }
+
+.sku {
+    width: 5rem;
+    text-transform: uppercase
+}

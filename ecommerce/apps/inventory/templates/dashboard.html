@@ -1,267 +1,297 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block header %}
-<link rel="stylesheet" href="{% static 'css/inventory.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/inventory.css' %}" />
 {% endblock header %}
 {% block title %}
-Inventory
+  Inventory
 {% endblock title %}
-
-{% block content %}
-<div class="container-fluid p-1 m-3">
-
-    <table class="table" style="background-color:rgb(149, 216, 146)">
-        <thead>
-            <tr>
-                <th scope="col">Enter SKU to inspect or move</th>
-                <th scope="col">Print supply</th>
-                <th scope="col">Sanding room</th>
-                <th scope="col">Painting room</th>
-                <th scope="col">Wrapping room</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-
-                    <div class="autocomplete">
-                        <label for="thesku">SKU:</label>
-                        <input type="text" name="sku" class="sku form-control" maxlength="12" id="thesku"
-                            style="width: 5rem; text-transform:uppercase" required>
-                    </div>
-                    <input type="submit" class="btn btn-success m-3" id="inspect-btn" value="Inspect">
-                </td>
-                <td><h2 id="psupp">-</h2></td>
-                <td><h2 id="sandqty">-</h2></td>
-                <td><h2 id="paintqty">-</h2></td>
-                <td><h2 id="wrapqty">-</h2></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div style="background-color:rgb(199, 155, 102)" class="m-3">
-        <div class="h3 text-center">Worklist generation</div>
-        <div class="row w-25">
-            <form class="m-1" action="{% url 'inventory:printing_worklist' %}" method="get">
-                <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Printing Worklist</button>
-            </form>
-        </div>
-        <div class="row w-25">
-            <form class="m-1" action="{% url 'inventory:sawing_worklist' %}" method="get">
-                <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Sawing Worklist</button>
-            </form>
-        </div>
-        <div class="row w-25">
-            <form class="m-1" action="{% url 'inventory:sanding_worklist' %}" method="get">
-                <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Sanding Worklist</button>
-            </form>
-        </div>
-        <div class="row w-25">
-            <form class="m-1" action="{% url 'inventory:mounting_worklist' %}" method="get">
-                <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Mounting Worklist</button>
-            </form>
-        </div>
-    </div>
-
-    <div style="background-color:rgb(212, 210, 95);" class="m-3">
-        <div class="border">
-            <div class="h3 text-center">
-                Inventory move
+{% block
+  content %}
+  <div class="container-fluid p-1 m-3">
+    <table class="table" style="background-color: rgb(149, 216, 146)">
+      <thead>
+        <tr>
+          <th scope="col">Enter SKU to inspect or move</th>
+          <th scope="col">Print supply</th>
+          <th scope="col">Sanding room</th>
+          <th scope="col">Painting room</th>
+          <th scope="col">Wrapping room</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="autocomplete">
+              <label for="thesku">SKU:</label>
+              <input type="text"
+                     name="sku"
+                     class="sku form-control"
+                     maxlength="12"
+                     id="thesku"
+                     required />
             </div>
-            <p>
-                <label for="from_room">From:</label>
-                <select name="from_room" class="form-control" id="from_room" style="width: 15%;">
-                    <option value="nowhere">nowhere</option>
-                    <option value="sanding">Sanding room</option>
-                    <option value="wrapping">Wrapping room</option>
-                    <option value="painting">Painting room</option>
-                    <option value="printing">Print supply</option>
-                </select>
-            </p>
-            <p>
-                <label for="to_room">To:</label>
-                <select name="to_room" id="to_room" class="form-control" style="width: 15%;">
-                    <option value="nowhere">nowhere</option>
-                    <option value="sanding">Sanding room</option>
-                    <option value="wrapping">Wrapping room</option>
-                    <option value="painting">Painting room</option>
-                    <option value="printing">Print supply</option>
-                </select>
-            </p>
-            <p>
-                <label for="id_qty">Quantity:</label>
-                <input type="number" name="qty" class="quantity form-control" min="0" id="id_qty" required>
-            </p>
-
-            <input type="submit" class="btn btn-success m-3" id="move-btn" value="Move">
-
-        </div>
+            <input type="submit"
+                   class="btn btn-success m-3"
+                   id="inspect-btn"
+                   value="Inspect" />
+          </td>
+          <td>
+            <h2 id="psupp">-</h2>
+          </td>
+          <td>
+            <h2 id="sandqty">-</h2>
+          </td>
+          <td>
+            <h2 id="paintqty">-</h2>
+          </td>
+          <td>
+            <h2 id="wrapqty">-</h2>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="background-color: rgb(199, 155, 102)" class="m-3">
+      <div class="h3 text-center">Worklist generation</div>
+      <div class="row w-25">
+        <form class="m-1"
+              action="{% url 'inventory:printing_worklist' %}"
+              method="get">
+          <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Printing Worklist</button>
+        </form>
+      </div>
+      <div class="row w-25">
+        <form class="m-1"
+              action="{% url 'inventory:sawing_worklist' %}"
+              method="get">
+          <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Sawing Worklist</button>
+        </form>
+      </div>
+      <div class="row w-25">
+        <form class="m-1"
+              action="{% url 'inventory:sanding_worklist' %}"
+              method="get">
+          <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Sanding Worklist</button>
+        </form>
+      </div>
+      <div class="row w-25">
+        <form class="m-1"
+              action="{% url 'inventory:mounting_worklist' %}"
+              method="get">
+          <button type="submit" class="btn btn-block btn-primary btn-sm w-50">Mounting Worklist</button>
+        </form>
+      </div>
     </div>
-    <h1><a href="{% url 'catalogue:store_home' %}">Back to Home</a></h1>
-</div>
+    <div style="background-color: rgb(212, 210, 95)" class="m-3">
+      <div class="border">
+        <div class="h3 text-center">Inventory move</div>
+        <p>
+          <label for="from_room">From:</label>
+          <select name="from_room"
+                  class="form-control"
+                  id="from_room"
+                  style="width: 15%">
+            <option value="nowhere">nowhere</option>
+            <option value="sanding">Sanding room</option>
+            <option value="wrapping">Wrapping room</option>
+            <option value="painting">Painting room</option>
+            <option value="printing">Print supply</option>
+          </select>
+        </p>
+        <p>
+          <label for="to_room">To:</label>
+          <select name="to_room" id="to_room" class="form-control" style="width: 15%">
+            <option value="nowhere">nowhere</option>
+            <option value="sanding">Sanding room</option>
+            <option value="wrapping">Wrapping room</option>
+            <option value="painting">Painting room</option>
+            <option value="printing">Print supply</option>
+          </select>
+        </p>
+        <p>
+          <label for="id_qty">Quantity:</label>
+          <input type="number"
+                 name="qty"
+                 class="quantity form-control"
+                 min="0"
+                 id="id_qty"
+                 required />
+        </p>
+        <input type="submit" class="btn btn-success m-3" id="move-btn" value="Move" />
+      </div>
+    </div>
+    <h1>
+      <a href="{% url 'catalogue:home' %}">Back to Home</a>
+    </h1>
+  </div>
+  <script>
+  $("#move-btn").on("click", function (e) {
+    e.preventDefault();
+    const sku = $("#thesku").val();
+    const from_room = $("#from_room").val();
+    const to_room = $("#to_room").val();
+    const qty = $("#id_qty").val();
+    const d = {
+      sku: sku,
+      from_room: from_room,
+      to_room: to_room,
+      qty: qty,
+      csrfmiddlewaretoken: "{{csrf_token}}",
+    };
+    console.log(
+      `POSTing a move request for ${qty}X${sku} from ${from_room} to ${to_room}`
+    );
+    $.ajax({
+      type: "POST",
+      data: d,
+      url: '{% url "inventory:move" %}',
+      success: function (json) {
+        console.log(json);
+        $("#wrapqty").html(json.wrapping_qty);
+        $("#paintqty").html(json.painting_qty);
+        $("#sandqty").html(json.sanding_qty);
+        $("#psupp").html(json.psupp);
+      },
+      error: function (xhr, errmsg, err) {
+        console.error("move POST failed", errmsg);
+      },
+    });
+  });
 
-<script>
-    $('#move-btn').on('click', function (e) {
-        e.preventDefault()
-        const sku = $("#thesku").val()
-        const from_room = $("#from_room").val()
-        const to_room = $("#to_room").val()
-        const qty = $("#id_qty").val()
-        const d = {
-            sku: sku,
-            from_room: from_room,
-            to_room: to_room,
-            qty: qty,
-            csrfmiddlewaretoken: '{{csrf_token}}',
-        }
-        console.log(`POSTing a move request for ${qty}X${sku} from ${from_room} to ${to_room}`)
-        $.ajax({
-            type: 'POST',
-            data: d,
-            url: '{% url "inventory:move" %}',
-            success: function (json) {
-                console.log(json)
-                $("#wrapqty").html(json.wrapping_qty)
-                $("#paintqty").html(json.painting_qty)
-                $("#sandqty").html(json.sanding_qty)
-                $("#psupp").html(json.psupp)
-            },
-            error: function (xhr, errmsg, err) {
-                console.error("move POST failed", errmsg)
-            }
-        })
-    })
+  $("#inspect-btn").on("click", function (e) {
+    e.preventDefault();
+    const sku = $("#thesku").val();
+    const d = {
+      sku: sku,
+      csrfmiddlewaretoken: "{{csrf_token}}",
+    };
+    console.log("POSTing an inspect request for " + sku);
+    $.ajax({
+      type: "POST",
+      data: d,
+      url: '{% url "inventory:inspect" %}',
+      success: function (json) {
+        console.log(json);
+        $("#wrapqty").html(json.wrapping_qty);
+        $("#paintqty").html(json.painting_qty);
+        $("#sandqty").html(json.sanding_qty);
+        $("#psupp").html(json.psupp);
+      },
+      error: function (xhr, errmsg, err) {
+        console.error("inspect POST failed", errmsg);
+      },
+    });
+  });
 
-    $('#inspect-btn').on('click', function (e) {
-        e.preventDefault()
-        const sku = $("#thesku").val()
-        const d = {
-            sku: sku,
-            csrfmiddlewaretoken: '{{csrf_token}}',
-        }
-        console.log("POSTing an inspect request for " + sku)
-        $.ajax({
-            type: 'POST',
-            data: d,
-            url: '{% url "inventory:inspect" %}',
-            success: function (json) {
-                console.log(json)
-                $("#wrapqty").html(json.wrapping_qty)
-                $("#paintqty").html(json.painting_qty)
-                $("#sandqty").html(json.sanding_qty)
-                $("#psupp").html(json.psupp)
-            },
-            error: function (xhr, errmsg, err) {
-                console.error("inspect POST failed", errmsg)
-            }
-        })
-    })
+  let skus_str = "{{ all_skus }}";
 
-    let skus_str = "{{ all_skus }}";
+  let skus_arr = skus_str.split(",");
 
-    let skus_arr = skus_str.split(",");
-
-    function autocomplete(inp, arr) {
-        /*the autocomplete function takes two arguments,
+  function autocomplete(inp, arr) {
+    /*the autocomplete function takes two arguments,
         the text field element and an array of possible autocompleted values:*/
-        var currentFocus;
-        /*execute a function when someone writes in the text field:*/
-        inp.addEventListener("input", function (e) {
-            var a, b, i, val = this.value;
-            /*close any already open lists of autocompleted values*/
-            closeAllLists();
-            if (!val) { return false; }
-            currentFocus = -1;
-            /*create a DIV element that will contain the items (values):*/
-            a = document.createElement("DIV");
-            a.setAttribute("id", this.id + "autocomplete-list");
-            a.setAttribute("class", "autocomplete-items");
-            /*append the DIV element as a child of the autocomplete container:*/
-            this.parentNode.appendChild(a);
-            /*for each item in the array...*/
-            for (i = 0; i < arr.length; i++) {
-                /*check if the item starts with the same letters as the text field value:*/
-                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                    /*create a DIV element for each matching element:*/
-                    b = document.createElement("DIV");
-                    /*make the matching letters bold:*/
-                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                    b.innerHTML += arr[i].substr(val.length);
-                    /*insert a input field that will hold the current array item's value:*/
-                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-                    /*execute a function when someone clicks on the item value (DIV element):*/
-                    b.addEventListener("click", function (e) {
-                        /*insert the value for the autocomplete text field:*/
-                        inp.value = this.getElementsByTagName("input")[0].value;
-                        /*close the list of autocompleted values,
+    var currentFocus;
+    /*execute a function when someone writes in the text field:*/
+    inp.addEventListener("input", function (e) {
+      var a,
+        b,
+        i,
+        val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) {
+        return false;
+      }
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function (e) {
+            /*insert the value for the autocomplete text field:*/
+            inp.value = this.getElementsByTagName("input")[0].value;
+            /*close the list of autocompleted values,
                         (or any other open lists of autocompleted values:*/
-                        closeAllLists();
-                    });
-                    a.appendChild(b);
-                }
-            }
-        });
-        /*execute a function presses a key on the keyboard:*/
-        inp.addEventListener("keydown", function (e) {
-            var x = document.getElementById(this.id + "autocomplete-list");
-            if (x) x = x.getElementsByTagName("div");
-            if (e.keyCode == 40) {
-                /*If the arrow DOWN key is pressed,
+            closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+    });
+    /*execute a function presses a key on the keyboard:*/
+    inp.addEventListener("keydown", function (e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
                 increase the currentFocus variable:*/
-                currentFocus++;
-                /*and and make the current item more visible:*/
-                addActive(x);
-            } else if (e.keyCode == 38) { //up
-                /*If the arrow UP key is pressed,
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) {
+        //up
+        /*If the arrow UP key is pressed,
                 decrease the currentFocus variable:*/
-                currentFocus--;
-                /*and and make the current item more visible:*/
-                addActive(x);
-            } else if (e.keyCode == 13) {
-                /*If the ENTER key is pressed, prevent the form from being submitted,*/
-                e.preventDefault();
-                if (currentFocus > -1) {
-                    /*and simulate a click on the "active" item:*/
-                    if (x) x[currentFocus].click();
-                }
-            }
-        });
-        function addActive(x) {
-            /*a function to classify an item as "active":*/
-            if (!x) return false;
-            /*start by removing the "active" class on all items:*/
-            removeActive(x);
-            if (currentFocus >= x.length) currentFocus = 0;
-            if (currentFocus < 0) currentFocus = (x.length - 1);
-            /*add class "autocomplete-active":*/
-            x[currentFocus].classList.add("autocomplete-active");
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
         }
-        function removeActive(x) {
-            /*a function to remove the "active" class from all autocomplete items:*/
-            for (var i = 0; i < x.length; i++) {
-                x[i].classList.remove("autocomplete-active");
-            }
-        }
-        function closeAllLists(elmnt) {
-            /*close all autocomplete lists in the document,
-            except the one passed as an argument:*/
-            var x = document.getElementsByClassName("autocomplete-items");
-            for (var i = 0; i < x.length; i++) {
-                if (elmnt != x[i] && elmnt != inp) {
-                    x[i].parentNode.removeChild(x[i]);
-                }
-            }
-        }
-        /*execute a function when someone clicks in the document:*/
-        document.addEventListener("click", function (e) {
-            closeAllLists(e.target);
-        });
+      }
+    });
+    function addActive(x) {
+      /*a function to classify an item as "active":*/
+      if (!x) return false;
+      /*start by removing the "active" class on all items:*/
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = x.length - 1;
+      /*add class "autocomplete-active":*/
+      x[currentFocus].classList.add("autocomplete-active");
     }
+    function removeActive(x) {
+      /*a function to remove the "active" class from all autocomplete items:*/
+      for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+      }
+    }
+    function closeAllLists(elmnt) {
+      /*close all autocomplete lists in the document,
+            except the one passed as an argument:*/
+      var x = document.getElementsByClassName("autocomplete-items");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+          x[i].parentNode.removeChild(x[i]);
+        }
+      }
+    }
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+    });
+  }
 
-    autocomplete(document.getElementById("thesku"), skus_arr);
-
-</script>
+  autocomplete(document.getElementById("thesku"), skus_arr);
+  </script>
 {% endblock content %}
-
 {% block footer %}
 {% endblock footer %}
