@@ -46,7 +46,13 @@ def payment_selection(request):
     purchase = session.get("purchase")
 
     total = purchase["total"] if purchase else 0
-    return render(request, "checkout/payment_selection.html", {"total": total})
+    app_id = settings.SQUARE_APP_ID
+    location_id = settings.SQUARE_LOCATION_ID
+    return render(
+        request,
+        "checkout/payment_selection.html",
+        {"app_id": app_id, "location_id": location_id, "total": total},
+    )
 
 
 def basket_update_delivery(request):
