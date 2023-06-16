@@ -44,6 +44,15 @@ def payment_selection(request):
     session = request.session
     logger.info(f"request is {request.method}")
     purchase = session.get("purchase")
+    address_json = json.loads(session.get("address"))
+
+    full_name = address_json.get("full_name")
+    address_line1 = address_json.get("address_line1")
+    address_line2 = address_json.get("address_line2")
+    city_locality = address_json.get("city_locality")
+    state_province = address_json.get("state_province")
+    postal_code = address_json.get("postal_code")
+    country_code = address_json.get("country_code")
 
     total = purchase["total"] if purchase else 0
     app_id = settings.SQUARE_APP_ID
@@ -51,7 +60,18 @@ def payment_selection(request):
     return render(
         request,
         "checkout/payment_selection.html",
-        {"app_id": app_id, "location_id": location_id, "total": total},
+        {
+            "app_id": app_id,
+            "location_id": location_id,
+            "total": total,
+            "full_name": full_name,
+            "address_line1": address_line1,
+            "address_line2": address_line2,
+            "city_locality": city_locality,
+            "state_province": state_province,
+            "postal_code": postal_code,
+            "country_code": country_code,
+        },
     )
 
 
@@ -81,14 +101,11 @@ def delivery_address(request):
     session = request.session
     session["purchase"] = {}
 
-    # everetgyng is simple if they are logged in:
     if request.user.is_authenticated:
         logger.debug(f"user is authenticated")
         addresses = Address.objects.filter(customer=request.user).order_by("-default")
 
         if len(addresses) == 0:
-            # messages.warning(
-            #     request, "Enter an address for the checkout")
             logger.debug(f"no addresses yet")
 
             return HttpResponseRedirect(reverse("accounts:addresses"))
@@ -185,9 +202,11 @@ def payment_with_token(request):
         "amount_money": {"amount": total_i, "currency": "USD"},
         "app_fee_money": {"amount": 0, "currency": "USD"},
         "autocomplete": True,
-        "location_id": settings.SQUARE_LOCATION,
+        "location_id": settings.SQUARE_LOCATION_ID,
         "reference_id": refid,
     }
+
+    logger.info(f"posting create payment: {payload}")
 
     result = client.payments.create_payment(body=payload)
 

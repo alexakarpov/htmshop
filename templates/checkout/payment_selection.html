@@ -57,28 +57,49 @@
 
     // Required in SCA Mandated Regions: Learn more at https://developer.squareup.com/docs/sca-overview
     async function verifyBuyer(payments, token) {
-      console.log("verifying buyer")
-      const fullName = $("#full-name").val()
-      const givenName = fullName.split(' ')[0]
-      const familyName = fullName.split(' ')[1]
-      const ad1 = $("#address-line1").val()
-      const ad2 = $("#address-line2").val()
-      const city = $("#town-city").val()
-      const zip =  $("#postal-code").val()
+      console.log("in verifyByer")
+      let fullName = givenName = familyName = addressLine1 = addressLine2 = city = zip = postalCode = country = region = ''
+      if ($('#billing-is-shipping_id')[0].checked) {
+        console.log("checked")
+        fullName = '{{ full_name }}'
+        givenName = fullName.split(' ')[0]
+        familyName = fullName.split(' ')[1]
+        console.log("address_line1 should be here: {{ address_line1 }}")
+        address_line1 = '{{ address_line1 }}'
+        console.log(`address_line1 is set to ${ address_line1 }`)
+        address_line2 = '{{ address_line2 }}'
+        city = '{{ city_locality }}'
+        zip = '{{ postal_code }}'
+        country = '{{ country_code }}'
+        region = '{{ state_province }}'
+      } else {
+        console.log("not checked")
+        fullName = $("#full-name").val()
+        givenName = fullName.split(' ')[0]
+        familyName = fullName.split(' ')[1]
+        addressLine1 = $("#address-line1").val()
+        addressLine2 = $("#address-line2").val()
+        city = $("#town-city").val()
+        zip =  $("#postal-code").val()
+        region = $("#region").val()
+        country = $("#country").val()
+      }
       const verificationDetails = {
-        amount: '1.00',
-        billingContact: {
-          addressLines: [ad1, ad2],
-          familyName,
-          givenName,
-          // phone: '1235679767',
-          // region: 'MA',
-          city
-        },
-        currencyCode: 'USD',
-        intent: 'CHARGE',
+          amount: '{{ total }}',
+          billingContact: {
+            addressLines: [addressLine1, addressLine2],
+            familyName,
+            givenName,
+            region,
+            city,
+            zip,
+            country
+          },
+          currencyCode: 'USD',
+          intent: 'CHARGE',
       };
 
+      console.log(`verification details should be ready for assembling: ${verificationDetails}`)
       const verificationResults = await payments.verifyBuyer(
         token,
         verificationDetails
@@ -132,7 +153,6 @@
         return;
       }
 
-      // START of the _INNER_ function (handlePaymentMethodSubmission) declaration
       async function handlePaymentMethodSubmission(event, card) {
         event.preventDefault();
         console.log("the inner handler function execution began")
@@ -146,9 +166,11 @@
             verificationToken
           );
           displayPaymentResults('SUCCESS');
+          /*
           setTimeout(() => {
             window.location.replace('{% url "catalogue:home" %}')
             }, 2300);
+            */
         } catch (e) {
           cardButton.disabled = false;
           displayPaymentResults('FAILURE');
@@ -166,7 +188,8 @@
         // this will contain a reference to the checkbox   
         if (this.checked) {
           $("#billingaddress").hide()
-        } else {
+        }
+        else {
           $("#billingaddress").show()
         }
       });
@@ -190,7 +213,7 @@
                id="billing-is-shipping_id"
                checked>
         <label for="billing-is-shipping_id">billing address is the same as shipping</label>
-        <div id="billingaddress" class="container" style="display:none;">
+        <div id="billingaddress" class="container">
           <label for="full-name" class="small mt-2">Full name</label>
           <input id="full-name"
                  class="form-control mb-1"
@@ -216,6 +239,11 @@
                  class="form-control mb-1"
                  type="text"
                  placeholder="postal code">
+          <label for="region" class="small mt-2">State/Province</label>
+          <input id="region"
+                 class="form-control mb-1"
+                 type="text"
+                 placeholder="state/province">
         </div>
       </div>
       <form id="payment-form">
@@ -225,5 +253,4 @@
       <div id="payment-status-container"></div>
     </div>
   </div>
-{% endblock %}
-</div>
+{% endblock content %}
