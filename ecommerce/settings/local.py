@@ -57,9 +57,7 @@ LOGGING = {
 }
 
 SQUARE_LOCATION_ID = "LCDT9FPECTMHA"
-SQUARE_APP_ID = "sandbox-sq0idb-T9rhevjnp8aNdXPPNf-qKg"
-
-COLLECTJS_PUBKEY = "uXRD2W-32WSUp-36EU4c-mbVZ3m"
+SQUARE_APP_ID = "sandbox-sq0idb-H9U7rreVn5iRv9za5FSlRg"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
