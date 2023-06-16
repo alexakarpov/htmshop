@@ -81,7 +81,7 @@
      let sku = $(this).data("index");
      $.ajax({
          type: "POST",
-         url: '{% url "basket:basket_delete" %}',
+         url: '{% url "basket:delete" %}',
          data: {
              sku: sku,
              csrfmiddlewaretoken: "{{csrf_token}}",
@@ -109,7 +109,7 @@
      let sku = $(this).data("index");
      $.ajax({
          type: "POST",
-         url: '{% url "basket:basket_update" %}',
+         url: '{% url "basket:update" %}',
          data: {
              sku: sku,
              skuqty: $("#"+sku+"-qty").val(),

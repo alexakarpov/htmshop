@@ -1,72 +1,75 @@
 {% extends '../base.html' %}
 {% block title %}
-{% if product %}
-{{ product.title }}
-{% else %}
-Product
-{% endif %}
+  {% if product %}
+    {{ product.title }}
+  {% else %}
+    Product
+  {% endif %}
 {% endblock %}
-
 {% block content %}
-<div class="container">
-  <div class="card mb-3 border-0">
-    <div class="row g-0">
-      <div class="col-md-12">
-        <div class="card-body p-1">
-          <p class="display-4 pt-4 text-center fw-bold lead mb-0 pe-4 pb-4">{{ product.title }}</p>
-          <img class="img-fluid mx-auto d-block" alt={{ product.title }} src="{{ product.image.url }}"
-            alt="{{ product.title }}" />
-          <details class="description">
-            <summary class="mt-2" data-open="hide" data-close="read more"></summary>
-            {% autoescape off %}
-            {{ product.description }}
-            {% endautoescape %}
-          </details>
+  <div class="container">
+    <div class="card mb-3 border-0">
+      <div class="row g-0">
+        <div class="col-md-12">
+          <div class="card-body p-1">
+            <p class="display-4 pt-4 text-center fw-bold lead mb-0 pe-4 pb-4">{{ product.title }}</p>
+            <img class="img-fluid mx-auto d-block" alt={{ product.title }} src="{{ product.image.url }}" alt="{{ product.title }}" />
+            <details class="description">
+              <summary class="mt-2" data-open="hide" data-close="read more"></summary>
+              {% autoescape off %}
+                {{ product.description }}
+              {% endautoescape %}
+            </details>
+          </div>
         </div>
       </div>
     </div>
+    {% if skus %}
+      <div class="input-group overflow-auto">
+        <table class="table table-striped">
+          <tbody>
+            {% for i in skus %}
+              <tr>
+                <td>
+                  <strong>{{ i.product_type.name }}</strong>
+                  {% if i.productspecificationvalue_set.count %}<i>({{ i.productspecificationvalue_set.first }})</i>{% endif %}
+                </td>
+                <td>
+                  <strong>${{ i.price }}</strong>
+                </td>
+                <td>
+                  <input class="form-check-input sku-picker"
+                         type="radio"
+                         name="radiox"
+                         value="{{ i.sku }}"
+                         {% if skus.count == 1 %}checked{% endif %}>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <label for="quantity" class="p-1 fs-6">Quantity:</label>
+        <input class="form-control quantity"
+               id="quantity"
+               type="number"
+               min="0"
+               value="1" />
+      </div>
+      <button type="button"
+              id="add-button"
+              class="btn btn-md btn-success mx-1 mt-2 mb-1 form-control"
+              {% if skus.count > 1 %}disabled{% endif %}>Add to cart</button>
+    {% else %}
+      <div class="alert alert-warning" role="alert">
+        <span class="warning">Sorry, there's no inventory available for this product</span>
+      </div>
+    {% endif %}
+    <div class="row m-1 alert alert-success"
+         role="alert"
+         id="cartalertbox"
+         style="display:none"></div>
   </div>
-
-  {% if skus %}
-
-  <div class="input-group overflow-auto">
-    <table class="table table-striped">
-      <tbody>
-        {% for i in skus %}
-        <tr>
-          <td><strong>{{i.product_type.name}}</strong>
-            {% if i.productspecificationvalue_set.count %}
-            <i>({{ i.productspecificationvalue_set.first }})</i>
-            {% endif %}
-          </td>
-          <td><strong>${{i.price}}</strong></td>
-          <td>
-            <input class="form-check-input sku-picker" type="radio" name="radiox" value="{{ i.sku }}" {% if skus.count == 1 %} checked {% endif %}>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-    <label for="quantity" class="p-1 fs-6">Quantity:</label>
-    <input class="form-control quantity" id="quantity" type="number" min="0" value="1" />
-
-  </div>
-
-  <button type="button" id="add-button" class="btn btn-md btn-success mx-1 mt-2 mb-1 form-control" {% if skus.count > 1 %} disabled {% endif %}>Add to cart</button>
-
-  {% else %}
-
-  <div class="alert alert-warning" role="alert">
-    <span class="warning">Sorry, there's no inventory available for this product</span>
-  </div>
-
-  {% endif %}
-
-  <div class="row m-1 alert alert-success" role="alert" id="cartalertbox" style="display:none;"></div>
-</div>
-
-<script>
+  <script>
   $(document).on('click', '.sku-picker', function (e) {
     $('#add-button').prop('disabled', false)
   })
@@ -84,7 +87,7 @@ Product
 
     $.ajax({
       type: 'POST',
-      url: '{% url "basket:basket_add" %}',
+      url: '{% url "basket:add" %}',
       data: d,
       success: function (json) {
         $('#basket-qty').html(json.qty)
@@ -100,5 +103,5 @@ Product
       }
     })
   })
-</script>
+  </script>
 {% endblock %}
