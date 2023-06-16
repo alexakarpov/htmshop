@@ -1,11 +1,11 @@
-{% extends '../base.html' %}
+{% extends "../base.html" %}
 {% block title %}
   {% if product %}
     {{ product.title }}
   {% else %}
     Product
   {% endif %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
   <div class="container">
     <div class="card mb-3 border-0">
@@ -64,10 +64,7 @@
         <span class="warning">Sorry, there's no inventory available for this product</span>
       </div>
     {% endif %}
-    <div class="row m-1 alert alert-success"
-         role="alert"
-         id="cartalertbox"
-         style="display:none"></div>
+    <div class="row m-1 alert alert-success" role="alert" id="cartalertbox"></div>
   </div>
   <script>
   $(document).on('click', '.sku-picker', function (e) {
@@ -104,4 +101,4 @@
     })
   })
   </script>
-{% endblock %}
+{% endblock content %}
