@@ -2,10 +2,9 @@ from decimal import Decimal
 
 from django.conf import settings
 from django.db import models
+from faker import Faker
 
 from ecommerce.apps.inventory.models import ProductStock
-
-from faker import Faker
 
 
 class Order(models.Model):
@@ -29,6 +28,7 @@ class Order(models.Model):
     order_key = models.CharField(max_length=36, null=False, blank=False)
     payment_option = models.CharField(max_length=200, blank=True)
     paid = models.BooleanField(default=False)
+    shipped = models.BooleanField(default=False)
 
     class Meta:
         ordering = ("-created",)
@@ -38,9 +38,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(
-        Order, related_name="items", on_delete=models.CASCADE
-    )
+    order = models.ForeignKey(Order, related_name="items", on_delete=models.CASCADE)
     inventory_item = models.ForeignKey(
         ProductStock, related_name="order_items", on_delete=models.CASCADE
     )
@@ -48,9 +46,7 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return (
-            f"{self.inventory_item} x {self.quantity} of order {self.order.id}"
-        )
+        return f"{self.inventory_item} x {self.quantity} of order {self.order.id}"
 
 
 def make_order(address_d, cart_d, email):
