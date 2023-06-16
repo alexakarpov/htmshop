@@ -105,3 +105,15 @@ input[type="radio"] {
 .itemqty {
   width: 4em;
 }
+
+#billingaddress {
+  display: none;
+}
+
+.shipped {
+  background-color: lightgreen;
+}
+
+.notshipped {
+  background-color: lightyellow;
+}
