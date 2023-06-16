@@ -34,15 +34,13 @@ MEDIA_ROOT = BASE_DIR / "media/"
 LOGGING = {
     "version": 1,
     "formatters": {
-        "verbose": {"format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"},
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
+        },
         "simple": {"format": "%(levelname)s %(message)s"},
     },
     "handlers": {
-        "console": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            "formatter": "simple"
-        },
+        "console": {"level": "INFO", "class": "logging.StreamHandler", "formatter": "simple"},
     },
     "loggers": {
         "django": {
@@ -58,7 +56,7 @@ LOGGING = {
     },
 }
 
-SQUARE_LOCATION = "LCDT9FPECTMHA"
+SQUARE_LOCATION_ID = "LCDT9FPECTMHA"
 SQUARE_APP_ID = "sandbox-sq0idb-T9rhevjnp8aNdXPPNf-qKg"
 
 COLLECTJS_PUBKEY = "uXRD2W-32WSUp-36EU4c-mbVZ3m"
