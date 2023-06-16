@@ -106,7 +106,9 @@ input[type="radio"] {
   width: 4em;
 }
 
-#billingaddress {
+#billingaddress,
+#cartalertbox,
+.alert {
   display: none;
 }
 
