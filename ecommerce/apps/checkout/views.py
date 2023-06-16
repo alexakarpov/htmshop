@@ -11,7 +11,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from dotenv import dotenv_values
@@ -44,6 +44,9 @@ def payment_selection(request):
     session = request.session
     logger.info(f"request is {request.method}")
     purchase = session.get("purchase")
+    address = session.get("address")
+    if not address:
+        return redirect("catalogue:home")
     address_json = json.loads(session.get("address"))
 
     full_name = address_json.get("full_name")
