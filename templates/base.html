@@ -33,7 +33,10 @@
                 <div class="page-header">
                     <div class="list-group list-group-horizontal text-center mb-1">
                         <a href="{% url 'catalogue:home' %}">
-                            <img src="{% static 'logo2.png' %}">
+                            <img src="{% static 'logo2.png' %}"
+                                 height="87"
+                                 width="85"
+                                 alt="Holy Transfiguration Monastery">
                         </a>
                         <h1>Holy Transfiguration Monastery Store</h1>
                     </div>
@@ -75,7 +78,8 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/incense"><span class="category">Incense</span></a>
+                            <a class="nav-link"
+                               href="{% url 'catalogue:category_list' category_slug='incense' %}"><span class="category">Incense</span></a>
                         </li>
                     </ul>
                     <span class="nav-item px-1">

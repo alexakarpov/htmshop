@@ -1,8 +1,7 @@
 {% extends '../accounts/sub_base.html' %}
 {% block title %}
   Guest addresses
-{% endblock %}
-
+{% endblock title %}
 {% block sub_content %}
   <div class="col-6 mx-auto">
     <h1 class="h3">Delivery Address</h1>
@@ -10,10 +9,11 @@
       Please provide a <b>delivery address</b> and instructions
     </div>
     <hr />
-    <form name="address_form" class="account-form" method="post" enctype="multipart/form-data">
-      {% if form.errors %}
-        <div class="alert alert-primary" role="alert">Some error in the form, fwiw...</div>
-      {% endif %}
+    <form name="address_form"
+          class="account-form"
+          method="post"
+          enctype="multipart/form-data">
+      {% if form.errors %}<div class="alert alert-primary" role="alert">Some error in the form, fwiw...</div>{% endif %}
       {% csrf_token %}
       <label class="small fw-bold">{{ form.full_name.label }}</label>
       {{ form.full_name }}
@@ -31,11 +31,11 @@
       {{ form.postcode }}
       <label class="small fw-bold">{{ form.country.label }}</label>
       {{ form.country }}
-
-      <button class="btn btn-primary btn-block py-2 mb-4 mt-4 fw-bold w-100" type="submit" value="Submit">Continue</button>
+      <button class="btn btn-primary btn-block py-2 mb-4 mt-4 fw-bold w-100"
+              type="submit"
+              value="Submit">Continue</button>
     </form>
   </div>
-
   <script>
     function switchToUS() {
       const us_state_select = `<select name="state_province" class="form-control mb-2 account-form" placeholder="State/Province" required="" id="id_state_province">
