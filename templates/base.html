@@ -17,7 +17,8 @@
                 HTM Store
             {% endblock title %}
         </title>
-        <link rel="stylesheet" href="{% block stylesheet %}{% endblock %}" />
+        <link rel="stylesheet"
+              href="{% block stylesheet %}{% endblock stylesheet %}" />
         <link rel="shortcut icon"
               type="image/png"
               href="{% static 'favicon.ico' %}" />
@@ -110,13 +111,14 @@
         {% endif %}
         <div class="m-4 alert alert-success" role="alert" id="alertbox"></div>
         <div id="content-wrap">
-            {% block content %}{% endblock %}
+            {% block content %}
+            {% endblock content %}
             {% block footer %}
                 <footer id="footer">
                     <div class="container">
                         <div class="row">
                             <div class="d-flex col col-1">
-                                <img src="{% static 'logo-small.png' %}">
+                                <img src="{% static 'logo-small.png' %}" height="44" width="43" alt="HTM">
                             </div>
                             <div class="col">
                                 <div class="row">
