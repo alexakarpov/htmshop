@@ -31,7 +31,7 @@
         url: '{% url "checkout:token_payment" %}',
         data: d,
         success: function (json) {
-          console.log(`success, payment created! - ${json}`)
+          console.debug("payment created", JSON.stringify(json))
         },
         error: function (xhr, errmsg, err) {
           console.error("PAYMENT POST failed", errmsg)
@@ -60,20 +60,16 @@
       console.log("in verifyByer")
       let fullName = givenName = familyName = addressLine1 = addressLine2 = city = zip = postalCode = country = region = ''
       if ($('#billing-is-shipping_id')[0].checked) {
-        console.log("checked")
         fullName = '{{ full_name }}'
         givenName = fullName.split(' ')[0]
         familyName = fullName.split(' ')[1]
-        console.log("address_line1 should be here: {{ address_line1 }}")
         address_line1 = '{{ address_line1 }}'
-        console.log(`address_line1 is set to ${ address_line1 }`)
         address_line2 = '{{ address_line2 }}'
         city = '{{ city_locality }}'
         zip = '{{ postal_code }}'
         country = '{{ country_code }}'
         region = '{{ state_province }}'
       } else {
-        console.log("not checked")
         fullName = $("#full-name").val()
         givenName = fullName.split(' ')[0]
         familyName = fullName.split(' ')[1]
@@ -166,11 +162,9 @@
             verificationToken
           );
           displayPaymentResults('SUCCESS');
-          /*
           setTimeout(() => {
             window.location.replace('{% url "catalogue:home" %}')
-            }, 2300);
-            */
+          }, 2000);
         } catch (e) {
           cardButton.disabled = false;
           displayPaymentResults('FAILURE');

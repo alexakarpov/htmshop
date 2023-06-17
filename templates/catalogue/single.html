@@ -13,7 +13,9 @@
         <div class="col-md-12">
           <div class="card-body p-1">
             <p class="display-4 pt-4 text-center fw-bold lead mb-0 pe-4 pb-4">{{ product.title }}</p>
-            <img class="img-fluid mx-auto d-block" alt={{ product.title }} src="{{ product.image.url }}" alt="{{ product.title }}" />
+            <img class="img-fluid mx-auto d-block"
+                 src="{{ product.image.url }}"
+                 alt="{{ product.title }}" />
             <details class="description">
               <summary class="mt-2" data-open="hide" data-close="read more"></summary>
               {% autoescape off %}

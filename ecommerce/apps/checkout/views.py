@@ -148,7 +148,7 @@ def delivery_address(request):
                 request,
                 "checkout/delivery_choices.html",
                 {
-                    "addresse   s": [address],
+                    "addresses": [address],
                 },
             )
 
@@ -174,14 +174,6 @@ def guest_address(request):
     else:
         address_form = UserAddressForm()
         return render(request, "checkout/guest_address.html", {"form": address_form})
-
-
-def report(logger, res_text):
-    logger.debug("REPORTING")
-
-    for i in res_text.split("&"):
-        (k, v) = i.split("=")
-        logger.debug(f"{k} => {v}")
 
 
 # https://developer.squareup.com/forums/t/django-csrf-middleware-token-missing/6959
@@ -254,7 +246,7 @@ def payment_with_token(request):
         order.save()
         basket.clear()
 
-        return JsonResponse({"status": "OK", "message": "payment accepted"})
+        return JsonResponse({"result": result.text})
     elif result.is_error():
         logger.error(result.errors)
         return JsonResponse({"status": result.status_code, "message": result.text})
