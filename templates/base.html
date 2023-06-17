@@ -30,14 +30,10 @@
             <header class="pt-1">
                 <div class="page-header">
                     <div class="list-group list-group-horizontal text-center mb-1">
-                        <div>
-                            <a href="{% url 'catalogue:home' %}">
-                                <img src="{% static 'logo2.png' %}">
-                            </a>
-                        </div>
-                        <div>
-                            <h1>Holy Transfiguration Monastery Store</h1>
-                        </div>
+                        <a href="{% url 'catalogue:home' %}">
+                            <img src="{% static 'logo2.png' %}">
+                        </a>
+                        <h1>Holy Transfiguration Monastery Store</h1>
                     </div>
                     <hr class="divider">
                     <nav class="navbar navbar-expand-sm p-0">
@@ -85,7 +81,7 @@
                             Cart (<strong><span id="basket-qty">{{ basket | length }}</span></strong>)
                         </a>
                     </span>
-                    <form class="d-flex" role="search" action="{% url 'search:query' %} ">
+                    <form class="d-flex" role="search" action="{% url 'search:query' %}">
                         <input class="form-control me-2"
                                type="search"
                                placeholder="Search our catalog"
