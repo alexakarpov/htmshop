@@ -72,8 +72,8 @@ LOGGING = {
     },
 }
 
-SQUARE_LOCATION = "LCDT9FPECTMHA"
-SQUARE_APP_ID = "sandbox-sq0idb-T9rhevjnp8aNdXPPNf-qKg"
+SQUARE_LOCATION_ID = "LCDT9FPECTMHA"
+SQUARE_APP_ID = "sandbox-sq0idb-H9U7rreVn5iRv9za5FSlRg"
 
 # email
 EMAIL_BACKEND = "django_ses.SESBackend"
