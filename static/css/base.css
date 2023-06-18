@@ -119,3 +119,7 @@ input[type="radio"] {
 .notshipped {
   background-color: lightyellow;
 }
+
+.icons {
+  font-size: larger;
+}
