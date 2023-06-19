@@ -62,12 +62,6 @@ def make_order(address_d, cart_d, email):
     return o
 
 
-# def make_fake_order_item(o:Order, persist=True):
-#     fake = Faker()
-#     for it in o.items:
-#         it.order = o
-
-
 def make_fake_order(persist=False):
     fake = Faker()
 

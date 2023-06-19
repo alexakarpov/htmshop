@@ -42,7 +42,6 @@ def deliverychoices(request):
 
 def payment_selection(request):
     session = request.session
-    logger.info(f"request is {request.method}")
     purchase = session.get("purchase")
     address = session.get("address")
     if not address:
@@ -109,8 +108,6 @@ def delivery_address(request):
         addresses = Address.objects.filter(customer=request.user).order_by("-default")
 
         if len(addresses) == 0:
-            logger.debug(f"no addresses yet")
-
             return HttpResponseRedirect(reverse("accounts:addresses"))
 
         if "address" not in request.session:
@@ -122,7 +119,6 @@ def delivery_address(request):
             logger.debug(f"Address in session:\n {address_json}")
             address_dict = json.loads(address_json)
             address_obj = Address.from_dict(address_dict)
-            logger.debug(f"address object: {address_obj}")
             addresses = [address_obj]
 
         return render(
@@ -142,7 +138,7 @@ def delivery_address(request):
 
         else:
             a = session.get("address")
-            logger.debug(f"Address in session:\n {a}")
+            logger.debug(f"address in session:\n {a}")
             address = json.loads(a)
             return render(
                 request,
@@ -201,7 +197,7 @@ def payment_with_token(request):
         "reference_id": refid,
     }
 
-    logger.info(f"posting create payment: {payload}")
+    logger.info(f"create_payment payload: {payload}")
 
     result = client.payments.create_payment(body=payload)
 
@@ -241,12 +237,14 @@ def payment_with_token(request):
             )
 
         order.save()
+
         new_key = order.order_key + "_" + str(order.id)
         order.order_key = new_key
         order.save()
+        logger.info(f"new order created: {order}, clearing the basket")
         basket.clear()
 
         return JsonResponse({"result": result.text})
-    elif result.is_error():
+    else:
         logger.error(result.errors)
         return JsonResponse({"status": result.status_code, "message": result.text})

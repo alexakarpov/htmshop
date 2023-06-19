@@ -6,7 +6,6 @@ from django.shortcuts import get_list_or_404, render
 
 from ecommerce.apps.inventory.models import ProductStock
 
-
 from .basket import Basket
 
 logger = logging.getLogger("console")
@@ -15,18 +14,16 @@ logger = logging.getLogger("console")
 def basket_summary(request):
     user = request.user
     basket = Basket(request)
-    logger.debug(f"summary of basket {basket}")
-    for sku, item in basket.basket.items():
-        logger.debug(f"summary > {sku}: {item}")
 
-    return render(
-        request, "basket/summary.html", {"basket": basket, "user": user}
-    )
+    for sku, item in basket.basket.items():
+        logger.debug(f"basket summary > {sku}: {item}")
+
+    return render(request, "basket/summary.html", {"basket": basket, "user": user})
 
 
 def basket_add(request):
     basket = Basket(request)
-    next = request.POST.get('next', '/')
+    next = request.POST.get("next", "/")
 
     if request.POST.get("action") == "post":
         product_qty = int(request.POST.get("productqty"))
@@ -38,7 +35,7 @@ def basket_add(request):
         basket.add(product=inventoryitem, qty=product_qty, sku=sku)
 
         basketqty = basket.__len__()
-        return JsonResponse({"qty": basketqty, 'next': next})
+        return JsonResponse({"qty": basketqty, "next": next})
 
 
 def basket_delete(request):
@@ -46,9 +43,6 @@ def basket_delete(request):
 
     if request.POST.get("action") == "post":
         sku_in = request.POST.get("sku")
-        logger.debug(
-            f"requested to remove {sku_in} from the cart in {basket} ({type(basket)}"
-        )
         basket.delete(sku=sku_in)
         basketqty = basket.__len__()
         baskettotal = basket.get_total()

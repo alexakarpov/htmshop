@@ -1,7 +1,7 @@
-import simplejson as json
 import logging
 from decimal import Decimal
 
+import simplejson as json
 from django.conf import settings
 
 from ecommerce.apps.inventory.models import ProductStock
@@ -33,15 +33,17 @@ class Basket:
         logger.debug(f"PRODUCT: {product}, qty:{qty}, sku:{sku}")
         if sku in self.basket:
             self.basket[sku]["qty"] = qty
-            self.basket[sku]["weight"] = json.dumps(product.weight),
+            self.basket[sku]["weight"] = (json.dumps(product.weight),)
         else:
             self.basket[sku] = {
                 "title": product.product.title,
                 "price": str(product.price),
                 "qty": qty,
-                "spec": product.productspecificationvalue_set.first().value if product.productspecificationvalue_set.first() else '',
+                "spec": product.productspecificationvalue_set.first().value
+                if product.productspecificationvalue_set.first()
+                else "",
                 "type": str(product.product_type),
-                "weight": json.dumps(product.weight)
+                "weight": json.dumps(product.weight),
             }
 
         self.save()
@@ -53,6 +55,7 @@ class Basket:
         Need to rewrite this, so that the template has access to the variants,
         which are not DB-based, but only live in the session.
         """
+        logger.debug("Basket.__iter__")
         skus = self.basket.keys()
         skus = ProductStock.objects.filter(sku__in=skus)
         basket = self.basket.copy()
@@ -63,20 +66,20 @@ class Basket:
         for item in basket.values():
             item["price"] = Decimal(item["price"])
             item["total_price"] = item["price"] * item["qty"]
-            yield   item
+            yield item
 
     def __len__(self):
         """
         Get the basket data and count the qty of items
         """
-        logger.debug("basket __len__ - why?")
+        logger.debug("Basket.__len__")
         return sum(item["qty"] for item in self.basket.values())
 
     def update(self, sku, qty):
         """
         Update values in session data
         """
-        
+        logger.debug("Basket.update")
         if sku in self.basket:
             self.basket[sku]["qty"] = qty
         self.save()
@@ -85,8 +88,7 @@ class Basket:
         return sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
 
     def get_total(self, deliveryprice=0):
-        subtotal = sum(Decimal(item["price"]) * item["qty"]
-                       for item in self.basket.values())
+        subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
         total = subtotal + Decimal(deliveryprice)
         return total
 

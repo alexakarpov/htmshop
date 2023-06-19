@@ -21,6 +21,7 @@ shipengine = ShipEngine(
     }
 )
 
+
 def init_shipment_dict():
     return {
         "rate_options": {
@@ -73,10 +74,10 @@ def get_rates(engine, shipment):
 
 
 def shipping_choices(basket: Basket, address_d: dict):
-    logger.debug(f"getting shipping choices for basket:\n{basket}")
     shipment = make_shipment(basket, address_d)
     logger.debug(f"built shipment:\n{shipment}")
     rates = []
+    # TODO: go back to calling SE
     # try:
     #     se_response = get_rates(shipengine, shipment)
     #     rates = se_response.get("rate_response").get("rates")
