@@ -1,5 +1,3 @@
 Hi {{ user }},
-
-Your account has successfully created. Please click below link to activate your account
-
+Your account has successfully created. Please click the link below to activate your account
 http://{{ domain }}{% url 'accounts:activate' uidb64=uid token=token %}

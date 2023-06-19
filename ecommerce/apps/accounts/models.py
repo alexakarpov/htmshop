@@ -3,8 +3,11 @@ import logging
 import uuid
 
 from django.conf import settings
-from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
-                                        PermissionsMixin)
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import validate_email
@@ -23,7 +26,6 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError(_("You must provide a valid email address"))
 
     def create_superuser(self, email, password, **other_fields):
-
         other_fields.setdefault("is_staff", True)
         other_fields.setdefault("is_superuser", True)
         other_fields.setdefault("is_active", True)
@@ -37,19 +39,16 @@ class CustomAccountManager(BaseUserManager):
             email = self.normalize_email(email)
             self.validateEmail(email)
         else:
-            raise ValueError(
-                _("Superuser Account: You must provide an email address"))
+            raise ValueError(_("Superuser Account: You must provide an email address"))
 
         return self.create_user(email, password, **other_fields)
 
     def create_user(self, email, password, **other_fields):
-
         if email:
             email = self.normalize_email(email)
             self.validateEmail(email)
         else:
-            raise ValueError(
-                _("Customer Account: You must provide an email address"))
+            raise ValueError(_("Customer Account: You must provide an email address"))
 
         email = self.normalize_email(email)
         user = self.model(email=email, **other_fields)
@@ -60,10 +59,8 @@ class CustomAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email address"), unique=True)
-    first_name = models.CharField(
-        _("first name"), max_length=20, blank=False, null=False)
-    last_name = models.CharField(
-        _("last name"), max_length=20, blank=False, null=False)
+    first_name = models.CharField(_("first name"), max_length=20, blank=False, null=False)
+    last_name = models.CharField(_("last name"), max_length=20, blank=False, null=False)
     phone = models.CharField(max_length=20, blank=True)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
@@ -81,7 +78,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = "Accounts"
 
     def email_user(self, subject, message):
-
         logger.debug(f"emailing '{subject}' to {self.email}")
         send_mail(
             subject,
@@ -111,21 +107,20 @@ class Address(models.Model):
     """
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    customer = models.ForeignKey(Account, verbose_name=_(
-        "Account"), on_delete=models.CASCADE)
+    customer = models.ForeignKey(Account, verbose_name=_("Account"), on_delete=models.CASCADE)
     full_name = models.CharField(_("Full Name"), max_length=25)
     phone = models.CharField(_("Phone Number"), max_length=20)
     postcode = models.CharField(_("Postal Code"), max_length=10)
     address_line = models.CharField(_("Address Line 1"), max_length=50)
-    address_line2 = models.CharField(
-        _("Address Line 2"), max_length=50, blank=True)
+    address_line2 = models.CharField(_("Address Line 2"), max_length=50, blank=True)
     town_city = models.CharField(_("Town/City"), max_length=50)
-    state_province = models.CharField(
-        _("State/Province"), max_length=10, blank=True)
+    state_province = models.CharField(_("State/Province"), max_length=10, blank=True)
     country = models.CharField(
-        _("Country"), max_length=2, default="US", choices=country_names.items())
+        _("Country"), max_length=2, default="US", choices=country_names.items()
+    )
     delivery_instructions = models.CharField(
-        _("Delivery Instructions"), max_length=255, blank=True)
+        _("Delivery Instructions"), max_length=255, blank=True
+    )
     created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated at"), auto_now=True)
     default = models.BooleanField(_("Default"), default=False)
@@ -139,7 +134,7 @@ class Address(models.Model):
 
     def from_dict(a_dict):
         a = Address()
-        a.full_name = a_dict.get("full_name"),
+        a.full_name = a_dict.get("full_name")
         a.address_line = a_dict.get("address_line1")
         a.address_line2 = a_dict.get("address_line2")
         a.phone = a_dict.get("phone")
