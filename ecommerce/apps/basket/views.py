@@ -8,15 +8,15 @@ from ecommerce.apps.inventory.models import ProductStock
 
 from .basket import Basket
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 
 def basket_summary(request):
     user = request.user
     basket = Basket(request)
 
-    for sku, item in basket.basket.items():
-        logger.debug(f"basket summary > {sku}: {item}")
+    # for sku, item in basket.basket.items():
+    #     logger.debug(f"basket summary > {sku}: {item}")
 
     return render(request, "basket/summary.html", {"basket": basket, "user": user})
 
