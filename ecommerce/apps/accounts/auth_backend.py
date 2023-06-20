@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 UserModel = get_user_model()
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 
 class EmailAuthBackend(object):

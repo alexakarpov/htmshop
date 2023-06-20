@@ -6,7 +6,7 @@ from django.conf import settings
 
 from ecommerce.apps.inventory.models import ProductStock
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 
 class Basket:

@@ -18,7 +18,7 @@ from .forms import RegistrationForm, UserAddressForm, UserEditForm
 from .models import Address
 from .tokens import account_activation_token
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 UserModel = get_user_model()
 

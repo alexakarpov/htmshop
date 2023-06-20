@@ -31,7 +31,7 @@ from ecommerce.constants import ORDER_KEY_LENGTH
 
 config = dotenv_values()
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 client = Client(access_token=config["SQUARE_ACCESS_TOKEN"], environment="sandbox")
 

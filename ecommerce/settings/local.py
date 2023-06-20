@@ -33,21 +33,19 @@ MEDIA_ROOT = BASE_DIR / "media/"
 
 LOGGING = {
     "version": 1,
-    "formatters": {
-        "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
-        },
-        "simple": {"format": "%(levelname)s %(message)s"},
-    },
+    "disable_existing_loggers": False,
     "handlers": {
-        "console": {"level": "DEBUG", "class": "logging.StreamHandler", "formatter": "simple"},
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+        },
     },
     "loggers": {
         "django": {
             "handlers": ["console"],
             "level": "DEBUG",
             "propagate": True,
-        }
+        },
     },
 }
 

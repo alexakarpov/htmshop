@@ -4,14 +4,13 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-
 from mptt.models import MPTTModel, TreeForeignKey
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 
 class Category(MPTTModel):
-    
+
     """
     Category Table implimented with mptt
     """
@@ -22,17 +21,17 @@ class Category(MPTTModel):
         max_length=255,
         unique=True,
     )
-    slug = models.SlugField(
-        verbose_name=_("Category safe URL"), max_length=255, unique=True
-    )
+    slug = models.SlugField(verbose_name=_("Category safe URL"), max_length=255, unique=True)
 
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    parent = TreeForeignKey(
+        "self", on_delete=models.CASCADE, null=True, blank=True, related_name="children"
+    )
 
     is_active = models.BooleanField(default=True)
 
     class MPTTMeta:
-        order_insertion_by = ['name']
-        
+        order_insertion_by = ["name"]
+
     class Meta:
         # enforcing that there can only be one category under a parent with same slug
         unique_together = (
@@ -64,9 +63,7 @@ class Product(models.Model):
     required by it's Product Type
     """
 
-    category = models.ForeignKey(
-        Category, null=True, blank=True, on_delete=models.RESTRICT
-    )
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.RESTRICT)
     title = models.CharField(
         verbose_name=_("title"),
         help_text=_("Required"),
@@ -82,9 +79,7 @@ class Product(models.Model):
         help_text=_("Change product visibility"),
         default=True,
     )
-    created_at = models.DateTimeField(
-        _("Created at"), auto_now_add=True, editable=False
-    )
+    created_at = models.DateTimeField(_("Created at"), auto_now_add=True, editable=False)
 
     users_wishlist = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="user_wishlist", blank=True
@@ -110,7 +105,7 @@ class Product(models.Model):
         These are actually ProductInventory items related to this Product
         """
         logger.debug(f"getting variants for {self}")
-        return self.productstock_set.filter(product_id=self.id).order_by('price')
+        return self.productstock_set.filter(product_id=self.id).order_by("price")
 
     def __str__(self):
         return f"{self.title}"

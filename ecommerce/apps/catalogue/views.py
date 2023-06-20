@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render
 
 from .models import Category, Product
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 
 def catalogue_index(request):

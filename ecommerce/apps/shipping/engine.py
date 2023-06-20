@@ -10,7 +10,7 @@ from ecommerce.apps.basket.basket import Basket, get_weight
 
 from .choice import rate_to_choice
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 shipengine = ShipEngine(
     {

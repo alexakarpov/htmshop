@@ -2,10 +2,7 @@ import logging
 
 from attr import attrs
 from django import forms
-from django.contrib.auth import (
-    authenticate,
-    get_user_model,
-)
+from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import (
     AuthenticationForm,
     PasswordResetForm,
@@ -19,7 +16,7 @@ from .models import Address
 
 UserModel = get_user_model()
 
-logger = logging.getLogger("console")
+logger = logging.getLogger("django")
 
 
 class UserAddressForm(forms.ModelForm):
@@ -59,9 +56,7 @@ class UserAddressForm(forms.ModelForm):
         self.fields["postcode"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Postal code")}
         )
-        self.fields["country"].widget.attrs.update(
-            {"class": "form-control mb-2"}
-        )
+        self.fields["country"].widget.attrs.update({"class": "form-control mb-2"})
         self.fields["address_line2"].required = False
 
 
@@ -103,9 +98,7 @@ class EmailAuthenticationForm(forms.Form):
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
         if email is not None and password:
-            self.user_cache = authenticate(
-                self.request, email=email, password=password
-            )
+            self.user_cache = authenticate(self.request, email=email, password=password)
             if self.user_cache is None:
                 raise self.get_invalid_login_error()
             else:
@@ -210,9 +203,7 @@ class RegistrationForm(forms.ModelForm):
 
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
 
-    password2 = forms.CharField(
-        label="Repeat password", widget=forms.PasswordInput
-    )
+    password2 = forms.CharField(label="Repeat password", widget=forms.PasswordInput)
 
     class Meta:
         model = UserModel
@@ -227,9 +218,7 @@ class RegistrationForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data["email"]
         if UserModel.objects.filter(email=email).exists():
-            raise forms.ValidationError(
-                "Please use another Email, that is already taken"
-            )
+            raise forms.ValidationError("Please use another Email, that is already taken")
         return email
 
     def __init__(self, *args, **kwargs):
@@ -265,7 +254,6 @@ class RegistrationForm(forms.ModelForm):
 
 
 class PwdResetForm(PasswordResetForm):
-
     email = forms.EmailField(
         max_length=254,
         widget=forms.TextInput(
@@ -309,7 +297,6 @@ class PwdResetConfirmForm(SetPasswordForm):
 
 
 class UserEditForm(forms.ModelForm):
-
     email = forms.EmailField(
         label="Account email (can not be changed)",
         max_length=200,
