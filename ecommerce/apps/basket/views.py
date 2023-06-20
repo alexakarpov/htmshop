@@ -12,13 +12,7 @@ logger = logging.getLogger("django")
 
 
 def basket_summary(request):
-    user = request.user
-    basket = Basket(request)
-
-    # for sku, item in basket.basket.items():
-    #     logger.debug(f"basket summary > {sku}: {item}")
-
-    return render(request, "basket/summary.html", {"basket": basket, "user": user})
+    return render(request, "basket/summary.html", {})
 
 
 def basket_add(request):
