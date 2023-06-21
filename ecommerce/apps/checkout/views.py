@@ -23,6 +23,7 @@ config = dotenv_values()
 
 logger = logging.getLogger("django")
 
+# TODO: switch to prod
 square_client = Client(access_token=config["SQUARE_ACCESS_TOKEN"], environment="sandbox")
 
 
@@ -166,9 +167,9 @@ def guest_address(request):
 @api_view(["POST"])
 def payment_with_token(request):
     token = request.data.get("payload").get("source_id")
-    if not token:
+    if not token:  # is it even possible though?
         logger.error("payment_with_token must have a token (source_id)")
-        res = JsonResponse({"message": "Token missing"}, status=400)
+        res = JsonResponse({"success": False, "message": "Token missing"}, status=400)
         return res
     session = request.session
     total_s = session.get("purchase")["total"]
@@ -188,10 +189,11 @@ def payment_with_token(request):
 
     logger.info(f"create_payment payload: {payload}")
 
-    result = client.payments.create_payment(body=payload)
+    result = square_client.payments.create_payment(body=payload)
+
+    logger.info(f"Square API call resulted in:\n{result.body}")
 
     if result.is_success():
-        logger.info(result.body)
         basket = Basket(request)
         address_json = session["address"]
         address_d = json.loads(request.session["address"])
@@ -232,8 +234,9 @@ def payment_with_token(request):
         order.save()
         logger.info(f"new order created: {order}, clearing the basket")
         basket.clear()
+        response = JsonResponse({"result": result.body, "success": True})
 
-        return JsonResponse({"result": result.text})
+        return response
     else:
         logger.error(result.errors)
-        return JsonResponse({"status": result.status_code, "message": result.text})
+        return JsonResponse({"success": False, "message": result.text})

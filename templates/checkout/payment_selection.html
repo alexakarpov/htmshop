@@ -8,187 +8,191 @@
     <script type="text/javascript"
             src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
     <script>
-    // TODO: replace with Production valies
-    const appId = '{{ app_id }}'
-    const locationId = '{{ location_id }}'
+      // TODO: replace with Production valies
+      const appId = '{{ app_id }}'
+      const locationId = '{{ location_id }}'
 
-    // ===== BEGIN OF OUTER LEVEL FUNCTION DECLARATIONS =====
-    async function initializeCard(payments) {
-      const card = await payments.card();
-      await card.attach('#card-container');
+      async function initializeCard(payments) {
+        const card = await payments.card();
+        await card.attach('#card-container');
 
-      return card;
-    }
-
-    async function createPayment(token, verificationToken) {
-      const d = {
-        locationId,
-        source_id: token,
-        verificationToken,
+        return card;
       }
-      $.ajax({
-        type: 'POST',
-        url: '{% url "checkout:token_payment" %}',
-        data: d,
-        success: function (json) {
-          console.debug("payment created", JSON.stringify(json))
-        },
-        error: function (xhr, errmsg, err) {
-          console.error("PAYMENT POST failed", errmsg)
-        }
-      })
-    }
 
-    async function tokenize(paymentMethod) {
-      const tokenResult = await paymentMethod.tokenize();
-      if (tokenResult.status === 'OK') {
-        return tokenResult.token;
-      } else {
-        let errorMessage = `Tokenization failed with status: ${tokenResult.status}`;
-        if (tokenResult.errors) {
-          errorMessage += ` and errors: ${JSON.stringify(
-            tokenResult.errors
-          )}`;
-        }
+      async function createPayment(token, verificationToken) {
+        const payload = { locationId, source_id: token, verificationToken }
 
-        throw new Error(errorMessage);
-      }
-    }
-
-    // Required in SCA Mandated Regions: Learn more at https://developer.squareup.com/docs/sca-overview
-    async function verifyBuyer(payments, token) {
-      console.log("in verifyByer")
-      let fullName = givenName = familyName = addressLine1 = addressLine2 = city = zip = postalCode = country = region = ''
-      if ($('#billing-is-shipping_id')[0].checked) {
-        fullName = '{{ full_name }}'
-        givenName = fullName.split(' ')[0]
-        familyName = fullName.split(' ')[1]
-        address_line1 = '{{ address_line1 }}'
-        address_line2 = '{{ address_line2 }}'
-        city = '{{ city_locality }}'
-        zip = '{{ postal_code }}'
-        country = '{{ country_code }}'
-        region = '{{ state_province }}'
-      } else {
-        fullName = $("#full-name").val()
-        givenName = fullName.split(' ')[0]
-        familyName = fullName.split(' ')[1]
-        addressLine1 = $("#address-line1").val()
-        addressLine2 = $("#address-line2").val()
-        city = $("#town-city").val()
-        zip =  $("#postal-code").val()
-        region = $("#region").val()
-        country = $("#country").val()
-      }
-      const verificationDetails = {
-          amount: '{{ total }}',
-          billingContact: {
-            addressLines: [addressLine1, addressLine2],
-            familyName,
-            givenName,
-            region,
-            city,
-            zip,
-            country
+        js_payload = JSON.stringify({payload})
+        const paymentResponse = await fetch('{% url "checkout:token_payment" %}', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
           },
-          currencyCode: 'USD',
-          intent: 'CHARGE',
-      };
+          body: js_payload
+        })
 
-      console.log(`verification details should be ready for assembling: ${verificationDetails}`)
-      const verificationResults = await payments.verifyBuyer(
-        token,
-        verificationDetails
-      );
-      return verificationResults.token;
-    }
+        if (paymentResponse.ok) {
+          return paymentResponse.json(); // we control the structure of this response
+        }
 
-    // status is either SUCCESS or FAILURE;
-    function displayPaymentResults(status) {
-      const statusContainer = document.getElementById(
-        'payment-status-container'
-      );
-      if (status === 'SUCCESS') {
-        statusContainer.classList.remove('is-failure');
-        statusContainer.classList.add('is-success');
-      } else {
-        statusContainer.classList.remove('is-success');
-        statusContainer.classList.add('is-failure');
+        const errorBody = await paymentResponse.text();
+        throw new Error(errorBody);
       }
 
-      statusContainer.style.visibility = 'visible';
-    }
-    // ===== END OF OUTER LEVEL FUNCTION DECLARATIONS =====
+      async function tokenize(paymentMethod) {
+        const tokenResult = await paymentMethod.tokenize();
+        if (tokenResult.status === 'OK') {
+          return tokenResult.token;
+        } else {
+          let errorMessage = `Tokenization failed with status: ${tokenResult.status}`;
+          if (tokenResult.errors) {
+            errorMessage += ` and errors: ${JSON.stringify(
+              tokenResult.errors
+            )}`;
+          }
 
-    // AND GO!
-    // when the DOM is loaded...
-    document.addEventListener('DOMContentLoaded', async function () {
-      // first check if Square object is ready
-      if (!window.Square) {
-        throw new Error('Square.js failed to load properly');
+          throw new Error(errorMessage);
+        }
       }
 
-      let payments;
-      try {
-        // prepare the Payments API
-        payments = window.Square.payments(appId, locationId);
-      } catch {
+      // Required in SCA Mandated Regions: Learn more at https://developer.squareup.com/docs/sca-overview
+      async function verifyBuyer(payments, token) {
+        let fullName = givenName = familyName = addressLine1 = addressLine2 = city = zip = postalCode = country = region = ''
+        if ($('#billing-is-shipping_id')[0].checked) {
+          fullName = '{{ full_name }}'
+          givenName = fullName.split(' ')[0]
+          familyName = fullName.split(' ')[1]
+          address_line1 = '{{ address_line1 }}'
+          address_line2 = '{{ address_line2 }}'
+          city = '{{ city_locality }}'
+          zip = '{{ postal_code }}'
+          country = '{{ country_code }}'
+          region = '{{ state_province }}'
+        } else {
+          fullName = $("#full-name").val()
+          givenName = fullName.split(' ')[0]
+          familyName = fullName.split(' ')[1]
+          addressLine1 = $("#address-line1").val()
+          addressLine2 = $("#address-line2").val()
+          city = $("#town-city").val()
+          zip =  $("#postal-code").val()
+          region = $("#region").val()
+          country = $("#country").val()
+        }
+        const verificationDetails = {
+            amount: '{{ total }}',
+            billingContact: {
+              addressLines: [addressLine1, addressLine2],
+              familyName,
+              givenName,
+              region,
+              city,
+              zip,
+              country
+            },
+            currencyCode: 'USD',
+            intent: 'CHARGE',
+        };
+
+        const verificationResults = await payments.verifyBuyer(
+          token,
+          verificationDetails
+        );
+        return verificationResults.token;
+      }
+
+      // status is either SUCCESS or FAILURE;
+      function displayPaymentResults(status) {
         const statusContainer = document.getElementById(
           'payment-status-container'
         );
-        statusContainer.className = 'missing-credentials';
+        if (status === 'SUCCESS') {
+          statusContainer.classList.remove('is-failure');
+          statusContainer.classList.add('is-success');
+        } else {
+          statusContainer.classList.remove('is-success');
+          statusContainer.classList.add('is-failure');
+        }
+
         statusContainer.style.visibility = 'visible';
-        return;
       }
 
-      let card;
-      try {
-        card = await initializeCard(payments); // empty card initialized
-      } catch (e) {
-        console.error('Initializing Card failed', e);
-        return;
-      }
-
-      async function handlePaymentMethodSubmission(event, card) {
-        event.preventDefault();
-        console.log("the inner handler function execution began")
-        try {
-          // disable the submit button as we await tokenization and make a payment request.
-          cardButton.disabled = true;
-          const token = await tokenize(card);
-          const verificationToken = await verifyBuyer(payments, token);
-          const paymentResults = await createPayment(
-            token,
-            verificationToken
-          );
-          displayPaymentResults('SUCCESS');
+      function redirectHomeAfter(ms) {
           setTimeout(() => {
             window.location.replace('{% url "catalogue:home" %}')
-          }, 2000);
-        } catch (e) {
-          cardButton.disabled = false;
-          displayPaymentResults('FAILURE');
-          console.error(e.message);
-        }
+          }, ms);
       }
 
-      const cardButton = document.getElementById('card-button');
-      // whencard button is clicked, the event, together with the initialized void card, is passed to the inner function
-      cardButton.addEventListener('click', async function (event) {
-        await handlePaymentMethodSubmission(event, card);
-      });
+      // ===== END OF OUTER LEVEL FUNCTION DECLARATIONS =====
 
-      $('#billing-is-shipping_id').on('change', function (e) {
-        // this will contain a reference to the checkbox   
-        if (this.checked) {
-          $("#billingaddress").hide()
+      // AND GO!
+      // when the DOM is loaded...
+      document.addEventListener('DOMContentLoaded', async function () {
+        // first check if Square object is ready
+        if (!window.Square) {
+          throw new Error('Square.js failed to load properly');
         }
-        else {
-          $("#billingaddress").show()
-        }
-      });
-    });
 
+        let payments;
+        try {
+          // prepare the Payments API
+          payments = window.Square.payments(appId, locationId);
+        } catch {
+          const statusContainer = document.getElementById(
+            'payment-status-container'
+          );
+          statusContainer.className = 'missing-credentials';
+          statusContainer.style.visibility = 'visible';
+          return;
+        }
+
+        let card;
+        try {
+          card = await initializeCard(payments); // empty card initialized
+        } catch (e) {
+          console.error('Initializing Card failed', e);
+          return;
+        }
+
+        async function handlePaymentMethodSubmission(event, card) {
+          event.preventDefault();
+          try {
+            // disable the submit button as we await tokenization and make a payment request.
+            cardButton.disabled = true;
+            const token = await tokenize(card);
+            const verificationToken = await verifyBuyer(payments, token);
+            let paymentResults = await createPayment(
+              token,
+              verificationToken
+            );
+            if (paymentResults.success) {
+              redirectHomeAfter(5000)
+            } else {
+              console.log(paymentResults)
+            }
+          } catch (e) {
+            cardButton.disabled = false;
+            console.error(e.message);
+          }
+        }
+
+        const cardButton = document.getElementById('card-button');
+        // whencard button is clicked, the event, together with the initialized void card, is passed to the inner function
+        cardButton.addEventListener('click', async function (event) {
+          handlePaymentMethodSubmission(event, card);
+        });
+
+        $('#billing-is-shipping_id').on('change', function (e) {
+          // this will contain a reference to the checkbox   
+          if (this.checked) {
+            $("#billingaddress").hide()
+          }
+          else {
+            $("#billingaddress").show()
+          }
+        });
+      });
     </script>
   </head>
   <div class="container">
