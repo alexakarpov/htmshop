@@ -1,7 +1,3 @@
-# from .forms import StaxPaymentForm
-# from square.client import Client
-# import hashlib
-
 import json
 import logging
 import random
@@ -9,12 +5,11 @@ import string
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.views.decorators.csrf import csrf_exempt
 from dotenv import dotenv_values
+from rest_framework.decorators import api_view
 from square.client import Client
 
 from ecommerce.apps.accounts.forms import UserAddressForm
@@ -24,16 +19,11 @@ from ecommerce.apps.inventory.models import ProductStock
 from ecommerce.apps.orders.models import Order, OrderItem
 from ecommerce.constants import ORDER_KEY_LENGTH
 
-# from uuid import uuid4
-
-
-# from .forms import BillingAddressForm
-
 config = dotenv_values()
 
 logger = logging.getLogger("django")
 
-client = Client(access_token=config["SQUARE_ACCESS_TOKEN"], environment="sandbox")
+square_client = Client(access_token=config["SQUARE_ACCESS_TOKEN"], environment="sandbox")
 
 
 def deliverychoices(request):
@@ -173,10 +163,9 @@ def guest_address(request):
 
 
 # https://developer.squareup.com/forums/t/django-csrf-middleware-token-missing/6959
-@csrf_exempt
+@api_view(["POST"])
 def payment_with_token(request):
-    post_data = request.POST
-    token = post_data.get("source_id")
+    token = request.data.get("payload").get("source_id")
     if not token:
         logger.error("payment_with_token must have a token (source_id)")
         res = JsonResponse({"message": "Token missing"}, status=400)
