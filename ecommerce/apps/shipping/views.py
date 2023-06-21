@@ -1,20 +1,18 @@
 import json
 import logging
-from datetime import datetime, timedelta, date
+from datetime import date, datetime, timedelta
 
 from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view, renderer_classes
-from rest_framework_xml.renderers import XMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_xml.renderers import XMLRenderer
 
-from ecommerce.apps.accounts.models import Address
-from ecommerce.apps.orders.models import Order
 from ecommerce.apps.basket.basket import Basket
+from ecommerce.apps.orders.models import Order
 from ecommerce.apps.shipping.choice import split_tiers
 from ecommerce.apps.shipping.engine import shipping_choices
-
 from ecommerce.constants import SS_DT_FORMAT
 
 from .serializers import OrderSerializer, ShippingChoiceSerializer
@@ -23,8 +21,8 @@ logger = logging.getLogger("django")
 
 
 class OrdersXMLRenderer(XMLRenderer):
-    root_tag_name = 'Orders'
-    item_tag_name = 'Order'
+    root_tag_name = "Orders"
+    item_tag_name = "Order"
 
 
 class OrderExportView(APIView):
@@ -32,8 +30,10 @@ class OrderExportView(APIView):
 
     def get(self, request):
         logger.info(f"SS GET, action={request.GET.get('action')}, page={request.GET.get('page')}")
-        start_date_str = request.GET.get('start_date') or (date.today() - timedelta(days = 1)).strftime(SS_DT_FORMAT)
-        end_date_str = request.GET.get('end_date') or date.today().strftime(SS_DT_FORMAT)
+        start_date_str = request.GET.get("start_date") or (
+            date.today() - timedelta(days=1)
+        ).strftime(SS_DT_FORMAT)
+        end_date_str = request.GET.get("end_date") or date.today().strftime(SS_DT_FORMAT)
         start_date = datetime.strptime(start_date_str, SS_DT_FORMAT)
         end_date = datetime.strptime(end_date_str, SS_DT_FORMAT)
 
