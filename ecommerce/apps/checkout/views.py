@@ -213,7 +213,6 @@ def payment_with_token(request):
             postal_code=address_d.get("postal_code"),
             country_code=address_d.get("country_code"),
             total_paid=total_i / 100,
-            order_key=refid,
             payment_option="Square",
             paid=True,
         )
@@ -227,10 +226,6 @@ def payment_with_token(request):
                 quantity=item["qty"],
             )
 
-        order.save()
-
-        new_key = order.order_key + "_" + str(order.id)
-        order.order_key = new_key
         order.save()
         logger.info(f"new order created: {order}, clearing the basket")
         basket.clear()
