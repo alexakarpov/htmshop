@@ -1,10 +1,11 @@
-import re
 import logging
+import re
 from abc import ABC
+
+from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib import messages
 
 from ecommerce.apps.catalogue.models import Product
 from ecommerce.constants import PRODUCT_TYPE_MOUNTED_ICON
@@ -40,9 +41,7 @@ class ProductSpecification(models.Model):
     """
 
     product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
-    name = models.CharField(
-        verbose_name=_("Name"), help_text=_("Required"), max_length=55
-    )
+    name = models.CharField(verbose_name=_("Name"), help_text=_("Required"), max_length=55)
 
     class Meta:
         verbose_name = _("specification")
@@ -70,16 +69,11 @@ class ProductStock(models.Model):
     restock_point = models.PositiveIntegerField(blank=True, null=True)
     target_amount = models.PositiveIntegerField(blank=False, null=False)
 
-    wrapping_qty = models.IntegerField(
-        default=0, verbose_name="Wrapping room stock")
-    sanding_qty = models.IntegerField(
-        default=0, verbose_name="Sanding room stock")
-    painting_qty = models.IntegerField(
-        default=0, verbose_name="Painting room stock")
+    wrapping_qty = models.IntegerField(default=0, verbose_name="Wrapping room stock")
+    sanding_qty = models.IntegerField(default=0, verbose_name="Sanding room stock")
+    painting_qty = models.IntegerField(default=0, verbose_name="Painting room stock")
 
-    weight = models.DecimalField(
-        decimal_places=2, max_digits=10, help_text="ounces"
-    )  # in ounces
+    weight = models.DecimalField(decimal_places=2, max_digits=10, help_text="ounces")  # in ounces
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
@@ -92,7 +86,7 @@ class ProductStock(models.Model):
         Print supply for a SKU such as A-9 is the number of A-9P units located in wrapping room
         """
         product_sku = self.sku
-        print_sku = product_sku + 'P' if product_sku[-1] != "P" else product_sku
+        print_sku = product_sku + "P" if product_sku[-1] != "P" else product_sku
         logger.debug(f"stock of {product_sku} looking up {print_sku}")
         try:
             print = ProductStock.objects.get(sku=print_sku)
@@ -124,29 +118,28 @@ class ProductStock(models.Model):
         adjust this stock object's quantity between wrapping, sanding and painting rooms
         move to/from printing supply involves a different SKU so will not be handled by this alone
         """
-        logger.debug(
-            f"settling move: {qty} of {self} from {from_room} to {to_room}")
+        logger.debug(f"settling move: {qty} of {self} from {from_room} to {to_room}")
         from_room = from_room.lower() if from_room else ""
         to_room = to_room.lower() if to_room else ""
 
         # increase destination qty
-        if to_room.find('wrap') > -1:
+        if to_room.find("wrap") > -1:
             self.wrapping_add(qty)
-        elif to_room.find('paint') > -1:
+        elif to_room.find("paint") > -1:
             self.painting_add(qty)
-        elif to_room.find('sand') > -1:
+        elif to_room.find("sand") > -1:
             self.sanding_add(qty)
-        elif to_room.find('print') > -1:
+        elif to_room.find("print") > -1:
             self.wrapping_add(qty)
         else:
             logger.debug("to nowhere, nothing to add")
 
         # decrease source qty
-        if from_room.find('wrap') > -1:
+        if from_room.find("wrap") > -1:
             self.wrapping_remove(qty)
-        elif from_room.find('paint') > -1:
+        elif from_room.find("paint") > -1:
             self.painting_remove(qty)
-        elif from_room.find('sand') > -1:
+        elif from_room.find("sand") > -1:
             self.sanding_remove(qty)
         # on a move from printing to wrapping - we decrease Print SKU, and increase the Mounted
         else:
@@ -155,7 +148,7 @@ class ProductStock(models.Model):
         return True
 
     def __str__(self):
-        return f"{self.sku} ({self.product} - {self.product_type}) X p{self.painting_qty}|s{self.sanding_qty}|w{self.wrapping_qty} + {self.get_print_supply_count()}"
+        return f"{self.sku} ({self.product} - {self.product_type})"
 
 
 class ProductSpecificationValue(models.Model):
@@ -164,9 +157,7 @@ class ProductSpecificationValue(models.Model):
     and ProductInventory entities
     """
 
-    specification = models.ForeignKey(
-        ProductSpecification, on_delete=models.CASCADE
-    )
+    specification = models.ForeignKey(ProductSpecification, on_delete=models.CASCADE)
 
     sku = models.ForeignKey(ProductStock, on_delete=models.CASCADE)
 
@@ -189,15 +180,11 @@ def get_or_create_stock_by_sku(sku: str) -> ProductStock:
 
 
 def get_print_supply_by_sku(sku: str) -> ProductStock:
-    return ProductStock.objects.filter(
-        sku__icontains=sku + "p"
-    ).first()
+    return ProductStock.objects.filter(sku__icontains=sku + "p").first()
 
 
 def get_stock_by_type(type: str) -> ProductStock:
-    return ProductStock.objects.filter(
-        product_type__name__icontains=type
-    )
+    return ProductStock.objects.filter(product_type__name__icontains=type)
 
 
 class WorkItem(ABC):
@@ -225,16 +212,14 @@ class MountingWorkItem(WorkItem):
             if smatch:
                 self_letter, self_num = smatch.groups()
             else:
-                logger.error(
-                    f"{self.sku} doesn't match the expected SKU pattern")
+                logger.error(f"{self.sku} doesn't match the expected SKU pattern")
                 return True
 
             omatch = sku_reg.match(other.sku)
             if omatch:
                 other_letter, other_num = omatch.groups()
             else:
-                logger.error(
-                    f"{other.sku} doesn't match the expected SKU pattern")
+                logger.error(f"{other.sku} doesn't match the expected SKU pattern")
                 return True
 
             if self_letter > other_letter:
@@ -245,8 +230,7 @@ class MountingWorkItem(WorkItem):
             logger.error(f"either {self_num} or {other_num} are not numeric")
             return True
         except:
-            logger.error(
-                f"something else blew up matching {self_num} or {other_num}")
+            logger.error(f"something else blew up matching {self_num} or {other_num}")
             return True
         return True
 

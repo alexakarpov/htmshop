@@ -14,12 +14,12 @@ class Order(models.Model):
         related_name="order_user",
         null=True,
     )
-    full_name = models.CharField(max_length=150, null=False, blank=False)
-    email = models.EmailField(max_length=254, null=False, blank=False)
-    address1 = models.CharField(max_length=250, null=False, blank=False)
+    full_name = models.CharField(max_length=150)
+    email = models.EmailField(max_length=254)
+    address1 = models.CharField(max_length=250)
     address2 = models.CharField(max_length=250, null=True, blank=True)
-    city = models.CharField(max_length=100, null=False, blank=False)
-    phone = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100, null=True, blank=True)
     postal_code = models.CharField(max_length=20)
     country_code = models.CharField(max_length=4, blank=True, default="US")
     created = models.DateTimeField(auto_now_add=True)
