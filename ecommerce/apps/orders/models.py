@@ -5,6 +5,7 @@ from django.db import models
 from faker import Faker
 
 from ecommerce.apps.inventory.models import ProductStock
+from ecommerce.constants import ORDER_STATUS
 
 
 class Order(models.Model):
@@ -28,6 +29,7 @@ class Order(models.Model):
     payment_option = models.CharField(max_length=200, blank=True)
     paid = models.BooleanField(default=False)
     shipped = models.BooleanField(default=False)
+    status = models.CharField(choices=ORDER_STATUS, default="PENDING", max_length=10)
 
     class Meta:
         ordering = ("-created",)
