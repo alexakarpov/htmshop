@@ -2,6 +2,8 @@
 {% block content %}
     <h2>Orders</h2>
     <ul>
-        {% for order in object_list %}<li>{{ order.order_key }}</li>{% endfor %}
+        {% for order in object_list %}
+            <li>{% include "order_page.html" with order=order %}</li>
+        {% endfor %}
     </ul>
 {% endblock content %}

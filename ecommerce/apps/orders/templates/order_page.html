@@ -1,0 +1,19 @@
+<table style="page-break-after: always;">
+    <th>ID</th>
+    <th>Full name</th>
+    <th>Address line 1</th>
+    <th>Address line 2</th>
+    <th>City</th>
+    <th>Province</th>
+    <th>Zip</th>
+    <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.full_name }}</td>
+        <td>{{ order.address_line1 }}</td>
+        <td>{{ order.address_line2 }}</td>
+        <td>{{ order.city }}</td>
+        <td>{{ order.state_province }}</td>
+        <td>{{ order.postal_code }}</td>
+    </tr>
+    by {{ order.full_name }} ({{ order.get_status_display }})
+</table>
