@@ -4,15 +4,19 @@
     <th class="qty">Qty</th>
     <th>Printed</th>
     {% for it in page %}
-    <tr>
-        <td><span class="sku">{{ it.sku }}</span></td>
-        <td><span class="title">{{ it.title }}</span></td>
-        <td><span class="qty">{{ it.qty }}</span></td>
-        <td></td>
-    </tr>
+        <tr>
+            <td>
+                <span class="sku">{{ it.sku }}</span>
+            </td>
+            <td>
+                <span class="title">{{ it.title }}</span>
+            </td>
+            <td>
+                <span class="qty">{{ it.qty }}</span>
+            </td>
+            <td></td>
+        </tr>
     {% endfor %}
     <p>Page {{ page.number }} of {{ page.paginator.num_pages }}</p>
 </table>
-<style>
-    
-</style>
+<style></style>

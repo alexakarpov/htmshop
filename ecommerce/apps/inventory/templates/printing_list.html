@@ -1,14 +1,12 @@
 {% load static %}
-
 <head>
     <link rel="stylesheet" href="{% static 'css/worklists.css' %}" />
 </head>
-
 <body>
     <h2>{{ title|title }} Worklist of {{ now }}</h2>
     <div id="content">
         {% for page in work %}
-        {% include 'printing_page.html' with page=page %}
+            {% include "printing_page.html" with page=page %}
         {% endfor %}
     </div>
 </body>

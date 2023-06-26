@@ -17,7 +17,6 @@ from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.inventory.models import ProductStock
 from ecommerce.apps.orders.models import Order, OrderItem
-from ecommerce.constants import ORDER_KEY_LENGTH
 
 config = dotenv_values()
 
