@@ -16,10 +16,11 @@ ROOMS = [
     ("print_supply", "Print Supply"),
 ]
 ORDER_STATUS = [
-    ("PAID", "Paid"),
     ("PENDING", "Pending"),
     ("PROCESSING", "Processing"),
     ("SHIPPED", "Shipped"),
+    ("CANCELED", "Canceled"),
+    ("RETURNED", "Returned"),
 ]
 ORDER_KEY_LENGTH = 8
 
