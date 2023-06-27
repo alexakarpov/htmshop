@@ -12,7 +12,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ecommerce.constants import ITEMS_PER_PAGE, PRINT_TYPE_ID
+from ecommerce.constants import LINES_PER_PAGE, PRINT_TYPE_ID
 
 from .lists import mounting_work, print_work, sanding_work, sawing_work
 from .models import ProductStock, get_or_create_stock_by_sku
@@ -36,7 +36,7 @@ class PrintingWorkListView(ListView):
 
     def get_context_data(self, **kwargs):
         work = print_work()
-        paginator = Paginator(work, ITEMS_PER_PAGE)
+        paginator = Paginator(work * 20, LINES_PER_PAGE)
 
         return {"work": paginator, "title": "printing", "now": ts()}
 
@@ -48,7 +48,7 @@ class SandingWorkListView(ListView):
     def get_context_data(self, **kwargs):
         work = sanding_work()
         # work = work * 150  # TODO remove
-        paginator = Paginator(work, ITEMS_PER_PAGE)
+        paginator = Paginator(work, LINES_PER_PAGE)
 
         return {"work": paginator, "title": "sanding", "now": ts()}
 
@@ -60,7 +60,7 @@ class MountingWorkListView(ListView):
     def get_context_data(self, **kwargs):
         work = mounting_work()
         # work = work * 150  # TODO remove
-        paginator = Paginator(work, ITEMS_PER_PAGE)
+        paginator = Paginator(work, LINES_PER_PAGE)
 
         return {"work": paginator, "title": "mounting", "now": ts()}
 
@@ -71,7 +71,7 @@ class SawingWorkListView(ListView):
 
     def get_context_data(self, **kwargs):
         work = sawing_work()
-        paginator = Paginator(work, ITEMS_PER_PAGE)
+        paginator = Paginator(work, LINES_PER_PAGE)
 
         return {"work": paginator, "title": "sawing", "now": ts()}
 

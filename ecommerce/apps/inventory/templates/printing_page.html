@@ -1,22 +1,20 @@
-<table style="page-break-after: always;">
+<table>
     <th class="sku">SKU</th>
     <th class="title">Title</th>
     <th class="qty">Qty</th>
     <th>Printed</th>
-    {% for it in page %}
+    {% for line in page %}
         <tr>
             <td>
-                <span class="sku">{{ it.sku }}</span>
+                <span class="sku">{{ line.sku }}</span>
             </td>
             <td>
-                <span class="title">{{ it.title }}</span>
+                <span class="title">{{ line.title }}</span>
             </td>
             <td>
-                <span class="qty">{{ it.qty }}</span>
+                <span class="qty">{{ line.qty }}</span>
             </td>
             <td></td>
         </tr>
     {% endfor %}
-    <p>Page {{ page.number }} of {{ page.paginator.num_pages }}</p>
 </table>
-<style></style>

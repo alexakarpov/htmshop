@@ -7,7 +7,7 @@ TEST_BOOK_SLUG = "psalter"
 MOUNTED_ICON_TYPE_NAME = "mounted icon"
 ICON_PRINT_TYPE_NAME = "icon print"
 PRINT_TYPE_ID = 4
-ITEMS_PER_PAGE = 27
+LINES_PER_PAGE = 28
 ROOMS = [
     ("nowhere", "nowhere"),
     ("sanding", "Sanding room"),
