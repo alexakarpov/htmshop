@@ -3,12 +3,12 @@ import logging
 from ecommerce.apps.inventory.models import (
     MountingWorkItem,
     PrintingWorkItem,
-    SawingWorkItem,
     ProductStock,
     SandingWorkItem,
-    get_print_supply_by_sku,
+    SawingWorkItem,
     get_or_create_stock_by_sku,
-    get_stock_by_type
+    get_print_supply_by_sku,
+    get_stock_by_type,
 )
 from ecommerce.constants import ICON_PRINT_TYPE_NAME
 
@@ -35,9 +35,7 @@ def print_work():
 
 
 def sanding_work():
-    mounted_icons = ProductStock.objects.filter(
-        product_type__name="mounted icon"
-    ).order_by("sku")
+    mounted_icons = ProductStock.objects.filter(product_type__name="mounted icon").order_by("sku")
 
     result = []
 
@@ -62,17 +60,13 @@ def sanding_work():
             )
             result.append(wit)
         else:
-            logger.debug(
-                f"above the restock point ({it.restock_point}), continuing"
-            )
+            logger.debug(f"above the restock point ({it.restock_point}), continuing")
             continue
     return sorted(result)
 
 
 def mounting_work():
-    mounted_icons = ProductStock.objects.filter(
-        product_type__name="mounted icon"
-    ).order_by("sku")
+    mounted_icons = ProductStock.objects.filter(product_type__name="mounted icon").order_by("sku")
     result = []
 
     for it in mounted_icons:
@@ -95,9 +89,7 @@ def sawing_work():
     This list is sorted by “Need” (descending), and then by SKU (ascending).
     The Print Supply column in just the count of Icon Prints for sku in Wrapping Room
     """
-    mounted_icons = ProductStock.objects.filter(
-        product_type__name="mounted icon"
-    )
+    mounted_icons = ProductStock.objects.filter(product_type__name="mounted icon")
 
     result = []
 

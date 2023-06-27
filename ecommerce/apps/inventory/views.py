@@ -1,36 +1,27 @@
 import logging
-
 from datetime import datetime
 
 from django.contrib import messages
-from django.shortcuts import redirect
-
+from django.contrib.admin.views.decorators import staff_member_required
+from django.core.paginator import Paginator
 from django.http import JsonResponse
-
+from django.shortcuts import redirect, render
+from django.utils.html import escape
+from django.views.generic.list import ListView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.utils.html import escape
 
-from django.core.paginator import Paginator
-from ecommerce.constants import (
-    ITEMS_PER_PAGE,
-)
+from ecommerce.constants import ITEMS_PER_PAGE, PRINT_TYPE_ID
 
-from ecommerce.constants import PRINT_TYPE_ID
-from django.contrib.admin.views.decorators import staff_member_required
-from django.shortcuts import render
+from .lists import mounting_work, print_work, sanding_work, sawing_work
 from .models import ProductStock, get_or_create_stock_by_sku
 from .serializers import ProductStockSerializer
-from .lists import (
-    print_work,
-    sanding_work,
-    mounting_work,
-    sawing_work,
+from .utils import (
+    move_sku_from_print_supply,
+    move_sku_to_print_supply,
+    move_stock_one_sku,
 )
-from .utils import move_stock_one_sku, move_sku_to_print_supply, move_sku_from_print_supply
-
-from django.views.generic.list import ListView
 
 logger = logging.getLogger("django")
 
@@ -45,7 +36,6 @@ class PrintingWorkListView(ListView):
 
     def get_context_data(self, **kwargs):
         work = print_work()
-        # work = work * 150  # TODO remove
         paginator = Paginator(work, ITEMS_PER_PAGE)
 
         return {"work": paginator, "title": "printing", "now": ts()}
@@ -86,10 +76,10 @@ class SawingWorkListView(ListView):
         return {"work": paginator, "title": "sawing", "now": ts()}
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 def inspect_sku(request):
     data = request.POST
-    sku=escape(data.get('sku').upper())
+    sku = escape(data.get("sku").upper())
     logger.error(sku)
     logger.debug(f"inspecting {sku}")
     item = ProductStock.objects.get(sku=sku)
@@ -100,7 +90,8 @@ def inspect_sku(request):
     logger.debug(f"API data: {sdata}")
     return JsonResponse(sdata)
 
-@api_view(['POST'])
+
+@api_view(["POST"])
 def move_stock(request):
     logger.debug(f"got move request, POST: {request.POST}")
     from_name = request.POST.get("from_room")
@@ -114,19 +105,14 @@ def move_stock(request):
     quantity = int(request.POST.get("qty"))
     sku = request.POST.get("sku").upper()
 
-    logger.debug(
-        f"move request, from {from_name} to {to_name}, {quantity} x {sku.upper()}"
-    )
+    logger.debug(f"move request, from {from_name} to {to_name}, {quantity} x {sku.upper()}")
 
     if to_name.find("print") >= 0:
         stock = move_sku_to_print_supply(sku, from_name, qty=quantity)
     elif from_name.find("print") >= 0:
         stock = move_sku_from_print_supply(sku, to_name, quantity)
     else:
-        move_stock_one_sku(sku,
-                           from_room=from_name,
-                           to_room=to_name,
-                           qty=quantity)
+        move_stock_one_sku(sku, from_room=from_name, to_room=to_name, qty=quantity)
 
     messages.success(
         request,
@@ -141,13 +127,12 @@ def move_stock(request):
     logger.debug(f"API data: {sdata}")
     return JsonResponse(sdata)
 
+
 def dashboard(request):
     logger.debug(f"GET dict: {request.GET}")
     logger.debug(f"POST dict: {request.POST}")
 
-    icons = ProductStock.objects.filter(
-        product_type__name="mounted icon"
-    )
+    icons = ProductStock.objects.filter(product_type__name="mounted icon")
     skus_arr = []
     for it in icons:
         skus_arr.append(it.sku)
@@ -175,4 +160,5 @@ def dashboard(request):
             {
                 "stock": None,
                 "all_skus": skus,
-            })
+            },
+        )
