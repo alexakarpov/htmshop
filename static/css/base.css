@@ -123,3 +123,7 @@ input[type="radio"] {
 .icons {
   font-size: larger;
 }
+
+.border-bottom {
+  border-bottom: solid;
+}
