@@ -206,8 +206,8 @@ def payment_with_token(request):
             user=user if user.is_authenticated else None,
             full_name=f"{fname} {lname}",
             email=user.email if user.is_authenticated else "someone@example.com",
-            address1=address_d.get("address_line1"),
-            address2=address_d.get("address_line2"),
+            address_line1=address_d.get("address_line1"),
+            address_line2=address_d.get("address_line2"),
             city=address_d.get("city_locality"),
             postal_code=address_d.get("postal_code"),
             country_code=address_d.get("country_code"),
@@ -220,6 +220,7 @@ def payment_with_token(request):
             pii = ProductStock.objects.get(sku=sku)
             OrderItem.objects.create(
                 order_id=order.pk,
+                title=item["title"],
                 inventory_item=pii,
                 price=item["price"],
                 quantity=item["qty"],
