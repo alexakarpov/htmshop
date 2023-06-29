@@ -8,9 +8,6 @@
 </head>
 <body>
     {% for page in pages %}
-        <div class="order">
-            {% include "order_page.html" with order=page.object_list.first %}
-            <p>Page {{ page.number }} of {{ page.paginator.num_pages }}</p>
-        </div>
+        <div class="order">{% include "order_page.html" with order=page.object_list.first %}</div>
     {% endfor %}
 </body>
