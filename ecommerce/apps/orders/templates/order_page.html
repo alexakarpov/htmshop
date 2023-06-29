@@ -1,19 +1,30 @@
-<table style="page-break-after: always;">
-    <th>ID</th>
-    <th>Full name</th>
-    <th>Address line 1</th>
-    <th>Address line 2</th>
-    <th>City</th>
-    <th>Province</th>
-    <th>Zip</th>
-    <tr>
-        <td>{{ order.id }}</td>
-        <td>{{ order.full_name }}</td>
-        <td>{{ order.address_line1 }}</td>
-        <td>{{ order.address_line2 }}</td>
-        <td>{{ order.city }}</td>
-        <td>{{ order.state_province }}</td>
-        <td>{{ order.postal_code }}</td>
-    </tr>
-    by {{ order.full_name }} ({{ order.get_status_display }})
-</table>
+{% load static %}
+<div class="row border-bottom">
+    <div class="col col-2 logo m-2">
+        <img src="{% static 'logo2.png' %}"
+             height="87"
+             width="85"
+             alt="Holy Transfiguration Monastery">
+    </div>
+    <div class="col col-6 m-2 fw-bold">
+        <div class="row">
+            Holy Transfiguration Monastery</
+        </div>
+        <div class="row">278 Warren St Brookline MA 02445-5950 USA (617)232-2326</div>
+    </div>
+    <div class="col col-1 m-2">{{ oid }}</div>
+</div>
+<div class="order" style="page-break-after: always;">
+    <div class="m-2">
+        <div>{{ order.id }}</div>
+        <div>{{ order.full_name }}</div>
+        <div>{{ order.address_line1 }}</div>
+        <div>{{ order.address_line2 }}</div>
+        <div>{{ order.city }}</div>
+        <div>{{ order.state_province }}</div>
+        <div>{{ order.postal_code }}</div>
+        <ul class="order-items">
+            {% for order_item in order.items.all %}<li>{{ order_item.inventory_item.product.title|title }}</li>{% endfor %}
+        </ul>
+    </div>
+</div>
