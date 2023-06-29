@@ -5,9 +5,6 @@
 <body>
     <h2>{{ title|title }} Worklist of {{ now }}</h2>
     {% for page in work %}
-        <div class="print_page" style="page-break-after: always;">
-            {% include "printing_page.html" with page=page %}
-            <p>Page {{ page.number }} of {{ page.paginator.num_pages }}</p>
-        </div>
+        <div class="print_page" style="page-break-after: always;">{% include "printing_page.html" %}</div>
     {% endfor %}
 </body>

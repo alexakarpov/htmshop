@@ -46,15 +46,8 @@ table {
     width: 100%;
 }
 
-/* #content {
-    display: table;
-}
-
-#pageFooter {
-    display: table-footer-group;
-}
-
-#pageFooter:after {
-    counter-increment: page;
-    content: counter(page);
+/* .print_page {
+    page-break-after: always;
 } */
+
+/* This ^ doesn't actually work, only element-level "style=..." does. */
