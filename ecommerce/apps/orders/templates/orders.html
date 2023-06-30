@@ -1,0 +1,73 @@
+{% load static %}
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"
+          integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+</head>
+{% comment %} style="page-break-after: always;" {% endcomment %}
+<body>
+    <div class="container-fluid">
+        {% for order in orders %}
+            <div class="row order"
+                 id="order-{{ order.id }}"
+                 style="page-break-after: always">
+                <div class="row order-head header-bottom" style="border-bottom: 1mm solid;"">
+                    <div class="col-2 logo m-1">
+                        <img src="{% static 'logo2.png' %}" height="87" width="85" alt="HTM">
+                    </div>
+                    <div class="col-6 m-1 fw-bold">
+                        <div class="row">
+                            <h1>Holy Transfiguration Monastery</h1>
+                            <br />
+                            <h2>278 Warren St Brookline MA 02445-5950 USA (617)232-2326</h2>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="row">
+                            <div class="col-2 m-1 h2">#{{ order.id }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 m-1 h5">{{ order.created|date:"d/m/Y" }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="m-2">
+                            <h2>Sold to:</h2>
+                            <div>{{ order.id }}</div>
+                            <div>{{ order.full_name }}</div>
+                            <div>{{ order.address_line1 }}</div>
+                            <div>{{ order.address_line2 }}</div>
+                            <div>{{ order.city }}</div>
+                            <div>{{ order.state_province }}</div>
+                            <div>{{ order.postal_code }}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="m-2">
+                            <h2>Ship to:</h2>
+                            <div>{{ order.id }}</div>
+                            <div>{{ order.full_name }}</div>
+                            <div>{{ order.address_line1 }}</div>
+                            <div>{{ order.address_line2 }}</div>
+                            <div>{{ order.city }}</div>
+                            <div>{{ order.state_province }}</div>
+                            <div>{{ order.postal_code }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <span>Order items:</span>
+                        <ul class="order-items">
+                            {% for order_item in order.items.all %}<li>{{ order_item.inventory_item.product.title|title }}</li>{% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>

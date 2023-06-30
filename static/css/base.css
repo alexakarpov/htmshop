@@ -124,6 +124,10 @@ input[type="radio"] {
   font-size: larger;
 }
 
-.border-bottom {
-  border-bottom: solid;
+.header-bottom {
+  border-bottom: 4mm solid;
+}
+
+.border-top {
+  border-top: 3px thick;
 }

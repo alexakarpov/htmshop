@@ -10,14 +10,14 @@ from .models import Order
 
 
 class ListOrders(ListView):
-    template_name = "orders_list.html"
+    template_name = "orders.html"
     model = Order
 
     def get_context_data(self, **kwargs):
         orders = Order.objects.all()  # TODO: narrow this
-        paginator = Paginator(orders, 1)
+        # paginator = Paginator(orders, 1)
 
-        return {"pages": paginator}
+        return {"orders": orders}
 
 
 def user_orders(request):
