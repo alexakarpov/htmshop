@@ -1,3 +1,6 @@
 .order-head {
     border-bottom: 3mm solid;
 }
+.order {
+    page-break-after: always;
+}

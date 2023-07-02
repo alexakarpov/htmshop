@@ -5,8 +5,8 @@
           integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w=="
           crossorigin="anonymous"
           referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/orders.css' %}" />
 </head>
-{% comment %} style="page-break-after: always;" {% endcomment %}
 <body>
     <div class="container-fluid">
         {% for order in orders %}
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="m-2">
+                        <div>
                             <h2>Ship to:</h2>
                             <div>{{ order.id }}</div>
                             <div>{{ order.full_name }}</div>
@@ -60,10 +60,30 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-12 h4">
+                        <div>{{ order.email }}</div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col">
                         <span>Order items:</span>
                         <ul class="order-items">
-                            {% for order_item in order.items.all %}<li>{{ order_item.inventory_item.product.title|title }}</li>{% endfor %}
+                            <table>
+                                <th>Title</th>
+                                <th>SKU</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                {% for order_item in order.items.all %}
+                                    <tr>
+                                        <td>{{ order_item.inventory_item.product.title|title }}</td>
+                                        <td>x</td>
+                                        <td>x</td>
+                                        <td>x</td>
+                                        <td>x</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
                         </ul>
                     </div>
                 </div>
