@@ -1,5 +1,3 @@
-from typing import Any
-
 from django.core.paginator import Paginator
 from django.http import HttpRequest, HttpResponse
 from django.views.generic import ListView
