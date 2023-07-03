@@ -3,12 +3,19 @@ from distutils.log import debug
 
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_list_or_404, render
+from django.views.generic import View, TemplateView
 
 from ecommerce.apps.inventory.models import ProductStock
 
 from .basket import Basket
 
 logger = logging.getLogger("django")
+
+# class BasketSummary(View):
+#     template_name = "summary.html"
+
+#     def get(self, request, *args, **kwargs):
+#             return render(request, self.template_name, {})
 
 
 def basket_summary(request):
