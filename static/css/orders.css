@@ -1,6 +1,7 @@
 .order-head {
-    border-bottom: 3mm solid;
+    border-bottom: 1mm dashed;
 }
+
 .order {
     page-break-after: always;
 }

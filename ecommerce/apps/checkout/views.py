@@ -217,13 +217,14 @@ def payment_with_token(request):
         )
 
         for sku, item in basket.basket.items():
-            pii = ProductStock.objects.get(sku=sku)
+            # pii = ProductStock.objects.get(sku=sku)
             OrderItem.objects.create(
                 order_id=order.pk,
                 title=item["title"],
-                inventory_item=pii,
+                # inventory_item=pii,
                 price=item["price"],
                 quantity=item["qty"],
+                sku=sku
             )
 
         order.save()
