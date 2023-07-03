@@ -9,4 +9,4 @@ echo you are on $BRANCH
 # zip -qr htmshop.zip ecommerce requirements.txt manage.py static templates
 # scp htmshop.zip transylvania.bostonmonks.com:/tmp/
 # rm requirements.txt
-ansible-playbook -i devops/inventory.ini devops/playbooks/deploy.yml
+ansible-playbook -i devops/staging-inv.ini devops/playbooks/deploy.yml
