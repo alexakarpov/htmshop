@@ -52,7 +52,7 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.inventory_item} x {self.quantity} of order {self.order.id}"
+        return f"{self.title} x {self.quantity} of order {self.order.id}"
 
 
 def make_order(address_d, cart_d, email):
