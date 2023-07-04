@@ -101,7 +101,7 @@ AUTH_USER_MODEL = "accounts.Account"
 
 LOGIN_REDIRECT_URL = "/accounts/dashboard"
 LOGIN_URL = "/accounts/login/"
-LOGOUT_REDIRECT_URL = LOGIN_URL
+LOGOUT_REDIRECT_URL = "/"
 BASKET_SESSION_KEY = "basket"
 
 # Email setting

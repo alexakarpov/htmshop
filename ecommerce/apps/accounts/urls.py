@@ -5,6 +5,8 @@ from django.views.generic import TemplateView
 from . import views
 from .forms import EmailAuthenticationForm, PwdResetConfirmForm, PwdResetForm
 
+from .signals.handlers import on_user_logged_out
+
 app_name = "accounts"
 
 urlpatterns = [
@@ -19,7 +21,7 @@ urlpatterns = [
     path("register/", views.register_account, name="register"),
     path(
         "logout/",
-        auth_views.LogoutView.as_view(next_page="/accounts/login/"),
+        auth_views.LogoutView.as_view(next_page=""),
         name="logout",
     ),
     path(
