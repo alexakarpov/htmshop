@@ -10,9 +10,7 @@
 <body>
     <div class="container-fluid">
         {% for order in orders %}
-            <div class="row order"
-                 id="order-{{ order.id }}"
-                 style="page-break-after: always">
+            <div class="row order" id="order-{{ order.id }}">
                 <div class="row order-head header-bottom">
                     <div class="col-2 logo m-1">
                         <img src="{% static 'logo2.png' %}" height="87" width="85" alt="HTM">
@@ -33,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-1">
+                <div class="row mt-2 pt-3">
                     <div class="col-6">
                         <div class="m-2">
                             <h2>Sold to:</h2>
@@ -74,13 +72,13 @@
                                     <div class="col-2 fw-bold">Quantity</div>
                                     <div class="col-2 fw-bold">Total</div>
                                 </div>
-                                {% for order_item in order.items.all %}
+                                {% for item in order.items.all %}
                                     <div class="row">
-                                        <div class="col">{{ order_item.inventory_item.product.title|title }}</div>
-                                        <div class="col"></div>
-                                        <div class="col"></div>
-                                        <div class="col"></div>
-                                        <div class="col"></div>
+                                        <div class="col-2">{{ item.title|title }}</div>
+                                        <div class="col-2">{{ item.sku }}</div>
+                                        <div class="col-2">${{ item.price }}</div>
+                                        <div class="col-2">{{ item.quantity }}</div>
+                                        <div class="col-2">${% widthratio item.quantity 1 item.price %}.00</div>
                                     </div>
                                 {% endfor %}
                             </div>

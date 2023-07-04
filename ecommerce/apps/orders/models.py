@@ -45,14 +45,11 @@ class OrderItem(models.Model):
     sku = models.CharField(
         max_length=12,
     )
-    # inventory_item = models.ForeignKey(
-    #     ProductStock, related_name="order_items", on_delete=models.CASCADE
-    # )
     price = models.DecimalField(max_digits=5, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.title} x {self.quantity} of order {self.order.id}"
+        return f"{self.title} x {self.quantity}"
 
 
 def make_order(address_d, cart_d, email):

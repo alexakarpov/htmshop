@@ -1,5 +1,3 @@
-from django.core.paginator import Paginator
-from django.http import HttpRequest, HttpResponse
 from django.views.generic import ListView
 
 from ecommerce.constants import LINES_PER_PAGE
@@ -13,8 +11,6 @@ class ListOrders(ListView):
 
     def get_context_data(self, **kwargs):
         orders = Order.objects.all()  # TODO: narrow this
-        # paginator = Paginator(orders, 1)
-
         return {"orders": orders}
 
 
