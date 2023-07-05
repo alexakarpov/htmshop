@@ -11,23 +11,23 @@
     <div class="container-fluid">
         {% for order in orders %}
             <div class="row order" id="order-{{ order.id }}">
-                <div class="row order-head header-bottom">
-                    <div class="col-2 logo m-1">
-                        <img src="{% static 'logo2.png' %}" height="87" width="85" alt="HTM">
-                    </div>
-                    <div class="col-6 m-1 fw-bold">
-                        <div class="row">
-                            <h1>Holy Transfiguration Monastery</h1>
-                            <br />
-                            <h2>278 Warren St Brookline MA 02445-5950 USA (617)232-2326</h2>
+                <div class="col-12">
+                    <div class="row order-head header-bottom">
+                        <div class="col-1 logo m-1">
+                            <img src="{% static 'logo2.png' %}" height="87" width="85" alt="HTM">
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="row">
-                            <div class="col-2 m-1 h2">#{{ order.id }}</div>
+                        <div class="col-9 px-5 fw-bold htm-address">
+                            <div class="h2">Holy Transfiguration Monastery</div>
+                            <div class="h5">278 Warren St Brookline MA 02445-5950 USA</div>
+                            <div class="h5">(617) 232-2326</div>
                         </div>
-                        <div class="row">
-                            <div class="col-3 m-1 h5">{{ order.created|date:"d/m/Y" }}</div>
+                        <div class="col-1 p-1 ml-auto mr-auto">
+                            <div class="row">
+                                <div class="col-1 m-1 h2">#{{ order.id }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-1 m-1 h5">{{ order.created|date:"d/m/Y" }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,13 +55,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 h4">
+                <div class="row p-2">
+                    <div class="col-9 m-2 h4">
                         <div>{{ order.email }}</div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col m-2">
+                    <div class="col m-3 p-3">
                         <span class="h3">Order items:</span>
                         <ul class="m-3 order-items">
                             <div class="container">
