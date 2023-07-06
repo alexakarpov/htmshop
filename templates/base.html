@@ -46,7 +46,10 @@
                         <div class="container">
                             {% if request.user.is_staff %}
                                 <span class="nav-item ">
-                                    <a class="h4" href="{% url 'inventory:dashboard' %}">INVENTORY ADMIN</a>
+                                    <a class="h4" href="{% url 'inventory:dashboard' %}">INVENTORY</a>
+                                </span>
+                                <span class="nav-item ">
+                                    <a class="h4" href="{% url 'orders:list' %}">ORDERS</a>
                                 </span>
                             {% endif %}
                             <ul class="navbar-nav list-group list-group-horizontal">
