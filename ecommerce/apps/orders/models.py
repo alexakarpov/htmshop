@@ -36,7 +36,7 @@ class Order(models.Model):
         ordering = ("-created",)
 
     def __str__(self):
-        return f"order# {self.id} by {self.full_name}"
+        return f"order# {self.id} by {self.full_name} ({self.status})"
 
 
 class OrderItem(models.Model):
