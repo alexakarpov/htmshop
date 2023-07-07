@@ -10,7 +10,7 @@ class ListOrders(ListView):
     model = Order
 
     def get_context_data(self, **kwargs):
-        orders = Order.objects.all()  # TODO: narrow this
+        orders = Order.objects.filter(status__iexact="PENDING")
         return {"orders": orders}
 
 
