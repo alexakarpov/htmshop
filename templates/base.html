@@ -44,15 +44,23 @@
                     <hr class="divider">
                     <nav class="navbar navbar-expand-sm p-0">
                         <div class="container">
-                            {% if request.user.is_staff %}
-                                <span class="nav-item ">
-                                    <a class="h4" href="{% url 'inventory:dashboard' %}">INVENTORY</a>
-                                </span>
-                                <span class="nav-item ">
-                                    <a class="h4" href="{% url 'orders:list' %}">ORDERS</a>
-                                </span>
-                            {% endif %}
                             <ul class="navbar-nav list-group list-group-horizontal">
+                                {% if request.user.is_staff %}
+                                    <li class="nav-item fw-bold h4 ">
+                                        <a class="nav-link" href="{% url 'inventory:dashboard' %}">Inventory</a>
+                                    </li>
+                                    <li class="nav-item h4 fw-bold orders dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Orders</a>
+                                        <ul class="dropdown-menu ">
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'orders:print' %}">Print</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'orders:manage' %}">Manage</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
                                 <li class="nav-item">
                                     <a class="nav-link"
                                        href="{% url 'catalogue:category_list' category_slug='books' %}"><span class="category">Books</span></a>
@@ -99,40 +107,40 @@
                     </nav>
                 </div>
             </header>
-            {% endblock header %}
-            <div id="content">
-                {% if messages %}
-                    <div class="m-4 alert alert-warning" role="alert">
-                        {% for message in messages %}{{ message|safe }}{% endfor %}
-                    </div>
-                {% endif %}
-                <div class="m-4 alert alert-success" role="alert" id="alertbox"></div>
-                <div id="content-wrap">
-                    {% block content %}
-                    {% endblock content %}
-                    {% block footer %}
-                        <footer id="footer">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="d-flex col col-1">
-                                        <img src="{% static 'logo-small.png' %}" height="44" width="43" alt="HTM">
+        {% endblock header %}
+        <div id="content">
+            {% if messages %}
+                <div class="m-4 alert alert-warning" role="alert">
+                    {% for message in messages %}{{ message|safe }}{% endfor %}
+                </div>
+            {% endif %}
+            <div class="m-4 alert alert-success" role="alert" id="alertbox"></div>
+            <div id="content-wrap">
+                {% block content %}
+                {% endblock content %}
+                {% block footer %}
+                    <footer id="footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="d-flex col col-1">
+                                    <img src="{% static 'logo-small.png' %}" height="44" width="43" alt="HTM">
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <p class="h5 text-center">Holy Transfiguration Monastery Store</p>
                                     </div>
-                                    <div class="col">
-                                        <div class="row">
-                                            <p class="h5 text-center">Holy Transfiguration Monastery Store</p>
-                                        </div>
-                                        <div class="row">
-                                            <p class="small mb-0 text-center">© 2023 by The Holy Transfiguration Monastery</p>
-                                        </div>
+                                    <div class="row">
+                                        <p class="small mb-0 text-center">© 2023 by The Holy Transfiguration Monastery</p>
                                     </div>
                                 </div>
                             </div>
-                        </footer>
-                    {% endblock footer %}
-                </div>
+                        </div>
+                    </footer>
+                {% endblock footer %}
             </div>
-            <!-- Bootstrap JS -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-            </script>
-        </body>
-    </html>
+        </div>
+        <!-- Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+    </body>
+</html>
