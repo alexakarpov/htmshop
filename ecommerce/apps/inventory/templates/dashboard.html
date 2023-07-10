@@ -137,9 +137,6 @@
       qty: qty,
       csrfmiddlewaretoken: "{{csrf_token}}",
     };
-    console.log(
-      `POSTing a move request for ${qty}X${sku} from ${from_room} to ${to_room}`
-    );
     $.ajax({
       type: "POST",
       data: d,
@@ -150,6 +147,11 @@
         $("#paintqty").html(json.painting_qty);
         $("#sandqty").html(json.sanding_qty);
         $("#psupp").html(json.psupp);
+        $('#alertbox').text(`moved ${qty}X${sku} from ${from_room} to ${to_room}`);
+        $('#alertbox').show();
+        setTimeout(function () {
+          $('#alertbox').hide()
+        }, 3000)
       },
       error: function (xhr, errmsg, err) {
         console.error("move POST failed", errmsg);
