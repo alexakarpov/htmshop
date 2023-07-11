@@ -56,72 +56,76 @@
         <form class="m-1"
               action="{% url 'inventory:printing_worklist' %}"
               method="get">
-          <button type="submit" class="btn btn-block btn-primary btn-sm w-50 form-control">Printing Worklist</button>
+          <button type="submit"
+                  class="btn btn-block btn-primary btn-sm w-50 form-control">Printing Worklist</button>
         </form>
       </div>
       <div class="row w-25">
         <form class="m-1"
               action="{% url 'inventory:sawing_worklist' %}"
               method="get">
-          <button type="submit" class="btn btn-block btn-primary btn-sm w-50 form-control">Sawing Worklist</button>
+          <button type="submit"
+                  class="btn btn-block btn-primary btn-sm w-50 form-control">Sawing Worklist</button>
         </form>
       </div>
       <div class="row w-25">
         <form class="m-1"
               action="{% url 'inventory:sanding_worklist' %}"
               method="get">
-          <button type="submit" class="btn btn-block btn-primary btn-sm w-50 form-control">Sanding Worklist</button>
+          <button type="submit"
+                  class="btn btn-block btn-primary btn-sm w-50 form-control">Sanding Worklist</button>
         </form>
       </div>
       <div class="row w-25">
         <form class="m-1"
               action="{% url 'inventory:mounting_worklist' %}"
               method="get">
-          <button type="submit" class="btn btn-block btn-primary btn-sm w-50 form-control">Mounting Worklist</button>
+          <button type="submit"
+                  class="btn btn-block btn-primary btn-sm w-50 form-control">Mounting Worklist</button>
         </form>
       </div>
     </div>
-  </div>
-  <div style="background-color: rgb(212, 210, 95)" class="m-3">
-    <div class="border">
-      <div class="h3 text-center">Inventory move</div>
-      <div class="container">
-        <div class="row">
-          <div class="col-3">
-            <label for="from_room">From:</label>
-            <select name="from_room" class="m-1 form-control" id="from_room">
-              <option value="nowhere">nowhere</option>
-              <option value="sanding">Sanding room</option>
-              <option value="wrapping">Wrapping room</option>
-              <option value="painting">Painting room</option>
-              <option value="printing">Print supply</option>
-            </select>
-          </div>
-          <div class="col-3">
-            <label for="to_room">To:</label>
-            <select name="to_room" id="to_room" class="m-1 form-control">
-              <option value="nowhere">nowhere</option>
-              <option value="sanding">Sanding room</option>
-              <option value="wrapping">Wrapping room</option>
-              <option value="painting">Painting room</option>
-              <option value="printing">Print supply</option>
-            </select>
-          </div>
-          <div class="col-1">
-            <label for="id_qty">Quantity:</label>
-            <input type="number"
-                   name="qty"
-                   class="m-1 form-control"
-                   min="0"
-                   id="id_qty"
-                   required />
-          </div>
-          <div class="col-1">
-            <label for="move-btn"></label>
-            <input type="submit"
-                   class="btn btn-block btn-primary m-1 form-control"
-                   id="move-btn"
-                   value="Move" />
+    <div style="background-color: rgb(212, 210, 95)" class="m-3">
+      <div class="border">
+        <div class="h3 text-center">Inventory move</div>
+        <div class="container">
+          <div class="row">
+            <div class="col-3">
+              <label for="from_room">From:</label>
+              <select name="from_room" class="m-1 form-control" id="from_room">
+                <option value="nowhere">nowhere</option>
+                <option value="sanding">Sanding room</option>
+                <option value="wrapping">Wrapping room</option>
+                <option value="painting">Painting room</option>
+                <option value="printing">Print supply</option>
+              </select>
+            </div>
+            <div class="col-3">
+              <label for="to_room">To:</label>
+              <select name="to_room" id="to_room" class="m-1 form-control">
+                <option value="nowhere">nowhere</option>
+                <option value="sanding">Sanding room</option>
+                <option value="wrapping">Wrapping room</option>
+                <option value="painting">Painting room</option>
+                <option value="printing">Print supply</option>
+              </select>
+            </div>
+            <div class="col-1">
+              <label for="id_qty">Quantity:</label>
+              <input type="number"
+                     name="qty"
+                     class="m-1 form-control"
+                     min="0"
+                     id="id_qty"
+                     required />
+            </div>
+            <div class="col-1">
+              <label for="move-btn"></label>
+              <input type="submit"
+                     class="btn btn-block btn-primary m-1 form-control"
+                     id="move-btn"
+                     value="Move" />
+            </div>
           </div>
         </div>
       </div>
