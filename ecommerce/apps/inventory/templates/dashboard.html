@@ -8,48 +8,54 @@
 {% endblock title %}
 {% block content %}
   <div class="container-fluid p-1 m-3">
-    <table class="table" style="background-color: rgb(149, 216, 146)">
-      <thead>
-        <tr>
-          <th scope="col">Enter SKU to inspect or move</th>
-          <th scope="col">Print supply</th>
-          <th scope="col">Sanding room</th>
-          <th scope="col">Painting room</th>
-          <th scope="col">Wrapping room</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <div class="autocomplete">
-              <label for="thesku">SKU:</label>
-              <input type="text"
-                     name="sku"
-                     class="sku form-control"
-                     maxlength="12"
-                     id="thesku"
-                     required />
-            </div>
-            <input type="submit"
-                   class="btn btn-primary m-3"
-                   id="inspect-btn"
-                   value="Inspect" />
-          </td>
-          <td>
-            <h2 id="psupp">-</h2>
-          </td>
-          <td>
-            <h2 id="sandqty">-</h2>
-          </td>
-          <td>
-            <h2 id="paintqty">-</h2>
-          </td>
-          <td>
-            <h2 id="wrapqty">-</h2>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="m-3" style="background-color: rgb(149, 216, 146)">
+      <div class="row">
+        <div class="col">
+          <span class="fw-bold">Enter SKU to inspect or move</span>
+        </div>
+        <div class="col">
+          <span class="fw-bold">Print supply</span>
+        </div>
+        <div class="col">
+          <span class="fw-bold">Sanding room</span>
+        </div>
+        <div class="col">
+          <span class="fw-bold">Painting room</span>
+        </div>
+        <div class="col">
+          <span class="fw-bold">Wrapping room</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="autocomplete">
+            <label for="thesku">SKU:</label>
+            <input type="text"
+                   name="sku"
+                   class="sku form-control"
+                   maxlength="12"
+                   id="thesku"
+                   required />
+          </div>
+          <input type="submit"
+                 class="btn btn-primary m-3"
+                 id="inspect-btn"
+                 value="Inspect" />
+        </div>
+        <div class="col h2">
+          <span id="psupp">-</span>
+        </div>
+        <div class="col h2">
+          <span id="sandqty">-</span>
+        </div>
+        <div class="col h2">
+          <span id="paintqty">-</span>
+        </div>
+        <div class="col h2">
+          <span id="wrapqty">-</span>
+        </div>
+      </div>
+    </div>
     <div style="background-color: rgb(199, 155, 102)" class="m-3">
       <div class="h3 text-center">Worklist generation</div>
       <div class="row w-25">
