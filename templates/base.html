@@ -110,7 +110,7 @@
         {% endblock header %}
         <div id="content">
             {% if messages %}
-                <div class="m-4 alert alert-warning" role="alert">
+                <div class="m-4 alert alert-warning" id="alert-message-box" role="alert">
                     {% for message in messages %}{{ message|safe }}{% endfor %}
                 </div>
             {% endif %}
