@@ -5,6 +5,9 @@
 {% endblock title %}
 {% block content %}
     <div class="container-fluid">
+        <div class="text-center">
+            <h2>order {{ order.id }} - {{ order.status }}</h2>
+        </div>
         <div class="row mt-2 pt-3">
             <div class="col-6">
                 <div class="m-2">
@@ -35,27 +38,25 @@
             </div>
         </div>
         <div class="row">
-            <div class="col m-3 p-3">
+            <div class="col">
                 <span class="h3">Order items:</span>
-                <ul class="m-3 order-items">
-                    <div class="container">
-                        <div class="row pb-1">
-                            <div class="col-2 fw-bold">Title</div>
-                            <div class="col-2 fw-bold">SKU</div>
-                            <div class="col-2 fw-bold">Price</div>
-                            <div class="col-2 fw-bold">Quantity</div>
-                            <div class="col-2 fw-bold">Total</div>
-                        </div>
-                        {% for item in order.items.all %}
-                            <div class="row">
-                                <div class="col-2">{{ item.title|title }}</div>
-                                <div class="col-2">{{ item.sku }}</div>
-                                <div class="col-2">${{ item.price }}</div>
-                                <div class="col-2">{{ item.quantity }}</div>
-                                <div class="col-2">${% widthratio item.quantity 1 item.price %}.00</div>
-                            </div>
-                        {% endfor %}
+                <ul class="m-1 order-items">
+                    <div class="row pb-1">
+                        <div class="col-4 fw-bold">Title</div>
+                        <div class="col-2 fw-bold">SKU</div>
+                        <div class="col-2 fw-bold">Price</div>
+                        <div class="col-2 fw-bold">Quantity</div>
+                        <div class="col-2 fw-bold">Total</div>
                     </div>
+                    {% for item in order.items.all %}
+                        <div class="row">
+                            <div class="col-4">{{ item.title|title }}</div>
+                            <div class="col-2">{{ item.sku }}</div>
+                            <div class="col-2">${{ item.price }}</div>
+                            <div class="col-2">{{ item.quantity }}</div>
+                            <div class="col-2">${% widthratio item.quantity 1 item.price %}.00</div>
+                        </div>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
