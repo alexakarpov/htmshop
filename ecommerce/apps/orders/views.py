@@ -5,8 +5,8 @@ from ecommerce.constants import LINES_PER_PAGE
 from .models import Order
 
 
-class ListOrders(ListView):
-    template_name = "orders.html"
+class PrintOrders(ListView):
+    template_name = "print_orders.html"
     model = Order
 
     def get_context_data(self, **kwargs):
