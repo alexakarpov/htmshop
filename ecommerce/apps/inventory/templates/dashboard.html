@@ -7,132 +7,106 @@
   Inventory
 {% endblock title %}
 {% block content %}
-  <div class="container-fluid p-1 m-3">
-    <div class="m-3" style="background-color: rgb(149, 216, 146)">
+  <div class="container p-1">
+    <div id="sku-explorer">
+      <div class="h3 text-center">SKU to explore or move</div>
       <div class="row">
-        <div class="col">
-          <span class="fw-bold">Enter SKU to inspect or move</span>
-        </div>
-        <div class="col">
-          <span class="fw-bold">Print supply</span>
-        </div>
-        <div class="col">
-          <span class="fw-bold">Sanding room</span>
-        </div>
-        <div class="col">
-          <span class="fw-bold">Painting room</span>
-        </div>
-        <div class="col">
-          <span class="fw-bold">Wrapping room</span>
-        </div>
+        <div class="col-3"></div>
+        <div class="col-2 border fw-bold">Print supply</div>
+        <div class="col-2 border fw-bold">Sanding room</div>
+        <div class="col-2 border fw-bold">Painting room</div>
+        <div class="col-2 border fw-bold">Wrapping room</div>
       </div>
       <div class="row">
-        <div class="col">
+        <div class="col-3 border">
           <div class="autocomplete">
-            <label for="thesku">SKU:</label>
+            <label for="thesku" class="fw-bold">SKU:</label>
             <input type="text"
                    name="sku"
                    class="sku form-control"
                    maxlength="12"
-                   id="thesku"
-                   required />
+                   id="thesku" />
           </div>
           <input type="submit"
                  class="btn btn-primary m-3"
                  id="inspect-btn"
                  value="Inspect" />
         </div>
-        <div class="col h2">
-          <span id="psupp">-</span>
-        </div>
-        <div class="col h2">
-          <span id="sandqty">-</span>
-        </div>
-        <div class="col h2">
-          <span id="paintqty">-</span>
-        </div>
-        <div class="col h2">
-          <span id="wrapqty">-</span>
-        </div>
+        <div class="col-2 border p-4" id="psupp"></div>
+        <div class="col-2 border p-4" id="sandqty"></div>
+        <div class="col-2 border p-4" id="paintqty"></div>
+        <div class="col-2 border p-4" id="wrapqty"></div>
       </div>
     </div>
-    <div style="background-color: rgb(199, 155, 102)" class="m-3">
+    <div id="worklist-generator">
       <div class="h3 text-center">Worklist generation</div>
-      <div class="row w-25">
+      <div class="col-3">
         <form class="m-1"
               action="{% url 'inventory:printing_worklist' %}"
               method="get">
-          <button type="submit"
-                  class="btn btn-block btn-primary btn-sm w-50 form-control">Printing Worklist</button>
+          <button type="submit" class="btn btn-block btn-primary btn-sm form-control">Printing Worklist</button>
         </form>
       </div>
-      <div class="row w-25">
+      <div class="col-3">
         <form class="m-1"
               action="{% url 'inventory:sawing_worklist' %}"
               method="get">
-          <button type="submit"
-                  class="btn btn-block btn-primary btn-sm w-50 form-control">Sawing Worklist</button>
+          <button type="submit" class="btn btn-block btn-primary btn-sm form-control">Sawing Worklist</button>
         </form>
       </div>
-      <div class="row w-25">
+      <div class="col-3">
         <form class="m-1"
               action="{% url 'inventory:sanding_worklist' %}"
               method="get">
-          <button type="submit"
-                  class="btn btn-block btn-primary btn-sm w-50 form-control">Sanding Worklist</button>
+          <button type="submit" class="btn btn-block btn-primary btn-sm form-control">Sanding Worklist</button>
         </form>
       </div>
-      <div class="row w-25">
+      <div class="col-3">
         <form class="m-1"
               action="{% url 'inventory:mounting_worklist' %}"
               method="get">
-          <button type="submit"
-                  class="btn btn-block btn-primary btn-sm w-50 form-control">Mounting Worklist</button>
+          <button type="submit" class="btn btn-block btn-primary btn-sm form-control">Mounting Worklist</button>
         </form>
       </div>
     </div>
-    <div style="background-color: rgb(212, 210, 95)" class="m-3">
-      <div class="border">
-        <div class="h3 text-center">Inventory move</div>
-        <div class="container">
-          <div class="row">
-            <div class="col-3">
-              <label for="from_room">From:</label>
-              <select name="from_room" class="m-1 form-control" id="from_room">
-                <option value="nowhere">nowhere</option>
-                <option value="sanding">Sanding room</option>
-                <option value="wrapping">Wrapping room</option>
-                <option value="painting">Painting room</option>
-                <option value="printing">Print supply</option>
-              </select>
-            </div>
-            <div class="col-3">
-              <label for="to_room">To:</label>
-              <select name="to_room" id="to_room" class="m-1 form-control">
-                <option value="nowhere">nowhere</option>
-                <option value="sanding">Sanding room</option>
-                <option value="wrapping">Wrapping room</option>
-                <option value="painting">Painting room</option>
-                <option value="printing">Print supply</option>
-              </select>
-            </div>
-            <div class="col-1">
-              <label for="id_qty">Quantity:</label>
-              <input type="number"
-                     name="qty"
-                     class="m-1 form-control"
-                     min="0"
-                     id="id_qty"
-                     required />
-            </div>
-            <div class="col-1">
-              <label for="move-btn"></label>
-              <input type="submit"
-                     class="btn btn-block btn-primary m-1 form-control"
-                     id="move-btn"
-                     value="Move" />
-            </div>
-          </div>
+    <div id="sku-mover">
+      <div class="h3 text-center">Inventory move</div>
+      <div class="row">
+        <div class="col-3">
+          <label for="from_room">From:</label>
+          <select name="from_room" class="m-1 form-control" id="from_room">
+            <option value="nowhere">nowhere</option>
+            <option value="sanding">Sanding room</option>
+            <option value="wrapping">Wrapping room</option>
+            <option value="painting">Painting room</option>
+            <option value="printing">Print supply</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label for="to_room">To:</label>
+          <select name="to_room" id="to_room" class="m-1 form-control">
+            <option value="nowhere">nowhere</option>
+            <option value="sanding">Sanding room</option>
+            <option value="wrapping">Wrapping room</option>
+            <option value="painting">Painting room</option>
+            <option value="printing">Print supply</option>
+          </select>
+        </div>
+        <div class="col-1">
+          <label for="id_qty">Quantity:</label>
+          <input type="number"
+                 name="qty"
+                 class="m-1 form-control"
+                 min="0"
+                 id="id_qty"
+                 required />
+        </div>
+        <div class="col-1">
+          <label for="move-btn"></label>
+          <input type="submit"
+                 class="btn btn-block btn-primary m-1 form-control"
+                 id="move-btn"
+                 value="Move" />
         </div>
       </div>
     </div>

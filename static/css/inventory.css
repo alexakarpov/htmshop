@@ -70,3 +70,15 @@ td {
     width: 5rem;
     text-transform: uppercase
 }
+
+#sku-explorer {
+    background-color: rgb(149, 216, 146)
+}
+
+#worklist-generator {
+    background-color: rgb(199, 155, 102)
+}
+
+#sku-mover {
+    background-color: rgb(212, 210, 95)
+}
