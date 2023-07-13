@@ -25,8 +25,7 @@ class OrderDetails(DetailView):
         return context
 
 
-class ManageOrders(ListView):
-    template_name = "orders.html"
+class ListOrders(ListView):
     model = Order
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:

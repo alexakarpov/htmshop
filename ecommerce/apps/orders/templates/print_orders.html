@@ -26,7 +26,7 @@
                                 <div class="col-1 m-1 h2">{{ order.id }}</div>
                             </div>
                             <div class="row">
-                                <div class="col-1 m-1 h5">{{ order.created|date:"d/m/Y" }}</div>
+                                <div class="col-1 m-1 h5">{{ order.created|date:"m/d/Y" }}</div>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,6 @@
                 </div>
                 <div class="row">
                     <div class="col m-3 p-3">
-                        <span class="h3">Order items:</span>
                         <ul class="m-3 order-items">
                             <div class="container">
                                 <div class="row pb-1">
