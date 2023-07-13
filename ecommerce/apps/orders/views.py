@@ -26,13 +26,12 @@ class OrderDetails(DetailView):
 
 
 class ManageOrders(ListView):
-    # template_name = "orders.html"
-    # model = Order
+    template_name = "orders.html"
+    model = Order
 
-    # def get_context_data(self, **kwargs):
-    #     orders = Order.objects.filter(status__iexact="PENDING")
-    #     return {"orders": orders}
-    pass
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 def user_orders(request):
