@@ -16,7 +16,7 @@
                     <a href="{% url 'orders:order_details' order.id %}">{{ order.id }}</a>
                 </div>
                 <div class="col-2">{{ order.status }}</div>
-                <div class="col-3">{{ order.created }} ({{ order.created|timesince }})</div>
+                <div class="col-4">{{ order.created }} ({{ order.created|timesince }})</div>
             </div>
         {% endfor %}
     </div>
