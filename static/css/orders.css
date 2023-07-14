@@ -5,3 +5,7 @@
 .order {
     page-break-after: always;
 }
+
+body {
+    font-family: Georgia, serif !important;
+}

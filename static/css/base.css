@@ -29,8 +29,8 @@ li {
   background-color: transparent;
 }
 
-.album .card {
-  font-family: Georgia, "Times New Roman", serif;
+body {
+  font-family: Georgia, serif !important;
 }
 
 hr.divider {
