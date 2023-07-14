@@ -9,3 +9,14 @@
 body {
     font-family: Georgia, serif !important;
 }
+
+.stamp {
+    background-position: center;
+    position: absolute;
+    height: 100px;
+    width: 200px;
+    top: 180px;
+    right: 730px;
+    background-size: cover;
+    z-index: 1;
+}
