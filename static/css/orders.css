@@ -3,6 +3,7 @@
 }
 
 .order {
+    z-index: 10;
     page-break-after: always;
 }
 
@@ -11,12 +12,11 @@ body {
 }
 
 .stamp {
-    background-position: center;
-    position: absolute;
+    position: relative;
+    /* image size */
     height: 100px;
     width: 200px;
-    top: 180px;
-    right: 730px;
-    background-size: cover;
-    z-index: 1;
+    /* image position */
+    right: -160px;
+    top: -100px;
 }
