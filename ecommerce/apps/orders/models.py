@@ -30,7 +30,9 @@ class Order(models.Model):
     payment_option = models.CharField(max_length=200, blank=True)
     paid = models.BooleanField(default=False)
     shipped = models.BooleanField(default=False)
-    status = models.CharField(choices=ORDER_STATUS, default="PENDING", max_length=10)
+    status = models.CharField(
+        choices=ORDER_STATUS, default="PENDING", max_length=10
+    )
 
     class Meta:
         ordering = ("-created",)
@@ -40,13 +42,15 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, related_name="items", on_delete=models.CASCADE)
+    order = models.ForeignKey(
+        Order, related_name="items", on_delete=models.CASCADE
+    )
+    quantity = models.PositiveIntegerField(default=1)
     title = models.CharField(max_length=100)
     sku = models.CharField(
         max_length=12,
     )
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return f"{self.title} x {self.quantity}"
