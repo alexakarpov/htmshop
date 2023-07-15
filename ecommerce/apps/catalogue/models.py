@@ -2,6 +2,8 @@ import logging
 
 from django.conf import settings
 from django.db import models
+from django.db.models import signals
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
@@ -21,10 +23,16 @@ class Category(MPTTModel):
         max_length=255,
         unique=True,
     )
-    slug = models.SlugField(verbose_name=_("Category safe URL"), max_length=255, unique=True)
+    slug = models.SlugField(
+        verbose_name=_("Category safe URL"), max_length=255, unique=True
+    )
 
     parent = TreeForeignKey(
-        "self", on_delete=models.CASCADE, null=True, blank=True, related_name="children"
+        "self",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="children",
     )
 
     is_active = models.BooleanField(default=True)
@@ -49,7 +57,9 @@ class Category(MPTTModel):
     #     return " -> ".join(full_path[::-1])
 
     def __str__(self) -> str:
-        return f"{self.parent.name} > { self.name }" if self.parent else self.name
+        return (
+            f"{self.parent.name} > { self.name }" if self.parent else self.name
+        )
 
     def get_absolute_url(self):
         return reverse("catalogue:category_list", args=[self.slug])
@@ -63,7 +73,9 @@ class Product(models.Model):
     required by it's Product Type
     """
 
-    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.RESTRICT)
+    category = models.ForeignKey(
+        Category, null=True, blank=True, on_delete=models.RESTRICT
+    )
     title = models.CharField(
         verbose_name=_("title"),
         help_text=_("Required"),
@@ -79,7 +91,9 @@ class Product(models.Model):
         help_text=_("Change product visibility"),
         default=True,
     )
-    created_at = models.DateTimeField(_("Created at"), auto_now_add=True, editable=False)
+    created_at = models.DateTimeField(
+        _("Created at"), auto_now_add=True, editable=False
+    )
 
     users_wishlist = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="user_wishlist", blank=True
@@ -105,7 +119,9 @@ class Product(models.Model):
         These are actually ProductInventory items related to this Product
         """
         logger.debug(f"getting variants for {self}")
-        return self.productstock_set.filter(product_id=self.id).order_by("price")
+        return self.productstock_set.filter(product_id=self.id).order_by(
+            "price"
+        )
 
     def __str__(self):
         return f"{self.title}"
@@ -129,3 +145,12 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = _("Product Image")
         verbose_name_plural = _("Product Images")
+
+
+@receiver(signals.pre_save, sender=Product)
+def product_slug_enforce_lower_case(sender, instance, **kwargs):
+    instance.slug = instance.slug.lower()
+
+@receiver(signals.pre_save, sender=Category)
+def category_slug_enforce_lower_case(sender, instance, **kwargs):
+    instance.slug = instance.slug.lower()
