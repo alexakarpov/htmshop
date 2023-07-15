@@ -33,7 +33,7 @@ class Basket:
         logger.debug(f"PRODUCT: {product}, qty:{qty}, sku:{sku}")
         if sku in self.basket:
             self.basket[sku]["qty"] = qty
-            self.basket[sku]["weight"] = (json.dumps(product.weight),)
+            self.basket[sku]["weight"] = json.dumps(product.weight)
         else:
             self.basket[sku] = {
                 "title": product.product.title,
