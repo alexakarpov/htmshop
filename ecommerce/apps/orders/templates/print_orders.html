@@ -54,16 +54,21 @@
                             <div>{{ order.postal_code }}</div>
                         </div>
                     </div>
+                    {% if order.paid %}
+                        <img src="{% static 'PAID-1.png' %}"
+                             height="100"
+                             width="200"
+                             alt="paid"
+                             class="stamp">
+                    {% endif %}
                 </div>
-                {% if order.paid %}
-                    <img src="{% static 'PAID-1.png' %}"
-                         height="100"
-                         width="200"
-                         alt="paid"
-                         class="stamp">
-                {% endif %}
-                <div class="row p-2">
-                    <div class="col-9 m-2 h4">
+                <div class="row">
+                    <div class="col-3 h3">
+                        <div>Total: ${{ order.total_paid }}</div>
+                    </div>
+                </div>
+                <div class="row p-1">
+                    <div class="col-6 m-2 h4">
                         <div>{{ order.email }}</div>
                     </div>
                 </div>
