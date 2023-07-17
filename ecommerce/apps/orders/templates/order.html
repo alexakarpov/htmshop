@@ -59,5 +59,12 @@
                 </ul>
             </div>
         </div>
+        {% if order.paid %}
+            <div class="row">
+                <div class="col-3 pt-3 h3">
+                    <div>Total: ${{ order.total_paid }}</div>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock content %}
