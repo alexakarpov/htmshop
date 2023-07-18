@@ -33,6 +33,7 @@ django-extensions==3.2.3 ; python_full_version >= "3.10.4" and python_version < 
 django-js-asset==2.1.0 ; python_full_version >= "3.10.4" and python_version < "4"
 django-mptt==0.14.0 ; python_full_version >= "3.10.4" and python_version < "4"
 django-ses==2.6.1 ; python_full_version >= "3.10.4" and python_version < "4"
+django-simple-history==3.3.0 ; python_full_version >= "3.10.4" and python_version < "4"
 django==4.2.2 ; python_full_version >= "3.10.4" and python_version < "4"
 djangorestframework-xml==2.0.0 ; python_full_version >= "3.10.4" and python_version < "4"
 djangorestframework==3.14.0 ; python_full_version >= "3.10.4" and python_version < "4"
