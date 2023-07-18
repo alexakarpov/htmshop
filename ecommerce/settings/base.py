@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "ecommerce.apps.inventory",
     "rest_framework",
     "mptt",
+    "simple_history",
     # "wkhtmltopdf",
     # "djpaypal",
 ]
@@ -38,6 +39,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "simple_history.middleware.HistoryRequestMiddleware",
 ]
 
 CSRF_TRUSTED_ORIGINS = [

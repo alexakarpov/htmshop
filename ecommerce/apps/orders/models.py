@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.db import models
 from faker import Faker
+from simple_history.models import HistoricalRecords
 
 from ecommerce.apps.inventory.models import ProductStock
 from ecommerce.constants import ORDER_STATUS
@@ -33,6 +34,7 @@ class Order(models.Model):
     status = models.CharField(
         choices=ORDER_STATUS, default="PENDING", max_length=10
     )
+    history = HistoricalRecords()
 
     class Meta:
         ordering = ("-created",)
