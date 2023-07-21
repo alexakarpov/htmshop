@@ -2,6 +2,8 @@ from decimal import Decimal
 
 from django.conf import settings
 from django.db import models
+from django.core.validators import RegexValidator
+
 from faker import Faker
 from simple_history.models import HistoricalRecords
 
@@ -51,7 +53,15 @@ class OrderItem(models.Model):
     title = models.CharField(max_length=100)
     sku = models.CharField(
         max_length=12,
+        validators=[
+            RegexValidator(
+                regex="^A-(?!0)\d{1,3}(\.\d{1,2}x\d{1,2})?(?(1)[MP]|P?)\Z|[BHJR]-(?!0)\d{1,3}\Z|^[DG]-(?!0)\d{1,3}P?\Z|^L-(?!0)\d{1,3}[ABC]\Z|^M-(?!0)\d{1,3}[AEJ]?\Z|^S-[1-9]\Z",
+                message="Not a valid SKU",
+                code="nomatch",
+            )
+        ],
     )
+
     price = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
