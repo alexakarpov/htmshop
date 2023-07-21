@@ -14,4 +14,5 @@ class OrderAdmin(SimpleHistoryAdmin):
         OrderItemInline,
     ]
 
-admin.site.register(Order, SimpleHistoryAdmin)
+
+admin.site.register(Order, OrderAdmin)
