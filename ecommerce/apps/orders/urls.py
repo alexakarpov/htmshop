@@ -8,5 +8,5 @@ urlpatterns = [
     path("<int:pk>", OrderDetails.as_view(), name="order_details"),
     path("print/", PrintOrders.as_view(), name="print"),
     path("manage/", ListOrders.as_view(), name="manage"),
-    path("kind/<str:kind>", orders_of_kind, name="ofkind"),
+    path("<str:kind>", orders_of_kind, name="ofkind"),
 ]
