@@ -8,7 +8,7 @@ from faker import Faker
 from simple_history.models import HistoricalRecords
 
 from ecommerce.apps.inventory.models import ProductStock
-from ecommerce.constants import ORDER_STATUS
+from ecommerce.constants import ORDER_STATUS, ORDER_KINDS, SKU_RE_PATTERN
 
 
 class Order(models.Model):
@@ -37,6 +37,9 @@ class Order(models.Model):
         choices=ORDER_STATUS, default="PENDING", max_length=10
     )
     history = HistoricalRecords()
+    kind = models.CharField(
+        choices=ORDER_KINDS, default="GENERIC", max_length=10
+    )
 
     class Meta:
         ordering = ("-created",)
@@ -55,7 +58,7 @@ class OrderItem(models.Model):
         max_length=12,
         validators=[
             RegexValidator(
-                regex="^A-(?!0)\d{1,3}(\.\d{1,2}x\d{1,2})?(?(1)[MP]|P?)\Z|[BHJR]-(?!0)\d{1,3}\Z|^[DG]-(?!0)\d{1,3}P?\Z|^L-(?!0)\d{1,3}[ABC]\Z|^M-(?!0)\d{1,3}[AEJ]?\Z|^S-[1-9]\Z",
+                regex=SKU_RE_PATTERN,
                 message="Not a valid SKU",
                 code="nomatch",
             )
@@ -75,6 +78,12 @@ def make_order(address_d, cart_d, email):
     total = 0
     for sku, item in cart_d.items():
         total += float(item.get("price")) * int(item.get("qty"))
+        if (sku.startswith("L-")):
+            o.kind="INCENSE"
+        elif ('x' in sku or '.' in sku):
+            o.kind="ENL_OR_RED"
+        else:
+            pass #generic is a default
 
     o.total_paid = total
     o.email = email

@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core.validators import RegexValidator
 
 from ecommerce.apps.catalogue.models import Product
-from ecommerce.constants import PRODUCT_TYPE_MOUNTED_ICON
+from ecommerce.constants import PRODUCT_TYPE_MOUNTED_ICON, SKU_RE_PATTERN
 
 sku_reg = re.compile("([A-Z]+)-([0-9]+)")
 logger = logging.getLogger("django")
@@ -69,7 +69,7 @@ class ProductStock(models.Model):
         unique=True,
         validators=[
             RegexValidator(
-                regex="^A-(?!0)\d{1,3}(\.\d{1,2}x\d{1,2})?(?(1)[MP]|P?)\Z|[BHJR]-(?!0)\d{1,3}\Z|^[DG]-(?!0)\d{1,3}P?\Z|^L-(?!0)\d{1,3}[ABC]\Z|^M-(?!0)\d{1,3}[AEJ]?\Z|^S-[1-9]\Z",
+                regex=SKU_RE_PATTERN,
                 message="Not a valid SKU",
                 code="nomatch",
             )

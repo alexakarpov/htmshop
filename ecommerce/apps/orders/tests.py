@@ -25,6 +25,12 @@ class OrdersTest(TestCase):
                 "title": "Prayer Book",
                 "weight": 8,
             },
+            "L-234C": {
+                "price": "11.00",
+                "qty": 1,
+                "title": "Sinai",
+                "weight": 2
+            }
         }
 
         test_address_d = {
@@ -46,4 +52,5 @@ class OrdersTest(TestCase):
 
         self.assertEqual(order.full_name, "Testy Testo")
         self.assertEqual(order.email, "testytesto@example.com")
-        self.assertEqual(order.total_paid, 2 * 30 + 20)
+        self.assertEqual(order.total_paid, 2 * 30 + 20 + 11)
+        self.assertEqual(order.kind, "INCENSE")

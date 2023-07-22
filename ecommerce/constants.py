@@ -1,6 +1,5 @@
 PRODUCT_TYPE_BOOK = "book"
 PRODUCT_TYPE_MOUNTED_ICON = "mounted icon"
-PRODUCT_TYPE_INCENSE = "incense"
 TEST_ICON_SLUG = "holy_napkin"
 TEST_ICON2_SLUG = "burning_bush"
 TEST_BOOK_SLUG = "psalter"
@@ -8,6 +7,8 @@ MOUNTED_ICON_TYPE_NAME = "mounted icon"
 ICON_PRINT_TYPE_NAME = "icon print"
 PRINT_TYPE_ID = 4
 LINES_PER_PAGE = 29
+SKU_RE_PATTERN = "^A-(?!0)\d{1,3}(\.\d{1,2}x\d{1,2})?(?(1)[MP]|P?)\Z|^[BHJR]-(?!0)\d{1,3}\Z|^[DG]-(?!0)\d{1,3}P?\Z|^L-(?!0)\d{1,3}[ABC]\Z|^M-(?!0)\d{1,3}[AEJ]?\Z|^S-[1-9]\Z"
+
 ROOMS = [
     ("nowhere", "nowhere"),
     ("sanding", "Sanding room"),
@@ -21,6 +22,12 @@ ORDER_STATUS = [
     ("SHIPPED", "shipped"),
     ("CANCELED", "canceled"),
     ("RETURNED", "returned"),
+]
+
+ORDER_KINDS =[
+    ("INCENSE", "incense"),
+    ("ENL_OR_RED", "enlargement or reduction"),
+    ("GENERIC", "generic")
 ]
 
 US_STATES = [
