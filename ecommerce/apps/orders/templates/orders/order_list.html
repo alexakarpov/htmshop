@@ -4,26 +4,24 @@
     Orders
 {% endblock title %}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-2">order number</div>
-            <div class="col-2">customer</div>
-            <div class="col-3">age</div>
-        </div>
-        {% for order in order_list %}
+    <div class="container p-2">
+        {% for order in orders %}
             <div class="row">
                 <div class="col-2">
                     <a href="{% url 'orders:order_details' order.id %}">{{ order.id }}</a>
                 </div>
                 <div class="col-2">
                     {% if order.user %}
-                    {{ order.user.first_name }} {{ order.user.last_name }}
+                        {{ order.user.first_name }} {{ order.user.last_name }}
                     {% else %}
-                    {{ order.email }}
+                        {{ order.email }}
                     {% endif %}
-                    {{ order.status }}</div>
-                <div class="col-4">{{ order.created }} ({{ order.created|timesince }})</div>
+                </div>
+                <div class="col-2">{{ order.status }}</div>
+                <div class="col-4">{{ order.created|timesince }}</div>
             </div>
-        {% endfor %}
-    </div>
+            
+        </div>
+    {% endfor %}
+</div>
 {% endblock content %}
