@@ -1,8 +1,8 @@
-from decimal import Decimal
+# from decimal import Decimal
 
 from django.conf import settings
 from django.db import models
-from django.core.validators import RegexValidator
+# from django.core.validators import RegexValidator
 
 from faker import Faker
 from simple_history.models import HistoricalRecords
@@ -56,15 +56,17 @@ class OrderItem(models.Model):
     )
     quantity = models.PositiveIntegerField(default=1)
     title = models.CharField(max_length=100)
-    sku = models.CharField(
-        max_length=12,
-        validators=[
-            RegexValidator(
-                regex=SKU_RE_PATTERN,
-                message="Not a valid SKU",
-                code="nomatch",
-            )
-        ],
+    sku = models.ForeignKey(
+        ProductStock,
+        on_delete=models.CASCADE
+        # max_length=12,
+        # validators=[
+        #     RegexValidator(
+        #         regex=SKU_RE_PATTERN,
+        #         message="Not a valid SKU",
+        #         code="nomatch",
+        #     )
+        # ],
     )
 
     price = models.DecimalField(max_digits=5, decimal_places=2)
