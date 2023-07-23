@@ -1,104 +1,100 @@
 {% extends "../base.html" %}
 {% load static %}
-{% block title %}Delivery Options{% endblock %}
-
+{% block title %}
+    Delivery Options
+{% endblock title %}
 {% block content %}
-<div class="container">
-    <div class="col-12">
-        <h1 class="h2">Delivery Options</h1>
-    </div>
-
-    <div class="text-center mt-3">
-        <div id="spinner" class="spinner-border" role="status"/>
-    </div>
-    <div class="col-12">
-        <p>Select your delivery options</p>
-    </div>
-    <hr />
-</div>
-
-<div class="container">
-    <div class="row g-3">
-        <div class="col-md-4 col-lg-4 order-md-last p-0 order-3">
-            <div class="d-flex bd-highlight ms-0">
-                <div class="p-2 flex-grow-1 bd-highlight">Sub Total:</div>
-                <div class="p-2 bd-highlight">
-                    <span class="fw-bold h5"></span>
-                    <span id="sub_total" class="fw-bold h5">${{basket.get_subtotal_price}}</span>
-                </div>
-            </div>
-            <div class="d-flex bd-highlight">
-                <div class="p-2 flex-grow-1 bd-highlight">Delivery Cost:</div>
-                <div class="p-2 bd-highlight"><span class="fw-bold h5"></span><span id="delivery_price"
-                                                                                    class="fw-bold h5">-</span></div>
-            </div>
-            <div class="d-flex bd-highlight">
-                <div class="p-2 flex-grow-1 bd-highlight">Total:</div>
-                <div class="p-2 bd-highlight"><span class="fw-bold h5"></span><span id="total"
-                                                                                    class="fw-bold h5">-</span></div>
-            </div>
-            <form action="{% url 'checkout:payment_selection' %}" method="post" >
-                {% csrf_token %}
-                <button type="submit" id="to-payment" class="btn btn-success" disabled>To payment</button>
-            </form>
-
+    <div class="container">
+        <div class="col-12">
+            <h1 class="h2">Delivery Options</h1>
         </div>
-        <div id="shippingoptions" class="col-md-7 col-lg-8">
-            <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
-                <div class="col-md-2 ps-3 ps-md-4">
-                    <i class="fa-solid fa-truck"></i>
-                </div>
-                <div class="row g-0">
-                    <div class="col-md-9 ps-md-1">
-                        <div class="card-body p-1">
-                            <p class="card-text ps-2 mb-1 pt-1 fw-bold">Regular</p>
-                            <p id="regular-days" class="card-text ps-2 pb-3">...</p>
-                        </div>
+        <div class="text-center mt-3">
+            <div id="spinner" class="spinner-border" role="status" /></div>
+        <div class="col-12">
+            <p>Select your delivery options</p>
+        </div>
+        <hr />
+    </div>
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-md-4 col-lg-4 order-md-last p-0 order-3">
+                <div class="d-flex bd-highlight ms-0">
+                    <div class="p-2 flex-grow-1 bd-highlight">Sub Total:</div>
+                    <div class="p-2 bd-highlight">
+                        <span class="fw-bold h5"></span>
+                        <span id="sub_total" class="fw-bold h5">${{ basket.get_subtotal_price }}</span>
                     </div>
-                    <div id="regular" class="col-md-1 ps-md-1">
-                        <input class="align-middle h-100" type="radio" name="deliveryOption">
+                </div>
+                <div class="d-flex bd-highlight">
+                    <div class="p-2 flex-grow-1 bd-highlight">Delivery Cost:</div>
+                    <div class="p-2 bd-highlight">
+                        <span class="fw-bold h5"></span><span id="delivery_price" class="fw-bold h5">-</span>
                     </div>
                 </div>
+                <div class="d-flex bd-highlight">
+                    <div class="p-2 flex-grow-1 bd-highlight">Total:</div>
+                    <div class="p-2 bd-highlight">
+                        <span class="fw-bold h5"></span><span id="total" class="fw-bold h5">-</span>
+                    </div>
+                </div>
+                <form action="{% url 'checkout:payment_selection' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" id="to-payment" class="btn btn-success" disabled>To payment</button>
+                </form>
             </div>
-
-            <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
-                <div class="col-md-2 ps-3 ps-md-4">
-                    <i class="fa-solid fa-truck-fast"></i>
-                </div>
-                <div class="row g-0">
-                    <div class="col-md-9 ps-md-1">
-                        <div class="card-body p-1">
-                            <p class="card-text ps-2 mb-1 pt-1 fw-bold">Fast</p>
-                            <p id="fast-days" class="card-text ps-2 pb-3">...</p>
+            <div id="shippingoptions" class="col-md-7 col-lg-8">
+                <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
+                    <div class="col-md-2 ps-3 ps-md-4">
+                        <i class="fa-solid fa-truck"></i>
+                    </div>
+                    <div class="row g-0">
+                        <div class="col-md-9 ps-md-1">
+                            <div class="card-body p-1">
+                                <p class="card-text ps-2 mb-1 pt-1 fw-bold">Regular</p>
+                                <p id="regular-days" class="card-text ps-2 pb-3">...</p>
+                            </div>
+                        </div>
+                        <div id="regular" class="col-md-1 ps-md-1">
+                            <input class="align-middle h-100" type="radio" name="deliveryOption">
                         </div>
                     </div>
-                    <div id="fast" class="col-md-1 ps-md-1">
-                        <input class="align-middle h-100" type="radio" name="deliveryOption">
+                </div>
+                <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
+                    <div class="col-md-2 ps-3 ps-md-4">
+                        <i class="fa-solid fa-truck-fast"></i>
                     </div>
-                </div>
-            </div>
-
-            <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
-                <div class="col-md-2 ps-3 ps-md-4">
-                    <i class="fa-solid fa-rocket"></i>
-                </div>
-                <div class="row g-0">
-                    <div class="col-md-9 ps-md-1">
-                        <div class="card-body p-1">
-                            <p class="card-text ps-2 mb-1 pt-1 fw-bold">Express</p>
-                            <p id="express-days" class="card-text ps-2 pb-3">...</p>
+                    <div class="row g-0">
+                        <div class="col-md-9 ps-md-1">
+                            <div class="card-body p-1">
+                                <p class="card-text ps-2 mb-1 pt-1 fw-bold">Fast</p>
+                                <p id="fast-days" class="card-text ps-2 pb-3">...</p>
+                            </div>
+                        </div>
+                        <div id="fast" class="col-md-1 ps-md-1">
+                            <input class="align-middle h-100" type="radio" name="deliveryOption">
                         </div>
                     </div>
-                    <div id="express" class="col-md-1 ps-md-1">
-                        <input class="align-middle h-100" type="radio" name="deliveryOption">
+                </div>
+                <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
+                    <div class="col-md-2 ps-3 ps-md-4">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <div class="row g-0">
+                        <div class="col-md-9 ps-md-1">
+                            <div class="card-body p-1">
+                                <p class="card-text ps-2 mb-1 pt-1 fw-bold">Express</p>
+                                <p id="express-days" class="card-text ps-2 pb-3">...</p>
+                            </div>
+                        </div>
+                        <div id="express" class="col-md-1 ps-md-1">
+                            <input class="align-middle h-100" type="radio" name="deliveryOption">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<script>
+    <script>
  const maybePluralize = (count, noun, suffix = 's') => `${count} ${noun}${count !== 1 ? suffix : ''}`;
 
  $(document).ready(function() {
@@ -143,5 +139,5 @@
          },
      });
  });
-</script>
-{% endblock %}
+    </script>
+{% endblock content %}
