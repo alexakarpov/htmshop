@@ -60,7 +60,7 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 1,
+    
     "fields": {
       "product": 1,
       "product_type": 1,
@@ -76,7 +76,7 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 3,
+    
     "fields": {
       "product": 2,
       "product_type": 4,
@@ -92,7 +92,7 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 4,
+    
     "fields": {
       "product": 2,
       "product_type": 3,
@@ -108,7 +108,7 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 7,
+    
     "fields": {
       "product": 6,
       "product_type": 2,
@@ -124,7 +124,7 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 9,
+    
     "fields": {
       "product": 5,
       "product_type": 4,
@@ -140,7 +140,7 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 10,
+    
     "fields": {
       "product": 8,
       "product_type": 4,
@@ -156,7 +156,7 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 11,
+    
     "fields": {
       "product": 9,
       "product_type": 4,
@@ -172,7 +172,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 12,
     "fields": {
       "product": 10,
       "product_type": 4,
@@ -188,7 +187,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 13,
     "fields": {
       "product": 11,
       "product_type": 4,
@@ -204,7 +202,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 14,
     "fields": {
       "product": 12,
       "product_type": 4,
@@ -220,7 +217,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 15,
     "fields": {
       "product": 13,
       "product_type": 4,
@@ -236,7 +232,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 16,
     "fields": {
       "product": 14,
       "product_type": 4,
@@ -252,7 +247,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 17,
     "fields": {
       "product": 14,
       "product_type": 3,
@@ -268,7 +262,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 18,
     "fields": {
       "product": 13,
       "product_type": 3,
@@ -284,7 +277,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 19,
     "fields": {
       "product": 12,
       "product_type": 3,
@@ -300,7 +292,7 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 20,
+
     "fields": {
       "product": 11,
       "product_type": 3,
@@ -316,7 +308,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 21,
     "fields": {
       "product": 10,
       "product_type": 3,
@@ -332,7 +323,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 22,
     "fields": {
       "product": 9,
       "product_type": 3,
@@ -348,7 +338,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 23,
     "fields": {
       "product": 8,
       "product_type": 3,
@@ -364,7 +353,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 24,
     "fields": {
       "product": 4,
       "product_type": 3,
@@ -380,7 +368,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 25,
     "fields": {
       "product": 3,
       "product_type": 3,
@@ -396,7 +383,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 26,
     "fields": {
       "product": 5,
       "product_type": 3,
@@ -412,7 +398,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 27,
     "fields": {
       "product": 4,
       "product_type": 4,
@@ -428,7 +413,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 28,
     "fields": {
       "product": 15,
       "product_type": 3,
@@ -444,7 +428,6 @@
   },
   {
     "model": "inventory.productstock",
-    "pk": 29,
     "fields": {
       "product": 15,
       "product_type": 4,
@@ -463,7 +446,7 @@
     "pk": 2,
     "fields": {
       "specification": 2,
-      "sku": 7,
+      "sku": "L-1C",
       "value": "ounce"
     }
   }

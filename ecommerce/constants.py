@@ -7,7 +7,6 @@ MOUNTED_ICON_TYPE_NAME = "mounted icon"
 ICON_PRINT_TYPE_NAME = "icon print"
 PRINT_TYPE_ID = 4
 LINES_PER_PAGE = 29
-SKU_RE_PATTERN = "^A-(?!0)\d{1,3}(\.\d{1,2}x\d{1,2})?(?(1)[MP]|P?)\Z|^[BHJR]-(?!0)\d{1,3}\Z|^[DG]-(?!0)\d{1,3}P?\Z|^L-(?!0)\d{1,3}[ABC]\Z|^M-(?!0)\d{1,3}[AEJ]?\Z|^S-[1-9]\Z"
 
 ROOMS = [
     ("nowhere", "nowhere"),

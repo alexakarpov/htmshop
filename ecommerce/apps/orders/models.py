@@ -8,7 +8,7 @@ from faker import Faker
 from simple_history.models import HistoricalRecords
 
 from ecommerce.apps.inventory.models import ProductStock
-from ecommerce.constants import ORDER_STATUS, ORDER_KINDS, SKU_RE_PATTERN
+from ecommerce.constants import ORDER_STATUS, ORDER_KINDS
 
 
 class Order(models.Model):
