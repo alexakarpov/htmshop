@@ -60,303 +60,10 @@
   },
   {
     "model": "inventory.productstock",
-    
-    "fields": {
-      "product": 1,
-      "product_type": 1,
-      "sku": "B-10",
-      "restock_point": null,
-      "target_amount": 10,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "16.00",
-      "price": "16.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    
-    "fields": {
-      "product": 2,
-      "product_type": 4,
-      "sku": "A-9P",
-      "restock_point": 5,
-      "target_amount": 25,
-      "wrapping_qty": 5,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "0.01",
-      "price": "18.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    
-    "fields": {
-      "product": 2,
-      "product_type": 3,
-      "sku": "A-9",
-      "restock_point": 4,
-      "target_amount": 12,
-      "wrapping_qty": 1,
-      "sanding_qty": 5,
-      "painting_qty": 2,
-      "weight": "39.00",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    
-    "fields": {
-      "product": 6,
-      "product_type": 2,
-      "sku": "L-1C",
-      "restock_point": null,
-      "target_amount": 10,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "1.00",
-      "price": "9.99"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    
-    "fields": {
-      "product": 5,
-      "product_type": 4,
-      "sku": "A-399P",
-      "restock_point": 10,
-      "target_amount": 25,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "0.78",
-      "price": "18.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    
-    "fields": {
-      "product": 8,
-      "product_type": 4,
-      "sku": "A-148P",
-      "restock_point": 5,
-      "target_amount": 25,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "1.00",
-      "price": "18.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    
-    "fields": {
-      "product": 9,
-      "product_type": 4,
-      "sku": "A-176P",
-      "restock_point": 5,
-      "target_amount": 25,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "1.00",
-      "price": "18.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 10,
-      "product_type": 4,
-      "sku": "A-391P",
-      "restock_point": 4,
-      "target_amount": 25,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "1.00",
-      "price": "18.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 11,
-      "product_type": 4,
-      "sku": "A-122P",
-      "restock_point": 5,
-      "target_amount": 25,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "0.05",
-      "price": "18.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 12,
-      "product_type": 4,
-      "sku": "A-298P",
-      "restock_point": 10,
-      "target_amount": 25,
-      "wrapping_qty": 3,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "0.76",
-      "price": "18.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 13,
-      "product_type": 4,
-      "sku": "A-129P",
-      "restock_point": 10,
-      "target_amount": 20,
-      "wrapping_qty": 4,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "0.94",
-      "price": "18.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 14,
-      "product_type": 4,
-      "sku": "A-5P",
-      "restock_point": 20,
-      "target_amount": 50,
-      "wrapping_qty": 6,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "0.75",
-      "price": "18.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 14,
-      "product_type": 3,
-      "sku": "A-5",
-      "restock_point": 15,
-      "target_amount": 30,
-      "wrapping_qty": 3,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "22.21",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 13,
-      "product_type": 3,
-      "sku": "A-129",
-      "restock_point": 5,
-      "target_amount": 15,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "28.02",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 12,
-      "product_type": 3,
-      "sku": "A-298",
-      "restock_point": 15,
-      "target_amount": 20,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "22.53",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-
-    "fields": {
-      "product": 11,
-      "product_type": 3,
-      "sku": "A-122",
-      "restock_point": 15,
-      "target_amount": 30,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "23.51",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 10,
-      "product_type": 3,
-      "sku": "A-391",
-      "restock_point": 5,
-      "target_amount": 25,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "22.70",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 9,
-      "product_type": 3,
-      "sku": "A-176",
-      "restock_point": 4,
-      "target_amount": 12,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "25.24",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 8,
-      "product_type": 3,
-      "sku": "A-148",
-      "restock_point": 15,
-      "target_amount": 30,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "21.67",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
+    "pk": "A-11",
     "fields": {
       "product": 4,
       "product_type": 3,
-      "sku": "A-11",
       "restock_point": 5,
       "target_amount": 15,
       "wrapping_qty": 0,
@@ -368,40 +75,10 @@
   },
   {
     "model": "inventory.productstock",
-    "fields": {
-      "product": 3,
-      "product_type": 3,
-      "sku": "A-329",
-      "restock_point": 4,
-      "target_amount": 12,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "20.90",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
-    "fields": {
-      "product": 5,
-      "product_type": 3,
-      "sku": "A-399",
-      "restock_point": 5,
-      "target_amount": 15,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "23.07",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.productstock",
+    "pk": "A-11P",
     "fields": {
       "product": 4,
       "product_type": 4,
-      "sku": "A-11P",
       "restock_point": 5,
       "target_amount": 25,
       "wrapping_qty": 3,
@@ -413,10 +90,295 @@
   },
   {
     "model": "inventory.productstock",
+    "pk": "A-122",
+    "fields": {
+      "product": 11,
+      "product_type": 3,
+      "restock_point": 15,
+      "target_amount": 30,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "23.51",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-122P",
+    "fields": {
+      "product": 11,
+      "product_type": 4,
+      "restock_point": 5,
+      "target_amount": 25,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "0.05",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-129",
+    "fields": {
+      "product": 13,
+      "product_type": 3,
+      "restock_point": 5,
+      "target_amount": 15,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "28.02",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-129P",
+    "fields": {
+      "product": 13,
+      "product_type": 4,
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": 4,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "0.94",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-148",
+    "fields": {
+      "product": 8,
+      "product_type": 3,
+      "restock_point": 15,
+      "target_amount": 30,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "21.67",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-148P",
+    "fields": {
+      "product": 8,
+      "product_type": 4,
+      "restock_point": 5,
+      "target_amount": 25,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "1.00",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-176",
+    "fields": {
+      "product": 9,
+      "product_type": 3,
+      "restock_point": 4,
+      "target_amount": 12,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "25.24",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-176P",
+    "fields": {
+      "product": 9,
+      "product_type": 4,
+      "restock_point": 5,
+      "target_amount": 25,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "1.00",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-298",
+    "fields": {
+      "product": 12,
+      "product_type": 3,
+      "restock_point": 15,
+      "target_amount": 20,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "22.53",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-298P",
+    "fields": {
+      "product": 12,
+      "product_type": 4,
+      "restock_point": 10,
+      "target_amount": 25,
+      "wrapping_qty": 3,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "0.76",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-329",
+    "fields": {
+      "product": 3,
+      "product_type": 3,
+      "restock_point": 4,
+      "target_amount": 12,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "20.90",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-391",
+    "fields": {
+      "product": 10,
+      "product_type": 3,
+      "restock_point": 5,
+      "target_amount": 25,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "22.70",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-391.16x20M",
+    "fields": {
+      "product": 10,
+      "product_type": 3,
+      "restock_point": null,
+      "target_amount": 3,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "17.00",
+      "price": "22.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-391P",
+    "fields": {
+      "product": 10,
+      "product_type": 4,
+      "restock_point": 4,
+      "target_amount": 25,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "1.00",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-399",
+    "fields": {
+      "product": 5,
+      "product_type": 3,
+      "restock_point": 5,
+      "target_amount": 15,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "23.07",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-399P",
+    "fields": {
+      "product": 5,
+      "product_type": 4,
+      "restock_point": 10,
+      "target_amount": 25,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "0.78",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-5",
+    "fields": {
+      "product": 14,
+      "product_type": 3,
+      "restock_point": 15,
+      "target_amount": 30,
+      "wrapping_qty": 3,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "22.21",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-5P",
+    "fields": {
+      "product": 14,
+      "product_type": 4,
+      "restock_point": 20,
+      "target_amount": 50,
+      "wrapping_qty": 6,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "0.75",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-9",
+    "fields": {
+      "product": 2,
+      "product_type": 3,
+      "restock_point": 4,
+      "target_amount": 12,
+      "wrapping_qty": 1,
+      "sanding_qty": 5,
+      "painting_qty": 2,
+      "weight": "39.00",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-93",
     "fields": {
       "product": 15,
       "product_type": 3,
-      "sku": "A-93",
       "restock_point": 15,
       "target_amount": 20,
       "wrapping_qty": 0,
@@ -428,10 +390,10 @@
   },
   {
     "model": "inventory.productstock",
+    "pk": "A-93P",
     "fields": {
       "product": 15,
       "product_type": 4,
-      "sku": "A-93P",
       "restock_point": 10,
       "target_amount": 25,
       "wrapping_qty": 3,
@@ -439,6 +401,51 @@
       "painting_qty": 0,
       "weight": "0.67",
       "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "A-9P",
+    "fields": {
+      "product": 2,
+      "product_type": 4,
+      "restock_point": 5,
+      "target_amount": 25,
+      "wrapping_qty": 5,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "0.01",
+      "price": "18.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "B-10",
+    "fields": {
+      "product": 1,
+      "product_type": 1,
+      "restock_point": null,
+      "target_amount": 10,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "16.00",
+      "price": "16.00"
+    }
+  },
+  {
+    "model": "inventory.productstock",
+    "pk": "L-1C",
+    "fields": {
+      "product": 6,
+      "product_type": 2,
+      "restock_point": null,
+      "target_amount": 10,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "1.00",
+      "price": "9.99"
     }
   },
   {
