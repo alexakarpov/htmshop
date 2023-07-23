@@ -33,6 +33,8 @@ class Order(models.Model):
     payment_option = models.CharField(max_length=200, blank=True)
     paid = models.BooleanField(default=False)
     shipped = models.BooleanField(default=False)
+    shipping_method = models.CharField(max_length=20)
+    shipping_price = models.DecimalField(max_digits=5, decimal_places=2)
     status = models.CharField(
         choices=ORDER_STATUS, default="PENDING", max_length=10
     )
