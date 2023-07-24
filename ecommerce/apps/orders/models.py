@@ -1,8 +1,5 @@
-# from decimal import Decimal
-
 from django.conf import settings
 from django.db import models
-# from django.core.validators import RegexValidator
 
 from faker import Faker
 from simple_history.models import HistoricalRecords
@@ -56,18 +53,7 @@ class OrderItem(models.Model):
     )
     quantity = models.PositiveIntegerField(default=1)
     title = models.CharField(max_length=100)
-    sku = models.ForeignKey(
-        ProductStock,
-        on_delete=models.CASCADE
-        # max_length=12,
-        # validators=[
-        #     RegexValidator(
-        #         regex=SKU_RE_PATTERN,
-        #         message="Not a valid SKU",
-        #         code="nomatch",
-        #     )
-        # ],
-    )
+    sku = models.ForeignKey(ProductStock, on_delete=models.CASCADE)
 
     price = models.DecimalField(max_digits=5, decimal_places=2)
 
@@ -82,12 +68,12 @@ def make_order(address_d, cart_d, email):
     total = 0
     for sku, item in cart_d.items():
         total += float(item.get("price")) * int(item.get("qty"))
-        if (sku.startswith("L-")):
-            o.kind="INCENSE"
-        elif ('x' in sku or '.' in sku):
-            o.kind="ENL_OR_RED"
+        if "x" in sku or "." in sku:
+            o.kind = "ENL_OR_RED"
+        elif sku.startswith("L-"):
+            o.kind = "INCENSE"            
         else:
-            pass #generic is a default
+            pass  # generic is a default
 
     o.total_paid = total
     o.email = email
