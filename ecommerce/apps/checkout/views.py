@@ -23,7 +23,9 @@ config = dotenv_values()
 logger = logging.getLogger("django")
 
 # TODO: switch to prod
-square_client = Client(access_token=config["SQUARE_ACCESS_TOKEN"], environment="sandbox")
+square_client = Client(
+    access_token=config["SQUARE_ACCESS_TOKEN"], environment="sandbox"
+)
 
 
 def deliverychoices(request):
@@ -95,7 +97,9 @@ def delivery_address(request):
 
     if request.user.is_authenticated:
         logger.debug(f"user is authenticated")
-        addresses = Address.objects.filter(customer=request.user).order_by("-default")
+        addresses = Address.objects.filter(customer=request.user).order_by(
+            "-default"
+        )
 
         if len(addresses) == 0:
             return HttpResponseRedirect(reverse("accounts:addresses"))
@@ -159,16 +163,25 @@ def guest_address(request):
             return HttpResponse("Error handler content", status=400)
     else:
         address_form = UserAddressForm()
-        return render(request, "checkout/guest_address.html", {"form": address_form})
+        return render(
+            request, "checkout/guest_address.html", {"form": address_form}
+        )
 
 
 # https://developer.squareup.com/forums/t/django-csrf-middleware-token-missing/6959
 @api_view(["POST"])
 def payment_with_token(request):
+    session = request.session
+    _id, shipping_price, tier, _days = (
+        session.get("purchase").get("delivery_choice").split("/")
+    )
+
     token = request.data.get("payload").get("source_id")
     if not token:  # is it even possible though?
         logger.error("payment_with_token must have a token (source_id)")
-        res = JsonResponse({"success": False, "message": "Token missing"}, status=400)
+        res = JsonResponse(
+            {"success": False, "message": "Token missing"}, status=400
+        )
         return res
     session = request.session
     total_s = session.get("purchase")["total"]
@@ -178,7 +191,9 @@ def payment_with_token(request):
 
     payload = {
         "source_id": token,
-        "idempotency_key": "".join(random.choices(string.ascii_lowercase, k=18)),
+        "idempotency_key": "".join(
+            random.choices(string.ascii_lowercase, k=18)
+        ),
         "amount_money": {"amount": total_i, "currency": "USD"},
         "app_fee_money": {"amount": 0, "currency": "USD"},
         "autocomplete": True,
@@ -205,7 +220,9 @@ def payment_with_token(request):
         order = Order.objects.create(
             user=user if user.is_authenticated else None,
             full_name=f"{fname} {lname}",
-            email=user.email if user.is_authenticated else "someone@example.com",
+            email=user.email
+            if user.is_authenticated
+            else "someone@example.com",
             address_line1=address_d.get("address_line1"),
             address_line2=address_d.get("address_line2"),
             city=address_d.get("city_locality"),
@@ -214,17 +231,25 @@ def payment_with_token(request):
             total_paid=total_i / 100,
             payment_option="Square",
             paid=True,
+            shipping_price=shipping_price,
+            shipping_method=tier,
         )
 
+        order.kind = "GENERIC"
         for sku, item in basket.basket.items():
-            # pii = ProductStock.objects.get(sku=sku)
+            stock = ProductStock.objects.get(sku=sku)
+            if "x" in sku or "." in sku:
+                order.kind = "ENL_OR_RED"
+                break
+            elif sku.startswith("L-"):
+                order.kind = "INCENSE"            
+            
             OrderItem.objects.create(
                 order_id=order.pk,
                 title=item["title"],
-                # inventory_item=pii,
+                sku=stock,
                 price=item["price"],
                 quantity=item["qty"],
-                sku=sku
             )
 
         order.save()
