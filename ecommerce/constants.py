@@ -4,8 +4,9 @@ TEST_ICON_SLUG = "holy_napkin"
 TEST_ICON2_SLUG = "burning_bush"
 TEST_BOOK_SLUG = "psalter"
 MOUNTED_ICON_TYPE_NAME = "mounted icon"
+MOUNTED_ICON_TYPE_ID = 3
 ICON_PRINT_TYPE_NAME = "icon print"
-PRINT_TYPE_ID = 4
+ICON_PRINT_TYPE_ID = 4
 LINES_PER_PAGE = 29
 
 ROOMS = [
