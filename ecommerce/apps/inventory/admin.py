@@ -27,6 +27,8 @@ class ProductStockAdmin(admin.ModelAdmin):
     inlines = [
         ProductSpecificationValueInline,
     ]
+    ordering = ('sku',)
+
 
     def get_inlines(self, request, obj):
         if not obj or not obj.sku or not obj.product_type:
