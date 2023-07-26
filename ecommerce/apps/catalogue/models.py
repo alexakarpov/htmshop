@@ -116,7 +116,7 @@ class Product(models.Model):
 
     def get_skus(self):
         """
-        These are actually ProductInventory items related to this Product
+        These are actually ProductStock items from the inventory app, related to this Product
         """
         logger.debug(f"getting variants for {self}")
         return self.productstock_set.filter(product_id=self.id).order_by(

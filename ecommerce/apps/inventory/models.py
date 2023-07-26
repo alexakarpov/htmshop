@@ -56,9 +56,7 @@ class ProductSpecification(models.Model):
 
 class ProductStock(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    product_type = models.ForeignKey(
-        ProductType, on_delete=models.CASCADE
-    )
+    product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
     specifications = models.ManyToManyField(
         ProductSpecification, through="ProductSpecificationValue"
     )
@@ -77,8 +75,8 @@ class ProductStock(models.Model):
         ],
     )
 
-    restock_point = models.PositiveIntegerField(default=1)
-    target_amount = models.PositiveIntegerField(default=1)
+    restock_point = models.PositiveIntegerField(null=True, default=1)
+    target_amount = models.PositiveIntegerField(null=True, default=1)
 
     wrapping_qty = models.IntegerField(
         default=0, verbose_name="Wrapping room stock"
