@@ -12,7 +12,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ecommerce.constants import LINES_PER_PAGE, PRINT_TYPE_ID
+from ecommerce.constants import LINES_PER_PAGE
 
 from .lists import mounting_work, print_work, sanding_work, sawing_work
 from .models import ProductStock, get_or_create_stock_by_sku
