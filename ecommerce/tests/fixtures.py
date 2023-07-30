@@ -3,7 +3,7 @@
 
 import pytest
 
-from ecommerce.apps.inventory.models import ProductStock
+from ecommerce.apps.inventory.models import Stock
 # from django.core.management import call_command
 
 @pytest.fixture(scope='session')

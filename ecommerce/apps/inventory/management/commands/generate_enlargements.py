@@ -1,7 +1,7 @@
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 
-from ecommerce.apps.inventory.models import ProductStock, ProductType
+from ecommerce.apps.inventory.models import Stock, ProductType
 
 from ecommerce.constants import MOUNTED_ICON_TYPE_ID
 
@@ -22,13 +22,13 @@ class Command(BaseCommand):
             "40x50",
         ]
         mounted_type = ProductType.objects.get(id=MOUNTED_ICON_TYPE_ID)
-        for p in ProductStock.objects.filter(
+        for p in Stock.objects.filter(
             product_type=MOUNTED_ICON_TYPE_ID
         ):
             a_sku = p.sku
             for size in sizes:
                 er_sku = a_sku + "." + size + "M"
-                ProductStock.objects.create(
+                ps = Stock.objects.create(
                     sku=er_sku,
                     product=p.product,
                     product_type=mounted_type,

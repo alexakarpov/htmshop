@@ -33,7 +33,7 @@
             {% for i in skus %}
               <tr>
                 <td>
-                  <strong>{% if i.productspecificationvalue_set.count %}<i>{{ i.productspecificationvalue_set.first }}</i>{% endif %}</strong>
+                  <strong>{% if i.spec %}<i>{{ i.spec }}</i>{% endif %}</strong>
                 </td>
                 <td>
                   <strong>${{ i.price }}</strong>

@@ -35,31 +35,7 @@
     }
   },
   {
-    "model": "inventory.productspecification",
-    "pk": 1,
-    "fields": {
-      "product_type": 3,
-      "name": "size"
-    }
-  },
-  {
-    "model": "inventory.productspecification",
-    "pk": 2,
-    "fields": {
-      "product_type": 2,
-      "name": "size"
-    }
-  },
-  {
-    "model": "inventory.productspecification",
-    "pk": 3,
-    "fields": {
-      "product_type": 4,
-      "name": "size"
-    }
-  },
-  {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-11",
     "fields": {
       "product": 4,
@@ -74,7 +50,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-122",
     "fields": {
       "product": 11,
@@ -89,7 +65,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-129",
     "fields": {
       "product": 13,
@@ -104,7 +80,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-148",
     "fields": {
       "product": 8,
@@ -119,7 +95,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-176",
     "fields": {
       "product": 9,
@@ -134,7 +110,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-298",
     "fields": {
       "product": 12,
@@ -149,7 +125,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-329",
     "fields": {
       "product": 3,
@@ -164,7 +140,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-391",
     "fields": {
       "product": 10,
@@ -179,7 +155,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-391.16x20M",
     "fields": {
       "product": 10,
@@ -194,7 +170,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-399",
     "fields": {
       "product": 5,
@@ -209,7 +185,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-5",
     "fields": {
       "product": 14,
@@ -224,7 +200,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-9",
     "fields": {
       "product": 2,
@@ -239,7 +215,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "A-93",
     "fields": {
       "product": 15,
@@ -254,7 +230,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "B-10",
     "fields": {
       "product": 1,
@@ -269,7 +245,7 @@
     }
   },
   {
-    "model": "inventory.productstock",
+    "model": "inventory.stock",
     "pk": "L-1C",
     "fields": {
       "product": 6,
@@ -281,15 +257,6 @@
       "painting_qty": 0,
       "weight": "1.00",
       "price": "9.99"
-    }
-  },
-  {
-    "model": "inventory.productspecificationvalue",
-    "pk": 2,
-    "fields": {
-      "specification": 2,
-      "sku": "L-1C",
-      "value": "ounce"
     }
   }
 ]

@@ -1,7 +1,7 @@
 import logging
 
 from ecommerce.apps.inventory.models import (
-    ProductStock,
+    Stock,
     get_or_create_stock_by_sku,
 )
 from ecommerce.constants import (
@@ -12,7 +12,7 @@ from ecommerce.constants import (
 logger = logging.getLogger("django")
 
 
-def move_stock_one_sku(sku: str, from_room: str = 'nowhere', to_room: str = 'nowhere',  qty: int = 1) -> ProductStock:
+def move_stock_one_sku(sku: str, from_room: str = 'nowhere', to_room: str = 'nowhere',  qty: int = 1) -> Stock:
     """
     move stock between rooms, including to/from nowhere
     the normal case is when only one stock is involved
@@ -45,7 +45,7 @@ def move_stock_one_sku(sku: str, from_room: str = 'nowhere', to_room: str = 'now
     return stock
 
 
-def move_sku_to_print_supply(source_sku: str, from_room: str, qty: int = 1) -> ProductStock:
+def move_sku_to_print_supply(source_sku: str, from_room: str, qty: int = 1) -> Stock:
     print_sku = source_sku+"P"
 
     stock = get_or_create_stock_by_sku(print_sku)
@@ -55,7 +55,7 @@ def move_sku_to_print_supply(source_sku: str, from_room: str, qty: int = 1) -> P
     return stock
 
 
-def move_sku_from_print_supply(sku: str, to_room: str,  qty: int = 1) -> ProductStock:
+def move_sku_from_print_supply(sku: str, to_room: str,  qty: int = 1) -> Stock:
     print_sku = sku+"P"
 
     print_stock = get_or_create_stock_by_sku(print_sku)

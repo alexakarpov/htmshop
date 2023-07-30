@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import ProductStock
+from .models import Stock
 
 class ProductStockSerializer(serializers.Serializer):
     product = serializers.CharField()

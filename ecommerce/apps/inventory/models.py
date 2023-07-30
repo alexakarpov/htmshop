@@ -2,7 +2,6 @@ import logging
 import re
 from abc import ABC
 
-from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -34,31 +33,14 @@ class ProductType(models.Model):
         return self.name
 
 
-class ProductSpecification(models.Model):
-    """
-    The Product Specification Table contains product
-    specifiction or features for the product types.
-    A ProductType can have many specification
-    """
-
-    product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
-    name = models.CharField(
-        verbose_name=_("Name"), help_text=_("Required"), max_length=55
-    )
-
-    class Meta:
-        verbose_name = _("specification")
-        verbose_name_plural = _("Associated Specifications")
-
-    def __str__(self):
-        return f"{self.product_type}.{self.name}"
-
-
-class ProductStock(models.Model):
+class Stock(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
-    specifications = models.ManyToManyField(
-        ProductSpecification, through="ProductSpecificationValue"
+    spec = models.CharField(
+        verbose_name="specification",
+        max_length=20,
+        null=True,
+        blank=True
     )
     sku = models.CharField(
         verbose_name=_("Product SKU"),
@@ -108,9 +90,9 @@ class ProductStock(models.Model):
         )
         logger.debug(f"stock of {product_sku} looking up {print_sku}")
         try:
-            print = ProductStock.objects.get(sku=print_sku)
+            print = Stock.objects.get(sku=print_sku)
             return print.wrapping_qty
-        except ProductStock.DoesNotExist:
+        except Stock.DoesNotExist:
             logger.warning(f"prints aren't even in stock for {product_sku}")
             return 0
 
@@ -172,42 +154,20 @@ class ProductStock(models.Model):
         return f"{self.sku} ({self.product} - {self.product_type})"
 
 
-class ProductSpecificationValue(models.Model):
-    """
-    link table for Many-to-Many relationship between ProductSpecification
-    and ProductInventory entities
-    """
-
-    specification = models.ForeignKey(
-        ProductSpecification, on_delete=models.CASCADE
-    )
-
-    sku = models.ForeignKey(ProductStock, on_delete=models.CASCADE)
-
-    value = models.CharField(max_length=30, blank=False)
-
-    def __str__(self) -> str:
-        return f"{self.value}"
-
-    class Meta:
-        verbose_name = _("Product spec")
-        verbose_name_plural = _("Product specs")
-
-
-def get_or_create_stock_by_sku(sku: str) -> ProductStock:
+def get_or_create_stock_by_sku(sku: str) -> Stock:
     try:
-        s = ProductStock.objects.get(sku=sku.upper())
-    except ProductStock.DoesNotExist:
-        s = ProductStock.objects.create(sku=sku)
+        s = Stock.objects.get(sku=sku.upper())
+    except Stock.DoesNotExist:
+        s = Stock.objects.create(sku=sku)
     return s
 
 
-def get_print_supply_by_sku(sku: str) -> ProductStock:
-    return ProductStock.objects.filter(sku__icontains=sku + "p").first()
+def get_print_supply_by_sku(sku: str) -> Stock:
+    return Stock.objects.filter(sku__icontains=sku + "p").first()
 
 
-def get_stock_by_type(type: str) -> ProductStock:
-    return ProductStock.objects.filter(product_type__name__icontains=type)
+def get_stock_by_type(type: str) -> Stock:
+    return Stock.objects.filter(product_type__name__icontains=type)
 
 
 class WorkItem(ABC):

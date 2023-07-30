@@ -15,7 +15,7 @@ from rest_framework.views import APIView
 from ecommerce.constants import LINES_PER_PAGE
 
 from .lists import mounting_work, print_work, sanding_work, sawing_work
-from .models import ProductStock, get_or_create_stock_by_sku
+from .models import Stock, get_or_create_stock_by_sku
 from .serializers import ProductStockSerializer
 from .utils import (
     move_sku_from_print_supply,
@@ -31,7 +31,7 @@ def ts():
 
 
 class PrintingWorkListView(ListView):
-    model = ProductStock
+    model = Stock
     template_name = "printing_list.html"
 
     def get_context_data(self, **kwargs):
@@ -42,7 +42,7 @@ class PrintingWorkListView(ListView):
 
 
 class SandingWorkListView(ListView):
-    model = ProductStock
+    model = Stock
     template_name = "sanding_list.html"
 
     def get_context_data(self, **kwargs):
@@ -54,7 +54,7 @@ class SandingWorkListView(ListView):
 
 
 class MountingWorkListView(ListView):
-    model = ProductStock
+    model = Stock
     template_name = "mounting_list.html"
 
     def get_context_data(self, **kwargs):
@@ -66,7 +66,7 @@ class MountingWorkListView(ListView):
 
 
 class SawingWorkListView(ListView):
-    model = ProductStock
+    model = Stock
     template_name = "sawing_list.html"
 
     def get_context_data(self, **kwargs):
@@ -82,7 +82,7 @@ def inspect_sku(request):
     sku = escape(data.get("sku").upper())
     logger.error(sku)
     logger.debug(f"inspecting {sku}")
-    item = ProductStock.objects.get(sku=sku)
+    item = Stock.objects.get(sku=sku)
     psupp = item.get_print_supply_count()
     serializer = ProductStockSerializer(item, many=False)
     sdata = serializer.data
@@ -108,7 +108,7 @@ def move_stock(request):
             sku, from_room=from_name, to_room=to_name, qty=quantity
         )
 
-    item = ProductStock.objects.get(sku=sku)
+    item = Stock.objects.get(sku=sku)
     psupp = item.get_print_supply_count()
     serializer = ProductStockSerializer(item, many=False)
     sdata = serializer.data
@@ -121,7 +121,7 @@ def dashboard(request):
     logger.debug(f"GET dict: {request.GET}")
     logger.debug(f"POST dict: {request.POST}")
 
-    icons = ProductStock.objects.filter(product_type__name="mounted icon")
+    icons = Stock.objects.filter(product_type__name="mounted icon")
     skus_arr = []
     for it in icons:
         skus_arr.append(it.sku)

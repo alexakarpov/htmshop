@@ -69,8 +69,7 @@ class Product(models.Model):
     """
     The product table. This class is meant to be "abstract",
     in a sense that items added to a shopping cart
-    will be a Product with Product Specification which are
-    required by it's Product Type
+    will be a related Stock entity
     """
 
     category = models.ForeignKey(
@@ -119,9 +118,7 @@ class Product(models.Model):
         These are actually ProductStock items from the inventory app, related to this Product
         """
         logger.debug(f"getting variants for {self}")
-        return self.productstock_set.filter(product_id=self.id).order_by(
-            "price"
-        )
+        return self.stock_set.filter(product_id=self.id).order_by("price")
 
     def __str__(self):
         return f"{self.title}"
@@ -150,6 +147,7 @@ class ProductImage(models.Model):
 @receiver(signals.pre_save, sender=Product)
 def product_slug_enforce_lower_case(sender, instance, **kwargs):
     instance.slug = instance.slug.lower()
+
 
 @receiver(signals.pre_save, sender=Category)
 def category_slug_enforce_lower_case(sender, instance, **kwargs):

@@ -15,7 +15,7 @@ from square.client import Client
 from ecommerce.apps.accounts.forms import UserAddressForm
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
-from ecommerce.apps.inventory.models import ProductStock
+from ecommerce.apps.inventory.models import Stock
 from ecommerce.apps.orders.models import Order, OrderItem
 
 config = dotenv_values()
@@ -237,7 +237,7 @@ def payment_with_token(request):
 
         order.kind = "GENERIC"
         for sku, item in basket.basket.items():
-            stock = ProductStock.objects.get(sku=sku)
+            stock = Stock.objects.get(sku=sku)
             if "x" in sku or "." in sku:
                 order.kind = "ENL_OR_RED"
                 break

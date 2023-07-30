@@ -1,34 +1,19 @@
 from django.contrib import admin
 
 from .models import (
-    ProductStock,
-    ProductSpecification,
-    ProductSpecificationValue,
+    Stock,
     ProductType,
 )
 
-class ProductSpecificationInline(admin.TabularInline):
-    model = ProductSpecification
-
-
 @admin.register(ProductType)
 class ProductTypeAdmin(admin.ModelAdmin):
-    inlines = [
-        ProductSpecificationInline,
-    ]
+    pass
 
 
-class ProductSpecificationValueInline(admin.TabularInline):
-    model = ProductSpecificationValue
 
-
-@admin.register(ProductStock)
+@admin.register(Stock)
 class ProductStockAdmin(admin.ModelAdmin):
-    inlines = [
-        ProductSpecificationValueInline,
-    ]
     ordering = ('sku',)
-
 
     def get_inlines(self, request, obj):
         if not obj or not obj.sku or not obj.product_type:

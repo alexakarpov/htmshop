@@ -4,7 +4,7 @@ from ecommerce.apps.catalogue.models import (
     Product,
 )
 from ecommerce.apps.inventory.models import (
-    ProductStock,
+    Stock,
     ProductType,
 )
 
@@ -40,4 +40,4 @@ class ProductTest(TestCase):
             len(i_skus), 2, "fixture has 2 variants of the Unburning Bush"
         )
         icon_v1 = i_skus[0]
-        self.assertIsInstance(icon_v1, ProductStock)
+        self.assertIsInstance(icon_v1, Stock)

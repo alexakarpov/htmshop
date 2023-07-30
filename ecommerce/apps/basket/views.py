@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_list_or_404, render
 from django.views.generic import View, TemplateView
 
-from ecommerce.apps.inventory.models import ProductStock
+from ecommerce.apps.inventory.models import Stock
 
 from .basket import Basket
 
@@ -31,7 +31,7 @@ def basket_add(request):
 
         sku = request.POST.get("sku")
 
-        inventoryitem = ProductStock.objects.get(sku=sku)
+        inventoryitem = Stock.objects.get(sku=sku)
 
         basket.add(product=inventoryitem, qty=product_qty, sku=sku)
 

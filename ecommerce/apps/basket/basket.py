@@ -4,7 +4,7 @@ from decimal import Decimal
 import simplejson as json
 from django.conf import settings
 
-from ecommerce.apps.inventory.models import ProductStock
+from ecommerce.apps.inventory.models import Stock
 
 logger = logging.getLogger("django")
 
@@ -39,9 +39,7 @@ class Basket:
                 "title": product.product.title,
                 "price": str(product.price),
                 "qty": qty,
-                "spec": product.productspecificationvalue_set.first().value
-                if product.productspecificationvalue_set.first()
-                else "",
+                "spec": product.spec if product.spec else "",
                 "type": str(product.product_type),
                 "weight": json.dumps(product.weight),
             }
@@ -57,7 +55,7 @@ class Basket:
         """
         logger.debug("Basket.__iter__")
         skus = self.basket.keys()
-        skus = ProductStock.objects.filter(sku__in=skus)
+        skus = Stock.objects.filter(sku__in=skus)
         basket = self.basket.copy()
 
         for s in skus:
@@ -85,10 +83,16 @@ class Basket:
         self.save()
 
     def get_subtotal_price(self):
-        return sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+        return sum(
+            Decimal(item["price"]) * item["qty"]
+            for item in self.basket.values()
+        )
 
     def get_total(self, deliveryprice=0):
-        subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+        subtotal = sum(
+            Decimal(item["price"]) * item["qty"]
+            for item in self.basket.values()
+        )
         total = subtotal + Decimal(deliveryprice)
         return total
 

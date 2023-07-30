@@ -4,7 +4,7 @@ from django.db import models
 from faker import Faker
 from simple_history.models import HistoricalRecords
 
-from ecommerce.apps.inventory.models import ProductStock
+from ecommerce.apps.inventory.models import Stock
 from ecommerce.constants import ORDER_STATUS, ORDER_KINDS
 
 
@@ -53,7 +53,7 @@ class OrderItem(models.Model):
     )
     quantity = models.PositiveIntegerField(default=1)
     title = models.CharField(max_length=100)
-    sku = models.ForeignKey(ProductStock, on_delete=models.CASCADE)
+    sku = models.ForeignKey(Stock, on_delete=models.CASCADE)
 
     price = models.DecimalField(max_digits=5, decimal_places=2)
 

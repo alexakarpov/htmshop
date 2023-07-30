@@ -1,11 +1,11 @@
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 
-from ecommerce.apps.inventory.models import Stock, ProductStock, get_or_create_stock_by_sku
+from ecommerce.apps.inventory.models import Stock, Stock, get_or_create_stock_by_sku
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        for p in ProductStock.objects.filter(
+        for p in Stock.objects.filter(
         product_type__name="mounted icon"):
             print(p.sku)
 
