@@ -36,4 +36,5 @@ class Command(BaseCommand):
                     # target_amount=1,
                     weight=0.1,
                     price=18.0,
+                    spec=size
                 )
