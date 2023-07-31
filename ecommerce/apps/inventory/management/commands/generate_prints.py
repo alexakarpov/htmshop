@@ -20,5 +20,6 @@ class Command(BaseCommand):
                 # restock_point=1,
                 target_amount=1,
                 weight=0.1,
-                price=18.0
+                price=18.0,
+                spec="print"
             )
