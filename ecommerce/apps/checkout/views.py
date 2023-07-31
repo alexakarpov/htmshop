@@ -238,11 +238,11 @@ def payment_with_token(request):
         order.kind = "GENERIC"
         for sku, item in basket.basket.items():
             stock = Stock.objects.get(sku=sku)
-            if "x" in sku or "." in sku:
+            if "x" in sku:
                 order.kind = "ENL_OR_RED"
-                break
+                continue
             elif sku.startswith("L-"):
-                order.kind = "INCENSE"            
+                order.kind = "INCENSE"
             
             OrderItem.objects.create(
                 order_id=order.pk,
