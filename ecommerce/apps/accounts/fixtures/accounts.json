@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$600000$oN67UeT7MrJDmqZ2fjxwpP$2dMudDSimBBb0dONK4ZW7KzLQFf6d7mBNCBpE2Nevr0=",
-      "last_login": "2023-07-31T05:19:11.604Z",
+      "last_login": "2023-07-31T05:33:14.597Z",
       "is_superuser": true,
       "email": "alexakarpov@gmail.com",
       "first_name": "Alexandre",
@@ -32,9 +32,42 @@
       "is_active": true,
       "is_staff": true,
       "created": "2023-07-31T05:25:21.847Z",
-      "updated": "2023-07-31T05:25:21.847Z",
+      "updated": "2023-07-31T06:05:03.231Z",
       "groups": [],
-      "user_permissions": []
+      "user_permissions": [
+        21,
+        22,
+        23,
+        24,
+        29,
+        30,
+        31,
+        32,
+        25,
+        26,
+        27,
+        28,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        49,
+        50,
+        51,
+        52,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ]
     }
   }
 ]
