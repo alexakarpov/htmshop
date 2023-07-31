@@ -8,7 +8,6 @@ from ecommerce.apps.inventory.models import (
     SawingWorkItem,
     get_or_create_stock_by_sku,
     get_print_supply_by_sku,
-    get_stock_by_type,
 )
 from ecommerce.constants import ICON_PRINT_TYPE_NAME
 
@@ -16,8 +15,7 @@ logger = logging.getLogger("django")
 
 
 def print_work():
-    # this is the "Print Supply" for all SKUs
-    inventory = get_stock_by_type(ICON_PRINT_TYPE_NAME)
+    inventory = Stock.objects.filter(product_type__name__icontains=ICON_PRINT_TYPE_NAME)
 
     result = []
     for it in inventory:

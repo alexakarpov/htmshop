@@ -54,8 +54,12 @@ class Stock(models.Model):
         ],
     )
 
-    restock_point = models.PositiveIntegerField(null=True, blank=True, default=1)
-    target_amount = models.PositiveIntegerField(null=True, blank=True, default=1)
+    restock_point = models.PositiveIntegerField(
+        null=True, blank=True, default=1
+    )
+    target_amount = models.PositiveIntegerField(
+        null=True, blank=True, default=1
+    )
 
     wrapping_qty = models.IntegerField(
         null=True, blank=True, default=0, verbose_name="Wrapping room stock"
@@ -68,9 +72,9 @@ class Stock(models.Model):
     )
 
     weight = models.DecimalField(
-        decimal_places=2, max_digits=10, help_text="ounces"
+        decimal_places=2, max_digits=10, help_text="ounces", default=16
     )  # in ounces
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=1.0)
 
     class Meta:
         verbose_name = _("Product Stock Record")
@@ -155,16 +159,14 @@ def get_or_create_stock_by_sku(sku: str) -> Stock:
     try:
         s = Stock.objects.get(sku=sku.upper())
     except Stock.DoesNotExist:
-        s = Stock.objects.create(sku=sku)
+        # s = Stock.objects.create(sku=sku)
+        print(f"Stock for {sku} doesn't exist")
+        s = None
     return s
 
 
 def get_print_supply_by_sku(sku: str) -> Stock:
     return Stock.objects.filter(sku__icontains=sku + "p").first()
-
-
-def get_stock_by_type(type: str) -> Stock:
-    return Stock.objects.filter(product_type__name__icontains=type)
 
 
 class WorkItem(ABC):
