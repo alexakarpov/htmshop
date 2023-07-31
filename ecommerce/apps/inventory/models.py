@@ -37,10 +37,7 @@ class Stock(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
     spec = models.CharField(
-        verbose_name="specification",
-        max_length=20,
-        null=True,
-        blank=True
+        verbose_name="specification", max_length=20, null=True, blank=True
     )
     sku = models.CharField(
         verbose_name=_("Product SKU"),
@@ -57,17 +54,17 @@ class Stock(models.Model):
         ],
     )
 
-    restock_point = models.PositiveIntegerField(null=True, default=1)
-    target_amount = models.PositiveIntegerField(null=True, default=1)
+    restock_point = models.PositiveIntegerField(null=True, blank=True, default=1)
+    target_amount = models.PositiveIntegerField(null=True, blank=True, default=1)
 
     wrapping_qty = models.IntegerField(
-        default=0, verbose_name="Wrapping room stock"
+        null=True, blank=True, default=0, verbose_name="Wrapping room stock"
     )
     sanding_qty = models.IntegerField(
-        default=0, verbose_name="Sanding room stock"
+        null=True, blank=True, default=0, verbose_name="Sanding room stock"
     )
     painting_qty = models.IntegerField(
-        default=0, verbose_name="Painting room stock"
+        null=True, blank=True, default=0, verbose_name="Painting room stock"
     )
 
     weight = models.DecimalField(
