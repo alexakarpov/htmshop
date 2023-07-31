@@ -46,7 +46,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "27.88",
-      "price": "32.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -61,7 +62,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "23.51",
-      "price": "32.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -76,7 +78,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "28.02",
-      "price": "32.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -91,7 +94,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "21.67",
-      "price": "32.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -106,7 +110,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "25.24",
-      "price": "32.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -121,7 +126,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "22.53",
-      "price": "32.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -136,7 +142,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "20.90",
-      "price": "32.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -151,22 +158,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "22.70",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.stock",
-    "pk": "A-391.16x20M",
-    "fields": {
-      "product": 10,
-      "product_type": 3,
-      "restock_point": null,
-      "target_amount": 3,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "17.00",
-      "price": "22.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -181,7 +174,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "23.07",
-      "price": "32.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -196,7 +190,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "22.21",
-      "price": "32.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -211,7 +206,8 @@
       "sanding_qty": 5,
       "painting_qty": 2,
       "weight": "39.00",
-      "price": "32.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -226,7 +222,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "19.72",
-      "price": "32.00"
+      "price": "32.00",
+      "spec":"8x10"
     }
   },
   {
@@ -241,7 +238,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "16.00",
-      "price": "16.00"
+      "price": "16.00",
+      "spec":"8x10"
     }
   },
   {
@@ -256,7 +254,8 @@
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "1.00",
-      "price": "9.99"
+      "price": "9.99",
+      "spec":"ounce"
     }
   }
 ]
