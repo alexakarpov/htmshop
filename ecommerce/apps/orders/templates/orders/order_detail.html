@@ -1,45 +1,45 @@
 {% extends 'headless_base.html' %}
 {% load static %}
 {% block title %}
-    Order {{ order.id }}
+    Order {{ object.id }}
 {% endblock title %}
 {% block content %}
     <div class="container-fluid">
         <div class="text-center">
-            <h2>order {{ order.id }} - {{ order.status }}</h2>
+            <h2>Order {{ object.id }} - {{ object.status }}</h2>
         </div>
         <div class="row mt-2 pt-3">
             <div class="col-6">
                 <div class="m-2">
                     <h2>Sold to:</h2>
-                    <div>{{ order.full_name }}</div>
-                    <div>{{ order.address_line1 }}</div>
-                    <div>{{ order.address_line2 }}</div>
-                    <div>{{ order.city }}</div>
-                    <div>{{ order.state_province }}</div>
-                    <div>{{ order.postal_code }}</div>
+                    <div>{{ object.full_name }}</div>
+                    <div>{{ object.address_line1 }}</div>
+                    <div>{{ object.address_line2 }}</div>
+                    <div>{{ object.city }}</div>
+                    <div>{{ object.state_province }}</div>
+                    <div>{{ object.postal_code }}</div>
                 </div>
             </div>
             <div class="col-6">
                 <div class="m-2">
                     <h2>Ship to:</h2>
-                    <div>{{ order.full_name }}</div>
-                    <div>{{ order.address_line1 }}</div>
-                    <div>{{ order.address_line2 }}</div>
-                    <div>{{ order.city }}</div>
-                    <div>{{ order.state_province }}</div>
-                    <div>{{ order.postal_code }}</div>
+                    <div>{{ object.full_name }}</div>
+                    <div>{{ object.address_line1 }}</div>
+                    <div>{{ object.address_line2 }}</div>
+                    <div>{{ object.city }}</div>
+                    <div>{{ object.state_province }}</div>
+                    <div>{{ object.postal_code }}</div>
                 </div>
             </div>
         </div>
         <div class="row p-2">
             <div class="col-9 m-2 h4">
-                <div>{{ order.email }}</div>
+                <div>{{ object.email }}</div>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <ul class="m-1 order-items">
+                <ul class="m-1 object-items">
                     <div class="row pb-1">
                         <div class="col-4 fw-bold">Title</div>
                         <div class="col-2 fw-bold">SKU</div>
@@ -47,7 +47,7 @@
                         <div class="col-2 fw-bold">Quantity</div>
                         <div class="col-2 fw-bold">Total</div>
                     </div>
-                    {% for item in order.items.all %}
+                    {% for item in object.items.all %}
                         <div class="row">
                             <div class="col-4">{{ item.title|title }}</div>
                             <div class="col-2">{{ item.sku }}</div>
@@ -59,10 +59,15 @@
                 </ul>
             </div>
         </div>
-        {% if order.paid %}
+        {% if object.paid %}
             <div class="row">
-                <div class="col-3 pt-3 h3">
-                    <div>Total: ${{ order.total_paid }}</div>
+                <div class="col-3 pt-3 h4">
+                    <div>Shipping ({{ object.shipping_method | lower }}): ${{ object.shipping_price }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 pt-3 h4">
+                    <div>Total: ${{ object.total_paid }}</div>
                 </div>
             </div>
         {% endif %}
