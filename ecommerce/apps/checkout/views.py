@@ -235,12 +235,11 @@ def payment_with_token(request):
             shipping_method=tier,
         )
 
-        order.kind = "GENERIC"
+        order.kind = "GENERIC" # default
         for sku, item in basket.basket.items():
             stock = Stock.objects.get(sku=sku)
             if "x" in sku:
                 order.kind = "ENL_OR_RED"
-                continue
             elif sku.startswith("L-"):
                 order.kind = "INCENSE"
             
