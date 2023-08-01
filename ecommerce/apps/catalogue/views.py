@@ -10,13 +10,21 @@ logger = logging.getLogger("django")
 def catalogue_index(request):
     products = Product.objects.filter(is_active=True)
     logger.debug(f"all products - {products.count()} are active")
-    return render(request, "catalogue/index.html", {"products": products})
+    return render(
+        request,
+        "catalogue/index.html",
+        {"products": products, "categories": Category.objects.all()},
+    )
 
 
 def catalogue_new(request):
     products = Product.objects.filter(is_active=True)
     logger.debug("catalogue new")
-    return render(request, "catalogue/wip_index.html", {"products": products})
+    return render(
+        request,
+        "catalogue/wip_index.html",
+        {"products": products, "categories": Category.objects.all()},
+    )
 
 
 def get_children_products(cat):
@@ -42,7 +50,11 @@ def category_list(request, category_slug=None):
     return render(
         request,
         "catalogue/category.html",
-        {"category": category, "products": products},
+        {
+            "category": category,
+            "products": products,
+            "categories": Category.objects.all(),
+        },
     )
 
 
@@ -55,5 +67,10 @@ def product_detail(request, slug):
     return render(
         request,
         "catalogue/single.html",
-        {"product": product, "skus": skus, "referred": referrer},
+        {
+            "product": product,
+            "skus": skus,
+            "referred": referrer,
+            "categories": Category.objects.all(),
+        },
     )
