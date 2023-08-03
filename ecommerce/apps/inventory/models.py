@@ -8,17 +8,13 @@ from django.utils.translation import gettext_lazy as _
 from django.core.validators import RegexValidator
 
 from ecommerce.apps.catalogue.models import Product
-from ecommerce.constants import PRODUCT_TYPE_MOUNTED_ICON, SKU_REGEX
+from ecommerce.constants import SKU_REGEX
 
 sku_reg = re.compile("([A-Z]+)-([0-9]+)")
 logger = logging.getLogger("django")
 
 
 class ProductType(models.Model):
-    """
-    product_type table - books, mounted icons, incense - each type will have related specifications.
-    """
-
     name = models.CharField(
         verbose_name=_("Product Type name"),
         help_text=_("Required"),
@@ -152,7 +148,7 @@ class Stock(models.Model):
         return True
 
     def __str__(self):
-        return f"{self.sku} ({self.product} - {self.product_type})"
+        return f"{self.sku} ({self.product})"
 
 
 def get_or_create_stock_by_sku(sku: str) -> Stock:

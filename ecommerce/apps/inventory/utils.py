@@ -4,10 +4,6 @@ from ecommerce.apps.inventory.models import (
     Stock,
     get_or_create_stock_by_sku,
 )
-from ecommerce.constants import (
-    MOUNTED_ICON_TYPE_NAME,
-    ICON_PRINT_TYPE_NAME,
-)
 
 logger = logging.getLogger("django")
 
