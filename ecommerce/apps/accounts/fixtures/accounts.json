@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$600000$oN67UeT7MrJDmqZ2fjxwpP$2dMudDSimBBb0dONK4ZW7KzLQFf6d7mBNCBpE2Nevr0=",
-      "last_login": "2023-07-31T05:33:14.597Z",
+      "last_login": "2023-08-01T17:50:12.495Z",
       "is_superuser": true,
       "email": "alexakarpov@gmail.com",
       "first_name": "Alexandre",
@@ -68,6 +68,25 @@
         47,
         48
       ]
+    }
+  },
+  {
+    "model": "accounts.address",
+    "pk": "feb37bc8-1d4c-400e-af88-d67bbf292295",
+    "fields": {
+      "customer": 1,
+      "full_name": "Alexandre Karpov",
+      "phone": "6478936710",
+      "postcode": "M3A1T8",
+      "address_line": "250 Cassandra Blvd",
+      "address_line2": "apt 232",
+      "town_city": "Toronto",
+      "state_province": "ON",
+      "country": "CA",
+      "delivery_instructions": "",
+      "created_at": "2023-08-03T01:54:05.087Z",
+      "updated_at": "2023-08-03T01:54:05.087Z",
+      "default": false
     }
   }
 ]

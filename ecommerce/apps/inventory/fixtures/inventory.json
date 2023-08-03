@@ -244,17 +244,34 @@
   },
   {
     "model": "inventory.stock",
+    "pk": "L-1A",
+    "fields": {
+      "product": 6,
+      "product_type": 2,
+      "weight": "17.00",
+      "price": "21.99",
+      "spec":"pound"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "L-1B",
+    "fields": {
+      "product": 6,
+      "product_type": 2,
+      "weight": "9.00",
+      "price": "9.99",
+      "spec":"half pound"
+    }
+  },
+  {
+    "model": "inventory.stock",
     "pk": "L-1C",
     "fields": {
       "product": 6,
       "product_type": 2,
-      "restock_point": null,
-      "target_amount": 10,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
       "weight": "1.00",
-      "price": "9.99",
+      "price": "2.99",
       "spec":"ounce"
     }
   }
