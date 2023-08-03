@@ -15,7 +15,7 @@ class OrdersTest(TestCase):
             "skuxx": {
                 "price": "30.00",
                 "qty": 2,
-                "variant": "8x10",
+                "spec": "8x10",
                 "title": "Holy Napkin",
                 "weight": 16,
             },
@@ -47,6 +47,9 @@ class OrdersTest(TestCase):
         order = make_order(
             test_address_d, test_cart_d, "testytesto@example.com"
         )
+
+        order.shipping_price = 10
+        order.shipping_method = "Economy"
 
         order.save()
 
