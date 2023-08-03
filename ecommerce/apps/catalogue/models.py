@@ -85,6 +85,8 @@ class Product(models.Model):
     )
     slug = models.SlugField(max_length=255)
 
+    sku_base = models.CharField(max_length=5, verbose_name="SKU base", unique=True)
+
     is_active = models.BooleanField(
         verbose_name=_("Product visibility"),
         help_text=_("Change product visibility"),
