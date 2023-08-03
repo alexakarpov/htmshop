@@ -3,8 +3,9 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import DatabaseError
 
 from ecommerce.apps.inventory.models import Stock, ProductType
+from ecommerce.apps.catalogue.models import Product, Category
 
-from ecommerce.constants import MOUNTED_ICON_TYPE_ID
+from ecommerce.constants import MOUNTED_ICON_TYPE_ID, ICONS_CATEGORY_ID
 
 
 class Command(BaseCommand):
@@ -23,15 +24,20 @@ class Command(BaseCommand):
             ("40x50", 77),
         ]
         mounted_type = ProductType.objects.get(id=MOUNTED_ICON_TYPE_ID)
-        for p in Stock.objects.filter(product_type=MOUNTED_ICON_TYPE_ID):
-            a_sku = p.sku
-            if not "x" in a_sku:
-                for size, pr in sizes:
+        icons_parent_category = Category.objects.get(id=ICONS_CATEGORY_ID)
+        icons = []
+        for cat in icons_parent_category.get_family():
+            for product in cat.product_set.all():
+                icons.append(product)
+        
+        for p in icons:
+            a_sku = p.sku_base
+            for size, pr in sizes:
                     er_sku = a_sku + "." + size + "M"
                     try:
                         Stock.objects.create(
                             sku=er_sku,
-                            product=p.product,
+                            product=p,
                             product_type=mounted_type,
                             weight=0.1,
                             price=pr,

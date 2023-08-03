@@ -51,24 +51,24 @@ class Stock(models.Model):
     )
 
     restock_point = models.PositiveIntegerField(
-        null=True, blank=True, default=1
+        null=True, blank=True
     )
     target_amount = models.PositiveIntegerField(
-        null=True, blank=True, default=1
+        null=True, blank=True
     )
 
     wrapping_qty = models.IntegerField(
-        null=True, blank=True, default=0, verbose_name="Wrapping room stock"
+        null=True, blank=True, verbose_name="Wrapping room stock"
     )
     sanding_qty = models.IntegerField(
-        null=True, blank=True, default=0, verbose_name="Sanding room stock"
+        null=True, blank=True, verbose_name="Sanding room stock"
     )
     painting_qty = models.IntegerField(
-        null=True, blank=True, default=0, verbose_name="Painting room stock"
+        null=True, blank=True, verbose_name="Painting room stock"
     )
 
     weight = models.DecimalField(
-        decimal_places=2, max_digits=10, help_text="ounces", default=16
+        decimal_places=2, max_digits=10, help_text="ounces", default=1
     )  # in ounces
     price = models.DecimalField(max_digits=10, decimal_places=2, default=1.0)
 
