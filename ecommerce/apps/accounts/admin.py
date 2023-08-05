@@ -1,14 +1,23 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .forms import AccountChangeForm, AccountCreationForm
-from .models import Account
+from .models import Account, Address
 
 
 class AccountAdmin(UserAdmin):
     fieldsets = (
-        (None, {"fields": ("email", "password",
-         "first_name", "last_name", "last_login")}),
+        (
+            None,
+            {
+                "fields": (
+                    "email",
+                    "password",
+                    "first_name",
+                    "last_name",
+                    "last_login",
+                )
+            },
+        ),
         (
             "Permissions",
             {
@@ -23,10 +32,22 @@ class AccountAdmin(UserAdmin):
         ),
     )
     add_fieldsets = (
-        (None, {"classes": ("wide",), "fields": ("email", "password1", "password2")}),)
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("email", "password1", "password2"),
+            },
+        ),
+    )
 
-    list_display = ("email", "first_name", "last_name",
-                    "is_staff", "last_login")
+    list_display = (
+        "email",
+        "first_name",
+        "last_name",
+        "is_staff",
+        "last_login",
+    )
     list_filter = ("is_staff", "is_superuser", "is_active", "groups")
     search_fields = ("email",)
     ordering = ("email",)
@@ -37,3 +58,4 @@ class AccountAdmin(UserAdmin):
 
 
 admin.site.register(Account, AccountAdmin)
+admin.site.register(Address)
