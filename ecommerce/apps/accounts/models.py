@@ -130,7 +130,7 @@ class Address(models.Model):
         verbose_name_plural = "Addresses"
 
     def __str__(self):
-        return f"{self.full_name} address ({self.id}):\n{self.toJSON()}\n >>>>>>>>>"
+        return f"{self.full_name} address"
 
     def from_dict(a_dict):
         a = Address()
