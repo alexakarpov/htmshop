@@ -3,8 +3,8 @@
     "model": "accounts.account",
     "pk": 1,
     "fields": {
-      "password": "pbkdf2_sha256$600000$oN67UeT7MrJDmqZ2fjxwpP$2dMudDSimBBb0dONK4ZW7KzLQFf6d7mBNCBpE2Nevr0=",
-      "last_login": "2023-08-01T17:50:12.495Z",
+      "password": "pbkdf2_sha256$600000$vx9o80I3xVCILMCTvYebT1$qdDxygXLw+/LFYSJyAIvKfxJ6aVX8KUs5DuMIwQgpKU=",
+      "last_login": "2023-08-05T02:53:00Z",
       "is_superuser": true,
       "email": "alexakarpov@gmail.com",
       "first_name": "Alexandre",
@@ -12,62 +12,10 @@
       "phone": "",
       "is_active": true,
       "is_staff": true,
-      "created": "2023-07-31T05:19:01.961Z",
-      "updated": "2023-07-31T05:19:01.961Z",
+      "created": "2023-08-05T02:50:44.601Z",
+      "updated": "2023-08-05T02:53:30.083Z",
       "groups": [],
       "user_permissions": []
-    }
-  },
-  {
-    "model": "accounts.account",
-    "pk": 2,
-    "fields": {
-      "password": "pbkdf2_sha256$600000$9FO0TbAlXOE48ZTpm7U1q1$PnADjeibRjQQWmw11ax6Z0Bb1ndPOCDcJAmTlDQ084o=",
-      "last_login": null,
-      "is_superuser": false,
-      "email": "frmichael@thehtm.org",
-      "first_name": "Michael",
-      "last_name": "Brown",
-      "phone": "",
-      "is_active": true,
-      "is_staff": true,
-      "created": "2023-07-31T05:25:21.847Z",
-      "updated": "2023-07-31T06:05:03.231Z",
-      "groups": [],
-      "user_permissions": [
-        21,
-        22,
-        23,
-        24,
-        29,
-        30,
-        31,
-        32,
-        25,
-        26,
-        27,
-        28,
-        53,
-        54,
-        55,
-        56,
-        57,
-        58,
-        59,
-        60,
-        49,
-        50,
-        51,
-        52,
-        41,
-        42,
-        43,
-        44,
-        45,
-        46,
-        47,
-        48
-      ]
     }
   },
   {
@@ -89,4 +37,5 @@
       "default": false
     }
   }
+
 ]
