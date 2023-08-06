@@ -1,3 +1,4 @@
+import functools
 from django.conf import settings
 from django.db import models
 
@@ -46,6 +47,11 @@ class Order(models.Model):
     def __str__(self):
         return f"order# {self.id} by {self.full_name} ({self.status})"
 
+    def subtotal(self):
+        return functools.reduce(
+            lambda s, i: i.quantity * i.price + s, self.items.all(), 0
+        )
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(
@@ -71,7 +77,7 @@ def make_order(address_d, cart_d, email):
         if "x" in sku or "." in sku:
             o.kind = "ENL_OR_RED"
         elif sku.startswith("L-"):
-            o.kind = "INCENSE"            
+            o.kind = "INCENSE"
         else:
             pass  # generic is a default
 

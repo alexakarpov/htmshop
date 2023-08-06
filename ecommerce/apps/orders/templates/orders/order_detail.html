@@ -27,27 +27,23 @@
                 </div>
             </div>
             <div class="row mt-2 pt-3">
-                <div class="col-6">
-                    <div class="m-2">
-                        <h2>Sold to:</h2>
-                        <div>{{ order.full_name }}</div>
-                        <div>{{ order.address_line1 }}</div>
-                        <div>{{ order.address_line2 }}</div>
-                        <div>{{ order.city }}</div>
-                        <div>{{ order.state_province }}</div>
-                        <div>{{ order.postal_code }}</div>
-                    </div>
+                <div class="col-9 ml-3">
+                    <h2>Sold to:</h2>
+                    <div>{{ order.full_name }}</div>
+                    <div>{{ order.address_line1 }}</div>
+                    <div>{{ order.address_line2 }}</div>
+                    <div>{{ order.city }}</div>
+                    <div>{{ order.state_province }}</div>
+                    <div>{{ order.postal_code }}</div>
                 </div>
-                <div class="col-6">
-                    <div class="m-2">
-                        <h2>Ship to:</h2>
-                        <div>{{ order.full_name }}</div>
-                        <div>{{ order.address_line1 }}</div>
-                        <div>{{ order.address_line2 }}</div>
-                        <div>{{ order.city }}</div>
-                        <div>{{ order.state_province }}</div>
-                        <div>{{ order.postal_code }}</div>
-                    </div>
+                <div class="col-3 ml-3">
+                    <h2>Ship to:</h2>
+                    <div>{{ order.full_name }}</div>
+                    <div>{{ order.address_line1 }}</div>
+                    <div>{{ order.address_line2 }}</div>
+                    <div>{{ order.city }}</div>
+                    <div>{{ order.state_province }}</div>
+                    <div>{{ order.postal_code }}</div>
                 </div>
                 {% if order.paid %}
                     <img src="{% static 'PAID-1.png' %}"
@@ -62,36 +58,35 @@
                     <div>{{ order.email }}</div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col m-3 p-3">
-                    <ul class="m-3 order-items">
-                        <div class="container">
-                            <div class="row pb-1">
-                                <div class="col-6 fw-bold">Product</div>
-                                <div class="col-2 fw-bold">SKU</div>
-                                <div class="col-2 fw-bold">Price</div>
-                                <div class="col-2 fw-bold">Total</div>
-                            </div>
-                            {% for item in order.items.all %}
-                                <div class="row">
-                                    <div class="col-6">{{ item.quantity }} x {{ item.title|title }}</div>
-                                    <div class="col-2">{{ item.sku.sku }}</div>
-                                    <div class="col-2">${{ item.price }}</div>
-                                    <div class="col-2">${% widthratio item.quantity 1 item.price %}.00</div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </ul>
+            <ul class="m-3 order-items">
+                <div class="row pb-1">
+                    <div class="col-6 fw-bold">Product</div>
+                    <div class="col-2 fw-bold">SKU</div>
+                    <div class="col-2 fw-bold">Price</div>
+                    <div class="col-2 fw-bold">Total</div>
                 </div>
-            </div>
+                {% for item in order.items.all %}
+                    <div class="row">
+                        <div class="col-6">{{ item.quantity }} x {{ item.title|title }}</div>
+                        <div class="col-2">{{ item.sku.sku }}</div>
+                        <div class="col-2">${{ item.price }}</div>
+                        <div class="col-2">${% widthratio item.quantity 1 item.price %}.00</div>
+                    </div>
+                {% endfor %}
+            </ul>
             {% if order.paid %}
                 <div class="row">
-                    <div class="col-3 pt-3 h4">
+                    <div class="col-9 pt-3 h4">
+                        <div>Subtotal: ${{ order.subtotal }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-9 pt-3 h4">
                         <div>Shipping ({{ order.shipping_method | lower }}): ${{ order.shipping_price }}</div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3 pt-3 h4">
+                    <div class="col-9 pt-3 h4">
                         <div>Total: ${{ order.total_paid }}</div>
                     </div>
                 </div>
