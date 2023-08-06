@@ -82,9 +82,31 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link"
-                                       href="{% url 'catalogue:category_list' category_slug='incense' %}"><span class="category">Incense</span></a>
+                                <li class="nav-item incense dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Incense</a>
+                                    <ul class="dropdown-menu ">
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='good' %}">Good Incense</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='better' %}">Better Incense</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='best' %}">Best Incense</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='rare' %}">Rare Incense</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='frankincense' %}">Natural Frankincense</a>
+                                        </li>
+
+                                    </ul>
                                 </li>
                             </ul>
                             <span class="nav-item px-1">

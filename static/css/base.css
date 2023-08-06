@@ -113,7 +113,8 @@ input[type="radio"] {
   background-color: lightyellow;
 }
 
-.icons {
+.icons,
+.incense {
   font-size: larger;
 }
 
