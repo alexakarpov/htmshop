@@ -55,7 +55,65 @@ class UserAddressForm(forms.ModelForm):
         self.fields["postcode"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Postal code")}
         )
-        self.fields["country"].widget.attrs.update({"class": "form-control mb-2"})
+        self.fields["country"].widget.attrs.update(
+            {"class": "form-control mb-2"}
+        )
+        self.fields["address_line2"].required = False
+
+
+class GuestAddressForm(forms.Form):
+    class Meta:
+        fields = [
+            "full_name",
+            "phone",
+            "email",
+            "address_line",
+            "address_line2",
+            "town_city",
+            "state_province",
+            "postcode",
+            "country",
+        ]
+
+    full_name = forms.CharField()
+    phone = forms.CharField()
+    email = forms.EmailField()
+    address_line = forms.CharField()
+    address_line2 = forms.CharField()
+    town_city = forms.CharField()
+    state_province = forms.CharField()
+    postcode = forms.CharField()
+    country = forms.CharField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["full_name"].widget.attrs.update(
+            {"class": "form-control mb-2", "placeholder": _("Full Name")}
+        )
+        self.fields["phone"].widget.attrs.update(
+            {"class": "form-control mb-2", "placeholder": _("Phone")}
+        )
+        self.fields["email"].widget.attrs.update(
+            {"class": "form-control mb-2", "placeholder": _("Email")}
+        )
+        self.fields["address_line"].widget.attrs.update(
+            {"class": "form-control mb-2", "placeholder": _("Address Line 1")}
+        )
+        self.fields["address_line2"].widget.attrs.update(
+            {"class": "form-control mb-2", "placeholder": _("Address Line 2")}
+        )
+        self.fields["town_city"].widget.attrs.update(
+            {"class": "form-control mb-2", "placeholder": _("Town/City")}
+        )
+        self.fields["state_province"].widget.attrs.update(
+            {"class": "form-control mb-2", "placeholder": _("State/Province")}
+        )
+        self.fields["postcode"].widget.attrs.update(
+            {"class": "form-control mb-2", "placeholder": _("Postal code")}
+        )
+        self.fields["country"].widget.attrs.update(
+            {"class": "form-control mb-2"}
+        )
         self.fields["address_line2"].required = False
 
 
@@ -97,7 +155,9 @@ class EmailAuthenticationForm(forms.Form):
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
         if email is not None and password:
-            self.user_cache = authenticate(self.request, email=email, password=password)
+            self.user_cache = authenticate(
+                self.request, email=email, password=password
+            )
             if self.user_cache is None:
                 raise self.get_invalid_login_error()
             else:
@@ -202,7 +262,9 @@ class RegistrationForm(forms.ModelForm):
 
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
 
-    password2 = forms.CharField(label="Repeat password", widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label="Repeat password", widget=forms.PasswordInput
+    )
 
     class Meta:
         model = UserModel
@@ -217,7 +279,9 @@ class RegistrationForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data["email"]
         if UserModel.objects.filter(email=email).exists():
-            raise forms.ValidationError("Please use another Email, that is already taken")
+            raise forms.ValidationError(
+                "Please use another Email, that is already taken"
+            )
         return email
 
     def __init__(self, *args, **kwargs):

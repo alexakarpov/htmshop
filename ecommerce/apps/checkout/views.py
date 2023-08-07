@@ -12,7 +12,7 @@ from dotenv import dotenv_values
 from rest_framework.decorators import api_view
 from square.client import Client
 
-from ecommerce.apps.accounts.forms import UserAddressForm
+from ecommerce.apps.accounts.forms import UserAddressForm, GuestAddressForm
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.inventory.models import Stock
@@ -144,17 +144,14 @@ def delivery_address(request):
 
 
 def guest_address(request):
-    logger.debug(f"| checkout guest_address with {request.method}")
+    logger.info(f"| checkout guest_address with {request.method}")
 
     if request.method == "POST":
         session = request.session
-        address_form = UserAddressForm(data=request.POST)
+        address_form = GuestAddressForm(data=request.POST)
         if address_form.is_valid():
             address = address_form.save(commit=False)
             session["address"] = address.toJSON()
-            logger.debug(
-                "| form processed, address saved in the session, redirectong to delivery_address"
-            )
             return HttpResponseRedirect(reverse("checkout:delivery_address"))
         else:
             logger.error("invalid address")
@@ -162,7 +159,7 @@ def guest_address(request):
                 logger.error(error)
             return HttpResponse("Error handler content", status=400)
     else:
-        address_form = UserAddressForm()
+        address_form = GuestAddressForm()
         return render(
             request, "checkout/guest_address.html", {"form": address_form}
         )
@@ -222,7 +219,7 @@ def payment_with_token(request):
             full_name=f"{fname} {lname}",
             email=user.email
             if user.is_authenticated
-            else "someone@example.com",
+            else "someone@example.com", # TODO: anonymous customers supply email with their address!
             address_line1=address_d.get("address_line1"),
             address_line2=address_d.get("address_line2"),
             city=address_d.get("city_locality"),
