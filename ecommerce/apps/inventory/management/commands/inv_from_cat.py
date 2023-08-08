@@ -9,8 +9,10 @@ from ecommerce.constants import (
     BEST_INCENSE_SIZES,
     BETTER_INCENSE_SIZES,
     GOOD_INCENSE_SIZES,
+    ICON_PRINT_SIZES,
     INCENSE_CATEGORY_ID,
     INCENSE_TYPE_ID,
+    MOUNTED_ICON_SIZES,
     MOUNTED_ICON_TYPE_ID,
     ICONS_CATEGORY_ID,
     ICON_PRINT_TYPE_ID,
@@ -22,36 +24,17 @@ def generate_icons(icons):
     print_type = ProductType.objects.get(id=ICON_PRINT_TYPE_ID)
     print(f"generating inventory for {len(icons)} icons")
 
-    sizes = [
-        ("5x7", 32, 16),
-        ("8x10", 32, 26),
-        ("11x14", 75, 32),
-        ("16x20", 100, 52),
-        ("20x24", 140, 76),
-        ("24x30", 190, 80),
-        ("30x40", 300, 92),
-        ("40x50", 625, 110),
-    ]
+    icon_sizes = MOUNTED_ICON_SIZES
 
-    print_sizes = [
-        ("5x7", 18, 0.1),
-        ("8x10", 18, 0.1),
-        ("11x14", 75, 0.2),
-        ("16x20", 100, 0.2),
-        ("20x24", 140, 0.3),
-        ("24x30", 190, 0.5),
-        ("30x40", 300, 0.7),
-        ("40x50", 625, 0.9),
-    ]
+    print_sizes = ICON_PRINT_SIZES
 
     pcount = ecount = 0
     for icon in icons:
         a_sku = icon.sku_base
         print(f"...for {a_sku}")
-        # enlargements
-        print(f"enlargements:")
 
-        for size, price, weight in sizes:
+        # enlargements
+        for size, price, weight in icon_sizes:
             er_sku = a_sku + "." + size + "M"
             try:
                 Stock.objects.create(
@@ -68,8 +51,6 @@ def generate_icons(icons):
                 print(f"SKU {er_sku} already exists")
 
         # prints
-        print(f"prints:")
-
         for size, price, weight in print_sizes:
             print_sku = a_sku + "." + size + "P"
             try:
