@@ -6,7 +6,22 @@ MOUNTED_ICON_TYPE_ID = 3
 INCENSE_TYPE_ID = 2
 BOOK_TYPE_ID = 1
 LINES_PER_PAGE = 29
-SKU_REGEX="^A-(?!0)\d{1,3}(\.\d{1,2}x\d{1,2})?(?(1)[MP]|P?)\Z|^[BHJR]-(?!0)\d{1,3}\Z|^[DG]-(?!0)\d{1,3}P?\Z|^L-(?!0)\d{1,3}[ABC]\Z|^M-(?!0)\d{1,3}[AEJ]?\Z|^S-[1-9]\Z"
+SKU_REGEX = "^A-(?!0)\d{1,3}(\.\d{1,2}x\d{1,2})?(?(1)[MP]|P?)\Z|^[BHJR]-(?!0)\d{1,3}\Z|^[DG]-(?!0)\d{1,3}P?\Z|^L-(?!0)\d{1,3}[ABC]\Z|^M-(?!0)\d{1,3}[AEJ]?\Z|^S-[1-9]\Z"
+BETTER_INCENSE_SIZES = (
+    ("A", 17, 35.0),
+    ("B", 9, 20.0),
+    ("C", 1.4, 5.0),
+)
+GOOD_INCENSE_SIZES = (
+    ("A", 17, 30.0),
+    ("B", 9, 16.0),
+    ("C", 1.4, 4.0),
+)
+BEST_INCENSE_SIZES = (
+    ("A", 17, 50.0),
+    ("B", 9, 28.0),
+    ("C", 1.4, 7.0),
+)
 
 ROOMS = [
     ("nowhere", "nowhere"),
@@ -23,10 +38,10 @@ ORDER_STATUS = [
     ("RETURNED", "returned"),
 ]
 
-ORDER_KINDS =[
+ORDER_KINDS = [
     ("INCENSE", "incense"),
     ("ENL_OR_RED", "enlargement or reduction"),
-    ("GENERIC", "generic")
+    ("GENERIC", "generic"),
 ]
 
 US_STATES = [

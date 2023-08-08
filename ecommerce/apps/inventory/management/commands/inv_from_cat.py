@@ -6,6 +6,11 @@ from ecommerce.apps.inventory.models import Stock, ProductType
 from ecommerce.apps.catalogue.models import Product, Category
 
 from ecommerce.constants import (
+    BEST_INCENSE_SIZES,
+    BETTER_INCENSE_SIZES,
+    GOOD_INCENSE_SIZES,
+    INCENSE_CATEGORY_ID,
+    INCENSE_TYPE_ID,
     MOUNTED_ICON_TYPE_ID,
     ICONS_CATEGORY_ID,
     ICON_PRINT_TYPE_ID,
@@ -19,7 +24,7 @@ def generate_icons(icons):
 
     sizes = [
         ("5x7", 32, 16),
-        ("8x10", 32, 26), # the only one which is not a guess
+        ("8x10", 32, 26),
         ("11x14", 75, 32),
         ("16x20", 100, 52),
         ("20x24", 140, 76),
@@ -45,7 +50,7 @@ def generate_icons(icons):
         print(f"...for {a_sku}")
         # enlargements
         print(f"enlargements:")
-        
+
         for size, price, weight in sizes:
             er_sku = a_sku + "." + size + "M"
             try:
@@ -83,6 +88,61 @@ def generate_icons(icons):
 
     return ecount, pcount
 
+def size2spec(size):
+    match size:
+        case 'A': return "pound"
+        case 'B': return "half pound"
+        case 'C': return "ounce"
+        case _: return "?"
+
+def generate_incense():
+    incense_type = ProductType.objects.get(id=INCENSE_TYPE_ID)
+    # incense_parent_category = Category.objects.get(id=INCENSE_CATEGORY_ID)
+
+    best_cat = (
+        Category.objects.get(slug="best"),
+        BEST_INCENSE_SIZES,
+    )
+
+    better_cat = (
+        Category.objects.get(slug="better"),
+        BETTER_INCENSE_SIZES,
+    )
+
+    good_cat = (
+        Category.objects.get(slug="good"),
+        GOOD_INCENSE_SIZES,
+    )
+    rare_cat = Category.objects.get(slug="rare")
+    frank_cat = Category.objects.get(slug="frankincense")
+
+    cats = [good_cat, better_cat, best_cat]
+
+    counts = {}
+
+    for cat, sizes in cats:
+        cnt = 0
+        for p in cat.product_set.all():
+            base_sku = p.sku_base
+
+            for size, weight, price in sizes:
+                sized_incense_sku = base_sku + size
+                try:
+                    Stock.objects.create(
+                        sku=sized_incense_sku,
+                        product=p,
+                        product_type=incense_type,
+                        weight=weight,
+                        price=price,
+                        spec=size2spec(size),
+                    )
+                    cnt += 1
+                except DatabaseError:
+                    print(f"SKU {sized_incense_sku} already exists")
+            counts[cat.slug] = cnt
+
+    return counts
+
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
@@ -93,8 +153,17 @@ class Command(BaseCommand):
         icons_parent_category = Category.objects.get(id=ICONS_CATEGORY_ID)
         icons = []
         for cat in icons_parent_category.get_family():
-            print(f"found category {cat} with {cat.product_set.count()} products")
+            print(
+                f"found category {cat} with {cat.product_set.count()} products"
+            )
             for product in cat.product_set.all():
                 icons.append(product)
         e, p = generate_icons(icons)
         print(f"DONE;generated {e} enlargements and {p} prints")
+        counts = generate_incense()
+        print(
+            f"""
+generated {counts["good"]} SKUs of Good Incense,
+generated {counts["better"]} SKUs of Better Incense,
+generated {counts["best"]} SKUS of Best Incense"""
+        )
