@@ -16,6 +16,8 @@ from ecommerce.constants import (
     MOUNTED_ICON_TYPE_ID,
     ICONS_CATEGORY_ID,
     ICON_PRINT_TYPE_ID,
+    ETHIOPIAN_FRANKINCENSE_SIZES,
+    SOMALIAN_FRANKINCENSE_SIZES,
 )
 
 
@@ -69,12 +71,18 @@ def generate_icons(icons):
 
     return ecount, pcount
 
-def size2spec(size):
+
+def incense_size2spec(size):
     match size:
-        case 'A': return "pound"
-        case 'B': return "half pound"
-        case 'C': return "ounce"
-        case _: return "?"
+        case "A":
+            return "pound"
+        case "B":
+            return "half pound"
+        case "C":
+            return "ounce"
+        case _:
+            return "?"
+
 
 def generate_incense():
     incense_type = ProductType.objects.get(id=INCENSE_TYPE_ID)
@@ -95,7 +103,6 @@ def generate_incense():
         GOOD_INCENSE_SIZES,
     )
     rare_cat = Category.objects.get(slug="rare")
-    frank_cat = Category.objects.get(slug="frankincense")
 
     cats = [good_cat, better_cat, best_cat]
 
@@ -115,12 +122,52 @@ def generate_incense():
                         product_type=incense_type,
                         weight=weight,
                         price=price,
-                        spec=size2spec(size),
+                        spec=incense_size2spec(size),
                     )
                     cnt += 1
                 except DatabaseError:
                     print(f"SKU {sized_incense_sku} already exists")
             counts[cat.slug] = cnt
+
+    # frankincenses
+
+    ethiopian = Product.objects.get(slug="ethiopian")
+    cnt = 0
+    for size, weight, price in ETHIOPIAN_FRANKINCENSE_SIZES:
+        sized_incense_sku = ethiopian.sku_base + size
+        try:
+            Stock.objects.create(
+                sku=sized_incense_sku,
+                product=ethiopian,
+                product_type=incense_type,
+                weight=weight,
+                price=price,
+                spec=incense_size2spec(size),
+            )
+            cnt+=1
+        except DatabaseError:
+            print(f"SKU {sized_incense_sku} already exists")
+
+    counts["ethiopian"] = cnt
+
+    somalian = Product.objects.get(slug="somalian")
+    cnt = 0
+    for size, weight, price in SOMALIAN_FRANKINCENSE_SIZES:
+        sized_incense_sku = somalian.sku_base + size
+        try:
+            Stock.objects.create(
+                sku=sized_incense_sku,
+                product=somalian,
+                product_type=incense_type,
+                weight=weight,
+                price=price,
+                spec=incense_size2spec(size),
+            )
+            cnt+=1
+        except DatabaseError:
+            print(f"SKU {sized_incense_sku} already exists")
+
+    counts["somalian"] = cnt
 
     return counts
 
@@ -146,5 +193,7 @@ class Command(BaseCommand):
             f"""
 generated {counts["good"]} SKUs of Good Incense,
 generated {counts["better"]} SKUs of Better Incense,
-generated {counts["best"]} SKUS of Best Incense"""
+generated {counts["best"]} SKUS of Best Incense
+generated {counts["ethiopian"]} SKUS of Ethiopian frankincense
+generated {counts["somalian"]} SKUS of Somalian frankincense"""
         )

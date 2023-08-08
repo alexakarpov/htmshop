@@ -45,6 +45,16 @@ BEST_INCENSE_SIZES = (
     ("B", 9, 28.0),
     ("C", 1.4, 7.0),
 )
+ETHIOPIAN_FRANKINCENSE_SIZES = (
+    ("A", 17, 16.0),
+    ("B", 9, 10.0),
+    ("C", 1.4, 3.0),
+)
+SOMALIAN_FRANKINCENSE_SIZES = (
+    ("A", 17, 20.0),
+    ("B", 9, 12.0),
+    ("C", 1.4, 4.0),
+)
 
 ROOMS = [
     ("nowhere", "nowhere"),
