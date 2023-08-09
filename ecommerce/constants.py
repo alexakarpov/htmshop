@@ -56,6 +56,18 @@ SOMALIAN_FRANKINCENSE_SIZES = (
     ("C", 1.4, 4.0),
 )
 
+SINAI_SIZES = (
+    ("A", 17, 80.0),
+    ("B", 9, 40.0),
+    ("C", 1.4, 10.0),
+)
+
+UNFADING_ROSE_SIZES = (
+    ("A", 17, 160.0),
+    ("B", 9, 80.0),
+    ("C", 1.4, 15.0),
+)
+
 ROOMS = [
     ("nowhere", "nowhere"),
     ("sanding", "Sanding room"),
