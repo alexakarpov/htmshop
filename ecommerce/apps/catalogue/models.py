@@ -85,7 +85,9 @@ class Product(models.Model):
     )
     slug = models.SlugField(max_length=255)
 
-    sku_base = models.CharField(max_length=5, verbose_name="SKU base", unique=True)
+    sku_base = models.CharField(
+        max_length=5, verbose_name="SKU base", unique=True
+    )
 
     is_active = models.BooleanField(
         verbose_name=_("Product visibility"),
@@ -117,10 +119,12 @@ class Product(models.Model):
 
     def get_skus(self):
         """
-        These are actually ProductStock items from the inventory app, related to this Product
+        These are Stock items from the inventory app, related to this Product
         """
-        logger.debug(f"getting variants for {self}")
-        return self.stock_set.filter(product_id=self.id).order_by("price")
+        return self.stock_set.order_by(
+            # "spec",
+            "price",
+        )
 
     def __str__(self):
         return f"{self.title}"
