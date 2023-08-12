@@ -36,9 +36,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-11",
+    "pk": "A-11.8x10",
     "fields": {
-      "product": 4,
+      "product": "A-11",
       "product_type": 3,
       "restock_point": 5,
       "target_amount": 15,
@@ -52,9 +52,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-122",
+    "pk": "A-122.8x10",
     "fields": {
-      "product": 11,
+      "product": "A-122",
       "product_type": 3,
       "restock_point": 15,
       "target_amount": 30,
@@ -68,9 +68,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-129",
+    "pk": "A-129.8x10",
     "fields": {
-      "product": 13,
+      "product": "A-129",
       "product_type": 3,
       "restock_point": 5,
       "target_amount": 15,
@@ -84,9 +84,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-148",
+    "pk": "A-148.8x10",
     "fields": {
-      "product": 8,
+      "product": "A-148",
       "product_type": 3,
       "restock_point": 15,
       "target_amount": 30,
@@ -100,9 +100,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-176",
+    "pk": "A-176.8x10",
     "fields": {
-      "product": 9,
+      "product": "A-176",
       "product_type": 3,
       "restock_point": 4,
       "target_amount": 12,
@@ -116,9 +116,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-298",
+    "pk": "A-298.8x10",
     "fields": {
-      "product": 12,
+      "product": "A-298",
       "product_type": 3,
       "restock_point": 15,
       "target_amount": 20,
@@ -132,9 +132,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-329",
+    "pk": "A-329.8x10",
     "fields": {
-      "product": 3,
+      "product": "A-329",
       "product_type": 3,
       "restock_point": 4,
       "target_amount": 12,
@@ -148,9 +148,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-391",
+    "pk": "A-391.8x10",
     "fields": {
-      "product": 10,
+      "product": "A-391",
       "product_type": 3,
       "restock_point": 5,
       "target_amount": 25,
@@ -164,9 +164,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-399",
+    "pk": "A-399.8x10",
     "fields": {
-      "product": 5,
+      "product": "A-399",
       "product_type": 3,
       "restock_point": 5,
       "target_amount": 15,
@@ -180,9 +180,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-5",
+    "pk": "A-5.8x10",
     "fields": {
-      "product": 14,
+      "product": "A-5",
       "product_type": 3,
       "restock_point": 15,
       "target_amount": 30,
@@ -196,9 +196,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-9",
+    "pk": "A-9.8x10",
     "fields": {
-      "product": 2,
+      "product": "A-9",
       "product_type": 3,
       "restock_point": 4,
       "target_amount": 12,
@@ -212,9 +212,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-93",
+    "pk": "A-93.8x10",
     "fields": {
-      "product": 15,
+      "product": "A-93",
       "product_type": 3,
       "restock_point": 15,
       "target_amount": 20,
@@ -230,7 +230,7 @@
     "model": "inventory.stock",
     "pk": "B-10",
     "fields": {
-      "product": 1,
+      "product": "B-10",
       "product_type": 1,
       "restock_point": null,
       "target_amount": 10,
@@ -239,14 +239,14 @@
       "painting_qty": 0,
       "weight": "16.00",
       "price": "16.00",
-      "spec":"8x10"
+      "spec":""
     }
   },
   {
     "model": "inventory.stock",
     "pk": "L-1A",
     "fields": {
-      "product": 6,
+      "product": "L-1",
       "product_type": 2,
       "weight": "17.00",
       "price": "21.99",
@@ -257,7 +257,7 @@
     "model": "inventory.stock",
     "pk": "L-1B",
     "fields": {
-      "product": 6,
+      "product": "L-1",
       "product_type": 2,
       "weight": "9.00",
       "price": "9.99",
@@ -268,7 +268,7 @@
     "model": "inventory.stock",
     "pk": "L-1C",
     "fields": {
-      "product": 6,
+      "product": "L-1",
       "product_type": 2,
       "weight": "1.00",
       "price": "2.99",
