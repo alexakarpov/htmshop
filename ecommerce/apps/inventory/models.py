@@ -93,6 +93,13 @@ class Stock(models.Model):
             logger.warning(f"prints aren't even in stock for {product_sku}")
             return 0
 
+    def sku2spec(self):
+        pat = re.compile(SKU_REGEX)
+        m = re.match(pat, self.sku)
+        return m.group(2)
+
+
+
     def wrapping_add(self, qty: int):
         self.wrapping_qty += qty
 
@@ -150,6 +157,12 @@ class Stock(models.Model):
     def __str__(self):
         return f"{self.sku} ({self.product})"
 
+def sku_str2spec_g(stroka):
+        pat = re.compile(SKU_REGEX)
+        m = re.match(pat, stroka)
+        if m:
+            return m.group(2)
+        return ""
 
 def get_or_create_stock_by_sku(sku: str) -> Stock:
     try:

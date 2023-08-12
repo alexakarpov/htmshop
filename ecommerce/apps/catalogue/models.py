@@ -48,13 +48,6 @@ class Category(MPTTModel):
         )
         verbose_name_plural = "categories"
 
-    # def __str__(self):
-    #     full_path = [self.name]
-    #     k = self.parent
-    #     while k is not None:
-    #         full_path.append(k.name)
-    #         k = k.parent
-    #     return " -> ".join(full_path[::-1])
 
     def __str__(self) -> str:
         return (
