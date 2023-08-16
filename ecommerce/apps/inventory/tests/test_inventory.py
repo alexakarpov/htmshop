@@ -13,7 +13,6 @@ from django.test import TestCase
 class InventoryTest(TestCase):
     fixtures = [
         "catalogue.json",
-        "test_inventory.json",
     ]
 
     # def test_padding(self):

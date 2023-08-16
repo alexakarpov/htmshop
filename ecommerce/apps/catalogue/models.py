@@ -120,7 +120,7 @@ class Product(models.Model):
         )
 
     def __str__(self):
-        return f"{self.title}"
+        return f"({self.sku_base}) {self.title}"
 
 
 class ProductImage(models.Model):
