@@ -62,13 +62,6 @@
         group: htm
         mode: 0775
 
-    - name: media files
-      copy:
-        src: ../../media/
-        dest: /var/media_root
-        owner: storeadmin
-        group: htm
-
     - name: Create log subdirectory
       file:
         path: /var/htmshop/log
