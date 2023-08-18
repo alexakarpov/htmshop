@@ -49,7 +49,7 @@
       "last_name": "Michael",
       "phone": "",
       "is_active": true,
-      "is_staff": truee,
+      "is_staff": true,
       "created": "2023-08-18T12:57:44.606Z",
       "updated": "2023-08-18T12:58:23.014Z",
       "groups": [],
