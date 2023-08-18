@@ -91,15 +91,12 @@ class Product(models.Model):
         _("Created at"), auto_now_add=True, editable=False
     )
 
-    users_wishlist = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, related_name="user_wishlist", blank=True
-    )
-
     image = models.ImageField(
         verbose_name=_("image"),
         help_text=_("Upload a product image"),
         upload_to="images/",
         default="images/default.png",
+        max_length=255
     )
 
     class Meta:
