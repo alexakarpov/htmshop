@@ -96,496 +96,27 @@ A-403,Saints,Brigid,Brigid,A-403-Icon-St-Brigid.png,"<b>Saint Brigid</b><p>The 8
 M-211,Baptismal Crosses,Armenian Cross,Armenian-Cross,m211.jpg,<b>1/2 x 1 inch</b>,,
 M-401,Baptismal Crosses,Byzantine Baptismal Cross,Byzantine-Baptismal-Cross,athos-baptismal-noback.png athos-baptismal.png,"Mount Athos Byzantine Style Precious Metal Cross available in gold or silver.<br />
 Chain not included.",,
-M-252,Baptismal Crosses,Celtic Cross,Celtic-Cross,m252.jpg,"<b><sup>3</sup>&#8260;<sub>4</sub> x 1-<sup>3</sup>&#8260;<sub>8</sub> inches</b><br />
-A classic Celtic cross. On the reverse is a phrase from a prayer by St Columba of Iona.
-<p />
-<!-- 
-Happi Multi Pix Happi-1: This makes one extra view pushes graphic as far right as possible.
-Thumb is sized at height of 80 to match the other graphic's height. 
-// -->
-<SCRIPT LANGUAGE=""JavaScript"" type=""text/javascript"">
-  <!--
-    function ShowPopup(pagenameoptions)
-    {
-    Window = window.open(pagenameoptions);
-    }
-// -->
-</SCRIPT>
-
-<TABLE WIDTH=""35%"" BORDER=0 CELLSPACING=6 CELLPADDING=6>
-
-  <TR>
-  <TD width=""85%"">
-  </TD>
-  <TD align=""center"">
-  <a href=""javascript:;"" onClick=""ShowPopup('images/m252-back.jpg''popup''resizable=yeswidth=157height=300');"">
-  <img src=""images/m252-back.jpg"" width=""51"" height=""80"" border=""0""></a>
-  </TD>
-  </TR>
-
-  <TR>
-  <TD width=""85%"">
-  </TD>
-  <TD align=""center""> 
-  <font face=""Georgia"" size=""1"">Back</font>
-  </TD>
-  </TR> 
-
-</TABLE>",,
-M-223,Baptismal Crosses,Cherson Cross,Cherson-Cross,m223.jpg,<b>&frac12, x &frac34, inches</b>
-M-236,Baptismal Crosses,Danielov Cross,Danielov-Cross,m236.jpg,<b><sup>5</sup>&#8260,<sub>8</sub> x 1-<sup>1</sup>&#8260,<sub>4</sub> inches</b>
-M-245,Baptismal Crosses,Georgian Cross,Georgian-Cross,m245.jpg,"<!-- m245 georgian cross -->
-<b><sup>5</sup>&#8260;<sub>8</sub> x <sup>3</sup>&#8260;<sub>4</sub> inches</b>
-<p />
-<!-- 
-Happi Multi Pix Happi-1: This makes one extra view pushes graphic as far right as possible.
-Thumb is sized at height of 80 to match the other graphic's height. 
-// -->
-<SCRIPT LANGUAGE=""JavaScript"" type=""text/javascript"">
-  <!--
-    function ShowPopup(pagenameoptions)
-    {
-    Window = window.open(pagenameoptions);
-    }
-// -->
-</SCRIPT>
-
-<TABLE WIDTH=""100%"" BORDER=0 CELLSPACING=6 CELLPADDING=6>
-
-  <TR>
-  <TD width=""85%"">
-  </TD>
-  <TD align=""center"">
-  <a href=""javascript:;"" onClick=""ShowPopup('/catalog/images/m245-back.jpg''popup''resizable=yeswidth=800height=600');"">
-  <img src=""/catalog/images/m245-back.jpg"" width=""51"" height=""80"" border=""0""></a>
-  </TD>
-  </TR>
-
-  <TR>
-  <TD width=""85%"">
-  </TD>
-  <TD align=""center""> 
-  <font face=""Georgia"" size=""1"">Back</font>
-  </TD>
-  </TR> 
-
-</TABLE>",,
-M-243,Baptismal Crosses,Golgotha Russian Baptismal Cross,Golgotha-Russian-Baptismal-Cross,m243.jpg,<b>1-<sup>1</sup>&#8260,<sub>8</sub> x 1-<sup>5</sup>&#8260,<sub>8</sub> inches</b>
-M-222,Baptismal Crosses,Infant's Cross,Infants-Cross,m222.jpg,<b><sup>1</sup>&#8260,<sub>4</sub> x <sup>5</sup>&#8260,<sub>8</sub> inches</b>
-M-203,Baptismal Crosses,"Justinian Cross, Large",Justinian-Cross-Large,m203.jpg,<b>1-<sup>1</sup>&#8260,<sub>2</sub> x 1-<sup>3</sup>&#8260,<sub>8</sub> inches</b>
-M-640,Baptismal Crosses,"Justinian Cross, Medium",Justinian-Cross-Medium,m640.jpg,<b><sup>3</sup>&#8260,<sub>4</sub> x <sup>7</sup>&#8260,<sub>8</sub> inches</b>
-M-641,Baptismal Crosses,"Justinian Cross, Small",Justinian-Cross-Small,m641.jpg,<b><sup>1</sup>&frasl,<sub>2</sub> x <sup>3</sup>&frasl,<sub>8</sub> inches</b>
-M-250,Baptismal Crosses,Light and Life Cross,Light-and-Life-Cross,m250.jpg,"<i>Phos-Zoe Cross</i><br />
-<b><sup>7</sup>&#8260;<sub>8</sub> x 1-<sup>1</sup>&#8260;<sub>4</sub> inches</b>
-
-<p />
-<!-- 
-Happi Multi Pix Happi-1: This makes one extra view.
-Thumb is sized at height of 80 to match the other graphic's height. 
-// -->
-<SCRIPT LANGUAGE=""JavaScript"" type=""text/javascript"">
-  <!--
-    function ShowPopup(pagenameoptions)
-    {
-    Window = window.open(pagenameoptions);
-    }
-// -->
-</SCRIPT>
-
-<TABLE WIDTH=""35%"" BORDER=0 CELLSPACING=6 CELLPADDING=6>
-
-  <TR>
-  <TD width=""85%"">
-  </TD>
-  <TD align=""center"">
-  <a href=""javascript:;"" onClick=""ShowPopup(\'/images/m250-back.jpg\'\'popup\'\'resizable=yeswidth=201height=300\');"">
-  <img src=""/images/m250-back.jpg"" width=""51"" height=""80"" border=""0""></a>
-  </TD>
-  </TR>
-
-  <TR>
-  <TD width=""85%"">
-  </TD>
-  <TD align=""center""> 
-  <font face=""Georgia"" size=""1"">Back</font>
-  </TD>
-  </TR> 
-
-</TABLE>",,
-M-208,Baptismal Crosses,Novgorod Cross,Novgorod-Cross,m208.jpg,"<b><sup>5</sup>&#8260;<sub>8</sub> x 1-<sup>1</sup>&#8260;<sub>8</sub> inches</b>
-
-<p />
-<!-- 
-Happi Multi Pix Happi-1: This makes one extra view pushes graphic as far right as possible.
-Thumb is sized at height of 80 to match the other graphic's height. 
-// -->
-<SCRIPT LANGUAGE=""JavaScript"" type=""text/javascript"">
-  <!--
-    function ShowPopup(pagenameoptions)
-    {
-    Window = window.open(pagenameoptions);
-    }
-// -->
-</SCRIPT>
-
-<TABLE WIDTH=""100%"" BORDER=0 CELLSPACING=6 CELLPADDING=6>
-
-  <TR>
-  <TD width=""85%"">
-  </TD>
-  <TD align=""center"">
-  <a href=""javascript:;"" onClick=""ShowPopup('/catalog/images/m208-back.jpg''popup''resizable=yeswidth=800height=600');"">
-  <img src=""/catalog/images/m208-back.jpg"" width=""51"" height=""80"" border=""0""></a>
-  </TD>
-  </TR>
-
-  <TR>
-  <TD width=""85%"">
-  </TD>
-  <TD align=""center""> 
-  <font face=""Georgia"" size=""1"">Back</font>
-  </TD>
-  </TR> 
-
-</TABLE>",,
-M-209,Baptismal Crosses,Optina Cross,Optina-Cross,m209.jpg,"<b>1-&frac14; x 2-&frac14; inches<br />
-Silver Only</b><br />
-
-
-
-
-<SCRIPT LANGUAGE=""JavaScript"" type=""text/javascript"">
-
-  <!--
-
-    function ShowPopup(pagenameoptions)
-
-    {
-
-    Window = window.open(pagenameoptions);
-
-    }
-
-
-
-// -->
-
-</SCRIPT>
-
-
-
-
-
-<TABLE BORDER=0 CELLSPACING=6 CELLPADDING=6>
-
-<TR>
-
-
-
-<TD align=""center""> 
-
-<a href=""javascript:;"" onClick=""ShowPopup('images/m209.jpg''popup');"">
-
-<img src=""images/m209.jpg"" width=""66"" height=""100"" border=""1""></a>
-
-</TD>
-
-
-
-
-
-<TD align=""center"">
-
-<a href=""javascript:;"" onClick=""ShowPopup('images/m209-back.jpg''popup');"">
-
-<img src=""images/m209-back.jpg"" width=""66"" height=""100"" border=""1""></a>
-
-</TD>
-
-</TR>
-
-<TR>
-<TD align=""center""><font face=""Georgia"" size=""1"">Front<font></TD>
-
-<TD align=""center""><font face=""Georgia"" size=""1"">Back</font></TD>
-
-</TR>
-
-<TR>
-<TD colspan=""2""> 
-
-<p align=""center""><font face=""Verdana"" size=""1"">Click on thumbnail pictures above for larger images</font>
-
-</TD>
-
-
-
-</TR> 
-
-</TABLE>",,
-M-225,Baptismal Crosses,Pochaev Cross,Pochaev-Cross,m225.jpg,<b>&frac34, x 1-&frac14, inches</b>
-M-662,Baptismal Crosses,Protection Cross,Protection-Cross,M662_front.jpg,"<b>Cross of the Holy Protection</b><br />
-<sup>5</sup>&frasl;<sub>8</sub> inches wide x 1 inch high
-<p>
-The front of this exquisite and sturdy cross shows the Holy Face of Our Saviour flanked by The Holy Theotokos and St John the Evangelist. Underneath the image of Christ is St Nicholas.
-<p>
-The back of the cross is a full stature icon of Our Lady the Theotokos extending her veil of Holy Protection.
-<p>
-<!-- 
-Happi Multi Pix Happi-1: This makes one extra view pushes graphic as far right as possible.
-Thumb is sized at height of 80 to match the other graphic's height. 
-REVISIONS: rev2 10/31/2007 made caption closer to graphic tried to align under main thumb ""Back"" clickable now
-// -->
-<SCRIPT LANGUAGE=""JavaScript"" type=""text/javascript"">
-  <!--
-    function ShowPopup(pagenameoptions)
-    {
-    Window = window.open(pagenameoptions);
-    }
-// -->
-</SCRIPT>
-
-<TABLE WIDTH=""100%"" BORDER=0 CELLSPACING=0 CELLPADDING=1>
-
- <TR>
- <TD width=""90%"">
-  </TD>
- <TD align=""center"">
-  <a href=""javascript:;"" onClick=""ShowPopup('images/M662_back.jpg''popup''resizable=yeswidth=287height=450');"">
-  <img align=""center"" src=""images/M662_back.jpg"" width=""61"" height=""80"" border=""0""></a>
-  </TD>
- </TR>
-  
- <TR>
- <TD width=""90%"">
-  </TD>
- <TD align=""center"" class=""smallText"">
-<a href=""javascript:;"" onClick=""ShowPopup('/catalog/images/M662_back.jpg''popup''resizable=yeswidth=300height=400');"">
-     Back
- </a>
-  </TD>
- </TR>
-
-  
-
-</TABLE>",,
-M-227,Baptismal Crosses,Rostov Cross,Rostov-Cross,m227.jpg,<b>1-<sup>1</sup>&#8260,<sub>8</sub> x 1-<sup>1</sup>&#8260,<sub>2</sub> inches </b>
-M-647,Baptismal Crosses,Russian Reliquary Cross,Russian-Reliquary-Cross,m647-Russian_Reliquary_Cross.jpg,"<b>Russian Reliquary Cross</b><br />
-<sup>5</sup>&#8260;<sub>8</sub> x <sup>7</sup>&#8260;<sub>8</sub> inches <br />
-Only available in sterling silver.
-
-<SCRIPT LANGUAGE=""JavaScript"" type=""text/javascript"">
-
-  <!--
-
-    function ShowPopup(pagenameoptions)
-
-    {
-
-    Window = window.open(pagenameoptions);
-
-    }
-
-
-
-// -->
-
-</SCRIPT>
-
-
-
-
-
-<TABLE BORDER=0 CELLSPACING=6 CELLPADDING=6>
-
-<TR>
-
-
-
-<TD align=""center""> 
-
-<a href=""javascript:;"" onClick=""ShowPopup('images/m647-Russian_Reliquary_Cross_(back).jpg''popup');"">
-
-<img src=""images/m647-Russian_Reliquary_Cross_(back).jpg"" width=""84"" height=""100"" border=""1""></a>
-
-</TD>
-
-
-
-
-
-<TD align=""center"">
-
-<a href=""javascript:;"" onClick=""ShowPopup('images/m647-Russian_Reliquary_Cross_(open).jpg''popup');"">
-
-<img src=""images/m647-Russian_Reliquary_Cross_(open).jpg"" width=""99"" height=""100"" border=""1""></a>
-
-</TD>
-
-</TR>
-
-<TR>
-<TD align=""center""><font face=""Georgia"" size=""1"">Back<font></TD>
-
-<TD align=""center""><font face=""Georgia"" size=""1"">Open</font></TD>
-
-</TR>
-
-<TR>
-<TD colspan=""2""> 
-
-<p align=""center""><font face=""Verdana"" size=""1"">Click on thumbnail pictures above for larger images</font>
-
-</TD>
-
-
-
-</TR> 
-
-</TABLE>",,
-M-244,Baptismal Crosses,Sergius Cross,Sergius-Cross,m244.jpg,"<b>Saint Sergius Cross</b><br />
-<b><sup>5</sup>&#8260;<sub>8</sub> x 1 inch</b>
-<p />
-<!-- 
-Happi Multi Pix.
-// -->
-<SCRIPT LANGUAGE=""JavaScript"" type=""text/javascript"">
-  <!--
-    function ShowPopup(pagenameoptions)
-    {
-    Window = window.open(pagenameoptions);
-    }
-// -->
-</SCRIPT>
-
-<TABLE WIDTH=""100%"" BORDER=0 CELLSPACING=6 CELLPADDING=6>
-<tr height=""50px"">
-</tr>
-  <TR>
-
-  <TD width=""100%"">
-  </TD>
-
-
-  <TD width=""100%"" align=""center"">
-  <a href=""javascript:;"" onClick=""ShowPopup('images/m244-back.jpg''popup''resizable=yeswidth=178height=300');"">
-  <img src=""images/m244-back.jpg"" width=""51"" height=""80"" border=""0""></a>
-  </TD>
-  </TR>
-  <TR>
-  <TD width=""85%"">
-  </TD>
-  <TD align=""center""> 
-  <p align=""center""><font face=""Georgia"" size=""1"">Back shows<br /> St Sergius of Radonezh</font>
-  </TD>
-  </TR> 
-
-</TABLE>",,
-M-207,Baptismal Crosses,Smolensk Cross,Smolensk-Cross,m207.jpg,<b>&frac34, x 1-&frac14, inches</b>
-M-226,Baptismal Crosses,Tver Cross,Tver-Cross,m226.jpg,"<b>&frac34; x 1-&frac14; inches</b>
-<p />
-<!-- 
-Happi Multi Pix Happi-1: This makes one extra view pushes graphic as far right as possible.
-Thumb is sized at height of 80 to match the other graphic's height. 
-// -->
-<SCRIPT LANGUAGE=""JavaScript"" type=""text/javascript"">
-  <!--
-    function ShowPopup(pagenameoptions)
-    {
-    Window = window.open(pagenameoptions);
-    }
-// -->
-</SCRIPT>
-
-<TABLE WIDTH=""100%"" BORDER=0 CELLSPACING=6 CELLPADDING=6>
-
-  <TR>
-  <TD width=""85%"">
-  </TD>
-  <TD align=""center"">
-  <a href=""javascript:;"" onClick=""ShowPopup('images/m226-back.jpg''popup''resizable=yeswidth=158height=300');"">
-  <img src=""images/m226-back.jpg"" width=""51"" height=""80"" border=""0""></a>
-  </TD>
-  </TR>
-
-  <TR>
-  <TD width=""85%"">
-  </TD>
-  <TD align=""center""> 
-  <font face=""Georgia"" size=""1"">Back</font>
-  </TD>
-  </TR> 
-
-</TABLE>",,
-M-228,Baptismal Crosses,Valaam Cross,Valaam-Cross,m228.jpg,"<b><sup>3</sup>&#8260;<sub>4</sub> x 1-<sup>5</sup>&#8260;<sub>8</sub> inches</b>
-<p />
-<p />
-<!-- 
-Happi Multi Pix Happi-1: This makes one extra view pushes graphic as far right as possible.
-Thumb is sized at height of 80 to match the other graphic's height. 
-// -->
-<SCRIPT LANGUAGE=""JavaScript"" type=""text/javascript"">
-  <!--
-    function ShowPopup(pagenameoptions)
-    {
-    Window = window.open(pagenameoptions);
-    }
-// -->
-</SCRIPT>
-
-<TABLE WIDTH=""80%"" BORDER=0 CELLSPACING=6 CELLPADDING=6>
-
-  <TR>
-  <TD width=""100%"">
-  </TD>
-  <TD align=""center"">
-  <a href=""javascript:;"" onClick=""ShowPopup('images/m228-back.jpg''popup''resizable=yeswidth=170height=300');"">
-  <img src=""images/m228-back.jpg"" width=""51"" height=""80"" border=""0""></a>
-  </TD>
-  </TR>
-
-  <TR>
-  <TD width=""100%"">
-  </TD>
-  <TD align=""center""> 
-  <font face=""Georgia"" size=""1"">Back</font>
-  </TD>
-  </TR> 
-
-</TABLE>",,
-M-246,Baptismal Crosses,Vologda Cross,Vologda-Cross,m246-with-background.jpg,"<b><sup>7</sup>&#8260;<sub>8</sub> x 1-<sup>7</sup>&#8260;<sub>8</sub> inches</b>
-
-<p />
-<!-- 
-Happi Multi Pix Happi-1: This makes one extra view.
-Thumb is sized at height of 80 to match the other graphic's height. 
-// -->
-<SCRIPT LANGUAGE=""JavaScript"" type=""text/javascript"">
-  <!--
-    function ShowPopup(pagenameoptions)
-    {
-    Window = window.open(pagenameoptions);
-    }
-// -->
-</SCRIPT>
-
-<TABLE WIDTH=""25%"" BORDER=0 CELLSPACING=6 CELLPADDING=6>
-
-  <TR>
-  
-  <TD align=""center"">
-  <a href=""javascript:;"" onClick=""ShowPopup('images/m246-back.jpg''popup''resizable=yeswidth=210height=300');"">
-  <img src=""images/m246-back.jpg"" width=""51"" height=""80"" border=""0""></a>
-  </TD>
-  </TR>
-
-  <TR>
-   <TD align=""center""> 
-  <font face=""Georgia"" size=""1"">Back</font>
-  </TD>
-  </TR> 
-
-</TABLE>",,
+M-252,Baptismal Crosses,Celtic Cross,Celtic-Cross,m252.jpg,,,
+M-223,Baptismal Crosses,Cherson Cross,Cherson-Cross,m223.jpg,,,
+M-236,Baptismal Crosses,Danielov Cross,Danielov-Cross,m236.jpg,,,
+M-245,Baptismal Crosses,Georgian Cross,Georgian-Cross,m245.jpg,,,
+M-243,Baptismal Crosses,Golgotha Russian Baptismal Cross,Golgotha-Russian-Baptismal-Cross,m243.jpg,,,
+M-222,Baptismal Crosses,Infant's Cross,Infants-Cross,m222.jpg,,,
+M-203,Baptismal Crosses,"Justinian Cross, Large",Justinian-Cross-Large,m203.jpg,,,
+M-640,Baptismal Crosses,"Justinian Cross, Medium",Justinian-Cross-Medium,m640.jpg,,,
+M-641,Baptismal Crosses,"Justinian Cross, Small",Justinian-Cross-Small,m641.jpg,,,
+M-250,Baptismal Crosses,Light and Life Cross,Light-and-Life-Cross,m250.jpg,,,
+M-208,Baptismal Crosses,Novgorod Cross,Novgorod-Cross,m208.jpg,,,
+M-209,Baptismal Crosses,Optina Cross,Optina-Cross,m209.jpg,,,
+M-225,Baptismal Crosses,Pochaev Cross,Pochaev-Cross,m225.jpg,,,
+M-662,Baptismal Crosses,Protection Cross,Protection-Cross,M662_front.jpg,,,
+M-227,Baptismal Crosses,Rostov Cross,Rostov-Cross,m227.jpg,,,<sub>2</sub> inches </b>
+M-647,Baptismal Crosses,Russian Reliquary Cross,Russian-Reliquary-Cross,m647-Russian_Reliquary_Cross.jpg,,,
+M-244,Baptismal Crosses,Sergius Cross,Sergius-Cross,m244.jpg,,,
+M-207,Baptismal Crosses,Smolensk Cross,Smolensk-Cross,m207.jpg,,, inches</b>
+M-226,Baptismal Crosses,Tver Cross,Tver-Cross,m226.jpg,,,
+M-228,Baptismal Crosses,Valaam Cross,Valaam-Cross,m228.jpg,,,
+M-246,Baptismal Crosses,Vologda Cross,Vologda-Cross,m246-with-background.jpg,,,
 A-37,Saints,Calliope,Calliope,A-37-Icon-St-Calliope.png,"<b>Saint Calliope</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>
 <p>See <a href=""http://tyoos.org/Lives-of-Saints/June/Jun-8/St-Calliope.html"" target=""_blank"">www.tyoos.org</a> about this icon.</p>",,
 A-38,Saints,Catherine,Catherine,A-38_St_Catherine.png,"<b>Saint Catherine</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>
@@ -628,8 +159,8 @@ M-451,Chains,"Box Chain, 20 inches",Box-Chain-20-inches,box.jpg,,,
 M-471,Chains,"Box Chain, 24 inches",Box-Chain-24-inches,box.jpg,,,
 M-450,Chains,"Curb Chain, 20 inches",Curb-Chain-20-inches,curb.jpg,,,
 M-470,Chains,"Curb Chain, 24 inches",Curb-Chain-24-inches,curb.jpg,,,
-M-495,Chains,"Double Link Silver Chain,  20 inches",Double-Link-Silver-Chain--20-inches,doublelink.jpg,<b>Double Link Silver Chain&mdash,20 inches</b><br /> <em>available in silver only</em>,
-M-496,Chains,"Double Link Silver Chain,  24 inches",Double-Link-Silver-Chain--24-inches,doublelink.jpg,<b>Double Link Silver Chain&mdash,24 inches</b><br /> <em>available in silver only</em>,
+M-495,Chains,"Double Link Silver Chain,  20 inches",Double-Link-Silver-Chain--20-inches,doublelink.jpg,,,
+M-496,Chains,"Double Link Silver Chain,  24 inches",Double-Link-Silver-Chain--24-inches,doublelink.jpg,,,
 M-475,Chains,"Round Chain, 20 inches",Round-Chain-20-inches,round.jpg,,,
 M-477,Chains,"Round Chain, 24 inches",Round-Chain-24-inches,round.jpg,,,
 M-217,ChAins for PectorAl Crosses,Round Chain for Pectoral Cross,Round-Chain-for-Pectoral-Cross,pectoral-round.jpg,"<b>Round Chain for Pectoral Cross</b><br/>
@@ -649,10 +180,10 @@ A-2,Christ,"Burial of Christ (Epitaphios, Inscription in Greek)",Burial-of-Chris
 <p>See <a href=""http://tyoos.org/Feasts-and-Saints-of-the-Day/Triodion/holy-friday.html"" target=""_blank"">www.tyoos.org</a> about this icon.</p>",,
 A-312,Christ,Calling of Zacchaeus,Calling-of-Zacchaeus,A-312-Icon-St-Zacchaeus.png,"<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>
 <p>See <a href=""http://tyoos.org/Lives-of-Saints/April/Apr-20/st-zacchaeus.html"" target=""_blank"">www.tyoos.org</a> about this icon.</p>",,
-A-371,Christ,Cefal&uacute, Pantocrator,Cefalu-Pantocrator,A-371_Icon_Christ_Cefalu_Pantocrator.png,<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,
+A-371,Christ,Cefal&uacute, Pantocrator,Cefalu-Pantocrator,A-371_Icon_Christ_Cefalu_Pantocrator.png,,
 A-322,Christ,"Deisis; Christ, the Mother of God, &amp; the Forerunner",Deisis-Greek,A-322_Icon_Christ_Deisis.png,<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
 A-8,Christ,"Deisis; Christ, the Mother of God, and the Forerunner",Deisis-Russian,A-8_Icon_Deisis_Christ_Theotokos_Forerunner_(Baptist).png,<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
-A-287,Christ,Deisis, Our Saviour between the Theotokos and Forerunner,Deisis-Six-Saints,A-287_Icon_Deisis.png,<b>Deisis, Our Saviour between the Theotokos and Forerunner with SS George Menas Gregory Palamas and John the Theologian</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>
+A-287,Christ,Deisis, Our Saviour between the Theotokos and Forerunner,Deisis-Six-Saints,A-287_Icon_Deisis.png,, Our Saviour between the Theotokos and Forerunner with SS George Menas Gregory Palamas and John the Theologian</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>
 A-3,Christ,Detail by Kontoglou,Detail-by-Kontoglou,A-3_Jesus_Christ_Detail_by_Kontoglou.png,<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
 A-334,Christ,Detail (Russian),Detail-Russian,A-334_Icon_Christ_Detail_Russian.png,<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
 A-4,Christ,Emmanuel,Emmanuel,A-4_Emmanuel.png,<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
@@ -690,7 +221,7 @@ A-147,Christ,"Lightgiver, by Kontoglou",Lightgiver-by-Kontoglou,A-147_Icon_Chris
 D-66,Christ,Lightgiver lithographed print,Lightgiver-lithographed-print,A-228_Icon_Christ_Lightgiver.png,"<b>Christ the Lightgiver</b> <br />
 4 x 6 inches",,
 A-391,Christ,"Lord, Save Me; Christ Walking on the Water",Lord-Save-Me,A-391_Icon_Christ_Lord_Save_Me.png,<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
-A-142,Christ,Mary &amp, Martha,Mary-and-Martha,A-142_Icon_Christ_with_Mary_and_Martha.png,Christ with Mary and Martha. SS Mary and Martha are the small figures falling down at the feet of Christ.<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,
+A-142,Christ,Mary and Martha,mary-and-martha,A-142_Icon_Christ_with_Mary_and_Martha.png,Christ with Mary and Martha. SS Mary and Martha are the small figures falling down at the feet of Christ.<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
 A-338,Christ,"Merciful, by Kontoglou",Merciful-by-Kontoglou,A-338_Icon_Christ_Merciful_by_Kontoglou.png A-339-A-338_Christ-and-Theotokos-Set.png,"Christ the Merciful by Photius Kontoglou<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>
 <p>This icon together with <a href=""product_info.php/products_id/60"">The Directress</a> (sold separately) make a matching set.</p>",,
 A-183,Christ,"Mystical Supper, by Kontoglou",Mystical-Supper-by-kontoglou,A-183-Icon-Mystical-Supper.png,"<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>
@@ -1345,7 +876,7 @@ A-305,Saints,Myrrh-bearing Women,Myrrh-bearing-Women,A-305-Icon-Myrrh-bearers.pn
 M-663,Medals,Anna / Guardian Angel Medal,Anna-Guardian-Angel-Medal,"m663-front.JPG, m663-back.JPG","<b>Saint Anna / Guardian Angel Medal</b>
 <br />
 Saint Anna the Mother of the Theotokos is on the front and an icon of the Guardian Angel is on the back.",,
-M-249,Medals,Christ the Almighty Medal,Christ-the-Almighty-Medal,m249.jpg,<b>&frac34, x 1-&frac14, inches</b>
+M-249,Medals,Christ the Almighty Medal,Christ-the-Almighty-Medal,m249.jpg,,,
 M-237,Medals,"Kazan Mother of God, Filigree",Kazan-Mother-of-God-Filigree,m237.jpg,<b>½ x ¾ inches</b>,,
 M-653,Medals,Mother of God of the Sign,Mother-of-God-of-the-Sign,m653.jpg,"<b>Mother of God of the Sign<br />
 &frac34; x &frac34; inch</b>",,
@@ -1432,7 +963,7 @@ the 11 x 14 size and reductions listed in the drop-down list are
 special orders and require up to four weeks to complete.</p>",,
 G-22,Menaion,Menaion Icon � Feasts and Saints of the Whole Year,Menaion-Icon-Whole-Year,G022_Menaion_Whole_Year_Icon.png,"<b>18 &frac58; x 24 inches</b><br />
 The outer twelve panels of this icon show each of the twelve months with the principal Feasts and Saints of each month and the inner thirteen panels show the Great Feasts of the liturgical year with the Resurrection (Descent into Hades) at center.",,
-A-420,Menaion,Menaion Icon Set of 12,Menaion-Icon-Set-of-12,NULL,This is a set of all 12 of the Menaion icons. Each icon in the set displays saints for the calendar month named. The price is less than if all the icons had been purchased separately, and in addition they can be shipped quickly since it is likely the entire set will be in stock.<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,
+A-420,Menaion,Menaion Icon Set of 12,Menaion-Icon-Set-of-12,,This is a set of all 12 of the Menaion icons. Each icon in the set displays saints for the calendar month named. The price is less than if all the icons had been purchased separately; in addition they can be shipped quickly since it is likely the entire set will be in stock.<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
 A-431,Menaion,November,November,A431_November_Menaion_Icon.png,"<p>The <i>November</i> icon belongs to the Menaion set. Each of the icons in the Menaion set when purchased individually are sold for the standard price of an 11 x 14 enlargement. The entire set of Great Feast icons when purchased as a set comes with a discount. See <a href=""https://www.bostonmonks.com/product_info.php/cPath/27_33/products_id/354"">here</a> for the full set.</p>
 <p>The 8 x 10 mounted icons are the standard size. All enlargements besides
 the 11 x 14 size and reductions listed in the drop-down list are
@@ -1447,7 +978,7 @@ the 11 x 14 size and reductions listed in the drop-down list are
 special orders and require up to four weeks to complete.</p>",,
 J-73,MiscellAneous,Olive Wood Cross,Olive-Wood-Cross,J-073-Olive-Wood-Cross-Mother-of-Pearl.png,"Olive wood with a mother of pearl overlay.<br />
 5 &frac18;"" high x 3 &frac58;"" wide x &frac12;"" thick.  Made in Bethlehem.",,
-J-70,MiscellAneous,Olive Wood Spoon Hand-Made in Bethlehem,Olive-Wood-Spoon,olive-wood_spoon_J-70.png,Hand-crafted spoon of Holy Land Olive Wood, no two are alike. Limited Quantity.,
+J-70,MiscellAneous,Olive Wood Spoon Hand-Made in Bethlehem,Olive-Wood-Spoon,olive-wood_spoon_J-70.png,Hand-crafted spoon of Holy Land Olive Wood; no two are alike. Limited Quantity.,,
 J-37,MiscellAneous,Plastic Incense Box,Plastic-Incense-Box,j037.jpg,"Empty ""c"" size plastic incense box.",,
 J-36,MiscellAneous,Sunshine Cloth,Sunshine-Cloth,j036.jpg,Safely cleans jewelry gold silver brass copper glass mirrors and most other surfaces leaving a deep long-lasting lustre. Great for shining up metal icons crosses and other metal items found on this web site. Imported from Japan.,,
 B-23,Monastery,"Ascetical Homilies of St Isaac the Syrian, Cloth bound",Ascetical-Homilies,b023-2.jpg,"<b>The Ascetical Homilies of Saint Isaac the Syrian</b><br />
@@ -2029,7 +1560,7 @@ D-27,Mother of God,Protection of the Mother of God lithographed print (wallet si
 A-229,Mother of God,Quick to Hear (English),Quick-to-Hear-English,A-229_Icon_Theotokos_Quick_to_Hear.png A-229-A-228_Christ-and-Theotokos-Set.png,"<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>
 <p>This icon together with <a href=""product_info.php/products_id/88"">Christ the Lightgiver</a> (sold separately) make a matching set.</p>",,
 D-67,Mother of God,Quick to Hear (English) lithographed print,Quick-to-Hear-English-lithographed-print,Quick_to_Hear_(English).jpg,4 x 6 inches,,
-A-18,Mother of God,Quick to Hear (Gorgo-ypeko&ouml,s),Quick-to-Hear-Greek,A-18_Icon_Theotokos_Quick_to_Hear_(Greek).png,<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,
+A-18,Mother of God,Quick to Hear (Gorgo-ypekooumls,Quick-to-Hear-Greek,A-18_Icon_Theotokos_Quick_to_Hear_(Greek).png,<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
 A-226,Mother of God,Searcher for the Lost (Greek and English),Searcher-for-the-Lost-Greek-and-English,A-226_Icon_Theotokos_Searcher_for_Lost_(Greek_and_English).png,<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
 A-324,Mother of God,Searcher for the Lost (Slavonic),Searcher-for-the-Lost-Slavonic,A-324_Icon_Theotokos_Searcher_for_the_lost.png,<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
 A-333,Mother of God,Sign,Sign,A-333_Icon_Theotokos_of_the_Sign.png,<b>Mother of God of the Sign</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>,,
@@ -2725,7 +2256,7 @@ J-4,Vigil Lamps,Ruby Red Glass�6 oz,Ruby-Red-Glass-6-oz,j004.jpg,Wick and Wick
 J-3,Vigil Lamps,Ruby Red Glass�9 oz,Ruby-Red-Glass-9-oz,j003.jpg,Wick and Wick Float available separately.,,
 J-65,Vigil Lamps,Ruby Red Thistle Glass�8 oz,Ruby-Red-Thistle-Glass-8-oz,j065.jpg,,,
 J-8,Vigil Lamps,Wick Float,Wick-Float,j008.jpg,<b>Wick Float</b><br /><em>from the Holy Mountain</em>,,
-J-9,Vigil Lamps,Wicks,Wicks,j009.jpg,<b>Wicks&mdash,package of 10</b><br /><em>for the J-008 Float</em>,
+J-9,Vigil Lamps,Wicks,Wicks,j009.jpg,<b>Wicks – package of 10</b><br /><em>for the J-008 Float</em>,,
 A-132,Saints,Xenia of Petersburg,A-132-Xenia-of-Petersburg,A-132-Icon-St-Xenia-Petersburg.png,"<b>Blessed Xenia of Petersburg</b><br/>
 <p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>
 <p>See <a href=""http://tyoos.org/Lives-of-Saints/January/Jan-24/St-Xenia-of-St-Petersburg.html"" target=""_blank"">www.tyoos.org</a> about this icon.</p>",,
