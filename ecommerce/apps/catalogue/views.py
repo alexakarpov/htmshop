@@ -38,8 +38,8 @@ def get_children_products(cat):
     return relevant_products
 
 
-def category_list(request, category_slug=None):
-    logger.debug(f"fetching products for category by slug - {category_slug}")
+def category_list(request, category_slug=None, letter=None):
+    print(f"fetching products for category by slug - {category_slug}")
     category = get_object_or_404(Category, slug=category_slug)
     products = (
         Product.objects.filter(category__slug=category_slug)
@@ -53,6 +53,37 @@ def category_list(request, category_slug=None):
         {
             "category": category,
             "products": products,
+            "categories": Category.objects.all(),
+        },
+    )
+
+def saints_all(request):
+    print(f"fetching all saints icons")
+   
+    saints = Category.objects.get(slug="saints").product_set.all()
+
+    return render(
+        request,
+        "catalogue/all_saints.html",
+        {
+            "category": "Saints",
+            "products": saints,
+        },
+    )
+
+
+def saints_filtered(request, letter=None):
+    print(f"fetching saints icons starting with {letter}")
+   
+    saints = Category.objects.get(slug="saints")
+    saints_filtered=saints.product_set.filter(title__startswith=letter)
+
+    return render(
+        request,
+        "catalogue/category.html",
+        {
+            "category": saints,
+            "products": saints_filtered,
             "categories": Category.objects.all(),
         },
     )
