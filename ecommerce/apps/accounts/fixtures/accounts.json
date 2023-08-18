@@ -19,30 +19,11 @@
     }
   },
   {
-    "model": "accounts.address",
-    "pk": "feb37bc8-1d4c-400e-af88-d67bbf292295",
-    "fields": {
-      "customer": 1,
-      "full_name": "Alexandre Karpov",
-      "phone": "6478936710",
-      "postcode": "M3A1T8",
-      "address_line": "250 Cassandra Blvd",
-      "address_line2": "apt 232",
-      "town_city": "Toronto",
-      "state_province": "ON",
-      "country": "CA",
-      "delivery_instructions": "",
-      "created_at": "2023-08-03T01:54:05.087Z",
-      "updated_at": "2023-08-03T01:54:05.087Z",
-      "default": false
-    }
-  },
-  {
     "model": "accounts.account",
     "pk": 2,
     "fields": {
       "password": "pbkdf2_sha256$600000$DbnyOUbzb0BKgt4EtqJ27C$lceIlJJ3/YG3NrSXxK1zzCtwY4pYix7SBU0/P4+eWsw=",
-      "last_login": "2023-08-18T12:58:23.024Z",
+      "last_login": "2023-08-18T12:58:23Z",
       "is_superuser": false,
       "email": "frmichael@thehtm.org",
       "first_name": "Father",
@@ -51,9 +32,17 @@
       "is_active": true,
       "is_staff": true,
       "created": "2023-08-18T12:57:44.606Z",
-      "updated": "2023-08-18T12:58:23.014Z",
+      "updated": "2023-08-18T13:40:48.551Z",
       "groups": [],
       "user_permissions": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
         1,
         2,
         3,
@@ -91,6 +80,25 @@
         47,
         48
       ]
+    }
+  },
+  {
+    "model": "accounts.address",
+    "pk": "feb37bc8-1d4c-400e-af88-d67bbf292295",
+    "fields": {
+      "customer": 1,
+      "full_name": "Alexandre Karpov",
+      "phone": "6478936710",
+      "postcode": "M3A1T8",
+      "address_line": "250 Cassandra Blvd",
+      "address_line2": "apt 232",
+      "town_city": "Toronto",
+      "state_province": "ON",
+      "country": "CA",
+      "delivery_instructions": "",
+      "created_at": "2023-08-03T01:54:05.087Z",
+      "updated_at": "2023-08-03T01:54:05.087Z",
+      "default": false
     }
   }
 ]
