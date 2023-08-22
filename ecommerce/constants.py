@@ -6,8 +6,7 @@ MOUNTED_ICON_TYPE_ID = 3
 INCENSE_TYPE_ID = 2
 BOOK_TYPE_ID = 1
 LINES_PER_PAGE = 29
-SKU_REGEX = "(^A-(?!0)\d{1,3})\.(\d{1,2}x\d{1,2}?(?(1)[MP])|P?)\Z|^[BHJR]-(?!0)\d{1,3}\Z|^[DG]-(?!0)\d{1,3}P?\Z|^L-(?!0)\d{1,3}[ABC]\Z|^M-(?!0)\d{1,3}[AEJ]?\Z|^S-[1-9]\Z"
-
+SKU_REGEX = "^(A-(?!0)\d{1,3})\.(\d{1,2}x\d{1,2})?(?(1)[MP]|P?)\Z|^[BHJR]-(?!0)\d{1,3}\Z|^[DG]-(?!0)\d{1,3}P?\Z|^L-(?!0)\d{1,3}[ABC]\Z|^M-(?!0)\d{1,3}[AEJ]?\Z|^S-[1-9]\Z"
 MOUNTED_ICON_SIZES = [
     ("5x7", 32, 16),
     ("8x10", 32, 26),
