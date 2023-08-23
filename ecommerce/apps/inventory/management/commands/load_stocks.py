@@ -6,20 +6,20 @@ from django.db import DatabaseError
 from ecommerce.apps.catalogue.models import Product
 
 from ecommerce.apps.inventory.models import ProductType, Stock
-from ecommerce.constants import SKU_REGEX, ICON_PRINT_TYPE_ID, MOUNTED_ICON_TYPE_ID
+from ecommerce.constants import SKU_REGEX, NEW_RE, ICON_PRINT_TYPE_ID, MOUNTED_ICON_TYPE_ID
 
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         """
-        For example Lord Save Me as a 16 x 20 (mounted) the SKU will be A-391.16x20M
+        ...Lord Save Me as a 16 x 20 (mounted) the SKU will be A-391.16x20M
         """
         mounted_icon = ProductType.objects.get(id=MOUNTED_ICON_TYPE_ID)
         icon_print = ProductType.objects.get(id=ICON_PRINT_TYPE_ID)
         with open("ecommerce/apps/inventory/data/stocks.csv") as f:
             r = csv.reader(f)
             next(r, None)  # skip the first row (header)
-            pat = re.compile(SKU_REGEX)
+            pat = re.compile(NEW_RE)
             for row in r:
                 print(f"processing: {row}")
                 sku = row[0]
@@ -36,8 +36,8 @@ class Command(BaseCommand):
                         type = mounted_icon
                     case "P":
                         type = icon_print
-                    case _: # unfortunatelly, A-1 can be a stock item's SKU, 8x10 mounted is implied
-                        type = None
+                    case _: # "A-1" without M/P can be a stock item's SKU, 8x10 mounted is implied
+                        type = mounted_icon
                        
                 try:
                     catalogue_product = Product.objects.get(sku_base=base)
@@ -52,7 +52,8 @@ class Command(BaseCommand):
                         spec = spec,
                         sku = sku,
                         restock_point = restock_point,
-                        target_amount = target_amount
+                        target_amount = target_amount,
+                        weight = weight
 
                     )
                     print(f"created {stock}")
