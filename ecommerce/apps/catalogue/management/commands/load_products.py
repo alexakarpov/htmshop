@@ -19,13 +19,14 @@ def get_sku_base(sku):
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        with open("ecommerce/apps/catalogue/data/products.csv") as f:
+        with open("ecommerce/apps/catalogue/data/catalogue.csv") as f:
             r = csv.reader(f)
             next(r, None)  # skip the first row (header)
             for row in r:
                 sku_base = row[0]
                 cat_name = row[1]
                 cat_slug = slugify(cat_name)
+                print(f"fetching category by slug '{cat_slug}'")
                 category=Category.objects.get(slug=cat_slug)
                 title = row[2]
                 slug = row[3].lower()
