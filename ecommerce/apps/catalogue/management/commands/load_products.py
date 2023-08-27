@@ -29,16 +29,16 @@ class Command(BaseCommand):
                 print(f"fetching category by slug '{cat_slug}'")
                 category=Category.objects.get(slug=cat_slug)
                 title = row[2]
-                slug = row[3].lower()
-                img_file = row[4]
-                desc = row[5]
+                img_files = row[3] # could be multiple, space-separated
+                img_file = img_files.split(' ')[0] # TODO: support multiple images
+                desc = row[4]
 
                 try:
                     prod = Product.objects.create(
                         sku_base=sku_base,
                         category=category,
                         title=title,
-                        slug=slug,
+                        slug=slugify(title),
                         image=f"images/{img_file}",
                         description=desc,
                     )
