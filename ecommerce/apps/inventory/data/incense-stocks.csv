@@ -1,0 +1,121 @@
+sku,specification,weight,restock_point,target_amount,price
+L-1C,Plastic box (about 1 oz.),1.9,0,0,4
+L-1A,One pound box,20,0,0,30
+L-1B,Half-pound box,10,0,0,16
+L-4B,Half-pound box,10,0,0,16
+L-4A,One pound box,20,0,0,30
+L-4C,Plastic box (about 1 oz.),1.9,0,0,4
+L-3B,Half-pound box,10,0,0,16
+L-3A,One pound box,20,0,0,30
+L-3C,Plastic box (about 1 oz.),1.9,0,0,4
+L-5B,Half-pound box,10,0,0,16
+L-5A,One pound box,20,0,0,30
+L-5C,Plastic box (about 1 oz.),1.9,0,0,4
+L-6B,Half-pound box,10,0,0,16
+L-6A,One pound box,20,0,0,30
+L-6C,Plastic box (about 1 oz.),1.9,0,0,4
+L-7B,Half-pound box,10,0,0,16
+L-7A,One pound box,20,0,0,30
+L-7C,Plastic box (about 1 oz.),1.9,0,0,4
+L-8B,Half-pound box,10,0,0,16
+L-8A,One pound box,20,0,0,30
+L-8C,Plastic box (about 1 oz.),1.9,0,0,4
+L-9B,Half-pound box,10,0,0,16
+L-9A,One pound box,20,0,0,30
+L-9C,Plastic box (about 1 oz.),1.9,0,0,4
+L-10B,Half-pound box,10,0,0,16
+L-10A,One pound box,20,0,0,30
+L-10C,Plastic box (about 1 oz.),1.9,0,0,4
+L-11B,Half-pound box,10,0,0,16
+L-11A,One pound box,20,0,0,30
+L-11C,Plastic box (about 1 oz.),1.9,0,0,4
+L-13B,Half-pound box,10,0,0,20
+L-13A,One pound box,20,0,0,35
+L-13C,Plastic box (about 1 oz.),1.9,0,0,5
+L-14C,Plastic box (about 1 oz.),1.9,0,0,5
+L-14A,One pound box,20,0,0,35
+L-14B,Half-pound box,10,0,0,20
+L-15C,Plastic box (about 1 oz.),1.9,0,0,5
+L-15A,One pound box,20,0,0,35
+L-15B,Half-pound box,10,0,0,20
+L-16C,Plastic box (about 1 oz.),1.9,0,0,5
+L-16A,One pound box,20,0,0,35
+L-16B,Half-pound box,10,0,0,20
+L-17C,Plastic box (about 1 oz.),1.9,0,0,5
+L-17A,One pound box,20,0,0,35
+L-17B,Half-pound box,10,0,0,20
+L-18C,Plastic box (about 1 oz.),1.9,0,0,5
+L-18A,One pound box,20,0,0,35
+L-18B,Half-pound box,10,0,0,20
+L-19C,Plastic box (about 1 oz.),1.9,0,0,5
+L-19A,One pound box,20,0,0,35
+L-19B,Half-pound box,10,0,0,20
+L-31B,Half-pound box,10,0,0,28
+L-31A,One pound box,20,0,0,50
+L-31C,Plastic box (about 1 oz.),1.9,0,0,7
+L-27C,Plastic box (about 1 oz.),1.9,0,0,7
+L-27A,One pound box,20,0,0,50
+L-27B,Half-pound box,10,0,0,28
+L-20C,Plastic box (about 1 oz.),1.9,0,0,7
+L-20A,One pound box,20,0,0,50
+L-20B,Half-pound box,10,0,0,28
+L-21C,Plastic box (about 1 oz.),1.9,0,0,7
+L-21A,One pound box,20,0,0,50
+L-21B,Half-pound box,10,0,0,28
+L-22C,Plastic box (about 1 oz.),1.9,0,0,7
+L-22A,One pound box,20,0,0,50
+L-22B,Half-pound box,10,0,0,28
+L-24C,Plastic box (about 1 oz.),1.9,0,0,7
+L-24A,One pound box,20,0,0,50
+L-24B,Half-pound box,10,0,0,28
+L-28C,Plastic box (about 1 oz.),1.9,0,0,7
+L-28A,One pound box,20,0,0,50
+L-28B,Half-pound box,10,0,0,28
+L-32C,Plastic box (about 1 oz.),1.9,0,0,7
+L-32A,One pound box,20,0,0,50
+L-32B,Half-pound box,10,0,0,28
+L-25C,Plastic box (about 1 oz.),1.9,0,0,7
+L-25A,One pound box,20,0,0,50
+L-25B,Half-pound box,10,0,0,28
+L-26C,Plastic box (about 1 oz.),1.9,0,0,7
+L-26A,One pound box,20,0,0,50
+L-26B,Half-pound box,10,0,0,28
+L-29C,Plastic box (about 1 oz.),1.9,0,0,7
+L-29A,One pound box,20,0,0,50
+L-29B,Half-pound box,10,0,0,28
+L-39C,Plastic box (about 1 oz.),1.9,0,0,7
+L-39A,One pound box,20,0,0,50
+L-39B,Half-pound box,10,0,0,28
+L-33C,Plastic box (about 1 oz.),1.9,0,0,7
+L-33A,One pound box,20,0,0,50
+L-33B,Half-pound box,10,0,0,28
+L-36C,Plastic box (about 1 oz.),1.9,0,0,7
+L-36A,One pound box,20,0,0,50
+L-36B,Half-pound box,10,0,0,28
+L-38C,Plastic box (about 1 oz.),1.9,0,0,7
+L-38A,One pound box,20,0,0,50
+L-38B,Half-pound box,10,0,0,28
+L-30C,Plastic box (about 1 oz.),1.9,0,0,7
+L-30A,One pound box,20,0,0,50
+L-30B,Half-pound box,10,0,0,28
+L-34C,Plastic box (about 1 oz.),1.9,0,0,7
+L-34A,One pound box,20,0,0,50
+L-34B,Half-pound box,10,0,0,28
+L-35C,Plastic box (about 1 oz.),1.9,0,0,7
+L-35A,One pound box,20,0,0,50
+L-35B,Half-pound box,10,0,0,28
+L-37B,Half-pound box,10,0,0,40
+L-37A,One pound box,20,0,0,80
+L-37C,Plastic box (about 1 oz.),1.9,0,0,10
+L-43B,Half-pound box,10,0,0,80
+L-43A,One pound box,20,0,0,160
+L-43C,Plastic box (about 1 oz.),1.9,0,0,15
+L-40B,Half-pound box,10,0,0,10
+L-40A,One pound box,20,0,0,16
+L-40C,Plastic box (about 1 oz.),1.9,0,0,3
+L-41B,Half-pound box,10,0,0,12
+L-41A,One pound box,20,0,0,20
+L-41C,Plastic box (about 1 oz.),1.9,0,0,4
+L-44A,One pound box,20,0,0,50
+L-44C,Plastic box (about 1 oz.),1.9,0,0,7
+L-44B,Half-pound box,10,0,0,28
