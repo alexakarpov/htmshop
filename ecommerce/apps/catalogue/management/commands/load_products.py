@@ -27,18 +27,29 @@ class Command(BaseCommand):
                 cat_name = row[1]
                 cat_slug = slugify(cat_name)
                 print(f"fetching category by slug '{cat_slug}'")
-                category=Category.objects.get(slug=cat_slug)
+                category = Category.objects.get(slug=cat_slug)
                 title = row[2]
-                img_files = row[3] # could be multiple, space-separated
-                img_file = img_files.split(' ')[0] # TODO: support multiple images
+                img_files = row[3]  # could be multiple, space-separated
+                img_file = img_files.split(" ")[
+                    0
+                ]  # TODO: support multiple images
                 desc = row[4]
+                product_slug = slugify(title)
+
+                for i in range(2, 6): # 5 with the same title/slug sounds like enough
+                    try:
+                        _exists = Product.objects.get(slug=product_slug)
+                        product_slug += str(i)
+                    except Product.DoesNotExist:
+                        # current slug is unique
+                        break
 
                 try:
                     prod = Product.objects.create(
                         sku_base=sku_base,
                         category=category,
                         title=title,
-                        slug=slugify(title),
+                        slug=product_slug,
                         image=f"images/{img_file}",
                         description=desc,
                     )

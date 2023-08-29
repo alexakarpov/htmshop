@@ -76,7 +76,7 @@ class Product(models.Model):
     description = models.TextField(
         verbose_name=_("description"), help_text=_("Not Required"), blank=True
     )
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
 
     sku_base = models.CharField(
         max_length=5, verbose_name="SKU base", primary_key=True
