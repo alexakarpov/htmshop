@@ -33,12 +33,12 @@ class Stock(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
     spec = models.CharField(
-        verbose_name="specification", max_length=20, null=True, blank=True
+        verbose_name="specification", max_length=40, null=True, blank=True
     )
     sku = models.CharField(
         verbose_name=_("Product SKU"),
         help_text=_("Required"),
-        max_length=12,
+        max_length=40,
         unique=True,
         primary_key=True,
         validators=[
