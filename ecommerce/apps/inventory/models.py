@@ -155,7 +155,7 @@ class Stock(models.Model):
         return True
 
     def __str__(self):
-        return f"{self.sku} ({self.product})"
+        return f"{self.sku} ({self.product.title})"
 
 def sku_str2spec_g(stroka):
         pat = re.compile(SKU_REGEX)
