@@ -22,26 +22,26 @@ class Basket:
             basket = self.session[settings.BASKET_SESSION_KEY] = {}
         self.basket = basket
 
-    def add(self, product, qty, sku):
+    def add(self, stock, qty, sku):
         """
         Adding and updating the users basket session data
-        product: actually a ProductInventoryItem
+        product: actually a Stock
         qty: quantity of the item added
         pid: ProductInventory item's SKU, which acts as key in Basket's dict
         """
 
-        logger.debug(f"PRODUCT: {product}, qty:{qty}, sku:{sku}")
+        logger.debug(f"PRODUCT: {stock}, qty:{qty}, sku:{sku}")
         if sku in self.basket:
             self.basket[sku]["qty"] = qty
-            self.basket[sku]["weight"] = json.dumps(product.weight)
+            self.basket[sku]["weight"] = json.dumps(stock.weight)
         else:
             self.basket[sku] = {
-                "title": product.product.title,
-                "price": str(product.price),
+                "title": stock.product.title,
+                "price": str(stock.price),
                 "qty": qty,
-                "spec": product.spec if product.spec else "",
-                "type": str(product.product_type),
-                "weight": json.dumps(product.weight),
+                "spec": stock.spec if stock.spec else "",
+                "type": str(stock.product_type),
+                "weight": json.dumps(stock.weight),
             }
 
         self.save()

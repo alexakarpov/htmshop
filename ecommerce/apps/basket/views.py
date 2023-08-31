@@ -33,7 +33,7 @@ def basket_add(request):
 
         inventoryitem = Stock.objects.get(sku=sku)
 
-        basket.add(product=inventoryitem, qty=product_qty, sku=sku)
+        basket.add(stock=inventoryitem, qty=product_qty, sku=sku)
 
         basketqty = basket.__len__()
         return JsonResponse({"qty": basketqty, "next": next})
