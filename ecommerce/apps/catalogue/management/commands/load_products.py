@@ -7,14 +7,6 @@ from django.db import IntegrityError
 from django.utils.text import slugify
 
 from ecommerce.apps.catalogue.models import Product, Category
-from ecommerce.constants import SKU_REGEX
-
-
-def get_sku_base(sku):
-    print(f"getting base from {sku}")
-    pat = re.compile(SKU_REGEX)
-    m = pat.match(sku)
-    return m.group(1)
 
 
 class Command(BaseCommand):

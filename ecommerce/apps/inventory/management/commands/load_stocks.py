@@ -10,7 +10,6 @@ from ecommerce.constants import (
     BHJR_RE,
     BOOK_TYPE_ID,
     INCENSE_TYPE_ID,
-    SKU_REGEX,
     NEW_RE,
     ICON_PRINT_TYPE_ID,
     MOUNTED_ICON_TYPE_ID,
@@ -61,7 +60,9 @@ def process_row(row, pattern: str, product_type=None):
         )
         print(f"created {stock}")
     except IntegrityError as e:
-        sys.stderr.write(f"looks like a Stock record for {sku} already exists\n")
+        sys.stderr.write(
+            f"looks like a Stock record for {sku} already exists\n"
+        )
 
 
 def load_icons_stock():
@@ -71,15 +72,6 @@ def load_icons_stock():
 
         for row in r:
             process_row(row, NEW_RE, product_type=mounted_icon_type)
-
-
-def load_BHJR_stock():
-    with open("ecommerce/apps/inventory/data/BHJR.csv") as f:
-        r = csv.reader(f)
-        next(r, None)  # skip the first row (header)
-
-        for row in r:
-            process_row(row, NEW_RE)
 
 
 def load_incense_stock():

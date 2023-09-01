@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core.validators import RegexValidator
 
 from ecommerce.apps.catalogue.models import Product
-from ecommerce.constants import SKU_REGEX
+from ecommerce.constants import NEW_RE
 
 sku_reg = re.compile("([A-Z]+)-([0-9]+)")
 logger = logging.getLogger("django")
@@ -43,19 +43,15 @@ class Stock(models.Model):
         primary_key=True,
         validators=[
             RegexValidator(
-                regex=SKU_REGEX,
+                regex=NEW_RE,
                 message="Not a valid SKU",
                 code="nomatch",
             )
         ],
     )
 
-    restock_point = models.PositiveIntegerField(
-        null=True, blank=True
-    )
-    target_amount = models.PositiveIntegerField(
-        null=True, blank=True
-    )
+    restock_point = models.PositiveIntegerField(null=True, blank=True)
+    target_amount = models.PositiveIntegerField(null=True, blank=True)
 
     wrapping_qty = models.IntegerField(
         null=True, blank=True, verbose_name="Wrapping room stock"
@@ -92,13 +88,6 @@ class Stock(models.Model):
         except Stock.DoesNotExist:
             logger.warning(f"prints aren't even in stock for {product_sku}")
             return 0
-
-    def sku2spec(self):
-        pat = re.compile(SKU_REGEX)
-        m = re.match(pat, self.sku)
-        return m.group(2)
-
-
 
     def wrapping_add(self, qty: int):
         self.wrapping_qty += qty
@@ -157,12 +146,6 @@ class Stock(models.Model):
     def __str__(self):
         return f"{self.sku} ({self.product.title})"
 
-def sku_str2spec_g(stroka):
-        pat = re.compile(SKU_REGEX)
-        m = re.match(pat, stroka)
-        if m:
-            return m.group(2)
-        return ""
 
 def get_or_create_stock_by_sku(sku: str) -> Stock:
     try:
