@@ -117175,6 +117175,22 @@
   },
   {
     "model": "inventory.stock",
+    "pk": "J-1",
+    "fields": {
+      "product": "J-1",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.50",
+      "price": "26.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
     "pk": "J-10",
     "fields": {
       "product": "J-10",
@@ -117219,6 +117235,22 @@
       "painting_qty": null,
       "weight": "0.03",
       "price": "20.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "J-19",
+    "fields": {
+      "product": "J-19",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "30.00"
     }
   },
   {
@@ -117383,6 +117415,54 @@
   },
   {
     "model": "inventory.stock",
+    "pk": "J-36",
+    "fields": {
+      "product": "J-36",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.03",
+      "price": "4.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "J-37",
+    "fields": {
+      "product": "J-37",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.03",
+      "price": "0.40"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "J-39",
+    "fields": {
+      "product": "J-39",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.22",
+      "price": "3.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
     "pk": "J-4",
     "fields": {
       "product": "J-4",
@@ -117431,6 +117511,22 @@
   },
   {
     "model": "inventory.stock",
+    "pk": "J-49",
+    "fields": {
+      "product": "J-49",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.02",
+      "price": "20.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
     "pk": "J-50",
     "fields": {
       "product": "J-50",
@@ -117459,6 +117555,22 @@
       "painting_qty": null,
       "weight": "0.11",
       "price": "260.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "J-52",
+    "fields": {
+      "product": "J-52",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.56",
+      "price": "18.00"
     }
   },
   {
@@ -117507,6 +117619,86 @@
       "painting_qty": null,
       "weight": "0.90",
       "price": "21.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "J-66",
+    "fields": {
+      "product": "J-66",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.71",
+      "price": "21.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "J-70",
+    "fields": {
+      "product": "J-70",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.05",
+      "price": "8.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "J-73",
+    "fields": {
+      "product": "J-73",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.11",
+      "price": "30.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "J-8",
+    "fields": {
+      "product": "J-8",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.01",
+      "price": "3.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "J-9",
+    "fields": {
+      "product": "J-9",
+      "product_type": 11,
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.01",
+      "price": "1.50"
     }
   },
   {
