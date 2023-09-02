@@ -37,6 +37,7 @@ class ProductListFilter(admin.SimpleListFilter):
 
 class ProductAdmin(admin.ModelAdmin):
     list_filter=[ProductListFilter]
-
+    ordering = ('title',)
+    search_fields = ("title",)
 
 admin.site.register(Product, ProductAdmin)
