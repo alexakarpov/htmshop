@@ -23,6 +23,7 @@ class AccountAdmin(UserAdmin):
             {
                 "fields": (
                     "is_active",
+                    "is_trusted",
                     "is_staff",
                     "is_superuser",
                     "groups",
@@ -48,7 +49,7 @@ class AccountAdmin(UserAdmin):
         "is_staff",
         "last_login",
     )
-    list_filter = ("is_staff", "is_superuser", "is_active", "groups")
+    list_filter = ("is_staff", "is_superuser", "is_active", "is_trusted", "groups")
     search_fields = ("email",)
     ordering = ("email",)
     filter_horizontal = (
