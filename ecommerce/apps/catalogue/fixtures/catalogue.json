@@ -22,7 +22,7 @@
       "parent": null,
       "is_active": true,
       "lft": 1,
-      "rght": 4,
+      "rght": 6,
       "tree_id": 2,
       "level": 0
     }
@@ -355,12 +355,12 @@
     "fields": {
       "name": "Other",
       "slug": "other",
-      "parent": null,
+      "parent": 2,
       "is_active": true,
-      "lft": 1,
-      "rght": 2,
-      "tree_id": 12,
-      "level": 0
+      "lft": 2,
+      "rght": 3,
+      "tree_id": 2,
+      "level": 1
     }
   },
   {
@@ -441,8 +441,8 @@
       "slug": "htm",
       "parent": 2,
       "is_active": true,
-      "lft": 2,
-      "rght": 3,
+      "lft": 4,
+      "rght": 5,
       "tree_id": 2,
       "level": 1
     }

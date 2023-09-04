@@ -61,10 +61,20 @@
                                         </ul>
                                     </li>
                                 {% endif %}
-                                <li class="nav-item">
-                                    <a class="nav-link"
-                                       href="{% url 'catalogue:category_list' category_slug='books' %}"><span class="category">Books</span></a>
+                                <li class="nav-item books dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Books</a>
+                                    <ul class="dropdown-menu ">
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='monastery' %}">Monastery</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='other' %}">Other</a>
+                                        </li>
+                                    </ul>
                                 </li>
+
                                 <li class="nav-item icons dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Icons</a>
                                     <ul class="dropdown-menu ">
