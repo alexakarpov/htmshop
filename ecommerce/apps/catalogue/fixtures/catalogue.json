@@ -36,7 +36,7 @@
       "parent": null,
       "is_active": true,
       "lft": 1,
-      "rght": 12,
+      "rght": 14,
       "tree_id": 8,
       "level": 0
     }
@@ -91,8 +91,8 @@
       "slug": "i-good-incense",
       "parent": 3,
       "is_active": true,
-      "lft": 6,
-      "rght": 7,
+      "lft": 8,
+      "rght": 9,
       "tree_id": 8,
       "level": 1
     }
@@ -133,8 +133,8 @@
       "slug": "iv-rare-incense",
       "parent": 3,
       "is_active": true,
-      "lft": 10,
-      "rght": 11,
+      "lft": 12,
+      "rght": 13,
       "tree_id": 8,
       "level": 1
     }
@@ -147,8 +147,8 @@
       "slug": "natural-frankincense",
       "parent": 3,
       "is_active": true,
-      "lft": 8,
-      "rght": 9,
+      "lft": 10,
+      "rght": 11,
       "tree_id": 8,
       "level": 1
     }
@@ -444,6 +444,20 @@
       "lft": 2,
       "rght": 3,
       "tree_id": 2,
+      "level": 1
+    }
+  },
+  {
+    "model": "catalogue.category",
+    "pk": 35,
+    "fields": {
+      "name": "Censers and charcoal",
+      "slug": "censers-and-charcoal",
+      "parent": 3,
+      "is_active": true,
+      "lft": 6,
+      "rght": 7,
+      "tree_id": 8,
       "level": 1
     }
   },
@@ -2221,7 +2235,7 @@
     "fields": {
       "category": 6,
       "title": "Luke the Evangelist, half stature",
-      "description": "<b>Saint Luke the Evangelist half stature</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>See <a href=\"http://tyoos.org/Lives-of-Saints/October/Oct-18/Evangelist-Luke.html\" target=\"_blank\">www.tyoos.org</a> about this icon.</p>",
+      "description": "<b>Saint Luke the Evangelist half stature</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\r\n<p>See <a href=\"http://tyoos.org/Lives-of-Saints/October/Oct-18/Evangelist-Luke.html\" target=\"_blank\">www.tyoos.org</a> about this icon.</p>",
       "slug": "luke-the-evangelist-half-stature",
       "is_active": true,
       "created_at": "2023-09-01T17:44:30.331Z",
@@ -3638,7 +3652,7 @@
     "fields": {
       "category": 6,
       "title": "Victor, Polyxenia, Anastasia",
-      "description": "<b>Saints Victor Polyxenia and Anastasia</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>See www.tyoos.org about <a href=\"http://tyoos.org/Lives-of-Saints/November/Nov-11/ss-victor-stephanie.html\" target=\"_blank\">St. Victor</a> and <a href=\"http://tyoos.org/Lives-of-Saints/December/Dec-22/St-Anastasia.html\" target=\"_blank\">St. Anastasia</a>.</p>",
+      "description": "<b>Saints Victor Polyxenia and Anastasia</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\r\n<p>See www.tyoos.org about <a href=\"http://tyoos.org/Lives-of-Saints/November/Nov-11/ss-victor-stephanie.html\" target=\"_blank\">St. Victor</a> and <a href=\"http://tyoos.org/Lives-of-Saints/December/Dec-22/St-Anastasia.html\" target=\"_blank\">St. Anastasia</a>.</p>",
       "slug": "victor-polyxenia-anastasia",
       "is_active": true,
       "created_at": "2023-09-01T17:44:32.281Z",
@@ -5007,7 +5021,7 @@
       "slug": "theophilus-feofil-of-the-kiev-caves-fool-for-christs-sake",
       "is_active": true,
       "created_at": "2023-09-01T17:44:32.186Z",
-      "image": "images/Theophilus_(Feofil)_of_the_Kiev_Caves_Fool_for_Christs_sake.jpg"
+      "image": "images/Theophilus_Feofil_of_the_Kiev_Caves_Fool_for_Christs_sake.jpg"
     }
   },
   {
@@ -6834,7 +6848,7 @@
     "model": "catalogue.product",
     "pk": "B-62",
     "fields": {
-      "category": 28,
+      "category": 34,
       "title": "Martyrdom and Miracles of Saint Phanurius",
       "description": "<i>Translated from the Greek by the Holy Transfiguration Monastery. 2022.",
       "slug": "martyrdom-and-miracles-of-saint-phanurius",
@@ -7984,7 +7998,7 @@
       "slug": "cobalt-blue-thistle-glass-8-oz",
       "is_active": true,
       "created_at": "2023-09-01T17:44:32.339Z",
-      "image": "images/j066.jpg"
+      "image": "images/J-66-cobalt-blue-thistle_2OBU7xK.png"
     }
   },
   {
@@ -9176,11 +9190,11 @@
     "fields": {
       "category": 24,
       "title": "Anna / Guardian Angel Medal",
-      "description": "<b>Saint Anna / Guardian Angel Medal</b>\n<br />\nSaint Anna the Mother of the Theotokos is on the front and an icon of the Guardian Angel is on the back.",
+      "description": "<b>Saint Anna / Guardian Angel Medal</b>\r\n<br />\r\nSaint Anna the Mother of the Theotokos is on the front and an icon of the Guardian Angel is on the back.",
       "slug": "anna-guardian-angel-medal",
       "is_active": true,
       "created_at": "2023-09-01T17:44:30.662Z",
-      "image": "images/m663-front.JPG,"
+      "image": "images/m663-front_tsihjQ7.JPG"
     }
   },
   {
