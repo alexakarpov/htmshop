@@ -40,11 +40,10 @@ def get_children_products(cat):
 
 def category_list(request, category_slug=None, letter=None):
     category = get_object_or_404(Category, slug=category_slug)
-    products = (
-        Product.objects.filter(category__slug=category_slug, is_active=True)
-        if category.children.count() == 0
-        else get_children_products(category)
+    products = Product.objects.filter(
+        category__slug=category_slug, is_active=True
     )
+    print(f"got { products.count()} products for {category_slug}")
 
     return render(
         request,
@@ -56,9 +55,10 @@ def category_list(request, category_slug=None, letter=None):
         },
     )
 
+
 def saints_all(request):
     print(f"fetching all saints icons")
-   
+
     saints = Category.objects.get(slug="saints").product_set.all()
 
     return render(
@@ -73,9 +73,9 @@ def saints_all(request):
 
 def saints_filtered(request, letter=None):
     print(f"fetching saints icons starting with {letter}")
-   
+
     saints = Category.objects.get(slug="saints")
-    saints_filtered=saints.product_set.filter(title__startswith=letter)
+    saints_filtered = saints.product_set.filter(title__startswith=letter)
 
     return render(
         request,

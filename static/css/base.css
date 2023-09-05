@@ -25,9 +25,14 @@ header div .navbar {
   background-color: #decaa0;
 }
 
-li {
+li,
+.shop-title,
+.account,
+.basket {
   background-color: transparent;
+  border: none;
 }
+
 
 body {
   font-family: Georgia, serif !important;

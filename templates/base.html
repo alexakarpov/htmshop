@@ -32,14 +32,22 @@
         {% block header %}
             <header class="pt-1">
                 <div class="page-header">
-                    <div class="list-group list-group-horizontal text-center mb-1">
+                    <div class="list-group list-group-horizontal justify-contenrt-right mb-1">
                         <a href="{% url 'catalogue:home' %}">
                             <img src="{% static 'logo2.png' %}"
                                  height="87"
                                  width="85"
                                  alt="Holy Transfiguration Monastery">
                         </a>
-                        <div class="h1 p-3">Holy Transfiguration Monastery Store</div>
+                        <div class="h1 shop-title list-group-item p-3">Holy Transfiguration Monastery Store</div>
+                        <div class="basket p-4 h2 list-group-item px-4">
+                            <a href="{% url 'basket:summary' %}">
+                                Cart (<strong><span id="basket-qty">{{ basket | length }}</span></strong>)
+                            </a>
+                        </div>
+                        <div class="h2 p-4 account list-group-item">
+                            <a href=" {% url 'accounts:dashboard' %} ">Account</a>
+                        </div>
                     </div>
                     <hr class="divider">
                     <nav class="navbar navbar-expand-sm p-0">
@@ -74,7 +82,6 @@
                                         </li>
                                     </ul>
                                 </li>
-
                                 <li class="nav-item icons dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Icons</a>
                                     <ul class="dropdown-menu ">
@@ -97,36 +104,48 @@
                                     <ul class="dropdown-menu ">
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='i-good-incense' %}">Good Incense</a>
+                                               href="{% url 'catalogue:category_list' category_slug='i-good-incense' %}">I (good incense)</a>                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='ii-better-incense' %}">II (better incense)</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='ii-better-incense' %}">Better Incense</a>
+                                               href="{% url 'catalogue:category_list' category_slug='iii-best-incense' %}">III (best incense)</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='iii-best-incense' %}">Best Incense</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='iv-rare-incense' %}">Rare Incense</a>
+                                               href="{% url 'catalogue:category_list' category_slug='iv-rare-incense' %}">IV (rare incense)</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
                                                href="{% url 'catalogue:category_list' category_slug='natural-frankincense' %}">Natural Frankincense</a>
                                         </li>
-
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='censers-charcoal' %}">Censers & charcoal</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item incense dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Chains, crosses, medals</a>
+                                    <ul class="dropdown-menu ">
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='chains' %}">Chains</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='crosses' %}">Crosses</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='medals' %}">Medals</a>
+                                        </li>
+                                        
                                     </ul>
                                 </li>
                             </ul>
-                            <span class="nav-item px-1">
-                                <a class="h4 mb-2" href=" {% url 'accounts:dashboard' %} ">Account</a>
-                            </span>
-                            <span class="nav-item px-5">
-                                <a class="h5" href="{% url 'basket:summary' %}">
-                                    Cart (<strong><span id="basket-qty">{{ basket | length }}</span></strong>)
-                                </a>
-                            </span>
                             <form class="d-flex" role="search" action="{% url 'search:query' %}">
                                 <input class="form-control me-2"
                                        type="search"
