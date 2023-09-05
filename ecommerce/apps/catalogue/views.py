@@ -39,10 +39,9 @@ def get_children_products(cat):
 
 
 def category_list(request, category_slug=None, letter=None):
-    print(f"fetching products for category by slug - {category_slug}")
     category = get_object_or_404(Category, slug=category_slug)
     products = (
-        Product.objects.filter(category__slug=category_slug)
+        Product.objects.filter(category__slug=category_slug, is_active=True)
         if category.children.count() == 0
         else get_children_products(category)
     )
