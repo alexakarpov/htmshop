@@ -27,23 +27,15 @@ def catalogue_new(request):
     )
 
 
-def get_children_products(cat):
-    all_products = Product.objects.all()
-    relevant_products = []
-
-    for p in all_products:
-        if p.category in cat.children.all():
-            relevant_products.append(p)
-
-    return relevant_products
-
-
 def category_list(request, category_slug=None, letter=None):
+    print(f"getting cat by slug {category_slug}")
     category = get_object_or_404(Category, slug=category_slug)
-    products = Product.objects.filter(
-        category__slug=category_slug, is_active=True
-    )
-    print(f"got { products.count()} products for {category_slug}")
+    products = []
+
+    for c in category.get_descendants():
+        products += list(c.product_set.all())
+
+    print(f"got {len(products)} products for {category_slug}")
 
     return render(
         request,
@@ -57,8 +49,7 @@ def category_list(request, category_slug=None, letter=None):
 
 
 def saints_all(request):
-    print(f"fetching all saints icons")
-
+    # print(f"fetching all saints icons")
     saints = Category.objects.get(slug="saints").product_set.all()
 
     return render(
@@ -72,8 +63,6 @@ def saints_all(request):
 
 
 def saints_filtered(request, letter=None):
-    print(f"fetching saints icons starting with {letter}")
-
     saints = Category.objects.get(slug="saints")
     saints_filtered = saints.product_set.filter(title__startswith=letter)
 
@@ -92,6 +81,25 @@ def product_detail(request, slug):
     referrer = request.META.get("HTTP_REFERER")
 
     product = get_object_or_404(Product, slug=slug, is_active=True)
+    skus = product.get_skus()
+    logger.debug(f"fetched {len(skus)} skus")
+    return render(
+        request,
+        "catalogue/single.html",
+        {
+            "product": product,
+            "skus": skus,
+            "referred": referrer,
+            "categories": Category.objects.all(),
+        },
+    )
+
+
+def st_phanurius_book(request):
+    referrer = request.META.get("HTTP_REFERER")
+    product = get_object_or_404(
+        Product, slug="martyrdom-and-miracles-of-saint-phanurius", is_active=True
+    )
     skus = product.get_skus()
     logger.debug(f"fetched {len(skus)} skus")
     return render(
