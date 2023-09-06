@@ -6,6 +6,7 @@ MOUNTED_ICON_TYPE_ID = 3
 INCENSE_TYPE_ID = 2
 BOOK_TYPE_ID = 1
 LINES_PER_PAGE = 29
+PHANURIUS_BOOK_SKUG = "martyrdom-and-miracles-of-saint-phanurius"
 NEW_RE = "^(A-(?!0)\d{1,3})(?:\.(\d{1,2}x\d{1,2}))?((?(2)[MP]|P?))\Z|^([BHJR]-(?!0)\d{1,3})\Z|^([DG]-(?!0)\d{1,3})(P)?\Z|^(L-(?!0)\d{1,3})([ABC])\Z|^(M-(?!0)\d{1,3})([AEJ])?\Z|^(S-[1-9])\Z"
 INCENSE_RE = "^(L-(?!0)\d{1,3})([ABC])\Z"
 BHJR_RE = "^([BHJR]-(?!0)\d{1,3})\Z|^([DG]-(?!0)\d{1,3})(P)?\Z"

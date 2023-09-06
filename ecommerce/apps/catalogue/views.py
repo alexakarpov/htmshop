@@ -2,6 +2,8 @@ import logging
 
 from django.shortcuts import get_object_or_404, render
 
+from ecommerce.constants import PHANURIUS_BOOK_SKUG
+
 from .models import Category, Product
 
 logger = logging.getLogger("django")
@@ -98,7 +100,7 @@ def product_detail(request, slug):
 def st_phanurius_book(request):
     referrer = request.META.get("HTTP_REFERER")
     product = get_object_or_404(
-        Product, slug="martyrdom-and-miracles-of-saint-phanurius", is_active=True
+        Product, slug=PHANURIUS_BOOK_SKUG, is_active=True
     )
     skus = product.get_skus()
     logger.debug(f"fetched {len(skus)} skus")
