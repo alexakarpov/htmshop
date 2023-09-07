@@ -1,6 +1,6 @@
 import logging
 
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 
 from ecommerce.constants import PHANURIUS_BOOK_SKUG
 
@@ -102,15 +102,4 @@ def st_phanurius_book(request):
     product = get_object_or_404(
         Product, slug=PHANURIUS_BOOK_SKUG, is_active=True
     )
-    skus = product.get_skus()
-    logger.debug(f"fetched {len(skus)} skus")
-    return render(
-        request,
-        "catalogue/single.html",
-        {
-            "product": product,
-            "skus": skus,
-            "referred": referrer,
-            "categories": Category.objects.all(),
-        },
-    )
+    return redirect(product)
