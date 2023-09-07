@@ -48,7 +48,6 @@ class Category(MPTTModel):
         )
         verbose_name_plural = "categories"
 
-
     def __str__(self) -> str:
         return (
             f"{self.parent.name} > { self.name }" if self.parent else self.name
@@ -87,6 +86,13 @@ class Product(models.Model):
         help_text=_("Change product visibility"),
         default=True,
     )
+
+    is_featured = models.BooleanField(
+        verbose_name=_("Product is featured"),
+        help_text=_("Flag product as featured"),
+        default=False,
+    )
+
     created_at = models.DateTimeField(
         _("Created at"), auto_now_add=True, editable=False
     )
@@ -96,7 +102,7 @@ class Product(models.Model):
         help_text=_("Upload a product image"),
         upload_to="images/",
         default="images/default.png",
-        max_length=255
+        max_length=255,
     )
 
     class Meta:
