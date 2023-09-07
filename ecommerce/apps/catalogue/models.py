@@ -82,7 +82,7 @@ class Product(models.Model):
     )
 
     is_active = models.BooleanField(
-        verbose_name=_("Product visibility"),
+        verbose_name=_("Product is active"),
         help_text=_("Change product visibility"),
         default=True,
     )

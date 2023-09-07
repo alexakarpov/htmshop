@@ -10,12 +10,12 @@ logger = logging.getLogger("django")
 
 
 def catalogue_index(request):
-    products = Product.objects.filter(is_active=True)
-    logger.debug(f"all products - {products.count()} are active")
+    featured = Product.objects.filter(is_active=True, is_featured=True)
+    logger.debug(f"featured products - {featured.count()}")
     return render(
         request,
         "catalogue/index.html",
-        {"products": products, "categories": Category.objects.all()},
+        {"products": featured, "categories": Category.objects.all()},
     )
 
 
@@ -31,11 +31,12 @@ def catalogue_new(request):
 
 def category_list(request, category_slug=None, letter=None):
     print(f"getting cat by slug {category_slug}")
-    category = get_object_or_404(Category, slug=category_slug)
-    products = []
+    cat = get_object_or_404(Category, slug=category_slug)
 
-    for c in category.get_descendants():
-        products += list(c.product_set.all())
+    products = cat.product_set.all()
+
+    # for c in category.get_descendants():
+    #     products += list(c.product_set.all())
 
     print(f"got {len(products)} products for {category_slug}")
 
@@ -43,7 +44,7 @@ def category_list(request, category_slug=None, letter=None):
         request,
         "catalogue/category.html",
         {
-            "category": category,
+            "category": cat,
             "products": products,
             "categories": Category.objects.all(),
         },
