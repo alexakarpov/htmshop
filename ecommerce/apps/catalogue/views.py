@@ -2,7 +2,7 @@ import logging
 
 from django.shortcuts import get_object_or_404, render, redirect
 
-from ecommerce.constants import PHANURIUS_BOOK_SKUG
+from ecommerce.constants import PHANURIUS_BOOK_SLUG
 
 from .models import Category, Product
 
@@ -100,6 +100,6 @@ def product_detail(request, slug):
 def st_phanurius_book(request):
     referrer = request.META.get("HTTP_REFERER")
     product = get_object_or_404(
-        Product, slug=PHANURIUS_BOOK_SKUG, is_active=True
+        Product, slug=PHANURIUS_BOOK_SLUG, is_active=True
     )
     return redirect(product)
