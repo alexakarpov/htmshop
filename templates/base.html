@@ -54,10 +54,10 @@
                         <div class="container">
                             <ul class="navbar-nav list-group list-group-horizontal">
                                 {% if request.user.is_staff %}
-                                    <li class="nav-item fw-bold h4 ">
+                                    <li class="nav-item fw-bold h4">
                                         <a class="nav-link" href="{% url 'inventory:dashboard' %}">Inventory</a>
                                     </li>
-                                    <li class="nav-item h4 fw-bold orders dropdown">
+                                    <li class="nav-item fw-bold dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Orders</a>
                                         <ul class="dropdown-menu ">
                                             <li>
@@ -69,7 +69,7 @@
                                         </ul>
                                     </li>
                                 {% endif %}
-                                <li class="nav-item books dropdown">
+                                <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Books</a>
                                     <ul class="dropdown-menu ">
                                         <li>
@@ -82,7 +82,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item icons dropdown">
+                                <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Icons</a>
                                     <ul class="dropdown-menu ">
                                         <li>
@@ -99,7 +99,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item incense dropdown">
+                                <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Incense</a>
                                     <ul class="dropdown-menu ">
                                         <li>
@@ -127,7 +127,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item incense dropdown">
+                                <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Chains, crosses, medals</a>
                                     <ul class="dropdown-menu ">
                                         <li>
@@ -145,6 +145,33 @@
                                         <li>
                                             <a class="dropdown-item"
                                                href="{% url 'catalogue:category_list' category_slug='medals' %}">Medals</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Other</a>
+                                    <ul class="dropdown-menu ">
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='prayer-ropes' %}">Prayer Ropes</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='prosphora-seals' %}">Prosphora Seals</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='fragrant-oils' %}">Fragrant Oils</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='vigil-lamps' %}">Vigil Lamps</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='liturgical-items' %}">Liturgical Items</a>
                                         </li>
                                         
                                     </ul>

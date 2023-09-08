@@ -118,10 +118,9 @@ input[type="radio"] {
   background-color: lightyellow;
 }
 
-.icons,
-.books,
-.incense {
+.dropdown {
   font-size: larger;
+  font-weight: 800;
 }
 
 .header-bottom {
