@@ -190,23 +190,9 @@
       "parent": null,
       "is_active": true,
       "lft": 1,
-      "rght": 4,
+      "rght": 2,
       "tree_id": 4,
       "level": 0
-    }
-  },
-  {
-    "model": "catalogue.category",
-    "pk": 17,
-    "fields": {
-      "name": "Chains for Pectoral Crosses",
-      "slug": "chains-for-pectoral-crosses",
-      "parent": 16,
-      "is_active": true,
-      "lft": 2,
-      "rght": 3,
-      "tree_id": 4,
-      "level": 1
     }
   },
   {
@@ -6577,9 +6563,9 @@
     "fields": {
       "category": 28,
       "title": "Against False Union, Paper bound",
-      "description": "<b>Against False Union</b> <br />\n<em>Alexander Kalomiros with a prologue by Photios Kontoglou translated from the Greek by George Gabriel.<br />\nSaint Nectarios Press. 1990.<br />\nSewn paperback. 184 pages. </em>\n<p />\n<em>Against False Union</em> was first published in 1967 and is still of value today. A revised appendix which includes such articles as <em>Is the Papacy a Church?</em> <em>The Form of Holy Baptism</em>  and <em>New Age Bishops</em> (part of which compares passages of the Koran with passages of the New Testament) was added for this edition.\n<p style=\"color:red;font-size:14pt;\">Out of print.</p>",
+      "description": "<b>Against False Union</b> <br />\r\n<em>Alexander Kalomiros with a prologue by Photios Kontoglou translated from the Greek by George Gabriel.<br />\r\nSaint Nectarios Press. 1990.<br />\r\nSewn paperback. 184 pages. </em>\r\n<p />\r\n<em>Against False Union</em> was first published in 1967 and is still of value today. A revised appendix which includes such articles as <em>Is the Papacy a Church?</em> <em>The Form of Holy Baptism</em>  and <em>New Age Bishops</em> (part of which compares passages of the Koran with passages of the New Testament) was added for this edition.\r\n<p style=\"color:red;font-size:14pt;\">Out of print.</p>",
       "slug": "against-false-union-paper-bound",
-      "is_active": true,
+      "is_active": false,
       "created_at": "2023-09-01T17:44:31.507Z",
       "image": "images/b004.jpg"
     }
@@ -8655,7 +8641,7 @@
     "model": "catalogue.product",
     "pk": "M-217",
     "fields": {
-      "category": 17,
+      "category": 16,
       "title": "Round Chain for Pectoral Cross",
       "description": "<b>Round Chain for Pectoral Cross</b><br/>\nThis chain requires special tools to attach to a pectoral cross.  If you buy it together with one of our pectoral crosses we'll put the chain on the cross for you.",
       "slug": "round-chain-for-pectoral-cross",
