@@ -50,7 +50,8 @@ class Category(MPTTModel):
 
     def __str__(self) -> str:
         return (
-            f"{self.parent.name} > { self.name }" if self.parent else self.name
+            # f"{self.parent.name} > { self.name }" if self.parent else self.name
+            self.name
         )
 
     def get_absolute_url(self):
@@ -93,6 +94,8 @@ class Product(models.Model):
         default=False,
     )
 
+    # additional_images = models.ForeignKey(ProductImage, null=True, on_delete=models.RESTRICT)
+
     created_at = models.DateTimeField(
         _("Created at"), auto_now_add=True, editable=False
     )
@@ -101,9 +104,28 @@ class Product(models.Model):
         verbose_name=_("image"),
         help_text=_("Upload a product image"),
         upload_to="images/",
-        default="images/default.png",
+        default="default.png",
         max_length=255,
     )
+
+    image2 = models.ImageField(
+        verbose_name=_("Additional image 1"),
+        help_text=_("an additional image"),
+        null=True,
+        blank=True,
+        upload_to="images/",
+        max_length=255,
+    )
+
+    image3 = models.ImageField(
+        verbose_name=_("Additional image 2"),
+        help_text=_("an additional image"),
+        null=True,
+        blank=True,
+        upload_to="images/",
+        max_length=255,
+    )
+
 
     class Meta:
         ordering = ("-created_at",)
@@ -126,25 +148,26 @@ class Product(models.Model):
         return f"({self.sku_base}) {self.title}"
 
 
-class ProductImage(models.Model):
-    """
-    The Product Image table.
-    """
+# class ProductImage(models.Model):
+#     """
+#     The Product Image table.
+#     """
 
-    alt_text = models.CharField(
-        verbose_name=_("Alternative text"),
-        help_text=_("Please add alternative text"),
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    updated_at = models.DateTimeField(auto_now=True)
+#     alt_text = models.CharField(
+#         verbose_name=_("Alternative text"),
+#         help_text=_("Please add alternative text"),
+#         max_length=255,
+#         null=True,
+#         blank=True,
+#     )
 
-    class Meta:
-        verbose_name = _("Product Image")
-        verbose_name_plural = _("Product Images")
+#     file = models.ImageField
 
+#     image_for = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
+
+#     class Meta:
+#         verbose_name = _("Product Image")
+#         verbose_name_plural = _("Product Images")
 
 @receiver(signals.pre_save, sender=Product)
 def product_slug_enforce_lower_case(sender, instance, **kwargs):
