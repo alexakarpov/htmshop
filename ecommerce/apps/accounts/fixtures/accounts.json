@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$600000$vx9o80I3xVCILMCTvYebT1$qdDxygXLw+/LFYSJyAIvKfxJ6aVX8KUs5DuMIwQgpKU=",
-      "last_login": "2023-09-08T04:57:26.630Z",
+      "last_login": "2023-09-09T03:11:35.119Z",
       "is_superuser": true,
       "email": "alexakarpov@gmail.com",
       "first_name": "Alexandre",
@@ -82,6 +82,26 @@
         43,
         44
       ]
+    }
+  },
+  {
+    "model": "accounts.account",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$QqYiu0oeh7w0HHFhKBxkyV$bdbBPrO/39DN/t/Dg4jqcP7y/VOe+PUQLIS1190p/lU=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "frephraim@thehtm.org",
+      "first_name": "Father",
+      "last_name": "Ephraim",
+      "phone": "",
+      "is_active": true,
+      "is_staff": false,
+      "created": "2023-09-09T05:16:38.846Z",
+      "updated": "2023-09-09T05:17:39.942Z",
+      "is_trusted": true,
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
