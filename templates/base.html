@@ -27,6 +27,11 @@
                 integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
                 crossorigin="anonymous"
                 referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/photoset-grid/1.0.1/jquery.photoset-grid.min.js"
+                integrity="sha512-0qNyuq+mtLXeXTYTcjYb74Nm8N04DaQHtxcggNGi1aIeL8PAcDlsi0ShHdKSyfiE8fl9MOhRckG2XGwslYPW4Q=="
+                crossorigin="anonymous"
+                referrerpolicy="no-referrer">
+        </script>
     </head>
     <body>
         {% block header %}
@@ -74,11 +79,11 @@
                                     <ul class="dropdown-menu ">
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='monastery' %}">Monastery</a>
+                                               href="{% url 'catalogue:category_list' category_slug='books-monastery' %}">Monastery</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='other' %}">Other</a>
+                                               href="{% url 'catalogue:category_list' category_slug='books-other' %}">Other</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -87,15 +92,15 @@
                                     <ul class="dropdown-menu ">
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='christ' %}">Savior</a>
+                                               href="{% url 'catalogue:category_list' category_slug='icons-christ' %}">Savior</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='mother-of-god' %}">Theotokos</a>
+                                               href="{% url 'catalogue:category_list' category_slug='icons-mother-of-god' %}">Theotokos</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='saints' %}">Saints</a>
+                                               href="{% url 'catalogue:category_list' category_slug='icons-saints' %}">Saints</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -104,26 +109,27 @@
                                     <ul class="dropdown-menu ">
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='i-good-incense' %}">I (good incense)</a>                                        </li>
-                                        <li>
-                                            <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='ii-better-incense' %}">II (better incense)</a>
+                                               href="{% url 'catalogue:category_list' category_slug='incense-i-good' %}">I (good incense)</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='iii-best-incense' %}">III (best incense)</a>
+                                               href="{% url 'catalogue:category_list' category_slug='incense-ii-better' %}">II (better incense)</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='iv-rare-incense' %}">IV (rare incense)</a>
+                                               href="{% url 'catalogue:category_list' category_slug='incense-iii-best' %}">III (best incense)</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='natural-frankincense' %}">Natural Frankincense</a>
+                                               href="{% url 'catalogue:category_list' category_slug='incense-iv-rare' %}">IV (rare incense)</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='censers-charcoal' %}">Censers & charcoal</a>
+                                               href="{% url 'catalogue:category_list' category_slug='incense-natural-frankincense' %}">Natural Frankincense</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="{% url 'catalogue:category_list' category_slug='incense-censers-charcoal' %}">Censers & charcoal</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -136,20 +142,18 @@
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='baptismal-crosses' %}">Baptismal Crosses</a>
+                                               href="{% url 'catalogue:category_list' category_slug='crosses-baptismal' %}">Baptismal Crosses</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{% url 'catalogue:category_list' category_slug='pectoral-crosses' %}">Pectoral Crosses</a>
+                                               href="{% url 'catalogue:category_list' category_slug='crosses-pectoral' %}">Pectoral Crosses</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item"
                                                href="{% url 'catalogue:category_list' category_slug='medals' %}">Medals</a>
                                         </li>
-                                        
                                     </ul>
                                 </li>
-
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Other</a>
                                     <ul class="dropdown-menu ">
@@ -173,7 +177,6 @@
                                             <a class="dropdown-item"
                                                href="{% url 'catalogue:category_list' category_slug='liturgical-items' %}">Liturgical Items</a>
                                         </li>
-                                        
                                     </ul>
                                 </li>
                             </ul>
