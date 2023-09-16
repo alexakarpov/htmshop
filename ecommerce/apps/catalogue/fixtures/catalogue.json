@@ -469,7 +469,7 @@
     "fields": {
       "category": 4,
       "title": "Kazan",
-      "description": "Mother of God of Kazan<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"product_info.php/products_id/94\">Christ the Pantocrator</a> (sold separately) make a matching set.</p>\n<p>See <a href=\"http://tyoos.org/Lives-of-Saints/July/Jul-8/Icon-of-Kazan.html\" target=\"_blank\">www.tyoos.org</a> about this icon.</p>",
+      "description": "Mother of God of Kazan<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"/product/pantocrator\">Christ the Pantocrator</a> (sold separately) make a matching set.</p>\n<p>See <a href=\"http://tyoos.org/Lives-of-Saints/July/Jul-8/Icon-of-Kazan.html\" target=\"_blank\">www.tyoos.org</a> about this icon.</p>",
       "slug": "kazan",
       "is_active": true,
       "is_featured": false,
@@ -1301,7 +1301,7 @@
     "fields": {
       "category": 5,
       "title": "Lifegiver",
-      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"product_info.php/products_id/61\">The Directress</a> (sold separately) make a matching set.</p>",
+      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"/product/directress-by-kontoglou\">The Directress</a> (sold separately) make a matching set.</p>",
       "slug": "lifegiver",
       "is_active": true,
       "is_featured": false,
@@ -1317,7 +1317,7 @@
     "fields": {
       "category": 4,
       "title": "Directress-by Kontoglou",
-      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"product_info.php/products_id/84\">Christ the Lifegiver</a> (sold separately) make a matching set.</p>",
+      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"/product/lifegiver\">Christ the Lifegiver</a> (sold separately) make a matching set.</p>",
       "slug": "directress-by-kontoglou",
       "is_active": true,
       "is_featured": false,
@@ -1829,7 +1829,7 @@
     "fields": {
       "category": 21,
       "title": "Extreme Humility",
-      "description": "The <i>Extreme Humility</i> icon belongs to the Great Feast set. Each of the icons in the Great Feast set when purchased individually are sold for the standard price of an 11 x 14 enlargement.  The entire set of Great Feast icons when purchased as a set comes with a discount.  <a href=\"http://www.bostonmonks.com/product_info.php/products_id/898\">See here</a> for 11 x 14 <a href=\"http://www.bostonmonks.com/product_info.php/products_id/145\">see here</a> for 8 x 10.\n<p>The 8 x 10 mounted icons are the standard size. All enlargements besides\nthe 11 x 14 size and reductions listed in the drop-down list are\nspecial orders and require up to four weeks to complete.</p>",
+      "description": "The <i>Extreme Humility</i> icon belongs to the Great Feast set. Each of the icons in the Great Feast set when purchased individually are sold for the standard price of an 11 x 14 enlargement.  The entire set of Great Feast icons when purchased as a set comes with a discount.  <a href=\"http://www.bostonmonks.com/product_info.php/products_id/898\">See here</a> for 11 x 14 <a href=\"http://www.bostonmonks.com/product_info.php/products_id/145\">see here</a> for 8 x 10.\r\n<p>The 8 x 10 mounted icons are the standard size. All enlargements besides\r\nthe 11 x 14 size and reductions listed in the drop-down list are\r\nspecial orders and require up to four weeks to complete.</p>",
       "slug": "extreme-humility",
       "is_active": true,
       "is_featured": false,
@@ -2725,7 +2725,7 @@
     "fields": {
       "category": 5,
       "title": "Lightgiver",
-      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"product_info.php/products_id/150\">Quick to Hear</a> (sold separately) make a matching set.</p>",
+      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"/product/quick-to-hear-english\">Quick to Hear</a> (sold separately) make a matching set.</p>",
       "slug": "lightgiver",
       "is_active": true,
       "is_featured": false,
@@ -2741,7 +2741,7 @@
     "fields": {
       "category": 4,
       "title": "Quick to Hear (English)",
-      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"product_info.php/products_id/88\">Christ the Lightgiver</a> (sold separately) make a matching set.</p>",
+      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"/product/lightgiver\">Christ the Lightgiver</a> (sold separately) make a matching set.</p>",
       "slug": "quick-to-hear-english",
       "is_active": true,
       "is_featured": false,
@@ -4661,7 +4661,7 @@
     "fields": {
       "category": 5,
       "title": "Merciful, by Kontoglou",
-      "description": "Christ the Merciful by Photius Kontoglou<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"product_info.php/products_id/60\">The Directress</a> (sold separately) make a matching set.</p>",
+      "description": "Christ the Merciful by Photius Kontoglou<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"/product/directress-by-kontoglou2\">The Directress</a> (sold separately) make a matching set.</p>",
       "slug": "merciful-by-kontoglou",
       "is_active": true,
       "is_featured": false,
@@ -4677,7 +4677,7 @@
     "fields": {
       "category": 4,
       "title": "Directress, by Kontoglou",
-      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"product_info.php/products_id/91\">Christ the Merciful</a> (sold separately) make a matching set.</p>",
+      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"/product/merciful-by-kontoglou\">Christ the Merciful</a> (sold separately) make a matching set.</p>",
       "slug": "directress-by-kontoglou2",
       "is_active": true,
       "is_featured": false,
@@ -6596,8 +6596,8 @@
     "pk": "A-448",
     "fields": {
       "category": 4,
-      "title": "U?rgu?p",
-      "description": "<b>U&#776;rgu&#776;p Theotokos</b>\n<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>",
+      "title": "Ürgüp",
+      "description": "<b>U&#776;rgu&#776;p Theotokos</b>\r\n<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>",
       "slug": "urgup",
       "is_active": true,
       "is_featured": false,
@@ -6981,7 +6981,7 @@
     "fields": {
       "category": 6,
       "title": "Gabriel",
-      "description": "<b>Archangel Gabriel</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"product_info.php/products_id/357\">Archangel Michael</a> (sold separately) make a matching set.</p>\n<p>See <a href=\"http://tyoos.org/Lives-of-Saints/November/Nov-8/Synaxis-Archangels.html\" target=\"_blank\">www.tyoos.org</a> about this icon.</p>",
+      "description": "<b>Archangel Gabriel</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"/product/michael\">Archangel Michael</a> (sold separately) make a matching set.</p>\n<p>See <a href=\"http://tyoos.org/Lives-of-Saints/November/Nov-8/Synaxis-Archangels.html\" target=\"_blank\">www.tyoos.org</a> about this icon.</p>",
       "slug": "gabriel",
       "is_active": true,
       "is_featured": false,
@@ -7045,7 +7045,7 @@
     "fields": {
       "category": 5,
       "title": "Pantocrator",
-      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"product_info.php/products_id/113\">Kazan Theotokos</a> (sold separately) make a matching set.</p>",
+      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"/product/kazan\">Kazan Theotokos</a> (sold separately) make a matching set.</p>",
       "slug": "pantocrator",
       "is_active": true,
       "is_featured": false,
@@ -7621,7 +7621,7 @@
     "fields": {
       "category": 6,
       "title": "Michael",
-      "description": "<b>Archangel Michael</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"product_info.php/products_id/916\">Archangel Gabriel</a> (sold separately) make a matching set.</p>\n<p>See <a href=\"http://tyoos.org/Lives-of-Saints/September/Sept-6/miracle-st-michael-colossae.html\" target=\"_blank\">www.tyoos.org</a> about this icon.</p>",
+      "description": "<b>Archangel Michael</b><p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>This icon together with <a href=\"/product/gabriel\">Archangel Gabriel</a> (sold separately) make a matching set.</p>\n<p>See <a href=\"http://tyoos.org/Lives-of-Saints/September/Sept-6/miracle-st-michael-colossae.html\" target=\"_blank\">www.tyoos.org</a> about this icon.</p>",
       "slug": "michael",
       "is_active": true,
       "is_featured": false,
@@ -8181,7 +8181,7 @@
     "fields": {
       "category": 34,
       "title": "Holy Week",
-      "description": "<b>Holy Week</b><br/>\n<i>Translated from the Greek by the Holy Transfiguration Monastery. 2016.<br/>\nHardcover binding. 144 pages.</i><br /><p>\nA complete translation of the services from the Triodion beginning with Lazarus Saturday through Holy Saturday. Large format for use in church printed in red and black throughout and bound in a durable library binding in the same size and format as the twelve volumes of our Menaion. All New Testament readings are provided in full including the Twelve Passion Gospels of Holy Friday Matins. This volume supplements the <a href=\"product_info.php/products_id/997\">Triodion</a>.</p>",
+      "description": "<b>Holy Week</b><br/>\n<i>Translated from the Greek by the Holy Transfiguration Monastery. 2016.<br/>\nHardcover binding. 144 pages.</i><br /><p>\nA complete translation of the services from the Triodion beginning with Lazarus Saturday through Holy Saturday. Large format for use in church printed in red and black throughout and bound in a durable library binding in the same size and format as the twelve volumes of our Menaion. All New Testament readings are provided in full including the Twelve Passion Gospels of Holy Friday Matins. This volume supplements the <a href=\"/product/triodion\">Triodion</a>.</p>",
       "slug": "holy-week",
       "is_active": true,
       "is_featured": false,
@@ -8277,7 +8277,7 @@
     "fields": {
       "category": 34,
       "title": "Triodion",
-      "description": "<b>The Triodion</b><br/>\n<i>Translated from the Greek by the Holy Transfiguration Monastery. 2021.<br />\nHardcover binding. 400 pages.</i><br />\n<p>This edition of the Triodion is meant to be used with our edition of <i><a href=\"product_info.php/products_id/980\">Holy Week</a></i>. The <i>Triodion</i> contains all the complete services from the Sunday of the Publican and the Pharisee through Matins and the Sixth Hour of Friday before Palm Sunday; <i>Holy Week</i> contains the services from Lazarus Saturday through Holy Saturday. Together these two books provide everything in the modern Greek editions of the <i>Triodion</i>.<br/>\n \nPlease click to download PDFs of 1. <a href=\"pdfs/1-Triodion-First-Page-of-Introduction.pdf\">the first page of the Introduction</a> explaining the division into two books the <i>Triodion</i> and <i>Holy Week</i>; and 2. <a href=\"pdfs/2-Triodion-Table-of-Contents.pdf\">the Table of Contents</a> of the <i>Triodion</i>. <br/>\nPrinted in red and black throughout and bound in a durable library binding in the same size and format as the twelve volumes of our <a href=\"product_info.php/products_id/573\">Menaion</a> <a href=\"product_info.php/products_id/575\">Pentecostarion</a> <a href=\"product_info.php/products_id/989\">Octoëchos</a> and <a href=\"product_info.php/products_id/980\">Holy Week</a>.</p>",
+      "description": "<b>The Triodion</b><br/>\n<i>Translated from the Greek by the Holy Transfiguration Monastery. 2021.<br />\nHardcover binding. 400 pages.</i><br />\n<p>This edition of the Triodion is meant to be used with our edition of <i><a href=\"/product/holy-week\">Holy Week</a></i>. The <i>Triodion</i> contains all the complete services from the Sunday of the Publican and the Pharisee through Matins and the Sixth Hour of Friday before Palm Sunday; <i>Holy Week</i> contains the services from Lazarus Saturday through Holy Saturday. Together these two books provide everything in the modern Greek editions of the <i>Triodion</i>.<br/>\n \nPlease click to download PDFs of 1. <a href=\"pdfs/1-Triodion-First-Page-of-Introduction.pdf\">the first page of the Introduction</a> explaining the division into two books the <i>Triodion</i> and <i>Holy Week</i>; and 2. <a href=\"pdfs/2-Triodion-Table-of-Contents.pdf\">the Table of Contents</a> of the <i>Triodion</i>. <br/>\nPrinted in red and black throughout and bound in a durable library binding in the same size and format as the twelve volumes of our <a href=\"/product/holy-week\">Holy Week</a> <a href=\"/product/holy-week\">Holy Week</a> <a href=\"/product/holy-week\">Holy Week</a> and <a href=\"/product/holy-week\">Holy Week</a>.</p>",
       "slug": "triodion",
       "is_active": true,
       "is_featured": false,
