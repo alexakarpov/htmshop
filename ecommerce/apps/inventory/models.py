@@ -14,24 +14,8 @@ sku_reg = re.compile("([A-Z]+)-([0-9]+)")
 logger = logging.getLogger("django")
 
 
-class ProductType(models.Model):
-    name = models.CharField(
-        verbose_name=_("Product Type name"),
-        help_text=_("Required"),
-        max_length=55,
-        unique=True,
-    )
-
-    class Meta:
-        verbose_name_plural = _("Product Types")
-
-    def __str__(self):
-        return self.name
-
-
 class Stock(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
     spec = models.CharField(
         verbose_name="specification", max_length=40, null=True, blank=True
     )

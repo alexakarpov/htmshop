@@ -9,13 +9,12 @@ from ecommerce.apps.inventory.models import (
     get_or_create_stock_by_sku,
     get_print_supply_by_sku,
 )
-from ecommerce.constants import ICON_PRINT_TYPE_ID
 
 logger = logging.getLogger("django")
 
 
 def print_work():
-    inventory = Stock.objects.filter(product_type__id__exact=ICON_PRINT_TYPE_ID)
+    inventory = Stock.objects.filter(sku__iendswith="P")
 
     result = []
     for it in inventory:
