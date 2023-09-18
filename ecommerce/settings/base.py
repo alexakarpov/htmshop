@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "ecommerce.apps.checkout",
     "ecommerce.apps.shipping",
     "ecommerce.apps.inventory",
+    "rangefilter",
     "rest_framework",
     "mptt",
     "simple_history",

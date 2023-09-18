@@ -25,8 +25,8 @@ class Order(models.Model):
     postal_code = models.CharField(max_length=20)
     state_province = models.CharField(max_length=10)
     country_code = models.CharField(max_length=4, blank=True, default="US")
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     total_paid = models.DecimalField(max_digits=5, decimal_places=2)
     payment_option = models.CharField(max_length=200, blank=True)
     paid = models.BooleanField(default=False)
@@ -42,7 +42,7 @@ class Order(models.Model):
     )
 
     class Meta:
-        ordering = ("-created",)
+        ordering = ("-created_at",)
 
     def __str__(self):
         return f"order# {self.id} by {self.full_name} ({self.status})"
@@ -108,7 +108,7 @@ def make_fake_order(persist=False):
     o.id = int(fake.numerify())
     o.total_paid = fake.pydecimal(left_digits=3, positive=True, right_digits=2)
     o.paid = fake.boolean()
-    o.created = fake.date_between()
+    o.created_at = fake.date_between()
     if persist:
         o.save()
     return o
