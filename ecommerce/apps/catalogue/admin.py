@@ -18,7 +18,7 @@ admin.site.register(Category, MPTTModelAdmin)
 
 #     def lookups(self, request: Any, model_admin: Any) -> List[Tuple[Any, str]]:
 #         return  [(x, x.upper()) for x in string.ascii_lowercase]
-    
+
 #     def queryset(self, request, queryset):
 #         """
 #         Returns the filtered queryset based on the value
@@ -35,9 +35,11 @@ admin.site.register(Category, MPTTModelAdmin)
 #         else:
 #             return queryset
 
+
 class ProductAdmin(admin.ModelAdmin):
-    # list_filter=[ProductListFilter]
-    ordering = ('title',)
+    ordering = ("title",)
     search_fields = ("title", "sku_base")
+    list_filter = ("category",)
+
 
 admin.site.register(Product, ProductAdmin)

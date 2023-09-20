@@ -1,9 +1,7 @@
 from django.contrib import admin
-from simple_history.admin import SimpleHistoryAdmin
+
+# from simple_history.admin import SimpleHistoryAdmin
 from rangefilter.filters import (
-    DateRangeFilterBuilder,
-    DateTimeRangeFilterBuilder,
-    NumericRangeFilterBuilder,
     DateRangeQuickSelectListFilterBuilder,
 )
 
@@ -15,14 +13,13 @@ class OrderItemInline(admin.TabularInline):
     extra = 0
 
 
-class OrderAdmin(SimpleHistoryAdmin):
+class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ["created_at"]
     inlines = [
         OrderItemInline,
     ]
     list_filter = (
-        "created_at",
-        # DateRangeFilterBuilder()
+        ("created_at", DateRangeQuickSelectListFilterBuilder()),
     )
 
 
