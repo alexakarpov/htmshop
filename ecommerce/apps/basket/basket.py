@@ -40,7 +40,6 @@ class Basket:
                 "price": str(stock.price),
                 "qty": qty,
                 "spec": stock.spec if stock.spec else "",
-                "type": str(stock.product_type),
                 "weight": json.dumps(stock.weight),
             }
 
