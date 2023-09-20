@@ -21,6 +21,8 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = (
         ("created_at", DateRangeQuickSelectListFilterBuilder()),
     )
+    search_fields = ("email", "full_name")
+
 
 
 admin.site.register(Order, OrderAdmin)
