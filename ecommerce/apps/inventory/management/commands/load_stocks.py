@@ -8,24 +8,30 @@ from ecommerce.apps.catalogue.models import Product
 from ecommerce.apps.inventory.models import Stock
 from ecommerce.constants import (
     BHJR_RE,
+    DGM_RE,
     NEW_RE,
     INCENSE_RE,
 )
 
 
 def process_row(row, pattern: str):
-    print("row is:")
+    print(f"row: {row}, pat: {pattern}")
     print(row)
     print("^^^^^^^^^^^^^")
     sku = row[0]
     m = re.match(pattern, sku)
-    base = m.group(1)
-    print(f"looking up a Product with base {base}")
-    spec = row[1]
-    weight = row[2]
-    restock_point = row[3]
-    target_amount = row[4]
-    price = row[5]
+      
+    if m is not None:
+        base = m.group(1)
+        print(f"looking up a Product with base {base}")
+        spec = row[1]
+        weight = row[2]
+        restock_point = row[3]
+        target_amount = row[4]
+        price = row[5]
+    else:
+        print("nope")
+        return -1
 
     try:
         catalogue_product = Product.objects.get(sku_base=base)
@@ -84,7 +90,7 @@ def load_DGM():
 
         for row in r:
             print("processing a row")
-            process_row(row, NEW_RE)
+            process_row(row, DGM_RE)
 
 
 class Command(BaseCommand):

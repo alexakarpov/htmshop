@@ -13,17 +13,9 @@ from django.test import TestCase
 class InventoryTest(TestCase):
     fixtures = [
         "catalogue.json",
+        "inventory.json"
     ]
 
-    # def test_padding(self):
-    #     px = padd("abc", 5)
-    #     self.assertEqual(px, ("abc  ", 2))
-    #     px = padd("abcd", 4)
-    #     self.assertEqual(px, ("abcd", 0))
-    #     px = padd("abcd", 3)
-    #     self.assertEqual(px, ("abcd", 0))
-    #     px = padd("-", 10, c="-")
-    #     self.assertEqual(px, ("-" * 10, 9))
 
     def test_move_between(self):
         sku = "A-9"
