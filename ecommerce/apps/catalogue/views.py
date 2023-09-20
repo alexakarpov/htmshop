@@ -3,6 +3,7 @@ import logging
 from django.shortcuts import get_object_or_404, render, redirect
 
 from ecommerce.constants import PHANURIUS_BOOK_SLUG
+from ecommerce.constants import idlookup
 
 from .models import Category, Product
 
@@ -11,13 +12,20 @@ logger = logging.getLogger("django")
 
 def catalogue_index(request):
     featured = Product.objects.filter(is_active=True, is_featured=True)
-    logger.debug(f"featured products - {featured.count()}")
     return render(
         request,
         "catalogue/index.html",
         {"products": featured, "categories": Category.objects.all()},
     )
 
+
+def legacy_product(request, legacy_id):
+    sku = idlookup.get(legacy_id)
+    try:
+        product = Product.objects.get(sku_base=sku)
+        return redirect(product)
+    except Product.DoesNotExist:
+        return redirect("catalogue:home")
 
 def catalogue_new(request):
     products = Product.objects.filter(is_active=True)
