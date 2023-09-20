@@ -32,7 +32,14 @@ urlpatterns = [
         "st-phanurius-book/", views.st_phanurius_book, name="st-phanurius-book"
     ),
     path(
-        "product_info.php/products_id/<int:legacy_id>", views.legacy_product, name="legacy-product"
+        "product_info.php/products_id/<int:legacy_id>",
+        views.legacy_product,
+        name="legacy-product",
+    ),
+    path(
+        "product_info.php/cPath/<int:smth1>_<int:smth2>/products_id/<int:legacy_id>",
+        views.legacy_product,
+        name="legacy-product",
     ),
     path("", include("ecommerce.apps.catalogue.urls", namespace="catalogue")),
 ]
