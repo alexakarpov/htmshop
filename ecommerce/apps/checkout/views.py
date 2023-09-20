@@ -28,6 +28,30 @@ square_client = Client(
 )
 
 
+def classify_order_add_items(order: Order, basket: Basket):
+    """
+    - classifies order between generic, enlargement/reduction and incense
+    - creates OrderItems and attaches them to order
+    """
+    order.kind = "GENERIC"  # default
+    for sku, item in basket.basket.items():
+        stock = Stock.objects.get(sku=sku)
+        if "x" in sku:
+            order.kind = "ENL_OR_RED"
+        elif sku.startswith("L-"):
+            order.kind = "INCENSE" if order.kind == "GENERIC" else "ENL_OR_RED"
+        OrderItem.objects.create(
+            order_id=order.pk,
+            title=item["title"],
+            sku=stock,
+            price=item["price"],
+            quantity=item["qty"],
+        )
+    print(f"classified as {order.kind}")
+    order.save()
+    return
+
+
 def deliverychoices(request):
     return render(request, "checkout/delivery_choices.html", {})
 
@@ -58,6 +82,8 @@ def payment_selection(request):
             "app_id": app_id,
             "location_id": location_id,
             "total": total,
+            "trusted": request.user.is_authenticated
+            and request.user.is_trusted,
             "full_name": full_name,
             "address_line1": address_line1,
             "address_line2": address_line2,
@@ -165,6 +191,53 @@ def guest_address(request):
         )
 
 
+@api_view(["POST"])
+def pay_later(request):
+    print("processing pay-later")
+    session = request.session
+    _id, shipping_price, tier, _days = (
+        session.get("purchase").get("delivery_choice").split("/")
+    )
+    total_s = session.get("purchase")["total"]
+    total_i = int(float(total_s) * 100)
+
+    refid = "".join(random.choices(string.ascii_lowercase, k=10))
+
+    basket = Basket(request)
+    address_json = session["address"]
+    address_d = json.loads(request.session["address"])
+
+    try:
+        fname, lname = json.loads(address_json).get("full_name").split(" ")
+    except ValueError:
+        fname = lname = ""
+    user = request.user
+    order = Order.objects.create(
+        user=user if user.is_authenticated else None,
+        full_name=f"{fname} {lname}",
+        email=user.email
+        if user.is_authenticated
+        else "someone@example.com",  # TODO: anonymous customers supply email with their address!
+        address_line1=address_d.get("address_line1"),
+        address_line2=address_d.get("address_line2"),
+        city=address_d.get("city_locality"),
+        postal_code=address_d.get("postal_code"),
+        country_code=address_d.get("country_code"),
+        total_paid=0,
+        payment_option="Later",
+        paid=False,
+        shipping_price=shipping_price,
+        shipping_method=tier,
+    )
+
+    classify_order_add_items(order, basket)
+
+    logger.info(f"new order created: {order}, clearing the basket")
+    basket.clear()
+
+    return JsonResponse({"succerss": True}, status=200)
+
+
 # https://developer.squareup.com/forums/t/django-csrf-middleware-token-missing/6959
 @api_view(["POST"])
 def payment_with_token(request):
@@ -180,7 +253,7 @@ def payment_with_token(request):
             {"success": False, "message": "Token missing"}, status=400
         )
         return res
-    session = request.session
+
     total_s = session.get("purchase")["total"]
     total_i = int(float(total_s) * 100)
 
@@ -219,7 +292,7 @@ def payment_with_token(request):
             full_name=f"{fname} {lname}",
             email=user.email
             if user.is_authenticated
-            else "someone@example.com", # TODO: anonymous customers supply email with their address!
+            else "someone@example.com",  # TODO: anonymous customers supply email with their address!
             address_line1=address_d.get("address_line1"),
             address_line2=address_d.get("address_line2"),
             city=address_d.get("city_locality"),
@@ -232,23 +305,8 @@ def payment_with_token(request):
             shipping_method=tier,
         )
 
-        order.kind = "GENERIC" # default
-        for sku, item in basket.basket.items():
-            stock = Stock.objects.get(sku=sku)
-            if "x" in sku:
-                order.kind = "ENL_OR_RED"
-            elif sku.startswith("L-"):
-                order.kind = "INCENSE"
-            
-            OrderItem.objects.create(
-                order_id=order.pk,
-                title=item["title"],
-                sku=stock,
-                price=item["price"],
-                quantity=item["qty"],
-            )
+        classify_order_add_items(order, basket)
 
-        order.save()
         logger.info(f"new order created: {order}, clearing the basket")
         basket.clear()
         response = JsonResponse({"result": result.body, "success": True})

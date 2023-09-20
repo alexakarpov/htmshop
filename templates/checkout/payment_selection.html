@@ -40,6 +40,24 @@
         throw new Error(errorBody);
       }
 
+      async function payLater() {
+        const payload = { }
+        js_payload = JSON.stringify({payload})
+
+        const paymentResponse = await fetch('{% url "checkout:pay_later" %}', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          body: js_payload
+        })
+
+        if (paymentResponse.ok) {
+          return paymentResponse.json(); // we control the structure of this response
+        }
+      }
+
       async function tokenize(paymentMethod) {
         const tokenResult = await paymentMethod.tokenize();
         if (tokenResult.status === 'OK') {
@@ -102,22 +120,6 @@
         return verificationResults.token;
       }
 
-      // status is either SUCCESS or FAILURE;
-      function displayPaymentResults(status) {
-        const statusContainer = document.getElementById(
-          'payment-status-container'
-        );
-        if (status === 'SUCCESS') {
-          statusContainer.classList.remove('is-failure');
-          statusContainer.classList.add('is-success');
-        } else {
-          statusContainer.classList.remove('is-success');
-          statusContainer.classList.add('is-failure');
-        }
-
-        statusContainer.style.visibility = 'visible';
-      }
-
       function redirectHomeAfter(ms) {
           setTimeout(() => {
             window.location.replace('{% url "catalogue:home" %}')
@@ -167,7 +169,7 @@
               verificationToken
             );
             if (paymentResults.success) {
-              redirectHomeAfter(5000)
+              redirectHomeAfter(2000)
             } else {
               console.log(paymentResults)
             }
@@ -177,11 +179,26 @@
           }
         }
 
+        async function handlePayLater(event) {
+          event.preventDefault();
+          console.log("pay later selected")
+
+          let paymentResults = await payLater()
+
+          redirectHomeAfter(1000)
+          
+        }
+
         const cardButton = document.getElementById('card-button');
+        const payLaterButton = document.getElementById('pay-later-button');
         // whencard button is clicked, the event, together with the initialized void card, is passed to the inner function
         cardButton.addEventListener('click', async function (event) {
           handlePaymentMethodSubmission(event, card);
         });
+        payLaterButton.addEventListener('click', async function (event) {
+          handlePayLater(event);
+        });
+        
 
         $('#billing-is-shipping_id').on('change', function (e) {
           // this will contain a reference to the checkbox   
@@ -203,7 +220,7 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-12">
+      <div class="col-6">
         <p>Pay with a credit card</p>
         <p>Please enter the billing address and the name on the card</p>
         <input type="checkbox"
@@ -244,9 +261,11 @@
                  placeholder="state/province">
         </div>
       </div>
+      
       <form id="payment-form">
         <div id="card-container"></div>
         <button id="card-button" type="button">Pay ${{ total }}</button>
+        {% if trusted %}<b> OR </b> <button id="pay-later-button" type="button">Pay later</button>{% endif %}
       </form>
       <div id="payment-status-container"></div>
     </div>
