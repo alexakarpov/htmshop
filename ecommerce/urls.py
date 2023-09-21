@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 
 from ecommerce.apps.catalogue import views
 
@@ -37,9 +37,9 @@ urlpatterns = [
         name="legacy-product",
     ),
     path(
-        "product_info.php/cPath/<int:smth1>_<int:smth2>/products_id/<int:legacy_id>",
+        "product_info.php/cPath/<str:ignored>/products_id/<int:legacy_id>",
         views.legacy_product,
-        name="legacy-product",
+        name="legacy-product-c",
     ),
     path("", include("ecommerce.apps.catalogue.urls", namespace="catalogue")),
 ]

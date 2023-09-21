@@ -19,7 +19,7 @@ def catalogue_index(request):
     )
 
 
-def legacy_product(request, legacy_id, smth1=None, smth2=None):
+def legacy_product(request, legacy_id, ignored=None):
     sku = idlookup.get(legacy_id)
     try:
         product = Product.objects.get(sku_base=sku)
