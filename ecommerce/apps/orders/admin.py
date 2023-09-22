@@ -5,7 +5,7 @@ from rangefilter.filters import (
     DateRangeQuickSelectListFilterBuilder,
 )
 
-from .models import Order, OrderItem
+from .models import Order, OrderItem, Payment
 
 
 class OrderItemInline(admin.TabularInline):
@@ -24,5 +24,12 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ("email", "full_name")
 
 
+class PaymentAdmin(admin.ModelAdmin):
+    readonly_fields = ["order"]
+    search_fields = (
+        ("order__full_name",)
+    )
+
 
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Payment, PaymentAdmin)

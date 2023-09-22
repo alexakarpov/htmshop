@@ -27,7 +27,8 @@ class Order(models.Model):
     country_code = models.CharField(max_length=4, blank=True, default="US")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    total_paid = models.DecimalField(max_digits=5, decimal_places=2)
+    order_total = models.DecimalField(max_digits=7, decimal_places=2)
+    total_paid = models.DecimalField(max_digits=7, decimal_places=2)
     payment_option = models.CharField(max_length=200, blank=True)
     paid = models.BooleanField(default=False)
     shipped = models.BooleanField(default=False)
@@ -61,7 +62,19 @@ class OrderItem(models.Model):
     title = models.CharField(max_length=100)
     sku = models.ForeignKey(Stock, on_delete=models.CASCADE, editable=False)
 
-    price = models.DecimalField(max_digits=5, decimal_places=2, editable=False)
+    price = models.DecimalField(max_digits=7, decimal_places=2, editable=False)
 
     def __str__(self):
         return f"{self.title} x {self.quantity}"
+
+
+class Payment(models.Model):
+    order = models.ForeignKey(
+        Order, related_name="payments", on_delete=models.CASCADE
+    )
+    paid_at = models.DateTimeField(auto_now=True)
+    comment = models.CharField(blank=True, null=True, max_length=150)
+    amount = models.DecimalField(decimal_places=2, max_digits=7)
+
+    def __str__(self) -> str:
+        return f"{self.amount} for {self.order.id} on {self.paid_at.date()}"

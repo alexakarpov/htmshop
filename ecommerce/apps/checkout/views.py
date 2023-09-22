@@ -212,6 +212,7 @@ def pay_later(request):
     except ValueError:
         fname = lname = ""
     user = request.user
+    total=total_i / 100 + shipping_price
     order = Order.objects.create(
         user=user if user.is_authenticated else None,
         full_name=f"{fname} {lname}",
@@ -223,6 +224,7 @@ def pay_later(request):
         city=address_d.get("city_locality"),
         postal_code=address_d.get("postal_code"),
         country_code=address_d.get("country_code"),
+        order_total = total,
         total_paid=0,
         payment_option="Later",
         paid=False,
@@ -298,6 +300,7 @@ def payment_with_token(request):
             city=address_d.get("city_locality"),
             postal_code=address_d.get("postal_code"),
             country_code=address_d.get("country_code"),
+            order_total=total_i / 100,
             total_paid=total_i / 100,
             payment_option="Square",
             paid=True,
