@@ -112,7 +112,7 @@ class Address(models.Model):
     full_name = models.CharField(_("Full Name"), max_length=25)
     phone = models.CharField(_("Phone Number"), max_length=20)
     postcode = models.CharField(_("Postal Code"), max_length=10)
-    address_line = models.CharField(_("Address Line 1"), max_length=50)
+    address_line1 = models.CharField(_("Address Line 1"), max_length=50)
     address_line2 = models.CharField(_("Address Line 2"), max_length=50, blank=True)
     town_city = models.CharField(_("Town/City"), max_length=50)
     state_province = models.CharField(_("State/Province"), max_length=10, blank=True)
@@ -136,7 +136,7 @@ class Address(models.Model):
     def from_dict(a_dict):
         a = Address()
         a.full_name = a_dict.get("full_name")
-        a.address_line = a_dict.get("address_line1")
+        a.address_line1 = a_dict.get("address_line1")
         a.address_line2 = a_dict.get("address_line2")
         a.phone = a_dict.get("phone")
         a.town_city = a_dict.get("city_locality")
@@ -148,7 +148,7 @@ class Address(models.Model):
     def to_dict(self):
         return {
             "full_name": self.full_name,
-            "address_line1": self.address_line,
+            "address_line1": self.address_line1,
             "address_line2": self.address_line2,
             "phone": self.phone,
             "city_locality": self.town_city,

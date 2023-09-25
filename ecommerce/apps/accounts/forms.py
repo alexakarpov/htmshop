@@ -24,7 +24,7 @@ class UserAddressForm(forms.ModelForm):
         fields = [
             "full_name",
             "phone",
-            "address_line",
+            "address_line1",
             "address_line2",
             "town_city",
             "state_province",
@@ -40,7 +40,7 @@ class UserAddressForm(forms.ModelForm):
         self.fields["phone"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Phone")}
         )
-        self.fields["address_line"].widget.attrs.update(
+        self.fields["address_line1"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Address Line 1")}
         )
         self.fields["address_line2"].widget.attrs.update(
@@ -67,7 +67,7 @@ class GuestAddressForm(forms.Form):
             "full_name",
             "phone",
             "email",
-            "address_line",
+            "address_line1",
             "address_line2",
             "town_city",
             "state_province",
@@ -78,7 +78,7 @@ class GuestAddressForm(forms.Form):
     full_name = forms.CharField()
     phone = forms.CharField()
     email = forms.EmailField()
-    address_line = forms.CharField()
+    address_line1 = forms.CharField()
     address_line2 = forms.CharField()
     town_city = forms.CharField()
     state_province = forms.CharField()
@@ -96,7 +96,7 @@ class GuestAddressForm(forms.Form):
         self.fields["email"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Email")}
         )
-        self.fields["address_line"].widget.attrs.update(
+        self.fields["address_line1"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Address Line 1")}
         )
         self.fields["address_line2"].widget.attrs.update(

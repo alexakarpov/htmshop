@@ -37,7 +37,7 @@ test_cart = [
 
 test_address = Address()
 test_address.full_name = "John Doe"
-test_address.address_line = "1 Main St"
+test_address.address_line1 = "1 Main St"
 test_address.postcode = "98765"
 test_address.town_city = "Boston"
 
