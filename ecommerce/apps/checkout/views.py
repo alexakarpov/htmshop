@@ -60,17 +60,20 @@ def payment_selection(request):
     session = request.session
     purchase = session.get("purchase")
     address = session.get("address")
+    
     if not address:
-        return redirect("catalogue:home")
+        return redirect("catalogue:home") # is this a right redirect?!
     address_json = json.loads(session.get("address"))
-
+    print(f"in payment_selection, address JSON:{address_json}")
     full_name = address_json.get("full_name")
     address_line1 = address_json.get("address_line1")
     address_line2 = address_json.get("address_line2")
     city_locality = address_json.get("city_locality")
     state_province = address_json.get("state_province")
     postal_code = address_json.get("postal_code")
-    country_code = address_json.get("country_code")
+    country_code = address_json.get("country_code") # wait a sec. guest users have 'country' in there
+    if not country_code:
+        country_code = address_json.get("country")
 
     total = purchase["total"] if purchase else 0
     app_id = settings.SQUARE_APP_ID
@@ -117,9 +120,18 @@ def basket_update_delivery(request):
 
 
 def delivery_address(request):
+    print("delivery_address view of checkout")
     logger.debug(f">> checkout delivery_address with {request.method}")
     session = request.session
     session["purchase"] = {}
+
+    print(f"session data:\n{session}")
+    # print(f"session dir:\n{dir(session)}")
+    print(f"session key:\n{session.session_key}")
+    print(f"session's keys:\n{session.keys()}")
+    # currently there are 3 for the anon user: 
+    # dict_keys(['basket', 'purchase', 'address'])
+
 
     if request.user.is_authenticated:
         logger.debug(f"user is authenticated")
@@ -151,14 +163,14 @@ def delivery_address(request):
     # guest user
     else:
         if "address" not in request.session:
-            logger.debug("no address in session for guest user")
+            print("no address in session for guest user")
             messages.warning(request, "Enter an address for the checkout")
 
             return HttpResponseRedirect(reverse("checkout:guest_address"))
 
         else:
             a = session.get("address")
-            logger.debug(f"address in session:\n {a}")
+            print(f"address in session:\n{a}")
             address = json.loads(a)
             return render(
                 request,
@@ -176,8 +188,8 @@ def guest_address(request):
         session = request.session
         address_form = GuestAddressForm(data=request.POST)
         if address_form.is_valid():
-            address = address_form.save(commit=False)
-            session["address"] = address.toJSON()
+            # address = address_form.save(commit=False)
+            session["address"] = json.dumps(request.POST)
             return HttpResponseRedirect(reverse("checkout:delivery_address"))
         else:
             logger.error("invalid address")
@@ -193,7 +205,6 @@ def guest_address(request):
 
 @api_view(["POST"])
 def pay_later(request):
-    print("processing pay-later")
     session = request.session
     _id, shipping_price, tier, _days = (
         session.get("purchase").get("delivery_choice").split("/")
@@ -212,19 +223,19 @@ def pay_later(request):
     except ValueError:
         fname = lname = ""
     user = request.user
-    total=total_i / 100 + shipping_price
+    total = total_i / 100 + shipping_price
     order = Order.objects.create(
         user=user if user.is_authenticated else None,
         full_name=f"{fname} {lname}",
         email=user.email
         if user.is_authenticated
-        else "someone@example.com",  # TODO: anonymous customers supply email with their address!
+        else address_d.get("email"),
         address_line1=address_d.get("address_line1"),
         address_line2=address_d.get("address_line2"),
         city=address_d.get("city_locality"),
         postal_code=address_d.get("postal_code"),
         country_code=address_d.get("country_code"),
-        order_total = total,
+        order_total=total,
         total_paid=0,
         payment_option="Later",
         paid=False,
@@ -234,10 +245,9 @@ def pay_later(request):
 
     classify_order_add_items(order, basket)
 
-    logger.info(f"new order created: {order}, clearing the basket")
     basket.clear()
 
-    return JsonResponse({"succerss": True}, status=200)
+    return JsonResponse({}, status=200)
 
 
 # https://developer.squareup.com/forums/t/django-csrf-middleware-token-missing/6959
@@ -248,6 +258,7 @@ def payment_with_token(request):
         session.get("purchase").get("delivery_choice").split("/")
     )
 
+    print("pay_with_token is executing\n")
     token = request.data.get("payload").get("source_id")
     if not token:  # is it even possible though?
         logger.error("payment_with_token must have a token (source_id)")
@@ -283,23 +294,25 @@ def payment_with_token(request):
         basket = Basket(request)
         address_json = session["address"]
         address_d = json.loads(request.session["address"])
+        print(address_d)
 
         try:
             fname, lname = json.loads(address_json).get("full_name").split(" ")
         except ValueError:
             fname = lname = ""
         user = request.user
+        print("trying to create the order")
         order = Order.objects.create(
             user=user if user.is_authenticated else None,
             full_name=f"{fname} {lname}",
             email=user.email
             if user.is_authenticated
             else "someone@example.com",  # TODO: anonymous customers supply email with their address!
-            address_line1=address_d.get("address_line1"),
+            address_line1=address_d.get("address_line1"), #somehow this is None for anon users?! their session contains 'address_line'
             address_line2=address_d.get("address_line2"),
-            city=address_d.get("city_locality"),
-            postal_code=address_d.get("postal_code"),
-            country_code=address_d.get("country_code"),
+            city=address_d.get("town_city"),
+            postal_code=address_d.get("postcode"),
+            country_code=address_d.get("country"),
             order_total=total_i / 100,
             total_paid=total_i / 100,
             payment_option="Square",
