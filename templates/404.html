@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load customtags %}
+
+{% block title %}
+    Page not found
+{% endblock title %}
+{% block content %}
+    {% if legacy_link %}
+        you came here using an outdated link
+    {% else %}
+        <h1>The requested resource is not available</h1>
+        <h2>You must have followed an outdated link</h2>
+    {% endif %}
+{% endblock content %}
