@@ -46,12 +46,14 @@
                         </a>
                         <div class="h1 shop-title list-group-item p-3">Holy Transfiguration Monastery Store</div>
                         <div class="basket p-4 h2 list-group-item px-4">
-                            <a href="{% url 'basket:summary' %}">
-                                Cart (<strong><span id="basket-qty">{{ basket | length }}</span></strong>)
+                            <a href="{% url 'basket:summary' %}"
+                               style="text-decoration: none;">
+                                Cart (<span id="basket-qty">{{ basket | length }}</span>)
                             </a>
                         </div>
                         <div class="h2 p-4 account list-group-item">
-                            <a href=" {% url 'accounts:dashboard' %} ">Account</a>
+                            <a href="{% url 'accounts:dashboard' %}"
+                               style="text-decoration: none;">Account</a>
                         </div>
                     </div>
                     <hr class="divider">
