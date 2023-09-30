@@ -10,7 +10,7 @@
 <body>
     <div class="container-fluid">
         {% for order in orders %}
-            {% include 'orders/order_detail.html' with order=order %}
+            {% include 'orders/order_print.html' with order=order %}
         {% endfor %}
     </div>
 </body>
