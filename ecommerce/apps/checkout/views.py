@@ -258,7 +258,6 @@ def payment_with_token(request):
         session.get("purchase").get("delivery_choice").split("/")
     )
 
-    print("pay_with_token is executing\n")
     token = request.data.get("payload").get("source_id")
     if not token:  # is it even possible though?
         logger.error("payment_with_token must have a token (source_id)")
@@ -307,12 +306,12 @@ def payment_with_token(request):
             full_name=f"{fname} {lname}",
             email=user.email
             if user.is_authenticated
-            else "someone@example.com",  # TODO: anonymous customers supply email with their address!
+            else address_d.get('email'),
             address_line1=address_d.get("address_line1"), #somehow this is None for anon users?! their session contains 'address_line'
             address_line2=address_d.get("address_line2"),
-            city=address_d.get("town_city"),
-            postal_code=address_d.get("postcode"),
-            country_code=address_d.get("country"),
+            city=address_d.get("city_locality"),
+            postal_code=address_d.get("postal_code"),
+            country_code=address_d.get("country_code"),
             order_total=total_i / 100,
             total_paid=total_i / 100,
             payment_option="Square",
