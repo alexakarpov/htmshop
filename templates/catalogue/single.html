@@ -31,9 +31,11 @@
         <table class="table table-striped">
           <tbody>
             {% for i in skus %}
-              <tr>
+              <tr class="choice_item" data-sku="{{ i.sku }}">
                 <td>
-                  <strong>{% if i.spec %}<i>{{ i.spec }}</i>{% endif %}</strong>
+                  <strong>
+                    {% if i.spec %}<i>{{ i.spec }}</i>{% endif %}
+                  </strong>
                 </td>
                 <td>
                   <strong>${{ i.price }}</strong>
@@ -41,8 +43,11 @@
                 <td>
                   <input class="form-check-input sku-picker"
                          type="radio"
-                         name="radiox"
+                         name="sku-radio"
                          value="{{ i.sku }}"
+                         style="border: 1px thin;
+                                width: 2em;
+                                height: 2em;"
                          {% if skus.count == 1 %}checked{% endif %}>
                 </td>
               </tr>
@@ -68,6 +73,13 @@
     <div class="row m-1 alert alert-success" role="alert" id="cartalertbox"></div>
   </div>
   <script>
+  /* $(document).on('click', '.choice_item', function(e) {
+    if (e.currentTarget.style.background=="#ffff99") {
+      e.currentTarget.style.background="#ffffff"
+    } else {
+      e.currentTarget.style.background="#ffff99"
+    }
+  }) */
   $(document).on('click', '.sku-picker', function (e) {
     $('#add-button').prop('disabled', false)
   })
