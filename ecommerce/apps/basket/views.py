@@ -1,9 +1,7 @@
 import logging
-from distutils.log import debug
 
-from django.http import HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_list_or_404, render
-from django.views.generic import View, TemplateView
+from django.http import JsonResponse
+from django.shortcuts import render
 
 from ecommerce.apps.inventory.models import Stock
 

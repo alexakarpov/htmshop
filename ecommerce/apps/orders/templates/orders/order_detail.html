@@ -1,45 +1,41 @@
 {% extends 'headless_base.html' %}
 {% load static %}
 {% block title %}
-    Order {{ order.id }}
+  Order {{ order.id }}
 {% endblock title %}
 {% block content %}
-<label for="amount" class="p-1 fs-6">Amount:</label>
-<input id="amount"></input>
-<label for="comment" class="p-1 fs-6">Comment:</label>
-<input id="comment"></input>
-<button type="button"
-              id="add-payment"
-              class="btn btn-md btn-success mx-1 mt-2 mb-1 form-control"
-              >Add a Payment </button>
-
-<script>
+  <label for="amount" class="p-1 fs-6">Amount:</label>
+  <input id="amount">
+  <label for="comment" class="p-1 fs-6">Comment:</label>
+  <input id="comment">
+  <input type="hidden" id="orderid" value="{{ order.id }}">
+  <button type="button"
+          id="add-payment"
+          class="btn btn-md btn-success mx-1 mt-2 mb-1 form-control">Add a Payment</button>
+  <script>
     $(document).on('click', '#add-payment', function (e) {
       e.preventDefault()
-      
       let amount = $('#amount').val()
       let comment = $('#comment').val()
-
       console.log(`amount is ${amount}, comment is ${comment}`)
-      
       const d = {
         amount,
         comment,
+        oid: $('#orderid').val(),
         csrfmiddlewaretoken: '{{csrf_token}}',
-        action: 'post'
+        // action: 'post'
       }
-  
       $.ajax({
         type: 'POST',
         url: '{% url "orders:add_payment" %}',
         data: d,
         success: function (json) {
-            console.log("Success")
+            console.log("SUCCESS; json is", json)
         },
         error: function (xhr, errmsg, err) {
           console.error("Error", errmsg)
         }
       })
     })
-    </script>
+  </script>
 {% endblock content %}

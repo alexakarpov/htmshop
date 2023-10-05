@@ -114,7 +114,7 @@
              csrfmiddlewaretoken: "{{csrf_token}}",
              action: "post",
          },
-         success: function (json) {
+         success: function(json) {
              total = (parseFloat(json.subtotal)).toFixed(2);
 
              $("#basket-qty").html(json.qty);

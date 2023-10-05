@@ -229,9 +229,8 @@ def set_default(request, id):
 
 @login_required
 def user_orders(request):
-    logger.debug(f"listing orders for {request.user}")
     user_id = request.user.id
-    orders = Order.objects.filter(user_id=user_id)  # .filter(paid=True)
+    orders = Order.objects.filter(user_id=user_id)
     return render(
         request, "accounts/dashboard/user_orders.html", {"orders": orders}
     )
