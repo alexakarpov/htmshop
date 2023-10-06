@@ -77,4 +77,4 @@ class Payment(models.Model):
     amount = models.DecimalField(decimal_places=2, max_digits=7)
 
     def __str__(self) -> str:
-        return f"{self.amount} for {self.order.id} on {self.paid_at.date()}"
+        return f"${self.amount} for order #{self.order.id}, paid on {self.paid_at.date()}"

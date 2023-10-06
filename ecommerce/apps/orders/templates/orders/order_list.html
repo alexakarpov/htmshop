@@ -4,22 +4,36 @@
     Orders
 {% endblock title %}
 {% block content %}
-    <div class="container p-2">
-        {% for order in orders %}
-            <div class="row">
-                <div class="col-2">
-                    <a href="{% url 'orders:order_details' order.id %}">{{ order.id }}</a>
-                </div>
-                <div class="col-2">
-                    {% if order.user %}
-                        {{ order.user.first_name }} {{ order.user.last_name }}
-                    {% else %}
-                        {{ order.email }}
-                    {% endif %}
-                </div>
-                <div class="col-2">{{ order.status }}</div>
-                <div class="col-4">{{ order.created|timesince }}</div>
-            </div>
-        {% endfor %}
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Order #</th>
+                <th scope="col">By</th>
+                <th scope="col">Status</th>
+                <th scope="col">Total</th>
+                <th scope="col">Total paid</th>
+                <th scope="col">Created on</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in order_list %}
+                <tr>
+                    <td>
+                        <a href="{% url 'orders:order_details' order.id %}">{{ order.id }}</a>
+                    </td>
+                    <td>
+                        {% if order.user %}
+                            {{ order.user.first_name }} {{ order.user.last_name }}
+                        {% else %}
+                            {{ order.email }}
+                        {% endif %}
+                    </td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.order_total }}</td>
+                    <td>{{ order.total_paid }}</td>
+                    <td>{{ order.created_at | date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock content %}

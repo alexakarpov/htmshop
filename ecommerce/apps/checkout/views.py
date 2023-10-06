@@ -47,7 +47,6 @@ def classify_order_add_items(order: Order, basket: Basket):
             price=item["price"],
             quantity=item["qty"],
         )
-    print(f"classified as {order.kind}")
     order.save()
     return
 
@@ -60,20 +59,22 @@ def payment_selection(request):
     session = request.session
     purchase = session.get("purchase")
     address = session.get("address")
-    
+
     if not address:
-        return redirect("catalogue:home") # is this a right redirect?!
+        logger.error("Address isn't in session")
+        return redirect("catalogue:home")  # is this a right redirect?!
     address_json = json.loads(session.get("address"))
-    print(f"in payment_selection, address JSON:{address_json}")
+    # print(f"in payment_selection, address JSON:{address_json}")
     full_name = address_json.get("full_name")
     address_line1 = address_json.get("address_line1")
     address_line2 = address_json.get("address_line2")
     city_locality = address_json.get("city_locality")
     state_province = address_json.get("state_province")
     postal_code = address_json.get("postal_code")
-    country_code = address_json.get("country_code") # wait a sec. guest users have 'country' in there
-    if not country_code:
-        country_code = address_json.get("country")
+    # guest users have 'country' in there
+    country_code = address_json.get("country_code") or address_json.get(
+        "country"
+    )
 
     total = purchase["total"] if purchase else 0
     app_id = settings.SQUARE_APP_ID
@@ -120,18 +121,15 @@ def basket_update_delivery(request):
 
 
 def delivery_address(request):
-    print("delivery_address view of checkout")
+    # print("delivery_address view of checkout")
     logger.debug(f">> checkout delivery_address with {request.method}")
     session = request.session
     session["purchase"] = {}
 
-    print(f"session data:\n{session}")
+    # print(f"session data:\n{session}")
     # print(f"session dir:\n{dir(session)}")
-    print(f"session key:\n{session.session_key}")
-    print(f"session's keys:\n{session.keys()}")
-    # currently there are 3 for the anon user: 
-    # dict_keys(['basket', 'purchase', 'address'])
-
+    # print(f"session key:\n{session.session_key}")
+    # print(f"session's keys:\n{session.keys()}")
 
     if request.user.is_authenticated:
         logger.debug(f"user is authenticated")
@@ -139,7 +137,7 @@ def delivery_address(request):
             "-default"
         )
 
-        if len(addresses) == 0:
+        if addresses.count() == 0:
             return HttpResponseRedirect(reverse("accounts:addresses"))
 
         if "address" not in request.session:
@@ -163,14 +161,14 @@ def delivery_address(request):
     # guest user
     else:
         if "address" not in request.session:
-            print("no address in session for guest user")
+            # print("no address in session for guest user")
             messages.warning(request, "Enter an address for the checkout")
 
             return HttpResponseRedirect(reverse("checkout:guest_address"))
 
         else:
             a = session.get("address")
-            print(f"address in session:\n{a}")
+            # print(f"address in session:\n{a}")
             address = json.loads(a)
             return render(
                 request,
@@ -182,7 +180,7 @@ def delivery_address(request):
 
 
 def guest_address(request):
-    logger.info(f"| checkout guest_address with {request.method}")
+    # print(f"| checkout guest_address with {request.method}")
 
     if request.method == "POST":
         session = request.session
@@ -223,13 +221,11 @@ def pay_later(request):
     except ValueError:
         fname = lname = ""
     user = request.user
-    total = total_i / 100 + shipping_price
+    total = total_i / 100 + float(shipping_price)
     order = Order.objects.create(
         user=user if user.is_authenticated else None,
         full_name=f"{fname} {lname}",
-        email=user.email
-        if user.is_authenticated
-        else address_d.get("email"),
+        email=user.email if user.is_authenticated else address_d.get("email"),
         address_line1=address_d.get("address_line1"),
         address_line2=address_d.get("address_line2"),
         city=address_d.get("city_locality"),
@@ -306,8 +302,8 @@ def payment_with_token(request):
             full_name=f"{fname} {lname}",
             email=user.email
             if user.is_authenticated
-            else address_d.get('email'),
-            address_line1=address_d.get("address_line1"), #somehow this is None for anon users?! their session contains 'address_line'
+            else address_d.get("email"),
+            address_line1=address_d.get("address_line1"),
             address_line2=address_d.get("address_line2"),
             city=address_d.get("city_locality"),
             postal_code=address_d.get("postal_code"),

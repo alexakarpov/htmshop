@@ -1,10 +1,13 @@
+import logging, decimal
 from typing import Any, Dict
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.http import HttpResponseRedirect, JsonResponse
 
-from .models import Order
+from .models import Order, Payment
+
+logger = logging.getLogger("django")
 
 class PrintOrders(ListView):
     template_name = "print_orders.html"
@@ -26,12 +29,29 @@ class OrderDetails(DetailView):
 
 class ListOrders(ListView):
     model = Order
-    template_name = "orders/manage.html"
+    template_name = "orders/order_list.html"
 
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        print("ListOrders CBV")
+        return super().get_context_data(**kwargs)
 
 def add_payment(request):
-    print("add_payment invoked")
-    return JsonResponse({})
+    amount = decimal.Decimal((request.POST.get("amount")))
+    comment = request.POST.get("comment")
+    oid = request.POST.get("oid")
+    order = Order.objects.get(id=oid)
+    p=Payment.objects.create(
+        amount=amount,
+        comment=comment,
+        order=order
+    )
+    order.total_paid += amount
+    if order.total_paid >= order.order_total:
+        order.paid = True
+    order.save()
+    print(f"Payment created: {p}")
+    return JsonResponse({"message": f"{p.pk} created"}, status = 200)
+
 
 def user_orders(request):
     user_id = request.user.id
