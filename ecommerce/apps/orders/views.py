@@ -34,7 +34,7 @@ class ListOrders(ListView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         kind=self.request.GET.get('kind')
         ctx = super().get_context_data(**kwargs)
-        if kind:
+        if kind and kind.lower() != 'all':
             orders = Order.objects.filter(kind__icontains=kind)            
             ctx = {"order_list": orders,
                    'kind': kind}
@@ -55,7 +55,7 @@ def add_payment(request):
         order.paid = True
     order.save()
     print(f"Payment created: {p}")
-    return JsonResponse({"message": f"{p.pk} created"}, status = 200)
+    return JsonResponse({"message": f"{p.pk} created", "amount": amount}, status = 200)
 
 
 def user_orders(request):

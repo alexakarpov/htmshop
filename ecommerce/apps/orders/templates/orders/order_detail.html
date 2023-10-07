@@ -5,7 +5,13 @@
 {% endblock title %}
 {% block content %}
   <h1>Order {{ order.id }} by {{ order.user }}</h1>
-  <h2>Total amount: ${{ order.order_total }}, paid: ${{ order.total_paid }}</h2>
+  <h2>
+    Total amount: ${{ order.order_total }}, paid: $<span id="paid">{{ order.total_paid }}</span>
+  </h2>
+  <div class="row m-1 alert alert-success"
+       role="alert"
+       id="alertbox"
+       display="none"></div>
   {% if order.total_paid < order.order_total %}
     <label for="amount" class="p-1 fs-6">Amount:</label>
     <input id="amount">
@@ -34,7 +40,12 @@
         url: '{% url "orders:add_payment" %}',
         data: d,
         success: function (json) {
-            console.log("SUCCESS; json is", json)
+            $('#alertbox').show()
+            $('#alertbox').text('Payment creared')
+            setTimeout(function () {
+              $('#alertbox').hide()
+              window.location.reload()
+          }, 2000)
         },
         error: function (xhr, errmsg, err) {
           console.error("Error", errmsg)

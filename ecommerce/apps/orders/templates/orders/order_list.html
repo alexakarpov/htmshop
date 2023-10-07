@@ -9,6 +9,13 @@
             <input type="radio"
                    class="btn-check"
                    name="btnradio"
+                   id="all"
+                   autocomplete="off"
+                   checked>
+            <label class="btn btn-outline-primary" for="all">All</label>
+            <input type="radio"
+                   class="btn-check"
+                   name="btnradio"
                    id="generic"
                    autocomplete="off"
                    {% if kind == 'generic' %}checked{% endif %}>
@@ -34,6 +41,7 @@
                     <th scope="col">Order #</th>
                     <th scope="col">By</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Paid</th>
                     <th scope="col">Total</th>
                     <th scope="col">Total paid</th>
                     <th scope="col">Created on</th>
@@ -53,6 +61,7 @@
                             {% endif %}
                         </td>
                         <td>{{ order.status }}</td>
+                        <td>{{ order.paid | yesno:"Yes, No"}}</td>
                         <td>{{ order.order_total }}</td>
                         <td>{{ order.total_paid }}</td>
                         <td>{{ order.created_at | date }}</td>
