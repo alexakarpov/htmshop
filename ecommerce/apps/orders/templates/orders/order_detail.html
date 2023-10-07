@@ -21,6 +21,7 @@
     <button type="button"
             id="add-payment"
             class="btn btn-md btn-success mx-1 mt-2 mb-1 form-control">Add a Payment</button>
+    {% for p in order.payments.all %}<span>{{ p }}</span><br>{% endfor %}
   {% endif %}
   <script>
     $(document).on('click', '#add-payment', function (e) {

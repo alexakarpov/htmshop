@@ -51,7 +51,7 @@
                 {% for order in order_list %}
                     <tr>
                         <td>
-                            <a href="{% url 'orders:order_details' order.id %}">{{ order.id }}</a>
+                            <a href="{% url 'orders:order_details' order.id %}"><strong># {{ order.id }}<strong></a>
                         </td>
                         <td>
                             {% if order.user %}
@@ -61,10 +61,10 @@
                             {% endif %}
                         </td>
                         <td>{{ order.status }}</td>
-                        <td>{{ order.paid | yesno:"Yes, No"}}</td>
+                        <td>{{ order.paid | yesno:"Yes, No" }}</td>
                         <td>{{ order.order_total }}</td>
                         <td>{{ order.total_paid }}</td>
-                        <td>{{ order.created_at | date }}</td>
+                        <td>{{ order.created_at }} ( {{ order.created_at | timesince }} ago)</td>
                     </tr>
                 {% endfor %}
             </tbody>
