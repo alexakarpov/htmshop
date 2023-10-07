@@ -32,8 +32,13 @@ class ListOrders(ListView):
     template_name = "orders/order_list.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        print("ListOrders CBV")
-        return super().get_context_data(**kwargs)
+        kind=self.request.GET.get('kind')
+        ctx = super().get_context_data(**kwargs)
+        if kind:
+            orders = Order.objects.filter(kind__icontains=kind)            
+            ctx = {"order_list": orders,
+                   'kind': kind}
+        return ctx
 
 def add_payment(request):
     amount = decimal.Decimal((request.POST.get("amount")))
