@@ -12,7 +12,7 @@ app_name = "orders"
 
 urlpatterns = [
     path("", ListOrders.as_view(), name="list"),
-    path("<int:pk>", OrderDetails.as_view(), name="order_details"),
+    path("<int:pk>", OrderDetails.as_view(), name="details"),
     path("print/", PrintOrders.as_view(), name="print"),
     path("payment/", add_payment, name="add_payment"),
 ]
