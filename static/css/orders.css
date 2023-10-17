@@ -21,10 +21,10 @@ body {
     top: -110px;
 }
 
-.row :nth-child(even) {
+/* .row :nth-child(even) {
     background-color: #dcdcdc;
 }
 
 .row :nth-child(odd) {
     background-color: #aaaaaa;
-}
+} */
