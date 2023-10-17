@@ -113566,6 +113566,21 @@
   },
   {
     "model": "inventory.stock",
+    "pk": "M-23A",
+    "fields": {
+      "product": "M-23",
+      "spec": "Bronze",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.00",
+      "price": "585.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
     "pk": "M-243E",
     "fields": {
       "product": "M-243",
@@ -113821,6 +113836,21 @@
   },
   {
     "model": "inventory.stock",
+    "pk": "M-40A",
+    "fields": {
+      "product": "M-40",
+      "spec": "Bronze",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.60",
+      "price": "85.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
     "pk": "M-40E",
     "fields": {
       "product": "M-40",
@@ -114046,6 +114076,66 @@
   },
   {
     "model": "inventory.stock",
+    "pk": "M-50A",
+    "fields": {
+      "product": "M-50",
+      "spec": "Bronze",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.00",
+      "price": "115.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-51A",
+    "fields": {
+      "product": "M-51",
+      "spec": "Bronze",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.60",
+      "price": "70.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-52A",
+    "fields": {
+      "product": "M-52",
+      "spec": "Bronze",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.90",
+      "price": "110.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-57A",
+    "fields": {
+      "product": "M-57",
+      "spec": "Bronze",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "4.80",
+      "price": "145.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
     "pk": "M-57E",
     "fields": {
       "product": "M-57",
@@ -114057,6 +114147,21 @@
       "painting_qty": null,
       "weight": "5.97",
       "price": "380.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-58A",
+    "fields": {
+      "product": "M-58",
+      "spec": "Bronze",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.30",
+      "price": "160.00"
     }
   },
   {
