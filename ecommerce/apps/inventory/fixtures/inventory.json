@@ -109546,6 +109546,1041 @@
   },
   {
     "model": "inventory.stock",
+    "pk": "D-10",
+    "fields": {
+      "product": "D-10",
+      "spec": "Mounted on wood",
+      "restock_point": 10,
+      "target_amount": 30,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "6.00",
+      "price": "12.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-23",
+    "fields": {
+      "product": "D-23",
+      "spec": "Mounted on wood",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "4.80",
+      "price": "12.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-27P",
+    "fields": {
+      "product": "D-27",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-28",
+    "fields": {
+      "product": "D-28",
+      "spec": "Mounted on wood",
+      "restock_point": 15,
+      "target_amount": 30,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "4.70",
+      "price": "12.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-28P",
+    "fields": {
+      "product": "D-28",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.09",
+      "price": "0.60"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-30",
+    "fields": {
+      "product": "D-30",
+      "spec": "Mounted on wood",
+      "restock_point": 5,
+      "target_amount": 10,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "8.60",
+      "price": "20.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-30P",
+    "fields": {
+      "product": "D-30",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.09",
+      "price": "0.75"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-31",
+    "fields": {
+      "product": "D-31",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 25,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-31P",
+    "fields": {
+      "product": "D-31",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-32",
+    "fields": {
+      "product": "D-32",
+      "spec": "Mounted on wood",
+      "restock_point": 25,
+      "target_amount": 50,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "4.60",
+      "price": "12.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-35",
+    "fields": {
+      "product": "D-35",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-35P",
+    "fields": {
+      "product": "D-35",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-37",
+    "fields": {
+      "product": "D-37",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-37P",
+    "fields": {
+      "product": "D-37",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-39",
+    "fields": {
+      "product": "D-39",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-39P",
+    "fields": {
+      "product": "D-39",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-41",
+    "fields": {
+      "product": "D-41",
+      "spec": "Mounted on wood",
+      "restock_point": 15,
+      "target_amount": 40,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "4.10",
+      "price": "12.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-41P",
+    "fields": {
+      "product": "D-41",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.09",
+      "price": "0.60"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-42P",
+    "fields": {
+      "product": "D-42",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-45P",
+    "fields": {
+      "product": "D-45",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-48",
+    "fields": {
+      "product": "D-48",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-48P",
+    "fields": {
+      "product": "D-48",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-49",
+    "fields": {
+      "product": "D-49",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-49P",
+    "fields": {
+      "product": "D-49",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-52",
+    "fields": {
+      "product": "D-52",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-52P",
+    "fields": {
+      "product": "D-52",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-56P",
+    "fields": {
+      "product": "D-56",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "5.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-60",
+    "fields": {
+      "product": "D-60",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-60P",
+    "fields": {
+      "product": "D-60",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-61P",
+    "fields": {
+      "product": "D-61",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-63P",
+    "fields": {
+      "product": "D-63",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-64P",
+    "fields": {
+      "product": "D-64",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-65",
+    "fields": {
+      "product": "D-65",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-65P",
+    "fields": {
+      "product": "D-65",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-66",
+    "fields": {
+      "product": "D-66",
+      "spec": "Mounted on wood",
+      "restock_point": 40,
+      "target_amount": 60,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "7.00",
+      "price": "12.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-66P",
+    "fields": {
+      "product": "D-66",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.09",
+      "price": "0.60"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-67",
+    "fields": {
+      "product": "D-67",
+      "spec": "Mounted on wood",
+      "restock_point": 40,
+      "target_amount": 60,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "7.00",
+      "price": "12.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-67P",
+    "fields": {
+      "product": "D-67",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.09",
+      "price": "0.60"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-68P",
+    "fields": {
+      "product": "D-68",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-70",
+    "fields": {
+      "product": "D-70",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-70P",
+    "fields": {
+      "product": "D-70",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.09",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-71",
+    "fields": {
+      "product": "D-71",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-71P",
+    "fields": {
+      "product": "D-71",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-74",
+    "fields": {
+      "product": "D-74",
+      "spec": "Mounted on wood",
+      "restock_point": 20,
+      "target_amount": 50,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "4.90",
+      "price": "12.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-74P",
+    "fields": {
+      "product": "D-74",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.60"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-76",
+    "fields": {
+      "product": "D-76",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "2.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-76P",
+    "fields": {
+      "product": "D-76",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.09",
+      "price": "0.40"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-79",
+    "fields": {
+      "product": "D-79",
+      "spec": "Hard plastic lamination",
+      "restock_point": 10,
+      "target_amount": 20,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "2.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-79P",
+    "fields": {
+      "product": "D-79",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.09",
+      "price": "0.40"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-83",
+    "fields": {
+      "product": "D-83",
+      "spec": "Mounted on wood",
+      "restock_point": 10,
+      "target_amount": 30,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "5.10",
+      "price": "12.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-83P",
+    "fields": {
+      "product": "D-83",
+      "spec": "Plain print",
+      "restock_point": 2500,
+      "target_amount": 37500,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.09",
+      "price": "0.60"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-84P",
+    "fields": {
+      "product": "D-84",
+      "spec": "Plain print",
+      "restock_point": 1000,
+      "target_amount": 100000,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-85",
+    "fields": {
+      "product": "D-85",
+      "spec": "Hard plastic lamination",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-85P",
+    "fields": {
+      "product": "D-85",
+      "spec": "Plain print",
+      "restock_point": 1000,
+      "target_amount": 18000,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-86",
+    "fields": {
+      "product": "D-86",
+      "spec": "Hard plastic lamination",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-86P",
+    "fields": {
+      "product": "D-86",
+      "spec": "Plain print",
+      "restock_point": 500,
+      "target_amount": 12000,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.01",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-87",
+    "fields": {
+      "product": "D-87",
+      "spec": "Hard plastic lamination",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-87P",
+    "fields": {
+      "product": "D-87",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.04",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-88",
+    "fields": {
+      "product": "D-88",
+      "spec": "Hard plastic lamination",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-88P",
+    "fields": {
+      "product": "D-88",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.20",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-90",
+    "fields": {
+      "product": "D-90",
+      "spec": "Mounted on wood",
+      "restock_point": 15,
+      "target_amount": 30,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "12.00",
+      "price": "12.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-90P",
+    "fields": {
+      "product": "D-90",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.00",
+      "price": "0.60"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-91",
+    "fields": {
+      "product": "D-91",
+      "spec": "Hard plastic lamination",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-91P",
+    "fields": {
+      "product": "D-91",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.30",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-93",
+    "fields": {
+      "product": "D-93",
+      "spec": "Hard plastic lamination",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "1.50"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "D-93P",
+    "fields": {
+      "product": "D-93",
+      "spec": "Plain print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.50",
+      "price": "0.20"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "G-22",
+    "fields": {
+      "product": "G-22",
+      "spec": "",
+      "restock_point": 2,
+      "target_amount": 4,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "142.56",
+      "price": "125.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "G-27",
+    "fields": {
+      "product": "G-27",
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "878.88",
+      "price": "900.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "G-33",
+    "fields": {
+      "product": "G-33",
+      "spec": "",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "453.44",
+      "price": "384.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
     "pk": "H-123",
     "fields": {
       "product": "H-123",
@@ -112077,6 +113112,1161 @@
       "painting_qty": null,
       "weight": "1.90",
       "price": "4.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-203E",
+    "fields": {
+      "product": "M-203",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "4.48",
+      "price": "90.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-203J",
+    "fields": {
+      "product": "M-203",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "5.44",
+      "price": "600.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-204E",
+    "fields": {
+      "product": "M-204",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "3.07",
+      "price": "85.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-204J",
+    "fields": {
+      "product": "M-204",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "3.95",
+      "price": "350.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-207E",
+    "fields": {
+      "product": "M-207",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.58",
+      "price": "80.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-207J",
+    "fields": {
+      "product": "M-207",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.11",
+      "price": "300.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-208E",
+    "fields": {
+      "product": "M-208",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.40",
+      "price": "60.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-208J",
+    "fields": {
+      "product": "M-208",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.40",
+      "price": "200.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-209E",
+    "fields": {
+      "product": "M-209",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "9.39",
+      "price": "100.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-211E",
+    "fields": {
+      "product": "M-211",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.96",
+      "price": "65.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-211J",
+    "fields": {
+      "product": "M-211",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.23",
+      "price": "240.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-217E",
+    "fields": {
+      "product": "M-217",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "130.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-222E",
+    "fields": {
+      "product": "M-222",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.53",
+      "price": "60.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-222J",
+    "fields": {
+      "product": "M-222",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.53",
+      "price": "115.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-223E",
+    "fields": {
+      "product": "M-223",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.70",
+      "price": "75.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-223J",
+    "fields": {
+      "product": "M-223",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.88",
+      "price": "150.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-225E",
+    "fields": {
+      "product": "M-225",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.58",
+      "price": "75.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-225J",
+    "fields": {
+      "product": "M-225",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.11",
+      "price": "300.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-226E",
+    "fields": {
+      "product": "M-226",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.28",
+      "price": "65.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-226J",
+    "fields": {
+      "product": "M-226",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.90",
+      "price": "380.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-227E",
+    "fields": {
+      "product": "M-227",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "3.95",
+      "price": "90.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-227J",
+    "fields": {
+      "product": "M-227",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "5.00",
+      "price": "460.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-228E",
+    "fields": {
+      "product": "M-228",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "5.09",
+      "price": "100.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-228J",
+    "fields": {
+      "product": "M-228",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "6.58",
+      "price": "595.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-232E",
+    "fields": {
+      "product": "M-232",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.96",
+      "price": "75.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-232J",
+    "fields": {
+      "product": "M-232",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.49",
+      "price": "145.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-236E",
+    "fields": {
+      "product": "M-236",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.84",
+      "price": "60.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-236J",
+    "fields": {
+      "product": "M-236",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.46",
+      "price": "340.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-237E",
+    "fields": {
+      "product": "M-237",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "4.39",
+      "price": "90.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-237J",
+    "fields": {
+      "product": "M-237",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.23",
+      "price": "190.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-243E",
+    "fields": {
+      "product": "M-243",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.46",
+      "price": "80.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-243J",
+    "fields": {
+      "product": "M-243",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.98",
+      "price": "400.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-244E",
+    "fields": {
+      "product": "M-244",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.81",
+      "price": "75.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-244J",
+    "fields": {
+      "product": "M-244",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "3.69",
+      "price": "500.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-245E",
+    "fields": {
+      "product": "M-245",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.76",
+      "price": "60.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-245J",
+    "fields": {
+      "product": "M-245",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.11",
+      "price": "280.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-246E",
+    "fields": {
+      "product": "M-246",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.81",
+      "price": "65.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-246J",
+    "fields": {
+      "product": "M-246",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "3.16",
+      "price": "420.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-248E",
+    "fields": {
+      "product": "M-248",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.56",
+      "price": "315.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-249E",
+    "fields": {
+      "product": "M-249",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.40",
+      "price": "75.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-249J",
+    "fields": {
+      "product": "M-249",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "5.97",
+      "price": "500.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-250E",
+    "fields": {
+      "product": "M-250",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.19",
+      "price": "65.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-250J",
+    "fields": {
+      "product": "M-250",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.81",
+      "price": "360.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-252E",
+    "fields": {
+      "product": "M-252",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.40",
+      "price": "75.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-252J",
+    "fields": {
+      "product": "M-252",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.93",
+      "price": "270.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-401E",
+    "fields": {
+      "product": "M-401",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.02",
+      "price": "80.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-401J",
+    "fields": {
+      "product": "M-401",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.46",
+      "price": "325.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-40E",
+    "fields": {
+      "product": "M-40",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.90",
+      "price": "165.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-450E",
+    "fields": {
+      "product": "M-450",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.20",
+      "price": "48.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-450J",
+    "fields": {
+      "product": "M-450",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.02",
+      "price": "335.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-451E",
+    "fields": {
+      "product": "M-451",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.20",
+      "price": "29.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-451J",
+    "fields": {
+      "product": "M-451",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.10",
+      "price": "340.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-470E",
+    "fields": {
+      "product": "M-470",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.30",
+      "price": "56.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-470J",
+    "fields": {
+      "product": "M-470",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.10",
+      "price": "410.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-471E",
+    "fields": {
+      "product": "M-471",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.30",
+      "price": "40.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-471J",
+    "fields": {
+      "product": "M-471",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.10",
+      "price": "420.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-475E",
+    "fields": {
+      "product": "M-475",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.30",
+      "price": "32.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-475J",
+    "fields": {
+      "product": "M-475",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "300.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-477E",
+    "fields": {
+      "product": "M-477",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.30",
+      "price": "36.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-477J",
+    "fields": {
+      "product": "M-477",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.16",
+      "price": "325.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-495E",
+    "fields": {
+      "product": "M-495",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.20",
+      "price": "36.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-496E",
+    "fields": {
+      "product": "M-496",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.30",
+      "price": "42.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-57E",
+    "fields": {
+      "product": "M-57",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "5.97",
+      "price": "380.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-58E",
+    "fields": {
+      "product": "M-58",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.44",
+      "price": "185.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-640E",
+    "fields": {
+      "product": "M-640",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.40",
+      "price": "75.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-640J",
+    "fields": {
+      "product": "M-640",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.67",
+      "price": "240.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-641E",
+    "fields": {
+      "product": "M-641",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.53",
+      "price": "70.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-641J",
+    "fields": {
+      "product": "M-641",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.70",
+      "price": "140.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-647E",
+    "fields": {
+      "product": "M-647",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "3.51",
+      "price": "140.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-653E",
+    "fields": {
+      "product": "M-653",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.02",
+      "price": "75.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-653J",
+    "fields": {
+      "product": "M-653",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.63",
+      "price": "390.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-654E",
+    "fields": {
+      "product": "M-654",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "3.95",
+      "price": "85.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-655E",
+    "fields": {
+      "product": "M-655",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.49",
+      "price": "33.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-662E",
+    "fields": {
+      "product": "M-662",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "2.46",
+      "price": "65.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-662J",
+    "fields": {
+      "product": "M-662",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.00",
+      "price": "300.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-663E",
+    "fields": {
+      "product": "M-663",
+      "spec": "Sterling silver",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "1.84",
+      "price": "41.00"
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "M-663J",
+    "fields": {
+      "product": "M-663",
+      "spec": " 14k gold",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": null,
+      "sanding_qty": null,
+      "painting_qty": null,
+      "weight": "0.00",
+      "price": "275.00"
     }
   },
   {
