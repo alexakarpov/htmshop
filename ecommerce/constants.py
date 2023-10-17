@@ -6,7 +6,8 @@ PHANURIUS_BOOK_SLUG = "martyrdom-and-miracles-of-saint-phanurius"
 NEW_RE = "^(A-(?!0)\d{1,3})(?:\.(\d{1,2}x\d{1,2}))?((?(2)[MP]|P?))\Z|^([BHJR]-(?!0)\d{1,3})\Z|^([DG]-(?!0)\d{1,3})(P)?\Z|^(L-(?!0)\d{1,3})([ABC])\Z|^(M-(?!0)\d{1,3})([AEJ])?\Z|^(S-[1-9])\Z"
 INCENSE_RE = "^(L-(?!0)\d{1,3})([ABC])\Z"
 BHJR_RE = "^([BHJR]-(?!0)\d{1,3})\Z|^([DG]-(?!0)\d{1,3})(P)?\Z"
-DGM_RE = "^([DGM]-(?!0)\d{1,3})\Z|^([DG]-(?!0)\d{1,3})(P)?\Z"
+DGM_RE = "^([DGM]-(?!0)\d{1,3})([JPE])?\Z"
+
 LURE = "<a href=\"product_info\.php/products_id/(\d+)\">([\w\s]+)</a>"
 
 ROOMS = [
