@@ -11,6 +11,7 @@ from .models import Order, OrderItem, Payment
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
+    readonly_fields = ['title']
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -25,7 +26,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 class PaymentAdmin(admin.ModelAdmin):
-    readonly_fields = ["order"]
+    # readonly_fields = ["order"]
     search_fields = (
         ("order__full_name",)
     )

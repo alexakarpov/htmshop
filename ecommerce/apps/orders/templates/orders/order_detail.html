@@ -1,57 +1,72 @@
 {% extends 'headless_base.html' %}
 {% load static %}
 {% block title %}
-  Order {{ order.id }}
+Order {{ order.id }}
 {% endblock title %}
 {% block content %}
-  <h1>Order {{ order.id }} by {{ order.user }}</h1>
-  <h2>
-    Total amount: ${{ order.order_total }}, paid: $<span id="paid">{{ order.total_paid }}</span>
-  </h2>
-  <div class="row m-1 alert alert-success"
-       role="alert"
-       id="alertbox"
-       display="none"></div>
-  {% if order.total_paid < order.order_total %}
-    <label for="amount" class="p-1 fs-6">Amount:</label>
+<h1>Order {{ order.id }} by {{ order.user }}</h1>
+<h3>
+    Total amount: ${{ order.order_total }}
+</h3>
+<h4>
+    Paid: $<span id="paid">{{ order.total_paid }}</span>
+</h4>
+<h4>Remains to pay: ${{ outstanding }}</h4>
+<h4>Shipping tier: {{ order.shipping_method }}</h4>
+<h4>Shipping cost: ${{ order.shipping_cost }}</h4>
+<div class="row m-1 alert alert-success" role="alert" id="alertbox" display="none"></div>
+<h4>Shipping to:</h4>
+<div>{{ order.full_name }}</div>
+<div>{{ order.address_line1 }}</div>
+<div>{{ order.address_line2 }}</div>
+<div>{{ order.city }}</div>
+<div>{{ order.state_province }}</div>
+<div>{{ order.postal_code }}</div>
+
+<div> </div>
+<hr>
+
+{% if outstanding > 0 %} <label for="amount" class="p-1 fs-6">Amount:</label>
     <input id="amount">
     <label for="comment" class="p-1 fs-6">Comment:</label>
     <input id="comment">
     <input type="hidden" id="orderid" value="{{ order.id }}">
-    <button type="button"
-            id="add-payment"
-            class="btn btn-md btn-success mx-1 mt-2 mb-1 form-control">Add a Payment</button>
+    <button type="button" id="add-payment" class="btn btn-md btn-success mx-1 mt-2 mb-1 form-control">Add a
+        Payment</button>
+    
+    {% endif %}
+    
+    <h4>Payment history</h4>
     {% for p in order.payments.all %}<span>{{ p }}</span><br>{% endfor %}
-  {% endif %}
-  <script>
-    $(document).on('click', '#add-payment', function (e) {
-      e.preventDefault()
-      let amount = $('#amount').val()
-      let comment = $('#comment').val()
-      console.log(`amount is ${amount}, comment is ${comment}`)
-      const d = {
-        amount,
-        comment,
-        oid: $('#orderid').val(),
-        csrfmiddlewaretoken: '{{csrf_token}}',
-        // action: 'post'
-      }
-      $.ajax({
-        type: 'POST',
-        url: '{% url "orders:add_payment" %}',
-        data: d,
-        success: function (json) {
-            $('#alertbox').show()
-            $('#alertbox').text('Payment creared')
-            setTimeout(function () {
-              $('#alertbox').hide()
-              window.location.reload()
-          }, 2000)
-        },
-        error: function (xhr, errmsg, err) {
-          console.error("Error", errmsg)
-        }
-      })
-    })
-  </script>
-{% endblock content %}
+    <script>
+        $(document).on('click', '#add-payment', function (e) {
+            e.preventDefault()
+            let amount = $('#amount').val()
+            let comment = $('#comment').val()
+            console.log(`amount is ${amount}, comment is ${comment}`)
+            const d = {
+                amount,
+                comment,
+                oid: $('#orderid').val(),
+                csrfmiddlewaretoken: '{{csrf_token}}',
+                // action: 'post'
+            }
+            $.ajax({
+                type: 'POST',
+                url: '{% url "orders:add_payment" %}',
+                data: d,
+                success: function (json) {
+                    $('#alertbox').show()
+                    $('#alertbox').text('Payment creared')
+                    setTimeout(function () {
+                        $('#alertbox').hide()
+                        window.location.reload()
+                    }, 2000)
+                },
+                error: function (xhr, errmsg, err) {
+                    console.error("Error", errmsg)
+                }
+            })
+        })
+    </script>
+    {% endblock content %}

@@ -22,8 +22,12 @@ class OrderDetails(DetailView):
     model = Order
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        print("orderDetail CBV get_context_data")
+        # print("orderDetail CBV get_context_data")
+        # print(self.object)
+
         ctx_data = super().get_context_data(**kwargs)
+        ctx_data['outstanding'] = self.object.order_total - self.object.total_paid
+        print(ctx_data)
         return ctx_data
     
 

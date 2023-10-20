@@ -16,7 +16,7 @@ from ecommerce.apps.accounts.forms import UserAddressForm, GuestAddressForm
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.inventory.models import Stock
-from ecommerce.apps.orders.models import Order, OrderItem
+from ecommerce.apps.orders.models import Order, OrderItem, Payment
 
 config = dotenv_values()
 
@@ -204,7 +204,7 @@ def guest_address(request):
 @api_view(["POST"])
 def pay_later(request):
     session = request.session
-    _id, shipping_price, tier, _days = (
+    _id, shipping_cost, tier, _days = (
         session.get("purchase").get("delivery_choice").split("/")
     )
     total_s = session.get("purchase")["total"]
@@ -214,14 +214,14 @@ def pay_later(request):
 
     basket = Basket(request)
     address_json = session["address"]
-    address_d = json.loads(request.session["address"])
+    address_d = json.loads(address_json)
 
     try:
         fname, lname = json.loads(address_json).get("full_name").split(" ")
     except ValueError:
         fname = lname = ""
     user = request.user
-    total = total_i / 100 + float(shipping_price)
+    total = float(total_s)
     order = Order.objects.create(
         user=user if user.is_authenticated else None,
         full_name=f"{fname} {lname}",
@@ -236,7 +236,7 @@ def pay_later(request):
         total_paid=0,
         payment_option="Later",
         paid=False,
-        shipping_price=shipping_price,
+        shipping_cost=shipping_cost,
         shipping_method=tier,
     )
 
@@ -251,10 +251,11 @@ def pay_later(request):
 @api_view(["POST"])
 def payment_with_token(request):
     session = request.session
-    _id, shipping_price, tier, _days = (
+    _id, shipping_cost, tier, _days = (
         session.get("purchase").get("delivery_choice").split("/")
     )
 
+    print(f"shipping is: {shipping_cost}")
     token = request.data.get("payload").get("source_id")
     if not token:  # is it even possible though?
         logger.error("payment_with_token must have a token (source_id)")
@@ -289,18 +290,16 @@ def payment_with_token(request):
     if result.is_success():
         basket = Basket(request)
         address_json = session["address"]
-        address_d = json.loads(request.session["address"])
-        print(address_d)
+        address_d = json.loads(address_json)
+        # print(address_d)
 
-        try:
-            fname, lname = json.loads(address_json).get("full_name").split(" ")
-        except ValueError:
-            fname = lname = ""
+        full_name = json.loads(address_json).get("full_name")
+        
         user = request.user
-        print("trying to create the order")
+
         order = Order.objects.create(
             user=user if user.is_authenticated else None,
-            full_name=f"{fname} {lname}",
+            full_name=full_name,
             email=user.email
             if user.is_authenticated
             else address_d.get("email"),
@@ -309,12 +308,12 @@ def payment_with_token(request):
             city=address_d.get("city_locality"),
             postal_code=address_d.get("postal_code"),
             country_code=address_d.get("country_code"),
-            order_total=total_i / 100,
-            total_paid=total_i / 100,
+            order_total=float(total_s),
+            total_paid=float(total_s),
             payment_option="Square",
             state_province=address_d.get("state_province"),
             paid=True,
-            shipping_price=shipping_price,
+            shipping_cost=shipping_cost,
             shipping_method=tier,
         )
 

@@ -1,6 +1,8 @@
 import functools
+from typing import Any
 from django.conf import settings
 from django.db import models
+from datetime import date
 
 from faker import Faker
 from simple_history.models import HistoricalRecords
@@ -33,7 +35,7 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     shipped = models.BooleanField(default=False)
     shipping_method = models.CharField(max_length=20)
-    shipping_price = models.DecimalField(max_digits=5, decimal_places=2)
+    shipping_cost = models.DecimalField(max_digits=5, decimal_places=2)
     status = models.CharField(
         choices=ORDER_STATUS, default="PENDING", max_length=10
     )
@@ -72,9 +74,17 @@ class Payment(models.Model):
     order = models.ForeignKey(
         Order, related_name="payments", on_delete=models.CASCADE
     )
-    paid_at = models.DateTimeField(auto_now=True)
+    paid_at = models.DateField(auto_now=True)
     comment = models.CharField(blank=True, null=True, max_length=150)
     amount = models.DecimalField(decimal_places=2, max_digits=7)
+    
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        
 
     def __str__(self) -> str:
-        return f"${self.amount} paid on {self.paid_at.date()}"
+        return f"${self.amount} paid on {self.paid_at}"
+
+def create_payment(order: Order, amount: float, comment: str, at:date=date.today()):
+    p = Payment(order, amount, comment, at)
+    return p
