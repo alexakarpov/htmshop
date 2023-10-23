@@ -208,23 +208,20 @@ def pay_later(request):
         session.get("purchase").get("delivery_choice").split("/")
     )
     total_s = session.get("purchase")["total"]
-    total_i = int(float(total_s) * 100)
 
-    refid = "".join(random.choices(string.ascii_lowercase, k=10))
+    # refid = "".join(random.choices(string.ascii_lowercase, k=10))
 
     basket = Basket(request)
     address_json = session["address"]
     address_d = json.loads(address_json)
 
-    try:
-        fname, lname = json.loads(address_json).get("full_name").split(" ")
-    except ValueError:
-        fname = lname = ""
+    full_name = address_d.get("full_name")
+    
     user = request.user
     total = float(total_s)
     order = Order.objects.create(
         user=user if user.is_authenticated else None,
-        full_name=f"{fname} {lname}",
+        full_name=full_name,
         email=user.email if user.is_authenticated else address_d.get("email"),
         address_line1=address_d.get("address_line1"),
         address_line2=address_d.get("address_line2"),
@@ -255,7 +252,7 @@ def payment_with_token(request):
         session.get("purchase").get("delivery_choice").split("/")
     )
 
-    print(f"shipping is: {shipping_cost}")
+    # print(f"shipping is: {shipping_cost}")
     token = request.data.get("payload").get("source_id")
     if not token:  # is it even possible though?
         logger.error("payment_with_token must have a token (source_id)")
