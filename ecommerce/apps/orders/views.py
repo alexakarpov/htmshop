@@ -9,6 +9,7 @@ from .models import Order, Payment
 
 logger = logging.getLogger("django")
 
+
 class PrintOrders(ListView):
     template_name = "print_orders.html"
     model = Order
@@ -20,46 +21,56 @@ class PrintOrders(ListView):
 
 class OrderDetails(DetailView):
     model = Order
-    
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        # print("orderDetail CBV get_context_data")
-        # print(self.object)
 
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         ctx_data = super().get_context_data(**kwargs)
-        ctx_data['outstanding'] = self.object.order_total - self.object.total_paid
+        ctx_data["outstanding"] = (
+            self.object.order_total - self.object.total_paid
+        )
         print(ctx_data)
         return ctx_data
-    
+
+
+class Invoice(DetailView):
+    model = Order
+    template_name = "orders/order_print.html"
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        ctx_data = super().get_context_data(**kwargs)
+        ctx_data["outstanding"] = (
+            self.object.order_total - self.object.total_paid
+        )
+
+        return ctx_data
+
 
 class ListOrders(ListView):
     model = Order
     template_name = "orders/order_list.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        kind=self.request.GET.get('kind')
+        kind = self.request.GET.get("kind")
         ctx = super().get_context_data(**kwargs)
-        if kind and kind.lower() != 'all':
-            orders = Order.objects.filter(kind__icontains=kind)            
-            ctx = {"order_list": orders,
-                   'kind': kind}
+        if kind and kind.lower() != "all":
+            orders = Order.objects.filter(kind__icontains=kind)
+            ctx = {"order_list": orders, "kind": kind}
         return ctx
+
 
 def add_payment(request):
     amount = decimal.Decimal((request.POST.get("amount")))
     comment = request.POST.get("comment")
     oid = request.POST.get("oid")
     order = Order.objects.get(id=oid)
-    p=Payment.objects.create(
-        amount=amount,
-        comment=comment,
-        order=order
-    )
+    p = Payment.objects.create(amount=amount, comment=comment, order=order)
     order.total_paid += amount
     if order.total_paid >= order.order_total:
         order.paid = True
     order.save()
     print(f"Payment created: {p}")
-    return JsonResponse({"message": f"{p.pk} created", "amount": amount}, status = 200)
+    return JsonResponse(
+        {"message": f"{p.pk} created", "amount": amount}, status=200
+    )
 
 
 def user_orders(request):

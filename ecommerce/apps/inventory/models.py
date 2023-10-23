@@ -34,17 +34,17 @@ class Stock(models.Model):
         ],
     )
 
-    restock_point = models.PositiveIntegerField(null=True, blank=True)
-    target_amount = models.PositiveIntegerField(null=True, blank=True)
+    restock_point = models.PositiveIntegerField(default=0)
+    target_amount = models.PositiveIntegerField(default=0)
 
     wrapping_qty = models.IntegerField(
-        null=True, blank=True, verbose_name="Wrapping room stock"
+        default=0, verbose_name="Wrapping room stock"
     )
     sanding_qty = models.IntegerField(
-        null=True, blank=True, verbose_name="Sanding room stock"
+        default=0, verbose_name="Sanding room stock"
     )
     painting_qty = models.IntegerField(
-        null=True, blank=True, verbose_name="Painting room stock"
+        default=0, verbose_name="Painting room stock"
     )
 
     weight = models.DecimalField(

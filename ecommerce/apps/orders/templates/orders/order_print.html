@@ -74,23 +74,28 @@
                     </div>
                 {% endfor %}
             </ul>
-            {% if order.paid %}
-                <div class="row">
-                    <div class="col-9 pt-3 h4">
-                        <div>Subtotal: ${{ order.subtotal }}</div>
-                    </div>
+            <div class="row">
+                <div class="col-9 pt-3 h4">Total: ${{ order.order_total }}</div>
+            </div>
+            <div class="row">
+                <div class="col-9 pt-3 h4">
+                    <div>Subtotal: ${{ order.subtotal }}</div>
                 </div>
-                <div class="row">
-                    <div class="col-9 pt-3 h4">
-                        <div>Shipping ({{ order.shipping_method | lower }}): ${{ order.shipping_cost }}</div>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-9 pt-3 h4">
+                    <div>Shipping ({{ order.shipping_method | lower }}): ${{ order.shipping_cost }}</div>
                 </div>
-                <div class="row">
-                    <div class="col-9 pt-3 h4">
-                        <div>Total: ${{ order.total_paid }}</div>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-9 pt-3 h4">
+                    <div>Paid: ${{ order.total_paid }}</div>
                 </div>
-            {% endif %}
+            </div>
+            <div class="row">
+                <div class="col-9 pt-3 h4">
+                    <div>Remains to pay: ${{ outstanding }}</div>
+                </div>
+            </div>
         </div>
-    </div>
-{% endblock content %}
+    {% endblock content %}

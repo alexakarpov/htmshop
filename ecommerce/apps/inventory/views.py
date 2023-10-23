@@ -1,7 +1,6 @@
 import logging
 from datetime import datetime
 
-from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.paginator import Paginator
 from django.http import JsonResponse
@@ -10,7 +9,7 @@ from django.utils.html import escape
 from django.views.generic.list import ListView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
+# from rest_framework.views import APIView
 
 from ecommerce.constants import LINES_PER_PAGE
 
@@ -121,7 +120,7 @@ def dashboard(request):
     logger.debug(f"GET dict: {request.GET}")
     logger.debug(f"POST dict: {request.POST}")
 
-    icons = Stock.objects.filter(product_type__name="mounted icon")
+    icons = Stock.objects.filter(sku__startswith="A-")
     skus_arr = []
     for it in icons:
         skus_arr.append(it.sku)
