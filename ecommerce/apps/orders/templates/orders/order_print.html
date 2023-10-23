@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-1 p-1 ml-auto mr-auto">
                         <div class="row">
-                            <div class="col-1 m-1 h2">{{ order.id }}</div>
+                            <div class="col-1 m-1 h2">#{{ order.id }}</div>
                         </div>
                         <div class="row">
                             <div class="col-1 m-1 h5">{{ order.created|date:"m/d/Y" }}</div>
@@ -74,9 +74,6 @@
                     </div>
                 {% endfor %}
             </ul>
-            <div class="row">
-                <div class="col-9 pt-3 h4">Total: ${{ order.order_total }}</div>
-            </div>
             <div class="row">
                 <div class="col-9 pt-3 h4">
                     <div>Subtotal: ${{ order.subtotal }}</div>
