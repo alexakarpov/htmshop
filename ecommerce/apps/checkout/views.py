@@ -216,7 +216,7 @@ def pay_later(request):
     address_d = json.loads(address_json)
 
     full_name = address_d.get("full_name")
-    
+
     user = request.user
     total = float(total_s)
     order = Order.objects.create(
@@ -291,7 +291,7 @@ def payment_with_token(request):
         # print(address_d)
 
         full_name = json.loads(address_json).get("full_name")
-        
+
         user = request.user
 
         order = Order.objects.create(
@@ -315,6 +315,10 @@ def payment_with_token(request):
         )
 
         classify_order_add_items(order, basket)
+
+        p = Payment.objects.create(
+            order=order, amount=float(total_s), comment="web full pay"
+        )
 
         logger.info(f"new order created: {order}, clearing the basket")
         basket.clear()

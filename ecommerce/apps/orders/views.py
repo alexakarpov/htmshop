@@ -67,7 +67,6 @@ def add_payment(request):
     if order.total_paid >= order.order_total:
         order.paid = True
     order.save()
-    print(f"Payment created: {p}")
     return JsonResponse(
         {"message": f"{p.pk} created", "amount": amount}, status=200
     )

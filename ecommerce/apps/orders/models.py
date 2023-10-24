@@ -76,14 +76,6 @@ class Payment(models.Model):
     paid_at = models.DateField(auto_now=True)
     comment = models.CharField(blank=True, null=True, max_length=150)
     amount = models.DecimalField(decimal_places=2, max_digits=7)
-    
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
-        
 
     def __str__(self) -> str:
-        return f"${self.amount} paid on {self.paid_at}"
-
-def create_payment(order: Order, amount: float, comment: str, at:date=date.today()):
-    p = Payment(order, amount, comment, at)
-    return p
+        return f"${self.amount} paid on {self.paid_at} ({self.comment})"

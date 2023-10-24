@@ -21,6 +21,10 @@ body {
     top: -110px;
 }
 
+#alertbox {
+    display: none;
+}
+
 /* .row :nth-child(even) {
     background-color: #dcdcdc;
 }
