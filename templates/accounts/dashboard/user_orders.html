@@ -18,13 +18,13 @@
         <div class="col-12 bg-light p-3 d-flex justify-content-between">
           <div class="d-flex d-flex-inline">
             <div class="pe-3">
-              <span class="fw-light">{{ order.id }} created at:</span> <span class="fw-bold">{{ order.created }}</span>
+              <span class="fw-light">{{ order.id }} created at:</span> <span class="fw-bold">{{ order.created_at }}</span>
             </div>
           </div>
           {% if order.shipped %}
             <div class="col-md-2 shipped">shipped</div>
           {% else %}
-            <div class="col-md-2 notshipped">not yet shipped</div>
+            <div class="col-md-2 notshipped">not shipped yet</div>
           {% endif %}
           <div class="text-end">
             Total paid: <span class="fw-bold">${{ order.total_paid }}</span>

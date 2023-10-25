@@ -221,6 +221,7 @@ def pay_later(request):
     total = float(total_s)
     order = Order.objects.create(
         user=user if user.is_authenticated else None,
+        phone=address_d.get("phone"),
         full_name=full_name,
         email=user.email if user.is_authenticated else address_d.get("email"),
         address_line1=address_d.get("address_line1"),
