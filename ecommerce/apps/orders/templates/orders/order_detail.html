@@ -48,19 +48,17 @@
         <div>{{ order.postal_code }}</div>
         <div>{{ order.country_code }}</div>
         <hr>
-        {% if outstanding > 0 %}
-            <label for="amount" class="p-1 fs-6">Amount:</label>
-            <input id="amount">
-            <label for="comment" class="p-1 fs-6">Comment:</label>
-            <input id="comment">
-            <input type="hidden" id="orderid" value="{{ order.id }}">
-            <button type="button"
-                    id="add-payment"
-                    class="btn btn-md btn-success mx-1 mt-2 mb-1 form-control">
-                Add a
-                Payment
-            </button>
-        {% endif %}
+        <label for="amount" class="p-1 fs-6">Amount:</label>
+        <input id="amount">
+        <label for="comment" class="p-1 fs-6">Comment:</label>
+        <input id="comment">
+        <input type="hidden" id="orderid" value="{{ order.id }}">
+        <button type="button"
+                id="add-payment"
+                class="btn btn-md btn-success mx-1 mt-2 mb-1 form-control">
+            Add a
+            Payment
+        </button>
         {% for order_item in order.items.all %}
             <tr>
                 <td>
