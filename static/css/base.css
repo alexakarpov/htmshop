@@ -106,7 +106,8 @@ input[type="radio"] {
 }
 
 #billingaddress,
-#alertbox {
+#alertbox,
+#cartalertbox {
   display: none;
 }
 
