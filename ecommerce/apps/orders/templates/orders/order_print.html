@@ -58,22 +58,26 @@
                     <div>{{ order.email }}</div>
                 </div>
             </div>
-            <ul class="m-3 order-items">
-                <div class="row pb-1">
-                    <div class="col-6 fw-bold">Product</div>
-                    <div class="col-2 fw-bold">SKU</div>
-                    <div class="col-2 fw-bold">Price</div>
-                    <div class="col-2 fw-bold">Total</div>
-                </div>
-                {% for item in order.items.all %}
-                    <div class="row">
-                        <div class="col-6">{{ item.quantity }} x {{ item.title|title }}</div>
-                        <div class="col-2">{{ item.sku.sku }}</div>
-                        <div class="col-2">${{ item.price }}</div>
-                        <div class="col-2">${% widthratio item.quantity 1 item.price %}.00</div>
-                    </div>
-                {% endfor %}
-            </ul>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">SKU</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items.all %}
+                        <tr>
+                            <td>{{ item.quantity }} x {{ item.title|title }}</td>
+                            <td>{{ item.sku.sku }}</td>
+                            <td>${{ item.price }}</td>
+                            <td>${% widthratio item.quantity 1 item.price %}.00</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
             <div class="row">
                 <div class="col-9 pt-3 h4">
                     <div>Subtotal: ${{ order.subtotal }}</div>
