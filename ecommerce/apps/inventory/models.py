@@ -4,7 +4,6 @@ from abc import ABC
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 from django.core.validators import RegexValidator
 
 from ecommerce.apps.catalogue.models import Product
@@ -20,8 +19,8 @@ class Stock(models.Model):
         verbose_name="specification", max_length=40, null=True, blank=True
     )
     sku = models.CharField(
-        verbose_name=_("Product SKU"),
-        help_text=_("Required"),
+        verbose_name="Product SKU",
+        help_text="Required",
         max_length=40,
         unique=True,
         primary_key=True,
@@ -53,8 +52,8 @@ class Stock(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, default=1.0)
 
     class Meta:
-        verbose_name = _("Product Stock Record")
-        verbose_name_plural = _("Inventory Stock Records")
+        verbose_name = "Product Stock Record"
+        verbose_name_plural = "Inventory Stock Records"
 
     # called only from inventory dashboard template
     def get_print_supply_count(self):
@@ -129,6 +128,10 @@ class Stock(models.Model):
 
     def __str__(self):
         return f"{self.sku} ({self.product.title})"
+
+
+class Icon(Stock):
+    pass
 
 
 def get_or_create_stock_by_sku(sku: str) -> Stock:
