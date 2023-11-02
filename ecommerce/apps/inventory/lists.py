@@ -32,7 +32,7 @@ def print_work():
 
 
 def sanding_work():
-    mounted_icons = Stock.objects.filter(sku_startswith="A-").order_by("sku")
+    mounted_icons = Stock.objects.filter(sku__startswith="A-").order_by("sku")
 
     result = []
 
@@ -63,7 +63,7 @@ def sanding_work():
 
 
 def mounting_work():
-    mounted_icons = Stock.objects.filter(sku_startswith="A-").order_by("sku")
+    mounted_icons = Stock.objects.filter(sku__startswith="A-").order_by("sku")
     result = []
 
     for it in mounted_icons:
@@ -86,7 +86,7 @@ def sawing_work():
     This list is sorted by “Need” (descending), and then by SKU (ascending).
     The Print Supply column in just the count of Icon Prints for sku in Wrapping Room
     """
-    mounted_icons = Stock.objects.filter(sku_startswith="A-").order_by("sku")
+    mounted_icons = Stock.objects.filter(sku__startswith="A-").order_by("sku")
 
     result = []
 
