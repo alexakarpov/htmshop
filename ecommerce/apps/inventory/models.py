@@ -130,8 +130,8 @@ class Stock(models.Model):
         return f"{self.sku} ({self.product.title})"
 
 
-class Icon(Stock):
-    pass
+# class Icon(Stock):
+#     pass
 
 
 def get_or_create_stock_by_sku(sku: str) -> Stock:
