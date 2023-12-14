@@ -4,8 +4,6 @@ from django.conf import settings
 from django.db import models
 from datetime import date
 
-from simple_history.models import HistoricalRecords
-
 from ecommerce.apps.inventory.models import Stock
 from ecommerce.constants import ORDER_STATUS, ORDER_KINDS
 
@@ -26,8 +24,8 @@ class Order(models.Model):
     postal_code = models.CharField(max_length=20)
     state_province = models.CharField(max_length=10)
     country_code = models.CharField(max_length=4, blank=True, default="US")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
     order_total = models.DecimalField(max_digits=7, decimal_places=2)
     total_paid = models.DecimalField(max_digits=7, decimal_places=2)
     payment_option = models.CharField(max_length=200, blank=True)
@@ -38,7 +36,6 @@ class Order(models.Model):
     status = models.CharField(
         choices=ORDER_STATUS, default="PENDING", max_length=10
     )
-    history = HistoricalRecords()
     kind = models.CharField(
         choices=ORDER_KINDS, default="GENERIC", max_length=10
     )
