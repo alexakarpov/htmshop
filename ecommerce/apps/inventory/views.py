@@ -74,19 +74,18 @@ class SawingWorkListView(ListView):
 
         return {"work": paginator, "title": "sawing", "now": ts()}
 
-
 @api_view(["POST"])
 def inspect_sku(request):
     data = request.POST
     sku = escape(data.get("sku").upper())
-    logger.error(sku)
-    logger.debug(f"inspecting {sku}")
+    # logger.error(sku)
+    # logger.debug(f"inspecting {sku}")
     item = Stock.objects.get(sku=sku)
     psupp = item.get_print_supply_count()
     serializer = ProductStockSerializer(item, many=False)
     sdata = serializer.data
     sdata["psupp"] = psupp
-    logger.debug(f"API data: {sdata}")
+    # logger.debug(f"API data: {sdata}")
     return JsonResponse(sdata)
 
 

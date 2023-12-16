@@ -1,0 +1,43 @@
+{% extends 'headless_base.html' %}
+{% load static %}
+{% block title %}
+    Orders late on payment
+{% endblock title %}
+{% block content %}
+<table>
+    <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Order #</th>
+                    <th scope="col">By</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Paid</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Total paid</th>
+                    <th scope="col">Created on</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in order_list %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'orders:details' order.id %}"><strong># {{ order.id }}<strong></a>
+                        </td>
+                        <td>
+                            {% if order.user %}
+                                {{ order.user.first_name }} {{ order.user.last_name }}
+                            {% else %}
+                                {{ order.email }}
+                            {% endif %}
+                        </td>
+                        <td>{{ order.status }}</td>
+                        <td>{{ order.paid | yesno:"Yes, No" }}</td>
+                        <td>{{ order.order_total }}</td>
+                        <td>{{ order.total_paid }}</td>
+                        <td>{{ order.created_at }} ( {{ order.created_at | timesince }} ago)</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</table>
+{% endblock content %}

@@ -57,6 +57,15 @@ class ListOrders(ListView):
         return ctx
 
 
+class LateOnPaymentOrders(ListView):
+    model = Order
+    template_name = "orders/payment_late.html"
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        ctx = super().get_context_data(**kwargs)
+        return ctx
+
+
 def add_payment(request):
     amount = decimal.Decimal((request.POST.get("amount")))
     comment = request.POST.get("comment")

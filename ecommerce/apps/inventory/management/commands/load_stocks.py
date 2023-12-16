@@ -15,22 +15,22 @@ from ecommerce.constants import (
 
 
 def process_row(row, pattern: str):
-    print(f"row: {row}, pat: {pattern}")
-    print(row)
-    print("^^^^^^^^^^^^^")
+    # print(f"row: {row}, pat: {pattern}")
+    # print(row)
+    # print("^^^^^^^^^^^^^")
     sku = row[0]
     m = re.match(pattern, sku)
-      
+
     if m is not None:
         base = m.group(1)
-        print(f"looking up a Product with base {base}")
+        # print(f"looking up a Product with base {base}")
         spec = row[1]
         weight = row[2]
         restock_point = row[3]
         target_amount = row[4]
         price = row[5]
     else:
-        print("nope")
+        # print("nope")
         return -1
 
     try:
@@ -49,7 +49,7 @@ def process_row(row, pattern: str):
             weight=weight,
             price=price,
         )
-        print(f"created {stock}")
+        # print(f"created {stock}")
     except IntegrityError as e:
         sys.stderr.write(
             f"looks like a Stock record for {sku} already exists\n"
@@ -89,7 +89,7 @@ def load_DGM():
         next(r, None)  # skip the first row (header)
 
         for row in r:
-            print("processing a row")
+            # print("processing a row")
             process_row(row, DGM_RE)
 
 
