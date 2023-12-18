@@ -54,8 +54,8 @@
                                 <p id="regular-days" class="card-text ps-2 pb-3">...</p>
                             </div>
                         </div>
-                        <div id="regular" class="col-md-1 ps-md-1">
-                            <input class="align-middle h-100" type="radio" name="deliveryOption">
+                        <div id="regular" class="col-md-1 radios">
+                            <input class="form-check-input" type="radio" name="deliveryOption">
                         </div>
                     </div>
                 </div>
@@ -64,14 +64,14 @@
                         <i class="fa-solid fa-truck-fast"></i>
                     </div>
                     <div class="row g-0">
-                        <div class="col-md-9 ps-md-1">
+                        <div class="col-md-9">
                             <div class="card-body p-1">
                                 <p class="card-text ps-2 mb-1 pt-1 fw-bold">Fast</p>
                                 <p id="fast-days" class="card-text ps-2 pb-3">...</p>
                             </div>
                         </div>
-                        <div id="fast" class="col-md-1 ps-md-1">
-                            <input class="align-middle h-100" type="radio" name="deliveryOption">
+                        <div id="fast" class="col-md-1 radios">
+                            <input class="form-check-input" type="radio" name="deliveryOption">
                         </div>
                     </div>
                 </div>
@@ -86,8 +86,10 @@
                                 <p id="express-days" class="card-text ps-2 pb-3">...</p>
                             </div>
                         </div>
-                        <div id="express" class="col-md-1 ps-md-1">
-                            <input class="align-middle h-100" type="radio" name="deliveryOption">
+                        <div id="express" class="col-md-1 radios">
+                            <input class="form-check-input align-middle"
+                                   type="radio"
+                                   name="deliveryOption">
                         </div>
                     </div>
                 </div>
@@ -119,7 +121,7 @@
      })
  })
 
- $('input[type=radio][name=deliveryOption]').on('change', function(e) {
+ $('input[type=radio]').on('change', function(e) {
      e.preventDefault();
      $.ajax({
          type: "POST",

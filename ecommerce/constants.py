@@ -7,6 +7,7 @@ NEW_RE = "^(A-(?!0)\d{1,3})(?:\.(\d{1,2}x\d{1,2}))?((?(2)[MP]|P?))\Z|^([BHJR]-(?
 INCENSE_RE = "^(L-(?!0)\d{1,3})([ABC])\Z"
 BHJR_RE = "^([BHJR]-(?!0)\d{1,3})\Z|^([DG]-(?!0)\d{1,3})(P)?\Z"
 DGM_RE = "^([DGM]-(?!0)\d{1,3})([JPEA])?\Z"
+DAYS_LATE = 30
 
 LURE = "<a href=\"product_info\.php/products_id/(\d+)\">([\w\s]+)</a>"
 

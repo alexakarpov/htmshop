@@ -4,6 +4,9 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.http import HttpResponseRedirect, JsonResponse
+from datetime import date, timedelta
+
+from ecommerce.constants import DAYS_LATE
 
 from .models import Order, Payment
 
@@ -62,7 +65,19 @@ class LateOnPaymentOrders(ListView):
     template_name = "orders/payment_late.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        all = Order.objects.filter(paid=False)
+        month = timedelta(days=30)
+        td = date.today()
+
+        late = []
+
+        for o in all:
+            diff = (date.today() - o.created_at).days
+            if diff > DAYS_LATE:
+                late.append(o)
+
         ctx = super().get_context_data(**kwargs)
+        ctx["order_list"] = late
         return ctx
 
 

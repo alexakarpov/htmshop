@@ -82,10 +82,6 @@ hr.divider {
   max-width: 6em;
 }
 
-input[type="radio"] {
-  border: 0.1em solid;
-}
-
 .category {
   font-weight: 500;
   font-size: larger;
@@ -130,4 +126,14 @@ input[type="radio"] {
 
 .border-top {
   border-top: 3px thick;
+}
+
+input[type='radio'] {
+  border: 2px solid;
+  width: 2em;
+  height: 2em;
+}
+
+.radios {
+  margin-top: 1rem;
 }
