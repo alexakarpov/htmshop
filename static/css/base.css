@@ -130,8 +130,8 @@ hr.divider {
 
 input[type='radio'] {
   border: 2px solid;
-  width: 2em;
-  height: 2em;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .radios {
