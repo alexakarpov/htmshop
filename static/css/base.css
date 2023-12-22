@@ -137,3 +137,7 @@ input[type='radio'] {
 .radios {
   margin-top: 1rem;
 }
+
+tr:hover {
+  background-color: rgb(145, 241, 97);
+}
