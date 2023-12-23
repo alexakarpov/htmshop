@@ -133,11 +133,15 @@ input[type='radio'] {
   width: 1.5em;
   height: 1.5em;
 }
+/* 
+input[type='number'] {
+  padding-top: 5px;
+} */
 
 .radios {
   margin-top: 1rem;
 }
 
-tr:hover {
+.sku-choice:hover {
   background-color: rgb(145, 241, 97);
 }
