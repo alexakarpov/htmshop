@@ -44,54 +44,67 @@
             </div>
             <div id="shippingoptions" class="col-md-7 col-lg-8">
                 <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
-                    <div class="col-md-2 ps-3 ps-md-4">
-                        <i class="fa-solid fa-truck"></i>
-                    </div>
-                    <div class="row g-0">
-                        <div class="col-md-9 ps-md-1">
-                            <div class="card-body p-1">
-                                <p class="card-text ps-2 mb-1 pt-1 fw-bold">Regular</p>
-                                <p id="regular-days" class="card-text ps-2 pb-3">...</p>
+                    <label for="rregular">
+                        <div class="col-md-2 ps-3 ps-md-4">
+                            <i class="fa-solid fa-truck"></i>
+                        </div>
+                        <div class="row g-0">
+                            <div class="col-md-9 ps-md-1">
+                                <div class="card-body p-1">
+                                    <p class="card-text ps-2 mb-1 pt-1 fw-bold">Regular</p>
+                                    <p id="regular-days" class="card-text ps-2 pb-3">...</p>
+                                </div>
                             </div>
-                        </div>
-                        <div id="regular" class="col-md-1 radios">
-                            <input class="form-check-input" type="radio" name="deliveryOption">
-                        </div>
+                            <div id="regular" class="col-md-1 radios">
+                                <input class="form-check-input"
+                                       id="rregular"
+                                       type="radio"
+                                       name="deliveryOption">
+                            </div>
+                        </label>
                     </div>
                 </div>
                 <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
-                    <div class="col-md-2 ps-3 ps-md-4">
-                        <i class="fa-solid fa-truck-fast"></i>
-                    </div>
-                    <div class="row g-0">
-                        <div class="col-md-9">
-                            <div class="card-body p-1">
-                                <p class="card-text ps-2 mb-1 pt-1 fw-bold">Fast</p>
-                                <p id="fast-days" class="card-text ps-2 pb-3">...</p>
+                    <label for="rfast">
+                        <div class="col-md-2 ps-3 ps-md-4">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <div class="row g-0">
+                            <div class="col-md-9">
+                                <div class="card-body p-1">
+                                    <p class="card-text ps-2 mb-1 pt-1 fw-bold">Fast</p>
+                                    <p id="fast-days" class="card-text ps-2 pb-3">...</p>
+                                </div>
+                            </div>
+                            <div id="fast" class="col-md-1 radios">
+                                <input id="rfast"
+                                       class="form-check-input"
+                                       type="radio"
+                                       name="deliveryOption">
                             </div>
                         </div>
-                        <div id="fast" class="col-md-1 radios">
-                            <input class="form-check-input" type="radio" name="deliveryOption">
-                        </div>
-                    </div>
+                    </label>
                 </div>
                 <div class="card mb-3 border-1 rounded-0 product-item me-md-4">
-                    <div class="col-md-2 ps-3 ps-md-4">
-                        <i class="fa-solid fa-rocket"></i>
-                    </div>
-                    <div class="row g-0">
-                        <div class="col-md-9 ps-md-1">
-                            <div class="card-body p-1">
-                                <p class="card-text ps-2 mb-1 pt-1 fw-bold">Express</p>
-                                <p id="express-days" class="card-text ps-2 pb-3">...</p>
+                    <label for="rexpress">
+                        <div class="col-md-2 ps-3 ps-md-4">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <div class="row g-0">
+                            <div class="col-md-9 ps-md-1">
+                                <div class="card-body p-1">
+                                    <p class="card-text ps-2 mb-1 pt-1 fw-bold">Express</p>
+                                    <p id="express-days" class="card-text ps-2 pb-3">...</p>
+                                </div>
+                            </div>
+                            <div id="express" class="col-md-1 radios">
+                                <input class="form-check-input align-middle"
+                                       id="rexpress"
+                                       type="radio"
+                                       name="deliveryOption">
                             </div>
                         </div>
-                        <div id="express" class="col-md-1 radios">
-                            <input class="form-check-input align-middle"
-                                   type="radio"
-                                   name="deliveryOption">
-                        </div>
-                    </div>
+                    </label>
                 </div>
             </div>
         </div>
@@ -108,9 +121,9 @@
              rc = response.choices[0]
              fc = response.choices[1]
              ec = response.choices[2]
-             $("#regular > input").val(`${rc.id}/${rc.price}/${rc.name}/${rc.days}`)
-             $("#fast > input").val(`${fc.id}/${fc.price}/${fc.name}/${fc.days}`)
-             $("#express > input").val(`${ec.id}/${ec.price}/${ec.name}/${ec.days}`)
+             $("#rregular").val(`${rc.id}/${rc.price}/${rc.name}/${rc.days}`)
+             $("#rfast").val(`${fc.id}/${fc.price}/${fc.name}/${fc.days}`)
+             $("#rexpress").val(`${ec.id}/${ec.price}/${ec.name}/${ec.days}`)
              $("#regular-days").text(`Your order should arrive within ${maybePluralize(rc.days,'day')} once shipped`)
              $("#fast-days").text(`Your order should arrive within ${maybePluralize(fc.days,'day')} once shipped`)
              $("#express-days").text(`Your order should arrive within ${maybePluralize(ec.days,'day')} once shipped`)
