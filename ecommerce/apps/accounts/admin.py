@@ -26,6 +26,7 @@ class AccountAdmin(UserAdmin):
                     "is_trusted",
                     "is_staff",
                     "is_superuser",
+                    "is_bookstore",
                     "groups",
                     "user_permissions",
                 )
@@ -47,9 +48,10 @@ class AccountAdmin(UserAdmin):
         "first_name",
         "last_name",
         "is_staff",
+        "is_bookstore",
         "last_login",
     )
-    list_filter = ("is_staff", "is_superuser", "is_active", "is_trusted", "groups")
+    list_filter = ("is_staff", "is_superuser", "is_active", "is_trusted", "is_bookstore", "groups")
     search_fields = ("email",)
     ordering = ("email",)
     filter_horizontal = (

@@ -5,6 +5,7 @@ from abc import ABC
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.core.validators import RegexValidator
+from ecommerce.apps.accounts.models import Account
 
 from ecommerce.apps.catalogue.models import Product
 from ecommerce.constants import NEW_RE
@@ -72,6 +73,12 @@ class Stock(models.Model):
             logger.warning(f"prints aren't even in stock for {product_sku}")
             return 0
 
+    def is_aseries(self):
+        return self.sku[0].upper() == "A"
+
+    def is_incense(self):
+        return self.sku[0].upper() == "L"
+
     def wrapping_add(self, qty: int):
         self.wrapping_qty += qty
 
@@ -125,6 +132,17 @@ class Stock(models.Model):
             logger.debug("from nowhere, nothing to remove")
 
         return True
+
+    def percentage(self, prct):
+        return  self.price * prct / 100
+
+    def get_price(self, acc: Account):
+        if acc.is_bookstore:
+            if self.is_aseries():
+                return self.price-self.percentage(30)
+            elif self.is_incense():
+                return self.price-self.percentage(15)
+        return self.price
 
     def __str__(self):
         return f"{self.sku} ({self.product.title})"
