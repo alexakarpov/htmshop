@@ -142,6 +142,6 @@ input[type='number'] {
   margin-top: 1rem;
 }
 
-.sku-choice:hover {
-  background-color: rgb(126, 171, 243);
+.choice-div:hover {
+  background-color: rgb(206, 218, 238);
 }
