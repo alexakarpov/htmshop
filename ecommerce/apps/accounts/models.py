@@ -67,6 +67,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     is_trusted = models.BooleanField(default=False)
+    is_bookstore = models.BooleanField(default=False)
 
     objects = CustomAccountManager()
 
