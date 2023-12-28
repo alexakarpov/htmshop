@@ -74,7 +74,7 @@ class Stock(models.Model):
             return 0
 
     def is_aseries(self):
-        return self.sku[0].upper() == "A"
+        return self.sku[0].upper() == "A" and self.sku[-1].upper() != 'P'
 
     def is_incense(self):
         return self.sku[0].upper() == "L"
@@ -135,14 +135,6 @@ class Stock(models.Model):
 
     def percentage(self, prct):
         return  self.price * prct / 100
-
-    def get_price(self, acc: Account):
-        if acc.is_bookstore:
-            if self.is_aseries():
-                return self.price-self.percentage(30)
-            elif self.is_incense():
-                return self.price-self.percentage(15)
-        return self.price
 
     def __str__(self):
         return f"{self.sku} ({self.product.title})"
