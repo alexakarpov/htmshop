@@ -142,6 +142,15 @@ input[type='number'] {
   margin-top: 1rem;
 }
 
-.choice-div:hover {
+div.choice-div {
+  margin: 1%;
+}
+
+div.choice-div:hover {
   background-color: rgb(217, 227, 244);
+  /* margin: 1.5%; */
+}
+
+label.pointer {
+  cursor: pointer;
 }

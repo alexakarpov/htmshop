@@ -31,15 +31,15 @@
       {% if skus %}
         {% for i in skus %}
           <div class="card choice-div" style="border-top: none;">
-            <label for="{{ i.sku }}">
+            <label for="{{ i.sku }}" class="pointer">
               <div class="row m-1" data-sku="{{ i.sku }}">
-                <div class="col-lg-9 col-md-6 col-sm-2">
+                <div class="col-lg-6 col-md-4 col-sm-2">
                   <strong>
                     {% if i.spec %}<i>{{ i.spec }}</i>{% endif %}
                   </strong>
                 </div>
                 <div class="col-lg-1">
-                  <strong>{% get_price user i %}</strong>
+                  <strong>${% get_price user i %}</strong>
                 </div>
                 <div class="col-lg-1">
                   <input class="form-check-input sku-picker"
