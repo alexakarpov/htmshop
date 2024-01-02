@@ -6,6 +6,8 @@ register = template.Library()
 
 @register.simple_tag
 def get_price(customer: Account, stock: Stock):
+    if customer.is_anonymous:
+        return stock.price
     if customer.is_bookstore:
         if stock.is_aseries() and stock.sku.find('x') == -1:
             return stock.price - stock.percentage(30)
