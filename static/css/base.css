@@ -154,3 +154,7 @@ div.choice-div:hover {
 label.pointer {
   cursor: pointer;
 }
+
+a {
+  font-weight:bold
+}
