@@ -41,7 +41,7 @@ def category_list(request, category_slug=None, letter=None):
     print(f"getting cat by slug {category_slug}")
     cat = get_object_or_404(Category, slug=category_slug)
 
-    products = cat.product_set.all()
+    products = cat.product_set.all().order_by("title")
 
     # for c in category.get_descendants():
     #     products += list(c.product_set.all())
@@ -59,22 +59,8 @@ def category_list(request, category_slug=None, letter=None):
     )
 
 
-def saints_all(request):
-    # print(f"fetching all saints icons")
-    saints = Category.objects.get(slug="saints").product_set.all()
-
-    return render(
-        request,
-        "catalogue/all_saints.html",
-        {
-            "category": "Saints",
-            "products": saints,
-        },
-    )
-
-
 def saints_filtered(request, letter=None):
-    saints = Category.objects.get(slug="saints")
+    saints = Category.objects.get(slug="icons-saints")
     saints_filtered = saints.product_set.filter(title__startswith=letter)
 
     return render(

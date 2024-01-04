@@ -7,7 +7,7 @@ app_name = "catalogue"
 urlpatterns = [
     path("", views.catalogue_index, name="home"),
     path("product/<slug:slug>", views.product_detail, name="product_detail"),
-    path("saints/", views.saints_all, name="saints_all"),
-    path("saints/<str:letter>/", views.saints_filtered, name="saints_filtered"),
+    # path("icons-saints/", views.saints_all, name="saints_all"),
+    path("icons-saints/<str:letter>/", views.saints_filtered, name="saints_filtered"),
     path("<slug:category_slug>/", views.category_list, name="category_list"),
 ]
