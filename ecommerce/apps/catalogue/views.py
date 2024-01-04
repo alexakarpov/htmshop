@@ -46,7 +46,7 @@ def category_list(request, category_slug=None, letter=None):
     # for c in category.get_descendants():
     #     products += list(c.product_set.all())
 
-    # print(f"got {len(products)} products for {category_slug}")
+    print(f"got {len(products)} products for {category_slug}")
 
     return render(
         request,
@@ -61,7 +61,7 @@ def category_list(request, category_slug=None, letter=None):
 
 def saints_all(request):
     # print(f"fetching all saints icons")
-    saints = Category.objects.get(slug="icons-saints").product_set.all()
+    saints = Category.objects.get(slug="saints").product_set.all()
 
     return render(
         request,
@@ -74,7 +74,7 @@ def saints_all(request):
 
 
 def saints_filtered(request, letter=None):
-    saints = Category.objects.get(slug="icons-saints")
+    saints = Category.objects.get(slug="saints")
     saints_filtered = saints.product_set.filter(title__startswith=letter)
 
     return render(

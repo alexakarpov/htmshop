@@ -1,5 +1,4 @@
 {% extends "../base.html" %}
-{% load static %}
 {% block title %}
   Icons of the saints
 {% endblock title %}
@@ -7,177 +6,59 @@
   <div class="h3 p-3">{{ category|title }}</div>
   <hr />
   <div class="container">
-    <div class="row">
-      <div class="col">
-        <a href="{% url 'catalogue:saints_filtered' letter='a' %}">
-          <img height="70" width="60" src="{% static 'cat-a.jpg' %}">
-        </img>
-      </a>
-    </div>
-    <div class="col">
-      <a href="{% url 'catalogue:saints_filtered' letter='b' %}">
-        <img height="70" width="60" src="{% static 'cat-b.jpg' %}">
-      </img>
-    </a>
-  </div>
-  <div class="col">
-    <a href="{% url 'catalogue:saints_filtered' letter='c' %}">
-      <img height="70" width="60" src="{% static 'cat-c.jpg' %}">
-    </img>
-  </a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='d' %}">
-    <img height="70" width="60" src="{% static 'cat-d.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='e' %}">
-    <img height="70" width="60" src="{% static 'cat-e.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='f' %}">
-    <img height="70" width="60" src="{% static 'cat-f.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='g' %}">
-    <img height="70" width="60" src="{% static 'cat-g.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='h' %}">
-    <img height="70" width="60" src="{% static 'cat-h.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='i' %}">
-    <img height="70" width="60" src="{% static 'cat-i.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='j' %}">
-    <img height="70" width="60" src="{% static 'cat-j.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='k' %}">
-    <img height="70" width="60" src="{% static 'cat-k.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='l' %}">
-    <img height="70" width="60" src="{% static 'cat-l.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='m' %}">
-    <img height="70" width="60" src="{% static 'cat-m.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='n' %}">
-    <img height="70" width="60" src="{% static 'cat-n.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='o' %}">
-    <img height="70" width="60" src="{% static 'cat-o.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='p' %}">
-    <img height="70" width="60" src="{% static 'cat-p.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='r' %}">
-    <img height="70" width="60" src="{% static 'cat-r.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='s' %}">
-    <img height="70" width="60" src="{% static 'cat-s.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='t' %}">
-    <img height="70" width="60" src="{% static 'cat-t.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='u' %}">
-    <img height="70" width="60" src="{% static 'cat-u.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='v' %}">
-    <img height="70" width="60" src="{% static 'cat-v.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='x' %}">
-    <img height="70" width="60" src="{% static 'cat-x.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='y' %}">
-    <img height="70" width="60" src="{% static 'cat-y.jpg' %}">
-  </img>
-</a>
-</div>
-<div class="col">
-  <a href="{% url 'catalogue:saints_filtered' letter='z' %}">
-    <img height="70" width="60" src="{% static 'cat-z.jpg' %}">
-  </img>
-</a>
-</div>
-</div>
-<div class="album">
-  {% if not products %}
-    <div class="col-12">
-      There are currently no products active <a href="{% url 'catalogue:home' %}">Home</a>
-    </div>
-  {% else %}
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-      {% for product in products %}
-        <div class="col">
-          <div class="card border-0">
-            <a class="text-dark text-decoration-none"
-               href="{{ product.get_absolute_url }}">
-              <img class="img-fluid"
-                   alt="Responsive image"
-                   src="{{ product.image.url }}"
-                   alt="{{ product.title }}">
-              <div class="card-body px-0">
-                <p class="card-text fw-bold">{{ product.title }}</p>
-              </a>
-            </div>
-          </div>
+  <div class="row">
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='a' %}">A</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='b' %}">B</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='c' %}">C</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='d' %}">D</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='e' %}">E</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='f' %}">F</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='g' %}">G</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='h' %}">H</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='i' %}">I</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='j' %}">J</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='k' %}">K</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='l' %}">L</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='m' %}">M</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='n' %}">N</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='o' %}">O</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='p' %}">P</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='q' %}">Q</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='r' %}">R</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='s' %}">S</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='t' %}">T</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='u' %}">U</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='v' %}">V</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='w' %}">W</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='x' %}">X</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='y' %}">Y</a></div>
+  <div class="col"><a href="{% url 'catalogue:saints_filtered' letter='z' %}">Z</a></div>
+      </div>
+    <div class="album">
+      {% if not products %}
+        <div class="col-12">
+          There are currently no products active <a href="{% url 'catalogue:home' %}">Home</a>
         </div>
-      {% endfor %}
+      {% else %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+          {% for product in products %}
+            <div class="col">
+              <div class="card border-0">
+                <a class="text-dark text-decoration-none"
+                   href="{{ product.get_absolute_url }}">
+                  <img class="img-fluid"
+                       alt="Responsive image"
+                       src="{{ product.image.url }}"
+                       alt="{{ product.title }}">
+                  <div class="card-body px-0">
+                    <p class="card-text fw-bold">{{ product.title }}</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
-  {% endif %}
-</div>
-</div>
+  </div>
 {% endblock content %}
