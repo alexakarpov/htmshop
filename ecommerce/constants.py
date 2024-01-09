@@ -93,6 +93,12 @@ US_STATES = [
 
 SS_DT_FORMAT = "%m%d%Y %H:%M"
 
+ANGEL_EMAILS = ["alexakarpov@gmail.com"]
+
+BOOKSTORE_DISCOUNT_A = 30
+BOOKSTORE_DISCOUNT_I = 15
+BOOKSTORE_DISCOUNT_AL = 33
+
 idlookup = {
     110: "A-301",
     61: "A-149",
