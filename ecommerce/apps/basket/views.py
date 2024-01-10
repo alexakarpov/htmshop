@@ -26,12 +26,12 @@ def basket_add(request):
 
     if request.POST.get("action") == "post":
         product_qty = int(request.POST.get("productqty"))
-
+        price = float(request.POST.get("price"))
         sku = request.POST.get("sku")
 
         inventoryitem = Stock.objects.get(sku=sku)
 
-        basket.add(stock=inventoryitem, qty=product_qty, sku=sku)
+        basket.add(stock=inventoryitem, qty=product_qty, sku=sku, price=price)
 
         basketqty = basket.__len__()
         return JsonResponse({"qty": basketqty, "next": next})

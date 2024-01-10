@@ -22,7 +22,7 @@ class Basket:
             basket = self.session[settings.BASKET_SESSION_KEY] = {}
         self.basket = basket
 
-    def add(self, stock, qty, sku):
+    def add(self, stock, qty, sku, price):
         """
         Adding and updating the users basket session data
         product: actually a Stock
@@ -30,14 +30,14 @@ class Basket:
         pid: ProductInventory item's SKU, which acts as key in Basket's dict
         """
 
-        logger.debug(f"PRODUCT: {stock}, qty:{qty}, sku:{sku}")
+        # print(f"PRODUCT: {stock}, qty:{qty}, sku:{sku}, price: {price}")
         if sku in self.basket:
             self.basket[sku]["qty"] = qty
             self.basket[sku]["weight"] = json.dumps(stock.weight)
         else:
             self.basket[sku] = {
                 "title": stock.product.title,
-                "price": str(stock.price),
+                "price": price,
                 "qty": qty,
                 "spec": stock.spec if stock.spec else "",
                 "weight": json.dumps(stock.weight),
@@ -83,8 +83,7 @@ class Basket:
 
     def get_subtotal_price(self):
         return sum(
-            Decimal(item["price"]) * item["qty"]
-            for item in self.basket.values()
+            item["price"] * item["qty"] for item in self.basket.values()
         )
 
     def get_total(self, deliveryprice=0):
