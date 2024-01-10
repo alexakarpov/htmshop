@@ -32,19 +32,20 @@
         {% for i in skus %}
           <div class="card choice-div" style="border-top: none;">
             <label for="{{ i.sku }}" class="pointer">
-              <div class="row m-1" data-sku="{{ i.sku }}">
+              <div class="row m-1">
                 <div class="col-lg-6 col-md-4 col-sm-2">
                   <strong>
                     {% if i.spec %}<i>{{ i.spec }}</i>{% endif %}
                   </strong>
                 </div>
                 <div class="col-lg-2">
-                  <strong>${% get_price user i %}</strong>
+                  <strong>${% display_price user i %}</strong>
                 </div>
                 <div class="col-lg-1">
                   <input class="form-check-input sku-picker"
                          type="radio"
                          name="sku-radio"
+                         data-price="{% get_price user i %}"
                          value="{{ i.sku }}"
                          id="{{ i.sku }}"
                          {% if skus.count == 1 %}checked{% endif %}>
@@ -76,13 +77,6 @@
     <div class="row m-1 alert alert-success" role="alert" id="cartalertbox"></div>
   </div>
   <script>
-  /* $(document).on('click', '.choice_item', function(e) {
-    if (e.currentTarget.style.background=="#ffff99") {
-      e.currentTarget.style.background="#ffffff"
-    } else {
-      e.currentTarget.style.background="#ffff99"
-    }
-  }) */
   $(document).on('click', '.sku-picker', function (e) {
     $('#add-button').prop('disabled', false)
   })
@@ -92,6 +86,7 @@
     let next = '{{referred}}'
     const d = {
       productqty: $('#quantity').val(),
+      price: $(".sku-picker:checked").data('price'),
       sku: $(".sku-picker:checked").val(),
       csrfmiddlewaretoken: '{{csrf_token}}',
       action: 'post',
