@@ -7,7 +7,7 @@ from django.db import models
 from django.core.validators import RegexValidator
 from ecommerce.apps.accounts.models import Account
 
-from ecommerce.apps.catalogue.models import Product
+from ecommerce.apps.catalogue.models import Category, Product
 from ecommerce.constants import NEW_RE
 
 sku_reg = re.compile("([A-Z]+)-([0-9]+)")
@@ -74,7 +74,21 @@ class Stock(models.Model):
             return 0
 
     def is_aseries(self):
-        return self.sku[0].upper() == "A" and self.sku[-1].upper() != 'P'
+        return self.sku[0].upper() == "A"
+
+    def is_print(self):
+        return self.sku[-1].upper() == "P"
+    
+    def is_enlargement(self):
+        return self.sku.find("x") != -1
+
+    def is_our_book(self):
+        print(f"iob? {self.product.category}")
+        ours = Category.objects.get(slug='books-monastery')
+        # print(ours)
+        test =  self.product.category == Category.objects.get(slug='books-monastery')
+        print(test)
+        return test
 
     def is_incense(self):
         return self.sku[0].upper() == "L"
@@ -134,7 +148,7 @@ class Stock(models.Model):
         return True
 
     def percentage(self, prct):
-        return  self.price * prct / 100
+        return self.price * prct / 100
 
     def __str__(self):
         return f"{self.sku} ({self.product.title})"

@@ -100,6 +100,7 @@ def payment_selection(request):
 
 
 def basket_update_delivery(request):
+    print("BUD")
     basket = Basket(request)
     if request.POST.get("action") == "post":
         opts = request.POST.get("deliveryoption")
@@ -180,7 +181,7 @@ def delivery_address(request):
 
 
 def guest_address(request):
-    # print(f"| checkout guest_address with {request.method}")
+    print(f"| checkout guest_address with {request.method}")
 
     if request.method == "POST":
         session = request.session

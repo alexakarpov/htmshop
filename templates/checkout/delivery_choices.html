@@ -145,6 +145,7 @@
              action: "post",
          },
          success: function (json) {
+            console.log(json);
              $('#to-payment').prop('disabled', false);
              document.getElementById("total").innerHTML = '$' + json.total;
              document.getElementById("delivery_price").innerHTML = '$' + json.delivery_price;

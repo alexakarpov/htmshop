@@ -88,10 +88,11 @@ class Basket:
 
     def get_total(self, deliveryprice=0):
         subtotal = sum(
-            Decimal(item["price"]) * item["qty"]
-            for item in self.basket.values()
+            item["price"] * item["qty"] for item in self.basket.values()
         )
-        total = subtotal + Decimal(deliveryprice)
+
+        total = subtotal + float(deliveryprice)
+        # print(f"subt:{subtotal}, tot:{total}")
         return total
 
     def delete(self, sku):

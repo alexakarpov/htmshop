@@ -9,12 +9,6 @@ from .basket import Basket
 
 logger = logging.getLogger("django")
 
-# class BasketSummary(View):
-#     template_name = "summary.html"
-
-#     def get(self, request, *args, **kwargs):
-#             return render(request, self.template_name, {})
-
 
 def basket_summary(request):
     return render(request, "basket/summary.html", {})
