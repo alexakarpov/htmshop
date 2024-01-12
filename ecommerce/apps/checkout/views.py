@@ -100,7 +100,6 @@ def payment_selection(request):
 
 
 def basket_update_delivery(request):
-    print("BUD")
     basket = Basket(request)
     if request.POST.get("action") == "post":
         opts = request.POST.get("deliveryoption")

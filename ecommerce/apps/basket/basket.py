@@ -86,13 +86,11 @@ class Basket:
             item["price"] * item["qty"] for item in self.basket.values()
         )
 
-    def get_total(self, deliveryprice=0):
+    def get_total(self, deliverycost=0):
         subtotal = sum(
             item["price"] * item["qty"] for item in self.basket.values()
         )
-
-        total = subtotal + float(deliveryprice)
-        # print(f"subt:{subtotal}, tot:{total}")
+        total = round((subtotal + float(deliverycost)), 2)
         return total
 
     def delete(self, sku):
@@ -102,7 +100,6 @@ class Basket:
         logger.debug(f"deleting {sku} from cart in {self.session.session_key}")
 
         if sku in self.basket:
-            logger.debug("found")
             del self.basket[sku]
             self.save()
         else:
