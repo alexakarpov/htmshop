@@ -37,7 +37,7 @@ class OrderExportView(APIView):
         start_date = datetime.strptime(start_date_str, SS_DT_FORMAT)
         end_date = datetime.strptime(end_date_str, SS_DT_FORMAT)
 
-        orders = Order.objects.filter(updated__gte=start_date, updated__lte=end_date)
+        orders = Order.objects.filter(updated_at__gte=start_date, updated_at__lte=end_date)
         orders_serializer = OrderSerializer(orders, many=True)
         return Response(orders_serializer.data)
 
