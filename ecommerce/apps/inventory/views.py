@@ -9,7 +9,6 @@ from django.utils.html import escape
 from django.views.generic.list import ListView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-# from rest_framework.views import APIView
 
 from ecommerce.constants import LINES_PER_PAGE
 

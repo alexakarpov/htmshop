@@ -29,7 +29,7 @@ class OrderExportView(APIView):
     renderer_classes = [OrdersXMLRenderer]
 
     def get(self, request):
-        logger.info(f"SS GET, action={request.GET.get('action')}, page={request.GET.get('page')}")
+        print(f"SS GET, action={request.GET.get('action')}, page={request.GET.get('page')}")
         start_date_str = request.GET.get("start_date") or (
             date.today() - timedelta(days=1)
         ).strftime(SS_DT_FORMAT)
