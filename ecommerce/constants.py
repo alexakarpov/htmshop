@@ -91,7 +91,7 @@ US_STATES = [
     ("WY", "Wyoming"),
 ]
 
-SS_DT_FORMAT = "%m%d%Y %H:%M"
+SS_DT_FORMAT = "%m/%d/%Y %H:%M"
 
 ANGEL_EMAILS = ["archangelsgiftshop@gmail.com"]
 
