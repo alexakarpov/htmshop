@@ -26,10 +26,10 @@ class UserAddressForm(forms.ModelForm):
             "phone",
             "address_line1",
             "address_line2",
-            "town_city",
+            "city_locality",
             "state_province",
-            "postcode",
-            "country",
+            "postal_code",
+            "country_code",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -46,16 +46,16 @@ class UserAddressForm(forms.ModelForm):
         self.fields["address_line2"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Address Line 2")}
         )
-        self.fields["town_city"].widget.attrs.update(
+        self.fields["city_locality"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Town/City")}
         )
         self.fields["state_province"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("State/Province")}
         )
-        self.fields["postcode"].widget.attrs.update(
+        self.fields["postal_code"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Postal code")}
         )
-        self.fields["country"].widget.attrs.update(
+        self.fields["country_code"].widget.attrs.update(
             {"class": "form-control mb-2"}
         )
         self.fields["address_line2"].required = False
@@ -69,10 +69,10 @@ class GuestAddressForm(forms.Form):
             "email",
             "address_line1",
             "address_line2",
-            "town_city",
+            "city_locality",
             "state_province",
-            "postcode",
-            "country",
+            "postal_code",
+            "country_code",
         ]
 
     full_name = forms.CharField()
@@ -80,10 +80,10 @@ class GuestAddressForm(forms.Form):
     email = forms.EmailField()
     address_line1 = forms.CharField()
     address_line2 = forms.CharField()
-    town_city = forms.CharField()
+    city_locality = forms.CharField()
     state_province = forms.CharField()
-    postcode = forms.CharField()
-    country = forms.CharField()
+    postal_code = forms.CharField()
+    country_code = forms.CharField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -102,16 +102,16 @@ class GuestAddressForm(forms.Form):
         self.fields["address_line2"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Address Line 2")}
         )
-        self.fields["town_city"].widget.attrs.update(
+        self.fields["city_locality"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Town/City")}
         )
         self.fields["state_province"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("State/Province")}
         )
-        self.fields["postcode"].widget.attrs.update(
+        self.fields["postal_code"].widget.attrs.update(
             {"class": "form-control mb-2", "placeholder": _("Postal code")}
         )
-        self.fields["country"].widget.attrs.update(
+        self.fields["country_code"].widget.attrs.update(
             {"class": "form-control mb-2"}
         )
         self.fields["address_line2"].required = False

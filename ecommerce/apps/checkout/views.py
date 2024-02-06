@@ -226,7 +226,7 @@ def pay_later(request):
         email=user.email if user.is_authenticated else address_d.get("email"),
         address_line1=address_d.get("address_line1"),
         address_line2=address_d.get("address_line2"),
-        city=address_d.get("city_locality"),
+        city_locality=address_d.get("city_locality"),
         postal_code=address_d.get("postal_code"),
         state_province=address_d.get("state_province"),
         country_code=address_d.get("country_code"),
@@ -289,12 +289,12 @@ def payment_with_token(request):
         basket = Basket(request)
         address_json = session["address"]
         address_d = json.loads(address_json)
-        # print(address_d)
 
         full_name = json.loads(address_json).get("full_name")
 
         user = request.user
-
+        print("---------------")
+        print(address_d)
         order = Order.objects.create(
             user=user if user.is_authenticated else None,
             full_name=full_name,
@@ -303,7 +303,7 @@ def payment_with_token(request):
             else address_d.get("email"),
             address_line1=address_d.get("address_line1"),
             address_line2=address_d.get("address_line2"),
-            city=address_d.get("city_locality"),
+            city_locality=address_d.get("city_locality"),
             postal_code=address_d.get("postal_code"),
             country_code=address_d.get("country_code"),
             order_total=float(total_s),

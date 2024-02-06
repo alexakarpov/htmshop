@@ -50,10 +50,10 @@
           <p class="card-text m-0 fw-bold">{{address.full_name}}</p>
           <p class="card-text m-0">{{address.address_line1}}</p>
           <p class="card-text m-0">{{address.address_line2}}</p>
-          <p class="card-text m-0">{{address.town_city}}</p>
+          <p class="card-text m-0">{{address.city_locality}}</p>
           <p class="card-text m-0">{{address.state_province}}</p>
-          <p class="card-text m-0">{{address.postcode}}</p>
-          <p class="card-text m-0">{{address.country}}</p>
+          <p class="card-text m-0">{{address.postal_code}}</p>
+          <p class="card-text m-0">{{address.country_code}}</p>
           <p class="card-text m-0">Phone number: {{address.phone}}</p>
           <div class="pt-5">
             <a href="{% url 'accounts:edit_address' address.id %}" class="text-decoration-none">Edit</a>

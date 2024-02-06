@@ -112,12 +112,12 @@ class Address(models.Model):
     customer = models.ForeignKey(Account, verbose_name=_("Account"), on_delete=models.CASCADE)
     full_name = models.CharField(_("Full Name"), max_length=25)
     phone = models.CharField(_("Phone Number"), max_length=20)
-    postcode = models.CharField(_("Postal Code"), max_length=10)
+    postal_code = models.CharField(_("Postal Code"), max_length=10)
     address_line1 = models.CharField(_("Address Line 1"), max_length=50)
     address_line2 = models.CharField(_("Address Line 2"), max_length=50, blank=True)
-    town_city = models.CharField(_("Town/City"), max_length=50)
+    city_locality = models.CharField(_("Town/City"), max_length=50)
     state_province = models.CharField(_("State/Province"), max_length=10, blank=True)
-    country = models.CharField(
+    country_code = models.CharField(
         _("Country"), max_length=2, default="US", choices=country_names.items()
     )
     delivery_instructions = models.CharField(
@@ -140,10 +140,10 @@ class Address(models.Model):
         a.address_line1 = a_dict.get("address_line1")
         a.address_line2 = a_dict.get("address_line2")
         a.phone = a_dict.get("phone")
-        a.town_city = a_dict.get("city_locality")
+        a.city_locality = a_dict.get("city_locality")
         a.state_province = a_dict.get("state_province")
-        a.postcode = a_dict.get("postal_code")
-        a.country = a_dict.get("country_code")
+        a.postal_code = a_dict.get("postal_code")
+        a.country_code = a_dict.get("country_code")
         return a
 
     def to_dict(self):
@@ -152,10 +152,10 @@ class Address(models.Model):
             "address_line1": self.address_line1,
             "address_line2": self.address_line2,
             "phone": self.phone,
-            "city_locality": self.town_city,
+            "city_locality": self.city_locality,
             "state_province": self.state_province,
-            "postal_code": self.postcode,
-            "country_code": self.country,
+            "postal_code": self.postal_code,
+            "country_code": self.country_code,
             # "address_residential_indicator": "yes", # used by SE
         }
 
