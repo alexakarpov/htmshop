@@ -1,6 +1,7 @@
 import json
 import logging
 from datetime import date, datetime, timedelta
+from typing import Any
 
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -8,6 +9,7 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_xml.renderers import XMLRenderer
+from django.views.generic import ListView
 
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order
@@ -15,7 +17,7 @@ from ecommerce.apps.shipping.choice import split_tiers
 from ecommerce.apps.shipping.engine import shipping_choices
 from ecommerce.constants import SS_DT_FORMAT
 
-from .serializers import OrderSerializer, ShippingChoiceSerializer
+from .serializers import ShippingChoiceSerializer
 
 logger = logging.getLogger("django")
 
@@ -25,21 +27,30 @@ class OrdersXMLRenderer(XMLRenderer):
     item_tag_name = "Order"
 
 
-class OrderExportView(APIView):
+class OrderExportView(ListView):
     renderer_classes = [OrdersXMLRenderer]
+    model = Order
+    template_name = "shipping/orders.xml"
+    content_type = "text/xml"
 
-    def get(self, request):
-        print(f"SS GET, action={request.GET.get('action')}, page={request.GET.get('page')}")
-        start_date_str = request.GET.get("start_date") or (
-            date.today() - timedelta(days=1)
-        ).strftime(SS_DT_FORMAT)
-        end_date_str = request.GET.get("end_date") or date.today().strftime(SS_DT_FORMAT)
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        start_date_str = self.request.GET.get("start_date") #or (date.today() - timedelta(days=30)).strftime(SS_DT_FORMAT)
+        print(f"got start_date (str) of: {start_date_str}")
+        end_date_str = self.request.GET.get(
+            "end_date"
+        ) # or date.today().strftime(SS_DT_FORMAT)
+        print(f"got end_date (str) of: {end_date_str}")
         start_date = datetime.strptime(start_date_str, SS_DT_FORMAT)
+        # print(f"and from it: {start_date}")
         end_date = datetime.strptime(end_date_str, SS_DT_FORMAT)
 
-        orders = Order.objects.filter(updated_at__gte=start_date, updated_at__lte=end_date)
-        orders_serializer = OrderSerializer(orders, many=True)
-        return Response(orders_serializer.data)
+        orders = Order.objects.filter(
+            updated_at__gte=start_date, updated_at__lte=end_date
+        )
+        print(f"got {len(orders)} orders between {start_date} and {end_date}")
+        context["orders"] = orders
+        return context
 
 
 @api_view(http_method_names=["GET"])
