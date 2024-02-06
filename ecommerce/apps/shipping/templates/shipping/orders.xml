@@ -2,23 +2,23 @@
 <Orders>
   {% for order in orders %}
   <Order>
-    <OrderID><![CDATA[{{ order.id }}]]></OrderID>
+    <OrderID><![CDATA[{{order.id}}]]></OrderID>
     <Customer>
       <BillTo>
-        <Name><![CDATA[{{ order.full_name }}]]></Name>
+        <Name><![CDATA[{{order.full_name}}]]></Name>
       </BillTo>
       <ShipTo>
-        <Name><![CDATA[{{ order.full_name }}]]></Name>
-        <Address1><![CDATA[{{ order.address_line1 }}]]></Address1>
-        <Address2><![CDATA[{{ order.address_line2 }}]]></Address2>
-        <City><![CDATA[{{ order.city }}]]></City>
-        <State><![CDATA[{{ order.state_province }}]]></State>
-        <PostalCode><![CDATA[{{ order.postal_code }}]]></PostalCode>
-        <Country><![CDATA[{{ order.country_code }}]]></Country>
-        <Phone><![CDATA[{{ order.phone }}]]></Phone>
+        <Name><![CDATA[{{order.full_name}}]]></Name>
+        <Address1><![CDATA[{{order.address_line1}}]]></Address1>
+        <Address2><![CDATA[{{order.address_line2}}]]></Address2>
+        <City><![CDATA[{{order.city}}]]></City>
+        <State><![CDATA[{{order.state_province}}]]></State>
+        <PostalCode><![CDATA[{{order.postal_code}}]]></PostalCode>
+        <Country><![CDATA[{{ order.country_code}}]]></Country>
+        <Phone><![CDATA[{{order.phone}}]]></Phone>
       </ShipTo>
     </Customer>
-    <OrderDate><![CDATA[{{ order.created_at }}]]></OrderDate>
+    <OrderDate><![CDATA[{{order.created_at}}]]></OrderDate>
   </Order>
 
   {% endfor %}

@@ -35,20 +35,22 @@ class OrderExportView(ListView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        start_date_str = self.request.GET.get("start_date") #or (date.today() - timedelta(days=30)).strftime(SS_DT_FORMAT)
-        print(f"got start_date (str) of: {start_date_str}")
+        start_date_str = self.request.GET.get(
+            "start_date"
+        )  # or (date.today() - timedelta(days=30)).strftime(SS_DT_FORMAT)
+
         end_date_str = self.request.GET.get(
             "end_date"
-        ) # or date.today().strftime(SS_DT_FORMAT)
-        print(f"got end_date (str) of: {end_date_str}")
+        ) or date.today().strftime(SS_DT_FORMAT)
+
         start_date = datetime.strptime(start_date_str, SS_DT_FORMAT)
-        # print(f"and from it: {start_date}")
+
         end_date = datetime.strptime(end_date_str, SS_DT_FORMAT)
 
         orders = Order.objects.filter(
             updated_at__gte=start_date, updated_at__lte=end_date
         )
-        print(f"got {len(orders)} orders between {start_date} and {end_date}")
+
         context["orders"] = orders
         return context
 
