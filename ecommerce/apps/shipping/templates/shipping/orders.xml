@@ -11,7 +11,7 @@
         <Name><![CDATA[{{order.full_name}}]]></Name>
         <Address1><![CDATA[{{order.address_line1}}]]></Address1>
         <Address2><![CDATA[{{order.address_line2}}]]></Address2>
-        <City><![CDATA[{{order.city}}]]></City>
+        <City><![CDATA[{{order.city_locality}}]]></City>
         <State><![CDATA[{{order.state_province}}]]></State>
         <PostalCode><![CDATA[{{order.postal_code}}]]></PostalCode>
         <Country><![CDATA[{{ order.country_code}}]]></Country>
