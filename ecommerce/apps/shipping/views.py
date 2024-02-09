@@ -3,7 +3,7 @@ import logging
 from datetime import date, datetime, timedelta
 from typing import Any
 
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.response import Response
@@ -18,30 +18,23 @@ from ecommerce.apps.shipping.engine import shipping_choices
 from ecommerce.constants import SS_DT_FORMAT
 
 from .serializers import ShippingChoiceSerializer
+from django.views.decorators.csrf import csrf_exempt
 
 logger = logging.getLogger("django")
 
 
-class OrdersXMLRenderer(XMLRenderer):
-    root_tag_name = "Orders"
-    item_tag_name = "Order"
-
-
-class OrderExportView(ListView):
-    renderer_classes = [OrdersXMLRenderer]
-    model = Order
-    template_name = "shipping/orders.xml"
-    content_type = "text/xml"
-
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        start_date_str = self.request.GET.get(
+@csrf_exempt
+def shipstation(request):
+    if request.method == "GET":
+        action = request.GET.get("action")
+        assert action == "export"
+        start_date_str = request.GET.get(
             "start_date"
         )  # or (date.today() - timedelta(days=30)).strftime(SS_DT_FORMAT)
 
-        end_date_str = self.request.GET.get(
-            "end_date"
-        ) or date.today().strftime(SS_DT_FORMAT)
+        end_date_str = request.GET.get("end_date") or date.today().strftime(
+            SS_DT_FORMAT
+        )
 
         start_date = datetime.strptime(start_date_str, SS_DT_FORMAT)
 
@@ -51,8 +44,25 @@ class OrderExportView(ListView):
             updated_at__gte=start_date, updated_at__lte=end_date
         )
 
-        context["orders"] = orders
-        return context
+        return render(
+            request,
+            "shipping/orders.xml",
+            {"orders": orders},
+            content_type="text/xml",
+        )
+
+    elif request.method == "POST":
+        action = request.GET.get("action")
+        order_number = request.GET.get("order_number")
+        assert action == "shipnotify"
+        try:
+            order = Order.objects.get(id=order_number)
+            order.shipped = True
+            order.save()
+        except Exception:
+            return HttpResponse(status=400)
+
+        return HttpResponse(status=200)
 
 
 @api_view(http_method_names=["GET"])
