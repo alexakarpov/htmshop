@@ -3,7 +3,15 @@
   {% for order in orders %}
   <Order>
     <OrderID><![CDATA[{{order.id}}]]></OrderID>
+    <OrderNumber><![CDATA[{{order.id}}]]></OrderNumber>
+    <OrderDate><![CDATA[{{order.created_at}}]]></OrderDate>
+    <OrderStatus><![CDATA[{{order.status}}]]></OrderStatus>
+    <LastModified><![CDATA[{{order.updated_at}}]]></LastModified>
+    <OrderTotal><![CDATA[{{order.total_paid}}]]></OrderTotal>
+    <ShippingAmount><![CDATA[{{order.shipping_cost}}]]></ShippingAmount>
+    <!-- <ShippingMethod><![CDATA[{{order.shipping_method}}]]></ShippingMethod> -->
     <Customer>
+      <CustomerCode><![CDATA[{{order.email}}]]></CustomerCode>
       <BillTo>
         <Name><![CDATA[{{order.full_name}}]]></Name>
       </BillTo>
@@ -18,7 +26,17 @@
         <Phone><![CDATA[{{order.phone}}]]></Phone>
       </ShipTo>
     </Customer>
-    <OrderDate><![CDATA[{{order.created_at}}]]></OrderDate>
+    <Items>
+    {% for item in order.items.all %}
+      <Item>
+        <SKU>{{ item.sku_id }}</SKU>
+        <Name>{{ item.title }}</Name>
+        <Quantity>{{ item.quantity }}</Quantity>
+        <UnitPrice>{{ item.price }}</UnitPrice>
+      </Item>
+    {% endfor %}
+    </Items>
+
   </Order>
 
   {% endfor %}
