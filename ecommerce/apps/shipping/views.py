@@ -27,10 +27,10 @@ logger = logging.getLogger("django")
 def shipstation(request):
     if request.method == "GET":
         action = request.GET.get("action")
-        assert action == "export"
+        # assert action == "export"
         start_date_str = request.GET.get(
             "start_date"
-        )  # or (date.today() - timedelta(days=30)).strftime(SS_DT_FORMAT)
+        ) or (date.today() - timedelta(days=30)).strftime(SS_DT_FORMAT)
 
         end_date_str = request.GET.get("end_date") or date.today().strftime(
             SS_DT_FORMAT

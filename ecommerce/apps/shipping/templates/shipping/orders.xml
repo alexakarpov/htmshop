@@ -9,7 +9,6 @@
     <LastModified><![CDATA[{{order.updated_at}}]]></LastModified>
     <OrderTotal><![CDATA[{{order.total_paid}}]]></OrderTotal>
     <ShippingAmount><![CDATA[{{order.shipping_cost}}]]></ShippingAmount>
-    <!-- <ShippingMethod><![CDATA[{{order.shipping_method}}]]></ShippingMethod> -->
     <Customer>
       <CustomerCode><![CDATA[{{order.email}}]]></CustomerCode>
       <BillTo>
