@@ -129,4 +129,4 @@ def get_weight(basket_ds):
         q = it["qty"]
         total += w * q
 
-    return total
+    return float(total)
