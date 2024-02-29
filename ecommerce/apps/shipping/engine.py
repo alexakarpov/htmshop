@@ -70,6 +70,8 @@ def make_shipment(basketd, address_d):
 
 
 def get_rates(engine, shipment):
+    # print("=== SHIPMENT ===")
+    # print(shipment)
     return engine.get_rates_from_shipment(shipment)
 
 
