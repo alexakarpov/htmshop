@@ -77,16 +77,16 @@ def shipping_choices(basket: Basket, address_d: dict):
     shipment = make_shipment(basket, address_d)
     logger.debug(f"built shipment:\n{shipment}")
     rates = []
-    # TODO: go back to calling SE
-    # try:
-    #     se_response = get_rates(shipengine, shipment)
-    #     rates = se_response.get("rate_response").get("rates")
-    # except ShipEngineError as err:
-    #     logger.error(err.to_json())
 
-    rates = None
-    with open("shipping_jsons/get_rates_response.json", "r") as f:
-        rates = json.load(f).get("rate_response").get("rates")
+    try:
+        se_response = get_rates(shipengine, shipment)
+        rates = se_response.get("rate_response").get("rates")
+    except ShipEngineError as err:
+        logger.error(err.to_json())
+
+    # rates = None
+    # with open("shipping_jsons/get_rates_response.json", "r") as f:
+    #     rates = json.load(f).get("rate_response").get("rates")
 
     choices = list(map(lambda r: rate_to_choice(r), rates))
     return choices
