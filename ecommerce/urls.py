@@ -42,7 +42,7 @@ urlpatterns = [
         name="legacy-product-c",
     ),
     path(
-        "export",
+        "export/",
         sviews.shipstation,
         name="get_orders",
     ),

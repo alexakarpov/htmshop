@@ -4,9 +4,9 @@
   <Order>
     <OrderID><![CDATA[{{order.id}}]]></OrderID>
     <OrderNumber><![CDATA[{{order.id}}]]></OrderNumber>
-    <OrderDate><![CDATA[{{order.created_at}}]]></OrderDate>
+    <OrderDate><![CDATA[{{order.format_created_at}}]]></OrderDate>
     <OrderStatus><![CDATA[{{order.status}}]]></OrderStatus>
-    <LastModified><![CDATA[{{order.updated_at}}]]></LastModified>
+    <LastModified><![CDATA[{{order.format_updated_at}}]]></LastModified>
     <OrderTotal><![CDATA[{{order.total_paid}}]]></OrderTotal>
     <ShippingAmount><![CDATA[{{order.shipping_cost}}]]></ShippingAmount>
     <Customer>

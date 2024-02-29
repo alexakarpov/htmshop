@@ -2,10 +2,10 @@ import functools
 from typing import Any
 from django.conf import settings
 from django.db import models
-from datetime import date
+from datetime import date, datetime
 
 from ecommerce.apps.inventory.models import Stock
-from ecommerce.constants import ORDER_STATUS, ORDER_KINDS
+from ecommerce.constants import ORDER_STATUS, ORDER_KINDS, SS_DT_FORMAT
 
 
 class Order(models.Model):
@@ -50,6 +50,12 @@ class Order(models.Model):
         return functools.reduce(
             lambda s, i: i.quantity * i.price + s, self.items.all(), 0
         )
+
+    def format_created_at(self):
+        return self.created_at.strftime(SS_DT_FORMAT)
+
+    def format_updated_at(self):
+        return self.updated_at.strftime(SS_DT_FORMAT)
 
 
 class OrderItem(models.Model):
