@@ -6,7 +6,7 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 
 from ecommerce.apps.catalogue import views
-
+from ecommerce.apps.shipping import views as sviews
 urlpatterns = [
     path("admin/", admin.site.urls),
     path(
@@ -40,6 +40,11 @@ urlpatterns = [
         "product_info.php/cPath/<str:ignored>/products_id/<int:legacy_id>",
         views.legacy_product,
         name="legacy-product-c",
+    ),
+    path(
+        "export",
+        sviews.shipstation,
+        name="get_orders",
     ),
     path("", include("ecommerce.apps.catalogue.urls", namespace="catalogue")),
 ]
