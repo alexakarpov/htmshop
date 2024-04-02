@@ -44,7 +44,7 @@ class Order(models.Model):
         ordering = ("-created_at",)
 
     def __str__(self):
-        return f"order# {self.id} by {self.full_name} ({self.status})"
+        return f"order# {self.id} by {self.full_name} ({self.created_at})"
 
     def subtotal(self):
         return functools.reduce(
@@ -63,8 +63,10 @@ class OrderItem(models.Model):
         Order, related_name="items", on_delete=models.CASCADE
     )
     quantity = models.PositiveIntegerField(default=1)
-    title = models.CharField(max_length=100)
-    sku = models.ForeignKey(Stock, on_delete=models.CASCADE, editable=False)
+    title = models.CharField(max_length=100) # "repeated"/denormalized, yes
+    stock = models.ForeignKey(Stock, on_delete=models.CASCADE, editable=False,
+                                #   related_name='stock'
+                                  )
 
     price = models.DecimalField(max_digits=7, decimal_places=2, editable=False)
 
