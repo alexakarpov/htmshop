@@ -8,6 +8,11 @@ app_name = "inventory"
 urlpatterns = [
     path("", views.dashboard, name="dashboard"),
     path(
+        "sales",
+        staff_member_required(views.Sales.as_view()),
+        name="sales",
+    ),
+    path(
         "printing-worklist",
         staff_member_required(views.PrintingWorkListView.as_view()),
         name="printing_worklist",

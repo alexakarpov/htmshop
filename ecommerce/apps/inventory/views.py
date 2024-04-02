@@ -10,7 +10,11 @@ from django.views.generic.list import ListView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from django.db.models import Avg, Sum, Count
+from django.db.models.functions import (ExtractWeek,ExtractYear,)
+
 from ecommerce.constants import LINES_PER_PAGE
+from ecommerce.apps.orders.models import Order, OrderItem
 
 from .lists import mounting_work, print_work, sanding_work, sawing_work
 from .models import Stock, get_or_create_stock_by_sku
@@ -26,6 +30,18 @@ logger = logging.getLogger("django")
 
 def ts():
     return datetime.now().strftime("%y-%m-%d")
+
+
+class Sales(ListView):
+    model = Order
+    template_name = "sales.html"
+
+    def get_context_data(self, **kwargs):
+        sales = Order.objects.annotate(Count('items'))
+        orders=Order.objects.filter(items__stock__sku__startswith="A-")
+        timed_sales=orders.annotate(week=ExtractWeek("created_at"), year=ExtractYear("created_at"), overall=Sum("items__stock__price"))
+        print(sales)
+        return {"sales": timed_sales, "title": "sales"}
 
 
 class PrintingWorkListView(ListView):
@@ -72,6 +88,7 @@ class SawingWorkListView(ListView):
         paginator = Paginator(work, LINES_PER_PAGE)
 
         return {"work": paginator, "title": "sawing", "now": ts()}
+
 
 @api_view(["POST"])
 def inspect_sku(request):
