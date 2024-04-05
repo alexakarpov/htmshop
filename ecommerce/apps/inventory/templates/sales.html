@@ -1,1 +1,32 @@
-{{ sales }}
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+    <link rel="stylesheet" href="{% static 'css/inventory.css' %}" />
+{% endblock header %}
+{% block title %}
+    Sales
+{% endblock title %}
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="sku">SKU</th>
+                <th scope="col" class="year">Year</th>
+                <th scope="col" class="week">Week</th>
+                <th scope="col" class="sales">Sales</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+                <tr>
+                    <td>{{ sale.items__stock__sku }}</td>
+                    <td>{{ sale.year }}</td>
+                    <td>{{ sale.week }}</td>
+                    <td>{{ sale.sales }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
+{% block footer %}
+{% endblock footer %}

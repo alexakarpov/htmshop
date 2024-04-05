@@ -11,7 +11,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from django.db.models import Avg, Sum, Count
-from django.db.models.functions import (ExtractWeek,ExtractYear,)
+from django.db.models.functions import (
+    ExtractWeek,
+    ExtractYear,
+)
 
 from ecommerce.constants import LINES_PER_PAGE
 from ecommerce.apps.orders.models import Order, OrderItem
@@ -37,10 +40,18 @@ class Sales(ListView):
     template_name = "sales.html"
 
     def get_context_data(self, **kwargs):
-        sales = Order.objects.annotate(Count('items'))
-        orders=Order.objects.filter(items__stock__sku__startswith="A-")
-        timed_sales=orders.annotate(week=ExtractWeek("created_at"), year=ExtractYear("created_at"), overall=Sum("items__stock__price"))
-        print(sales)
+
+        orders = Order.objects.filter(items__stock__sku__startswith="A-")
+
+        timed_sales = (
+            orders.annotate(
+                week=ExtractWeek("created_at"), year=ExtractYear("created_at")
+            )
+            .values("items__stock__sku", "week", "year")
+            .annotate(
+                sales=Count("*"),
+            ).order_by('year','week')
+        )
         return {"sales": timed_sales, "title": "sales"}
 
 
