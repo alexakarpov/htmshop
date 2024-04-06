@@ -78,7 +78,7 @@ class Product(models.Model):
     )
     slug = models.SlugField(max_length=255, unique=True)
 
-    start_date = models.DateField(null=True, blank=True)
+    start_date = models.DateField(null=True, blank=True, help_text=_("When we've started selling this"))
 
     sku_base = models.CharField(
         max_length=5, verbose_name="SKU base", primary_key=True

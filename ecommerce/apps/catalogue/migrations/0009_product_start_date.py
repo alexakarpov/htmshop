@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='product',
             name='start_date',
-            field=models.DateField(default=datetime.datetime(2024, 5, 13, 0, 0)),
+            field=models.DateField(default=datetime.datetime(2024, 1, 1, 0, 0)),
             preserve_default=False,
         ),
     ]
