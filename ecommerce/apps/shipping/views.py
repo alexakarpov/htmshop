@@ -1,15 +1,10 @@
 import json
 import logging
 from datetime import date, datetime, timedelta
-from typing import Any
 
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view, renderer_classes
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework_xml.renderers import XMLRenderer
-from django.views.generic import ListView
 
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order
