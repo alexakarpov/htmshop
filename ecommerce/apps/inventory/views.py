@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime
+from datetime import datetime, date
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.paginator import Paginator
@@ -18,6 +18,7 @@ from django.db.models.functions import (
 
 from ecommerce.constants import LINES_PER_PAGE
 from ecommerce.apps.orders.models import Order, OrderItem
+from ecommerce.apps.catalogue.models import Product
 
 from .lists import mounting_work, print_work, sanding_work, sawing_work
 from .models import Stock, get_or_create_stock_by_sku
@@ -40,18 +41,34 @@ class Sales(ListView):
     template_name = "sales.html"
 
     def get_context_data(self, **kwargs):
-
-        orders = Order.objects.filter(items__stock__sku__startswith="A-")
-
-        timed_sales = (
-            orders.annotate(
-                week=ExtractWeek("created_at"), year=ExtractYear("created_at")
+        products = list(
+            Product.objects.filter(sku_base__startswith="A").values(
+                "sku_base", "start_date"
             )
-            .values("items__stock__sku", "week", "year")
-            .annotate(
-                sales=Count("*"),
-            ).order_by('year','week')
         )
+
+        sku_to_date = {}
+        for it in products:
+            sd = it.get("start_date")
+            sb = it.get("sku_base")
+            sku_to_date[sb] = sd
+
+        orders = Order.objects.filter(
+            items__stock__sku__startswith="A-"
+        ).exclude(items__stock__sku__endswith="P")
+
+        timed_sales = orders.values(
+            "items__stock__sku",
+        ).annotate(
+            sales=Count("*"),
+        )
+
+        for x in timed_sales:
+            sku = x["items__stock__sku"]
+            td = (sku_to_date.get(sku) - date.today()).days
+
+            x["sales"] = round(x["sales"] / (td / 7), 2)
+
         return {"sales": timed_sales, "title": "sales"}
 
 

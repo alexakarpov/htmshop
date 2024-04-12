@@ -11,8 +11,6 @@
         <thead>
             <tr>
                 <th scope="col" class="sku">SKU</th>
-                <th scope="col" class="year">Year</th>
-                <th scope="col" class="week">Week</th>
                 <th scope="col" class="sales">Sales</th>
             </tr>
         </thead>
@@ -20,8 +18,6 @@
             {% for sale in sales %}
                 <tr>
                     <td>{{ sale.items__stock__sku }}</td>
-                    <td>{{ sale.year }}</td>
-                    <td>{{ sale.week }}</td>
                     <td>{{ sale.sales }}</td>
                 </tr>
             {% endfor %}
