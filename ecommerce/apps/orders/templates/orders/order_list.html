@@ -58,7 +58,7 @@
                             {% if order.user %}
                                 {{ order.user.first_name }} {{ order.user.last_name }}
                             {% else %}
-                                {{ order.email }}
+                                {{ order.full_name }}
                             {% endif %}
                         </td>
                         <td>{{ order.status }}</td>
