@@ -52,7 +52,7 @@
                 {% for order in order_list %}
                     <tr>
                         <td>
-                            <a href="{% url 'orders:details' order.id %}"><strong># {{ order.id }}<strong></a>
+                            <a href="{% url 'orders:details' order.id %}"><strong># {{ order.id }}</strong></a>
                         </td>
                         <td>
                             {% if order.user %}
