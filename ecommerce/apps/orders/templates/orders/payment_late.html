@@ -22,13 +22,13 @@
                 {% for order in order_list %}
                     <tr>
                         <td>
-                            <a href="{% url 'orders:details' order.id %}"><strong># {{ order.id }}<strong></a>
+                            <a href="{% url 'orders:details' order.id %}"><strong># {{ order.id }}</strong></a>
                         </td>
                         <td>
                             {% if order.user %}
                                 {{ order.user.first_name }} {{ order.user.last_name }}
                             {% else %}
-                                {{ order.email }}
+                                {{ order.full_name }}
                             {% endif %}
                         </td>
                         <td>{{ order.status }}</td>
