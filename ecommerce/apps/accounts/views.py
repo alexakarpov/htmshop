@@ -197,7 +197,7 @@ def edit_address(request, id):
             address_form.save()
             return HttpResponseRedirect(reverse("accounts:addresses"))
     else:
-        address = Address.objects.get(pk=id, customer=request.user)
+        address = Address.objects.get(pk=id.hex, customer=request.user)
         address_form = UserAddressForm(instance=address)
     return render(
         request,
@@ -214,11 +214,8 @@ def delete_address(request, id):
 
 @login_required
 def set_default(request, id):
-    Address.objects.filter(customer=request.user, default=True).update(
-        default=False
-    )
-    Address.objects.filter(pk=id, customer=request.user).update(default=True)
-
+    Address.objects.filter(pk=id).update(default=True)
+    Address.objects.exclude(pk=id).update(default=False)
     previous_url = request.META.get("HTTP_REFERER")
 
     if "delivery_address" in previous_url:
