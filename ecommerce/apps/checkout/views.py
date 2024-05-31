@@ -121,8 +121,6 @@ def basket_update_delivery(request):
 
 
 def delivery_address(request):
-    # print("delivery_address view of checkout")
-    logger.debug(f">> checkout delivery_address with {request.method}")
     session = request.session
     session["purchase"] = {}
 
@@ -132,7 +130,6 @@ def delivery_address(request):
     # print(f"session's keys:\n{session.keys()}")
 
     if request.user.is_authenticated:
-        logger.debug(f"user is authenticated")
         addresses = Address.objects.filter(customer=request.user).order_by(
             "-default"
         )
@@ -141,15 +138,8 @@ def delivery_address(request):
             return HttpResponseRedirect(reverse("accounts:addresses"))
 
         if "address" not in request.session:
-            logger.debug("no address in session for authenticated user")
             session["address"] = addresses[0].toJSON()
             session.modified = True
-        else:
-            address_json = session["address"]
-            logger.debug(f"Address in session:\n {address_json}")
-            address_dict = json.loads(address_json)
-            address_obj = Address.from_dict(address_dict)
-            addresses = [address_obj]
 
         return render(
             request,
@@ -298,9 +288,9 @@ def payment_with_token(request):
         order = Order.objects.create(
             user=user if user.is_authenticated else None,
             full_name=full_name,
-            email=user.email
-            if user.is_authenticated
-            else address_d.get("email"),
+            email=(
+                user.email if user.is_authenticated else address_d.get("email")
+            ),
             address_line1=address_d.get("address_line1"),
             address_line2=address_d.get("address_line2"),
             city_locality=address_d.get("city_locality"),
