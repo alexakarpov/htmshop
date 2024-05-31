@@ -43,7 +43,7 @@ def classify_order_add_items(order: Order, basket: Basket):
         OrderItem.objects.create(
             order_id=order.pk,
             title=item["title"],
-            sku=stock,
+            stock=stock,
             price=item["price"],
             quantity=item["qty"],
         )
@@ -223,7 +223,7 @@ def pay_later(request):
         order_total=total,
         total_paid=0,
         payment_option="Later",
-        paid=False,
+        status="PROCESSING",
         shipping_cost=shipping_cost,
         shipping_method=tier,
     )
@@ -300,7 +300,7 @@ def payment_with_token(request):
             total_paid=float(total_s),
             payment_option="Square",
             state_province=address_d.get("state_province"),
-            paid=True,
+            status="PROCESSING",
             shipping_cost=shipping_cost,
             shipping_method=tier,
         )

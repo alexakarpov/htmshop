@@ -2,6 +2,7 @@ from ecommerce.apps.orders.models import Order, OrderItem
 from ecommerce.apps.inventory.models import Stock
 from faker import Faker
 from random import random, randint
+from datetime import datetime
 
 fake = Faker()
 
@@ -14,24 +15,28 @@ def make_order_with():
     o.phone = fake.numerify("###-###-####")
     o.postal_code = fake.postalcode()
     o.state_province = fake.state()
-    o.order_total = o.total_paid = 32.0
-    o.paid = True
+
+    o.status = "PROCESSING"
     o.shipping_cost = 12.00
 
     oi = OrderItem()
     oi.order = o
 
     sku = input("which SKU? ")
-    
+    od_str = input("when was it placed (YYYY-MM-DD)? ")
+
     st = oi.stock = Stock.objects.get(sku=sku)
     qty_s = input("quantity? ")
     qty_i = int(qty_s)
     oi.quantity = qty_i
-    oi.price = 32.0
+    oi.price = 32.0 * oi.quantity
+    o.order_total = o.total_paid = oi.price
     oi.title = st.product.title
     o.save()
+    o.created_at = datetime.strptime(od_str, "%Y-%m-%d")
+    o.save()
     oi.save()
-    
+
     return o
 
 
@@ -45,7 +50,7 @@ def make_order(icon_stocks):
     o.postal_code = fake.postalcode()
     o.state_province = fake.state()
     o.order_total = o.total_paid = 32.0
-    o.paid = True
+    o.status = "PROCESSING"
     o.shipping_cost = 12.00
 
     oi = OrderItem()
@@ -61,10 +66,9 @@ def make_order(icon_stocks):
 
 def run():
 
-    s_n_orders = input('how many orders? ')
+    s_n_orders = input("how many orders? ")
     N_ORDERS = int(s_n_orders)
 
-    for n in range(1, N_ORDERS+1):
+    for n in range(1, N_ORDERS + 1):
         o = make_order_with()
         print(f"generating order #{n}... -> {o.pk}")
-        

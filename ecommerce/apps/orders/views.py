@@ -65,7 +65,7 @@ class LateOnPaymentOrders(ListView):
     template_name = "orders/payment_late.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        all = Order.objects.filter(paid=False)
+        all = Order.objects.filter(status="PROCESSING")
         month = timedelta(days=30)
         td = date.today()
 
@@ -89,7 +89,7 @@ def add_payment(request):
     p = Payment.objects.create(amount=amount, comment=comment, order=order)
     order.total_paid += amount
     if order.total_paid >= order.order_total:
-        order.paid = True
+        order.status="PROCESSING"
     order.save()
     return JsonResponse(
         {"message": f"{p.pk} created", "amount": amount}, status=200

@@ -29,8 +29,6 @@ class Order(models.Model):
     order_total = models.DecimalField(max_digits=7, decimal_places=2)
     total_paid = models.DecimalField(max_digits=7, decimal_places=2)
     payment_option = models.CharField(max_length=200, blank=True)
-    paid = models.BooleanField(default=False)
-    shipped = models.BooleanField(default=False)
     shipping_method = models.CharField(max_length=20)
     shipping_cost = models.DecimalField(max_digits=5, decimal_places=2)
     status = models.CharField(
@@ -45,6 +43,9 @@ class Order(models.Model):
 
     def __str__(self):
         return f"order# {self.id} by {self.full_name} ({self.created_at})"
+
+    def paid(self):
+        return self.status == "PAID"
 
     def subtotal(self):
         return functools.reduce(
@@ -63,10 +64,13 @@ class OrderItem(models.Model):
         Order, related_name="items", on_delete=models.CASCADE
     )
     quantity = models.PositiveIntegerField(default=1)
-    title = models.CharField(max_length=100) # "repeated"/denormalized, yes
-    stock = models.ForeignKey(Stock, on_delete=models.CASCADE, editable=False,
-                                #   related_name='stock'
-                                  )
+    title = models.CharField(max_length=100)  # "repeated"/denormalized, yes
+    stock = models.ForeignKey(
+        Stock,
+        on_delete=models.CASCADE,
+        editable=False,
+        #   related_name='stock'
+    )
 
     price = models.DecimalField(max_digits=7, decimal_places=2, editable=False)
 
