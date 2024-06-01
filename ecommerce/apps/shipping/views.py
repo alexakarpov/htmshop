@@ -23,9 +23,9 @@ def shipstation(request):
     if request.method == "GET":
         action = request.GET.get("action")
         # assert action == "export"
-        start_date_str = request.GET.get(
-            "start_date"
-        ) or (date.today() - timedelta(days=30)).strftime(SS_DT_FORMAT)
+        start_date_str = request.GET.get("start_date") or (
+            date.today() - timedelta(days=30)
+        ).strftime(SS_DT_FORMAT)
 
         end_date_str = request.GET.get("end_date") or date.today().strftime(
             SS_DT_FORMAT
@@ -52,7 +52,7 @@ def shipstation(request):
         assert action == "shipnotify"
         try:
             order = Order.objects.get(id=order_number)
-            order.shipped = True
+            order.status = "SHIPPED"
             order.save()
         except Exception:
             return HttpResponse(status=400)
