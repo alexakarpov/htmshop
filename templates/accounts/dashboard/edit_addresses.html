@@ -97,7 +97,7 @@
     
     $(document).ready(function () {
       switchToUS()
-      $('select#id_country').change(function () {
+      $('select#id_country_code').change(function () {
         country_code = $(this).val()
         console.log('current state set to ' + country_code)
         if (country_code == 'CA') {
