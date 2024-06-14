@@ -157,7 +157,7 @@
       sku: sku,
       csrfmiddlewaretoken: "{{csrf_token}}",
     };
-    console.log("POSTing an inspect request for " + sku);
+    
     $.ajax({
       type: "POST",
       data: d,

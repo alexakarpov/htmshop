@@ -11,10 +11,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from django.db.models import Avg, Sum, Count
-from django.db.models.functions import (
-    ExtractWeek,
-    ExtractYear,
-)
+from django.db.models.functions import ExtractWeek, ExtractYear, Length
 
 from ecommerce.constants import LINES_PER_PAGE
 from ecommerce.apps.orders.models import Order, OrderItem
@@ -121,16 +118,24 @@ class SawingWorkListView(ListView):
 @api_view(["POST"])
 def inspect_sku(request):
     data = request.POST
-    sku = escape(data.get("sku").upper())
-    # logger.error(sku)
-    # logger.debug(f"inspecting {sku}")
-    item = Stock.objects.get(sku=sku)
-    psupp = item.get_print_supply_count()
-    serializer = ProductStockSerializer(item, many=False)
-    sdata = serializer.data
-    sdata["psupp"] = psupp
-    # logger.debug(f"API data: {sdata}")
-    return JsonResponse(sdata)
+    if data:
+        sku = escape(data.get("sku").upper())
+        # logger.error(sku)
+        # logger.debug(f"inspecting {sku}")
+        try:
+            item = Stock.objects.get(sku=sku)
+            psupp = item.get_print_supply_count()
+            serializer = ProductStockSerializer(item, many=False)
+            sdata = serializer.data
+            sdata["psupp"] = psupp
+            # logger.debug(f"API data: {sdata}")
+            return JsonResponse(sdata)
+        except:
+            print("No such SKU?")
+            return JsonResponse({})
+    else:
+        print("No data")
+        return JsonResponse({})
 
 
 @api_view(["POST"])
@@ -163,7 +168,12 @@ def dashboard(request):
     logger.debug(f"GET dict: {request.GET}")
     logger.debug(f"POST dict: {request.POST}")
 
-    icons = Stock.objects.filter(sku__startswith="A-")
+    icons = (
+        Stock.objects.filter(sku__startswith="A-")
+        .annotate(sku_length=Length("sku"))
+        .filter(sku_length__lte=5)
+    )
+
     skus_arr = []
     for it in icons:
         skus_arr.append(it.sku)
