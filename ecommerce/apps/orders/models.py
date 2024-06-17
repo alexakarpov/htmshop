@@ -47,9 +47,12 @@ class Order(models.Model):
     def paid(self):
         return self.status == "PAID"
 
+    def shipped(self):
+        return self.status == "SHIPPED"
+
     def subtotal(self):
         return functools.reduce(
-            lambda s, i: i.quantity * i.price + s, self.items.all(), 0
+            lambda s, i: i.quantity * i.stock.price + s, self.items.all(), 0
         )
 
     def format_created_at(self):
@@ -75,6 +78,9 @@ class OrderItem(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2, editable=False)
 
     def __str__(self):
+        return f"{self.title} x {self.quantity}"
+
+    def __repr__(self):
         return f"{self.title} x {self.quantity}"
 
 
