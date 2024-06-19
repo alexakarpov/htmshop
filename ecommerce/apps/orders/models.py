@@ -4,6 +4,9 @@ from django.conf import settings
 from django.db import models
 from datetime import date, datetime
 
+# from django.db.models.signals import pre_save, m2m_changed
+# from django.dispatch import receiver
+
 from ecommerce.apps.inventory.models import Stock
 from ecommerce.constants import ORDER_STATUS, ORDER_KINDS, SS_DT_FORMAT
 
@@ -94,3 +97,23 @@ class Payment(models.Model):
 
     def __str__(self) -> str:
         return f"${self.amount} paid on {self.paid_at} ({self.comment})"
+
+
+# @receiver(pre_save, sender=OrderItem)
+# def adjust_order(sender, instance, **kwargs):
+#     print("receiver for pre_save from OrderItem")
+#     order = Order.objects.get(id=instance.order.id)
+
+#     print(f"updating order #{order.id}")
+#     print(f"instance: {instance} ({type(instance)})")
+#     print(f"sender: {sender} ({type(sender)})")
+
+# @receiver(pre_save, sender=Order)
+# def adjust_order2(sender, instance, **kwargs):
+
+#     order = Order.objects.get(id=instance.id)
+#     for i in order.items.all():
+#         print(f"OItem: {i}")
+#     print(f"updating order #{order.id}")
+#     print(f"instance: {instance} ({type(instance)})")
+#     print(f"sender: {sender} ({type(sender)})")
