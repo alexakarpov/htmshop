@@ -21,7 +21,8 @@ class PrintOrders(ListView):
     model = Order
 
     def get_context_data(self, **kwargs):
-        orders = Order.objects.filter(status__iexact="PENDING")
+        orders = Order.objects.filter(status__iexact="PROCESSING")
+        print(f"{orders.count()} orders to print")
         return {"orders": orders}
 
 
@@ -30,8 +31,12 @@ class OrderDetails(DetailView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         ctx_data = super().get_context_data(**kwargs)
+        outstanding = self.object.total() - self.object.total_paid
+        print(
+            f"outstanding is {outstanding} ({self.object.total()} minus {self.object.total_paid})"
+        )
         ctx_data["outstanding"] = (
-            self.object.order_total - self.object.total_paid
+            outstanding
         )
 
         products = Product.objects.filter(is_active=True).order_by("title")
@@ -69,7 +74,6 @@ def append(request):
     new_item.price = stock.price
     new_item.title = stock.product.title
     new_item.save()
-    order.order_total += new_item.price * new_item.quantity
     order.save()
     return JsonResponse({"success": True})
 
@@ -80,9 +84,13 @@ class Invoice(DetailView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         ctx_data = super().get_context_data(**kwargs)
-        ctx_data["outstanding"] = (
-            self.object.order_total - self.object.total_paid
+        print(
+            f"({type(self.object)} total is {self.object.total()}, paid is {self.object.total_paid}"
         )
+
+        outstanding = self.object.total() - self.object.total_paid
+        print(f"outstanding is {outstanding}")
+        ctx_data["outstanding"] = outstanding
 
         return ctx_data
 
@@ -128,7 +136,7 @@ def add_payment(request):
     order = Order.objects.get(id=oid)
     p = Payment.objects.create(amount=amount, comment=comment, order=order)
     order.total_paid += amount
-    if order.total_paid >= order.order_total:
+    if order.total_paid >= order.total():
         order.status = "PROCESSING"
     order.save()
     return JsonResponse(

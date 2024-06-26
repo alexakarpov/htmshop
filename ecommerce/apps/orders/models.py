@@ -29,7 +29,7 @@ class Order(models.Model):
     country_code = models.CharField(max_length=4, blank=True, default="US")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
-    order_total = models.DecimalField(max_digits=7, decimal_places=2)
+    # order_total = models.DecimalField(max_digits=7, decimal_places=2)
     total_paid = models.DecimalField(max_digits=7, decimal_places=2)
     payment_option = models.CharField(max_length=200, blank=True)
     shipping_method = models.CharField(max_length=20)
@@ -58,6 +58,9 @@ class Order(models.Model):
             lambda s, i: i.quantity * i.stock.price + s, self.items.all(), 0
         )
 
+    def total(self):
+        return self.subtotal() + self.shipping_cost
+
     def format_created_at(self):
         return self.created_at.strftime(SS_DT_FORMAT)
 
@@ -79,6 +82,9 @@ class OrderItem(models.Model):
     )
 
     price = models.DecimalField(max_digits=7, decimal_places=2, editable=False)
+
+    def item_total(self):
+        return self.price * self.quantity
 
     def __str__(self):
         return f"{self.title} x {self.quantity}"

@@ -64,7 +64,7 @@
                         <td>{{ order.status }}</td>
                         <td>{{ order.paid | yesno:"Yes, No" }}</td>
                         <td>{{ order.shipped | yesno:"Yes, No" }}</td>
-                        <td>{{ order.order_total }}</td>
+                        <td>{{ order.total }}</td>
                         <td>{{ order.total_paid }}</td>
                         <td>{{ order.created_at }} ( {{ order.created_at | timesince }} ago)</td>
                     </tr>

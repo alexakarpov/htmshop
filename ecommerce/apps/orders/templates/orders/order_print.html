@@ -73,7 +73,7 @@
                             <td>{{ item.quantity }} x {{ item.title|title }}</td>
                             <td>{{ item.stock.sku }}</td>
                             <td>${{ item.price }}</td>
-                            <td>${% widthratio item.quantity 1 item.price %}.00</td>
+                            <td>${{ item.item_total }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
