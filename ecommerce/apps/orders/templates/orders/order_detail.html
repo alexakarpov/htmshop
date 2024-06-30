@@ -69,7 +69,9 @@
         <div>{{ order.full_name }}</div>
         <div>{{ order.phone }}</div>
         <div>{{ order.address_line1 }}</div>
+        {% if order.address_line2 %}
         <div>{{ order.address_line2 }}</div>
+        {% endif %}
         <div>{{ order.city }}</div>
         <div>{{ order.state_province }}</div>
         <div>{{ order.postal_code }}</div>
