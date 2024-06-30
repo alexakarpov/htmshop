@@ -133,7 +133,7 @@ REGULAR = [
 ]
 
 # Shipping
-SE_API_KEY = "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw"
+SE_API_KEY = config["SE_API_KEY"]
 
 USPS_ID = "se-660215"
 FEDEX_ID = "se-660217"

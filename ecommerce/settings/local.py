@@ -4,6 +4,7 @@ ENV = "development"
 ########### .env-based keys #################
 
 SECRET_KEY = config["SECRET_KEY"]
+
 # PAYPAL_CLIENT_ID = config["PAYPAL_CLIENT_ID"]
 # PAYPAL_SECRET = config["PAYPAL_SECRET"]
 # PAYPAL_BUSINESS_EMAIL = config["PAYPAL_BUSINESS_EMAIL"]
@@ -13,7 +14,7 @@ SECRET_KEY = config["SECRET_KEY"]
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver","192.168.1.169"]
 
 DATABASES = {
     "default": {
@@ -61,7 +62,7 @@ if DEBUG:
 
     # django-debug-toolbar
     INSTALLED_APPS.append("django_extensions")
-    INTERNAL_IPS = ("127.0.0.1",)
+    INTERNAL_IPS = ("127.0.0.1","192.168.1.169")
     MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
 
     INSTALLED_APPS += ("debug_toolbar",)
