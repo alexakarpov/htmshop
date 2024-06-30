@@ -55,11 +55,7 @@
                             <a href="{% url 'orders:details' order.id %}"><strong># {{ order.id }}</strong></a>
                         </td>
                         <td>
-                            {% if order.user %}
-                                {{ order.user.first_name }} {{ order.user.last_name }}
-                            {% else %}
-                                {{ order.full_name }}
-                            {% endif %}
+                            {{ order.full_name }}
                         </td>
                         <td>{{ order.status }}</td>
                         <td>{{ order.paid | yesno:"Yes, No" }}</td>
