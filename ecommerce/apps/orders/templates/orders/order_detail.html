@@ -77,6 +77,7 @@
         <div>{{ order.postal_code }}</div>
         <div>{{ order.country_code }}</div>
         <hr>
+        {% if outstanding > 0 %}
         <label for="amount" class="p-1 fs-6">Amount:</label>
         <input id="amount">
         <label for="comment" class="p-1 fs-6">Comment:</label>
@@ -87,6 +88,7 @@
                 class="btn btn-md btn-success mx-1 mt-2 mb-1 form-control">
             Add a payment
         </button>
+        {% endif %}
         <hr>
         <h4>Payment history</h4>
         {% for p in order.payments.all %}
