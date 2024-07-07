@@ -59,6 +59,10 @@ class AccountAdmin(UserAdmin):
         "user_permissions",
     )
 
+class AddressAdmin(admin.ModelAdmin):
+    model = Address
+    search_fields = ("full_name",)
+
 
 admin.site.register(Account, AccountAdmin)
-admin.site.register(Address)
+admin.site.register(Address, AddressAdmin)
