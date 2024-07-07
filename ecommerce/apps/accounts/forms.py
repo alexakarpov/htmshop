@@ -12,6 +12,7 @@ from django.contrib.auth.forms import (
 from django.utils.translation import gettext_lazy as _
 
 from .models import Address
+from pytz import country_names
 
 UserModel = get_user_model()
 
@@ -83,7 +84,8 @@ class GuestAddressForm(forms.Form):
     city_locality = forms.CharField()
     state_province = forms.CharField()
     postal_code = forms.CharField()
-    country_code = forms.CharField()
+    country_code = forms.ChoiceField(choices=country_names.items(),
+                                     initial="US")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
