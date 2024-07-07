@@ -39,7 +39,9 @@ class CustomAccountManager(BaseUserManager):
             email = self.normalize_email(email)
             self.validateEmail(email)
         else:
-            raise ValueError(_("Superuser Account: You must provide an email address"))
+            raise ValueError(
+                _("Superuser Account: You must provide an email address")
+            )
 
         return self.create_user(email, password, **other_fields)
 
@@ -48,7 +50,9 @@ class CustomAccountManager(BaseUserManager):
             email = self.normalize_email(email)
             self.validateEmail(email)
         else:
-            raise ValueError(_("Customer Account: You must provide an email address"))
+            raise ValueError(
+                _("Customer Account: You must provide an email address")
+            )
 
         email = self.normalize_email(email)
         user = self.model(email=email, **other_fields)
@@ -59,8 +63,12 @@ class CustomAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email address"), unique=True)
-    first_name = models.CharField(_("first name"), max_length=20, blank=False, null=False)
-    last_name = models.CharField(_("last name"), max_length=20, blank=False, null=False)
+    first_name = models.CharField(
+        _("first name"), max_length=20, blank=False, null=False
+    )
+    last_name = models.CharField(
+        _("last name"), max_length=20, blank=False, null=False
+    )
     phone = models.CharField(max_length=20, blank=True)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
@@ -109,14 +117,20 @@ class Address(models.Model):
     """
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    customer = models.ForeignKey(Account, verbose_name=_("Account"), on_delete=models.CASCADE)
+    customer = models.ForeignKey(
+        Account, verbose_name=_("Account"), on_delete=models.CASCADE, null=True
+    )
     full_name = models.CharField(_("Full Name"), max_length=25)
     phone = models.CharField(_("Phone Number"), max_length=20)
     postal_code = models.CharField(_("Postal Code"), max_length=10)
     address_line1 = models.CharField(_("Address Line 1"), max_length=50)
-    address_line2 = models.CharField(_("Address Line 2"), max_length=50, blank=True)
+    address_line2 = models.CharField(
+        _("Address Line 2"), max_length=50, null=True, blank=True
+    )
     city_locality = models.CharField(_("Town/City"), max_length=50)
-    state_province = models.CharField(_("State/Province"), max_length=10, blank=True)
+    state_province = models.CharField(
+        _("State/Province"), max_length=10, blank=True
+    )
     country_code = models.CharField(
         _("Country"), max_length=2, default="US", choices=country_names.items()
     )
