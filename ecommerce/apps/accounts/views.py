@@ -1,6 +1,7 @@
 import logging
 
-from django.contrib import messages
+# from django.core import serializers
+# from django.contrib import messages
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
@@ -214,10 +215,16 @@ def delete_address(request, id):
 
 @login_required
 def set_default(request, id):
+    session = request.session
+    # print(f"{session.get('address')} is what's in the session")
     Address.objects.filter(pk=id).update(default=True)
+    address = Address.objects.get(pk=id)
+
+    session["address"] = address.toJSON()
+    # print(f"new active address: {session['address']}")
     Address.objects.exclude(pk=id).update(default=False)
     previous_url = request.META.get("HTTP_REFERER")
-
+    # print(f"{previous_url} is prev URL")
     if "delivery_address" in previous_url:
         return redirect("checkout:delivery_address")
 
