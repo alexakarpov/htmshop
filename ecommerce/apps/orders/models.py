@@ -29,7 +29,9 @@ class Order(models.Model):
     country_code = models.CharField(max_length=4, blank=True, default="US")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
-    # order_total = models.DecimalField(max_digits=7, decimal_places=2)
+    order_total = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True
+    )
     total_paid = models.DecimalField(max_digits=7, decimal_places=2)
     payment_option = models.CharField(max_length=200, blank=True)
     shipping_method = models.CharField(max_length=20)
