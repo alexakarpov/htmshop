@@ -40,12 +40,16 @@ def classify_order_add_items(order: Order, basket: Basket):
             order.kind = "ENL_OR_RED"
         elif sku.startswith("L-"):
             order.kind = "INCENSE" if order.kind == "GENERIC" else "ENL_OR_RED"
+        qty = item["qty"]
+        print(f"stock is {stock}, wrapping is { stock.wrapping_qty }")
+        stock.wrapping_remove(qty)
+        stock.save()
         OrderItem.objects.create(
             order_id=order.pk,
             title=item["title"],
             stock=stock,
             price=item["price"],
-            quantity=item["qty"],
+            quantity=qty,
         )
     order.save()
     return
@@ -103,7 +107,7 @@ def basket_update_delivery(request):
     basket = Basket(request)
     if request.POST.get("action") == "post":
         opts = request.POST.get("deliveryoption")
-        logger.debug(f"delivery option selected: {opts}")
+        print(f"delivery option selected: {opts}")
         [_, sprice, _, _] = opts.split("/")
         total = basket.get_total(sprice)
         total = str(total)
@@ -123,11 +127,6 @@ def basket_update_delivery(request):
 def delivery_address(request):
     session = request.session
     session["purchase"] = {}
-
-    # print(f"session data:\n{session}")
-    # print(f"session dir:\n{dir(session)}")
-    # print(f"session key:\n{session.session_key}")
-    # print(f"session's keys:\n{session.keys()}")
 
     if request.user.is_authenticated:
         addresses = Address.objects.filter(customer=request.user).order_by(
@@ -170,7 +169,7 @@ def delivery_address(request):
 
 
 def guest_address(request):
-    print(f"| checkout guest_address with {request.method}")
+    # print(f"| checkout guest_address with {request.method}")
 
     if request.method == "POST":
         session = request.session
@@ -197,8 +196,9 @@ def pay_later(request):
     _id, shipping_cost, tier, _days = (
         session.get("purchase").get("delivery_choice").split("/")
     )
-    total_s = session.get("purchase")["total"]
 
+    total_s = session.get("purchase")["total"]
+    # print(f"total_s is {total_s}")
     # refid = "".join(random.choices(string.ascii_lowercase, k=10))
 
     basket = Basket(request)
@@ -209,6 +209,7 @@ def pay_later(request):
 
     user = request.user
     total = float(total_s)
+    # print(f"total calculated in view as {total}")
     order = Order.objects.create(
         user=user if user.is_authenticated else None,
         phone=address_d.get("phone"),
@@ -220,7 +221,7 @@ def pay_later(request):
         postal_code=address_d.get("postal_code"),
         state_province=address_d.get("state_province"),
         country_code=address_d.get("country_code"),
-        order_total=total,
+        # order_total=total,
         total_paid=0,
         payment_option="Later",
         status="PROCESSING",
@@ -229,8 +230,11 @@ def pay_later(request):
     )
 
     classify_order_add_items(order, basket)
-
+    print("clearing the basket")
+    print(basket)
     basket.clear()
+    print("and now it is:")
+    print(basket)
 
     return JsonResponse({}, status=200)
 
@@ -296,7 +300,7 @@ def payment_with_token(request):
             city_locality=address_d.get("city_locality"),
             postal_code=address_d.get("postal_code"),
             country_code=address_d.get("country_code"),
-            order_total=float(total_s),
+            # order_total=float(total_s),
             total_paid=float(total_s),
             payment_option="Square",
             state_province=address_d.get("state_province"),
@@ -311,7 +315,6 @@ def payment_with_token(request):
             order=order, amount=float(total_s), comment="web full pay"
         )
 
-        logger.info(f"new order created: {order}, clearing the basket")
         basket.clear()
         response = JsonResponse({"result": result.body, "success": True})
 
