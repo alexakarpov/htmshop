@@ -63,9 +63,8 @@ def shipstation(request):
 @api_view(http_method_names=["GET"])
 def get_rates(request):
     basket = Basket(request)
-    logger.debug(f"get_rates: Basket>\n{basket}")
     address_d = json.loads(request.session["address"])
-    logger.debug(f"as a dict:\n{address_d}")
+    logger.warn(f"as a dict:\n{address_d}")
     choices = shipping_choices(basket, address_d)
 
     if len(choices) == 0:
