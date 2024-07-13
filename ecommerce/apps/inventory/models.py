@@ -83,12 +83,7 @@ class Stock(models.Model):
         return self.sku.find("x") != -1
 
     def is_our_book(self):
-        print(f"iob? {self.product.category}")
-        ours = Category.objects.get(slug='books-monastery')
-        # print(ours)
-        test =  self.product.category == Category.objects.get(slug='books-monastery')
-        print(test)
-        return test
+        return self.product.category == Category.objects.get(slug='books-monastery')
 
     def is_incense(self):
         return self.sku[0].upper() == "L"
