@@ -35,7 +35,7 @@ def init_shipment_dict():
                 # "usps_priority_mail_express",
                 # "usps_parcel_select",
                 # "usps_first_class_mail",
-                # "usps_media_mail", # add for books-only basket
+                # TODO: # "usps_media_mail", # add for books-only basket 
             ],
             "package_types": ["package"],
         },
@@ -63,32 +63,27 @@ def make_package(basketd: dict):
 
 def make_shipment(basketd, address_d):
     sd = init_shipment_dict()
-    # sd["shipment"]["ship_to"]["country_code"] = address.country
     sd["shipment"]["ship_to"] = address_d
     sd["shipment"]["packages"].append(make_package(basketd))
     return sd
 
 
 def get_rates(engine, shipment):
-    # print("=== SHIPMENT ===")
-    # print(shipment)
     return engine.get_rates_from_shipment(shipment)
 
 
 def shipping_choices(basket: Basket, address_d: dict):
+    # @TODO: if address is international, tiers may not work!
     shipment = make_shipment(basket, address_d)
-    logger.debug(f"built shipment:\n{shipment}")
+    logger.warn(f"built shipment:\n{shipment}")
     rates = []
 
     try:
         se_response = get_rates(shipengine, shipment)
         rates = se_response.get("rate_response").get("rates")
     except ShipEngineError as err:
+        logger.error("==== ERROR calling ShipEngine")
         logger.error(err.to_json())
-
-    # rates = None
-    # with open("shipping_jsons/get_rates_response.json", "r") as f:
-    #     rates = json.load(f).get("rate_response").get("rates")
 
     choices = list(map(lambda r: rate_to_choice(r), rates))
     return choices
