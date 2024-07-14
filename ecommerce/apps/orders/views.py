@@ -31,10 +31,7 @@ class OrderDetails(DetailView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         ctx_data = super().get_context_data(**kwargs)
-        outstanding = self.object.total() - self.object.total_paid
-        print(
-            f"outstanding is {outstanding} ({self.object.total()} minus {self.object.total_paid})"
-        )
+        outstanding = self.object.order_total - self.object.total_paid
         ctx_data["outstanding"] = (
             outstanding
         )
@@ -88,7 +85,7 @@ class Invoice(DetailView):
             f"({type(self.object)} total is {self.object.total()}, paid is {self.object.total_paid}"
         )
 
-        outstanding = self.object.total() - self.object.total_paid
+        outstanding = self.object.order_total - self.object.total_paid
         print(f"outstanding is {outstanding}")
         ctx_data["outstanding"] = outstanding
 
@@ -136,7 +133,7 @@ def add_payment(request):
     order = Order.objects.get(id=oid)
     p = Payment.objects.create(amount=amount, comment=comment, order=order)
     order.total_paid += amount
-    if order.total_paid >= order.total():
+    if order.total_paid >= order.order_total:
         order.status = "PROCESSING"
     order.save()
     return JsonResponse(
