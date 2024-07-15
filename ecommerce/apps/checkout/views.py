@@ -3,6 +3,8 @@ import logging
 import random
 import string
 
+from decimal import Decimal
+
 from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -197,19 +199,19 @@ def pay_later(request):
         session.get("purchase").get("delivery_choice").split("/")
     )
 
-    total_s = session.get("purchase")["total"]
+    # total_s = session.get("purchase")["total"]
     # print(f"total_s is {total_s}")
     # refid = "".join(random.choices(string.ascii_lowercase, k=10))
 
     basket = Basket(request)
+    subtotal = basket.get_subtotal_price()
     address_json = session["address"]
     address_d = json.loads(address_json)
 
     full_name = address_d.get("full_name")
 
     user = request.user
-    total = float(total_s)
-    # print(f"total calculated in view as {total}")
+
     order = Order.objects.create(
         user=user if user.is_authenticated else None,
         phone=address_d.get("phone"),
@@ -221,7 +223,8 @@ def pay_later(request):
         postal_code=address_d.get("postal_code"),
         state_province=address_d.get("state_province"),
         country_code=address_d.get("country_code"),
-        # order_total=total,
+        subtotal = subtotal,
+        order_total=Decimal(subtotal) + Decimal(shipping_cost),
         total_paid=0,
         payment_option="Later",
         status="PROCESSING",
@@ -230,11 +233,7 @@ def pay_later(request):
     )
 
     classify_order_add_items(order, basket)
-    print("clearing the basket")
-    print(basket)
     basket.clear()
-    print("and now it is:")
-    print(basket)
 
     return JsonResponse({}, status=200)
 

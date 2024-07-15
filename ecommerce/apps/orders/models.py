@@ -1,9 +1,8 @@
-import functools
 from typing import Any
 from django.conf import settings
 from django.db import models
-from datetime import date, datetime
-
+# from datetime import date, datetime
+from decimal import Decimal
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
@@ -29,6 +28,9 @@ class Order(models.Model):
     country_code = models.CharField(max_length=4, blank=True, default="US")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    subtotal = models.DecimalField(
+        max_digits=7, decimal_places=2, null=False, blank=False
+    )
     order_total = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True
     )
@@ -54,14 +56,6 @@ class Order(models.Model):
 
     def shipped(self):
         return self.status == "SHIPPED"
-
-    def subtotal(self):
-        return functools.reduce(
-            lambda s, i: i.quantity * i.stock.price + s, self.items.all(), 0
-        )
-
-    def total(self):
-        return self.subtotal() + self.shipping_cost
 
     def format_created_at(self):
         return self.created_at.strftime(SS_DT_FORMAT)
@@ -108,5 +102,5 @@ class Payment(models.Model):
 
 
 @receiver(pre_save, sender=Order)
-def adjust_order2(sender, instance, **kwargs):
-    instance.order_total = instance.total() + instance.shipping_cost
+def set_order_total(sender, instance, **kwargs):
+    instance.order_total = Decimal(instance.subtotal) + Decimal(instance.shipping_cost)
