@@ -44,6 +44,7 @@ class Order(models.Model):
     kind = models.CharField(
         choices=ORDER_KINDS, default="GENERIC", max_length=10
     )
+    is_phone_order = models.BooleanField(default=False)
 
     class Meta:
         ordering = ("-created_at",)
@@ -103,4 +104,6 @@ class Payment(models.Model):
 
 @receiver(pre_save, sender=Order)
 def set_order_total(sender, instance, **kwargs):
-    instance.order_total = Decimal(instance.subtotal) + Decimal(instance.shipping_cost)
+    if instance.order_total == 0:
+        instance.order_total = Decimal(instance.subtotal) + Decimal(instance.shipping_cost)
+    return
