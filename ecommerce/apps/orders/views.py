@@ -81,14 +81,8 @@ class Invoice(DetailView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         ctx_data = super().get_context_data(**kwargs)
-        print(
-            f"({type(self.object)} total is {self.object.total()}, paid is {self.object.total_paid}"
-        )
-
         outstanding = self.object.order_total - self.object.total_paid
-        print(f"outstanding is {outstanding}")
         ctx_data["outstanding"] = outstanding
-
         return ctx_data
 
 

@@ -16,6 +16,7 @@ class Order(models.Model):
         on_delete=models.CASCADE,
         related_name="order_user",
         null=True,
+        blank=True
     )
     full_name = models.CharField(max_length=150)
     email = models.EmailField(max_length=254)
@@ -45,6 +46,7 @@ class Order(models.Model):
         choices=ORDER_KINDS, default="GENERIC", max_length=10
     )
     is_phone_order = models.BooleanField(default=False)
+    is_bookstore_order = models.BooleanField(default=False)
 
     class Meta:
         ordering = ("-created_at",)
