@@ -1,4 +1,4 @@
-import json
+# import json
 from datetime import datetime
 from json import JSONEncoder
 
@@ -39,7 +39,7 @@ class ShippingChoice:
 
 def rate_to_choice(rate_d):
     # print(f"rate_d:{rate_d}")
-    print("###############")
+
     return ShippingChoice(
         rate_d.get("service_code"),
         rate_d.get("shipping_amount").get("amount"),
