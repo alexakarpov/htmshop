@@ -1,10 +1,12 @@
 from typing import Any
 from django.conf import settings
 from django.db import models
+
 # from datetime import date, datetime
 from decimal import Decimal
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from .utils import discount
 
 from ecommerce.apps.inventory.models import Stock
 from ecommerce.constants import ORDER_STATUS, ORDER_KINDS, SS_DT_FORMAT
@@ -16,7 +18,7 @@ class Order(models.Model):
         on_delete=models.CASCADE,
         related_name="order_user",
         null=True,
-        blank=True
+        blank=True,
     )
     full_name = models.CharField(max_length=150)
     email = models.EmailField(max_length=254)
@@ -37,7 +39,16 @@ class Order(models.Model):
     )
     total_paid = models.DecimalField(max_digits=7, decimal_places=2)
     payment_option = models.CharField(max_length=200, blank=True)
-    shipping_method = models.CharField(max_length=20)
+    shipping_method = models.CharField(
+        choices=[
+            ("REGULAR", "Regular"),
+            ("FAST", "Fast"),
+            ("EXPEDITED", "Expedited"),
+        ],
+        blank=False,
+        null=False,
+        max_length=20,
+    )
     shipping_cost = models.DecimalField(max_digits=5, decimal_places=2)
     status = models.CharField(
         choices=ORDER_STATUS, default="PENDING", max_length=10
@@ -66,6 +77,16 @@ class Order(models.Model):
     def format_updated_at(self):
         return self.updated_at.strftime(SS_DT_FORMAT)
 
+    def recalculate(self):
+        new_total = 0
+        for it in self.items.all():
+            new_price = discount(it)
+            it.price = new_price * it.quantity
+            it.save()
+            new_total += it.item_total()
+        self.order_total = new_total
+        self.save()
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(
@@ -77,7 +98,6 @@ class OrderItem(models.Model):
         Stock,
         on_delete=models.CASCADE,
         editable=False,
-        #   related_name='stock'
     )
 
     price = models.DecimalField(max_digits=7, decimal_places=2, editable=False)
@@ -106,6 +126,8 @@ class Payment(models.Model):
 
 @receiver(pre_save, sender=Order)
 def set_order_total(sender, instance, **kwargs):
-    if instance.order_total == 0:
-        instance.order_total = Decimal(instance.subtotal) + Decimal(instance.shipping_cost)
+    if instance.order_total <= 0:
+        instance.order_total = Decimal(instance.subtotal) + Decimal(
+            instance.shipping_cost
+        )
     return

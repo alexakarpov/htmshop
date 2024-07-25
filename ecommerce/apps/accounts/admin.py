@@ -61,7 +61,7 @@ class AccountAdmin(UserAdmin):
 
 class AddressAdmin(admin.ModelAdmin):
     model = Address
-    search_fields = ("full_name",)
+    search_fields = ("full_name","address_line1", "address_line2", "postal_code", "phone", "city_locality")
 
 
 admin.site.register(Account, AccountAdmin)
