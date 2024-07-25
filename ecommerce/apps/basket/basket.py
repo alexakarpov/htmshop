@@ -52,7 +52,6 @@ class Basket:
         Need to rewrite this, so that the template has access to the variants,
         which are not DB-based, but only live in the session.
         """
-        logger.debug("Basket.__iter__")
         skus = self.basket.keys()
         skus = Stock.objects.filter(sku__in=skus)
         basket = self.basket.copy()
@@ -69,14 +68,12 @@ class Basket:
         """
         Get the basket data and count the qty of items
         """
-        logger.debug("Basket.__len__")
         return sum(item["qty"] for item in self.basket.values())
 
     def update(self, sku, qty):
         """
         Update values in session data
         """
-        logger.debug("Basket.update")
         if sku in self.basket:
             self.basket[sku]["qty"] = qty
         self.save()
