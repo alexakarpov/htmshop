@@ -6,7 +6,6 @@ from django.db import models
 from decimal import Decimal
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from .utils import discount
 
 from ecommerce.apps.inventory.models import Stock
 from ecommerce.constants import ORDER_STATUS, ORDER_KINDS, SS_DT_FORMAT
@@ -76,16 +75,6 @@ class Order(models.Model):
 
     def format_updated_at(self):
         return self.updated_at.strftime(SS_DT_FORMAT)
-
-    def recalculate(self):
-        new_total = 0
-        for it in self.items.all():
-            new_price = discount(it)
-            it.price = new_price * it.quantity
-            it.save()
-            new_total += it.item_total()
-        self.order_total = new_total
-        self.save()
 
 
 class OrderItem(models.Model):

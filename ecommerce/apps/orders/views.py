@@ -56,17 +56,6 @@ def amend(request):
 
 
 @api_view(["POST"])
-def discount(request):
-    order_id = int(request.POST.get("oid"))
-    order = Order.objects.get(id = order_id)
-    
-    for i in order.items.all():
-        print(f"{i} was {i.price}")
-    order.recalculate()
-    order.save()
-    return JsonResponse({"success": True})
-
-@api_view(["POST"])
 def append(request):
     # print(f"append POST came in: { request.POST}")
     sku = request.POST.get("sku")

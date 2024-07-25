@@ -10,7 +10,6 @@ from .views import (
     add_payment,
     amend,
     append,
-    discount
 )
 
 app_name = "orders"
@@ -22,7 +21,6 @@ urlpatterns = [
     path("late/", LateOnPaymentOrders.as_view(), name="payment_late"),
     path("amend/", amend, name="amend"),
     path("append/", append, name="append"),
-    path("bookstore-discount", discount, name="bookstore-discount"),
     path("payment/", add_payment, name="add_payment"),
-    path("invoice/<int:pk>", Invoice.as_view(), name="invoice")
+    path("invoice/<int:pk>", Invoice.as_view(), name="invoice"),
 ]

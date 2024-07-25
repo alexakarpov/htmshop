@@ -190,32 +190,5 @@ $(document).on('click', '#fix-product-to-order-btn', function (e) {
       })
   })
 
-  $(document).on('click', '#bookstore-discount', function (e) {
-      e.preventDefault()
-      const oid = $('#orderid').val()
-      const d = {
-          oid,
-          csrfmiddlewaretoken: '{{csrf_token}}',
-          // action: 'post'
-      }
-      
-      $.ajax({
-          type: 'POST',
-          url: '{% url "orders:bookstore-discount" %}',
-          data: d,
-          success: function (json) {
-              $('#alertbox').show()
-              $('#alertbox').text('Discount applied')
-              setTimeout(function () {
-                  $('#alertbox').hide()
-                  window.location.reload()
-              }, 2000)
-          },
-          error: function (xhr, errmsg, err) {
-              console.error("Error", errmsg)
-          }
-      })
-  })
-
 </script>
 {% endblock content %}
