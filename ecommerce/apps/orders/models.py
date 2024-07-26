@@ -36,7 +36,7 @@ class Order(models.Model):
     order_total = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True
     )
-    total_paid = models.DecimalField(max_digits=7, decimal_places=2)
+    total_paid = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     payment_option = models.CharField(max_length=200, blank=True)
     shipping_method = models.CharField(
         choices=[
@@ -82,14 +82,12 @@ class OrderItem(models.Model):
         Order, related_name="items", on_delete=models.CASCADE
     )
     quantity = models.PositiveIntegerField(default=1)
-    title = models.CharField(max_length=100)  # "repeated"/denormalized, yes
-    stock = models.ForeignKey(
-        Stock,
-        on_delete=models.CASCADE,
-        editable=False,
+    title = models.CharField(max_length=100)
+    sku = models.CharField(verbose_name="Product SKU",
+        max_length=40
     )
 
-    price = models.DecimalField(max_digits=7, decimal_places=2, editable=False)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
 
     def item_total(self):
         return self.price * self.quantity
@@ -115,8 +113,5 @@ class Payment(models.Model):
 
 @receiver(pre_save, sender=Order)
 def set_order_total(sender, instance, **kwargs):
-    if instance.order_total <= 0:
-        instance.order_total = Decimal(instance.subtotal) + Decimal(
-            instance.shipping_cost
-        )
+    instance.order_total = Decimal(instance.subtotal) + Decimal(instance.shipping_cost)
     return
