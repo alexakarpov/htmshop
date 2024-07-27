@@ -22,7 +22,7 @@ class PrintOrders(ListView):
 
     def get_context_data(self, **kwargs):
         orders = Order.objects.filter(status__iexact="PROCESSING")
-        print(f"{orders.count()} orders to print")
+        # print(f"{orders.count()} orders to print")
         return {"orders": orders}
 
 
@@ -41,38 +41,6 @@ class OrderDetails(DetailView):
         # print(f"{products.count()} products to select")
         # print(ctx_data)
         return ctx_data
-
-
-@api_view(["POST"])
-def amend(request):
-    product_slug = request.POST.get("slug")
-    order_id = int(request.POST.get("order"))
-    order = Order.objects.get(id=order_id)
-    p = Product.objects.get(slug=product_slug)
-    stocks = p.get_skus()
-    skus = [stock.sku for stock in stocks.all()]
-
-    return JsonResponse({"skus": skus})
-
-
-@api_view(["POST"])
-def append(request):
-    # print(f"append POST came in: { request.POST}")
-    sku = request.POST.get("sku")
-    order_id = int(request.POST.get("order"))
-    qty = int(request.POST.get("qty"))
-    stock = Stock.objects.get(sku=sku)
-
-    order = Order.objects.get(id=order_id)
-    new_item = OrderItem()
-    new_item.order = order
-    new_item.quantity = qty
-    new_item.stock = stock
-    new_item.price = stock.price
-    new_item.title = stock.product.title
-    new_item.save()
-    order.save()
-    return JsonResponse({"success": True})
 
 
 class Invoice(DetailView):
@@ -139,8 +107,3 @@ def user_orders(request):
     user_id = request.user.id
     orders = Order.objects.filter(user_id=user_id)
     return orders
-
-
-def orders_of_kind(request, kind):
-    orders = Order.objects.filter(kind=kind)
-    return render(request, "orders/order_list.html", {"orders": orders})
