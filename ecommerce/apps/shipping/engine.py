@@ -1,11 +1,9 @@
-import json
 import logging
 
 from django.conf import settings
 from shipengine import ShipEngine
 from shipengine.errors import ShipEngineError
 
-from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import Basket, get_weight
 
 from .choice import rate_to_choice
