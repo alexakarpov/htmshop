@@ -45,26 +45,6 @@
                     <h4>Remains to pay: ${{ outstanding }}</h4>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    Fix a Product
-                    <select id="product-to-fix">
-                        {% for p in products %}<option value="{{ p.title |slugify }}">{{ p.title }}</option>{% endfor %}
-                    </select>
-                    <button type="button" id="fix-product-to-order-btn">Fix</button>
-                </td>
-                <td>Pick the SKU</td>
-                <td>
-                    <select id="stock-to-append"></select>
-                    <input type="number" size="5" value="1" id="howmany" style="width: 3rem;">
-                    <label for="howmany">quantity</label>
-                    <button type="button" id="append-stock" disabled>Add to order</button>
-                </td>
-            </tr>
-            <tr>
-                <button type="button" id="bookstore-discount">Apply bookstore discount</button>
-            </tr>
-    
         </table>
 
         <div class="row m-1 alert alert-success"
@@ -103,62 +83,6 @@
         {% endfor %}
     </div>
     <script>
-
-$(document).on('click', '#fix-product-to-order-btn', function (e) {
-    e.preventDefault()
-    const d = {
-      slug: $("#product-to-fix").val(),
-      order: "{{ order.id }}",
-      csrfmiddlewaretoken: '{{csrf_token}}',
-      action: 'post'
-    }
-
-    const fix_sku_url = '{% url "orders:amend" %}'
-    $.ajax({
-      type: 'POST',
-      url: fix_sku_url,
-      data: d,
-      success: function (json) {
-        const skus=json.skus
-        let select = $('#stock-to-append')
-        skus.forEach((s) => {
-            let opt = document.createElement('option')
-            opt.value = s
-            opt.innerText = s
-            select.append(opt)
-        })
-        $("#append-stock").prop('disabled', false)
-      },
-      error: function (xhr, errmsg, err) {
-        console.error("fix product POST failed", errmsg)
-      }
-    })
-  })
-
-  $(document).on('click', '#append-stock', function (e) {
-    e.preventDefault()
-    const toappend = $('#stock-to-append').val()
-    const data = {
-      qty: $('#howmany').val(),
-      sku: toappend,
-      order: "{{ order.id }}",
-      csrfmiddlewaretoken: '{{csrf_token}}',
-      action: 'post'
-    }
-    append_stock_url = '{% url "orders:append" %}'
-    $.ajax({
-      type: 'POST',
-      url: append_stock_url,
-      data,
-      success: function (json) {
-        window.location.reload()
-      },
-      error: function (xhr, errmsg, err) {
-        console.error("fix product POST failed", errmsg)
-      }
-    })
-
-  })
 
   $(document).on('click', '#add-payment', function (e) {
       e.preventDefault()
