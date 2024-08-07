@@ -4,9 +4,10 @@ version = "0.1.0"
 description = "ecommerce project HTM"
 authors = ["Alexandre Karpov <alexakarpov@gmail.com>"]
 license = "MIT"
+package-mode = false
 
 [tool.poetry.dependencies]
-python = ">=3.10.4, <4"
+python = ">=3.8.1, <4"
 gunicorn = "^20"
 python-dotenv = "^0.15"
 Pillow = "^9"
@@ -26,6 +27,7 @@ djlint = "^1.30.2"
 django-simple-history = "^3.3.0"
 django-admin-rangefilter = "^0.11.1"
 django-hijack = "^3.6.0"
+# shipstation = {git = "https://github.com/natecox/pyshipstation"}
 
 [tool.poetry.group.dev.dependencies]
 pytest-selenium = "^4.0.1"
