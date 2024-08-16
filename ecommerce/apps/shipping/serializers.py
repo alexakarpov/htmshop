@@ -1,10 +1,14 @@
 from rest_framework import serializers
 
-# from .choice import ShippingChoice
 
-
-class ShippingChoiceSerializer(serializers.Serializer):
+class ShippingChoiceSESerializer(serializers.Serializer):
     name = serializers.CharField()
     days = serializers.IntegerField()
     id = serializers.CharField()
+    price = serializers.FloatField()
+
+
+class ShippingChoiceSSSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    serviceCode = serializers.CharField()
     price = serializers.FloatField()

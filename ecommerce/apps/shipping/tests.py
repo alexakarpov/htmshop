@@ -12,9 +12,9 @@ from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import get_weight
 from ecommerce.apps.shipping.views import get_rates
 
-from .choice import ShippingChoice, rate_to_choice, split_tiers
-from .engine import make_shipment
-from .serializers import ShippingChoiceSerializer
+from .choice import ShippingChoiceSE, rate_to_choice, split_tiers_SE
+from .engine import make_SE_shipment
+from .serializers import ShippingChoiceSESerializer
 
 # import unittest
 
@@ -63,7 +63,7 @@ class SimpleTest(APITestCase):
         self.assertEqual(choices_j[0].get("id"), "se-1573559620")
 
     def test_make_shipment(self):
-        s = make_shipment(test_cart, test_address.to_dict())
+        s = make_SE_shipment(test_cart, test_address.to_dict())
         sd = s["shipment"]
         assert (
             sd["ship_from"]["company_name"] == "Holy Transfiguration Monastery"
@@ -104,7 +104,7 @@ class SimpleTest(APITestCase):
         }
 
         choices = list(map(lambda r: rate_to_choice(r), [r1, r2, r3]))
-        tiers = split_tiers(choices)
+        tiers = split_tiers_SE(choices)
         self.assertEqual(choices[0].price, 17.74)
         assert choices[0].name == "fedex_standard_overnight"
         assert tiers["regular"][0].name == "usps_priority_mail"
@@ -112,8 +112,8 @@ class SimpleTest(APITestCase):
         assert tiers["express"][0].name == "fedex_standard_overnight"
 
     def test_shipping_choice_seriaizer(self):
-        c = ShippingChoice("nameo", 21.99, "qwe123", 9)
-        ser = ShippingChoiceSerializer(c)
+        c = ShippingChoiceSE("nameo", 21.99, "qwe123", 9)
+        ser = ShippingChoiceSESerializer(c)
         assert ser.data.get("name") == "nameo"
         assert ser.data.get("price") == 21.99
         assert ser.data.get("id") == "qwe123"
@@ -130,7 +130,7 @@ class SimpleTest(APITestCase):
         )
 
         # TODO: work out a proper assertion
-        c1 = ShippingChoice.from_repr(
+        c1 = ShippingChoiceSE.from_repr(
             "usps_priority_mail/20.77/se-1573559617/2"
         )
         self.assertEqual(len(choices), 18)

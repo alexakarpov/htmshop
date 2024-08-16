@@ -121,12 +121,12 @@
              rc = response.choices[0]
              fc = response.choices[1]
              ec = response.choices[2]
-             $("#rregular").val(`${rc.id}/${rc.price}/${rc.name}/${rc.days}`)
-             $("#rfast").val(`${fc.id}/${fc.price}/${fc.name}/${fc.days}`)
-             $("#rexpress").val(`${ec.id}/${ec.price}/${ec.name}/${ec.days}`)
-             $("#regular-days").text(`Your order should arrive within ${maybePluralize(rc.days,'day')} once shipped`)
-             $("#fast-days").text(`Your order should arrive within ${maybePluralize(fc.days,'day')} once shipped`)
-             $("#express-days").text(`Your order should arrive within ${maybePluralize(ec.days,'day')} once shipped`)
+             $("#rregular").val(`${rc.serviceCode}/${rc.price}/${rc.name}`)
+             $("#rfast").val(`${fc.serviceCode}/${fc.price}/${fc.name}`)
+             $("#rexpress").val(`${ec.serviceCode}/${ec.price}/${ec.name}`)
+             // $("#regular-days").text(`Your order should arrive within ${maybePluralize(rc.days,'day')} once shipped`)
+             // $("#fast-days").text(`Your order should arrive within ${maybePluralize(fc.days,'day')} once shipped`)
+             // $("#express-days").text(`Your order should arrive within ${maybePluralize(ec.days,'day')} once shipped`)
          },
          error: function(error) {
              console.log(error)

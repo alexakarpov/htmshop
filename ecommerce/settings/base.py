@@ -112,17 +112,22 @@ DEFAULT_FROM_EMAIL = "info@thehtm.org"
 
 # shipping tiers
 MEDIA_MAIL = "usps_media_mail"
-EXPEDITED = [
+
+# Shipping
+
+EXPRESS = [
     "ups_next_day_air_saver",
     "fedex_standard_overnight",
 ]
 FAST = [
     "ups_2nd_day_air",
+    "usps_priority_mail_express",
     "fedex_2day_am",
     "fedex_2day",
 ]
 REGULAR = [
     "usps_priority_mail",
+    "usps_ground_advantage",
     "usps_first_class_mail",
     "fedex_express_saver",
     "ups_3_day_select",
@@ -132,8 +137,28 @@ REGULAR = [
     "usps_first_class_mail",
 ]
 
-# Shipping
+INTL_REGULAR = {
+    "usps_first_class_mail_international",
+    "globalpost_economy",
+    "ups_standard_international",
+}
+
+INTL_FAST = {
+    "ups_worldwide_expedited",
+    "usps_priority_mail_international",
+    "usps_priority_mail_express_international",
+    "globalpost_priority",
+    "gp_plus",
+}
+
+INTL_EXPRESS = {
+    "ups_worldwide_express",
+    "ups_worldwide_express_plus",
+    "ups_worldwide_saver",
+}
+
 SE_API_KEY = config["SE_API_KEY"]
+SS_GET_RATES_URL = "https://ssapi.shipstation.com/shipments/getrates"
 
 USPS_ID = "se-660215"
 FEDEX_ID = "se-660217"

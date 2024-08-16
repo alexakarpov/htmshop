@@ -108,8 +108,9 @@ def basket_update_delivery(request):
     basket = Basket(request)
     if request.POST.get("action") == "post":
         opts = request.POST.get("deliveryoption")
+
         print(f"delivery option selected: {opts}")
-        [_, sprice, _, _] = opts.split("/")
+        [_, sprice, name] = opts.split("/")
         total = basket.get_total(sprice)
         total = str(total)
         # token = hashlib.md5(str(basket).encode())
@@ -194,7 +195,7 @@ def guest_address(request):
 @api_view(["POST"])
 def pay_later(request):
     session = request.session
-    _id, shipping_cost, tier, _days = (
+    tier_code, shipping_cost, tier_name = (
         session.get("purchase").get("delivery_choice").split("/")
     )
 
@@ -222,13 +223,13 @@ def pay_later(request):
         postal_code=address_d.get("postal_code"),
         state_province=address_d.get("state_province"),
         country_code=address_d.get("country_code"),
-        subtotal = subtotal,
+        subtotal=subtotal,
         order_total=Decimal(subtotal) + Decimal(shipping_cost),
         total_paid=0,
         payment_option="Later",
         status="PROCESSING",
         shipping_cost=shipping_cost,
-        shipping_method=tier,
+        shipping_method=tier_name,
     )
 
     classify_order_add_items(order, basket)
@@ -241,7 +242,7 @@ def pay_later(request):
 @api_view(["POST"])
 def payment_with_token(request):
     session = request.session
-    _id, shipping_cost, tier, _days = (
+    _tier_code, shipping_cost, tier_name = (
         session.get("purchase").get("delivery_choice").split("/")
     )
 
@@ -298,20 +299,19 @@ def payment_with_token(request):
             city_locality=address_d.get("city_locality"),
             postal_code=address_d.get("postal_code"),
             country_code=address_d.get("country_code"),
-            # order_total=float(total_s),
             total_paid=float(total_s),
             payment_option="Square",
             state_province=address_d.get("state_province"),
             status="PROCESSING",
             shipping_cost=shipping_cost,
-            shipping_method=tier,
+            shipping_method=tier_name,
         )
 
         classify_order_add_items(order, basket)
 
-        p = Payment.objects.create(
-            order=order, amount=float(total_s), comment="web full pay"
-        )
+        # p = Payment.objects.create(
+        #     order=order, amount=float(total_s), comment="web full pay"
+        # )
 
         basket.clear()
         response = JsonResponse({"result": result.body, "success": True})

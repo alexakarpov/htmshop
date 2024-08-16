@@ -5,6 +5,7 @@ import simplejson as json
 from django.conf import settings
 
 from ecommerce.apps.inventory.models import Stock
+from ecommerce.constants import PACKING_WEIGHT_MULTIPLIER
 
 logger = logging.getLogger("django")
 
@@ -126,4 +127,4 @@ def get_weight(basket_ds):
         q = it["qty"]
         total += w * q
 
-    return float(total)
+    return float(total) * PACKING_WEIGHT_MULTIPLIER

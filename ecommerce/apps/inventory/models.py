@@ -53,8 +53,8 @@ class Stock(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, default=1.0)
 
     class Meta:
-        verbose_name = "Product Stock Record"
-        verbose_name_plural = "Inventory Stock Records"
+        verbose_name = "Stock Record"
+        verbose_name_plural = "Stock Records"
 
     # called only from inventory dashboard template
     def get_print_supply_count(self):

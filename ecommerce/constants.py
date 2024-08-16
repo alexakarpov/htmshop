@@ -991,3 +991,5 @@ idlookup = {
     997: "B-60",
     1000: "S-1",
 }
+
+PACKING_WEIGHT_MULTIPLIER = 1.22

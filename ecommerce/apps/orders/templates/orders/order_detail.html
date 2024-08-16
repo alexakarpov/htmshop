@@ -24,7 +24,7 @@
                     <h4>Sub-total: ${{ order.subtotal }}</h4>
                 </td>
                 <td>
-                    <h4>Shipping tier: {{ order.shipping_method }}</h4>
+                    <h4>Shipping tier: {{ order.get_shipping_method_display }}</h4>
                 </td>
                 <td>
                     <h4>Shipping cost: ${{ order.shipping_cost }}</h4>
