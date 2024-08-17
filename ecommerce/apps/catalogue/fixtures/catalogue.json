@@ -6475,7 +6475,7 @@
       "slug": "menaion-icon-set-of-12",
       "start_date": "2024-01-01",
       "is_active": true,
-      "is_featured": false,
+      "is_featured": true,
       "created_at": "2023-09-01T17:44:30.787Z",
       "image": "images/",
       "image2": "",
@@ -6590,7 +6590,7 @@
     "fields": {
       "category": 25,
       "title": "July",
-      "description": "<p>The <i>July</i> icon belongs to the Menaion set. Each of the icons in the Menaion set when purchased individually are sold for the standard price of an 11 x 14 enlargement. The entire set of Great Feast icons when purchased as a set comes with a discount. See <a href=\"https://www.bostonmonks.com/product_info.php/cPath/27_33/products_id/354\">here</a> for the full set.</p>\n<p>The 8 x 10 mounted icons are the standard size. All enlargements besides\nthe 11 x 14 size and reductions listed in the drop-down list are\nspecial orders and require up to four weeks to complete.</p>",
+      "description": "<p>The <i>July</i> icon belongs to the Menaion set. Each of the icons in the Menaion set when purchased individually are sold for the standard price of an 11 x 14 enlargement. The entire set of Great Feast icons when purchased as a set comes with a discount. See <a href=\"https://www.bostonmonks.com/product_info.php/cPath/27_33/products_id/354\">here</a> for the full set.</p>\r\n<p>The 8 x 10 mounted icons are the standard size. All enlargements besides\r\nthe 11 x 14 size and reductions listed in the drop-down list are\r\nspecial orders and require up to four weeks to complete.</p>",
       "slug": "july",
       "start_date": "2024-01-01",
       "is_active": true,

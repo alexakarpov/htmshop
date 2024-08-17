@@ -8617,7 +8617,7 @@
       "spec": "Standard size 6⅜\" x 10\"",
       "restock_point": 5,
       "target_amount": 15,
-      "wrapping_qty": 0,
+      "wrapping_qty": -1,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "20.21",
@@ -15577,7 +15577,7 @@
       "spec": "Standard size 6⅛\" x 10\"",
       "restock_point": 2,
       "target_amount": 4,
-      "wrapping_qty": 0,
+      "wrapping_qty": -4,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "19.40",
@@ -29272,7 +29272,7 @@
       "spec": "Standard size 6⅞\" x 10\"",
       "restock_point": 15,
       "target_amount": 35,
-      "wrapping_qty": 0,
+      "wrapping_qty": -1,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "21.94",
@@ -63592,7 +63592,7 @@
       "spec": "Standard size 6¾\" x 10\"",
       "restock_point": 5,
       "target_amount": 15,
-      "wrapping_qty": 0,
+      "wrapping_qty": -2,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "21.67",
@@ -63637,7 +63637,7 @@
       "spec": "13⅝\" x 20\"",
       "restock_point": 0,
       "target_amount": 0,
-      "wrapping_qty": 0,
+      "wrapping_qty": -1,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "86.68",
@@ -84931,39 +84931,9 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-420",
-    "fields": {
-      "product": "A-420",
-      "spec": "Standard size 7½\" x 10\"",
-      "restock_point": 0,
-      "target_amount": 0,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "289.86",
-      "price": "32.00"
-    }
-  },
-  {
-    "model": "inventory.stock",
-    "pk": "A-420.11x14M",
-    "fields": {
-      "product": "A-420",
-      "spec": "10⅝\" x 14\"",
-      "restock_point": 0,
-      "target_amount": 0,
-      "wrapping_qty": 0,
-      "sanding_qty": 0,
-      "painting_qty": 0,
-      "weight": "568.13",
-      "price": "75.00"
-    }
-  },
-  {
-    "model": "inventory.stock",
     "pk": "A-421",
     "fields": {
-      "product": "A-421",
+      "product": "A-420",
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -85203,7 +85173,7 @@
     "model": "inventory.stock",
     "pk": "A-422",
     "fields": {
-      "product": "A-422",
+      "product": "A-420",
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -85443,7 +85413,7 @@
     "model": "inventory.stock",
     "pk": "A-423",
     "fields": {
-      "product": "A-423",
+      "product": "A-420",
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -85683,7 +85653,7 @@
     "model": "inventory.stock",
     "pk": "A-424",
     "fields": {
-      "product": "A-424",
+      "product": "A-420",
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -85923,7 +85893,7 @@
     "model": "inventory.stock",
     "pk": "A-425",
     "fields": {
-      "product": "A-425",
+      "product": "A-420",
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -86163,7 +86133,7 @@
     "model": "inventory.stock",
     "pk": "A-426",
     "fields": {
-      "product": "A-426",
+      "product": "A-420",
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -86403,7 +86373,7 @@
     "model": "inventory.stock",
     "pk": "A-427",
     "fields": {
-      "product": "A-427",
+      "product": "A-420",
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -86643,7 +86613,7 @@
     "model": "inventory.stock",
     "pk": "A-428",
     "fields": {
-      "product": "A-428",
+      "product": "A-420",
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -86883,7 +86853,7 @@
     "model": "inventory.stock",
     "pk": "A-429",
     "fields": {
-      "product": "A-429",
+      "product": "A-420",
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -87363,7 +87333,7 @@
     "model": "inventory.stock",
     "pk": "A-430",
     "fields": {
-      "product": "A-430",
+      "product": "A-420",
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -87603,7 +87573,7 @@
     "model": "inventory.stock",
     "pk": "A-431",
     "fields": {
-      "product": "A-431",
+      "product": "A-420",
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -87843,7 +87813,7 @@
     "model": "inventory.stock",
     "pk": "A-432",
     "fields": {
-      "product": "A-432",
+      "product": "A-420",
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
@@ -96037,7 +96007,7 @@
       "spec": "Standard size 7\" x 10\"",
       "restock_point": 15,
       "target_amount": 30,
-      "wrapping_qty": 0,
+      "wrapping_qty": -1,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "22.21",
@@ -108994,13 +108964,13 @@
     "pk": "B-10",
     "fields": {
       "product": "B-10",
-      "spec": "",
+      "spec": null,
       "restock_point": 0,
       "target_amount": 0,
-      "wrapping_qty": 0,
+      "wrapping_qty": -2,
       "sanding_qty": 0,
       "painting_qty": 0,
-      "weight": "1.31",
+      "weight": "11.31",
       "price": "30.00"
     }
   },
@@ -109057,7 +109027,7 @@
       "spec": "",
       "restock_point": 0,
       "target_amount": 0,
-      "wrapping_qty": 0,
+      "wrapping_qty": -1,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "2.50",
@@ -109477,7 +109447,7 @@
       "spec": "",
       "restock_point": 0,
       "target_amount": 0,
-      "wrapping_qty": 0,
+      "wrapping_qty": -1,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "3.13",
