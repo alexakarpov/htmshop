@@ -115,6 +115,7 @@ MEDIA_MAIL = "usps_media_mail"
 
 # Shipping
 
+SE_ENABLED = True # otherwise, SS
 EXPRESS = [
     "ups_next_day_air_saver",
     "fedex_standard_overnight",
