@@ -20,7 +20,7 @@ class Stock(models.Model):
         verbose_name="specification", max_length=40, null=True, blank=True
     )
     sku = models.CharField(
-        verbose_name="Product SKU",
+        verbose_name="Stock SKU",
         help_text="Required",
         max_length=40,
         unique=True,
@@ -78,12 +78,14 @@ class Stock(models.Model):
 
     def is_print(self):
         return self.sku[-1].upper() == "P"
-    
+
     def is_enlargement(self):
         return self.sku.find("x") != -1
 
     def is_our_book(self):
-        return self.product.category == Category.objects.get(slug='books-monastery')
+        return self.product.category == Category.objects.get(
+            slug="books-monastery"
+        )
 
     def is_incense(self):
         return self.sku[0].upper() == "L"
@@ -146,7 +148,7 @@ class Stock(models.Model):
         return self.price * prct / 100
 
     def __str__(self):
-        return f"{self.sku} ({self.product.title})"
+        return f"{self.sku} ({self.product.title})"  # problem: Stocks can be parts of a set. or they can be individuals
 
 
 def get_or_create_stock_by_sku(sku: str) -> Stock:
