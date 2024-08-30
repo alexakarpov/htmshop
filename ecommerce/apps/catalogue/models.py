@@ -12,7 +12,6 @@ logger = logging.getLogger("django")
 
 
 class Category(MPTTModel):
-
     """
     Category Table implimented with mptt
     """
@@ -78,7 +77,9 @@ class Product(models.Model):
     )
     slug = models.SlugField(max_length=255, unique=True)
 
-    start_date = models.DateField(null=True, blank=True, help_text=_("When we've started selling this"))
+    start_date = models.DateField(
+        null=True, blank=True, help_text=_("When we've started selling this")
+    )
 
     sku_base = models.CharField(
         max_length=5, verbose_name="SKU base", primary_key=True
@@ -94,6 +95,12 @@ class Product(models.Model):
         verbose_name=_("Product is featured"),
         help_text=_("Flag product as featured"),
         default=False,
+    )
+
+    is_set = models.BooleanField(
+        default=False,
+        verbose_name=_("Product is a set"),
+        help_text=_("Flag product as a set"),
     )
 
     # additional_images = models.ForeignKey(ProductImage, null=True, on_delete=models.RESTRICT)
@@ -127,7 +134,6 @@ class Product(models.Model):
         upload_to="images/",
         max_length=255,
     )
-
 
     class Meta:
         ordering = ("-created_at",)
@@ -170,6 +176,7 @@ class Product(models.Model):
 #     class Meta:
 #         verbose_name = _("Product Image")
 #         verbose_name_plural = _("Product Images")
+
 
 @receiver(signals.pre_save, sender=Product)
 def product_slug_enforce_lower_case(sender, instance, **kwargs):
