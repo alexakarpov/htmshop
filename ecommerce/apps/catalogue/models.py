@@ -147,10 +147,17 @@ class Product(models.Model):
         """
         These are Stock items from the inventory app, related to this Product
         """
-        return self.stock_set.order_by(
-            # "spec",
-            "price",
-        )
+        # if it's a Set kind of product, we must return a single SKU, not 12,
+        # because they're not picking one of them here
+
+        if not self.is_set:
+            stocks = self.stock_set.order_by(
+                "price",
+            )
+        else:  # fetch the "fake" stock items
+            stocks = self.stock_set.all()
+
+        return stocks
 
     def __str__(self):
         return f"({self.sku_base}) {self.title}"

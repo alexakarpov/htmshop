@@ -52,6 +52,8 @@ class Stock(models.Model):
     )  # in ounces
     price = models.DecimalField(max_digits=10, decimal_places=2, default=1.0)
 
+    is_set = models.BooleanField(default=False)
+
     class Meta:
         verbose_name = "Stock Record"
         verbose_name_plural = "Stock Records"

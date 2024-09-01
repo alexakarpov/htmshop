@@ -27,6 +27,7 @@ def legacy_product(request, legacy_id, ignored=None):
     except Product.DoesNotExist:
         return redirect("catalogue:home")
 
+
 def catalogue_new(request):
     products = Product.objects.filter(is_active=True)
     logger.debug("catalogue new")
@@ -38,7 +39,7 @@ def catalogue_new(request):
 
 
 def category_list(request, category_slug=None, letter=None):
-    print(f"getting cat by slug {category_slug}")
+    # print(f"getting cat by slug {category_slug}")
     cat = get_object_or_404(Category, slug=category_slug)
 
     products = cat.product_set.all().order_by("title")
@@ -46,7 +47,7 @@ def category_list(request, category_slug=None, letter=None):
     # for c in category.get_descendants():
     #     products += list(c.product_set.all())
 
-    print(f"got {len(products)} products for {category_slug}")
+    # print(f"got {len(products)} products for {category_slug}")
 
     return render(
         request,
@@ -79,7 +80,8 @@ def product_detail(request, slug):
 
     product = get_object_or_404(Product, slug=slug, is_active=True)
     skus = product.get_skus()
-    logger.debug(f"fetched {len(skus)} skus")
+    # logger.warn(f"fetched {len(skus)} skus")
+
     return render(
         request,
         "catalogue/single.html",
