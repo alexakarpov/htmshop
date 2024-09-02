@@ -95,7 +95,7 @@ def product_detail(request, slug):
 
 
 def st_phanurius_book(request):
-    referrer = request.META.get("HTTP_REFERER")
+    # referrer = request.META.get("HTTP_REFERER")
     product = get_object_or_404(
         Product, slug=PHANURIUS_BOOK_SLUG, is_active=True
     )

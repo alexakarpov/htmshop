@@ -78,21 +78,21 @@
     <div class="row m-1 alert alert-success" role="alert" id="cartalertbox"></div>
   </div>
   <script>
-  // $(document).on('click', '.sku-picker', function (e) {
-  //   $('#add-button').prop('disabled', false)
-  // })
+  $(document).on('click', '.sku-picker', function (e) {
+    $('#add-button').prop('disabled', false)
+  })
 
-  // $(document).on('click', '#add-button', function (e) {
-  //   e.preventDefault()
-  //   let next = '{{referred}}'
-  //   const d = {
-  //     productqty: $('#quantity').val(),
-  //     price: $(".sku-picker:checked").data('price'),
-  //     sku: $(".sku-picker:checked").val(),
-  //     csrfmiddlewaretoken: '{{csrf_token}}',
-  //     action: 'post',
-  //     next
-  //   }
+  $(document).on('click', '#add-button', function (e) {
+    e.preventDefault()
+    let next = '{{referred}}'
+    const d = {
+      productqty: $('#quantity').val(),
+      price: $(".sku-picker:checked").data('price'),
+      sku: $(".sku-picker:checked").val(),
+      csrfmiddlewaretoken: '{{csrf_token}}',
+      action: 'post',
+      next
+    }
 
     $.ajax({
       type: 'POST',

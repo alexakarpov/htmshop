@@ -272,11 +272,11 @@ def payment_with_token(request):
         "reference_id": refid,
     }
 
-    logger.info(f"create_payment payload: {payload}")
+    # logger.info(f"create_payment payload: {payload}")
 
     result = square_client.payments.create_payment(body=payload)
 
-    logger.info(f"Square API call resulted in:\n{result.body}")
+    # logger.info(f"Square API call resulted in:\n{result.body}")
 
     if result.is_success():
         basket = Basket(request)
@@ -286,8 +286,8 @@ def payment_with_token(request):
         full_name = json.loads(address_json).get("full_name")
 
         user = request.user
-        print("---------------")
-        print(address_d)
+        # print("---------------")
+        # print(address_d)
         order = Order.objects.create(
             user=user if user.is_authenticated else None,
             full_name=full_name,
