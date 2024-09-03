@@ -124,9 +124,9 @@
              $("#rregular").val(`${rc.serviceCode}/${rc.price}/${rc.name}`)
              $("#rfast").val(`${fc.serviceCode}/${fc.price}/${fc.name}`)
              $("#rexpress").val(`${ec.serviceCode}/${ec.price}/${ec.name}`)
-             // $("#regular-days").text(`Your order should arrive within ${maybePluralize(rc.days,'day')} once shipped`)
-             // $("#fast-days").text(`Your order should arrive within ${maybePluralize(fc.days,'day')} once shipped`)
-             // $("#express-days").text(`Your order should arrive within ${maybePluralize(ec.days,'day')} once shipped`)
+             $("#regular-days").text(`Your order should arrive within ${maybePluralize(rc.days,'day')} once shipped`)
+             $("#fast-days").text(`Your order should arrive within ${maybePluralize(fc.days,'day')} once shipped`)
+             $("#express-days").text(`Your order should arrive within ${maybePluralize(ec.days,'day')} once shipped`)
          },
          error: function(error) {
              console.log(error)

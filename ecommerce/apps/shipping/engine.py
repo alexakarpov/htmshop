@@ -77,7 +77,9 @@ def make_SE_shipment(basketd, address_d):
 
 
 def get_rates(engine, shipment):
-    return engine.get_rates_from_shipment(shipment)
+    response = engine.get_rates_from_shipment(shipment)
+    logger.warn(f"SE returned:\n{response}")
+    return response
 
 
 def shipping_choices_SS(basket: Basket, address_d: dict):
@@ -314,3 +316,7 @@ SS_GET_RATES_RESPONSE = [
         "otherCost": 0.0,
     },
 ]
+
+# invalid rates response
+
+# request with customs info

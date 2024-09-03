@@ -2,9 +2,11 @@ import json
 import logging
 from datetime import date, datetime, timedelta
 
+from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.decorators import api_view
+# ,renderer_classes
 
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order
@@ -68,30 +70,32 @@ def shipstation(request):
 def get_rates(request):
     basket = Basket(request)
     address_d = json.loads(request.session["address"])
-    print(address_d)
     logger.warn(f"address dict:\n{address_d}")
-    # choices = shipping_choices_SE(basket, address_d)
-    choices = shipping_choices_SS(basket, address_d)
-    print(f"got {len(choices)} choices")
-    for c in choices:
-        print(f"choice: {c}")
+    if settings.SE_ENABLED:
+        choices = shipping_choices_SE(basket, address_d)
+    else:
+        choices = shipping_choices_SS(basket, address_d)
+
+    # for c in choices:
+    #     logger.warn(f"choice: {c}")
 
     if len(choices) == 0:
-        logger.error("no rates in SS response")
+        logger.error("no rates in response?")
         return JsonResponse({"choices": []})
 
-    tiers = split_tiers_SS(choices, address_d.get("country_code") != "US")
+    tiers = split_tiers_SE(choices, intl=address_d.get("country_code") != "US")
     if len(tiers) == 0:
-        logger.error("no rates in SS response")
+        logger.error("no rates in SS/SE response")
         return JsonResponse({"choices": []})
 
     logger.warn(f"Tiers are:{tiers}")
     e = sorted(tiers["express"])[0]
     r = sorted(tiers["regular"])[0]
     f = sorted(tiers["fast"])[0]
-    e.name = "Expedited"
+    # careful, magic words
+    e.name = "Express"
     f.name = "Fast"
-    r.name = "Economy"
-    serializer = ShippingChoiceSSSerializer([r, f, e], many=True)
+    r.name = "Regular"
+    serializer = ShippingChoiceSESerializer([r, f, e], many=True)
     sdata = serializer.data
     return JsonResponse({"choices": sdata})
