@@ -42,7 +42,7 @@ class Order(models.Model):
         choices=[
             ("REGULAR", "Regular"),
             ("FAST", "Fast"),
-            ("EXPEDITED", "Expedited"),
+            ("EXPRESS", "Express"),
         ],
         blank=False,
         null=False,

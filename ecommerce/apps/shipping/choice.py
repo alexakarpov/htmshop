@@ -68,9 +68,9 @@ def rate_to_choice(rate_d):
     )
 
 
-def split_tiers_SE(choices):
+def split_tiers_SE(choices, intl=False):
     reg = [x for x in choices if x.name in settings.REGULAR]
-    exp = [x for x in choices if x.name in settings.EXPEDITED]
+    exp = [x for x in choices if x.name in settings.EXPRESS]
     fas = [x for x in choices if x.name in settings.FAST]
 
     return {"regular": reg, "express": exp, "fast": fas}

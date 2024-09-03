@@ -51,6 +51,7 @@ def classify_order_add_items(order: Order, basket: Basket):
             title=item["title"],
             price=item["price"],
             quantity=qty,
+            sku=sku,
         )
     order.save()
     return
@@ -110,7 +111,7 @@ def basket_update_delivery(request):
         opts = request.POST.get("deliveryoption")
 
         print(f"delivery option selected: {opts}")
-        [_, sprice, name] = opts.split("/")
+        [_, sprice, _] = opts.split("/")
         total = basket.get_total(sprice)
         total = str(total)
         # token = hashlib.md5(str(basket).encode())
@@ -195,16 +196,11 @@ def guest_address(request):
 @api_view(["POST"])
 def pay_later(request):
     session = request.session
-    tier_code, shipping_cost, tier_name = (
+    _, shipping_cost, tier_name = (
         session.get("purchase").get("delivery_choice").split("/")
     )
 
-    # total_s = session.get("purchase")["total"]
-    # print(f"total_s is {total_s}")
-    # refid = "".join(random.choices(string.ascii_lowercase, k=10))
-
     basket = Basket(request)
-    subtotal = basket.get_subtotal_price()
     address_json = session["address"]
     address_d = json.loads(address_json)
 
@@ -223,13 +219,13 @@ def pay_later(request):
         postal_code=address_d.get("postal_code"),
         state_province=address_d.get("state_province"),
         country_code=address_d.get("country_code"),
-        subtotal=subtotal,
-        order_total=Decimal(subtotal) + Decimal(shipping_cost),
+        subtotal=basket.get_subtotal_price(),
+        # order_total=Decimal(subtotal) + Decimal(shipping_cost),
         total_paid=0,
         payment_option="Later",
         status="PROCESSING",
         shipping_cost=shipping_cost,
-        shipping_method=tier_name,
+        shipping_method=tier_name.upper(),
     )
 
     classify_order_add_items(order, basket)
@@ -241,12 +237,11 @@ def pay_later(request):
 # https://developer.squareup.com/forums/t/django-csrf-middleware-token-missing/6959
 @api_view(["POST"])
 def payment_with_token(request):
+    basket = Basket(request)
     session = request.session
-    _tier_code, shipping_cost, tier_name = (
-        session.get("purchase").get("delivery_choice").split("/")
-    )
+    choices = session.get("purchase").get("delivery_choice")
+    _, shipping_cost, tier_name = choices.split("/")
 
-    # print(f"shipping is: {shipping_cost}")
     token = request.data.get("payload").get("source_id")
     if not token:  # is it even possible though?
         logger.error("payment_with_token must have a token (source_id)")
@@ -286,8 +281,7 @@ def payment_with_token(request):
         full_name = json.loads(address_json).get("full_name")
 
         user = request.user
-        # print("---------------")
-        # print(address_d)
+
         order = Order.objects.create(
             user=user if user.is_authenticated else None,
             full_name=full_name,
@@ -304,7 +298,8 @@ def payment_with_token(request):
             state_province=address_d.get("state_province"),
             status="PROCESSING",
             shipping_cost=shipping_cost,
-            shipping_method=tier_name,
+            shipping_method=tier_name.upper(),
+            subtotal=Decimal(total_s),
         )
 
         classify_order_add_items(order, basket)

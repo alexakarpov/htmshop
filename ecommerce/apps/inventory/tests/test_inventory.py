@@ -13,7 +13,7 @@ from django.test import TestCase
 class InventoryTest(TestCase):
     fixtures = [
         "catalogue.json",
-        "inventory.json"
+        "test_inventory.json"
     ]
 
 

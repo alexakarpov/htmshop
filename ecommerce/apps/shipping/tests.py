@@ -1,20 +1,16 @@
 import json
 from unittest.mock import patch
 
-from django.conf import settings
-
 # Third-party imports...
 from rest_framework.test import APIRequestFactory, APITestCase
 
-import ecommerce
-
 from ecommerce.apps.accounts.models import Address
-from ecommerce.apps.basket.basket import get_weight
 from ecommerce.apps.shipping.views import get_rates
 
 from .choice import ShippingChoiceSE, rate_to_choice, split_tiers_SE
 from .engine import make_SE_shipment
 from .serializers import ShippingChoiceSESerializer
+from ecommerce.apps.shipping.engine import shipping_choices_SE
 
 # import unittest
 
@@ -57,9 +53,10 @@ class SimpleTest(APITestCase):
         view = get_rates
         assert Address.objects.count() == 1
         response = view(request)
+        print(f"RESPONSE CAME:\n{response.content}\n=======")
         choices_j = json.loads(response.content).get("choices")
         self.assertEqual(len(choices_j), 3)
-        self.assertEqual(choices_j[0].get("name"), "Economy")
+        self.assertEqual(choices_j[0].get("name"), "Regular")
         self.assertEqual(choices_j[0].get("id"), "se-1573559620")
 
     def test_make_shipment(self):
@@ -125,7 +122,7 @@ class SimpleTest(APITestCase):
             rresponse = json.load(f)
 
         mock_get_rates_from_shipment.return_value = rresponse
-        choices = ecommerce.apps.shipping.engine.shipping_choices(
+        choices = shipping_choices_SE(
             test_cart, test_address
         )
 

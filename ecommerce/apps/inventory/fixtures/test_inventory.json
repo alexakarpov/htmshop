@@ -1,0 +1,66 @@
+[
+    {
+      "model": "inventory.stock",
+      "pk": "A-122",
+      "fields": {
+        "product": "A-122",
+        "spec": "Standard size 7⅜\" x 10\"",
+        "restock_point": 15,
+        "target_amount": 30,
+        "wrapping_qty": 0,
+        "sanding_qty": 0,
+        "painting_qty": 0,
+        "weight": "23.51",
+        "price": "32.00",
+        "is_set": false
+      }
+    },
+    {
+      "model": "inventory.stock",
+      "pk": "A-9",
+      "fields": {
+        "product": "A-9",
+        "spec": "Standard size 8\" x 10\"",
+        "restock_point": 4,
+        "target_amount": 12,
+        "wrapping_qty": 5,
+        "sanding_qty": 0,
+        "painting_qty": 2,
+        "weight": "25.61",
+        "price": "32.00",
+        "is_set": false
+      }
+    },
+    {
+        "model": "inventory.stock",
+        "pk": "A-329",
+        "fields": {
+        "product": "A-329",
+        "spec": "Standard size 8½\" x 8\"",
+        "restock_point": 4,
+        "target_amount": 12,
+        "wrapping_qty": 0,
+        "sanding_qty": 0,
+        "painting_qty": 0,
+        "weight": "20.90",
+        "price": "32.00",
+        "is_set": false
+        }
+    },
+    {
+      "model": "inventory.stock",
+      "pk": "A-9P",
+      "fields": {
+        "product": "A-9",
+        "spec": "Standard size 8\" x 10\" print",
+        "restock_point": 5,
+        "target_amount": 25,
+        "wrapping_qty": 7,
+        "sanding_qty": 0,
+        "painting_qty": 0,
+        "weight": "0.86",
+        "price": "18.00",
+        "is_set": false
+      }
+    }
+]
