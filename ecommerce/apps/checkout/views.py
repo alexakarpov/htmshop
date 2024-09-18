@@ -43,7 +43,7 @@ def classify_order_add_items(order: Order, basket: Basket):
         elif sku.startswith("L-"):
             order.kind = "INCENSE" if order.kind == "GENERIC" else "ENL_OR_RED"
         qty = item["qty"]
-        print(f"stock is {stock}, wrapping is { stock.wrapping_qty }")
+
         stock.wrapping_remove(qty)
         stock.save()
         OrderItem.objects.create(
@@ -110,7 +110,7 @@ def basket_update_delivery(request):
     if request.POST.get("action") == "post":
         opts = request.POST.get("deliveryoption")
 
-        print(f"delivery option selected: {opts}")
+        # print(f"delivery option selected: {opts}")
         [_, sprice, _] = opts.split("/")
         total = basket.get_total(sprice)
         total = str(total)
@@ -123,8 +123,7 @@ def basket_update_delivery(request):
             session["purchase"]["total"] = total
 
         session.modified = True
-        response = JsonResponse({"total": total, "delivery_price": sprice})
-        return response
+        return JsonResponse({"total": total, "delivery_price": sprice})
 
 
 def delivery_address(request):
@@ -245,11 +244,9 @@ def payment_with_token(request):
     token = request.data.get("payload").get("source_id")
     if not token:  # is it even possible though?
         logger.error("payment_with_token must have a token (source_id)")
-        res = JsonResponse(
+        return JsonResponse(
             {"success": False, "message": "Token missing"}, status=400
         )
-        return res
-
     total_s = session.get("purchase")["total"]
     total_i = int(float(total_s) * 100)
 
@@ -309,9 +306,7 @@ def payment_with_token(request):
         # )
 
         basket.clear()
-        response = JsonResponse({"result": result.body, "success": True})
-
-        return response
+        return JsonResponse({"result": result.body, "success": True})
     else:
         logger.error(result.errors)
         return JsonResponse({"success": False, "message": result.text})
