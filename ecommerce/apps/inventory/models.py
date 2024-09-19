@@ -2,6 +2,7 @@ import logging
 import re
 from abc import ABC
 
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.core.validators import RegexValidator
@@ -59,14 +60,12 @@ class Stock(models.Model):
         verbose_name_plural = "Stock Records"
 
     # called only from inventory dashboard template
-    def get_print_supply_count(self):
+    def get_print_supply_count(self):  # sourcery skip: avoid-builtin-shadow
         """
         Print supply for a SKU such as A-9 is the number of A-9P units located in wrapping room
         """
         product_sku = self.sku
-        print_sku = (
-            product_sku + "P" if product_sku[-1] != "P" else product_sku
-        )
+        print_sku = f"{product_sku}P" if product_sku[-1] != "P" else product_sku
         logger.debug(f"stock of {product_sku} looking up {print_sku}")
         try:
             print = Stock.objects.get(sku=print_sku)
@@ -102,7 +101,15 @@ class Stock(models.Model):
         self.sanding_qty += qty
 
     def wrapping_remove(self, qty: int):
-        self.wrapping_qty -= qty
+        if self.is_set:
+            members = settings.SETS.get(self.sku)
+
+            for it in members:
+                stock = Stock.objects.get(pk=it)
+                stock.wrapping_remove -= qty
+        else:
+            # a regular item
+            self.wrapping_qty -= qty
 
     def painting_remove(self, qty: int):
         self.painting_qty -= qty
