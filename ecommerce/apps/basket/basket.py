@@ -23,7 +23,7 @@ class Basket:
             basket = self.session[settings.BASKET_SESSION_KEY] = {}
         self.basket = basket
 
-    def add(self, stock, qty, sku, price):
+    def add(self, stock: Stock, qty: int, sku: str, price: Decimal):
         """
         Adding and updating the users basket session data
         product: actually a Stock
@@ -40,7 +40,7 @@ class Basket:
                 "title": stock.product.title,
                 "price": price,
                 "qty": qty,
-                "spec": stock.spec if stock.spec else "",
+                "spec": stock.spec or "",
                 "weight": json.dumps(stock.weight),
             }
 
@@ -84,12 +84,11 @@ class Basket:
             item["price"] * item["qty"] for item in self.basket.values()
         )
 
-    def get_total(self, deliverycost=0):
+    def get_total(self, delivery_cost=0):
         subtotal = sum(
             item["price"] * item["qty"] for item in self.basket.values()
         )
-        total = round((subtotal + float(deliverycost)), 2)
-        return total
+        return round((subtotal + float(delivery_cost)), 2)
 
     def delete(self, sku):
         """

@@ -54,8 +54,6 @@ UserModel = get_user_model()
 
 @login_required
 def dashboard(request):
-    logger.debug(f"accounts - dashboard for {request.user}")
-
     return render(
         request,
         "accounts/dashboard/dashboard.html",
