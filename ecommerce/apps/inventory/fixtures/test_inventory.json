@@ -1,66 +1,84 @@
 [
-    {
-      "model": "inventory.stock",
-      "pk": "A-122",
-      "fields": {
-        "product": "A-122",
-        "spec": "Standard size 7⅜\" x 10\"",
-        "restock_point": 15,
-        "target_amount": 30,
-        "wrapping_qty": 0,
-        "sanding_qty": 0,
-        "painting_qty": 0,
-        "weight": "23.51",
-        "price": "32.00",
-        "is_set": false
-      }
-    },
-    {
-      "model": "inventory.stock",
-      "pk": "A-9",
-      "fields": {
-        "product": "A-9",
-        "spec": "Standard size 8\" x 10\"",
-        "restock_point": 4,
-        "target_amount": 12,
-        "wrapping_qty": 5,
-        "sanding_qty": 0,
-        "painting_qty": 2,
-        "weight": "25.61",
-        "price": "32.00",
-        "is_set": false
-      }
-    },
-    {
-        "model": "inventory.stock",
-        "pk": "A-329",
-        "fields": {
-        "product": "A-329",
-        "spec": "Standard size 8½\" x 8\"",
-        "restock_point": 4,
-        "target_amount": 12,
-        "wrapping_qty": 0,
-        "sanding_qty": 0,
-        "painting_qty": 0,
-        "weight": "20.90",
-        "price": "32.00",
-        "is_set": false
-        }
-    },
-    {
-      "model": "inventory.stock",
-      "pk": "A-9P",
-      "fields": {
-        "product": "A-9",
-        "spec": "Standard size 8\" x 10\" print",
-        "restock_point": 5,
-        "target_amount": 25,
-        "wrapping_qty": 7,
-        "sanding_qty": 0,
-        "painting_qty": 0,
-        "weight": "0.86",
-        "price": "18.00",
-        "is_set": false
-      }
+  {
+    "model": "catalogue.product",
+    "pk": "A-122",
+    "fields": {
+      "category": 1,
+      "title": "Test Icon Product",
+      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>See <a href=\"http://tyoos.org/Feasts-and-Saints-of-the-Day/Triodion/holy-thursday.html\" target=\"_blank\">www.tyoos.org</a> about this icon.</p>",
+      "slug": "test-icon",
+      "start_date": "2024-01-01",
+      "is_active": true,
+      "is_featured": false,
+      "is_set": false,
+      "created_at": "2023-09-01T17:44:28.334Z",
+      "image": "",
+      "image2": "",
+      "image3": ""
     }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-122",
+    "fields": {
+      "product": "A-122",
+      "spec": "Standard size 7⅜\" x 10\"",
+      "restock_point": 15,
+      "target_amount": 30,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "23.51",
+      "price": "32.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-9",
+    "fields": {
+      "product": "A-9",
+      "spec": "Standard size 8\" x 10\"",
+      "restock_point": 4,
+      "target_amount": 12,
+      "wrapping_qty": 5,
+      "sanding_qty": 0,
+      "painting_qty": 2,
+      "weight": "25.61",
+      "price": "32.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-329",
+    "fields": {
+      "product": "A-329",
+      "spec": "Standard size 8½\" x 8\"",
+      "restock_point": 4,
+      "target_amount": 12,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "20.90",
+      "price": "32.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-9P",
+    "fields": {
+      "product": "A-9",
+      "spec": "Standard size 8\" x 10\" print",
+      "restock_point": 5,
+      "target_amount": 25,
+      "wrapping_qty": 7,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "0.86",
+      "price": "18.00",
+      "is_set": false
+    }
+  }
 ]
