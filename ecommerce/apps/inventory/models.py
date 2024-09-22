@@ -105,8 +105,10 @@ class Stock(models.Model):
             members = settings.SETS.get(self.sku)
 
             for it in members:
-                stock = Stock.objects.get(pk=it)
-                stock.wrapping_remove -= qty
+                member_s = Stock.objects.get(pk=it)
+                print(f"###### removing {qty} of {member_s} for the set of {self.sku}")
+                member_s.wrapping_remove(qty)
+                member_s.save()
         else:
             # a regular item
             self.wrapping_qty -= qty

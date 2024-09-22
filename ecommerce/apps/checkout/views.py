@@ -112,7 +112,7 @@ def basket_update_delivery(request):
 
         # print(f"delivery option selected: {opts}")
         [_, sprice, _] = opts.split("/")
-        total = basket.get_total(sprice)
+        total = basket.get_total(delivery_cost=sprice)
         total = str(total)
         # token = hashlib.md5(str(basket).encode())
         session = request.session
