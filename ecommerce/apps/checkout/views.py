@@ -22,7 +22,7 @@ from ecommerce.apps.orders.models import Order, OrderItem, Payment
 
 config = dotenv_values()
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 # TODO: switch to prod
 square_client = Client(

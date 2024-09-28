@@ -14,7 +14,7 @@ SECRET_KEY = config["SECRET_KEY"]
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver","192.168.1.169"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver", "192.168.1.169"]
 
 DATABASES = {
     "default": {
@@ -35,19 +35,6 @@ MEDIA_ROOT = BASE_DIR / "media/"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {
-        "console": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console"],
-            "level": "INFO",
-            "propagate": True,
-        },
-    },
 }
 
 SQUARE_LOCATION_ID = "LCDT9FPECTMHA"
@@ -62,7 +49,7 @@ if DEBUG:
 
     # django-debug-toolbar
     INSTALLED_APPS.append("django_extensions")
-    INTERNAL_IPS = ("127.0.0.1","192.168.1.169")
+    INTERNAL_IPS = ("127.0.0.1", "192.168.1.169")
     MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
 
     INSTALLED_APPS += ("debug_toolbar",)

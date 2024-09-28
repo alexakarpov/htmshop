@@ -16615,7 +16615,7 @@
       "spec": "Standard size 6⅛\" x 10\"",
       "restock_point": 2,
       "target_amount": 4,
-      "wrapping_qty": 0,
+      "wrapping_qty": -1,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "19.40",
@@ -90604,7 +90604,7 @@
       "painting_qty": 0,
       "weight": "289.86",
       "price": "336.00",
-      "is_set": false
+      "is_set": true
     }
   },
   {
@@ -90620,6 +90620,22 @@
       "painting_qty": 0,
       "weight": "568.13",
       "price": "900.00",
+      "is_set": true
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-420P",
+    "fields": {
+      "product": "A-420",
+      "spec": "Large size (10⅝\" x 14\") prints",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "1.00",
+      "price": "660.00",
       "is_set": false
     }
   },
@@ -90631,7 +90647,7 @@
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "24.16",
@@ -90887,7 +90903,7 @@
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "24.32",
@@ -91143,7 +91159,7 @@
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "24.26",
@@ -91399,7 +91415,7 @@
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "24.21",
@@ -91655,7 +91671,7 @@
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "24.43",
@@ -91911,7 +91927,7 @@
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "23.99",
@@ -92167,7 +92183,7 @@
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "23.83",
@@ -92423,7 +92439,7 @@
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "23.99",
@@ -92679,7 +92695,7 @@
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "24.48",
@@ -93191,7 +93207,7 @@
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "24.16",
@@ -93447,7 +93463,7 @@
       "spec": "Standard size 7⅝\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "24.21",
@@ -93703,7 +93719,7 @@
       "spec": "Standard size 7½\" x 10\"",
       "restock_point": 4,
       "target_amount": 12,
-      "wrapping_qty": 0,
+      "wrapping_qty": -5,
       "sanding_qty": 0,
       "painting_qty": 0,
       "weight": "24.16",
@@ -116548,7 +116564,7 @@
     "pk": "B-45",
     "fields": {
       "product": "B-45",
-      "spec": "",
+      "spec": null,
       "restock_point": 0,
       "target_amount": 0,
       "wrapping_qty": 0,
@@ -116556,7 +116572,7 @@
       "painting_qty": 0,
       "weight": "35.83",
       "price": "1200.00",
-      "is_set": false
+      "is_set": true
     }
   },
   {
@@ -117932,7 +117948,7 @@
       "painting_qty": 0,
       "weight": "878.88",
       "price": "900.00",
-      "is_set": false
+      "is_set": true
     }
   },
   {
@@ -117948,7 +117964,7 @@
       "painting_qty": 0,
       "weight": "453.44",
       "price": "384.00",
-      "is_set": false
+      "is_set": true
     }
   },
   {

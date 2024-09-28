@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 import re
 
 from ecommerce.apps.catalogue.models import Product
-from ecommerce.constants import idlookup
+from ecommerce.constants import ID_LOOKUP
 
 LURE = '<a href="product_info\.php/products_id/(\d+)">([\w\s]+)</a>'
 href_pat = re.compile(LURE)
@@ -22,7 +22,7 @@ class Command(BaseCommand):
                 print(p.description)
                 id_in_href = int(m.group(1))
                 href_title = m.group(2)
-                linked_to_sku = idlookup.get(id_in_href)
+                linked_to_sku = ID_LOOKUP.get(id_in_href)
                 print(
                     f"\nit refers to id {linked_to_sku}, titled {href_title}"
                 )
