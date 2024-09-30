@@ -12,7 +12,7 @@ from ecommerce.apps.catalogue.models import Category, Product
 from ecommerce.constants import NEW_RE
 
 sku_reg = re.compile("([A-Z]+)-([0-9]+)")
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 
 class Stock(models.Model):

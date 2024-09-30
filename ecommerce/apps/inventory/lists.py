@@ -10,7 +10,7 @@ from ecommerce.apps.inventory.models import (
     get_print_supply_by_sku,
 )
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 
 def print_work():

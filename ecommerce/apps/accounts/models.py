@@ -15,7 +15,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from pytz import country_names
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 
 class CustomAccountManager(BaseUserManager):

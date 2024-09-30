@@ -8,7 +8,7 @@ from ecommerce.constants import ID_LOOKUP
 
 from .models import Category, Product
 
-# logger = logging.getLogger("django")
+# logger = logging.getLogger(__name__)
 logger = logging.getLogger(__name__)
 
 

@@ -6,6 +6,7 @@ from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
+
 # ,renderer_classes
 
 from ecommerce.apps.basket.basket import Basket
@@ -21,7 +22,7 @@ from ecommerce.constants import SS_DT_FORMAT
 from .serializers import ShippingChoiceSESerializer, ShippingChoiceSSSerializer
 from django.views.decorators.csrf import csrf_exempt
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 
 @csrf_exempt
@@ -70,16 +71,13 @@ def shipstation(request):
 def get_rates(request):
     basket = Basket(request)
     address_d = json.loads(request.session["address"])
-    logger.warn(f"address dict:\n{address_d}")
+    print("GERONIMO!")
+    logger.warning(f"address dict:\n{address_d}")
     if settings.SE_ENABLED:
         choices = shipping_choices_SE(basket, address_d)
     else:
         choices = shipping_choices_SS(basket, address_d)
-
-    # for c in choices:
-    #     logger.warn(f"choice: {c}")
-
-    if len(choices) == 0:
+    if choices and len(choices) == 0:
         logger.error("no rates in response?")
         return JsonResponse({"choices": []})
 
@@ -88,14 +86,20 @@ def get_rates(request):
         logger.error("no rates in SS/SE response")
         return JsonResponse({"choices": []})
 
-    logger.warn(f"Tiers are:{tiers}")
-    e = sorted(tiers["express"])[0]
-    r = sorted(tiers["regular"])[0]
-    f = sorted(tiers["fast"])[0]
-    # careful, magic words
-    e.name = "Express"
-    f.name = "Fast"
-    r.name = "Regular"
-    serializer = ShippingChoiceSESerializer([r, f, e], many=True)
-    sdata = serializer.data
-    return JsonResponse({"choices": sdata})
+    logger.warning(f"Tiers are:{tiers}")
+    all = []
+    for v in tiers.values():
+        all += v
+    if all:
+        e = sorted(tiers["express"])[0]
+        r = sorted(tiers["regular"])[0]
+        f = sorted(tiers["fast"])[0]
+        # careful, magic words
+        e.name = "Express"
+        f.name = "Fast"
+        r.name = "Regular"
+        serializer = ShippingChoiceSESerializer([r, f, e], many=True)
+        sdata = serializer.data
+        return JsonResponse({"choices": sdata})
+    else:
+        return JsonResponse({"choices": []})

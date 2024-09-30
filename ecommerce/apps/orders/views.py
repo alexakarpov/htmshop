@@ -13,7 +13,7 @@ from ecommerce.constants import DAYS_LATE
 
 from .models import Order, OrderItem, Payment
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 
 class PrintOrders(ListView):

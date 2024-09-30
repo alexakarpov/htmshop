@@ -110,9 +110,9 @@ def basket_update_delivery(request):
     if request.POST.get("action") == "post":
         opts = request.POST.get("deliveryoption")
 
-        # print(f"delivery option selected: {opts}")
-        [_, sprice, _] = opts.split("/")
-        total = basket.get_total(delivery_cost=sprice)
+        print(f"delivery option selected: {opts}")
+        [_, shipping_price, _] = opts.split("/")
+        total = basket.get_total(delivery_cost=shipping_price)
         total = str(total)
         # token = hashlib.md5(str(basket).encode())
         session = request.session
@@ -123,7 +123,7 @@ def basket_update_delivery(request):
             session["purchase"]["total"] = total
 
         session.modified = True
-        return JsonResponse({"total": total, "delivery_price": sprice})
+        return JsonResponse({"total": total, "delivery_price": shipping_price})
 
 
 def delivery_address(request):

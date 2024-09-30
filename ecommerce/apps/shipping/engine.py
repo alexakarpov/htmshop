@@ -12,7 +12,7 @@ from ecommerce.apps.basket.basket import Basket, get_weight
 
 from .choice import rate_to_choice, ShippingChoiceSS
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 shipengine = ShipEngine(
     {
@@ -78,8 +78,9 @@ def make_SE_shipment(basketd, address_d):
 
 def get_rates(engine, shipment):
     response = engine.get_rates_from_shipment(shipment)
-    logger.warn(f"SE returned:\n{response}")
-    return response
+    logger.warning(f"SE returned:\n{response}")
+    if response.get("rate_response").get("rates"):
+        return response
 
 
 def shipping_choices_SS(basket: Basket, address_d: dict):
@@ -87,7 +88,7 @@ def shipping_choices_SS(basket: Basket, address_d: dict):
     config = dotenv_values()
     auth = (config["SS_API_KEY"], config["SS_API_SECRET"])
     weight = get_weight(basket)
-    logger.warn(f"weight calculated as {weight}")
+    logger.warning(f"weight calculated as {weight}")
     ss_dict.update(
         {
             "weight": {"value": weight, "unit": "ounces"},
@@ -131,21 +132,22 @@ def shipping_choices_SS(basket: Basket, address_d: dict):
 
 
 def shipping_choices_SE(basket: Basket, address_d: dict):
-    # @TODO: if address is international, tiers may not work!
+    # @TODO: if address is international, need customs data
 
     shipment = make_SE_shipment(basket, address_d)
-    logger.warn(f"built shipment:\n{shipment}")
+    logger.warning(f"built shipment:\n{shipment}")
     rates = []
 
     try:
-        se_response = get_rates(shipengine, shipment)
-        rates = se_response.get("rate_response").get("rates")
+        if se_response := get_rates(shipengine, shipment):
+            rates = se_response.get("rate_response").get("rates")
+            return list(map(lambda r: rate_to_choice(r), rates))
+        else:
+            print("OOPS")
+            return []
     except ShipEngineError as err:
         logger.error("==== ERROR calling ShipEngine")
         logger.error(err.to_json())
-
-    choices = list(map(lambda r: rate_to_choice(r), rates))
-    return choices
 
 
 # these are just to quiet the code

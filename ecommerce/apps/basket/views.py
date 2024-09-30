@@ -7,7 +7,7 @@ from ecommerce.apps.inventory.models import Stock
 
 from .basket import Basket
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 
 def basket_summary(request):

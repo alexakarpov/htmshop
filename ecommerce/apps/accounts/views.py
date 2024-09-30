@@ -21,7 +21,7 @@ from .models import Address
 from .tokens import account_activation_token
 
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 UserModel = get_user_model()
 

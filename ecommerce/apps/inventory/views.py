@@ -26,7 +26,7 @@ from .utils import (
     move_stock_one_sku,
 )
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 
 def ts():

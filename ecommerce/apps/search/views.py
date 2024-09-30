@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 from ecommerce.apps.catalogue.models import Product
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 
 def search(request):

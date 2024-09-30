@@ -7,7 +7,7 @@ from django.conf import settings
 from ecommerce.apps.inventory.models import Stock
 from ecommerce.constants import PACKING_WEIGHT_MULTIPLIER
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 
 class Basket:

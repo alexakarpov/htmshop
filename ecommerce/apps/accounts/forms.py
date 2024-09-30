@@ -16,7 +16,7 @@ from pytz import country_names
 
 UserModel = get_user_model()
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 
 class UserAddressForm(forms.ModelForm):

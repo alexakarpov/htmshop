@@ -5,7 +5,7 @@ from ecommerce.apps.inventory.models import (
     get_or_create_stock_by_sku,
 )
 
-logger = logging.getLogger("django")
+logger = logging.getLogger(__name__)
 
 
 def move_stock_one_sku(sku: str, from_room: str = 'nowhere', to_room: str = 'nowhere',  qty: int = 1) -> Stock:
