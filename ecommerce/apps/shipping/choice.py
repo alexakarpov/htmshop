@@ -68,22 +68,26 @@ def rate_to_choice(rate_d):
     )
 
 
-def split_tiers_SE(choices, intl=False):
-    reg = [x for x in choices if x.name in settings.REGULAR]
-    exp = [x for x in choices if x.name in settings.EXPRESS]
-    fas = [x for x in choices if x.name in settings.FAST]
-
-    return {"regular": reg, "express": exp, "fast": fas}
-
-def split_tiers_SS(choices, intl=False):
-    print(f"splitting tiers from {choices} for intl {intl}")
-    if intl:
-        reg = [x for x in choices if x.serviceCode in settings.INTL_REGULAR]
-        exp = [x for x in choices if x.serviceCode in settings.INTL_EXPRESS]
-        fas = [x for x in choices if x.serviceCode in settings.INTL_FAST]
+def split_tiers_SE(choices, international=False):
+    if international:
+        regular = [x for x in choices if x.name in settings.INTL_REGULAR]
+        express = [x for x in choices if x.name in settings.INTL_EXPRESS]
+        fast = [x for x in choices if x.name in settings.INTL_FAST]
     else:
-        reg = [x for x in choices if x.serviceCode in settings.REGULAR]
-        exp = [x for x in choices if x.serviceCode in settings.EXPRESS]
-        fas = [x for x in choices if x.serviceCode in settings.FAST]
+        regular = [x for x in choices if x.name in settings.REGULAR]
+        express = [x for x in choices if x.name in settings.EXPRESS]
+        fast = [x for x in choices if x.name in settings.FAST]
 
-    return {"regular": reg, "express": exp, "fast": fas}
+    return {"regular": regular, "express": express, "fast": fast}
+
+def split_tiers_SS(choices, international=False):
+    if international:
+        regular = [x for x in choices if x.serviceCode in settings.INTL_REGULAR]
+        fast = [x for x in choices if x.serviceCode in settings.INTL_FAST]
+        express = [x for x in choices if x.serviceCode in settings.INTL_EXPRESS]
+    else:
+        regular = [x for x in choices if x.serviceCode in settings.REGULAR]
+        fast = [x for x in choices if x.serviceCode in settings.FAST]
+        express = [x for x in choices if x.serviceCode in settings.EXPRESS]
+
+    return {"regular": regular, "express": express, "fast": fast}
