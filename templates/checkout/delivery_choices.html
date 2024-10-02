@@ -117,15 +117,16 @@ $(document).ready(function() {
         type: 'GET',
         url: '/shipping/get-rates',
         success: function(response) {
-            console.log('$$$$$$$$$$$$$$')
-            console.log(response)
+            console.log('Choices in response:')
+            console.log(response.choices)
             $('#spinner').hide()
             rc = response.choices[0]
             fc = response.choices[1]
             ec = response.choices[2]
-            $("#rregular").val(`${rc.serviceCode}/${rc.price}/${rc.name}`)
-            $("#rfast").val(`${fc.serviceCode}/${fc.price}/${fc.name}`)
-            $("#rexpress").val(`${ec.serviceCode}/${ec.price}/${ec.name}`)
+            // SS uses 'serviceCode' in place of 'id'
+            $("#rregular").val(`${rc.id}/${rc.price}/${rc.name}`)
+            $("#rfast").val(`${fc.id}/${fc.price}/${fc.name}`)
+            $("#rexpress").val(`${ec.id}/${ec.price}/${ec.name}`)
             $("#regular-days").text(`Your order should arrive within ${maybePluralize(rc.days,'day')} once shipped`)
             $("#fast-days").text(`Your order should arrive within ${maybePluralize(fc.days,'day')} once shipped`)
             $("#express-days").text(`Your order should arrive within ${maybePluralize(ec.days,'day')} once shipped`)
@@ -136,26 +137,26 @@ $(document).ready(function() {
     })
 })
 
- $('input[type=radio]').on('change', function(e) {
-     e.preventDefault();
-     $.ajax({
-         type: "POST",
-         url: '{% url "checkout:basket_update_delivery" %}',
-         data: {
-             deliveryoption: $(this).val(),
-             csrfmiddlewaretoken: "{{csrf_token}}",
-             action: "post",
-         },
-         success: function (json) {
+$('input[type=radio]').on('change', function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: '{% url "checkout:basket_update_delivery" %}',
+        data: {
+            deliveryoption: $(this).val(),
+            csrfmiddlewaretoken: "{{csrf_token}}",
+            action: "post",
+        },
+        success: function (json) {
             console.log(json);
-             $('#to-payment').prop('disabled', false);
-             document.getElementById("total").innerHTML = '$' + json.total;
-             document.getElementById("delivery_price").innerHTML = '$' + json.delivery_price;
-         },
-         error: function (xhr, errmsg, err) {
-             console.error(errmsg);
-         },
-     });
- });
+            $('#to-payment').prop('disabled', false);
+            document.getElementById("total").innerHTML = '$' + json.total;
+            document.getElementById("delivery_price").innerHTML = '$' + json.delivery_price;
+        },
+        error: function (xhr, errmsg, err) {
+            console.error(errmsg);
+        },
+    });
+});
     </script>
 {% endblock content %}

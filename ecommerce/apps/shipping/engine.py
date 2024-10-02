@@ -65,25 +65,28 @@ def init_SE_shipment_dict():
     }
 
 
-def make_package(basketd: dict):
-    return {"weight": {"value": get_weight(basketd), "unit": "ounce"}}
+def make_package(basket_dict: dict):
+    return {"weight": {"value": get_weight(basket_dict), "unit": "ounce"}}
 
 
-def make_SE_shipment(basketd, address_d):
-    sd = init_SE_shipment_dict()
-    sd["shipment"]["ship_to"] = address_d
-    sd["shipment"]["packages"].append(make_package(basketd))
-    return sd
+def make_SE_shipment(basket_dict, address_dict):
+    shipment_dict = init_SE_shipment_dict()
+    shipment_dict["shipment"]["ship_to"] = address_dict
+    shipment_dict["shipment"]["packages"].append(make_package(basket_dict))
+
+    return shipment_dict
 
 
 def get_rates(engine, shipment):
     response = engine.get_rates_from_shipment(shipment)
     logger.warning(f"SE returned:\n{response}")
     if response.get("rate_response").get("rates"):
-        return response
+        return response.get("rate_response").get("rates")
+    else:
+        return response.get("rate_response").get("invalid_rates")
 
 
-def shipping_choices_SS(basket: Basket, address_d: dict):
+def shipping_choices_SS(basket: Basket, address_dict: dict):
     ss_dict = init_SS_dict
     config = dotenv_values()
     auth = (config["SS_API_KEY"], config["SS_API_SECRET"])
@@ -94,10 +97,10 @@ def shipping_choices_SS(basket: Basket, address_d: dict):
             "weight": {"value": weight, "unit": "ounces"},
             "packageCode": "package",
             "carrierCode": "stamps_com",
-            "toState": address_d["state_province"],
-            "toCity": address_d["city_locality"],
-            "toPostalCode": address_d["postal_code"],
-            "toCountry": address_d["country_code"],
+            "toState": address_dict["state_province"],
+            "toCity": address_dict["city_locality"],
+            "toPostalCode": address_dict["postal_code"],
+            "toCountry": address_dict["country_code"],
         }
     )
 
@@ -132,111 +135,21 @@ def shipping_choices_SS(basket: Basket, address_d: dict):
 
 
 def shipping_choices_SE(basket: Basket, address_d: dict):
-    # @TODO: if address is international, need customs data
-
     shipment = make_SE_shipment(basket, address_d)
-    logger.warning(f"built shipment:\n{shipment}")
-    rates = []
 
     try:
-        if se_response := get_rates(shipengine, shipment):
-            rates = se_response.get("rate_response").get("rates")
-            return list(map(lambda r: rate_to_choice(r), rates))
-        else:
-            print("OOPS")
-            return []
+        get_rates_response = get_rates(shipengine, shipment)
+        logger.warning("FULL SE RESPONSE:\n{get_rates_response}")
+        return list(map(lambda r: rate_to_choice(r), get_rates_response))
     except ShipEngineError as err:
         logger.error("==== ERROR calling ShipEngine")
         logger.error(err.to_json())
 
 
 # these are just to quiet the code
-true = True
-false = False
-null = None
-
-SS_GET_CARRIERS_RESPONSE = [
-    {
-        "name": "Stamps.com",
-        "code": "stamps_com",
-        "accountNumber": "frmichael",
-        "requiresFundedAccount": true,
-        "balance": 315.1316,
-        "nickname": "Stamps-FM",
-        "shippingProviderId": 127005,
-        "primary": true,
-    },
-    {
-        "name": "UPS",
-        "code": "ups",
-        "accountNumber": "039128",
-        "requiresFundedAccount": false,
-        "balance": 0.0,
-        "nickname": null,
-        "shippingProviderId": 265492,
-        "primary": true,
-    },
-    {
-        "name": "FedEx",
-        "code": "fedex",
-        "accountNumber": "200784219",
-        "requiresFundedAccount": false,
-        "balance": 0.0,
-        "nickname": "FEDEX",
-        "shippingProviderId": 142514,
-        "primary": true,
-    },
-    {
-        "name": "DHL Express from ShipStation",
-        "code": "dhl_express_worldwide",
-        "accountNumber": null,
-        "requiresFundedAccount": true,
-        "balance": 315.1316,
-        "nickname": "Stamps-FM",
-        "shippingProviderId": 162523,
-        "primary": true,
-    },
-    {
-        "name": "UPS by ShipStation",
-        "code": "ups_walleted",
-        "accountNumber": "F87387",
-        "requiresFundedAccount": true,
-        "balance": 315.1316,
-        "nickname": "Stamps-FM",
-        "shippingProviderId": 127012,
-        "primary": true,
-    },
-    {
-        "name": "SEKO LTL by ShipStation",
-        "code": "seko_ltl_walleted",
-        "accountNumber": null,
-        "requiresFundedAccount": true,
-        "balance": 315.1316,
-        "nickname": "Stamps-FM",
-        "shippingProviderId": 264642,
-        "primary": true,
-    },
-    {
-        "name": "DHL eCommerce by ShipStation",
-        "code": "dhl_ecommerce_wallet",
-        "accountNumber": "8781258a-e9f1-404c-81f9-cf1ae13472d1",
-        "requiresFundedAccount": true,
-        "balance": 315.1316,
-        "nickname": "Stamps-FM",
-        "shippingProviderId": 662913,
-        "primary": true,
-    },
-    {
-        "name": "GlobalPost",
-        "code": "globalpost",
-        "accountNumber": "72732fc7-76d9-4aea-a56c-b84dfd9b5114",
-        "requiresFundedAccount": true,
-        "balance": 315.1316,
-        "nickname": "Stamps-FM",
-        "shippingProviderId": 405013,
-        "primary": true,
-    },
-]
+# true = True
+# false = False
+# null = None
 
 SS_GET_RATES_RESPONSE = [
     {
@@ -319,6 +232,927 @@ SS_GET_RATES_RESPONSE = [
     },
 ]
 
-# invalid rates response
-
-# request with customs info
+# SE response with invalid rates
+{
+    "rate_response": {
+        "rates": [],
+        "invalid_rates": [
+            {
+                "rate_id": "se-5981118302",
+                "rate_type": "shipment",
+                "carrier_id": "se-660216",
+                "shipping_amount": {"currency": "usd", "amount": 116.56},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 25.35},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "Shipping",
+                        "carrier_billing_code": "BaseServiceCharge",
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 116.56},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "fuel_charge",
+                        "carrier_description": "Fuel Surcharge",
+                        "carrier_billing_code": "375",
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 25.35},
+                        "billing_source": "Carrier",
+                    },
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 1,
+                "guaranteed_service": True,
+                "estimated_delivery_date": "2024-10-01T13:30:00Z",
+                "carrier_delivery_days": "Tuesday 10/1 by 01:30 PM",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "UPS Worldwide Express®",
+                "service_code": "ups_worldwide_express",
+                "trackable": True,
+                "carrier_code": "ups",
+                "carrier_nickname": "ShipEngine Test Account - UPS",
+                "carrier_friendly_name": "UPS",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118303",
+                "rate_type": "shipment",
+                "carrier_id": "se-660216",
+                "shipping_amount": {"currency": "usd", "amount": 104.93},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 22.82},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "Shipping",
+                        "carrier_billing_code": "BaseServiceCharge",
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 104.93},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "fuel_charge",
+                        "carrier_description": "Fuel Surcharge",
+                        "carrier_billing_code": "375",
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 22.82},
+                        "billing_source": "Carrier",
+                    },
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 2,
+                "guaranteed_service": True,
+                "estimated_delivery_date": "2024-10-02T23:30:00Z",
+                "carrier_delivery_days": "Wednesday 10/2 by 11:30 PM",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "UPS Worldwide Expedited®",
+                "service_code": "ups_worldwide_expedited",
+                "trackable": True,
+                "carrier_code": "ups",
+                "carrier_nickname": "ShipEngine Test Account - UPS",
+                "carrier_friendly_name": "UPS",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118304",
+                "rate_type": "shipment",
+                "carrier_id": "se-660216",
+                "shipping_amount": {"currency": "usd", "amount": 25.41},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 4.95},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "Shipping",
+                        "carrier_billing_code": "BaseServiceCharge",
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 25.41},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "fuel_charge",
+                        "carrier_description": "Fuel Surcharge",
+                        "carrier_billing_code": "375",
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 4.95},
+                        "billing_source": "Carrier",
+                    },
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 3,
+                "guaranteed_service": True,
+                "estimated_delivery_date": "2024-10-03T23:30:00Z",
+                "carrier_delivery_days": "Thursday 10/3 by 11:30 PM",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "UPS Standard®",
+                "service_code": "ups_standard_international",
+                "trackable": True,
+                "carrier_code": "ups",
+                "carrier_nickname": "ShipEngine Test Account - UPS",
+                "carrier_friendly_name": "UPS",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118305",
+                "rate_type": "shipment",
+                "carrier_id": "se-660216",
+                "shipping_amount": {"currency": "usd", "amount": 116.56},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 25.35},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "Shipping",
+                        "carrier_billing_code": "BaseServiceCharge",
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 116.56},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "fuel_charge",
+                        "carrier_description": "Fuel Surcharge",
+                        "carrier_billing_code": "375",
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 25.35},
+                        "billing_source": "Carrier",
+                    },
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 1,
+                "guaranteed_service": True,
+                "estimated_delivery_date": "2024-10-01T10:30:00Z",
+                "carrier_delivery_days": "Tuesday 10/1 by 10:30 AM",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "UPS Worldwide Express Plus®",
+                "service_code": "ups_worldwide_express_plus",
+                "trackable": True,
+                "carrier_code": "ups",
+                "carrier_nickname": "ShipEngine Test Account - UPS",
+                "carrier_friendly_name": "UPS",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118306",
+                "rate_type": "shipment",
+                "carrier_id": "se-660216",
+                "shipping_amount": {"currency": "usd", "amount": 112.07},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 24.38},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "Shipping",
+                        "carrier_billing_code": "BaseServiceCharge",
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 112.07},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "fuel_charge",
+                        "carrier_description": "Fuel Surcharge",
+                        "carrier_billing_code": "375",
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 24.38},
+                        "billing_source": "Carrier",
+                    },
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 1,
+                "guaranteed_service": True,
+                "estimated_delivery_date": "2024-10-01T23:30:00Z",
+                "carrier_delivery_days": "Tuesday 10/1 by 11:30 PM",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "UPS Worldwide Saver®",
+                "service_code": "ups_worldwide_saver",
+                "trackable": True,
+                "carrier_code": "ups",
+                "carrier_nickname": "ShipEngine Test Account - UPS",
+                "carrier_friendly_name": "UPS",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118307",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {"currency": "usd", "amount": 118.26},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 6.96},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "uncategorized",
+                        "carrier_description": "Demand Surcharge",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 1.0},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "fuel_charge",
+                        "carrier_description": "Fuel",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 5.96},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "Total Net Freight",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 118.26},
+                        "billing_source": "Carrier",
+                    },
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 1,
+                "guaranteed_service": False,
+                "estimated_delivery_date": "2024-10-01T12:00:00Z",
+                "carrier_delivery_days": "Tuesday 10/1 by 12:00 PM",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "FedEx International Priority Express®",
+                "service_code": "fedex_international_priority_express",
+                "trackable": True,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118308",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {"currency": "usd", "amount": 112.95},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 10.9},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "uncategorized",
+                        "carrier_description": "Demand Surcharge",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 5.0},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "fuel_charge",
+                        "carrier_description": "Fuel",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 5.9},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "Total Net Freight",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 112.95},
+                        "billing_source": "Carrier",
+                    },
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 1,
+                "guaranteed_service": False,
+                "estimated_delivery_date": "2024-10-01T17:00:00Z",
+                "carrier_delivery_days": "Tuesday 10/1 by 05:00 PM",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "FedEx International Priority®",
+                "service_code": "fedex_international_priority",
+                "trackable": False,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118309",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {"currency": "usd", "amount": 106.69},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 6.38},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "uncategorized",
+                        "carrier_description": "Demand Surcharge",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 1.0},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "fuel_charge",
+                        "carrier_description": "Fuel",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 5.38},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "Total Net Freight",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 106.69},
+                        "billing_source": "Carrier",
+                    },
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 2,
+                "guaranteed_service": False,
+                "estimated_delivery_date": "2024-10-02T17:00:00Z",
+                "carrier_delivery_days": "Wednesday 10/2 by 05:00 PM",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "FedEx International Economy®",
+                "service_code": "fedex_international_economy",
+                "trackable": True,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118310",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {"currency": "usd", "amount": 98.69},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 4.93},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "fuel_charge",
+                        "carrier_description": "Fuel",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 4.93},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "Total Net Freight",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 98.69},
+                        "billing_source": "Carrier",
+                    },
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 3,
+                "guaranteed_service": False,
+                "estimated_delivery_date": "2024-10-03T22:00:00Z",
+                "carrier_delivery_days": "Thursday 10/3 by 10:00 PM",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "FedEx International Connect Plus®",
+                "service_code": "fedex_international_connect_plus",
+                "trackable": False,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118311",
+                "rate_type": "shipment",
+                "carrier_id": "se-660217",
+                "shipping_amount": {"currency": "usd", "amount": 25.45},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 1.65},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "fuel_charge",
+                        "carrier_description": "FedEx Ground Fuel",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 1.65},
+                        "billing_source": "Carrier",
+                    },
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "Total Net Freight",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 25.45},
+                        "billing_source": "Carrier",
+                    },
+                ],
+                "zone": 51,
+                "package_type": "package",
+                "delivery_days": 3,
+                "guaranteed_service": False,
+                "estimated_delivery_date": "2024-10-03T23:59:00Z",
+                "carrier_delivery_days": "3",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "FedEx International Ground®",
+                "service_code": "fedex_ground_international",
+                "trackable": True,
+                "carrier_code": "fedex",
+                "carrier_nickname": "ShipEngine Test Account - FedEx",
+                "carrier_friendly_name": "FedEx",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118312",
+                "rate_type": "shipment",
+                "carrier_id": "se-660215",
+                "shipping_amount": {"currency": "usd", "amount": 16.46},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 0.0},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "shipping",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 16.46},
+                        "billing_source": "Carrier",
+                    }
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": None,
+                "guaranteed_service": False,
+                "estimated_delivery_date": None,
+                "carrier_delivery_days": None,
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "USPS First Class Mail Intl",
+                "service_code": "usps_first_class_mail_international",
+                "trackable": False,
+                "carrier_code": "stamps_com",
+                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+                "carrier_friendly_name": "Stamps.com",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118313",
+                "rate_type": "shipment",
+                "carrier_id": "se-660215",
+                "shipping_amount": {"currency": "usd", "amount": 40.91},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 0.0},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "shipping",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 40.91},
+                        "billing_source": "Carrier",
+                    }
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 10,
+                "guaranteed_service": False,
+                "estimated_delivery_date": "2024-10-10T00:00:00Z",
+                "carrier_delivery_days": "6 - 10",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "USPS Priority Mail Intl",
+                "service_code": "usps_priority_mail_international",
+                "trackable": False,
+                "carrier_code": "stamps_com",
+                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+                "carrier_friendly_name": "Stamps.com",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118314",
+                "rate_type": "shipment",
+                "carrier_id": "se-660215",
+                "shipping_amount": {"currency": "usd", "amount": 57.32},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 0.0},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "shipping",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 57.32},
+                        "billing_source": "Carrier",
+                    }
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 5,
+                "guaranteed_service": False,
+                "estimated_delivery_date": "2024-10-05T00:00:00Z",
+                "carrier_delivery_days": "3 - 5",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "USPS Priority Mail Express Intl",
+                "service_code": "usps_priority_mail_express_international",
+                "trackable": False,
+                "carrier_code": "stamps_com",
+                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+                "carrier_friendly_name": "Stamps.com",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118315",
+                "rate_type": "shipment",
+                "carrier_id": "se-660215",
+                "shipping_amount": {"currency": "usd", "amount": 13.04},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 0.0},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "shipping",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 13.04},
+                        "billing_source": "Carrier",
+                    }
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 14,
+                "guaranteed_service": False,
+                "estimated_delivery_date": "2024-10-14T00:00:00Z",
+                "carrier_delivery_days": "7-14",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "GlobalPost Economy Intl",
+                "service_code": "globalpost_economy",
+                "trackable": False,
+                "carrier_code": "stamps_com",
+                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+                "carrier_friendly_name": "Stamps.com",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118316",
+                "rate_type": "shipment",
+                "carrier_id": "se-660215",
+                "shipping_amount": {"currency": "usd", "amount": 12.69},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 0.0},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "shipping",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 12.69},
+                        "billing_source": "Carrier",
+                    }
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 10,
+                "guaranteed_service": False,
+                "estimated_delivery_date": "2024-10-10T00:00:00Z",
+                "carrier_delivery_days": "6-10",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "GlobalPost Standard Intl",
+                "service_code": "globalpost_priority",
+                "trackable": False,
+                "carrier_code": "stamps_com",
+                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+                "carrier_friendly_name": "Stamps.com",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+            {
+                "rate_id": "se-5981118317",
+                "rate_type": "shipment",
+                "carrier_id": "se-660215",
+                "shipping_amount": {"currency": "usd", "amount": 11.5},
+                "insurance_amount": {"currency": "usd", "amount": 0.0},
+                "confirmation_amount": {"currency": "usd", "amount": 0.0},
+                "other_amount": {"currency": "usd", "amount": 0.0},
+                "requested_comparison_amount": {
+                    "currency": "usd",
+                    "amount": 0.0,
+                },
+                "rate_details": [
+                    {
+                        "rate_detail_type": "shipping",
+                        "carrier_description": "shipping",
+                        "carrier_billing_code": None,
+                        "carrier_memo": None,
+                        "amount": {"currency": "usd", "amount": 11.5},
+                        "billing_source": "Carrier",
+                    }
+                ],
+                "zone": None,
+                "package_type": "package",
+                "delivery_days": 5,
+                "guaranteed_service": False,
+                "estimated_delivery_date": "2024-10-05T00:00:00Z",
+                "carrier_delivery_days": "3-5",
+                "ship_date": "2024-09-30T00:00:00Z",
+                "negotiated_rate": False,
+                "service_type": "GlobalPost Plus",
+                "service_code": "gp_plus",
+                "trackable": False,
+                "carrier_code": "stamps_com",
+                "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+                "carrier_friendly_name": "Stamps.com",
+                "validation_status": "invalid",
+                "warning_messages": [],
+                "error_messages": [
+                    "No customs items have been created for international order."
+                ],
+            },
+        ],
+        "rate_request_id": "se-851476958",
+        "shipment_id": "se-1504763950",
+        "created_at": "2024-09-30T05:09:40.6337917Z",
+        "status": "completed",
+        "errors": [],
+    },
+    "shipment_id": "se-1504763950",
+    "carrier_id": None,
+    "service_code": None,
+    "external_shipment_id": None,
+    "shipment_number": None,
+    "ship_date": "2024-09-30T00:00:00Z",
+    "created_at": "2024-09-30T05:09:36.293Z",
+    "modified_at": "2024-09-30T05:09:36.28Z",
+    "shipment_status": "pending",
+    "ship_to": {
+        "geolocation": None,
+        "instructions": "",
+        "name": "",
+        "phone": "6478936710",
+        "email": None,
+        "company_name": None,
+        "address_line1": "250 Cassandra Blvd",
+        "address_line2": "apt 232",
+        "address_line3": None,
+        "city_locality": "Toronto",
+        "state_province": "ON",
+        "postal_code": "M3A1T8",
+        "country_code": "CA",
+        "address_residential_indicator": "unknown",
+    },
+    "ship_from": {
+        "instructions": None,
+        "name": "Shipping department",
+        "phone": "617-734-0608",
+        "email": None,
+        "company_name": "Holy Transfiguration Monastery",
+        "address_line1": "278 Warren St",
+        "address_line2": None,
+        "address_line3": None,
+        "city_locality": "Brookline",
+        "state_province": "MA",
+        "postal_code": "02445",
+        "country_code": "US",
+        "address_residential_indicator": "no",
+    },
+    "warehouse_id": None,
+    "return_to": {
+        "instructions": None,
+        "name": "Shipping department",
+        "phone": "617-734-0608",
+        "email": None,
+        "company_name": "Holy Transfiguration Monastery",
+        "address_line1": "278 Warren St",
+        "address_line2": None,
+        "address_line3": None,
+        "city_locality": "Brookline",
+        "state_province": "MA",
+        "postal_code": "02445",
+        "country_code": "US",
+        "address_residential_indicator": "no",
+    },
+    "is_return": False,
+    "confirmation": "none",
+    "customs": {
+        "contents": "merchandise",
+        "contents_explanation": None,
+        "customs_items": [],
+        "non_delivery": "return_to_sender",
+        "buyer_shipping_amount_paid": None,
+        "duties_paid": None,
+        "terms_of_trade_code": None,
+        "declaration": None,
+        "invoice_additional_details": {
+            "freight_charge": None,
+            "insurance_charge": None,
+            "other_charge": None,
+            "other_charge_description": None,
+            "discount": None,
+        },
+        "importer_of_record": None,
+        "export_declaration_number": None,
+    },
+    "external_order_id": None,
+    "order_source_code": None,
+    "advanced_options": {
+        "bill_to_account": None,
+        "bill_to_country_code": None,
+        "bill_to_party": None,
+        "bill_to_postal_code": None,
+        "contains_alcohol": False,
+        "delivered_duty_paid": False,
+        "non_machinable": False,
+        "saturday_delivery": False,
+        "dry_ice": False,
+        "dry_ice_weight": None,
+        "fedex_freight": None,
+        "third_party_consignee": False,
+        "ancillary_endorsements_option": None,
+        "freight_class": None,
+        "custom_field1": None,
+        "custom_field2": None,
+        "custom_field3": None,
+        "collect_on_delivery": None,
+        "return_pickup_attempts": None,
+        "additional_handling": False,
+        "own_document_upload": False,
+        "limited_quantity": False,
+        "event_notification": False,
+    },
+    "comparison_rate_type": None,
+    "retail_rate": None,
+    "shipping_rule_id": None,
+    "insurance_provider": "none",
+    "tags": [],
+    "packages": [
+        {
+            "shipment_package_id": "se-1767201776",
+            "package_id": "se-3",
+            "package_code": "package",
+            "package_name": "Package",
+            "weight": {"value": 1.22, "unit": "ounce"},
+            "dimensions": {
+                "unit": "inch",
+                "length": 0.0,
+                "width": 0.0,
+                "height": 0.0,
+            },
+            "insured_value": {"currency": "usd", "amount": 0.0},
+            "label_messages": {
+                "reference1": None,
+                "reference2": None,
+                "reference3": None,
+            },
+            "external_package_id": None,
+            "content_description": None,
+            "products": [],
+        }
+    ],
+    "total_weight": {"value": 1.22, "unit": "ounce"},
+    "items": [],
+}

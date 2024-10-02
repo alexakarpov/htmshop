@@ -71,20 +71,18 @@ def shipstation(request):
 def get_rates(request):
     basket = Basket(request)
     address_d = json.loads(request.session["address"])
-    print("GERONIMO!")
     logger.warning(f"address dict:\n{address_d}")
     if settings.SE_ENABLED:
         choices = shipping_choices_SE(basket, address_d)
     else:
         choices = shipping_choices_SS(basket, address_d)
+
+    logger.warning(f">>> CHOICES returned:\n{choices}")
     if choices and len(choices) == 0:
         logger.error("no rates in response?")
         return JsonResponse({"choices": []})
 
-    tiers = split_tiers_SE(choices, intl=address_d.get("country_code") != "US")
-    if len(tiers) == 0:
-        logger.error("no rates in SS/SE response")
-        return JsonResponse({"choices": []})
+    tiers = split_tiers_SE(choices, international=address_d.get("country_code") != "US")
 
     logger.warning(f"Tiers are:{tiers}")
     all = []

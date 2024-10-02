@@ -108,6 +108,112 @@ class SimpleTest(APITestCase):
         assert tiers["fast"][0].name == "fedex_2day"
         assert tiers["express"][0].name == "fedex_standard_overnight"
 
+    def test_tiers_intl(self):
+        choices_str = [
+            {
+                "service_code": "ups_worldwide_express",
+                "shipping_amount": {"amount": 116.56},
+                "rate_id": "se - 5985783216",
+                "delivery_days": 1,
+            },
+            {
+                "service_code": "ups_worldwide_expedited",
+                "shipping_amount": {"amount": 104.93},
+                "rate_id": "se - 5985783217",
+                "delivery_days": 2,
+            },
+            {
+                "service_code": "ups_standard_international",
+                "shipping_amount": {"amount": 25.41},
+                "rate_id": "se - 5985783218",
+                "delivery_days": 3,
+            },
+            {
+                "service_code": "ups_worldwide_express_plus",
+                "shipping_amount": {"amount": 116.56},
+                "rate_id": "se - 5985783219",
+                "delivery_days": 1,
+            },
+            {
+                "service_code": "ups_worldwide_saver",
+                "shipping_amount": {"amount": 112.07},
+                "rate_id": "se - 5985783220",
+                "delivery_days": 1,
+            },
+            {
+                "service_code": "usps_first_class_mail_international",
+                "shipping_amount": {"amount": 16.46},
+                "rate_id": "se - 5985783221",
+                "delivery_days": 2,
+            },
+            {
+                "service_code": "usps_priority_mail_international",
+                "shipping_amount": {"amount": 40.91},
+                "rate_id": "se - 5985783222",
+                "delivery_days": 10,
+            },
+            {
+                "service_code": "usps_priority_mail_express_international",
+                "shipping_amount": {"amount": 57.32},
+                "rate_id": "se-5985783223",
+                "delivery_days": 5,
+            },
+            {
+                "service_code": "globalpost_economy",
+                "shipping_amount": {"amount": 13.04},
+                "rate_id": "se - 5985783224",
+                "delivery_days": 14,
+            },
+            {
+                "service_code": "globalpost_priority",
+                "shipping_amount": {"amount": 12.69},
+                "rate_id": "se - 5985783225",
+                "delivery_days": 10,
+            },
+            {
+                "service_code": "gp_plus",
+                "shipping_amount": {"amount": 11.5},
+                "rate_id": "se-5985783226",
+                "delivery_days": 5,
+            },
+            {
+                "service_code": "fedex_international_economy",
+                "shipping_amount": {"amount": 106.69},
+                "rate_id": "se-5985783227",
+                "delivery_days": 1,
+            },
+            {
+                "service_code": "fedex_ground_international",
+                "shipping_amount": {"amount": 25.45},
+                "rate_id": "se - 5985783228",
+                "delivery_days": 3,
+            },
+            {
+                "service_code": "fedex_international_priority_express",
+                "shipping_amount": {"amount": 118.26},
+                "rate_id": "se - 5985783229",
+                "delivery_days": 1,
+            },
+            {
+                "service_code": "fedex_international_connect_plus",
+                "shipping_amount": {"amount": 98.69},
+                "rate_id": "se-5985783230",
+                "delivery_days": 1,
+            },
+            {
+                "service_code": "fedex_international_priority",
+                "shipping_amount": {"amount": 112.95},
+                "rate_id": "se - 5985783231",
+                "delivery_days": 1,
+            },
+        ]
+
+        choices = list(map(lambda r: rate_to_choice(r), choices_str))
+        tiers = split_tiers_SE(choices, international=True)
+        self.assertEqual(3, len(tiers.values()))
+
+        print(tiers)
+
     def test_shipping_choice_seriaizer(self):
         c = ShippingChoiceSE("nameo", 21.99, "qwe123", 9)
         ser = ShippingChoiceSESerializer(c)
@@ -122,9 +228,7 @@ class SimpleTest(APITestCase):
             rresponse = json.load(f)
 
         mock_get_rates_from_shipment.return_value = rresponse
-        choices = shipping_choices_SE(
-            test_cart, test_address
-        )
+        choices = shipping_choices_SE(test_cart, test_address)
 
         # TODO: work out a proper assertion
         c1 = ShippingChoiceSE.from_repr(

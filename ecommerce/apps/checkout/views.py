@@ -111,7 +111,7 @@ def basket_update_delivery(request):
         opts = request.POST.get("deliveryoption")
 
         print(f"delivery option selected: {opts}")
-        [_, shipping_price, _] = opts.split("/")
+        [_id, shipping_price, _name] = opts.split("/")
         total = basket.get_total(delivery_cost=shipping_price)
         total = str(total)
         # token = hashlib.md5(str(basket).encode())
