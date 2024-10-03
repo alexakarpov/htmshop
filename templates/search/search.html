@@ -21,12 +21,14 @@ HTM Store - Search
         {% for product in products %}
         <div class="col">
           <div class="card border-0">
+            <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">
             <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}" alt="{{ product.title }}">
             <div class="card-body px-0">
               <p class="card-text">
-                <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                {{ product.title }}
               </p>
             </div>
+            </a>
           </div>
         </div>
         {% endfor %}
