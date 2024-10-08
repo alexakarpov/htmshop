@@ -140,12 +140,13 @@ def shipping_choices_SE(basket: Basket, address_d: dict):
 
     try:
         # get_rates_response = get_rates(shipengine, shipment)
-        get_rates_response = HARDCODED_SE_RATES
+        get_rates_response = HARDCODED_SE_RATES #@FIXME
         logger.warning(f"GET_RATES RETURNED\n{get_rates_response}")
         return list(map(lambda r: rate_to_choice(r), get_rates_response))
     except ShipEngineError as err:
         logger.error("==== ERROR calling ShipEngine")
         logger.error(err.to_json())
+        return []
 
 
 SS_GET_RATES_RESPONSE = [
