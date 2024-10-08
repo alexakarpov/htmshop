@@ -56,8 +56,8 @@ class SimpleTest(APITestCase):
         cwd = os.getcwd()
         print("Current working directory:", cwd)
         with open("ecommerce/apps/shipping/data/grfsr.json", "r") as f:
-            rresponse = json.load(f)
-        mock_get_rates_from_shipment.return_value = rresponse
+            rates_response = json.load(f)
+        mock_get_rates_from_shipment.return_value = rates_response
 
         view = get_rates
         self.assertEqual(Address.objects.count(), 2)
