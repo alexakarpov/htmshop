@@ -76,3 +76,5 @@ if DEBUG:
 USPS_ID = "se-660215"
 UPS_ID = "se-660216"
 FEDEX_ID = "se-660217"
+
+HARDCODE_RATES = True

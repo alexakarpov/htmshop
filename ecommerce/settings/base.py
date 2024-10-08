@@ -234,3 +234,5 @@ SETS = {
         "A-167.11x14M",
     ],
 }
+
+HARDCODE_RATES = False
