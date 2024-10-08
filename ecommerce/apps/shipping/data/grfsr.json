@@ -1,0 +1,1412 @@
+[
+    {
+        "rate_id": "se-5997175725",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 104.58
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 16.21
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Shipping",
+                "carrier_billing_code": "BaseServiceCharge",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 104.58
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel Surcharge",
+                "carrier_billing_code": "375",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 16.21
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2024-10-04T10:30:00Z",
+        "carrier_delivery_days": "Tomorrow by 10:30 AM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS Next Day Air®",
+        "service_code": "ups_next_day_air",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175726",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 134.58
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 20.86
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Shipping",
+                "carrier_billing_code": "BaseServiceCharge",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 134.58
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel Surcharge",
+                "carrier_billing_code": "375",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 20.86
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2024-10-04T08:00:00Z",
+        "carrier_delivery_days": "Tomorrow by 08:00 AM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS Next Day Air® Early",
+        "service_code": "ups_next_day_air_early_am",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175727",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 91.81
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 14.23
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Shipping",
+                "carrier_billing_code": "BaseServiceCharge",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 91.81
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel Surcharge",
+                "carrier_billing_code": "375",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 14.23
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2024-10-04T23:00:00Z",
+        "carrier_delivery_days": "Tomorrow by 11:00 PM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS Next Day Air Saver®",
+        "service_code": "ups_next_day_air_saver",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175728",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 40.92
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 6.34
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Shipping",
+                "carrier_billing_code": "BaseServiceCharge",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 40.92
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel Surcharge",
+                "carrier_billing_code": "375",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 6.34
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 2,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2024-10-05T23:00:00Z",
+        "carrier_delivery_days": "Saturday 10/5 by 11:00 PM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS 2nd Day Air®",
+        "service_code": "ups_2nd_day_air",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175729",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 47.77
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 7.4
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Shipping",
+                "carrier_billing_code": "BaseServiceCharge",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 47.77
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel Surcharge",
+                "carrier_billing_code": "375",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 7.4
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 2,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2024-10-07T10:30:00Z",
+        "carrier_delivery_days": "Monday 10/7 by 10:30 AM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS 2nd Day Air AM®",
+        "service_code": "ups_2nd_day_air_am",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175730",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 35.96
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 5.57
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Shipping",
+                "carrier_billing_code": "BaseServiceCharge",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 35.96
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel Surcharge",
+                "carrier_billing_code": "375",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 5.57
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 3,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2024-10-08T23:00:00Z",
+        "carrier_delivery_days": "Tuesday 10/8 by 11:00 PM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS 3 Day Select®",
+        "service_code": "ups_3_day_select",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175731",
+        "rate_type": "shipment",
+        "carrier_id": "se-660216",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 13.38
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 2.21
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Shipping",
+                "carrier_billing_code": "BaseServiceCharge",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 13.38
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel Surcharge",
+                "carrier_billing_code": "375",
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 2.21
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": null,
+        "package_type": "package",
+        "delivery_days": 4,
+        "guaranteed_service": true,
+        "estimated_delivery_date": "2024-10-09T23:00:00Z",
+        "carrier_delivery_days": "Wednesday 10/9 by 11:00 PM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "UPS® Ground",
+        "service_code": "ups_ground",
+        "trackable": true,
+        "carrier_code": "ups",
+        "carrier_nickname": "ShipEngine Test Account - UPS",
+        "carrier_friendly_name": "UPS",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175732",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 134.54
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 7.67
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "uncategorized",
+                "carrier_description": "Demand Surcharge",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 0.9
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 6.77
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Total Net Freight",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 134.54
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-04T08:00:00Z",
+        "carrier_delivery_days": "Tomorrow by 08:00 AM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx First Overnight®",
+        "service_code": "fedex_first_overnight",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175733",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 103.54
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 6.12
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "uncategorized",
+                "carrier_description": "Demand Surcharge",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 0.9
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 5.22
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Total Net Freight",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 103.54
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-04T10:30:00Z",
+        "carrier_delivery_days": "Tomorrow by 10:30 AM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx Priority Overnight®",
+        "service_code": "fedex_priority_overnight",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175734",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 90.89
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 5.49
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "uncategorized",
+                "carrier_description": "Demand Surcharge",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 0.9
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 4.59
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Total Net Freight",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 90.89
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 1,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-04T17:00:00Z",
+        "carrier_delivery_days": "Tomorrow by 05:00 PM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx Standard Overnight®",
+        "service_code": "fedex_standard_overnight",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175735",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 47.88
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 3.34
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "uncategorized",
+                "carrier_description": "Demand Surcharge",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 0.9
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 2.44
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Total Net Freight",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 47.88
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 4,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-07T10:30:00Z",
+        "carrier_delivery_days": "Monday 10/7 by 10:30 AM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx 2Day® A.M.",
+        "service_code": "fedex_2day_am",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175736",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 40.51
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 2.97
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "uncategorized",
+                "carrier_description": "Demand Surcharge",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 0.9
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 2.07
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Total Net Freight",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 40.51
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 4,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-07T17:00:00Z",
+        "carrier_delivery_days": "Monday 10/7 by 05:00 PM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx 2Day®",
+        "service_code": "fedex_2day",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175737",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 37.08
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 2.8
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "uncategorized",
+                "carrier_description": "Demand Surcharge",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 0.9
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "Fuel",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 1.9
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Total Net Freight",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 37.08
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 5,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-08T17:00:00Z",
+        "carrier_delivery_days": "Tuesday 10/8 by 05:00 PM",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx Express Saver®",
+        "service_code": "fedex_express_saver",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175738",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 13.38
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 0.74
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "FedEx Ground Fuel",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 0.74
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Total Net Freight",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 13.38
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 5,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-10T23:59:00Z",
+        "carrier_delivery_days": "5",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx Ground®",
+        "service_code": "fedex_ground",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "has_warnings",
+        "warning_messages": [
+            "FedEx may add a Home Delivery Surcharge to this shipment later if this is a residential address."
+        ],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175739",
+        "rate_type": "shipment",
+        "carrier_id": "se-660217",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 13.38
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 7.12
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "delivery",
+                "carrier_description": "Residential delivery surcharge",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 5.55
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "uncategorized",
+                "carrier_description": "Demand Surcharge",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 0.5
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "fuel_charge",
+                "carrier_description": "FedEx Ground Fuel",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 1.07
+                },
+                "billing_source": "Carrier"
+            },
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "Total Net Freight",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 13.38
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 5,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-10T23:59:00Z",
+        "carrier_delivery_days": "5",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "FedEx Home Delivery®",
+        "service_code": "fedex_home_delivery",
+        "trackable": true,
+        "carrier_code": "fedex",
+        "carrier_nickname": "ShipEngine Test Account - FedEx",
+        "carrier_friendly_name": "FedEx",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175740",
+        "rate_type": "shipment",
+        "carrier_id": "se-660215",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 4.36
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "shipping",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 4.36
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 5,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-09T00:00:00Z",
+        "carrier_delivery_days": "5",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "USPS First Class Mail",
+        "service_code": "usps_first_class_mail",
+        "trackable": true,
+        "carrier_code": "stamps_com",
+        "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+        "carrier_friendly_name": "Stamps.com",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175741",
+        "rate_type": "shipment",
+        "carrier_id": "se-660215",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 10.59
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "shipping",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 10.59
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 2,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-05T00:00:00Z",
+        "carrier_delivery_days": "2",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "USPS Priority Mail",
+        "service_code": "usps_priority_mail",
+        "trackable": true,
+        "carrier_code": "stamps_com",
+        "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+        "carrier_friendly_name": "Stamps.com",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175742",
+        "rate_type": "shipment",
+        "carrier_id": "se-660215",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 40.35
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "shipping",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 40.35
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 2,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-05T00:00:00Z",
+        "carrier_delivery_days": "2",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "USPS Priority Mail Express",
+        "service_code": "usps_priority_mail_express",
+        "trackable": true,
+        "carrier_code": "stamps_com",
+        "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+        "carrier_friendly_name": "Stamps.com",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175743",
+        "rate_type": "shipment",
+        "carrier_id": "se-660215",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 4.63
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "shipping",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 4.63
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 7,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-11T00:00:00Z",
+        "carrier_delivery_days": "7",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "USPS Media Mail",
+        "service_code": "usps_media_mail",
+        "trackable": true,
+        "carrier_code": "stamps_com",
+        "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+        "carrier_friendly_name": "Stamps.com",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175744",
+        "rate_type": "shipment",
+        "carrier_id": "se-660215",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 4.36
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "shipping",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 4.36
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 5,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-09T00:00:00Z",
+        "carrier_delivery_days": "5",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "USPS Parcel Select Ground",
+        "service_code": "usps_parcel_select",
+        "trackable": true,
+        "carrier_code": "stamps_com",
+        "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+        "carrier_friendly_name": "Stamps.com",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    },
+    {
+        "rate_id": "se-5997175745",
+        "rate_type": "shipment",
+        "carrier_id": "se-660215",
+        "shipping_amount": {
+            "currency": "usd",
+            "amount": 4.36
+        },
+        "insurance_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "confirmation_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "other_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "requested_comparison_amount": {
+            "currency": "usd",
+            "amount": 0.0
+        },
+        "rate_details": [
+            {
+                "rate_detail_type": "shipping",
+                "carrier_description": "shipping",
+                "carrier_billing_code": null,
+                "carrier_memo": null,
+                "amount": {
+                    "currency": "usd",
+                    "amount": 4.36
+                },
+                "billing_source": "Carrier"
+            }
+        ],
+        "zone": 8,
+        "package_type": "package",
+        "delivery_days": 5,
+        "guaranteed_service": false,
+        "estimated_delivery_date": "2024-10-09T00:00:00Z",
+        "carrier_delivery_days": "5",
+        "ship_date": "2024-10-03T00:00:00Z",
+        "negotiated_rate": false,
+        "service_type": "USPS Ground Advantage",
+        "service_code": "usps_ground_advantage",
+        "trackable": true,
+        "carrier_code": "stamps_com",
+        "carrier_nickname": "ShipEngine Test Account - Stamps.com",
+        "carrier_friendly_name": "Stamps.com",
+        "validation_status": "valid",
+        "warning_messages": [],
+        "error_messages": []
+    }
+]
