@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 
 class ShippingChoiceSESerializer(serializers.Serializer):
-    name = serializers.CharField()
+    service_code = serializers.CharField()
     days = serializers.IntegerField()
     id = serializers.CharField()
     price = serializers.FloatField()
