@@ -1,4 +1,4 @@
-import json
+import json, os
 from unittest.mock import patch
 
 # Third-party imports...
@@ -42,7 +42,8 @@ test_address.city_locality = "Boston"
 class SimpleTest(APITestCase):
     fixtures = ["accounts.json"]
 
-    def test_api(self):
+    @patch("ecommerce.apps.shipping.engine.shipengine.get_rates_from_shipment")
+    def test_api(self, mock_get_rates_from_shipment):
         factory = APIRequestFactory()
         request = factory.get("/shipping/get-rates/")
         request.session = {}
@@ -52,8 +53,14 @@ class SimpleTest(APITestCase):
         self.assertEqual(address.country_code, "US")
         aj = address.toJSON()
         request.session["address"] = aj
+        cwd = os.getcwd()
+        print("Current working directory:", cwd)
+        with open("ecommerce/apps/shipping/data/grfsr.json", "r") as f:
+            rresponse = json.load(f)
+        mock_get_rates_from_shipment.return_value = rresponse
+
         view = get_rates
-        assert Address.objects.count() == 2
+        self.assertEqual(Address.objects.count(), 2)
         response = view(request)
         choices_j = json.loads(response.content).get("choices")
         self.assertEqual(len(choices_j), 3)
@@ -221,19 +228,3 @@ class SimpleTest(APITestCase):
         assert ser.data.get("price") == 21.99
         assert ser.data.get("service_code") == "fake_service_code"
         assert ser.data.get("days") == 3
-
-    @patch("ecommerce.apps.shipping.engine.shipengine.get_rates_from_shipment")
-    def test_shipping_choices(self, mock_get_rates_from_shipment):
-        with open("shipping_jsons/get_rates_response.json", "r") as f:
-            rresponse = json.load(f)
-
-        mock_get_rates_from_shipment.return_value = rresponse
-        choices = shipping_choices_SE(test_cart, test_address)
-
-        # TODO: work out a proper assertion
-        c1 = ShippingChoiceSE.from_repr(
-            "4.36/se-5997175744/5/usps_parcel_select"
-        )
-        self.assertEqual(len(choices), 21)
-
-    #    self.assertIn(c1, choices)
