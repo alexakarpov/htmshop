@@ -74,6 +74,9 @@ def split_tiers_SE(
     choices, international=False
 ) -> dict[str, list[ShippingChoiceSE]]:
 
+    if not choices:
+        return {}
+
     regular_tier = []
     fast_tier = []
     express_tier = []
@@ -88,10 +91,8 @@ def split_tiers_SE(
     for choice in choices:
         if choice.service_code in regular_codes:
             regular_tier.append(choice)
-            continue
         elif choice.service_code in fast_codes:
             fast_tier.append(choice)
-            continue
         else:  # express
             express_tier.append(choice)
 
