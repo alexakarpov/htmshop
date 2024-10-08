@@ -120,16 +120,16 @@ $(document).ready(function() {
             console.log('Choices in response:')
             console.log(response.choices)
             $('#spinner').hide()
-            rc = response.choices[0]
-            fc = response.choices[1]
-            ec = response.choices[2]
+            reg_choice = response.choices[0]
+            fast_choice = response.choices[1]
+            express_choice = response.choices[2]
             // SS uses 'serviceCode' in place of 'id'
-            $("#rregular").val(`${rc.id}/${rc.price}/${rc.name}`)
-            $("#rfast").val(`${fc.id}/${fc.price}/${fc.name}`)
-            $("#rexpress").val(`${ec.id}/${ec.price}/${ec.name}`)
-            $("#regular-days").text(`Your order should arrive within ${maybePluralize(rc.days,'day')} once shipped`)
-            $("#fast-days").text(`Your order should arrive within ${maybePluralize(fc.days,'day')} once shipped`)
-            $("#express-days").text(`Your order should arrive within ${maybePluralize(ec.days,'day')} once shipped`)
+            $("#rregular").val(`${reg_choice.id}/${reg_choice.price}/${reg_choice.service_code}`)
+            $("#rfast").val(`${fast_choice.id}/${fast_choice.price}/${fast_choice.service_code}`)
+            $("#rexpress").val(`${express_choice.id}/${express_choice.price}/${express_choice.service_code}`)
+            $("#regular-days").text(`Your order should arrive within ${maybePluralize(reg_choice.days,'day')} once shipped`)
+            $("#fast-days").text(`Your order should arrive within ${maybePluralize(fast_choice.days,'day')} once shipped`)
+            $("#express-days").text(`Your order should arrive within ${maybePluralize(express_choice.days,'day')} once shipped`)
         },
         error: function(error) {
             console.log(error)

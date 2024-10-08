@@ -11,7 +11,12 @@ from rest_framework.decorators import api_view
 
 from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.orders.models import Order
-from ecommerce.apps.shipping.choice import split_tiers_SE, split_tiers_SS
+from ecommerce.apps.shipping.choice import (
+    ShippingChoiceSE,
+    ShippingChoiceSS,
+    split_tiers_SE,
+    split_tiers_SS,
+)
 from ecommerce.apps.shipping.engine import (
     shipping_choices_SE,
     shipping_choices_SS,
@@ -71,33 +76,32 @@ def shipstation(request):
 def get_rates(request):
     basket = Basket(request)
     address_d = json.loads(request.session["address"])
-    logger.warning(f"address dict:\n{address_d}")
+
     if settings.SE_ENABLED:
-        choices = shipping_choices_SE(basket, address_d)
+        choices: list[ShippingChoiceSE] = shipping_choices_SE(
+            basket, address_d
+        )
     else:
-        choices = shipping_choices_SS(basket, address_d)
+        choices: list[ShippingChoiceSS] = shipping_choices_SS(
+            basket, address_d
+        )
 
-    logger.warning(f">>> CHOICES returned:\n{choices}")
-    if choices and len(choices) == 0:
-        logger.error("no rates in response?")
-        return JsonResponse({"choices": []})
-
-    tiers = split_tiers_SE(choices, international=address_d.get("country_code") != "US")
-
-    logger.warning(f"Tiers are:{tiers}")
-    all = []
-    for v in tiers.values():
-        all += v
-    if all:
-        e = sorted(tiers["express"])[0]
-        r = sorted(tiers["regular"])[0]
-        f = sorted(tiers["fast"])[0]
-        # careful, magic words
-        e.name = "Express"
-        f.name = "Fast"
-        r.name = "Regular"
-        serializer = ShippingChoiceSESerializer([r, f, e], many=True)
-        sdata = serializer.data
-        return JsonResponse({"choices": sdata})
+    logger.warning(
+        f">>> CHOICES returned:\n{choices}"
+    )  # hardcode to skip API calls!! @TODO fix me!
+    if settings.SE_ENABLED:
+        tiers = split_tiers_SE(
+            choices, international=address_d.get("country_code") != "US"
+        )
     else:
-        return JsonResponse({"choices": []})
+        tiers = split_tiers_SS(
+            choices, international=address_d.get("country_code") != "US"
+        )
+
+    e: ShippingChoiceSE = sorted(tiers["express"])[0]
+    r: ShippingChoiceSE = sorted(tiers["regular"])[0]
+    f: ShippingChoiceSE = sorted(tiers["fast"])[0]
+
+    serializer = ShippingChoiceSESerializer([r, f, e], many=True)
+    choices_data = serializer.data
+    return JsonResponse({"choices": choices_data})
