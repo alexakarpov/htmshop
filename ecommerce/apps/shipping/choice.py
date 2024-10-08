@@ -84,18 +84,20 @@ def split_tiers_SE(
 
     regular_codes = settings.REGULAR
     fast_codes = settings.FAST
+    express_codes = settings.EXPRESS
 
     if international:
         regular_codes = settings.INTL_REGULAR
         fast_codes = settings.INTL_FAST
+        express_codes = settings.INTL_EXPRESS
 
     for choice in choices:
-        if choice.service_code in regular_codes:
-            regular_tier.append(choice)
+        if choice.service_code in express_codes:
+            express_tier.append(choice)
         elif choice.service_code in fast_codes:
             fast_tier.append(choice)
-        else:  # express
-            express_tier.append(choice)
+        else:  # regular
+            regular_tier.append(choice)
 
     return {
         "regular": regular_tier,
