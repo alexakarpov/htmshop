@@ -51,6 +51,7 @@ class ShippingChoiceSS:
             )
         return False
 
+    @staticmethod
     def from_repr(it):
         [serviceCode, price, name] = it.split("/")
         return ShippingChoiceSS(serviceCode, float(price), name)
