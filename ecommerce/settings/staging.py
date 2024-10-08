@@ -84,4 +84,5 @@ AWS_SES_REGION_ENDPOINT = "email.us-east-1.amazonaws.com"
 
 # Shipping related
 USPS_ID = "se-660215"
-SE_API_KEY = "TEST_pTjqOjvNiKsTgNXKGtLi1jWEzUuDadyhO4uLfQSzXWw"
+UPS_ID = "se-660216"
+FEDEX_ID = "se-660217"

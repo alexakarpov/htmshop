@@ -135,9 +135,9 @@ REGULAR = [
     "usps_parcel_select",
     "ups_ground",
     "fedex_home_delivery",
-    "usps_first_class_mail",
 ]
 
+FIRST_CLASS_MAIL = "usps_first_class_mail"
 INTL_REGULAR = {
     "usps_first_class_mail_international",
     "globalpost_economy",
@@ -160,10 +160,6 @@ INTL_EXPRESS = {
 
 SE_API_KEY = config["SE_API_KEY"]
 SS_GET_RATES_URL = "https://ssapi.shipstation.com/shipments/getrates"
-
-USPS_ID = "se-660215"
-FEDEX_ID = "se-660217"
-UPS_ID = "se-660216"
 
 # Item sets
 SETS = {

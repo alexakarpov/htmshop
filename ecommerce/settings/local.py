@@ -72,3 +72,7 @@ if DEBUG:
     DEBUG_TOOLBAR_CONFIG = {
         "INTERCEPT_REDIRECTS": False,
     }
+
+USPS_ID = "se-660215"
+UPS_ID = "se-660216"
+FEDEX_ID = "se-660217"
