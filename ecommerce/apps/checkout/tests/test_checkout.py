@@ -9,6 +9,4 @@ class CheckoutTest(TestCase):
     ]
 
     def test_item_set(self):
-        test_basket = Basket()
-        test_basket.add(s1, 1, "sku1", 79.99)
         assert(False)
