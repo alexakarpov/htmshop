@@ -119,11 +119,11 @@ class Basket:
         return self.basket.__str__()
 
 
-def get_weight(basket_ds):
+def get_weight(basket_dict):
     total = 0
-    for it in basket_ds:
+    for it in basket_dict:
         w = Decimal(it["weight"])
         q = it["qty"]
         total += w * q
 
-    return float(total) * PACKING_WEIGHT_MULTIPLIER
+    return Decimal(total) * Decimal(PACKING_WEIGHT_MULTIPLIER)
