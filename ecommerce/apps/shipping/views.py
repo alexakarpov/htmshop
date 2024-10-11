@@ -14,8 +14,7 @@ from ecommerce.apps.orders.models import Order
 from ecommerce.apps.shipping.choice import (
     ShippingChoiceSE,
     ShippingChoiceSS,
-    split_tiers_SE,
-    split_tiers_SS,
+    split_tiers,
 )
 from ecommerce.apps.shipping.engine import (
     shipping_choices_SE,
@@ -89,19 +88,21 @@ def get_rates(request):
     logger.warning(
         f">>> CHOICES returned:\n{choices}"
     )  # hardcode to skip API calls!! @TODO fix me!
-    if settings.SE_ENABLED:
-        tiers = split_tiers_SE(
-            choices, international=address_d.get("country_code") != "US"
-        )
-    else:
-        tiers = split_tiers_SS(
-            choices, international=address_d.get("country_code") != "US"
-        )
+    # TODO: determine if USPS 1st class and Media
+    # can be applied to the basket; if not, exclude
+    # choices strings contain service_code, so can filter
+    # alternatively, can provide acceptable codes to SE
 
-    e: ShippingChoiceSE = sorted(tiers["express"])[0]
-    r: ShippingChoiceSE = sorted(tiers["regular"])[0]
-    f: ShippingChoiceSE = sorted(tiers["fast"])[0]
+    intl = address_d.get("country_code") != "US"
 
-    serializer = ShippingChoiceSESerializer([r, f, e], many=True)
+    tiers = split_tiers(choices, intl)
+    logger.warning(f"TIERS:\n{tiers}")
+    express_choice: ShippingChoiceSE = sorted(tiers["express"])[0]
+    regular_choice: ShippingChoiceSE = sorted(tiers["regular"])[0]
+    fast_choice: ShippingChoiceSE = sorted(tiers["fast"])[0]
+
+    serializer = ShippingChoiceSESerializer(
+        [regular_choice, fast_choice, express_choice], many=True
+    )
     choices_data = serializer.data
     return JsonResponse({"choices": choices_data})

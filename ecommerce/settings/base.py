@@ -126,23 +126,9 @@ FAST = [
     "fedex_2day_am",
     "fedex_2day",
 ]
-REGULAR = [
-    "usps_priority_mail",
-    "usps_ground_advantage",
-    "usps_first_class_mail",
-    "fedex_express_saver",
-    "ups_3_day_select",
-    "usps_parcel_select",
-    "ups_ground",
-    "fedex_home_delivery",
-]
 
-FIRST_CLASS_MAIL = "usps_first_class_mail"
-INTL_REGULAR = {
-    "usps_first_class_mail_international",
-    "globalpost_economy",
-    "ups_standard_international",
-}
+USPS_1ST_CLASS_MAIL = "usps_first_class_mail"
+USPS_MEDIA_MAIL = "usps_media_mail"
 
 INTL_FAST = {
     "ups_worldwide_expedited",

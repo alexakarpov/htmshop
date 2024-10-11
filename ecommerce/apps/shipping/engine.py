@@ -79,7 +79,6 @@ def make_SE_shipment(basket_dict, address_dict):
 
 def get_rates(engine, shipment):
     response = engine.get_rates_from_shipment(shipment)
-    # logger.warning(f"SE get_rates_from_shipment returned:\n{response}")
     if response.get("rate_response").get("rates"):
         rates = response.get("rate_response").get("rates")
     else:
