@@ -46,9 +46,11 @@ MIDDLEWARE = [
 CSRF_TRUSTED_ORIGINS = [
     "https://transylvania.bostonmonks.com",
     "http://localhost:8000",
+    "https://hzz08mrz-8000.use.devtunnels.ms",
 ]
 
 CORS_ALLOWED_ORIGINS = [
+    "https://hzz08mrz-8000.use.devtunnels.ms",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "https://transylvania.bostonmonks.com",
@@ -116,6 +118,8 @@ MEDIA_MAIL = "usps_media_mail"
 # Shipping
 
 SE_ENABLED = True  # otherwise, SS
+REGULAR = ["usps_ground_advantage", "usps_parcel_select"]
+
 EXPRESS = [
     "ups_next_day_air_saver",
     "fedex_standard_overnight",
@@ -130,19 +134,22 @@ FAST = [
 USPS_1ST_CLASS_MAIL = "usps_first_class_mail"
 USPS_MEDIA_MAIL = "usps_media_mail"
 
-INTL_FAST = {
-    "ups_worldwide_expedited",
+INTL_REGULAR = [
     "usps_priority_mail_international",
+]
+
+INTL_FAST = [
+    "ups_worldwide_expedited",
     "usps_priority_mail_express_international",
     "globalpost_priority",
     "gp_plus",
-}
+]
 
-INTL_EXPRESS = {
+INTL_EXPRESS = [
     "ups_worldwide_express",
     "ups_worldwide_express_plus",
     "ups_worldwide_saver",
-}
+]
 
 SE_API_KEY = config["SE_API_KEY"]
 SS_GET_RATES_URL = "https://ssapi.shipstation.com/shipments/getrates"
