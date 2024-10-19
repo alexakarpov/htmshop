@@ -9,6 +9,14 @@ from ecommerce.constants import PACKING_WEIGHT_MULTIPLIER
 
 logger = logging.getLogger(__name__)
 
+def get_weight(basket):
+    total = 0
+    for sku in basket.basket:
+        w = Decimal(basket.basket.get(sku).get("weight"))
+        q = int(basket.basket.get(sku).get("qty"))
+        total += w * q
+    # had to drop using Decimal, as it's not JSON-serializable (wut?)
+    return float(total) * float(PACKING_WEIGHT_MULTIPLIER)
 
 class Basket:
     """
@@ -90,6 +98,10 @@ class Basket:
         )
         return round((subtotal + float(delivery_cost)), 2)
 
+    def is_first_class(self):
+        total_weight = get_weight(self)
+        return total_weight <= 12
+
     def delete(self, sku):
         """
         Delete item from session data
@@ -117,13 +129,3 @@ class Basket:
 
     def __str__(self):
         return self.basket.__str__()
-
-
-def get_weight(basket_dict):
-    total = 0
-    for it in basket_dict:
-        w = Decimal(it["weight"])
-        q = it["qty"]
-        total += w * q
-
-    return Decimal(total) * Decimal(PACKING_WEIGHT_MULTIPLIER)
