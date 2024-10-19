@@ -3,34 +3,36 @@ from unittest.mock import patch
 
 # Third-party imports...
 from rest_framework.test import APIRequestFactory, APITestCase
+from django.conf import settings
 
 from ecommerce.apps.accounts.models import Address
 from ecommerce.apps.basket.basket import get_weight
 from ecommerce.apps.shipping.views import get_rates
 
-from .choice import ShippingChoiceSE, rate_to_choice, split_tiers_SE
+from .choice import ShippingChoiceSE, rate_to_choice, split_tiers
 from .engine import make_SE_shipment
 from .serializers import ShippingChoiceSESerializer
 from ecommerce.apps.shipping.engine import shipping_choices_SE
 
 # import unittest
 
-test_cart = [
-    {
+test_cart = {
+    "TEST_SKU1": {
         "price": "30.00",
         "qty": 1,
         "variant": "8x10",
         "title": "Holy Napkin",
         "weight": 16,
     },
-    {
+    "TEST_SKU2": {
         "price": "20.00",
         "qty": 1,
         "variant": "",
         "title": "Prayer Book",
         "weight": 8,
     },
-]
+}
+
 
 test_address = Address()
 test_address.full_name = "John Doe"
@@ -67,6 +69,7 @@ class SimpleTest(APITestCase):
 
     def test_make_shipment(self):
         s = make_SE_shipment(test_cart, test_address.to_dict())
+
         sd = s["shipment"]
         assert (
             sd["ship_from"]["company_name"] == "Holy Transfiguration Monastery"
@@ -113,10 +116,13 @@ class SimpleTest(APITestCase):
             "service_code": "fedex_2day",  # fast
         }
         choices = list(map(lambda r: rate_to_choice(r), [r1, r2, r3]))
-        tiers = split_tiers_SE(choices)
+        tiers = split_tiers(choices)
 
         assert tiers["fast"][0].service_code == "fedex_2day"
         assert tiers["express"][0].service_code == "fedex_standard_overnight"
+
+# TODO: need a test for choices for baskets eligible for USPS First Class
+
 
     def test_tiers_intl(self):
         choices_str = [
@@ -219,12 +225,15 @@ class SimpleTest(APITestCase):
         ]
 
         choices = list(map(lambda r: rate_to_choice(r), choices_str))
-        tiers = split_tiers_SE(choices, international=True)
+        tiers = split_tiers(choices, international=True)
         self.assertEqual(3, len(tiers.values()))
 
     def test_shipping_choice_serializer(self):
-        c = ShippingChoiceSE(21.99, "some_fake_id", 3, "fake_service_code")
+        c = ShippingChoiceSE(21.99, "some_fake_id", "fake_service_code", 3)
         ser = ShippingChoiceSESerializer(c)
         assert ser.data.get("price") == 21.99
         assert ser.data.get("service_code") == "fake_service_code"
         assert ser.data.get("days") == 3
+
+    def test_funky(self):
+        self.assertTrue(settings.HARDCODE_RATES)
