@@ -117,8 +117,8 @@ $(document).ready(function() {
         type: 'GET',
         url: '/shipping/get-rates',
         success: function(response) {
-            console.log('Choices in response:')
-            console.log(response.choices)
+            //console.log('Choices in response:')
+            //console.log(response.choices)
             $('#spinner').hide()
             reg_choice = response.choices[0]
             fast_choice = response.choices[1]
@@ -148,7 +148,6 @@ $('input[type=radio]').on('change', function(e) {
             action: "post",
         },
         success: function (json) {
-            console.log(json);
             $('#to-payment').prop('disabled', false);
             document.getElementById("total").innerHTML = '$' + json.total;
             document.getElementById("delivery_price").innerHTML = '$' + json.delivery_price;
