@@ -148,8 +148,6 @@ INTL_REGULAR = [
 INTL_FAST = [
     "ups_worldwide_expedited",
     "usps_priority_mail_express_international",
-    "globalpost_priority",
-    "gp_plus",
 ]
 
 INTL_EXPRESS = [
