@@ -85,6 +85,11 @@ def get_rates(request):
             basket, address_d
         )
 
+    if not basket.is_first_class():
+        choices = [
+            x for x in choices if x.service_code != "usps_first_class_mail"
+        ]
+
     logger.warning(
         f">>> CHOICES returned:\n{choices}"
     )  # hardcode to skip API calls!! @TODO fix me!
@@ -97,6 +102,8 @@ def get_rates(request):
 
     tiers = split_tiers(choices, intl)
     logger.warning(f"TIERS:\n{tiers}")
+    if len(tiers) != 3:
+        return JsonResponse({"choices": None})
     express_choice: ShippingChoiceSE = sorted(tiers["express"])[0]
     regular_choice: ShippingChoiceSE = sorted(tiers["regular"])[0]
     fast_choice: ShippingChoiceSE = sorted(tiers["fast"])[0]
