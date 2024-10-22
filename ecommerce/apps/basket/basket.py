@@ -9,6 +9,7 @@ from ecommerce.constants import PACKING_WEIGHT_MULTIPLIER
 
 logger = logging.getLogger(__name__)
 
+
 def get_weight(basket):
     total = 0
     for sku in basket.basket:
@@ -17,6 +18,7 @@ def get_weight(basket):
         total += w * q
     # had to drop using Decimal, as it's not JSON-serializable (wut?)
     return float(total) * float(PACKING_WEIGHT_MULTIPLIER)
+
 
 class Basket:
     """
@@ -101,6 +103,9 @@ class Basket:
     def is_first_class(self):
         total_weight = get_weight(self)
         return total_weight <= 12
+
+    def is_media(self):
+        return all(item.startswith("B") for item in self.basket.keys())
 
     def delete(self, sku):
         """
