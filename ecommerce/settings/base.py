@@ -123,12 +123,19 @@ REGULAR = ["usps_ground_advantage", "usps_parcel_select"]
 EXPRESS = [
     "ups_next_day_air_saver",
     "fedex_standard_overnight",
+    "ups_next_day_air",
+    "ups_next_day_air_early_am",
+    "fedex_first_overnight",
+    "fedex_priority_overnight"
 ]
 FAST = [
     "ups_2nd_day_air",
+    "ups_2nd_day_air_am",
+    "ups_3_day_select",
     "usps_priority_mail_express",
     "fedex_2day_am",
     "fedex_2day",
+    "fedex_express_saver"
 ]
 
 USPS_1ST_CLASS_MAIL = "usps_first_class_mail"
