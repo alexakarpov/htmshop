@@ -90625,7 +90625,7 @@
   },
   {
     "model": "inventory.stock",
-    "pk": "A-420P",
+    "pk": "A-420.11x14P",
     "fields": {
       "product": "A-420",
       "spec": "Large size (10⅝\" x 14\") prints",
@@ -90636,6 +90636,22 @@
       "painting_qty": 0,
       "weight": "1.00",
       "price": "660.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-420P",
+    "fields": {
+      "product": "A-420",
+      "spec": "Standard size prints",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "1.00",
+      "price": "330.00",
       "is_set": false
     }
   },
