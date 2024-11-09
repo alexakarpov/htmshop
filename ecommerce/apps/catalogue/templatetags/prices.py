@@ -37,6 +37,11 @@ def display_price(customer: Account, stock: Stock):
 
     return f"{stock.price}"  # no discounts on the stock
 
+
+@register.simple_tag
+def is_oos(stock: Stock):
+    return "out of stock, expect a delay" if stock.wrapping_qty <= 0 else ""
+
 @register.simple_tag
 def get_price(customer: Account, stock: Stock):
     if (
