@@ -40,7 +40,9 @@ def display_price(customer: Account, stock: Stock):
 
 @register.simple_tag
 def is_oos(stock: Stock):
-    return "out of stock, expect a delay" if stock.wrapping_qty <= 0 else ""
+    if '.' in stock.sku and stock.wrapping_qty <= 0:
+        return "Enlargement/reductions are made per order" 
+    return "Out of stock, expect a delay" if stock.wrapping_qty <= 0 else ""
 
 @register.simple_tag
 def get_price(customer: Account, stock: Stock):

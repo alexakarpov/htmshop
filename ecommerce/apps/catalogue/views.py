@@ -60,12 +60,18 @@ def product_detail(request, slug):
     referrer = request.META.get("HTTP_REFERER")
 
     product = get_object_or_404(Product, slug=slug, is_active=True)
-    skus = product.get_skus()
 
+    # for books, filter out all OOS skus.
+    if product.sku_base.startswith('B-'):
+        skus = product.get_skus().filter(wrapping_qty__gt=0)
+    else:
+        skus = product.get_skus()
 #    logger.warning(f"fetched {len(skus)} skus:")
 
 #    for s in skus:
 #        logger.warning(s)
+
+
 
     return render(
         request,
