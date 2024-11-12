@@ -28,7 +28,6 @@
           </div>
         </div>
       </div>
-
       {% if skus %}
         {% for i in skus %}
           <div class="card choice-div" style="border-top: none;">
@@ -70,7 +69,7 @@
              value="1" />
       <button type="button"
               id="add-button"
-              class="btn btn-lg btn-primary  mt-2 mb-1 form-control"
+              class="btn btn-lg btn-primary mt-2 mb-1 form-control"
               {% if skus.count > 1 %}disabled{% endif %}>Add to cart</button>
     {% else %}
       <div class="alert alert-warning" role="alert">
@@ -78,6 +77,9 @@
       </div>
     {% endif %}
     <div class="row m-1 alert alert-success" role="alert" id="cartalertbox"></div>
+    <a href="{{ referred }}">
+      <button type="button" id="back" class="btn btn-primary btn-lg mt-2 mb-1 form-control">Go back</button>
+    </a>
   </div>
   <script>
   $(document).on('click', '.sku-picker', function (e) {
