@@ -1,6 +1,6 @@
-from typing import Any
 from django.conf import settings
 from django.db import models
+import json
 
 # from datetime import date, datetime
 from decimal import Decimal
@@ -76,6 +76,22 @@ class Order(models.Model):
     def format_updated_at(self):
         return self.updated_at.strftime(SS_DT_FORMAT)
 
+    def to_dict(self):
+        return {
+            "full_name": self.full_name,
+            "address_line1": self.address_line1,
+            "address_line2": self.address_line2,
+            "phone": self.phone,
+            "city_locality": self.city_locality,
+            "state_province": self.state_province,
+            "postal_code": self.postal_code,
+            "country_code": self.country_code,
+            "created_at": str(self.created_at)
+        }
+
+    def toJSON(self):
+        return json.dumps(self.to_dict(), indent=2)
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(
@@ -83,9 +99,7 @@ class OrderItem(models.Model):
     )
     quantity = models.PositiveIntegerField(default=1)
     title = models.CharField(max_length=100)
-    sku = models.CharField(verbose_name="Product SKU",
-        max_length=40
-    )
+    sku = models.CharField(verbose_name="Product SKU", max_length=40)
 
     price = models.DecimalField(max_digits=7, decimal_places=2)
 
@@ -113,5 +127,7 @@ class Payment(models.Model):
 
 @receiver(pre_save, sender=Order)
 def set_order_total(sender, instance, **kwargs):
-    instance.order_total = Decimal(instance.subtotal) + Decimal(instance.shipping_cost)
+    instance.order_total = Decimal(instance.subtotal) + Decimal(
+        instance.shipping_cost
+    )
     return
