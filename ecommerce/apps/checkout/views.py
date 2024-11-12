@@ -305,7 +305,7 @@ def payment_with_token(request):
         )
 
         classify_order_add_items(order, basket)
-
+        #logger.warning(f"new order created:\n{order.toJSON()}")
         # p = Payment.objects.create(
         #     order=order, amount=float(total_s), comment="web full pay"
         # )
