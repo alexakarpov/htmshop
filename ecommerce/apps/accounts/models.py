@@ -148,6 +148,7 @@ class Address(models.Model):
     def __str__(self):
         return f"{self.full_name} address"
 
+    @staticmethod
     def from_dict(a_dict):
         a = Address()
         a.full_name = a_dict.get("full_name")
