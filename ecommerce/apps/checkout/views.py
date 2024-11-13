@@ -109,8 +109,8 @@ def basket_update_delivery(request):
     basket = Basket(request)
     if request.POST.get("action") == "post":
         opts = request.POST.get("deliveryoption")
-        # logger.warning(f"delivery option selected: {opts}")
-        [_id, shipping_price, service_code] = opts.split("/")
+        logger.warning(f"delivery option selected: {opts}")
+        tier_name, shipping_price, service_code = opts.split("/")
         total = str(basket.get_total(delivery_cost=shipping_price))
 
         # token = hashlib.md5(str(basket).encode())
@@ -200,9 +200,8 @@ def guest_address(request):
 @api_view(["POST"])
 def pay_later(request):
     session = request.session
-    _, shipping_cost, tier_name = (
-        session.get("purchase").get("delivery_choice").split("/")
-    )
+    choice = session.get("purchase").get("delivery_choice")
+    tier_name, shipping_cost, service_code = choice.split("/")
 
     basket = Basket(request)
     address_json = session["address"]
@@ -224,7 +223,6 @@ def pay_later(request):
         state_province=address_d.get("state_province"),
         country_code=address_d.get("country_code"),
         subtotal=basket.get_subtotal_price(),
-        # order_total=Decimal(subtotal) + Decimal(shipping_cost),
         total_paid=0,
         payment_option="Later",
         status="PROCESSING",
@@ -243,8 +241,8 @@ def pay_later(request):
 def payment_with_token(request):
     basket = Basket(request)
     session = request.session
-    choices = session.get("purchase").get("delivery_choice")
-    _, shipping_cost, tier_name = choices.split("/")
+    choice = session.get("purchase").get("delivery_choice")
+    tier_name, shipping_cost, service_code = choice.split("/")
 
     token = request.data.get("payload").get("source_id")
     if not token:  # is it even possible though?
@@ -255,7 +253,7 @@ def payment_with_token(request):
     session_total_str = session.get("purchase")["total"]
     total_i = int(float(session_total_str) * 100)
 
-    refid = "".join(random.choices(string.ascii_lowercase, k=10))
+    reference_id = "".join(random.choices(string.ascii_lowercase, k=10))
 
     payload = {
         "source_id": token,
@@ -266,7 +264,7 @@ def payment_with_token(request):
         "app_fee_money": {"amount": 0, "currency": "USD"},
         "autocomplete": True,
         "location_id": settings.SQUARE_LOCATION_ID,
-        "reference_id": refid,
+        "reference_id": reference_id,
     }
 
     # logger.info(f"create_payment payload: {payload}")
