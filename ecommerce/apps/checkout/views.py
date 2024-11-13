@@ -252,8 +252,8 @@ def payment_with_token(request):
         return JsonResponse(
             {"success": False, "message": "Token missing"}, status=400
         )
-    total_s = session.get("purchase")["total"]
-    total_i = int(float(total_s) * 100)
+    session_total_str = session.get("purchase")["total"]
+    total_i = int(float(session_total_str) * 100)
 
     refid = "".join(random.choices(string.ascii_lowercase, k=10))
 
@@ -295,20 +295,17 @@ def payment_with_token(request):
             city_locality=address_d.get("city_locality"),
             postal_code=address_d.get("postal_code"),
             country_code=address_d.get("country_code"),
-            total_paid=float(total_s),
+            total_paid=float(session_total_str),
             payment_option="Square",
             state_province=address_d.get("state_province"),
             status="PROCESSING",
             shipping_cost=shipping_cost,
             shipping_method=tier_name.upper(),
-            subtotal=Decimal(total_s),
+            subtotal=basket.get_subtotal_price(),  # Decimal(session_total_str),
         )
 
         classify_order_add_items(order, basket)
-        #logger.warning(f"new order created:\n{order.toJSON()}")
-        # p = Payment.objects.create(
-        #     order=order, amount=float(total_s), comment="web full pay"
-        # )
+        # logger.warning(f"new order created:\n{order.toJSON()}")
 
         basket.clear()
         return JsonResponse({"result": result.body, "success": True})
