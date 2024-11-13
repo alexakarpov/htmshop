@@ -36,7 +36,7 @@
       "parent": null,
       "is_active": true,
       "lft": 1,
-      "rght": 14,
+      "rght": 12,
       "tree_id": 8,
       "level": 0
     }
@@ -91,8 +91,8 @@
       "slug": "incense-i-good",
       "parent": 3,
       "is_active": true,
-      "lft": 8,
-      "rght": 9,
+      "lft": 6,
+      "rght": 7,
       "tree_id": 8,
       "level": 1
     }
@@ -133,8 +133,8 @@
       "slug": "incense-iv-rare",
       "parent": 3,
       "is_active": true,
-      "lft": 12,
-      "rght": 13,
+      "lft": 10,
+      "rght": 11,
       "tree_id": 8,
       "level": 1
     }
@@ -147,8 +147,8 @@
       "slug": "incense-natural-frankincense",
       "parent": 3,
       "is_active": true,
-      "lft": 10,
-      "rght": 11,
+      "lft": 8,
+      "rght": 9,
       "tree_id": 8,
       "level": 1
     }
@@ -430,20 +430,6 @@
       "lft": 4,
       "rght": 5,
       "tree_id": 2,
-      "level": 1
-    }
-  },
-  {
-    "model": "catalogue.category",
-    "pk": 35,
-    "fields": {
-      "name": "Censers and charcoal",
-      "slug": "incense-censers-and-charcoal",
-      "parent": 3,
-      "is_active": true,
-      "lft": 6,
-      "rght": 7,
-      "tree_id": 8,
       "level": 1
     }
   },
@@ -6832,7 +6818,7 @@
       "is_featured": true,
       "is_set": true,
       "created_at": "2023-09-01T17:44:30.787Z",
-      "image": "images/A420_sm_f4xwxbG_Rlzckpr.png",
+      "image": "images/A420_sm_iR0qSul.png",
       "image2": "",
       "image3": ""
     }
