@@ -1,0 +1,11 @@
+cart looks like this:
+
+Sub Total:
+$32.0
+Delivery Cost:
+$10.77
+Total:
+$42.77
+
+order #13 placed, total displayed as above
+total_paid is now correct, but 'paid' is displayed as falsy
