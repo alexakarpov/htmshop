@@ -30,6 +30,8 @@ class Order(models.Model):
     country_code = models.CharField(max_length=4, blank=True, default="US")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    # order subtotal is the price of every item multiplied by it's quantity
+    # ,same as Basket's subtotal
     subtotal = models.DecimalField(
         max_digits=7, decimal_places=2, null=False, blank=False
     )
@@ -65,7 +67,7 @@ class Order(models.Model):
         return f"order# {self.id} by {self.full_name} ({self.created_at})"
 
     def paid(self):
-        return self.status == "PAID"
+        return self.total_paid >= self.order_total
 
     def shipped(self):
         return self.status == "SHIPPED"
