@@ -1,1 +1,2 @@
-HTM Shop v. 2 on Django,
+HTM Shop v. 2 on Django
+yo
