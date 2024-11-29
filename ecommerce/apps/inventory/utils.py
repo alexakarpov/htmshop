@@ -5,6 +5,8 @@ from ecommerce.apps.inventory.models import (
     get_or_create_stock_by_sku,
 )
 
+from ecommerce.apps.orders.models import Order
+
 logger = logging.getLogger(__name__)
 
 

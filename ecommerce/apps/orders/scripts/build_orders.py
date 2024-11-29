@@ -21,16 +21,17 @@ def make_order_with():
     sku = input("which SKU? ")
     od_str = input("when was it placed (YYYY-MM-DD)? ")
 
-    st = oi.stock = Stock.objects.get(sku=sku)
+    st = Stock.objects.get(sku=sku)
+    oi.stock = st
     qty_s = input("quantity? ")
     qty_i = int(qty_s)
     oi.quantity = qty_i
-    oi.price = 32.0 * oi.quantity
+    oi.price=qty_i*st.price
+    o.subtotal = qty_i*st.price
+    
     oi.title = st.product.title
-    o.save()
     o.created_at = datetime.strptime(od_str, "%Y-%m-%d")
     o.save()
-    oi.save()
 
     return o
 
@@ -53,7 +54,7 @@ def make_order(icon_stocks):
     oi.price = 32.0
     oi.title = st.product.title
     o.save()
-    oi.save()
+    
     return o
 
 
@@ -63,4 +64,4 @@ def run():
 
     for n in range(1, N_ORDERS + 1):
         o = make_order_with()
-        print(f"generated order #{n}... -> {o.pk}")
+        print(f"generated order #{n}")
