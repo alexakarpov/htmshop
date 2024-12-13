@@ -101,7 +101,7 @@ class OrderItem(models.Model):
     )
     quantity = models.PositiveIntegerField(default=1)
     title = models.CharField(max_length=100)
-    sku = models.CharField(verbose_name="Product SKU", max_length=40)
+    #sku = models.CharField(verbose_name="Product SKU", max_length=40)
 
     price = models.DecimalField(max_digits=7, decimal_places=2)
 
