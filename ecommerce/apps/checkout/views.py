@@ -202,11 +202,9 @@ def pay_later(request):
     session = request.session
     choice = session.get("purchase").get("delivery_choice")
     tier_name, shipping_cost, service_code = choice.split("/")
-
     basket = Basket(request)
     address_json = session["address"]
     address_d = json.loads(address_json)
-
     full_name = address_d.get("full_name")
 
     user = request.user
@@ -267,11 +265,7 @@ def payment_with_token(request):
         "reference_id": reference_id,
     }
 
-    # logger.info(f"create_payment payload: {payload}")
-
     result = square_client.payments.create_payment(body=payload)
-
-    # logger.info(f"Square API call resulted in:\n{result.body}")
 
     if result.is_success():
         basket = Basket(request)
@@ -294,6 +288,7 @@ def payment_with_token(request):
             postal_code=address_d.get("postal_code"),
             country_code=address_d.get("country_code"),
             total_paid=float(session_total_str),
+            phone=address_d.get("phone"),
             payment_option="Square",
             state_province=address_d.get("state_province"),
             status="PROCESSING",
