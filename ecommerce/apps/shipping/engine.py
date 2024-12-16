@@ -94,7 +94,7 @@ def make_SE_shipment(basket, address_dict):
         codes.append(settings.USPS_MEDIA_MAIL)
     shipment_dict["rate_options"].update({"service_codes": codes})
 
-    logger.warning(f">>> RATE OPTIONS:\n{shipment_dict["rate_options"]}")
+    logger.warning(f">>> RATE OPTIONS:\n{shipment_dict['rate_options']}")
     return shipment_dict
 
 
