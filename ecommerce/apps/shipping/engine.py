@@ -39,13 +39,12 @@ def init_SE_shipment_dict():
                 settings.UPS_ID,
             ],
             "service_codes": [
-                # USPS
                 # "usps_priority_mail_express",
                 # "usps_parcel_select",
                 # "usps_first_class_mail",
                 # TODO: # "usps_media_mail", # add for books-only basket
             ],
-            "package_types": ["package"],
+            "package_code": "package",
         },
         "shipment": {
             "ship_from": {
@@ -60,23 +59,29 @@ def init_SE_shipment_dict():
                 "address_residential_indicator": "yes",
             },
             "ship_to": {},
-            "packages": [],
+            "packages": [],  # required to append to!
         },
     }
 
 
 def make_package(basket_dict: dict):
-    return {"weight": {"value": get_weight(basket_dict), "unit": "ounce"}}
+    return {
+        "weight": {
+            "value": get_weight(basket_dict),
+            "unit": "ounce",
+        }
+    }
 
 
 def make_SE_shipment(basket, address_dict):
-    international = address_dict.get("country_code") != 'US'
+    international = address_dict.get("country_code") != "US"
     shipment_dict = init_SE_shipment_dict()
     shipment_dict["shipment"]["ship_to"] = address_dict
-    shipment_dict["shipment"]["packages"].append(make_package(basket))
+    shipment_dict["shipment"]["packages"] = [make_package(basket)]
 
     shipment_dict["rate_options"] = {
-        "carrier_ids": [settings.USPS_ID, settings.UPS_ID, settings.FEDEX_ID]
+        "carrier_ids": [settings.USPS_ID, settings.UPS_ID, settings.FEDEX_ID],
+        "package_types": ["package"],
     }
     # next, limit the service codes
     codes = (
@@ -89,7 +94,7 @@ def make_SE_shipment(basket, address_dict):
         codes.append(settings.USPS_MEDIA_MAIL)
     shipment_dict["rate_options"].update({"service_codes": codes})
 
-    #logger.warning(f">>> RATE OPTIONS:\n{shipment_dict["rate_options"]}")
+    logger.warning(f">>> RATE OPTIONS:\n{shipment_dict["rate_options"]}")
     return shipment_dict
 
 

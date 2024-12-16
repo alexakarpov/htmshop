@@ -8,7 +8,7 @@
     <script type="text/javascript"
             src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
     <script>
-      // TODO: replace with Production valies
+      // TODO: replace with Production values
       const appId = '{{ app_id }}'
       const locationId = '{{ location_id }}'
 
@@ -183,30 +183,32 @@
 
         async function handlePayLater(event) {
           event.preventDefault();
-          console.log("pay later selected")
+          // console.log("pay later selected")
 
           let paymentResults = await payLater()
           $("#alertbox").show();
           $("#alertbox").text("Order successfully placed");
             
-          redirectHomeAfter(3000)
-          
+          redirectHomeAfter(2000)
         }
 
         const cardButton = document.getElementById('card-button');
         const payLaterButton = document.getElementById('pay-later-button');
-        // whencard button is clicked, the event, together with the initialized void card, is passed to the inner function
+        // when card button is clicked, the event, together with the initialized void card, is passed to the inner function
         cardButton.addEventListener('click', async function (event) {
           handlePaymentMethodSubmission(event, card);
         });
-        payLaterButton.addEventListener('click', async function (event) {
-          handlePayLater(event);
-        });
+        if(payLaterButton) { 
+          payLaterButton.addEventListener('click', async function (event) {
+            handlePayLater(event);
+          });
+        }
         
 
         $('#billing-is-shipping_id').on('change', function (e) {
-          // this will contain a reference to the checkbox   
+          // this will contain a reference to the checkbox
           if (this.checked) {
+            console.log("hiding...")
             $("#billingaddress").hide()
           }
           else {
