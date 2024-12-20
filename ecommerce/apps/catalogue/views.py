@@ -70,9 +70,6 @@ def product_detail(request, slug):
 
 #    for s in skus:
 #        logger.warning(s)
-
-
-
     return render(
         request,
         "catalogue/single.html",

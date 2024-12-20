@@ -37,7 +37,7 @@ admin.site.register(Category, MPTTModelAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    ordering = ("title",)
+    ordering = ("sku_base", "title",)
     search_fields = ("title", "sku_base")
     list_filter = ("category",)
 

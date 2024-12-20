@@ -48,10 +48,10 @@ def classify_order_add_items(order: Order, basket: Basket):
         stock.save()
         OrderItem.objects.create(
             order_id=order.pk,
-            title=item["title"],
+            stock=stock,
             price=item["price"],
             quantity=qty,
-            sku=sku,
+            product = stock.product
         )
     order.save()
     return

@@ -8,6 +8,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
 from ecommerce.apps.inventory.models import Stock
+from ecommerce.apps.catalogue.models import Product
 from ecommerce.constants import ORDER_STATUS, ORDER_KINDS, SS_DT_FORMAT
 
 
@@ -88,7 +89,7 @@ class Order(models.Model):
             "state_province": self.state_province,
             "postal_code": self.postal_code,
             "country_code": self.country_code,
-            "created_at": str(self.created_at)
+            "created_at": str(self.created_at),
         }
 
     def toJSON(self):
@@ -99,9 +100,20 @@ class OrderItem(models.Model):
     order = models.ForeignKey(
         Order, related_name="items", on_delete=models.CASCADE
     )
+
+    product = models.ForeignKey(
+        Product,
+        related_name="products",
+        on_delete=models.RESTRICT,
+        null=True,
+        blank=True,
+    )
+
+    stock = models.ForeignKey(
+        Stock, related_name="stock", on_delete=models.CASCADE, null=True
+    )
+
     quantity = models.PositiveIntegerField(default=1)
-    title = models.CharField(max_length=100)
-    sku = models.CharField(verbose_name="Product SKU", max_length=40)
 
     price = models.DecimalField(max_digits=7, decimal_places=2)
 
@@ -109,10 +121,18 @@ class OrderItem(models.Model):
         return self.price * self.quantity
 
     def __str__(self):
-        return f"{self.title} x {self.quantity}"
+        return (
+            f"{self.stock.product.title} x {self.quantity}"
+            if self.stock
+            else "X"
+        )
 
     def __repr__(self):
-        return f"{self.title} x {self.quantity}"
+        return (
+            f"{self.stock.product.title} x {self.quantity}"
+            if self.stock
+            else "X"
+        )
 
 
 class Payment(models.Model):

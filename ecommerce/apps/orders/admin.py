@@ -11,6 +11,7 @@ from .models import Order, OrderItem  # , Payment
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
+    readonly_fields = ["stock"] # strange, why it affects the loading time?
 
 
 class OrderAdmin(admin.ModelAdmin):

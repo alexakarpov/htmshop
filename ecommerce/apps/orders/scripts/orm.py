@@ -8,16 +8,20 @@ from django.db.models import Count
 
 
 def run():
-    orders = Order.objects.filter(items__stock__sku__startswith="A-")
+    orders = Order.objects.filter(items__sku__startswith="A-")
 
-    timed_sales = (
-        orders.annotate(
-            week=ExtractWeek("created_at"), year=ExtractYear("created_at")
-        )
-        .values("items__stock__sku", "week", "year")
-        .annotate(
-            sales=Count("*"),
-        )
-    )
 
-    pprint(timed_sales)
+#    timed_sales = (
+#        orders.annotate(
+#            week=ExtractWeek("created_at"),
+#            year=ExtractYear("created_at")
+#        )
+#        .values("items__sku", "week", "year")
+#        .annotate(
+#            sales=Count("*"),
+#            sku={items__sku: items__sku.quantity}
+#        )
+#    )
+
+#    pprint(timed_sales)
+    return
