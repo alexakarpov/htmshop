@@ -32,9 +32,7 @@ class OrderDetails(DetailView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         ctx_data = super().get_context_data(**kwargs)
         outstanding = self.object.order_total - self.object.total_paid
-        ctx_data["outstanding"] = (
-            outstanding
-        )
+        ctx_data["outstanding"] = outstanding
 
         products = Product.objects.filter(is_active=True).order_by("title")
         ctx_data["products"] = products
@@ -107,32 +105,31 @@ def user_orders(request):
     user_id = request.user.id
     return Order.objects.filter(user_id=user_id)
 
+
 @api_view(["POST"])
-def amend(request):
+def fix_product(request):
     product_slug = request.POST.get("slug")
-    order_id = int(request.POST.get("order"))
-    order = Order.objects.get(id=order_id)
     p = Product.objects.get(slug=product_slug)
     stocks = p.get_skus()
+
     skus = [stock.sku for stock in stocks.all()]
 
     return JsonResponse({"skus": skus})
 
+
 @api_view(["POST"])
 def append(request):
-    # print(f"append POST came in: { request.POST}")
     sku = request.POST.get("sku")
     order_id = int(request.POST.get("order"))
     qty = int(request.POST.get("qty"))
     stock = Stock.objects.get(sku=sku)
-
     order = Order.objects.get(id=order_id)
     new_item = OrderItem()
+    new_item.product = stock.product
     new_item.order = order
-    new_item.quantity = qty
     new_item.stock = stock
-    new_item.price = stock.price
-    new_item.title = stock.product.title
     new_item.save()
+    order.items.add(new_item)
+    order.subtotal += stock.price*qty
     order.save()
     return JsonResponse({"success": True})

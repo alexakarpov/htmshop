@@ -70,9 +70,9 @@
                 <tbody>
                     {% for item in order.items.all %}
                         <tr>
-                            <td>{{ item.quantity }} x {{ item.title|title }}</td>
+                            <td>{{ item.quantity }} x {{ item.stock.product.title|title }}</td>
                             <td>{{ item.stock.sku }}</td>
-                            <td>${{ item.price }}</td>
+                            <td>${{ item.stock.price }}</td>
                             <td>${{ item.item_total }}</td>
                         </tr>
                     {% endfor %}
@@ -99,4 +99,6 @@
                 </div>
             </div>
         </div>
+    </div>
+
     {% endblock content %}

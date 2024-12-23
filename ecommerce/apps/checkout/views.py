@@ -49,7 +49,6 @@ def classify_order_add_items(order: Order, basket: Basket):
         OrderItem.objects.create(
             order_id=order.pk,
             stock=stock,
-            price=item["price"],
             quantity=qty,
             product = stock.product
         )
@@ -70,7 +69,6 @@ def payment_selection(request):
         logger.error("Address isn't in session")
         return redirect("catalogue:home")  # is this a right redirect?!
     address_json = json.loads(session.get("address"))
-    # print(f"in payment_selection, address JSON:{address_json}")
     full_name = address_json.get("full_name")
     address_line1 = address_json.get("address_line1")
     address_line2 = address_json.get("address_line2")
@@ -157,14 +155,12 @@ def delivery_address(request):
     # guest user
     else:
         if "address" not in request.session:
-            # print("no address in session for guest user")
             messages.warning(request, "Enter an address for the checkout")
 
             return HttpResponseRedirect(reverse("checkout:guest_address"))
 
         else:
             a = session.get("address")
-            # print(f"address in session:\n{a}")
             address = json.loads(a)
             return render(
                 request,
@@ -176,8 +172,6 @@ def delivery_address(request):
 
 
 def guest_address(request):
-    # print(f"| checkout guest_address with {request.method}")
-
     if request.method == "POST":
         session = request.session
         address_form = GuestAddressForm(data=request.POST)
@@ -298,8 +292,6 @@ def payment_with_token(request):
         )
 
         classify_order_add_items(order, basket)
-        # logger.warning(f"new order created:\n{order.toJSON()}")
-
         basket.clear()
         return JsonResponse({"result": result.body, "success": True})
     else:

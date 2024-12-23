@@ -7,6 +7,8 @@ from .views import (
     ListOrders,
     LateOnPaymentOrders,
     add_payment,
+    fix_product,
+    append
 )
 
 app_name = "orders"
@@ -18,4 +20,7 @@ urlpatterns = [
     path("late/", LateOnPaymentOrders.as_view(), name="payment_late"),
     path("payment/", add_payment, name="add_payment"),
     path("invoice/<int:pk>", Invoice.as_view(), name="invoice"),
+    path("fix_product/", fix_product, name="fix_product"),
+    path("append/", append, name="append"),
+
 ]

@@ -103,6 +103,61 @@
         {% endfor %}
     </div>
     <script>
+    $(document).on('click', '#fix-product-to-order-btn', function (e) {
+        e.preventDefault()
+        const d = {
+          slug: $("#product-to-fix").val(),
+          csrfmiddlewaretoken: '{{csrf_token}}'
+        }
+
+        const fix_sku_url = '{% url "orders:fix_product" %}'
+        $.ajax({
+          type: 'POST',
+          url: fix_sku_url,
+          data: d,
+          success: function (json) {
+            const skus=json.skus
+            let select = $('#stock-to-append')
+            skus.forEach((s) => {
+                let opt = document.createElement('option')
+                opt.value = s
+                opt.innerText = s
+                select.append(opt)
+            })
+            $("#append-stock").prop('disabled', false)
+            $("#fix-product-to-order-btn").prop('disabled', true)
+          },
+          error: function (xhr, errmsg, err) {
+            console.error("fix product POST failed", errmsg)
+          }
+        })
+      })
+
+  $(document).on('click', '#append-stock', function (e) {
+    e.preventDefault()
+    const toappend = $('#stock-to-append').val()
+    const data = {
+      qty: $('#howmany').val(),
+      sku: toappend,
+      order: "{{ order.id }}",
+      csrfmiddlewaretoken: '{{csrf_token}}'
+      //action: 'post'
+    }
+    append_stock_url = '{% url "orders:append" %}'
+    $.ajax({
+      type: 'POST',
+      url: append_stock_url,
+      data,
+      success: function (json) {
+        window.location.reload()
+      },
+      error: function (xhr, errmsg, err) {
+        console.error("fix product POST failed", errmsg)
+      }
+    })
+
+  })
+
 
   $(document).on('click', '#add-payment', function (e) {
       e.preventDefault()
