@@ -130,6 +130,15 @@ def append(request):
     new_item.stock = stock
     new_item.save()
     order.items.add(new_item)
-    order.subtotal += stock.price*qty
+    order.subtotal += stock.price * qty
     order.save()
     return JsonResponse({"success": True})
+
+
+@api_view(["POST"])
+def recalculate(request):
+    order_id=request.POST.get('order_id')
+    print(f"recalculating for {order_id}")
+    order = Order.objects.get(id=order_id)
+    sub=order.calculate_subtotal()
+    return JsonResponse({"price": sub})

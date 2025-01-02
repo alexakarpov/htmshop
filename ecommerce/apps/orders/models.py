@@ -95,19 +95,25 @@ class Order(models.Model):
     def toJSON(self):
         return json.dumps(self.to_dict(), indent=2)
 
+    def calculate_subtotal(self):
+        sub = sum(i.item_total() for i in self.items.all())
+        self.subtotal = sub
+        self.save()
+        return sub
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(
         Order, related_name="items", on_delete=models.CASCADE
     )
 
-    product = models.ForeignKey(
-        Product,
-        related_name="products",
-        on_delete=models.RESTRICT,
-        null=True,
-        blank=True,
-    )
+    #    product = models.ForeignKey(
+    #        Product,
+    #        related_name="products",
+    #        on_delete=models.RESTRICT,
+    #        null=True,
+    #        blank=True,
+    #       )
 
     stock = models.ForeignKey(
         Stock, related_name="stock", on_delete=models.CASCADE, null=True

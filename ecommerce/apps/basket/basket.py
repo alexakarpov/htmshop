@@ -95,10 +95,7 @@ class Basket:
         )
 
     def get_total(self, delivery_cost=0):
-        subtotal = sum(
-            item["price"] * item["qty"] for item in self.basket.values()
-        )
-        return round((subtotal + float(delivery_cost)), 2)
+        return round((self.get_subtotal_price() + float(delivery_cost)), 2)
 
     def is_first_class(self):
         total_weight = get_weight(self)

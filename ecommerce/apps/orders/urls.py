@@ -8,7 +8,8 @@ from .views import (
     LateOnPaymentOrders,
     add_payment,
     fix_product,
-    append
+    append,
+    recalculate
 )
 
 app_name = "orders"
@@ -22,5 +23,5 @@ urlpatterns = [
     path("invoice/<int:pk>", Invoice.as_view(), name="invoice"),
     path("fix_product/", fix_product, name="fix_product"),
     path("append/", append, name="append"),
-
+    path("recalculate/", recalculate, name="recalculate"),
 ]
