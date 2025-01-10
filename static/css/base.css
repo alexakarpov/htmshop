@@ -102,6 +102,7 @@ hr.divider {
 }
 
 #billingaddress,
+#errorbox,
 #alertbox,
 #cartalertbox {
   display: none;
