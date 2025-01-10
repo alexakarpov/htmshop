@@ -47,6 +47,7 @@
                          name="sku-radio"
                          data-price="{% get_price user i %}"
                          value="{{ i.sku }}"
+                         id="{{ i.sku }}"
                          {% if skus.count == 1 %}checked{% endif %}>
                 </div>
                 <div class="col-lg-2">
