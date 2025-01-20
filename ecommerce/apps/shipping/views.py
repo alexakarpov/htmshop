@@ -76,14 +76,17 @@ def get_rates(request):
     basket = Basket(request)
     address_d = json.loads(request.session["address"])
 
-    if settings.SE_ENABLED:
-        choices: list[ShippingChoiceSE] = shipping_choices_SE(
-            basket, address_d
-        )
-    else:
-        choices: list[ShippingChoiceSS] = shipping_choices_SS(
-            basket, address_d
-        )
+    try:
+        if settings.SE_ENABLED:
+            choices: list[ShippingChoiceSE] = shipping_choices_SE(
+                basket, address_d
+            )
+        else:
+            choices: list[ShippingChoiceSS] = shipping_choices_SS(
+                basket, address_d
+            )
+    except Exception as e:
+        return JsonResponse({"status": "error", "msg": str(e)})
 
     if not basket.is_first_class():
         choices = [

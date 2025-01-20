@@ -50,7 +50,6 @@ def classify_order_add_items(order: Order, basket: Basket):
             order_id=order.pk,
             stock=stock,
             quantity=qty,
-            product = stock.product
         )
     order.save()
     return

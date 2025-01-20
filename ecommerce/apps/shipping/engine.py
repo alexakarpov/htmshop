@@ -100,9 +100,16 @@ def make_SE_shipment(basket, address_dict):
 
 def get_rates(engine, shipment):
     response = engine.get_rates_from_shipment(shipment)
-    return response.get("rate_response").get("rates") or response.get(
+    err = response.get("rate_response").get("errors")
+    res = response.get("rate_response").get("rates") or response.get(
         "rate_response"
     ).get("invalid_rates")
+
+    if not res and err:
+        error_msgs = []
+        error_msgs.extend(e.get('message') for e in err)
+        raise(Exception(error_msgs[1] or error_msgs[0]))
+    return res
 
 
 def shipping_choices_SS(basket: Basket, address_dict: dict):

@@ -112,13 +112,23 @@
     <script>
 const maybePluralize = (count, noun, suffix = 's') => `${count} ${noun}${count !== 1 ? suffix : ''}`;
 
+function redirectHomeAfter(ms) {
+    setTimeout(() => {
+        window.location.replace('{% url "catalogue:home" %}')
+    }, ms);
+}
+
 $(document).ready(function() {
     $.ajax({
         type: 'GET',
         url: '/shipping/get-rates',
         success: function(response) {
-            //console.log('Choices in response:')
-            //console.log(response.choices)
+            if (response.status == 'error') {
+                $("#errorbox").show();
+                $("#errorbox").text(`Error calculating shipping cost: ${response.msg}`);
+                alert(response.msg)
+                redirectHomeAfter(5000)
+            }
             $('#spinner').hide()
             reg_choice = response.choices[0]
             fast_choice = response.choices[1]
