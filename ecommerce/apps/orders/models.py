@@ -107,14 +107,6 @@ class OrderItem(models.Model):
         Order, related_name="items", on_delete=models.CASCADE
     )
 
-    #    product = models.ForeignKey(
-    #        Product,
-    #        related_name="products",
-    #        on_delete=models.RESTRICT,
-    #        null=True,
-    #        blank=True,
-    #       )
-
     stock = models.ForeignKey(
         Stock, related_name="stock", on_delete=models.CASCADE, null=True
     )
