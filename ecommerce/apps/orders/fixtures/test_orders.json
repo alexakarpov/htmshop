@@ -1,0 +1,94 @@
+[
+  {
+    "model": "orders.order",
+    "pk": 4,
+    "fields": {
+      "user": 1,
+      "full_name": "Alex Karpov",
+      "email": "alexakarpov@gmail.com",
+      "address_line1": "500 Wall St",
+      "address_line2": "213",
+      "city_locality": "Seattle",
+      "phone": "76587698",
+      "postal_code": "98121",
+      "state_province": "WA",
+      "country_code": "US",
+      "created_at": "2025-01-01",
+      "updated_at": "2025-01-06",
+      "subtotal": "30.00",
+      "order_total": "75.54",
+      "total_paid": "75.54",
+      "payment_option": "Square",
+      "shipping_method": "FAST",
+      "shipping_cost": "45.54",
+      "status": "PROCESSING",
+      "kind": "GENERIC",
+      "is_phone_order": false,
+      "is_bookstore_order": false
+    }
+  },
+  {
+    "model": "orders.order",
+    "pk": 5,
+    "fields": {
+      "user": null,
+      "full_name": "Someone Else",
+      "email": "alexandre.karpov@protonmail.com",
+      "address_line1": "500 Wall St",
+      "address_line2": "apt 222",
+      "city_locality": "Seattle",
+      "phone": "5546546677",
+      "postal_code": "98121",
+      "state_province": "WA",
+      "country_code": "US",
+      "created_at": "2025-01-02",
+      "updated_at": "2025-02-10",
+      "subtotal": "236.00",
+      "order_total": "248.99",
+      "total_paid": "0.00",
+      "payment_option": "",
+      "shipping_method": "FAST",
+      "shipping_cost": "12.99",
+      "status": "PROCESSING",
+      "kind": "GENERIC",
+      "is_phone_order": true,
+      "is_bookstore_order": false
+    }
+  },
+  {
+    "model": "orders.orderitem",
+    "pk": 11,
+    "fields": {
+      "order": 4,
+      "stock": "B-10",
+      "quantity": 1
+    }
+  },
+  {
+    "model": "orders.orderitem",
+    "pk": 14,
+    "fields": {
+      "order": 5,
+      "stock": "A-113",
+      "quantity": 2
+    }
+  },
+  {
+    "model": "orders.orderitem",
+    "pk": 19,
+    "fields": {
+      "order": 5,
+      "stock": "A-202.20x24M",
+      "quantity": 1
+    }
+  },
+  {
+    "model": "orders.orderitem",
+    "pk": 20,
+    "fields": {
+      "order": 5,
+      "stock": "A-1",
+      "quantity": 1
+    }
+  }
+]
