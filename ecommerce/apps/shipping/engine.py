@@ -163,10 +163,7 @@ def shipping_choices_SE(basket: Basket, address_d: dict):
     shipment = make_SE_shipment(basket, address_d)
 
     try:
-        if settings.HARDCODE_RATES:
-            get_rates_response = HARDCODED_SE_RATES  # @FIXME
-        else:
-            get_rates_response = get_rates(shipengine, shipment)
+        get_rates_response = get_rates(shipengine, shipment)
         #logger.warning(f"GET_RATES RETURNED\n{get_rates_response}")
         return list(map(lambda r: rate_to_choice(r), get_rates_response))
     except ShipEngineError as err:
