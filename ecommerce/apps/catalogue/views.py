@@ -44,7 +44,7 @@ def category_list(request, category_slug=None, letter=None):
 
 def saints_filtered(request, letter=None):
     saints = Category.objects.get(slug="icons-saints")
-    saints_filtered = saints.product_set.filter(title__startswith=letter)
+    saints_filtered = saints.product_set.filter(title__istartswith=letter)
 
     return render(
         request,
