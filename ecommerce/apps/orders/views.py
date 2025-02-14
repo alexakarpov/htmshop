@@ -1,11 +1,16 @@
+import json
 import logging, decimal
-from typing import Any, Dict
+from typing import Any
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
-from datetime import date, timedelta
+from datetime import date
+from ecommerce.apps.basket.basket import Basket
+from ecommerce.apps.shipping.engine import (
+    shipping_choices_SE,
+)
 
 from ecommerce.apps.catalogue.models import Product
 from ecommerce.apps.inventory.models import Stock
@@ -33,11 +38,9 @@ class OrderDetails(DetailView):
         ctx_data = super().get_context_data(**kwargs)
         outstanding = self.object.order_total - self.object.total_paid
         ctx_data["outstanding"] = outstanding
-
         products = Product.objects.filter(is_active=True).order_by("title")
         ctx_data["products"] = products
-        # print(f"{products.count()} products to select")
-        # print(ctx_data)
+
         return ctx_data
 
 
@@ -70,13 +73,11 @@ class LateOnPaymentOrders(ListView):
     template_name = "orders/payment_late.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        all = Order.objects.filter(status="PROCESSING")
-        month = timedelta(days=30)
-        td = date.today()
+        orders_in_processing = Order.objects.filter(status="PROCESSING")
 
         late = []
 
-        for o in all:
+        for o in orders_in_processing:
             diff = (date.today() - o.created_at).days
             if diff > DAYS_LATE:
                 late.append(o)
@@ -137,8 +138,12 @@ def append(request):
 
 @api_view(["POST"])
 def recalculate(request):
-    order_id=request.POST.get('order_id')
-    print(f"recalculating for {order_id}")
+    # need to pass session key manually with JS
+    basket = Basket(request)
+    address_d = json.loads(request.session["address"])
+
+    order_id = request.POST.get("order_id")
     order = Order.objects.get(id=order_id)
-    sub=order.calculate_subtotal()
-    return JsonResponse({"price": sub})
+    choices = shipping_choices_SE(basket, address_d)
+    sub = order.calculate_subtotal()
+    return JsonResponse({"sub_price": sub})

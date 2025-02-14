@@ -1,23 +1,5 @@
 [
   {
-    "model": "catalogue.product",
-    "pk": "A-122",
-    "fields": {
-      "category": 1,
-      "title": "Test Icon Product",
-      "description": "<p>The 8 x 10 mounted icons are the standard size. All enlargements and reductions listed in the drop-down list are special orders and require up to four weeks to complete.</p>\n<p>See <a href=\"http://tyoos.org/Feasts-and-Saints-of-the-Day/Triodion/holy-thursday.html\" target=\"_blank\">www.tyoos.org</a> about this icon.</p>",
-      "slug": "test-icon",
-      "start_date": "2024-01-01",
-      "is_active": true,
-      "is_featured": false,
-      "is_set": false,
-      "created_at": "2023-09-01T17:44:28.334Z",
-      "image": "",
-      "image2": "",
-      "image3": ""
-    }
-  },
-  {
     "model": "inventory.stock",
     "pk": "A-122",
     "fields": {

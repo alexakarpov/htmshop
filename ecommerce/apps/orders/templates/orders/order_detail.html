@@ -27,7 +27,7 @@
                     <h4>Shipping tier: {{ order.get_shipping_method_display }}</h4>
                 </td>
                 <td>
-                    <h4>Shipping cost: ${{ order.shipping_cost }}</h4>
+                    <h4>Shipping cost: $<span id="shipping_cost">{{ order.shipping_cost }}</span></h4>
                 </td>
             </tr>
             <tr>
@@ -117,9 +117,9 @@
           url: recalculate_url,
           data: d,
           success: function (json) {
-            const price=json.price
+            const sub_price=json.sub_price
             
-            $("#subtotal").text(price)
+            $("#subtotal").text(sub_price)
           },
           error: function (xhr, errmsg, err) {
             console.error("fix product POST failed", errmsg)

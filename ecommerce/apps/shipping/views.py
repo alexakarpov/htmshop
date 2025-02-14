@@ -95,11 +95,7 @@ def get_rates(request):
 
     logger.warning(
         f">>> CHOICES returned:\n{choices}"
-    )  # hardcode to skip API calls!! @TODO fix me!
-    # TODO: determine if USPS 1st class and Media
-    # can be applied to the basket; if not, exclude
-    # choices strings contain service_code, so can filter
-    # alternatively, can provide acceptable codes to SE
+    )
 
     intl = address_d.get("country_code") != "US"
 
