@@ -8,12 +8,15 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from datetime import date
 from ecommerce.apps.basket.basket import Basket
+from ecommerce.apps.shipping.choice import ShippingChoiceSE, split_tiers
 from ecommerce.apps.shipping.engine import (
     shipping_choices_SE,
+    shipping_choices_for_order,
 )
 
 from ecommerce.apps.catalogue.models import Product
 from ecommerce.apps.inventory.models import Stock
+from ecommerce.apps.shipping.serializers import ShippingChoiceSESerializer
 from ecommerce.constants import DAYS_LATE
 
 from .models import Order, OrderItem, Payment
@@ -138,12 +141,31 @@ def append(request):
 
 @api_view(["POST"])
 def recalculate(request):
-    # need to pass session key manually with JS
-    basket = Basket(request)
-    address_d = json.loads(request.session["address"])
-
     order_id = request.POST.get("order_id")
     order = Order.objects.get(id=order_id)
-    choices = shipping_choices_SE(basket, address_d)
+    intl = order.country_code != "US"
+    try:
+        choices: list[ShippingChoiceSE] = shipping_choices_for_order(
+            order
+        )  # now need to split tiers and extract 3
+    except Exception as e:
+        return JsonResponse({"status": "error", "msg": str(e)})
+
+    if not order.is_first_class():
+        choices = [
+            x for x in choices if x.service_code != "usps_first_class_mail"
+        ]
+
+    # 13.28/se-6550365789/usps_ground_advantage/5 <- a choice
+    tiers = split_tiers(choices, international=intl)
+
+    express_choice: ShippingChoiceSE = sorted(tiers["express"])[0]
+    regular_choice: ShippingChoiceSE = sorted(tiers["regular"])[0]
+    fast_choice: ShippingChoiceSE = sorted(tiers["fast"])[0]
+
+    serializer = ShippingChoiceSESerializer(
+        [regular_choice, fast_choice, express_choice], many=True
+    )
+
     sub = order.calculate_subtotal()
-    return JsonResponse({"sub_price": sub})
+    return JsonResponse({"sub_price": sub, "tiers": serializer.data})

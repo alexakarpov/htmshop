@@ -9,7 +9,12 @@ from django.dispatch import receiver
 
 from ecommerce.apps.inventory.models import Stock
 from ecommerce.apps.catalogue.models import Product
-from ecommerce.constants import ORDER_STATUS, ORDER_KINDS, SS_DT_FORMAT
+from ecommerce.constants import (
+    ORDER_STATUS,
+    ORDER_KINDS,
+    PACKING_WEIGHT_MULTIPLIER,
+    SS_DT_FORMAT,
+)
 
 
 class Order(models.Model):
@@ -67,10 +72,31 @@ class Order(models.Model):
     def __str__(self):
         return f"order# {self.id} by {self.full_name} ({self.created_at})"
 
+    def address_json(self):
+        return self.to_dict()
+
+    def is_media(self):
+        return all(item.stock.sku.startswith("B") for item in self.items.all())
+
+    def get_weight(self):
+        total_weight = 0
+        for it in self.items.all():
+            total_weight += it.stock.weight * it.quantity
+
+        return float(total_weight) * float(PACKING_WEIGHT_MULTIPLIER)
+
+    def is_first_class(self):
+        return self.get_weight() <= 12
+
+    def extract_ship_to(self):
+        d = self.address_json()
+        created_at = d.pop("created_at")
+        return d
+
     def paid(self):
         return self.total_paid >= self.order_total
 
-    def shipped(self):
+    def is_shipped(self):
         return self.status == "SHIPPED"
 
     def format_created_at(self):

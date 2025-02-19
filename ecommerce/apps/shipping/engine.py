@@ -9,6 +9,8 @@ from shipengine import ShipEngine
 from shipengine.errors import ShipEngineError
 
 from ecommerce.apps.basket.basket import Basket, get_weight
+from ecommerce.apps.orders.models import Order
+from ecommerce.constants import PACKING_WEIGHT_MULTIPLIER
 
 from .choice import rate_to_choice, ShippingChoiceSS
 
@@ -64,6 +66,22 @@ def init_SE_shipment_dict():
     }
 
 
+def get_order_weight(order):
+    total = sum(
+        item.stock.weight * item.quantity for item in order.items.all()
+    )
+    return float(total) * float(PACKING_WEIGHT_MULTIPLIER)
+
+
+def order_to_package(order: Order):
+    return {
+        "weight": {
+            "value": get_order_weight(order),
+            "unit": "ounce",
+        }
+    }
+
+
 def make_package(basket_dict: dict):
     return {
         "weight": {
@@ -71,6 +89,27 @@ def make_package(basket_dict: dict):
             "unit": "ounce",
         }
     }
+
+
+def make_shipment_for_order(order: Order):
+    international = order.country_code != "US"
+    shipment_dict = init_SE_shipment_dict()
+    shipment_dict["shipment"]["packages"] = [order_to_package(order)]
+    shipment_dict["shipment"]["ship_to"] = order.extract_ship_to()
+    shipment_dict["rate_options"] = {
+        "carrier_ids": [settings.USPS_ID, settings.UPS_ID, settings.FEDEX_ID],
+        "package_types": ["package"],
+    }
+
+    codes = (
+        settings.INTL_REGULAR + settings.INTL_FAST + settings.INTL_EXPRESS
+        if international
+        else settings.REGULAR + settings.FAST + settings.EXPRESS
+    )
+    if order.is_media() and not international:
+            codes.append(settings.USPS_MEDIA_MAIL)
+    shipment_dict["rate_options"].update({"service_codes": codes})
+    return shipment_dict
 
 
 def make_SE_shipment(basket, address_dict):
@@ -107,8 +146,8 @@ def get_rates(engine, shipment):
 
     if not res and err:
         error_msgs = []
-        error_msgs.extend(e.get('message') for e in err)
-        raise(Exception(error_msgs[1] or error_msgs[0]))
+        error_msgs.extend(e.get("message") for e in err)
+        raise (Exception(error_msgs[1] or error_msgs[0]))
     return res
 
 
@@ -159,12 +198,24 @@ def shipping_choices_SS(basket: Basket, address_dict: dict):
     return choices
 
 
+def shipping_choices_for_order(order: Order):
+    shipment = make_shipment_for_order(order)
+    try:
+        get_rates_response = get_rates(shipengine, shipment)
+        # logger.warning(f"GET_RATES RETURNED\n{get_rates_response}")
+        return list(map(lambda r: rate_to_choice(r), get_rates_response))
+    except ShipEngineError as err:
+        logger.error("==== ERROR calling ShipEngine")
+        logger.error(err.to_json())
+        return []
+
+
 def shipping_choices_SE(basket: Basket, address_d: dict):
     shipment = make_SE_shipment(basket, address_d)
 
     try:
         get_rates_response = get_rates(shipengine, shipment)
-        #logger.warning(f"GET_RATES RETURNED\n{get_rates_response}")
+        # logger.warning(f"GET_RATES RETURNED\n{get_rates_response}")
         return list(map(lambda r: rate_to_choice(r), get_rates_response))
     except ShipEngineError as err:
         logger.error("==== ERROR calling ShipEngine")
