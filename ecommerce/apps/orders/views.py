@@ -132,6 +132,7 @@ def append(request):
     new_item.product = stock.product
     new_item.order = order
     new_item.stock = stock
+    new_item.quantity = qty
     new_item.save()
     order.items.add(new_item)
     order.subtotal += stock.price * qty
