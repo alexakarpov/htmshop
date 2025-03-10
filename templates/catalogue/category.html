@@ -99,7 +99,7 @@
           </div>
         {% endif %}
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-          {% for product in products %}
+          {% for product in page_obj %}
             <div class="col">
               <div class="card border-0">
                 <a class="text-dark text-decoration-none"
@@ -116,6 +116,26 @@
             </div>
           {% endfor %}
         </div>
+        {% comment %}
+          End of album?
+        {% endcomment %}
+        <nav aria-label="cat-nav">
+          <ul class="pagination">
+            {% if page_obj.has_next %}
+              <li class="page-item flex-fill">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">NEXT</a>
+              </li>
+            {% endif %}
+            {% if page_obj.has_previous %}
+              <li class="page-item flex-fill">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">PREVIOUS</a>
+              </li>
+            {% endif %}
+            <li class="page-item flex-fill">
+              <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">LAST &raquo</a>
+            </li>
+          </ul>
+        </nav>
       {% endif %}
     </div>
   </div>

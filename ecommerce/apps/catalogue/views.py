@@ -1,6 +1,7 @@
 import logging
 
 from django.shortcuts import get_object_or_404, render, redirect
+from django.core.paginator import Paginator
 
 from ecommerce.constants import PHANURIUS_BOOK_SLUG
 from ecommerce.constants import ID_LOOKUP
@@ -31,13 +32,16 @@ def category_list(request, category_slug=None, letter=None):
     cat = get_object_or_404(Category, slug=category_slug)
 
     products = cat.product_set.all().order_by("title")
-
+    paginator = Paginator(products, 20)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     return render(
         request,
         "catalogue/category.html",
         {
             "category": cat,
-            "products": products,
+            "page_obj": page_obj,
+            "products": paginator,
         },
     )
 
@@ -46,12 +50,17 @@ def saints_filtered(request, letter=None):
     saints = Category.objects.get(slug="icons-saints")
     saints_filtered = saints.product_set.filter(title__istartswith=letter)
 
+    paginator = Paginator(saints_filtered, 20)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     return render(
         request,
         "catalogue/category.html",
         {
             "category": saints,
-            "products": saints_filtered,
+            "page_obj": page_obj,
+            "products": paginator,
         },
     )
 
