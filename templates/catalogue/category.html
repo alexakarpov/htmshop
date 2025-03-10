@@ -135,6 +135,9 @@
               </li>
             {% endif %}
           </ul>
+          <div class="fw-bold d-flex">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+          </div>
         </nav>
       {% endif %}
     </div>

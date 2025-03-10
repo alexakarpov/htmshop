@@ -202,14 +202,17 @@ def shipping_choices_for_order(order: Order):
     shipment = make_shipment_for_order(order)
     try:
         get_rates_response = get_rates(shipengine, shipment)
-        # logger.warning(f"GET_RATES RETURNED\n{get_rates_response}")
-        return list(map(lambda r: rate_to_choice(r), get_rates_response))
+        #logger.warning(f"Raw rates response:\n{get_rates_response}")
+        choices = list(map(lambda r: rate_to_choice(r), get_rates_response))
+        #logger.warning(f"GET_RATES RETURNED {len(choices)} choices:\n{choices}")
+        return choices
     except ShipEngineError as err:
         logger.error("==== ERROR calling ShipEngine")
         logger.error(err.to_json())
         return []
 
 
+# shipping choice for basket
 def shipping_choices_SE(basket: Basket, address_d: dict):
     shipment = make_SE_shipment(basket, address_d)
 
