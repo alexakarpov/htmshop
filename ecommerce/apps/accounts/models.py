@@ -76,6 +76,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     updated = models.DateTimeField(auto_now=True)
     is_trusted = models.BooleanField(default=False)
     is_bookstore = models.BooleanField(default=False)
+    credit_limit = models.IntegerField(default=0)
 
     objects = CustomAccountManager()
 
