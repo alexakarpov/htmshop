@@ -15,6 +15,8 @@ class AccountAdmin(UserAdmin):
                     "first_name",
                     "last_name",
                     "last_login",
+                    "debt",
+                    "credit_limit"
                 )
             },
         ),
@@ -50,6 +52,7 @@ class AccountAdmin(UserAdmin):
         "is_staff",
         "is_bookstore",
         "last_login",
+        "debt",
     )
     list_filter = ("is_staff", "is_superuser", "is_active", "is_trusted", "is_bookstore", "groups")
     search_fields = ("email",)

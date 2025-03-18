@@ -77,6 +77,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_trusted = models.BooleanField(default=False)
     is_bookstore = models.BooleanField(default=False)
     credit_limit = models.IntegerField(default=0)
+    debt = models.IntegerField(default=0)
 
     objects = CustomAccountManager()
 
@@ -103,6 +104,9 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     def get_last_name(self):
         return self.last_name
+
+    def creditable(self, price_s):
+        return self.is_trusted and (self.debt + float(price_s) < self.credit_limit)
 
     def get_short_name(self):
         # otherwise there are strange error in the logs

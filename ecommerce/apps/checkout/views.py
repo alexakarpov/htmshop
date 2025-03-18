@@ -3,8 +3,6 @@ import logging
 import random
 import string
 
-from decimal import Decimal
-
 from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -90,7 +88,7 @@ def payment_selection(request):
             "location_id": location_id,
             "total": total,
             "trusted": request.user.is_authenticated
-            and request.user.is_trusted,
+            and request.user.is_trusted and request.user.creditable(total),
             "full_name": full_name,
             "address_line1": address_line1,
             "address_line2": address_line2,
