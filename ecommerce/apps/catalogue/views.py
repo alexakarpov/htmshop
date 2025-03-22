@@ -78,20 +78,30 @@ def product_detail(request, slug):
     else:
         skus = product.get_skus()
 
-    ss, ers, ps = reorder(skus)
-
-    return render(
-        request,
-        "catalogue/single.html",
-        {
-            "product": product,
-            "skus": skus,
-            "ss": sorted(ss),
-            "ers": sorted(ers),
-            "ps": sorted(ps),
-            "referred": referrer,
-        },
-    )
+    if len(skus) == 1:
+        return render(
+            request,
+            "catalogue/single.html",
+            {
+                "product": product,
+                "skus": skus,
+                "referred": referrer,
+            },
+        )
+    else:
+        ss, ers, ps = reorder(skus)
+        return render(
+            request,
+            "catalogue/choices.html",
+            {
+                "product": product,
+                "skus": skus,
+                "ss": ss,
+                "ers": sorted(ers),
+                "ps": sorted(ps),
+                "referred": referrer,
+            },
+        )
 
 
 def st_phanurius_book(request):
