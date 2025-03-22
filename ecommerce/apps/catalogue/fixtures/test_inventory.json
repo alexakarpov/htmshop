@@ -1,0 +1,241 @@
+[
+  {
+    "model": "inventory.stock",
+    "pk": "A-1",
+    "fields": {
+      "product": "A-1",
+      "spec": "Standard size 10\" x 8\"",
+      "restock_point": 5,
+      "target_amount": 15,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "25.72",
+      "price": "32.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.11x14M",
+    "fields": {
+      "product": "A-1",
+      "spec": "14\" x 11¼\"",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "50.41",
+      "price": "75.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.11x14P",
+    "fields": {
+      "product": "A-1",
+      "spec": "14\" x 11¼\" print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "1.70",
+      "price": "50.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.16x20M",
+    "fields": {
+      "product": "A-1",
+      "spec": "20\" x 16⅛\"",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "102.88",
+      "price": "100.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.16x20P",
+    "fields": {
+      "product": "A-1",
+      "spec": "20\" x 16⅛\" print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "3.47",
+      "price": "75.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.20x24M",
+    "fields": {
+      "product": "A-1",
+      "spec": "24\" x 19¼\"",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "148.15",
+      "price": "140.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.20x24P",
+    "fields": {
+      "product": "A-1",
+      "spec": "24\" x 19¼\" print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "5.00",
+      "price": "100.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.24x30M",
+    "fields": {
+      "product": "A-1",
+      "spec": "30\" x 24⅛\"",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "231.48",
+      "price": "190.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.24x30P",
+    "fields": {
+      "product": "A-1",
+      "spec": "30\" x 24⅛\" print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "7.81",
+      "price": "150.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.30x40M",
+    "fields": {
+      "product": "A-1",
+      "spec": "40\" x 32⅛\"",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "411.53",
+      "price": "300.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.30x40P",
+    "fields": {
+      "product": "A-1",
+      "spec": "40\" x 32⅛\" print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "13.89",
+      "price": "200.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.40x50M",
+    "fields": {
+      "product": "A-1",
+      "spec": "50\" x 40⅛\"",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "643.01",
+      "price": "625.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.40x50P",
+    "fields": {
+      "product": "A-1",
+      "spec": "50\" x 40⅛\" print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "21.70",
+      "price": "425.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.5x7M",
+    "fields": {
+      "product": "A-1",
+      "spec": "7\" x 5⅝\"",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "9.21",
+      "price": "32.00",
+      "is_set": false
+    }
+  },
+  {
+    "model": "inventory.stock",
+    "pk": "A-1.5x7P",
+    "fields": {
+      "product": "A-1",
+      "spec": "7\" x 5⅝\" print",
+      "restock_point": 0,
+      "target_amount": 0,
+      "wrapping_qty": 0,
+      "sanding_qty": 0,
+      "painting_qty": 0,
+      "weight": "0.43",
+      "price": "18.00",
+      "is_set": false
+    }
+  }]

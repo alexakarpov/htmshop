@@ -54,8 +54,7 @@ def move_sku_to_print_supply(source_sku: str, from_room: str, qty: int = 1) -> S
 
 
 def move_sku_from_print_supply(sku: str, to_room: str,  qty: int = 1) -> Stock:
-    print_sku = sku+"P"
-
+    print_sku = f"{sku}P"
     print_stock = get_or_create_stock_by_sku(print_sku)
     print_stock.wrapping_qty -= qty  # print supply IS prints in wrapping room
     print_stock.save()

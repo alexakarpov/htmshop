@@ -7,8 +7,10 @@ from ecommerce.constants import PHANURIUS_BOOK_SLUG
 from ecommerce.constants import ID_LOOKUP
 
 from .models import Category, Product
+from .utils import reorder
 
 logger = logging.getLogger(__name__)
+
 
 def catalogue_index(request):
     featured = Product.objects.filter(is_active=True, is_featured=True)
@@ -71,20 +73,22 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, is_active=True)
 
     # for books, filter out all OOS skus.
-    if product.sku_base.startswith('B-'):
+    if product.sku_base.startswith("B-"):
         skus = product.get_skus().filter(wrapping_qty__gt=0)
     else:
         skus = product.get_skus()
-#    logger.warning(f"fetched {len(skus)} skus:")
 
-#    for s in skus:
-#        logger.warning(s)
+    ss, ers, ps = reorder(skus)
+
     return render(
         request,
         "catalogue/single.html",
         {
             "product": product,
             "skus": skus,
+            "ss": sorted(ss),
+            "ers": sorted(ers),
+            "ps": sorted(ps),
             "referred": referrer,
         },
     )

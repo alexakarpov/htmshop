@@ -65,10 +65,12 @@ class Stock(models.Model):
         Print supply for a SKU such as A-9 is the number of A-9P units located in wrapping room
         """
         product_sku = self.sku
-        print_sku = f"{product_sku}P" if product_sku[-1] != "P" else product_sku
-        logger.debug(f"stock of {product_sku} looking up {print_sku}")
+        print_sku = (
+            f"{product_sku}P" if product_sku[-1] != "P" else product_sku
+        )
+        # logger.debug(f"stock of {product_sku} looking up {print_sku}")
         try:
-            print = Stock.objects.get(sku=print_sku)
+            # print = Stock.objects.get(sku=print_sku)
             return print.wrapping_qty
         except Stock.DoesNotExist:
             logger.warning(f"prints aren't even in stock for {product_sku}")
@@ -81,7 +83,7 @@ class Stock(models.Model):
         return self.sku[-1].upper() == "P"
 
     def is_enlargement(self):
-        return self.sku.find("x") != -1
+        return "x" in self.sku
 
     def is_our_book(self):
         return self.product.category == Category.objects.get(
@@ -90,6 +92,12 @@ class Stock(models.Model):
 
     def is_incense(self):
         return self.sku[0].upper() == "L"
+
+    def is_standard(self):
+        return "Standard" in self.spec
+
+    def __lt__(self, other):
+        return self.price < other.price
 
     def wrapping_add(self, qty: int):
         self.wrapping_qty += qty
@@ -106,7 +114,9 @@ class Stock(models.Model):
 
             for it in members:
                 member_s = Stock.objects.get(pk=it)
-                print(f"###### removing {qty} of {member_s} for the set of {self.sku}")
+                print(
+                    f"###### removing {qty} of {member_s} for the set of {self.sku}"
+                )
                 member_s.wrapping_remove(qty)
                 member_s.save()
         else:
@@ -143,13 +153,12 @@ class Stock(models.Model):
             logger.debug("to nowhere, nothing to add")
 
         # decrease source qty
-        if from_room.find("wrap") > -1:
+        if "wrap" in from_room:
             self.wrapping_remove(qty)
-        elif from_room.find("paint") > -1:
+        elif "paint" in from_room:
             self.painting_remove(qty)
-        elif from_room.find("sand") > -1:
+        elif "sand" in from_room:
             self.sanding_remove(qty)
-        # on a move from printing to wrapping - we decrease Print SKU, and increase the Mounted
         else:
             logger.debug("from nowhere, nothing to remove")
 
@@ -173,7 +182,7 @@ def get_or_create_stock_by_sku(sku: str) -> Stock:
 
 
 def get_print_supply_by_sku(sku: str) -> Stock:
-    return Stock.objects.filter(sku__icontains=sku + "p").first()
+    return Stock.objects.filter(sku__icontains=f"{sku}p").first()
 
 
 class WorkItem(ABC):

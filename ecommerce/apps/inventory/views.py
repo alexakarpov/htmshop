@@ -98,9 +98,7 @@ class MountingWorkListView(ListView):
 
     def get_context_data(self, **kwargs):
         work = mounting_work()
-        # work = work * 150  # TODO remove
         paginator = Paginator(work, LINES_PER_PAGE)
-
         return {"work": paginator, "title": "mounting", "now": ts()}
 
 
