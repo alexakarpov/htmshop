@@ -1,6 +1,5 @@
 import logging
 
-from django.conf import settings
 from django.db import models
 from django.db.models import signals
 from django.dispatch import receiver
@@ -13,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 class Category(MPTTModel):
     """
-    Category Table implimented with mptt
+    Category Table implemented with mptt
     """
 
     name = models.CharField(
@@ -147,11 +146,7 @@ class Product(models.Model):
         """
         These are Stock items from the inventory app, related to this Product
         """
-        return (
-            self.stock_set.all() if self.is_set else self.stock_set.order_by(
-                            "price",
-                        )
-        )
+        return self.stock_set.all()
 
     def __str__(self):
         return f"({self.sku_base}) {self.title}"
