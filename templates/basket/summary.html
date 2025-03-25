@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container">
         <div class="col-12">
-            <h1 class="h2 pt-5">Your Cart, {{ user }}</h1>
+            <h1 class="h2 pt-5">Your Cart{% if user.is_authenticated %}, {{ user }} {% endif %}</h1>
         </div>
         <div class="col-12">
             <p>
