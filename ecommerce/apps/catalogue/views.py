@@ -88,11 +88,11 @@ def product_detail(request, slug):
                 "referred": referrer,
             },
         )
-    else:
+    elif product.sku_base.startswith('A-'):
         ss, ers, ps = reorder(skus)
         return render(
             request,
-            "catalogue/choices.html",
+            "catalogue/icons.html",
             {
                 "product": product,
                 "skus": skus,
@@ -102,7 +102,16 @@ def product_detail(request, slug):
                 "referred": referrer,
             },
         )
-
+    else:
+        return render(
+            request,
+            "catalogue/choice.html",
+            {
+                "product": product,
+                "skus": skus,
+                "referred": referrer,
+            },
+        )
 
 def st_phanurius_book(request):
     # referrer = request.META.get("HTTP_REFERER")

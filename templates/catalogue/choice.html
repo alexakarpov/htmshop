@@ -1,0 +1,121 @@
+{% extends "../base.html" %}
+{% load prices %}
+{% block title %}
+  {% if product %}
+    {{ product.title }}
+  {% else %}
+    Product
+  {% endif %}
+{% endblock title %}
+{% block content %}
+  <div class="container">
+    <div class="table">
+      <div class="row g-0">
+        <div class="card">
+          <div class="col-lg-12 col-md-9">
+            <div class="card-body p-1">
+              <p class="display-4 pt-4 text-center fw-bold lead mb-0 pe-4 pb-4">{{ product.title }} ({{ product.sku_base }})</p>
+              <img class="img-fluid mx-auto d-block"
+                   src="{{ product.image.url }}"
+                   alt="{{ product.title }}" />
+              <details class="description">
+                <summary class="mt-2" data-open="hide" data-close="read more"></summary>
+                {% autoescape off %}
+                  {{ product.description }}
+                {% endautoescape %}
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if skus %}
+        {% for i in skus %}
+          <div class="card choice-div" style="border-top: none;">
+            <label for="{{ i.sku }}" class="pointer">
+              <div class="row m-1">
+                <div class="col-lg-6 col-md-4 col-sm-2">
+                  <strong>
+                    {% if i.spec %}<i>{{ i.spec }}</i>{% endif %}
+                  </strong>
+                </div>
+                <div class="col-lg-2">
+                  <strong>${% display_price user i %}</strong>
+                </div>
+                <div class="col-lg-1">
+                  <input class="form-check-input sku-picker"
+                         type="radio"
+                         name="sku-radio"
+                         data-price="{% get_price user i %}"
+                         value="{{ i.sku }}"
+                         id="{{ i.sku }}"
+                         {% if skus.count == 1 %}checked{% endif %}>
+                </div>
+                <div class="col-lg-2">
+                  <i>{% is_oos i %}</i>
+                </div>
+              </div>
+            </div>
+          </label>
+        {% endfor %}
+      </div>
+      <label for="quantity" class="p-1 fs-2">Quantity:</label>
+      <input class="form-control quantity"
+             style="border: 2px solid black;
+                    height: 2rem;
+                    padding-top: 7px"
+             id="quantity"
+             type="number"
+             size="40"
+             min="0"
+             value="1" />
+      <button type="button"
+              id="add-button"
+              class="btn btn-lg btn-primary mt-2 mb-1 form-control"
+              {% if skus.count > 1 %}disabled{% endif %}>Add to cart</button>
+    {% else %}
+      <div class="alert alert-warning" role="alert">
+        <span class="warning">Sorry, this product is out of stock</span>
+      </div>
+    {% endif %}
+    <div class="row m-1 alert alert-success" role="alert" id="cartalertbox"></div>
+    <a href="{{ referred }}">
+      <button type="button" id="back" class="btn btn-primary btn-lg mt-2 mb-1 form-control">Go back</button>
+    </a>
+  </div>
+  <script>
+  $(document).on('click', '.sku-picker', function (e) {
+    $('#add-button').prop('disabled', false)
+  })
+
+  $(document).on('click', '#add-button', function (e) {
+    e.preventDefault()
+    let next = '{{referred}}'
+    const d = {
+      productqty: $('#quantity').val(),
+      price: $(".sku-picker:checked").data('price'),
+      sku: $(".sku-picker:checked").val(),
+      csrfmiddlewaretoken: '{{csrf_token}}',
+      action: 'post',
+      next
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '{% url "basket:add" %}',
+      data: d,
+      success: function (json) {
+        $('#basket-qty').html(json.qty)
+        $('#cartalertbox').show()
+        $('#cartalertbox').text('{{product.title}} added to the cart')
+        setTimeout(function () {
+          $('#cartalertbox').hide()
+          window.location.replace(next)
+        }, 2000)
+      },
+      error: function (xhr, errmsg, err) {
+        console.error("add POST failed", errmsg)
+      }
+    })
+  })
+  </script>
+{% endblock content %}
