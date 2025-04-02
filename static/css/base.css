@@ -12,6 +12,10 @@ body header,
   background-color: #c6b991;
 }
 
+.footer-bottom {
+  align-items: center;
+}
+
 details.description[open] summary::after {
   content: attr(data-open);
 }
