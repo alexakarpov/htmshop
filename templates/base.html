@@ -36,8 +36,7 @@
     </head>
     <body>
         {% block header %}
-            <header class="pt-1">
-                <div class="page-header">
+            <header class="pt-1 page-header">
                     <div class="list-group list-group-horizontal justify-contenrt-right mb-1">
                         <a href="{% url 'catalogue:home' %}">
                             <img src="{% static 'logo2.png' %}"
@@ -202,7 +201,6 @@
                             </form>
                         </div>
                     </nav>
-                </div>
             </header>
         {% endblock header %}
         <div id="content">
