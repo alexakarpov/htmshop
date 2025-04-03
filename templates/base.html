@@ -14,11 +14,10 @@
     />
     <!-- Bootstrap CSS -->
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"
-      integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w=="
+      integrity="sha384-DQvkBjpPgn7RC31MCQoOeC9TI2kdqa4+BSgNMNj8v77fdC77Kj5zpWFTJaaAoMbC"
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <title>{% block title %} HTM Store {% endblock title %}</title>
@@ -76,8 +75,8 @@
         </div>
       </div>
       <hr class="divider" />
-      <nav class="navbar navbar-expand-sm p-0">
-        <div class="container">
+      <nav class="navbar navbar-expand-md p-0">
+        <div class="container-fluid">
           <ul class="navbar-nav list-group list-group-horizontal">
             {% if request.user.is_staff %}
             <li class="nav-item fw-bold h4">
@@ -373,10 +372,9 @@
     </div>
     <!-- Bootstrap JS -->
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"
-      integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ=="
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YUe2LzesAfftltw+PEaao2tjU/QATaW/rOitAq67e0CT0Zi2VVRL0oC4+gAaeBKu"
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     ></script>
   </body>
 </html>

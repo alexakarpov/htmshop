@@ -3,12 +3,7 @@ body #content {
   color: #3d2a1a;
 }
 
-body #content p {
-  color: #3d2a1a;
-}
-
-body header,
-#footer {
+body, header, footer {
   background-color: #c6b991;
 }
 
@@ -37,36 +32,34 @@ li,
   border: none;
 }
 
-
 body {
-  font-family: Georgia, serif !important;
+  font-family: Georgia, serif /*!important*/;
 }
 
-hr.divider {
-  margin: 0em;
+.divider {
   border: 1px solid #6e260a;
+  margin: 0;
 }
 
 .navbar ul a {
-  font-weight: 500;
   color: #3c1201;
+  font-weight: 500;
 }
 
 .navbar {
   border-bottom: 1px solid #773e28;
 }
 
-#footer {
+footer {
   border-top: 1px solid #773e28;
-  position: absolute;
   bottom: 0;
+  position: absolute;
   width: 100%;
-  height: 3.5rem;
 }
 
 #content {
-  position: relative;
   min-height: 85vh;
+  position: relative;
 }
 
 #content-wrap {
@@ -78,8 +71,8 @@ hr.divider {
 }
 
 .quantity {
-  max-width: 4em;
   max-height: 2em;
+  max-width: 4em;
 }
 
 .sku {
@@ -87,18 +80,18 @@ hr.divider {
 }
 
 .category {
-  font-weight: 500;
   font-size: larger;
+  font-weight: 500;
 }
 
 .errormsg {
-  font-style: italic;
   color: darkred;
+  font-style: italic;
 }
 
 #cartalertbox {
-  font-weight: bold;
   font-size: xx-large;
+  font-weight: bold;
 }
 
 .itemqty {
@@ -130,18 +123,8 @@ hr.divider {
 }
 
 .border-top {
-  border-top: 3px thick;
+  border-top: 3px;
 }
-
-input[type='radio'] {
-  border: 2px solid;
-  width: 1.5em;
-  height: 1.5em;
-}
-/* 
-input[type='number'] {
-  padding-top: 5px;
-} */
 
 .radios {
   margin-top: 1rem;
@@ -156,7 +139,7 @@ div.choice-div:hover {
   /* margin: 1.5%; */
 }
 
-label.pointer {
+.pointer {
   cursor: pointer;
 }
 
