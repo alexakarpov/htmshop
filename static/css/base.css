@@ -50,6 +50,10 @@ body {
   border-bottom: 1px solid #773e28;
 }
 
+.undecorated {
+  text-decoration: none;
+}
+
 footer {
   border-top: 1px solid #773e28;
   bottom: 0;

@@ -64,269 +64,286 @@
           Holy Transfiguration Monastery Store
         </div>
         <div class="basket p-4 h2 list-group-item px-4">
-          <a href="{% url 'basket:summary' %}" style="text-decoration: none">
+          <a class="undecorated" href="{% url 'basket:summary' %}">
             Cart (<span id="basket-qty">{{ basket | length }}</span>)
           </a>
         </div>
         <div class="h2 p-4 account list-group-item">
-          <a href="{% url 'accounts:dashboard' %}" style="text-decoration: none"
+          <a class="undecorated" href="{% url 'accounts:dashboard' %}"
             >Account</a
           >
         </div>
       </div>
       <hr class="divider" />
-      <nav class="navbar navbar-expand-md p-0">
+      <nav class="navbar navbar-expand-lg p-0">
         <div class="container-fluid">
-          <ul class="navbar-nav list-group list-group-horizontal">
-            {% if request.user.is_staff %}
-            <li class="nav-item fw-bold h4">
-              <a class="nav-link" href="{% url 'inventory:dashboard' %}"
-                >Inventory</a
-              >
-            </li>
-            <li class="nav-item fw-bold dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                data-bs-toggle="dropdown"
-                >Orders</a
-              >
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="{% url 'orders:print' %}"
-                    >Print</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'orders:list' %}"
-                    >Manage</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'orders:payment_late' %}"
-                    >Late payment</a
-                  >
-                </li>
-              </ul>
-            </li>
-            {% endif %}
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                data-bs-toggle="dropdown"
-                >Books</a
-              >
-              <ul class="dropdown-menu">
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='books-monastery' %}"
-                    >Monastery</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='books-other' %}"
-                    >Other</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                data-bs-toggle="dropdown"
-                >Icons</a
-              >
-              <ul class="dropdown-menu">
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='icons-christ' %}"
-                    >Savior</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='icons-mother-of-god' %}"
-                    >Theotokos</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='icons-saints' %}"
-                    >Saints</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='icons-great-feast' %}"
-                    >Great Feasts</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='icons-menaion' %}"
-                    >Menaion</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                data-bs-toggle="dropdown"
-                >Incense</a
-              >
-              <ul class="dropdown-menu">
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='incense-i-good' %}"
-                    >I (good incense)</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='incense-ii-better' %}"
-                    >II (better incense)</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='incense-iii-best' %}"
-                    >III (best incense)</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='incense-iv-rare' %}"
-                    >IV (rare incense)</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='incense-natural-frankincense' %}"
-                    >Natural Frankincense</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='censers-charcoal' %}"
-                    >Censers & charcoal</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                data-bs-toggle="dropdown"
-                >Chains, crosses, medals</a
-              >
-              <ul class="dropdown-menu">
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='chains' %}"
-                    >Chains</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='crosses-baptismal' %}"
-                    >Baptismal Crosses</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='crosses-pectoral' %}"
-                    >Pectoral Crosses</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='medals' %}"
-                    >Medals</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                data-bs-toggle="dropdown"
-                >Other</a
-              >
-              <ul class="dropdown-menu">
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='prayer-ropes' %}"
-                    >Prayer Ropes</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='prosphora-seals' %}"
-                    >Prosphora Seals</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='fragrant-oils' %}"
-                    >Fragrant Oils</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='vigil-lamps' %}"
-                    >Vigil Lamps</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'catalogue:category_list' category_slug='liturgical-items' %}"
-                    >Liturgical Items</a
-                  >
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <form class="d-flex" role="search" action="{% url 'search:query' %}">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search our catalog"
-              aria-label="Search"
-              name="q"
-            />
-            <button class="btn btn-secondary" type="submit">Search</button>
-          </form>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav list-group">
+              {% if request.user.is_staff %}
+              <li class="nav-item fw-bold h4">
+                <a class="nav-link" href="{% url 'inventory:dashboard' %}"
+                  >Inventory</a
+                >
+              </li>
+              <li class="nav-item fw-bold dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  data-bs-toggle="dropdown"
+                  >Orders</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'orders:print' %}"
+                      >Print</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'orders:list' %}"
+                      >Manage</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'orders:payment_late' %}"
+                      >Late payment</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              {% endif %}
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  data-bs-toggle="dropdown"
+                  >Books</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='books-monastery' %}"
+                      >Monastery</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='books-other' %}"
+                      >Other</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  data-bs-toggle="dropdown"
+                  >Icons</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='icons-christ' %}"
+                      >Savior</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='icons-mother-of-god' %}"
+                      >Theotokos</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='icons-saints' %}"
+                      >Saints</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='icons-great-feast' %}"
+                      >Great Feasts</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='icons-menaion' %}"
+                      >Menaion</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  data-bs-toggle="dropdown"
+                  >Incense</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='incense-i-good' %}"
+                      >I (good incense)</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='incense-ii-better' %}"
+                      >II (better incense)</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='incense-iii-best' %}"
+                      >III (best incense)</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='incense-iv-rare' %}"
+                      >IV (rare incense)</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='incense-natural-frankincense' %}"
+                      >Natural Frankincense</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='censers-charcoal' %}"
+                      >Censers & charcoal</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  data-bs-toggle="dropdown"
+                  >Chains, crosses, medals</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='chains' %}"
+                      >Chains</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='crosses-baptismal' %}"
+                      >Baptismal Crosses</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='crosses-pectoral' %}"
+                      >Pectoral Crosses</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='medals' %}"
+                      >Medals</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  data-bs-toggle="dropdown"
+                  >Other</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='prayer-ropes' %}"
+                      >Prayer Ropes</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='prosphora-seals' %}"
+                      >Prosphora Seals</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='fragrant-oils' %}"
+                      >Fragrant Oils</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='vigil-lamps' %}"
+                      >Vigil Lamps</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'catalogue:category_list' category_slug='liturgical-items' %}"
+                      >Liturgical Items</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <form
+              class="d-flex"
+              role="search"
+              action="{% url 'search:query' %}"
+            >
+              <input
+                class="form-control me-2 search"
+                type="search"
+                placeholder="Search our catalog"
+                aria-label="Search"
+                name="q"
+              />
+              <button class="btn btn-secondary" type="submit">Search</button>
+            </form>
+          </div>
         </div>
       </nav>
     </header>
