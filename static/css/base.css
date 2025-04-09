@@ -25,11 +25,17 @@ header div .navbar {
 }
 
 li,
-.shop-title,
 .account,
 .basket {
   background-color: transparent;
   border: none;
+}
+
+.navbar-brand {
+  background-color: transparent;
+  border: none;
+  font-size: x-large;
+  padding: 0.5rem;
 }
 
 body {
