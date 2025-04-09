@@ -31,11 +31,10 @@ li,
   border: none;
 }
 
-.navbar-brand {
+.page-header {
   background-color: transparent;
   border: none;
   font-size: x-large;
-  padding: 0.5rem;
 }
 
 body {
