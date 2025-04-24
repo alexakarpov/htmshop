@@ -1,13 +1,16 @@
-import json
+# import json
 import logging, decimal
 from typing import Any
-from django.shortcuts import get_object_or_404, render
+
+# from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from datetime import date
-from ecommerce.apps.basket.basket import Basket
+from django.db.models import F
+
+# from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.shipping.choice import ShippingChoiceSE, split_tiers
 from ecommerce.apps.shipping.engine import (
     shipping_choices_SE,
@@ -76,7 +79,9 @@ class LateOnPaymentOrders(ListView):
     template_name = "orders/payment_late.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        orders_in_processing = Order.objects.filter(status="PROCESSING")
+        orders_in_processing = Order.objects.filter(
+            status="PROCESSING"
+        ).filter(total_paid__lt=F("order_total"))
 
         late = []
 
