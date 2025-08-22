@@ -1,0 +1,60 @@
+{% extends 'headless_base.html' %}
+{% load static %}
+{% block title %}
+    Orders
+{% endblock title %}
+{% block content %}
+    <div id="content" class="p-2">        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Order #</th>
+                    <th scope="col">By</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Paid</th>
+                    <th scope="col">Shipped</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Total paid</th>
+                    <th scope="col">Created on</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ccall in collections %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'orders:details' order.id %}"><strong># {{ order.id }}</strong></a>
+                        </td>
+                        <td>
+                            {{ order.full_name }}
+                        </td>
+                        <td>{{ order.status }}</td>
+                        <td>{{ order.paid | yesno:"Yes, No" }}</td>
+                        <td>{{ order.is_shipped | yesno:"Yes, No" }}</td>
+                        <td>{{ order.order_total }}</td>
+                        <td>{{ order.total_paid }}</td>
+                        <td>{{ order.created_at }} ( {{ order.created_at | timesince }} ago)</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h1 class="text-center">
+        <a href="{% url 'catalogue:home' %}">Back to Home</a>
+      </h1>
+    <script>
+    /* $(document).on('click', '.choice_item', function(e) {
+      if (e.currentTarget.style.background=="#ffff99") {
+        e.currentTarget.style.background="#ffffff"
+      } else {
+        e.currentTarget.style.background="#ffff99"
+      }
+    }) */
+    $(document).on('click', 'input[name="btnradio"]', function (e) {
+      let kind = e.currentTarget.id
+      console.log(`${kind} clicked`)
+      let url = new URL(window.location.href);
+      url.searchParams.set('kind', kind);
+      console.log(url)
+      window.location.href=url
+    })
+    </script>
+{% endblock content %}

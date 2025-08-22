@@ -79,10 +79,9 @@ class Order(models.Model):
         return all(item.stock.sku.startswith("B") for item in self.items.all())
 
     def get_weight(self):
-        total_weight = 0
-        for it in self.items.all():
-            total_weight += it.stock.weight * it.quantity
-
+        total_weight = sum(
+            it.stock.weight * it.quantity for it in self.items.all()
+        )
         return float(total_weight) * float(PACKING_WEIGHT_MULTIPLIER)
 
     def is_first_class(self):
@@ -90,7 +89,7 @@ class Order(models.Model):
 
     def extract_ship_to(self):
         d = self.address_json()
-        created_at = d.pop("created_at")
+        d.pop("created_at")
         return d
 
     def paid(self):
@@ -167,6 +166,15 @@ class Payment(models.Model):
 
     def __str__(self) -> str:
         return f"${self.amount} paid on {self.paid_at} ({self.comment})"
+
+
+class Collection(models.Model):
+    order = models.ForeignKey(
+        Order, related_name="collections", on_delete=models.CASCADE
+    )
+    last_attempt = models.SmallIntegerField(default=0)
+    call_date = models.DateField(blank=False, default=None)
+    comment = models.CharField(blank=True, null=True, max_length=150)
 
 
 @receiver(pre_save, sender=Order)

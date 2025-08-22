@@ -13,7 +13,6 @@ from django.db.models import F
 # from ecommerce.apps.basket.basket import Basket
 from ecommerce.apps.shipping.choice import ShippingChoiceSE, split_tiers
 from ecommerce.apps.shipping.engine import (
-    shipping_choices_SE,
     shipping_choices_for_order,
 )
 
@@ -22,7 +21,7 @@ from ecommerce.apps.inventory.models import Stock
 from ecommerce.apps.shipping.serializers import ShippingChoiceSESerializer
 from ecommerce.constants import DAYS_LATE
 
-from .models import Order, OrderItem, Payment
+from .models import Order, OrderItem, Payment, Collection
 
 logger = logging.getLogger(__name__)
 
@@ -71,6 +70,18 @@ class ListOrders(ListView):
         if kind and kind.lower() != "all":
             orders = Order.objects.filter(kind__icontains=kind)
             ctx = {"order_list": orders, "kind": kind}
+        return ctx
+
+
+#@api_view(["GET"])
+class Collections(ListView):
+    model = Collection
+    template_name = "orders/collection_calls.html"
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        collects = Collection.objects.all()
+        ctx = super().get_context_data(**kwargs)
+        ctx["collections"] = collects
         return ctx
 
 

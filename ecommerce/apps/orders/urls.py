@@ -9,7 +9,8 @@ from .views import (
     add_payment,
     fix_product,
     append,
-    recalculate
+    recalculate,
+    Collections,
 )
 
 app_name = "orders"
@@ -24,4 +25,5 @@ urlpatterns = [
     path("fix_product/", fix_product, name="fix_product"),
     path("append/", append, name="append"),
     path("recalculate/", recalculate, name="recalculate"),
+    path("collections/", Collections.as_view(), name="collections"),
 ]
