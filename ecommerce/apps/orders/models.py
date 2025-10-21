@@ -172,8 +172,15 @@ class Collection(models.Model):
     order = models.ForeignKey(
         Order, related_name="collections", on_delete=models.CASCADE
     )
-    last_attempt = models.SmallIntegerField(default=0)
-    call_date = models.DateField(blank=False, default=None)
+    
+    closed = models.BooleanField(default=False, null=False)
+
+class Call(models.Model):
+    collection = models.ForeignKey(
+        Collection, related_name="calls", on_delete=models.CASCADE
+    )
+    attempt = models.SmallIntegerField(default=0)
+    date = models.DateField(blank=False, default=None)
     comment = models.CharField(blank=True, null=True, max_length=150)
 
 
