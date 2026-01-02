@@ -110,7 +110,7 @@ LOGOUT_REDIRECT_URL = "/"
 BASKET_SESSION_KEY = "basket"
 
 # Email setting
-DEFAULT_FROM_EMAIL = "info@thehtm.org"
+DEFAULT_FROM_EMAIL = "noreply@bostonmonks.com"
 
 # shipping tiers
 MEDIA_MAIL = "usps_media_mail"
